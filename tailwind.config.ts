@@ -1,4 +1,5 @@
 import { skeleton } from '@skeletonlabs/tw-plugin'
+import forms from '@tailwindcss/forms'
 import typography from '@tailwindcss/typography'
 import { join } from 'path'
 import type { Config } from 'tailwindcss'
@@ -17,7 +18,8 @@ export default {
 	plugins: [
 		typography,
 		skeleton({
-			themes: { preset: ['crimson'] }
-		})
+			themes: { preset: ['wintry'] }
+		}),
+		forms
 	]
 } as Config
