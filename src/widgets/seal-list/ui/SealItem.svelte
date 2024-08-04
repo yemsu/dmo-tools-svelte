@@ -1,12 +1,10 @@
 <script lang="ts">
 	import type { MySeal, SealData } from '$entities/seals'
-	import {
-		statColorStyles,
-		type StatType
-	} from '$widgets/select-seal-form/config'
+	import { statColorStyles } from '$widgets/select-seal-form/config'
 
 	export let seal: SealData | MySeal
 	export let count: number | undefined = undefined
+	export let price: number | undefined = undefined
 </script>
 
 <span class="flex flex-col justify-center bg-primary-50 text-center">
@@ -22,7 +20,10 @@
 			<span>MAX {seal.maxIncrease}</span>
 		</span>
 		{#if count !== undefined}
-			<span>{count}개</span>
+			<span>{count}개 보유중</span>
+		{/if}
+		{#if price !== undefined}
+			<span>{price}M</span>
 		{/if}
 	</span>
 </span>

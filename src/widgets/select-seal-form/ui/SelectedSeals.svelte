@@ -1,35 +1,10 @@
 <script lang="ts">
-	import { mySeals } from '$entities/seals/model'
-	import { objectBy } from '$shared/lib'
+	import { mySeals, myStats } from '$entities/seals/model'
 	import { SealItem } from '$widgets/seal-list'
 	import SealList from '$widgets/seal-list/ui/SealList.svelte'
-	import {
-		commonStatTable,
-		STATS,
-		type StatType
-	} from '$widgets/select-seal-form/config'
+	import { STATS } from '$widgets/select-seal-form/config'
 
 	export let saveMySeals: () => void
-	$: mySealsByStatType = objectBy($mySeals, (mySeal) => mySeal.statType)
-
-	$: statCalc = (statType: StatType) => {
-		const sealsByStatType = mySealsByStatType[statType]
-		if (!sealsByStatType || sealsByStatType.length === 0) {
-			return 0
-		}
-		let resultValue = 0
-		sealsByStatType.forEach(({ maxIncrease, count }) => {
-			let sealPercent = 0
-			for (const statTable of commonStatTable) {
-				if (count <= statTable.sealCount) {
-					sealPercent = statTable.percent
-					break
-				}
-			}
-			resultValue += maxIncrease * (sealPercent / 100)
-		})
-		return resultValue
-	}
 </script>
 
 <section class="rounded-md border border-gray-600 p-4">
@@ -50,13 +25,46 @@
 			<iconify-icon icon="mdi:close" width={14} height={14} />
 		</button>
 	</SealList>
+	<!-- <div>
+		<h2>능력치별 최강 효율</h2>
+		<dl>
+			<dt>공격력 AT -</dt>
+			<dd>
+				아구몬 10개 1400T 효율 수치 1000% <button
+					class="variant-filled-tertiary btn">등록 완료</button
+				>
+			</dd>
+			<dd>
+				아구몬 10개 1400T 효율 수치 1000% <button
+					class="variant-filled-tertiary btn">등록 완료</button
+				>
+			</dd>
+			<dd>
+				아구몬 10개 1400T 효율 수치 1000% <button
+					class="variant-filled-tertiary btn">등록 완료</button
+				>
+			</dd>
+			<dt>치명타 AT</dt>
+			<dd>
+				아구몬 10개 1400T 효율 수치 600% <button
+					class="variant-filled-tertiary btn">등록 완료</button
+				>
+			</dd>
+			<dt>적중도 AT</dt>
+			<dd>
+				아구몬 10개 1400T 효율 수치 200% <button
+					class="variant-filled-tertiary btn">등록 완료</button
+				>
+			</dd>
+		</dl>
+	</div> -->
 	<div class="flex items-center gap-4 border-t border-gray-700 pt-4">
 		<h3 class="font-bold">능력치</h3>
 		<dl class="flex gap-2">
 			{#each STATS as stat (stat.type)}
 				<div class="flex gap-2 rounded-full bg-gray-800 px-3 py-1">
 					<dt>{stat.name}</dt>
-					<dd>{statCalc(stat.type)}</dd>
+					<dd>{$myStats[stat.type]}</dd>
 				</div>
 			{/each}
 		</dl>

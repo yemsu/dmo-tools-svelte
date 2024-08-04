@@ -10,3 +10,14 @@ export type SealData = {
 export type MySeal = SealData & {
 	count: number
 }
+
+export type SealPrice = {
+	id: number
+	price: number
+	regCount: number
+	sealId: number
+	createAt: string
+	modifiedAt: string
+}
+
+export type MyStats = Record<StatType, number>

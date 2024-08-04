@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { seals, type MySeal, type SealData } from '$entities/seals'
-	import { mySeals } from '$entities/seals/model'
+	import { getSeals, seals, type MySeal, type SealData } from '$entities/seals'
+	import { getSealPrices } from '$entities/seals/api'
+	import { mySeals, sealPrices } from '$entities/seals/model'
 	import { apiFetch } from '$shared/api'
 	import { Input } from '$shared/form'
 	import { SealItem } from '$widgets/seal-list'
@@ -14,7 +15,7 @@
 	import { onMount } from 'svelte'
 
 	type Form = {
-		[key: number]: MySeal
+		[key: number]: MySeal & { price: number | '' }
 	}
 
 	const defaultForm = {}
@@ -31,10 +32,16 @@
 	let inputElement: HTMLInputElement
 
 	onMount(async () => {
-		const data = await apiFetch<SealData[]>('/seals')
-		searchResults = [...data]
-		seals.set(data)
+		const sealsFetched = await getSeals()
+		searchResults = [...sealsFetched]
+		seals.set(sealsFetched)
+		const sealPricesFetched = await getSealPrices('modifiedAt')
+		sealPrices.set(sealPricesFetched)
 	})
+
+	const getSealPrice = (sealId: number) => {
+		return $sealPrices.find(({ sealId: _sealId }) => _sealId === sealId)
+	}
 
 	const updateSearchResult = (_searchText: string) => {
 		const sealFilteredStat = $seals.filter(
@@ -84,7 +91,7 @@
 		return { [sealId]: { ...formValue, count } }
 	}
 
-	const onCountInput = (e: Event) => {
+	const onPriceInput = (e: Event) => {
 		const target = e.target as HTMLInputElement
 		const { value } = target
 		form = { ...newCountForm(+value) }
@@ -94,14 +101,15 @@
 		return $mySeals.find(({ id }) => id === sealId)
 	}
 
-	const selectSeal = (selectedSeal: SealData) => {
+	const clickSeal = (selectedSeal: SealData) => {
 		const sealId = selectedSeal.id
-		const count = getMySeal(sealId)?.count || 0
-		form = { [sealId]: { ...selectedSeal, count } }
+		const price = getSealPrice(sealId)?.price || ''
+		form = { [sealId]: { ...form[sealId], price } }
 		setTimeout(() => {
 			inputElement.focus()
 		}, 60)
 	}
+
 	const onblur = () => {
 		form = {}
 	}
@@ -155,32 +163,44 @@
 			{/each}
 		</ul>
 	</div>
+	<div class="flex">
+		<button class="variant-filled-primary btn py-1 text-xs"
+			>최신 가격 일괄 적용</button
+		>
+		<button class="variant-filled-primary btn text-xs"
+			>많이 입력된 가격 일괄 적용</button
+		>
+	</div>
 	<form on:submit={onSubmit} class="w-full">
 		<SealMenuList
 			seals={searchResults}
 			let:seal
 			selectedSealName={Object.values(form)[0]?.name}
-			onClickSeal={selectSeal}
+			onClickSeal={clickSeal}
+			buttonTitle="클릭하여 가격 수정"
 		>
-			<SealItem
-				{seal}
-				count={!form[seal.id] ? getMySeal(seal.id)?.count || 0 : undefined}
-			/>
+			{#if $sealPrices.length > 0}
+				<SealItem
+					{seal}
+					count={getMySeal(seal.id)?.count || 0}
+					price={!form[seal.id] ? getSealPrice(seal.id)?.price : undefined}
+				/>
+			{/if}
 			{#if form[seal.id]}
 				<span class="flex items-center justify-center gap-1 bg-primary-50">
 					<span class="w-[4em] overflow-hidden">
 						<input
 							bind:this={inputElement}
 							type="number"
-							id={`count-${seal.id}`}
+							id={`price-${seal.id}`}
 							class="w-full bg-primary-200 p-1 text-xs text-white"
 							placeholder="씰 개수"
-							bind:value={form[seal.id].count}
-							on:input={onCountInput}
+							bind:value={form[seal.id].price}
+							on:input={onPriceInput}
 							on:blur|once={onblur}
 						/>
 					</span>
-					<span>개</span>
+					<span>M</span>
 				</span>
 			{/if}
 		</SealMenuList>

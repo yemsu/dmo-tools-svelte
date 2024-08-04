@@ -1,4 +1,4 @@
-import type { MySeal, SealData } from '../type'
+import type { MySeal, MyStats, SealData, SealPrice } from '../type'
 import { writable } from 'svelte/store'
 
 export const seals = writable<SealData[]>([])
@@ -29,3 +29,6 @@ const createMySeals = () => {
 }
 
 export const mySeals = createMySeals()
+export const myStats = writable<MyStats>()
+
+export const sealPrices = writable<SealPrice[]>([])

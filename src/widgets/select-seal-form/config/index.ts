@@ -1,4 +1,4 @@
-export const commonStatTable = [
+export const SEAL_STAT_TABLE = [
 	{
 		sealCount: 1,
 		percent: 10
@@ -23,7 +23,7 @@ export const commonStatTable = [
 		sealCount: 3000,
 		percent: 100
 	}
-]
+] as const
 
 export const STATS = [
 	{ type: 'AT', name: '공격력' },

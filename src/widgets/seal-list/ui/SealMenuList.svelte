@@ -4,6 +4,7 @@
 	export let seals: SealData[] = []
 	export let selectedSealName: SealData['name'] | undefined
 	export let onClickSeal: (seal: SealData) => void | undefined
+	export let buttonTitle: string | undefined = '선택하기'
 </script>
 
 {#if seals.length === 0}
@@ -21,7 +22,7 @@
 					type="button"
 					class="block size-full"
 					on:click={() => onClickSeal(seal)}
-					title="선택하기"
+					title={buttonTitle}
 				>
 					<slot {seal}></slot>
 				</button>
