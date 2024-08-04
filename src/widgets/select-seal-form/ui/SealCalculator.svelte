@@ -254,7 +254,7 @@
 <section class="rounded-md border border-gray-600 p-4">
 	<h2 class="mb-4 text-lg font-bold">씰 계산기</h2>
 	<div>
-		<form on:submit={onSubmit} class="flex flex-col gap-2">
+		<form on:submit|preventDefault={onSubmit} class="flex flex-col gap-2">
 			<ul class="flex items-center gap-2">
 				{#each STATS as stat, i (stat.type)}
 					<li>
@@ -310,39 +310,6 @@
 			</p>
 		{/if}
 	</div>
-	<!-- <div>
-		<h2>능력치별 최강 효율</h2>
-		<dl>
-			<dt>공격력 AT -</dt>
-			<dd>
-				아구몬 10개 1400T 효율 수치 1000% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dd>
-				아구몬 10개 1400T 효율 수치 1000% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dd>
-				아구몬 10개 1400T 효율 수치 1000% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dt>치명타 AT</dt>
-			<dd>
-				아구몬 10개 1400T 효율 수치 600% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dt>적중도 AT</dt>
-			<dd>
-				아구몬 10개 1400T 효율 수치 200% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-		</dl>
-	</div> -->
 	<div class="flex items-center gap-4 border-t border-gray-700 pt-4">
 		<h3 class="font-bold">능력치</h3>
 		<dl class="flex gap-2">

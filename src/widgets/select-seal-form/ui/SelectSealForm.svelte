@@ -155,7 +155,7 @@
 			{/each}
 		</ul>
 	</div>
-	<form on:submit={onSubmit} class="w-full">
+	<form on:submit|preventDefault={onSubmit} class="w-full">
 		<SealMenuList
 			seals={searchResults}
 			let:seal

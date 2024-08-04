@@ -32,3 +32,4 @@ export const mySeals = createMySeals()
 export const myStats = writable<MyStats>()
 
 export const sealPrices = writable<SealPrice[]>([])
+export const mySealPrices = writable<SealPrice[]>([])

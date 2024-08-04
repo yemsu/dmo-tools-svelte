@@ -1,5 +1,12 @@
 <script lang="ts">
-	import { mySeals, myStats } from '$entities/seals/model'
+	import { getSealPrices, getSeals } from '$entities/seals'
+	import {
+		seals,
+		mySeals,
+		myStats,
+		mySealPrices,
+		sealPrices
+	} from '$entities/seals/model'
 	import type { MyStats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
 	import {
@@ -15,20 +22,43 @@
 	} from '$widgets/select-seal-form/config'
 	import { onMount } from 'svelte'
 
-	const STORAGE_NAME = 'DMO_MYS'
+	const MY_SEALS_STORAGE = 'DMO_MYS'
+	const SEAL_PRICE_STORAGE = 'DMO_MYP'
 	onMount(async () => {
-		if ($mySeals.length > 0) return
-		const savedData = localStorage.getItem(STORAGE_NAME)
-		if (savedData) {
-			mySeals.add(...JSON.parse(savedData))
+		// seals
+		const sealsFetched = await getSeals()
+		seals.set(sealsFetched)
+		// sealPrices
+		const sealPricesFetched = await getSealPrices('modifiedAt')
+		if ($mySealPrices.length === 0) {
+			const savedData = localStorage.getItem(SEAL_PRICE_STORAGE)
+			if (savedData) {
+				mySealPrices.set(JSON.parse(savedData))
+			}
+		}
+		const newSealPrices = sealPricesFetched.map((sealPrice) => {
+			const mySealPrice = $mySealPrices.find(
+				({ sealId }) => sealId === sealPrice.sealId
+			)
+			return mySealPrice || sealPrice
+		})
+		sealPrices.set(newSealPrices)
+		// my seals
+		if ($mySeals.length === 0) {
+			const savedData = localStorage.getItem(MY_SEALS_STORAGE)
+			if (savedData) {
+				mySeals.add(...JSON.parse(savedData))
+			}
 		}
 	})
 
 	const saveMySeals = () => {
-		localStorage.setItem(STORAGE_NAME, JSON.stringify($mySeals))
+		localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify($mySeals))
+	}
+	const saveMySealPrices = () => {
+		localStorage.setItem(SEAL_PRICE_STORAGE, JSON.stringify($mySealPrices))
 	}
 	$: mySealsByStatType = objectBy($mySeals, (mySeal) => mySeal.statType)
-	$: console.log('mySealsByStatType', mySealsByStatType)
 	$: statCalc = (statType: StatType) => {
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
@@ -71,7 +101,7 @@
 	<SelectedSeals {saveMySeals} />
 	<section class="rounded-md border border-gray-600 p-4">
 		<h2 class="mb-4 text-lg font-bold">씰 가격표</h2>
-		<SealPriceForm {saveMySeals} />
+		<SealPriceForm {saveMySealPrices} />
 	</section>
 	<SealCalculator />
 </div>
