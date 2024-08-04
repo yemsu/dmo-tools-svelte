@@ -71,3 +71,9 @@ button:focus:not(:focus-visible) {
 	width: 1px;
 	white-space: nowrap;
 }
+
+@layer components {
+	.scroll-box {
+		@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500 overflow-y-auto;
+	}
+}

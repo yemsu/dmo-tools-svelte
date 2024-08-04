@@ -6,12 +6,14 @@
 <div class="app">
 	<Header></Header>
 
-	<main>
+	<main class="mx-auto max-w-[1400px] p-8">
 		<slot></slot>
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>
+			visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit
+		</p>
 	</footer>
 </div>
 
@@ -21,18 +23,6 @@
 		flex-direction: column;
 		min-height: 100vh;
 	}
-
-	main {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		padding: 1rem;
-		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
-	}
-
 	footer {
 		display: flex;
 		flex-direction: column;
