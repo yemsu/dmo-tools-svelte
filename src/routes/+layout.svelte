@@ -1,5 +1,6 @@
 <script>
 	import Header from './Header.svelte'
+	import 'iconify-icon'
 	import '../app/app.css'
 </script>
 

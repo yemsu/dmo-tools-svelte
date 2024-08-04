@@ -6,6 +6,7 @@
 
 	const STORAGE_NAME = 'DMO_MYS'
 	onMount(async () => {
+		if ($mySeals.length > 0) return
 		const savedData = localStorage.getItem(STORAGE_NAME)
 		if (savedData) {
 			mySeals.add(...JSON.parse(savedData))
@@ -24,7 +25,7 @@
 
 <div class="grid grid-cols-2 gap-4">
 	<section class="rounded-md border border-gray-600 p-4">
-		<h2 class="mb-4 text-lg font-bold">보유중인 씰 선택</h2>
+		<h2 class="mb-4 text-lg font-bold">내 씰 설정</h2>
 		<SelectSealForm {saveData} />
 	</section>
 	<SelectedSeals />

@@ -47,6 +47,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"es-hangul": "^1.4.7"
+		"es-hangul": "^1.4.7",
+		"iconify-icon": "^2.1.0"
 	}
 }

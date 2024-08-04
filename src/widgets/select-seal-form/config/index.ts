@@ -27,11 +27,19 @@ export const commonStatTable = [
 
 export const STATS = [
 	{ type: 'AT', name: '공격력' },
-	{ type: 'HT', name: '적중도' },
-	{ type: 'CT', name: '치명타' }
+	{ type: 'CT', name: '치명타' },
+	{ type: 'HT', name: '적중도' }
 ] as const
 
+export const STAT_TYPES = STATS.map(({ type }) => type)
+
 export type StatType = (typeof STATS)[number]['type']
+
+export const statColorStyles: Record<StatType, string> = {
+	AT: 'text-stat-at',
+	HT: 'text-stat-ht',
+	CT: 'text-stat-ct'
+}
 
 export type Seal = {
 	name: string

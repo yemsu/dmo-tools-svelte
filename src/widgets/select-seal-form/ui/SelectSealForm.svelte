@@ -1,24 +1,34 @@
 <script lang="ts">
-	import { seals, type SealData } from '$entities/seals'
+	import { seals, type MySeal, type SealData } from '$entities/seals'
 	import { mySeals } from '$entities/seals/model'
 	import { apiFetch } from '$shared/api'
 	import { Input } from '$shared/form'
 	import { SealItem } from '$widgets/seal-list'
-	import SealList from '$widgets/seal-list/ui/SealList.svelte'
-	import type { MySeal } from '$widgets/select-seal-form/type'
+	import SealMenuList from '$widgets/seal-list/ui/SealMenuList.svelte'
+	import {
+		STAT_TYPES,
+		statColorStyles,
+		type StatType
+	} from '$widgets/select-seal-form/config'
 	import { choseongIncludes } from 'es-hangul'
 	import { onMount } from 'svelte'
 
-	type Form = Partial<MySeal>
-
-	const defaultForm = {
-		seal: undefined,
-		count: undefined
+	type Form = {
+		[key: number]: MySeal
 	}
+
+	const defaultForm = {}
 
 	export let saveData: () => void
 	let form: Form = defaultForm
+	let statCheckboxes: Record<StatType, boolean> = {
+		AT: true,
+		HT: true,
+		CT: true
+	}
+	let searchText = ''
 	let searchResults: SealData[] = []
+	let inputElement: HTMLInputElement
 
 	onMount(async () => {
 		const data = await apiFetch<SealData[]>('/seals')
@@ -26,66 +36,126 @@
 		seals.set(data)
 	})
 
+	const getMySeal = (sealId: number) => {
+		return $mySeals.find(({ id }) => id === sealId)
+	}
+
 	const selectSeal = (selectedSeal: SealData) => {
-		form = { ...form, seal: selectedSeal }
+		const sealId = selectedSeal.id
+		const count = getMySeal(sealId)?.count || 0
+		form = { [sealId]: { ...selectedSeal, count } }
+		setTimeout(() => {
+			inputElement.focus()
+		}, 60)
+	}
+	const onblur = () => {
+		form = {}
 	}
 
 	const onSubmit = () => {
-		if (!form.seal) {
+		const sealId = +Object.keys(form)[0]
+		const formValue = Object.values(form)[0]
+		if (!formValue.name) {
 			alert('보유 중인 씰을 선택해주세요.')
 			return
 		}
-		if (!form.count) {
+		if (!formValue.count) {
 			alert('보유 중인 씰의 개수를 설정해주세요.')
 			return
 		}
-		if (form.count > 3000) {
-			form = { ...form, count: 3000 }
+		if (formValue.count > 3000) {
+			form = { [sealId]: { ...formValue, count: 3000 } }
 		}
-		mySeals.add(form as NonNullable<MySeal>)
+		mySeals.add(form[sealId])
 		form = { ...defaultForm }
 		saveData()
 	}
 
-	const onSearchInput = (e: CustomEvent) => {
-		const value = e.detail.target.value
-		if (value === '') {
-			searchResults = [...$seals]
+	const updateSearchResult = (_searchText: string) => {
+		const sealFilteredStat = $seals.filter(
+			({ statType }) => statCheckboxes[statType]
+		)
+		if (_searchText === '') {
+			searchResults = sealFilteredStat
 			return
 		}
 
 		const results: SealData[] = []
-		$seals.forEach((seal) => {
-			if (seal.name.includes(value) || choseongIncludes(seal.name, value)) {
+		sealFilteredStat.forEach((seal) => {
+			if (
+				seal.name.includes(_searchText) ||
+				choseongIncludes(seal.name, _searchText)
+			) {
 				results.push(seal)
 			}
 		})
 		searchResults = [...results]
 	}
+
+	const onSearchInput = (e: CustomEvent) => {
+		const _searchText = e.detail.target.value
+		updateSearchResult(_searchText)
+	}
+
+	const onCheck = (e: CustomEvent) => {
+		const { id, checked } = e.detail.target
+		if (checked) {
+			updateSearchResult(searchText)
+		} else {
+			searchResults = [
+				...searchResults.filter(({ statType }) => statType !== id)
+			]
+		}
+		console.log('value', id, checked)
+	}
 </script>
 
-<form on:submit={onSubmit} class="flex flex-col items-start gap-4">
-	<Input
-		label="검색"
-		name="search"
-		maxlength={30}
-		placeholder="씰이름을 입력하세요"
-		on:input={onSearchInput}
-	/>
-	<SealList
-		seals={searchResults}
-		let:seal
-		selectedSealName={form.seal?.name}
-		onClickSeal={selectSeal}
-	>
-		<SealItem {seal} />
-	</SealList>
-	<Input
-		pattern="\d*"
-		label="개수"
-		name="count"
-		maxlength={4}
-		bind:value={form.count}
-	/>
-	<button type="submit" class="variant-filled-primary btn">추가</button>
-</form>
+<div class="flex flex-col items-start gap-4">
+	<div class="flex w-full items-center justify-between">
+		<Input
+			id="search"
+			maxlength={30}
+			placeholder="씰이름을 검색하세요"
+			bind:value={searchText}
+			on:input={onSearchInput}
+		/>
+		<ul class="flex">
+			{#each STAT_TYPES as statType (statType)}
+				<li class="text-xs font-bold {statColorStyles[statType]}">
+					<Input
+						id={statType}
+						label={statType}
+						type="checkbox"
+						checked={statCheckboxes[statType]}
+						on:input={onCheck}
+						class="checkbox"
+					/>
+				</li>
+			{/each}
+		</ul>
+	</div>
+	<form on:submit={onSubmit} class="w-full">
+		<SealMenuList
+			seals={searchResults}
+			let:seal
+			selectedSealName={Object.values(form)[0]?.name}
+			onClickSeal={selectSeal}
+		>
+			<SealItem
+				{seal}
+				count={!form[seal.id] ? getMySeal(seal.id)?.count || 0 : undefined}
+			/>
+			{#if form[seal.id]}
+				<input
+					bind:this={inputElement}
+					type="number"
+					id={`count-${seal.id}`}
+					class="w-full bg-primary-50 p-1 text-xs text-white"
+					placeholder="씰 개수"
+					bind:value={form[seal.id].count}
+					on:blur|once={onblur}
+				/>
+			{/if}
+		</SealMenuList>
+	</form>
+</div>

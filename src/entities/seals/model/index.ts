@@ -8,10 +8,11 @@ const createMySeals = () => {
 
 	return {
 		subscribe,
-		add: (...newMySeals: MySeal[]) =>
-			update((prev) => [...prev, ...newMySeals]),
+		add: (...newMySeals: MySeal[]) => {
+			update((prev) => [...prev, ...newMySeals])
+		},
 		remove: (sealName: string) =>
-			update((prev) => [...prev.filter(({ seal }) => seal.name !== sealName)]),
+			update((prev) => [...prev.filter(({ name }) => name !== sealName)]),
 		reset: () => set([])
 	}
 }

@@ -1,11 +1,12 @@
+import type { StatType } from '$widgets/select-seal-form/config'
+
 export type SealData = {
 	id: number
 	name: string
-	maxIncrease: StatType
-	statType: string
+	maxIncrease: number
+	statType: StatType
 }
 
-export type MySeal = {
-	seal: SealData
+export type MySeal = SealData & {
 	count: number
 }

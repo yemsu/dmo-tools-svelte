@@ -16,7 +16,25 @@ export default {
 	],
 
 	theme: {
-		extend: {}
+		extend: {
+			colors: {
+				primary: {
+					50: 'hsl(var(--primary-50))',
+					100: 'hsl(var(--primary-100))',
+					200: 'hsl(var(--primary-200))',
+					300: 'hsl(var(--primary-300))',
+					400: 'hsl(var(--primary-400))'
+				},
+				stat: {
+					at: 'hsl(var(--stat-at))',
+					ht: 'hsl(var(--stat-ht))',
+					ct: 'hsl(var(--stat-ct))',
+					ds: 'hsl(var(--stat-cds))',
+					ev: 'hsl(var(--stat-cev))',
+					de: 'hsl(var(--stat-cde))'
+				}
+			}
+		}
 	},
 
 	plugins: [

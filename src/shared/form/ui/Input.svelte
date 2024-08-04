@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte'
 	const dispatch = createEventDispatcher()
 
-	export let label: string
+	export let label: string | undefined = undefined
 	export let value: string | number | undefined = undefined
 
 	const { name, placeholder } = $$restProps
@@ -11,13 +11,19 @@
 	}
 </script>
 
-<label for={name} class="label">
-	<span>{label}</span>
+<label
+	for={name}
+	class="label flex items-center gap-2 {$$restProps.type === 'checkbox'
+		? 'flex-row-reverse'
+		: ''}"
+>
+	{#if label}
+		<span class="min-w-[40px]">{label}</span>
+	{/if}
 	<input
 		class="input"
 		{...$$restProps}
-		id={name}
-		placeholder={placeholder || `${label}를 입력하세요`}
+		placeholder={placeholder || (label && `${label}를 입력하세요`)}
 		bind:value
 		on:input={handleInput}
 	/>
