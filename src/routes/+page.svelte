@@ -65,13 +65,13 @@
 
 <div class="grid grid-cols-2 gap-4">
 	<section class="rounded-md border border-gray-600 p-4">
-		<h2 class="mb-4 text-lg font-bold">씰 가격표</h2>
-		<SealPriceForm {saveMySeals} />
-	</section>
-	<SealCalculator />
-	<section class="rounded-md border border-gray-600 p-4">
 		<h2 class="mb-4 text-lg font-bold">내 씰 설정</h2>
 		<SelectSealForm {saveMySeals} />
 	</section>
 	<SelectedSeals {saveMySeals} />
+	<section class="rounded-md border border-gray-600 p-4">
+		<h2 class="mb-4 text-lg font-bold">씰 가격표</h2>
+		<SealPriceForm {saveMySeals} />
+	</section>
+	<SealCalculator />
 </div>
