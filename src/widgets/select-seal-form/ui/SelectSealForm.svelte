@@ -36,6 +36,60 @@
 		seals.set(data)
 	})
 
+	const updateSearchResult = (_searchText: string) => {
+		const sealFilteredStat = $seals.filter(
+			({ statType }) => statCheckboxes[statType]
+		)
+		if (_searchText === '') {
+			searchResults = sealFilteredStat
+			return
+		}
+
+		const results: SealData[] = []
+		sealFilteredStat.forEach((seal) => {
+			if (
+				seal.name.includes(_searchText) ||
+				choseongIncludes(seal.name, _searchText)
+			) {
+				results.push(seal)
+			}
+		})
+		searchResults = [...results]
+	}
+	const onSearchInput = (e: CustomEvent) => {
+		const _searchText = e.detail.target.value
+		updateSearchResult(_searchText)
+	}
+
+	const onCheck = (e: CustomEvent) => {
+		const { id, checked } = e.detail.target
+		if (checked) {
+			updateSearchResult(searchText)
+		} else {
+			searchResults = [
+				...searchResults.filter(({ statType }) => statType !== id)
+			]
+		}
+	}
+
+	const newCountForm = (count: number) => {
+		const sealId = +Object.keys(form)[0]
+		const formValue = Object.values(form)[0]
+		if (`${count}`.startsWith('0')) {
+			count = +`${count}`.replace(/^0+/g, '')
+		}
+		if (formValue.count > 3000) {
+			count = 3000
+		}
+		return { [sealId]: { ...formValue, count } }
+	}
+
+	const onCountInput = (e: Event) => {
+		const target = e.target as HTMLInputElement
+		const { value } = target
+		form = { ...newCountForm(+value) }
+	}
+
 	const getMySeal = (sealId: number) => {
 		return $mySeals.find(({ id }) => id === sealId)
 	}
@@ -64,7 +118,7 @@
 			return
 		}
 		if (formValue.count > 3000) {
-			form = { [sealId]: { ...formValue, count: 3000 } }
+			form = newCountForm(3000)
 		}
 		const alreadyExist = $mySeals.find(({ id }) => id === sealId)
 		if (alreadyExist) {
@@ -74,44 +128,6 @@
 		}
 		form = { ...defaultForm }
 		saveMySeals()
-	}
-
-	const updateSearchResult = (_searchText: string) => {
-		const sealFilteredStat = $seals.filter(
-			({ statType }) => statCheckboxes[statType]
-		)
-		if (_searchText === '') {
-			searchResults = sealFilteredStat
-			return
-		}
-
-		const results: SealData[] = []
-		sealFilteredStat.forEach((seal) => {
-			if (
-				seal.name.includes(_searchText) ||
-				choseongIncludes(seal.name, _searchText)
-			) {
-				results.push(seal)
-			}
-		})
-		searchResults = [...results]
-	}
-
-	const onSearchInput = (e: CustomEvent) => {
-		const _searchText = e.detail.target.value
-		updateSearchResult(_searchText)
-	}
-
-	const onCheck = (e: CustomEvent) => {
-		const { id, checked } = e.detail.target
-		if (checked) {
-			updateSearchResult(searchText)
-		} else {
-			searchResults = [
-				...searchResults.filter(({ statType }) => statType !== id)
-			]
-		}
-		console.log('value', id, checked)
 	}
 </script>
 
@@ -158,6 +174,7 @@
 					class="w-full bg-primary-50 p-1 text-xs text-white"
 					placeholder="씰 개수"
 					bind:value={form[seal.id].count}
+					on:input={onCountInput}
 					on:blur|once={onblur}
 				/>
 			{/if}
