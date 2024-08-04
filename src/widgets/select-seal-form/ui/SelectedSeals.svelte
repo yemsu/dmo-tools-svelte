@@ -9,6 +9,7 @@
 		type StatType
 	} from '$widgets/select-seal-form/config'
 
+	export let saveMySeals: () => void
 	$: mySealsByStatType = objectBy($mySeals, (mySeal) => mySeal.statType)
 
 	$: statCalc = (statType: StatType) => {
@@ -40,7 +41,10 @@
 		/>
 		<button
 			class="absolute right-[1px] top-[1px]"
-			on:click={() => mySeals.remove(mySeal.name)}
+			on:click={() => {
+				mySeals.remove(mySeal.name)
+				saveMySeals()
+			}}
 			title="삭제"
 		>
 			<iconify-icon icon="mdi:close" width={14} height={14} />

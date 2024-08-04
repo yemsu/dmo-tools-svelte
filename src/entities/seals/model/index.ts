@@ -11,6 +11,17 @@ const createMySeals = () => {
 		add: (...newMySeals: MySeal[]) => {
 			update((prev) => [...prev, ...newMySeals])
 		},
+		modify: (newMySeal: MySeal) => {
+			update((prev) =>
+				prev.map((mySeal) => {
+					if (mySeal.id === newMySeal.id) {
+						return newMySeal
+					} else {
+						return mySeal
+					}
+				})
+			)
+		},
 		remove: (sealName: string) =>
 			update((prev) => [...prev.filter(({ name }) => name !== sealName)]),
 		reset: () => set([])

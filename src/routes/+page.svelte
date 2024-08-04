@@ -13,7 +13,7 @@
 		}
 	})
 
-	const saveData = () => {
+	const saveMySeals = () => {
 		localStorage.setItem(STORAGE_NAME, JSON.stringify($mySeals))
 	}
 </script>
@@ -26,7 +26,7 @@
 <div class="grid grid-cols-2 gap-4">
 	<section class="rounded-md border border-gray-600 p-4">
 		<h2 class="mb-4 text-lg font-bold">내 씰 설정</h2>
-		<SelectSealForm {saveData} />
+		<SelectSealForm {saveMySeals} />
 	</section>
-	<SelectedSeals />
+	<SelectedSeals {saveMySeals} />
 </div>

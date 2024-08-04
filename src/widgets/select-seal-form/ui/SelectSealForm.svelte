@@ -19,7 +19,7 @@
 
 	const defaultForm = {}
 
-	export let saveData: () => void
+	export let saveMySeals: () => void
 	let form: Form = defaultForm
 	let statCheckboxes: Record<StatType, boolean> = {
 		AT: true,
@@ -66,9 +66,14 @@
 		if (formValue.count > 3000) {
 			form = { [sealId]: { ...formValue, count: 3000 } }
 		}
-		mySeals.add(form[sealId])
+		const alreadyExist = $mySeals.find(({ id }) => id === sealId)
+		if (alreadyExist) {
+			mySeals.modify(form[sealId])
+		} else {
+			mySeals.add(form[sealId])
+		}
 		form = { ...defaultForm }
-		saveData()
+		saveMySeals()
 	}
 
 	const updateSearchResult = (_searchText: string) => {
