@@ -89,8 +89,11 @@
 </script>
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>디지몬 마스터즈 도구 모음 | dom tools</title>
+	<meta
+		name="description"
+		content="디지몬 마스터즈 도구 모음 사이트 dom tools 입니다. 보유 중인 씰을 등록하고 목표 능력치를 위한 효율적인 씰 구성을 편리하게 확인해보세요!"
+	/>
 </svelte:head>
 
 <div class="grid grid-cols-2 gap-4">
