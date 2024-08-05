@@ -9,7 +9,6 @@
 		STATS,
 		type StatType
 	} from '$widgets/select-seal-form/config'
-	import { StatBar } from '$widgets/stat-bar'
 
 	type SealEfficiency2 = {
 		sealId: number
@@ -312,5 +311,4 @@
 			</p>
 		{/if}
 	</div>
-	<StatBar stats={$myStats} />
 </Section>

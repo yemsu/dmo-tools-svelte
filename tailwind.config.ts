@@ -24,11 +24,13 @@ export default {
 		extend: {
 			colors: {
 				primary: {
+					5: 'hsl(var(--primary-5))',
+					10: 'hsl(var(--primary-10))',
+					20: 'hsl(var(--primary-20))',
+					30: 'hsl(var(--primary-30))',
+					40: 'hsl(var(--primary-40))',
 					50: 'hsl(var(--primary-50))',
-					100: 'hsl(var(--primary-100))',
-					200: 'hsl(var(--primary-200))',
-					300: 'hsl(var(--primary-300))',
-					400: 'hsl(var(--primary-400))'
+					90: 'hsl(var(--primary-90))'
 				},
 				stat: {
 					at: 'hsl(var(--stat-at))',
@@ -37,7 +39,11 @@ export default {
 					ds: 'hsl(var(--stat-cds))',
 					ev: 'hsl(var(--stat-cev))',
 					de: 'hsl(var(--stat-cde))'
-				}
+				},
+				point: 'hsl(var(--point))'
+			},
+			dropShadow: {
+				'primary-90': '0 0 3px hsl(var(--primary-90))'
 			}
 		}
 	},

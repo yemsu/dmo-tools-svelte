@@ -22,6 +22,7 @@
 		STATS,
 		type StatType
 	} from '$widgets/select-seal-form/config'
+	import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
 	import { onMount } from 'svelte'
 
 	const MY_SEALS_STORAGE = 'DMO_MYS'
@@ -115,4 +116,7 @@
 		<SealPriceForm {saveMySealPrices} />
 	</Section>
 	<SealCalculator />
+	<div class="fixed bottom-5 left-1/2 -translate-x-1/2">
+		<StatBar stats={$myStats} />
+	</div>
 </div>

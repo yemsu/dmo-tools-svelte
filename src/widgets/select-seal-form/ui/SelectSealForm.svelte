@@ -173,13 +173,13 @@
 					: getMySeal(seal.id)?.count || 0}
 			/>
 			{#if form.sealId === seal.id}
-				<span class="flex items-center justify-center gap-1 bg-primary-50">
+				<span class="bg-primary-10 flex items-center justify-center gap-1">
 					<span class="w-[4em] overflow-hidden">
 						<input
 							bind:this={inputElement}
 							type="number"
 							id={`count-${seal.id}`}
-							class="w-full bg-primary-200 p-1 text-xs text-white"
+							class="bg-primary-20 w-full p-1 text-xs text-white"
 							placeholder="씰 개수"
 							bind:value={form.count}
 							on:input={onCountInput}

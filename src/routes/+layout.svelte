@@ -2,13 +2,16 @@
 	import Header from './Header.svelte'
 	import 'iconify-icon'
 	import '../app/app.css'
+	import { Inner } from '$shared/section'
 </script>
 
 <div class="app">
 	<Header></Header>
 
-	<main class="mx-auto max-w-[1400px] px-4 lg:px-8">
-		<slot></slot>
+	<main>
+		<Inner>
+			<slot></slot>
+		</Inner>
 	</main>
 </div>
 

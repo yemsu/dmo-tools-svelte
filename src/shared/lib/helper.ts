@@ -15,3 +15,9 @@ export const objectBy = <ArrItem, KeyName extends string>(
 	)
 	return result
 }
+
+export const cn = (
+	...classNames: (string | number | undefined | boolean | null)[]
+) => {
+	return classNames.filter((className) => className).join(' ')
+}

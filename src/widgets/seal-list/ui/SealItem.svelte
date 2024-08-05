@@ -7,7 +7,7 @@
 	export let price: number | undefined = undefined
 </script>
 
-<span class="flex flex-col justify-center bg-primary-50 text-center">
+<span class="bg-primary-10 flex flex-col justify-center text-center">
 	<span
 		class="flex h-[4em] items-center justify-center text-balance break-keep border-b border-t border-b-white/30 border-t-white/30 bg-black/40 font-bold"
 	>

@@ -1,3 +1,4 @@
-import Section from '$shared/section/ui/Section.svelte'
+import Inner from './ui/Inner.svelte'
+import Section from './ui/Section.svelte'
 
-export { Section }
+export { Section, Inner }
