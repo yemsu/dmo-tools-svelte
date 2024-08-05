@@ -7,11 +7,7 @@
 	import { Title } from '$shared/text'
 	import { SealItem } from '$widgets/seal-list'
 	import SealMenuList from '$widgets/seal-list/ui/SealMenuList.svelte'
-	import {
-		STAT_TYPES,
-		statColorStyles,
-		type StatType
-	} from '$widgets/select-seal-form/config'
+	import { STAT_TYPES, type StatType } from '$widgets/select-seal-form/config'
 	import { choseongIncludes } from 'es-hangul'
 
 	type Form = {
@@ -19,7 +15,11 @@
 	}
 
 	const defaultForm = {}
-
+	const statColorStyles: Record<StatType, string> = {
+		AT: 'text-stat-at',
+		HT: 'text-stat-ht',
+		CT: 'text-stat-ct'
+	}
 	export let saveMySealPrices: () => void
 	let form: Form = defaultForm
 	let statCheckboxes: Record<StatType, boolean> = {

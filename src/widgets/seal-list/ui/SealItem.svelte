@@ -2,8 +2,12 @@
 	import SealItemPrice from './SealItemPrice.svelte'
 	import SealItemCount from './SealItemCount.svelte'
 	import type { SealData } from '$entities/seals'
-	import { statColorStyles } from '$widgets/select-seal-form/config'
-
+	import { type StatType } from '$widgets/select-seal-form/config'
+	const statColorStyles: Record<StatType, string> = {
+		AT: 'text-stat-at',
+		HT: 'text-stat-ht',
+		CT: 'text-stat-ct'
+	}
 	export let seal: SealData
 </script>
 

@@ -35,12 +35,6 @@ export const STAT_TYPES = STATS.map(({ type }) => type)
 
 export type StatType = (typeof STATS)[number]['type']
 
-export const statColorStyles: Record<StatType, string> = {
-	AT: 'text-stat-at',
-	HT: 'text-stat-ht',
-	CT: 'text-stat-ct'
-}
-
 export type Seal = {
 	name: string
 	stat: StatType
