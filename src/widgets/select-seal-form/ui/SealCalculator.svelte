@@ -3,7 +3,8 @@
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals/model'
 	import { objectBy } from '$shared/lib'
 	import { Section } from '$shared/section'
-	import { SealItem } from '$widgets/seal-list'
+	import { Title } from '$shared/text'
+	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
 		SEAL_STAT_TABLE,
 		STATS,
@@ -253,8 +254,8 @@
 </script>
 
 <Section>
-	<h2 class="mb-4 text-lg font-bold">씰 계산기</h2>
-	<div>
+	<Title>씰 계산기</Title>
+	<div class="flex flex-1 flex-col gap-3">
 		<form on:submit|preventDefault={onSubmit} class="flex flex-col gap-2">
 			<ul class="flex items-center gap-2">
 				{#each STATS as stat, i (stat.type)}
@@ -285,30 +286,17 @@
 				<button class="variant-filled-primary btn"> 결과보기 </button>
 			</div>
 		</form>
-		{#if effDataListSorted.length === 0}
-			<p>씰 없음</p>
-		{:else}
-			<ul
-				class="scroll-box w-fullgap-2 grid max-h-[500px] grid-cols-5 items-start gap-2 text-xs"
-			>
-				{#each effDataListSorted as effData}
-					{@const seal = $seals.find(({ id }) => id === effData.sealId)}
-					{#if seal}
-						<li class="relative">
-							<SealItem {seal} count={effData.count} price={effData.price} />
-							필요개수 {effData.needCount} <br />
-							필요금액 {effData.needPrice} <br />
-							얻게될 능력치 {effData.willGetStat} <br />
-							1M당 능력치 {effData.efficiency.toFixed(5)} <br />
-						</li>
-					{/if}
-				{/each}
-			</ul>
-			<p>
-				최종 능력치: {$myStats[selectedStatType]} + {willGetStatTotal} = {willGetStatTotal +
-					$myStats[selectedStatType]} <br />
-				총 필요 금액: {willNeedMoneyTotal.toLocaleString()}
-			</p>
-		{/if}
+		<SealList seals={effDataListSorted} let:seal={effData}>
+			{@const seal = $seals.find(({ id }) => id === effData.sealId)}
+			{#if seal}
+				<li class="relative">
+					<SealItem {seal} count={effData.count} price={effData.price} />
+					필요개수 {effData.needCount} <br />
+					필요금액 {effData.needPrice} <br />
+					얻게될 능력치 {effData.willGetStat} <br />
+					1M당 능력치 {effData.efficiency.toFixed(5)} <br />
+				</li>
+			{/if}
+		</SealList>
 	</div>
 </Section>

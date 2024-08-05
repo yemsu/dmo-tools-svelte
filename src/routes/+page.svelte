@@ -10,6 +10,7 @@
 	import type { Stats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
 	import { Section } from '$shared/section'
+	import { Title } from '$shared/text'
 	import {
 		SelectSealForm,
 		SealPriceForm,
@@ -107,12 +108,11 @@
 
 <div class="grid gap-4 lg:grid-cols-2">
 	<Section>
-		<h2 class="mb-4 text-lg font-bold">내 씰 설정</h2>
+		<Title>내 씰 설정</Title>
 		<SelectSealForm {saveMySeals} />
 	</Section>
-	<MySeals {saveMySeals} />
 	<Section>
-		<h2 class="mb-4 text-lg font-bold">씰 가격표</h2>
+		<Title>씰 가격표</Title>
 		<SealPriceForm {saveMySealPrices} />
 	</Section>
 	<SealCalculator />

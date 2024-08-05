@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { mySeals, seals } from '$entities/seals/model'
 	import { Section } from '$shared/section'
+	import { Title } from '$shared/text'
 	import { SealItem } from '$widgets/seal-list'
 	import SealList from '$widgets/seal-list/ui/SealList.svelte'
 	import { getMySealData } from '$widgets/select-seal-form/lib/helper'
@@ -9,7 +10,7 @@
 </script>
 
 <Section>
-	<h2 class="mb-4 text-lg font-bold">보유중인 씰 ({$mySeals.length})</h2>
+	<Title>보유중인 씰 ({$mySeals.length})</Title>
 	<SealList seals={$mySeals} let:seal={mySeal}>
 		<SealItem
 			seal={getMySealData($seals, mySeal.sealId)}

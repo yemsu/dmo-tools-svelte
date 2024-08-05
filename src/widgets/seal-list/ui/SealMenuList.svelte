@@ -8,7 +8,13 @@
 </script>
 
 {#if seals.length === 0}
-	<p>waiting for the promise to resolve...</p>
+	<div
+		class="scroll-box w-fullgap-2 grid max-h-[500px] grid-cols-3 items-start gap-2 text-xs sm:grid-cols-5"
+	>
+		{#each new Array(25).fill(1) as _}
+			<div class="h-[92px] rounded-sm bg-gray-800"></div>
+		{/each}
+	</div>
 {:else}
 	<menu
 		class="scroll-box w-fullgap-2 grid max-h-[500px] grid-cols-3 items-start gap-2 text-xs sm:grid-cols-5"
