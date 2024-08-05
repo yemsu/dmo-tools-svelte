@@ -21,4 +21,4 @@ export type SealPrice = {
 	modifiedAt: string
 }
 
-export type MyStats = Record<StatType, number>
+export type Stats = Record<StatType, number>

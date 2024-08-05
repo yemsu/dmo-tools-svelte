@@ -1,6 +1,6 @@
 {
 	"Svelte Component Template": {
 		"prefix": "svc",
-		"body": ["<script lang=\"ts\">", "</script>", "", "<div>$0</div>", "", "<style>", "</style>"]
+		"body": ["<script lang=\"ts\">", "</script>", "", "<div>$0</div>"]
 	}
 }

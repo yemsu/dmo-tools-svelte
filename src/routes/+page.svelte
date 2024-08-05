@@ -7,14 +7,14 @@
 		mySealPrices,
 		sealPrices
 	} from '$entities/seals/model'
-	import type { MyStats } from '$entities/seals/type'
+	import type { Stats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import {
 		SelectSealForm,
 		SealPriceForm,
 		SealCalculator,
-		SelectedSeals,
+		MySeals,
 		getMySealData
 	} from '$widgets/select-seal-form'
 	import {
@@ -88,11 +88,11 @@
 	}
 
 	$: {
-		const newMyStats = STATS.reduce((result, { type }) => {
+		const newStats = STATS.reduce((result, { type }) => {
 			result[type] = statCalc(type)
 			return result
-		}, {} as MyStats)
-		myStats.set(newMyStats)
+		}, {} as Stats)
+		myStats.set(newStats)
 	}
 </script>
 
@@ -109,7 +109,7 @@
 		<h2 class="mb-4 text-lg font-bold">내 씰 설정</h2>
 		<SelectSealForm {saveMySeals} />
 	</Section>
-	<SelectedSeals {saveMySeals} />
+	<MySeals {saveMySeals} />
 	<Section>
 		<h2 class="mb-4 text-lg font-bold">씰 가격표</h2>
 		<SealPriceForm {saveMySealPrices} />
