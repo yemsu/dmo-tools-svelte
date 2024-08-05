@@ -2,6 +2,7 @@
 	import type { SealData } from '$entities/seals'
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals/model'
 	import { objectBy } from '$shared/lib'
+	import { Section } from '$shared/section'
 	import { SealItem } from '$widgets/seal-list'
 	import {
 		SEAL_STAT_TABLE,
@@ -251,7 +252,7 @@
 	}
 </script>
 
-<section class="rounded-md border border-gray-600 p-4">
+<Section>
 	<h2 class="mb-4 text-lg font-bold">씰 계산기</h2>
 	<div>
 		<form on:submit|preventDefault={onSubmit} class="flex flex-col gap-2">
@@ -321,4 +322,4 @@
 			{/each}
 		</dl>
 	</div>
-</section>
+</Section>

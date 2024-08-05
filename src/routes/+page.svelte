@@ -9,6 +9,7 @@
 	} from '$entities/seals/model'
 	import type { MyStats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
+	import { Section } from '$shared/section'
 	import {
 		SelectSealForm,
 		SealPriceForm,
@@ -96,15 +97,15 @@
 	/>
 </svelte:head>
 
-<div class="grid grid-cols-2 gap-4">
-	<section class="rounded-md border border-gray-600 p-4">
+<div class="grid gap-4 lg:grid-cols-2">
+	<Section>
 		<h2 class="mb-4 text-lg font-bold">내 씰 설정</h2>
 		<SelectSealForm {saveMySeals} />
-	</section>
+	</Section>
 	<SelectedSeals {saveMySeals} />
-	<section class="rounded-md border border-gray-600 p-4">
+	<Section>
 		<h2 class="mb-4 text-lg font-bold">씰 가격표</h2>
 		<SealPriceForm {saveMySealPrices} />
-	</section>
+	</Section>
 	<SealCalculator />
 </div>
