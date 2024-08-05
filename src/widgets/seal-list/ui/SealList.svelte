@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { MySeal, SealData } from '$entities/seals'
-
-	export let seals: (MySeal | SealData)[] = []
+	type T = $$Generic
+	export let seals: T[] = []
 </script>
 
 {#if seals.length === 0}

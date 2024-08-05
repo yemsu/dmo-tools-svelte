@@ -14,7 +14,8 @@
 		SelectSealForm,
 		SealPriceForm,
 		SealCalculator,
-		SelectedSeals
+		SelectedSeals,
+		getMySealData
 	} from '$widgets/select-seal-form'
 	import {
 		SEAL_STAT_TABLE,
@@ -48,6 +49,10 @@
 		if ($mySeals.length === 0) {
 			const savedData = localStorage.getItem(MY_SEALS_STORAGE)
 			if (savedData) {
+				console.log(
+					'mySEalSVaed',
+					JSON.parse(savedData).map(({ sealId }) => sealId)
+				)
 				mySeals.add(...JSON.parse(savedData))
 			}
 		}
@@ -59,22 +64,28 @@
 	const saveMySealPrices = () => {
 		localStorage.setItem(SEAL_PRICE_STORAGE, JSON.stringify($mySealPrices))
 	}
-	$: mySealsByStatType = objectBy($mySeals, (mySeal) => mySeal.statType)
 	$: statCalc = (statType: StatType) => {
+		const mySealsByStatType = objectBy(
+			$mySeals,
+			({ sealId }) => getMySealData($seals, sealId).statType
+		)
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
 		if (!sealsByStatType || sealsByStatType.length === 0) {
 			return 0
 		}
 		let resultValue = 0
-		sealsByStatType.forEach(({ maxIncrease, count }) => {
+		sealsByStatType.forEach(({ sealId, count }) => {
 			let sealPercent = 0
 			for (const statTable of SEAL_STAT_TABLE) {
-				if (count <= statTable.sealCount) {
+				if (count >= statTable.sealCount) {
 					sealPercent = statTable.percent
+				} else {
 					break
 				}
 			}
+			const seal = getMySealData($seals, sealId)
+			const maxIncrease = seal.maxIncrease
 			resultValue += maxIncrease * (sealPercent / 100)
 		})
 		return resultValue

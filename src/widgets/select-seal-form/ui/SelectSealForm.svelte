@@ -13,11 +13,9 @@
 	import { choseongIncludes } from 'es-hangul'
 	import { onMount } from 'svelte'
 
-	type Form = {
-		[key: number]: MySeal
-	}
+	type Form = Partial<MySeal>
 
-	const defaultForm = {}
+	const defaultForm: Form = {}
 
 	export let saveMySeals: () => void
 	let form: Form = defaultForm
@@ -72,59 +70,65 @@
 		}
 	}
 
-	const newCountForm = (count: number) => {
-		const sealId = +Object.keys(form)[0]
-		const formValue = Object.values(form)[0]
-		if (`${count}`.startsWith('0')) {
-			count = +`${count}`.replace(/^0+/g, '')
+	const checkCountValue = (count: Form['count']) => {
+		if (count === 0) {
+			count = undefined
+		} else if (count) {
+			count = count * 1
+			if (count > 3000) {
+				count = 3000
+			}
 		}
-		if (formValue.count > 3000) {
-			count = 3000
-		}
-		return { [sealId]: { ...formValue, count } }
+		return count
 	}
 
 	const onCountInput = (e: Event) => {
 		const target = e.target as HTMLInputElement
-		const { value } = target
-		form = { ...newCountForm(+value) }
+		const count = +target.value
+		const countChecked = checkCountValue(count)
+		form = { ...form, count: countChecked }
 	}
 
-	const getMySeal = (sealId: number) => {
-		return $mySeals.find(({ id }) => id === sealId)
+	const getMySeal = (_sealId: number) => {
+		return $mySeals.find(({ sealId }) => sealId === _sealId)
 	}
 
 	const selectSeal = (selectedSeal: SealData) => {
 		const sealId = selectedSeal.id
 		const count = getMySeal(sealId)?.count || 0
-		form = { [sealId]: { ...selectedSeal, count } }
+		form = { sealId, count }
 		setTimeout(() => {
 			inputElement.focus()
 		}, 60)
 	}
+
 	const onblur = () => {
 		form = {}
 	}
 
 	const onSubmit = () => {
-		const sealId = +Object.keys(form)[0]
-		const formValue = Object.values(form)[0]
-		if (!formValue.name) {
+		const { sealId, count } = form
+		if (!sealId) {
 			alert('보유 중인 씰을 선택해주세요.')
 			return
 		}
-		if (!formValue.count) {
+		if (!count) {
 			alert('보유 중인 씰의 개수를 설정해주세요.')
 			return
 		}
-		if (formValue.count > 3000) {
-			form = newCountForm(3000)
+		if (count > 3000) {
+			form = { ...form, count: 3000 }
 		}
-		const alreadyExist = $mySeals.find(({ id }) => id === sealId)
+
+		const newMySeal: MySeal = {
+			sealId,
+			count
+		}
+		const alreadyExist = $mySeals.find((mySeal) => mySeal.sealId === sealId)
 		if (alreadyExist) {
-			mySeals.modify(form[sealId])
+			mySeals.modify(newMySeal)
 		} else {
-			mySeals.add(form[sealId])
+			mySeals.add(newMySeal)
 		}
 		form = { ...defaultForm }
 		saveMySeals()
@@ -159,14 +163,16 @@
 		<SealMenuList
 			seals={searchResults}
 			let:seal
-			selectedSealName={Object.values(form)[0]?.name}
+			selectedSealId={form.sealId}
 			onClickSeal={selectSeal}
 		>
 			<SealItem
 				{seal}
-				count={!form[seal.id] ? getMySeal(seal.id)?.count || 0 : undefined}
+				count={form.sealId === seal.id
+					? undefined
+					: getMySeal(seal.id)?.count || 0}
 			/>
-			{#if form[seal.id]}
+			{#if form.sealId === seal.id}
 				<span class="flex items-center justify-center gap-1 bg-primary-50">
 					<span class="w-[4em] overflow-hidden">
 						<input
@@ -175,7 +181,7 @@
 							id={`count-${seal.id}`}
 							class="w-full bg-primary-200 p-1 text-xs text-white"
 							placeholder="씰 개수"
-							bind:value={form[seal.id].count}
+							bind:value={form.count}
 							on:input={onCountInput}
 							on:blur|once={onblur}
 						/>

@@ -3,18 +3,25 @@ import { writable } from 'svelte/store'
 
 export const seals = writable<SealData[]>([])
 
+const sortBy = <ArrItem extends Record<string, number>>(
+	arr: ArrItem[],
+	keyName: keyof ArrItem
+) => {
+	return arr.sort((a, b) => a[keyName] - b[keyName])
+}
+
 const createMySeals = () => {
 	const { subscribe, set, update } = writable<MySeal[]>([])
 
 	return {
 		subscribe,
 		add: (...newMySeals: MySeal[]) => {
-			update((prev) => [...prev, ...newMySeals])
+			update((prev) => sortBy([...prev, ...newMySeals], 'sealId'))
 		},
 		modify: (newMySeal: MySeal) => {
 			update((prev) =>
 				prev.map((mySeal) => {
-					if (mySeal.id === newMySeal.id) {
+					if (mySeal.sealId === newMySeal.sealId) {
 						return newMySeal
 					} else {
 						return mySeal
@@ -22,8 +29,8 @@ const createMySeals = () => {
 				})
 			)
 		},
-		remove: (sealName: string) =>
-			update((prev) => [...prev.filter(({ name }) => name !== sealName)]),
+		remove: (_sealId: number) =>
+			update((prev) => [...prev.filter(({ sealId }) => sealId !== _sealId)]),
 		reset: () => set([])
 	}
 }

@@ -2,7 +2,7 @@
 	import type { SealData } from '$entities/seals'
 
 	export let seals: SealData[] = []
-	export let selectedSealName: SealData['name'] | undefined
+	export let selectedSealId: SealData['id'] | undefined
 	export let onClickSeal: (seal: SealData) => void | undefined
 	export let buttonTitle: string | undefined = '선택하기'
 </script>
@@ -15,8 +15,8 @@
 	>
 		{#each seals as seal (seal.id)}
 			<li
-				class="transition-opacity {selectedSealName &&
-					(selectedSealName !== seal.name ? 'opacity-50' : '')}"
+				class="transition-opacity {selectedSealId &&
+					(selectedSealId !== seal.id ? 'opacity-50' : '')}"
 			>
 				<button
 					type="button"

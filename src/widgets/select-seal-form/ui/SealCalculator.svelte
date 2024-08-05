@@ -56,7 +56,7 @@
 		return $sealPrices.find(({ sealId }) => sealId === _sealId)?.price
 	}
 	$: getMySealCount = (_sealId: number) => {
-		return $mySeals.find(({ id }) => id === _sealId)?.count || 0
+		return $mySeals.find(({ sealId }) => sealId === _sealId)?.count || 0
 	}
 
 	$: getNextEfficiencyData = (

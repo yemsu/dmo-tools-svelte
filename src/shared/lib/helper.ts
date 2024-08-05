@@ -3,12 +3,12 @@ export const objectBy = <ArrItem, KeyName extends string>(
 	keyNameCB: (arrItem: ArrItem) => KeyName
 ) => {
 	const result = arr.reduce(
-		(result, mySeal) => {
-			const keyName = keyNameCB(mySeal)
+		(result, arrItem) => {
+			const keyName = keyNameCB(arrItem)
 			if (!result[keyName]) {
 				result[keyName] = []
 			}
-			result[keyName] = [...result[keyName], mySeal]
+			result[keyName] = [...result[keyName], arrItem]
 			return result
 		},
 		{} as Record<KeyName, ArrItem[]>

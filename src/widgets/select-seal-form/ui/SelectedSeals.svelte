@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { mySeals, myStats } from '$entities/seals/model'
+	import { seals, mySeals, myStats } from '$entities/seals/model'
 	import { Section } from '$shared/section'
 	import { SealItem } from '$widgets/seal-list'
 	import SealList from '$widgets/seal-list/ui/SealList.svelte'
 	import { STATS } from '$widgets/select-seal-form/config'
+	import { getMySealData } from '$widgets/select-seal-form/lib/helper'
 
 	export let saveMySeals: () => void
 </script>
@@ -12,13 +13,13 @@
 	<h2 class="mb-4 text-lg font-bold">보유중인 씰 ({$mySeals.length})</h2>
 	<SealList seals={$mySeals} let:seal={mySeal}>
 		<SealItem
-			seal={mySeal}
+			seal={getMySealData($seals, mySeal.sealId)}
 			count={'count' in mySeal ? mySeal.count : undefined}
 		/>
 		<button
 			class="absolute right-[1px] top-[1px]"
 			on:click={() => {
-				mySeals.remove(mySeal.name)
+				mySeals.remove(mySeal.sealId)
 				saveMySeals()
 			}}
 			title="삭제"

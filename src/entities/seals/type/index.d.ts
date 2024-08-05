@@ -7,7 +7,8 @@ export type SealData = {
 	statType: StatType
 }
 
-export type MySeal = SealData & {
+export type MySeal = {
+	sealId: number
 	count: number
 }
 

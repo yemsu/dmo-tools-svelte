@@ -86,8 +86,8 @@
 		form = { ...newPriceForm(+value) }
 	}
 
-	const getMySeal = (sealId: number) => {
-		return $mySeals.find(({ id }) => id === sealId)
+	const getMySeal = (_sealId: number) => {
+		return $mySeals.find(({ sealId }) => sealId === _sealId)
 	}
 
 	const clickSeal = (selectedSeal: SealData) => {
