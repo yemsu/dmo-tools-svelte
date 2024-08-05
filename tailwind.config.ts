@@ -42,6 +42,9 @@ export default {
 				},
 				point: 'hsl(var(--point))'
 			},
+			fontFamily: {
+				tiny: ['Tiny5', 'sans-serif']
+			},
 			dropShadow: {
 				'primary-90': '0 0 3px hsl(var(--primary-90))'
 			}

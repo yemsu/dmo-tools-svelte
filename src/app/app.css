@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Tiny5&display=swap');
 
 @layer base {
 	:root {
@@ -99,5 +100,11 @@ input[type='number']::-webkit-inner-spin-button {
 @layer components {
 	.scroll-box {
 		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
+	}
+	.text-logo {
+		background: linear-gradient(to bottom, #fef102, #ed7000);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		filter: drop-shadow(0 0 5px #0267b6);
 	}
 }
