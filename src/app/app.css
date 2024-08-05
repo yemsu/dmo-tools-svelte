@@ -5,6 +5,7 @@
 
 @layer base {
 	:root {
+		/* colors */
 		--primary-5: 214 82% 11%; /* hsl(214 82% 11%) */
 		--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
 		--primary-20: 219 67% 31%; /* hsl(219 67% 31%) */
@@ -13,6 +14,7 @@
 		--primary-50: 194 99% 49%; /* hsl(194 99% 49%) */
 		--primary-90: 181 100% 71%; /* hsl(181 100% 71%) */
 
+		--secondary-5: 208 46% 8%; /* hsl(208 46% 8%) */
 		--secondary-10: 207 48% 9.8%; /* hsl(207 48% 9.8%) */
 		--secondary-20: 190 33.33% 14.12%; /* hsl(190 33.33% 14.12%) */
 		--secondary-30: 196.36 34.02% 19.02%; /* hsl(196.36 34.02% 19.02%) */
@@ -27,6 +29,16 @@
 		--stat-ds: 180 100% 51.96%; /* hsl(180 100% 51.96%) */
 		--stat-ev: 94.62 100% 49.61%; /* hsl(94.62 100% 49.61%) */
 		--stat-de: 60 100% 50.39%; /* hsl(60 100% 50.39%) */
+
+		--price-t-1: #ea6228;
+		--price-t-2: #421921;
+		--price-m-1: #50b602;
+		--price-m-2: #1c4319;
+		--price-b-1: #bdbdbd;
+		--price-b-2: #1d1d1d;
+
+		/* size */
+		--header-h: 50px;
 	}
 }
 
@@ -57,7 +69,7 @@ dd {
 
 input,
 button {
-	@apply appearance-none border-none bg-transparent text-inherit;
+	@apply appearance-none bg-transparent text-inherit;
 }
 
 input {

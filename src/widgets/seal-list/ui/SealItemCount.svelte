@@ -101,8 +101,8 @@
 				title="보유 개수 +1"
 				on:click={() => sumCount(1)}
 			>
-				<iconify-icon icon="mdi:plus" width={12} height={12} /></button
-			>
+				<iconify-icon icon="mdi:plus" width={12} height={12} />
+			</button>
 		</li>
 	</menu>
 {/if}

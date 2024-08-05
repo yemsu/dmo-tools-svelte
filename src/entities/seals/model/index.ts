@@ -51,3 +51,5 @@ export const myStats = writable<Stats>()
 
 export const sealPrices = writable<SealPrice[]>([])
 export const mySealPrices = writable<SealPrice[]>([])
+
+export const isShowMySealPopup = writable<boolean>(false)

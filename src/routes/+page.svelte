@@ -1,21 +1,19 @@
 <script lang="ts">
 	import { getSealPrices, getSeals } from '$entities/seals'
 	import {
-		seals,
+		mySealPrices,
 		mySeals,
 		myStats,
-		mySealPrices,
-		sealPrices
+		sealPrices,
+		seals
 	} from '$entities/seals/model'
 	import type { Stats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
-	import { Section } from '$shared/section'
-	import { Title } from '$shared/text'
+	import { Inner } from '$shared/section'
 	import {
-		SelectSealForm,
-		SealPriceForm,
-		SealCalculator,
 		MySeals,
+		SealCalculator,
+		SelectSealForm,
 		getMySealData
 	} from '$widgets/select-seal-form'
 	import {
@@ -23,7 +21,6 @@
 		STATS,
 		type StatType
 	} from '$widgets/select-seal-form/config'
-	import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
 	import { onMount } from 'svelte'
 
 	const SEAL_PRICE_STORAGE = 'DMO_MYP'
@@ -98,15 +95,9 @@
 	/>
 </svelte:head>
 
-<div class="grid gap-4 lg:grid-cols-2">
+<Inner class="md:h-content-fill-h grid gap-2 overflow-hidden md:grid-cols-2">
 	<SelectSealForm />
-	<MySeals />
-	<Section>
-		<Title>씰 가격표</Title>
-		<SealPriceForm {saveMySealPrices} />
-	</Section>
+	<!-- <SealPriceForm {saveMySealPrices} /> -->
 	<SealCalculator />
-	<div class="fixed bottom-5 left-1/2 -translate-x-1/2">
-		<StatBar stats={$myStats} />
-	</div>
-</div>
+	<MySeals />
+</Inner>

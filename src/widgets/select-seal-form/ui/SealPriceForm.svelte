@@ -3,6 +3,8 @@
 	import { postSealPrice } from '$entities/seals/api'
 	import { mySealPrices, mySeals, sealPrices } from '$entities/seals/model'
 	import { Input } from '$shared/form'
+	import { Section } from '$shared/section'
+	import { Title } from '$shared/text'
 	import { SealItem } from '$widgets/seal-list'
 	import SealMenuList from '$widgets/seal-list/ui/SealMenuList.svelte'
 	import {
@@ -125,65 +127,68 @@
 	}
 </script>
 
-<div class="flex flex-col gap-4">
-	<div class="flex w-full items-center justify-between">
-		<Input
-			id="search"
-			maxlength={30}
-			placeholder="씰이름을 검색하세요"
-			bind:value={searchText}
-			on:input={onSearchInput}
-		/>
-		<ul class="flex">
-			{#each STAT_TYPES as statType (statType)}
-				<li class="text-xs font-bold {statColorStyles[statType]}">
-					<Input
-						id={statType}
-						label={statType}
-						type="checkbox"
-						checked={statCheckboxes[statType]}
-						on:input={onCheck}
-						class="checkbox"
-					/>
-				</li>
-			{/each}
-		</ul>
-	</div>
-	<div class="flex">
-		<button class="variant-filled-primary py-1 text-xs"
-			>최신 가격 일괄 적용</button
-		>
-		<button class="variant-filled-primary text-xs"
-			>많이 입력된 가격 일괄 적용</button
-		>
-	</div>
-	<form on:submit|preventDefault={onSubmit} class="w-full">
-		<SealMenuList
-			seals={searchResults}
-			let:seal
-			selectedSealId={Object.values(form)[0]?.id}
-		>
-			{#if $sealPrices.length > 0}
-				<SealItem {seal} />
-			{/if}
-			{#if form[seal.id]}
-				<span class="flex items-center justify-center gap-1 bg-primary-10">
-					<span class="w-[4em] overflow-hidden">
-						<input
-							bind:this={inputElement}
-							type="number"
-							id={`price-${seal.id}`}
-							class="w-full bg-primary-20 p-1 text-xs text-white"
-							placeholder="씰 개수"
-							step="0.1"
-							bind:value={form[seal.id].price}
-							on:input={onPriceInput}
-							on:blur|once={onblur}
+<Section>
+	<Title>씰 가격표</Title>
+	<div class="flex flex-col gap-4">
+		<div class="flex w-full items-center justify-between">
+			<Input
+				id="search"
+				maxlength={30}
+				placeholder="씰이름을 검색하세요"
+				bind:value={searchText}
+				on:input={onSearchInput}
+			/>
+			<ul class="flex">
+				{#each STAT_TYPES as statType (statType)}
+					<li class="text-xs font-bold {statColorStyles[statType]}">
+						<Input
+							id={statType}
+							label={statType}
+							type="checkbox"
+							checked={statCheckboxes[statType]}
+							on:input={onCheck}
+							class="checkbox"
 						/>
+					</li>
+				{/each}
+			</ul>
+		</div>
+		<div class="flex">
+			<button class="variant-filled-primary py-1 text-xs"
+				>최신 가격 일괄 적용</button
+			>
+			<button class="variant-filled-primary text-xs"
+				>많이 입력된 가격 일괄 적용</button
+			>
+		</div>
+		<form on:submit|preventDefault={onSubmit} class="w-full">
+			<SealMenuList
+				seals={searchResults}
+				let:seal
+				selectedSealId={Object.values(form)[0]?.id}
+			>
+				{#if $sealPrices.length > 0}
+					<SealItem {seal} />
+				{/if}
+				{#if form[seal.id]}
+					<span class="flex items-center justify-center gap-1 bg-primary-10">
+						<span class="w-[4em] overflow-hidden">
+							<input
+								bind:this={inputElement}
+								type="number"
+								id={`price-${seal.id}`}
+								class="w-full bg-primary-20 p-1 text-xs text-white"
+								placeholder="씰 개수"
+								step="0.1"
+								bind:value={form[seal.id].price}
+								on:input={onPriceInput}
+								on:blur|once={onblur}
+							/>
+						</span>
+						<span>M</span>
 					</span>
-					<span>M</span>
-				</span>
-			{/if}
-		</SealMenuList>
-	</form>
-</div>
+				{/if}
+			</SealMenuList>
+		</form>
+	</div>
+</Section>

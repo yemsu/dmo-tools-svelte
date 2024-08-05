@@ -62,9 +62,9 @@
 	}
 </script>
 
-<Section>
+<Section class="md:h-full md:overflow-hidden">
 	<Title>전체 씰</Title>
-	<div class="flex flex-col gap-4">
+	<div class="flex flex-1 flex-col gap-4 overflow-hidden">
 		<div class="flex w-full items-center justify-between">
 			<Input
 				id="search"
@@ -88,8 +88,16 @@
 				{/each}
 			</ul>
 		</div>
-		<SealMenuList seals={searchResults} let:seal selectedSealId={form.sealId}>
-			<SealItem {seal} />
-		</SealMenuList>
+		<button class="variant-filled-primary py-1 text-xs"
+			>최신 가격 일괄 적용</button
+		>
+		<button class="variant-filled-primary text-xs"
+			>많이 입력된 가격 일괄 적용</button
+		>
+		<div class="flex-1 overflow-hidden">
+			<SealMenuList seals={searchResults} let:seal selectedSealId={form.sealId}>
+				<SealItem {seal} />
+			</SealMenuList>
+		</div>
 	</div>
 </Section>

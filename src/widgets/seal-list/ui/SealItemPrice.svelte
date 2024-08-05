@@ -6,7 +6,10 @@
 </script>
 
 {#if price}
-	<span>{price.toLocaleString()}M</span>
+	<span class="inline-flex items-end justify-center gap-[0.2em]">
+		<span>{price.toLocaleString()}</span>
+		<span class="text-[10px] font-bold text-secondary-50">M</span>
+	</span>
 {:else}
-	<span><span class="text-gray-400">??</span> M</span>
+	<span class="text-secondary-50">???</span>
 {/if}

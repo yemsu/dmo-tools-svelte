@@ -22,6 +22,7 @@ export default {
 					90: 'hsl(var(--primary-90))'
 				},
 				secondary: {
+					5: 'hsl(var(--secondary-5))',
 					10: 'hsl(var(--secondary-10))',
 					20: 'hsl(var(--secondary-20))',
 					30: 'hsl(var(--secondary-30))',
@@ -36,7 +37,19 @@ export default {
 					ev: 'hsl(var(--stat-cev))',
 					de: 'hsl(var(--stat-cde))'
 				},
+				price: {
+					't-1': 'var(--price-t-1)',
+					't-2': 'var(--price-t-2)',
+					'm-1': 'var(--price-m-1)',
+					'm-2': 'var(--price-m-2)',
+					'b-1': 'var(--price-b-1))',
+					'b-2': 'var(--price-b-2))'
+				},
 				point: 'hsl(var(--point))'
+			},
+			spacing: {
+				'header-h': 'var(--header-h)',
+				'content-fill-h': 'calc(100vh - var(--header-h) - 15px)'
 			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif']

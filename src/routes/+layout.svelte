@@ -1,24 +1,13 @@
 <script>
-	import Header from './Header.svelte'
 	import 'iconify-icon'
 	import '../app/app.css'
-	import { Inner } from '$shared/section'
+	import Header from './Header.svelte'
 </script>
 
-<div class="app">
+<div class="flex min-h-[100vh] flex-col">
 	<Header></Header>
 
 	<main>
-		<Inner>
-			<slot></slot>
-		</Inner>
+		<slot></slot>
 	</main>
 </div>
-
-<style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-</style>
