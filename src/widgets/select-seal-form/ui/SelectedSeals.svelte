@@ -27,44 +27,13 @@
 			<iconify-icon icon="mdi:close" width={14} height={14} />
 		</button>
 	</SealList>
-	<!-- <div>
-		<h2>능력치별 최강 효율</h2>
-		<dl>
-			<dt>공격력 AT -</dt>
-			<dd>
-				아구몬 10개 1400T 효율 수치 1000% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dd>
-				아구몬 10개 1400T 효율 수치 1000% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dd>
-				아구몬 10개 1400T 효율 수치 1000% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dt>치명타 AT</dt>
-			<dd>
-				아구몬 10개 1400T 효율 수치 600% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-			<dt>적중도 AT</dt>
-			<dd>
-				아구몬 10개 1400T 효율 수치 200% <button
-					class="variant-filled-tertiary btn">등록 완료</button
-				>
-			</dd>
-		</dl>
-	</div> -->
-	<div class="flex items-center gap-4 border-t border-gray-700 pt-4">
-		<h3 class="font-bold">능력치</h3>
-		<dl class="flex gap-2">
+	<div class="flex items-center gap-2 border-t border-gray-700 pt-4 sm:gap-4">
+		<h3 class="shrink-0 font-bold">능력치</h3>
+		<dl class="flex flex-wrap gap-1 sm:gap-2">
 			{#each STATS as stat (stat.type)}
-				<div class="flex gap-2 rounded-full bg-gray-800 px-3 py-1">
+				<div
+					class="sm:text-md flex gap-1 rounded-full bg-gray-800 px-3 py-1 text-sm sm:gap-2"
+				>
 					<dt>{stat.name}</dt>
 					<dd>{$myStats[stat.type]}</dd>
 				</div>

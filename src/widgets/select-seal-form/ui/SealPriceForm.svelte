@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { getSeals, seals, type MySeal, type SealData } from '$entities/seals'
-	import { getSealPrices, postSealPrice } from '$entities/seals/api'
-	import { mySeals, sealPrices, mySealPrices } from '$entities/seals/model'
-	import { apiFetch } from '$shared/api'
+	import { seals, type SealData } from '$entities/seals'
+	import { postSealPrice } from '$entities/seals/api'
+	import { mySealPrices, mySeals, sealPrices } from '$entities/seals/model'
 	import { Input } from '$shared/form'
 	import { SealItem } from '$widgets/seal-list'
 	import SealMenuList from '$widgets/seal-list/ui/SealMenuList.svelte'
@@ -12,7 +11,6 @@
 		type StatType
 	} from '$widgets/select-seal-form/config'
 	import { choseongIncludes } from 'es-hangul'
-	import { onMount } from 'svelte'
 
 	type Form = {
 		[key: number]: SealData & { price: number | '' }
@@ -163,7 +161,7 @@
 		<SealMenuList
 			seals={searchResults}
 			let:seal
-			selectedSealName={Object.values(form)[0]?.name}
+			selectedSealId={Object.values(form)[0]?.id}
 			onClickSeal={clickSeal}
 			buttonTitle="클릭하여 가격 수정"
 		>

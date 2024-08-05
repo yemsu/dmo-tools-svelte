@@ -49,10 +49,6 @@
 		if ($mySeals.length === 0) {
 			const savedData = localStorage.getItem(MY_SEALS_STORAGE)
 			if (savedData) {
-				console.log(
-					'mySEalSVaed',
-					JSON.parse(savedData).map(({ sealId }) => sealId)
-				)
 				mySeals.add(...JSON.parse(savedData))
 			}
 		}

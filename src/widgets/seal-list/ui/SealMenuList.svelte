@@ -11,7 +11,7 @@
 	<p>waiting for the promise to resolve...</p>
 {:else}
 	<menu
-		class="scroll-box w-fullgap-2 grid max-h-[500px] grid-cols-5 items-start gap-2 text-xs"
+		class="scroll-box w-fullgap-2 grid max-h-[500px] grid-cols-3 items-start gap-2 text-xs sm:grid-cols-5"
 	>
 		{#each seals as seal (seal.id)}
 			<li

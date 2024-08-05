@@ -7,7 +7,7 @@
 <div class="app">
 	<Header></Header>
 
-	<main class="mx-auto max-w-[1400px] p-8">
+	<main class="mx-auto max-w-[1400px] px-4 lg:px-8">
 		<slot></slot>
 	</main>
 </div>
