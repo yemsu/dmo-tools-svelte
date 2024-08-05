@@ -162,24 +162,18 @@
 			seals={searchResults}
 			let:seal
 			selectedSealId={Object.values(form)[0]?.id}
-			onClickSeal={clickSeal}
-			buttonTitle="클릭하여 가격 수정"
 		>
 			{#if $sealPrices.length > 0}
-				<SealItem
-					{seal}
-					count={getMySeal(seal.id)?.count || 0}
-					price={!form[seal.id] ? getSealPrice(seal.id)?.price : undefined}
-				/>
+				<SealItem {seal} />
 			{/if}
 			{#if form[seal.id]}
-				<span class="bg-primary-10 flex items-center justify-center gap-1">
+				<span class="flex items-center justify-center gap-1 bg-primary-10">
 					<span class="w-[4em] overflow-hidden">
 						<input
 							bind:this={inputElement}
 							type="number"
 							id={`price-${seal.id}`}
-							class="bg-primary-20 w-full p-1 text-xs text-white"
+							class="w-full bg-primary-20 p-1 text-xs text-white"
 							placeholder="씰 개수"
 							step="0.1"
 							bind:value={form[seal.id].price}

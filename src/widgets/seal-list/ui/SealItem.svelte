@@ -1,10 +1,10 @@
 <script lang="ts">
+	import SealItemPrice from './SealItemPrice.svelte'
 	import SealItemCount from './SealItemCount.svelte'
 	import type { SealData } from '$entities/seals'
 	import { statColorStyles } from '$widgets/select-seal-form/config'
 
 	export let seal: SealData
-	export let price: number | undefined = undefined
 </script>
 
 <span
@@ -19,7 +19,7 @@
 	</span>
 	<span class="flex flex-col gap-1 p-1">
 		<SealItemCount sealId={seal.id} />
-		<span>{price ? `${price}M` : '??? M'}</span>
+		<SealItemPrice sealId={seal.id} />
 	</span>
 	<span
 		class="absolute -right-1 top-2 z-10 hidden translate-x-full rounded-md bg-primary-90/90 p-2 text-xs font-bold text-black group-hover:block"

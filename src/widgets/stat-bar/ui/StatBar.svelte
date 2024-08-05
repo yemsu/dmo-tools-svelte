@@ -20,7 +20,7 @@
 		{#each STATS as stat (stat.type)}
 			<div class={cn('flex gap-2', 'sm:text-md rounded-full text-sm')}>
 				<dt>{stat.type}</dt>
-				<dd class="text-point w-[40px]">{stats[stat.type]}</dd>
+				<dd class="text-point w-[40px]">{stats[stat.type].toLocaleString()}</dd>
 			</div>
 		{/each}
 	</dl>

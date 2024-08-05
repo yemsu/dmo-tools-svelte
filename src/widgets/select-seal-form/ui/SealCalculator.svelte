@@ -290,7 +290,7 @@
 			{@const seal = $seals.find(({ id }) => id === effData.sealId)}
 			{#if seal}
 				<li class="relative">
-					<SealItem {seal} count={effData.count} price={effData.price} />
+					<SealItem {seal} />
 					필요개수 {effData.needCount} <br />
 					필요금액 {effData.needPrice} <br />
 					얻게될 능력치 {effData.willGetStat} <br />
