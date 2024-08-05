@@ -279,11 +279,11 @@
 				<input
 					bind:this={goalStatInput}
 					type="number"
-					class="input w-[200px]"
+					class="w-[200px]"
 					placeholder="목표 수치 입력"
 					bind:value={goalStat}
 				/>
-				<button class="variant-filled-primary btn"> 결과보기 </button>
+				<button class="variant-filled-primary"> 결과보기 </button>
 			</div>
 		</form>
 		<SealList seals={effDataListSorted} let:seal={effData}>

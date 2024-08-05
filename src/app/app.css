@@ -13,6 +13,12 @@
 		--primary-50: 194 99% 49%; /* hsl(194 99% 49%) */
 		--primary-90: 181 100% 71%; /* hsl(181 100% 71%) */
 
+		--secondary-10: 207 48% 9.8%; /* hsl(207 48% 9.8%) */
+		--secondary-20: 190 33.33% 14.12%; /* hsl(190 33.33% 14.12%) */
+		--secondary-30: 196.36 34.02% 19.02%; /* hsl(196.36 34.02% 19.02%) */
+		--secondary-40: 195.43 22.88% 30%; /* hsl(195.43 22.88% 30%) */
+		--secondary-50: 188.28 12.13% 46.86%; /* hsl(188.28 12.13% 46.86%) */
+
 		--point: 120 100% 48%; /* hsl(120 100% 48%) */
 
 		--stat-at: 185.69 93.55% 48.63%; /* hsl(185.69 93.55% 48.63%) */
@@ -32,72 +38,50 @@ h3,
 h4,
 h5,
 h6 {
-	margin: 0;
-}
-
-body {
-	min-height: 100vh;
+	@apply m-0;
 }
 
 p {
-	line-height: 1.5;
+	@apply leading-[1.5];
 }
 
 a {
-	color: inherit;
+	@apply text-inherit;
 }
 
 li,
 dt,
 dd {
-	list-style: none;
-}
-
-.text-column {
-	display: flex;
-	max-width: 48rem;
-	flex: 0.6;
-	flex-direction: column;
-	justify-content: center;
-	margin: 0 auto;
+	@apply list-none;
 }
 
 input,
 button {
-	font-size: inherit;
-	font-family: inherit;
-	appearance: none;
-	border: none;
-	background-color: transparent;
+	@apply appearance-none border-none bg-transparent text-inherit;
+}
+
+input {
+	@apply rounded-md border-solid bg-gray-800 px-[0.5em] py-[0.4em] focus:border focus:border-primary-90 focus:outline-none focus:drop-shadow-primary-90;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+	@apply m-0 appearance-none;
 }
 
 button {
-	cursor: pointer;
+	@apply cursor-pointer;
 }
 
 button:focus:not(:focus-visible) {
 	outline: none;
 }
 
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
-.ir {
-	border: 0;
-	clip: rect(0 0 0 0);
-	height: auto;
-	margin: 0;
-	overflow: hidden;
-	padding: 0;
-	position: absolute;
-	width: 1px;
-	white-space: nowrap;
-}
-
 @layer components {
+	.ir {
+		@apply absolute m-0 h-auto w-[1px] overflow-hidden whitespace-nowrap border-none p-0;
+		clip: rect(0 0 0 0);
+	}
 	.scroll-box {
 		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
 	}

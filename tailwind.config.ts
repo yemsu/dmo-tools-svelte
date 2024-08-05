@@ -1,19 +1,8 @@
-import { skeleton } from '@skeletonlabs/tw-plugin'
-import forms from '@tailwindcss/forms'
-import typography from '@tailwindcss/typography'
-import { join } from 'path'
 import tailwindScrollBar from 'tailwind-scrollbar'
 import type { Config } from 'tailwindcss'
 
 export default {
-	content: [
-		'./src/**/*.{html,js,svelte,ts}',
-		// 3. Append the path to the Skeleton package
-		join(
-			require.resolve('@skeletonlabs/skeleton'),
-			'../**/*.{html,js,svelte,ts}'
-		)
-	],
+	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
 		screens: {
@@ -31,6 +20,13 @@ export default {
 					40: 'hsl(var(--primary-40))',
 					50: 'hsl(var(--primary-50))',
 					90: 'hsl(var(--primary-90))'
+				},
+				secondary: {
+					10: 'hsl(var(--secondary-10))',
+					20: 'hsl(var(--secondary-20))',
+					30: 'hsl(var(--secondary-30))',
+					40: 'hsl(var(--secondary-40))',
+					50: 'hsl(var(--secondary-50))'
 				},
 				stat: {
 					at: 'hsl(var(--stat-at))',
@@ -51,12 +47,5 @@ export default {
 		}
 	},
 
-	plugins: [
-		typography,
-		skeleton({
-			themes: { preset: ['wintry'] }
-		}),
-		tailwindScrollBar({ nocompatible: true }),
-		forms
-	]
+	plugins: [tailwindScrollBar({ nocompatible: true })]
 } as Config

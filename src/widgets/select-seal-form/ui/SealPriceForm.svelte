@@ -125,7 +125,7 @@
 	}
 </script>
 
-<div class="flex flex-col items-start gap-4">
+<div class="flex flex-col gap-4">
 	<div class="flex w-full items-center justify-between">
 		<Input
 			id="search"
@@ -150,10 +150,10 @@
 		</ul>
 	</div>
 	<div class="flex">
-		<button class="variant-filled-primary btn py-1 text-xs"
+		<button class="variant-filled-primary py-1 text-xs"
 			>최신 가격 일괄 적용</button
 		>
-		<button class="variant-filled-primary btn text-xs"
+		<button class="variant-filled-primary text-xs"
 			>많이 입력된 가격 일괄 적용</button
 		>
 	</div>

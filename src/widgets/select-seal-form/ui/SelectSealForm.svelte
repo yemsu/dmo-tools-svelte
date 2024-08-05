@@ -64,7 +64,7 @@
 
 <Section>
 	<Title>전체 씰</Title>
-	<div class="flex flex-col items-start gap-4">
+	<div class="flex flex-col gap-4">
 		<div class="flex w-full items-center justify-between">
 			<Input
 				id="search"

@@ -21,7 +21,6 @@
 		<span class="min-w-[40px]">{label}</span>
 	{/if}
 	<input
-		class="input"
 		{...$$restProps}
 		placeholder={placeholder || (label && `${label}를 입력하세요`)}
 		bind:value
