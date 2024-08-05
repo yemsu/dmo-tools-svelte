@@ -90,9 +90,8 @@
 					icon="mdi:treasure-chest-outline"
 					width={15}
 					height={15}
-					title="보유 개수"
 				/>
-				{count}개
+				{count.toLocaleString()}개
 			</button>
 		</li>
 		<li>
