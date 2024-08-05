@@ -13,7 +13,7 @@
 	import {
 		MySeals,
 		SealCalculator,
-		SelectSealForm,
+		TotalSeals,
 		getMySealData
 	} from '$widgets/select-seal-form'
 	import {
@@ -96,7 +96,7 @@
 </svelte:head>
 
 <Inner class="md:h-content-fill-h grid gap-2 overflow-hidden md:grid-cols-2">
-	<SelectSealForm />
+	<TotalSeals />
 	<!-- <SealPriceForm {saveMySealPrices} /> -->
 	<SealCalculator />
 	<MySeals />
