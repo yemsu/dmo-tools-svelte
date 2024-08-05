@@ -10,28 +10,39 @@ const sortBy = <ArrItem extends Record<string, number>>(
 	return arr.sort((a, b) => a[keyName] - b[keyName])
 }
 
+const MY_SEALS_STORAGE = 'DMO_MYS'
 const createMySeals = () => {
-	const { subscribe, set, update } = writable<MySeal[]>([])
+	const { subscribe, update } = writable<MySeal[]>([])
 
 	return {
 		subscribe,
-		add: (...newMySeals: MySeal[]) => {
-			update((prev) => sortBy([...prev, ...newMySeals], 'sealId'))
+		loadSavedData: () => {
+			const savedData = localStorage.getItem(MY_SEALS_STORAGE)
+			if (savedData) {
+				update((prev) => sortBy([...prev, ...JSON.parse(savedData)], 'sealId'))
+			}
 		},
-		modify: (newMySeal: MySeal) => {
-			update((prev) =>
-				prev.map((mySeal) => {
-					if (mySeal.sealId === newMySeal.sealId) {
-						return newMySeal
-					} else {
-						return mySeal
-					}
-				})
-			)
+		updateCount: (sealId: number, count: number) => {
+			update((prev) => {
+				const prevItem = prev.find((prevItem) => prevItem.sealId === sealId)
+				if (prevItem) {
+					return prev.map((mySeal) =>
+						mySeal.sealId === sealId ? { sealId, count } : mySeal
+					)
+				} else {
+					return [...prev, { sealId, count }]
+				}
+			})
+			subscribe((value) => {
+				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
+			})
 		},
-		remove: (_sealId: number) =>
-			update((prev) => [...prev.filter(({ sealId }) => sealId !== _sealId)]),
-		reset: () => set([])
+		remove: (_sealId: number) => {
+			update((prev) => [...prev.filter(({ sealId }) => sealId !== _sealId)])
+			subscribe((value) => {
+				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
+			})
+		}
 	}
 }
 

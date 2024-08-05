@@ -26,7 +26,6 @@
 	import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
 	import { onMount } from 'svelte'
 
-	const MY_SEALS_STORAGE = 'DMO_MYS'
 	const SEAL_PRICE_STORAGE = 'DMO_MYP'
 	onMount(async () => {
 		// seals
@@ -49,16 +48,9 @@
 		sealPrices.set(newSealPrices)
 		// my seals
 		if ($mySeals.length === 0) {
-			const savedData = localStorage.getItem(MY_SEALS_STORAGE)
-			if (savedData) {
-				mySeals.add(...JSON.parse(savedData))
-			}
+			mySeals.loadSavedData()
 		}
 	})
-
-	const saveMySeals = () => {
-		localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify($mySeals))
-	}
 	const saveMySealPrices = () => {
 		localStorage.setItem(SEAL_PRICE_STORAGE, JSON.stringify($mySealPrices))
 	}
@@ -99,7 +91,7 @@
 </script>
 
 <svelte:head>
-	<title>디지몬 마스터즈 도구 모음 | dom tools</title>
+	<title>디지몬 마스터즈 도구 모음 | DOM tools</title>
 	<meta
 		name="description"
 		content="디지몬 마스터즈 도구 모음 사이트 dom tools 입니다. 보유 중인 씰을 등록하고 목표 능력치를 위한 효율적인 씰 구성을 편리하게 확인해보세요!"
@@ -107,10 +99,8 @@
 </svelte:head>
 
 <div class="grid gap-4 lg:grid-cols-2">
-	<Section>
-		<Title>내 씰 설정</Title>
-		<SelectSealForm {saveMySeals} />
-	</Section>
+	<SelectSealForm />
+	<MySeals />
 	<Section>
 		<Title>씰 가격표</Title>
 		<SealPriceForm {saveMySealPrices} />

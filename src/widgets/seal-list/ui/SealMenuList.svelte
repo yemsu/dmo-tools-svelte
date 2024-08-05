@@ -3,8 +3,6 @@
 
 	export let seals: SealData[] = []
 	export let selectedSealId: SealData['id'] | undefined
-	export let onClickSeal: (seal: SealData) => void | undefined
-	export let buttonTitle: string | undefined = '선택하기'
 </script>
 
 {#if seals.length === 0}
@@ -16,7 +14,7 @@
 		{/each}
 	</div>
 {:else}
-	<menu
+	<ul
 		class="scroll-box w-fullgap-2 grid max-h-[500px] grid-cols-3 items-start gap-2 text-xs sm:grid-cols-5"
 	>
 		{#each seals as seal (seal.id)}
@@ -24,15 +22,8 @@
 				class="transition-opacity {selectedSealId &&
 					(selectedSealId !== seal.id ? 'opacity-50' : '')}"
 			>
-				<button
-					type="button"
-					class="block size-full"
-					on:click={() => onClickSeal(seal)}
-					title={buttonTitle}
-				>
-					<slot {seal}></slot>
-				</button>
+				<slot {seal}></slot>
 			</li>
 		{/each}
-	</menu>
+	</ul>
 {/if}
