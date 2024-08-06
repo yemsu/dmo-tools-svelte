@@ -1,3 +1,4 @@
+import { goto } from '$app/navigation'
 import type { MySeal, Stats, SealData, SealPrice } from '../type'
 import { writable } from 'svelte/store'
 
@@ -10,16 +11,17 @@ const sortBy = <ArrItem extends Record<string, number>>(
 	return arr.sort((a, b) => a[keyName] - b[keyName])
 }
 
-const MY_SEALS_STORAGE = 'DMO_MYS'
+const MY_SEALS_STORAGE = 'seals'
 const createMySeals = () => {
 	const { subscribe, update } = writable<MySeal[]>([])
 
 	return {
 		subscribe,
 		loadSavedData: () => {
-			const savedData = localStorage.getItem(MY_SEALS_STORAGE)
+			const params = new URLSearchParams(window.location.search)
+			const savedData = params.get(MY_SEALS_STORAGE)
 			if (savedData) {
-				update((prev) => sortBy([...prev, ...JSON.parse(savedData)], 'sealId'))
+				update(() => sortBy([...JSON.parse(savedData)], 'sealId'))
 			}
 		},
 		updateCount: (id: number, count: number) => {
@@ -33,7 +35,10 @@ const createMySeals = () => {
 					return [...prev, { id, count }]
 				}
 			})
+			const params = new URLSearchParams(window.location.search)
 			subscribe((value) => {
+				params.set(MY_SEALS_STORAGE, JSON.stringify(value))
+				goto(`?${params.toString()}`)
 				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
 			})
 		},
