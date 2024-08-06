@@ -5,10 +5,12 @@
 		mySeals,
 		myStats,
 		sealPrices,
-		seals
-	} from '$entities/seals/model'
+		seals,
+		activeMenu
+	} from '$entities/seals'
+	import type { Menus } from '$entities/seals'
 	import type { Stats } from '$entities/seals/type'
-	import { objectBy } from '$shared/lib'
+	import { cn, objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import { MySeals, TotalSeals, getMySealData } from '$widgets/select-seal-form'
 	import { SealCalculator } from '$widgets/seal-calculator'
@@ -19,19 +21,12 @@
 	} from '$widgets/select-seal-form/config'
 	import { onMount } from 'svelte'
 
-	const SEAL_PRICE_STORAGE = 'DMO_MYP'
 	onMount(async () => {
 		// seals
 		const sealsFetched = await getSeals()
 		seals.set(sealsFetched)
 		// sealPrices
 		const sealPricesFetched = await getSealPrices('modifiedAt')
-		if ($mySealPrices.length === 0) {
-			const savedData = localStorage.getItem(SEAL_PRICE_STORAGE)
-			if (savedData) {
-				mySealPrices.set(JSON.parse(savedData))
-			}
-		}
 		const newSealPrices = sealPricesFetched.map((sealPrice) => {
 			const mySealPrice = $mySealPrices.find(
 				({ sealId }) => sealId === sealPrice.sealId
@@ -44,9 +39,6 @@
 			mySeals.loadSavedData()
 		}
 	})
-	const saveMySealPrices = () => {
-		localStorage.setItem(SEAL_PRICE_STORAGE, JSON.stringify($mySealPrices))
-	}
 	$: statCalc = (statType: StatType) => {
 		const mySealsByStatType = objectBy(
 			$mySeals,
@@ -81,6 +73,42 @@
 		}, {} as Stats)
 		myStats.set(newStats)
 	}
+
+	const menuDataList: {
+		type: Menus
+		name: string
+		icon: { name: string; width: number; height: number; class?: string }
+	}[] = [
+		{
+			type: 'EVERY',
+			name: '모든 씰',
+			icon: {
+				name: 'streamline:cards',
+				width: 20,
+				height: 20,
+				class: 'mb-[2px]'
+			}
+		},
+		{
+			type: 'CALC',
+			name: '씰 계산기',
+			icon: {
+				name: 'circum:calculator-2',
+				width: 25,
+				height: 25,
+				class: 'mb-[1px]'
+			}
+		},
+		{
+			type: 'MY',
+			name: '보유 씰',
+			icon: {
+				name: 'ph:treasure-chest-light',
+				width: 24,
+				height: 24
+			}
+		}
+	]
 </script>
 
 <svelte:head>
@@ -91,8 +119,44 @@
 	/>
 </svelte:head>
 
-<Inner class="grid gap-2 overflow-hidden md:h-content-fill-h md:grid-cols-2">
-	<TotalSeals />
-	<SealCalculator />
-	<MySeals />
+<Inner
+	class={cn('grid h-content-fill-h gap-2 overflow-hidden', 'md:grid-cols-2')}
+>
+	{#if $activeMenu === 'EVERY'}
+		<TotalSeals />
+	{:else if $activeMenu === 'MY'}
+		<MySeals />
+	{:else}
+		<SealCalculator />
+	{/if}
+	<Inner size="full" class="fixed bottom-0 left-0 h-[50px] w-full bg-gray-800">
+		<nav>
+			<h2 class="ir">글로벌 네비게이션</h2>
+			<ul
+				class="flex-center h-mobile-nav-h w-full gap-[10%] whitespace-nowrap pt-1 text-center text-[9px]"
+			>
+				{#each menuDataList as menuData (menuData.type)}
+					<li>
+						<button
+							class={cn(
+								'flex-col-center gap-[2px] px-[2vw]',
+								$activeMenu === menuData.type
+									? 'font-bold opacity-100'
+									: 'opacity-50'
+							)}
+							on:click={() => activeMenu.set(menuData.type)}
+						>
+							<iconify-icon
+								icon={menuData.icon.name}
+								width={menuData.icon.width}
+								height={menuData.icon.height}
+								class={cn(menuData.icon.class)}
+							/>
+							<span>{menuData.name}</span>
+						</button>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	</Inner>
 </Inner>

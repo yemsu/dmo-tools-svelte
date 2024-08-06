@@ -4,8 +4,8 @@
 
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
-		sm: 'text-md',
-		md: 'text-lg',
+		sm: 'text-sm md:text-md',
+		md: 'text-md md:text-lg',
 		lg: ''
 	}
 </script>

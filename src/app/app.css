@@ -39,6 +39,10 @@
 
 		/* size */
 		--header-h: 50px;
+		--mobile-nav-h: 0;
+		@media screen and (max-width: 767px) {
+			--mobile-nav-h: 50px;
+		}
 	}
 }
 
@@ -111,5 +115,8 @@ button:focus:not(:focus-visible) {
 	}
 	.point-neon {
 		@apply border border-point/80 bg-point/20 text-point;
+	}
+	.point-border-neon {
+		@apply border border-primary-90/70 border-l-transparent border-r-transparent drop-shadow-primary-90;
 	}
 }

@@ -9,7 +9,7 @@
 	export let noDataText: string
 
 	const wrapClassName = cn(
-		'grid items-start grid-cols-5 gap-2',
+		'grid items-start md:grid-cols-5 grid-cols-3 gap-2',
 		'w-full',
 		'scroll-box text-xs',
 		className

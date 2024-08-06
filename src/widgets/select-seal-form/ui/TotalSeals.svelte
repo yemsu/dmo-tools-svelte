@@ -63,7 +63,9 @@
 <Section class="md:h-full">
 	<Title>전체 씰</Title>
 	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
-		<div class="flex w-full items-center justify-between gap-3">
+		<div
+			class="flex w-full flex-col items-start gap-3 md:flex-row md:items-center md:justify-between"
+		>
 			<Tabs>
 				{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 					<Tab
@@ -82,7 +84,7 @@
 				id="search"
 				maxlength={30}
 				placeholder="씰이름을 검색하세요"
-				class="flex-1"
+				class="w-full flex-1 md:w-auto"
 				bind:value={searchText}
 				on:input={onSearchInput}
 			/>

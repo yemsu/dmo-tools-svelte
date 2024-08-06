@@ -6,9 +6,7 @@ export default {
 
 	theme: {
 		screens: {
-			sm: '768px',
-			md: '1024px',
-			lg: '1280px'
+			md: '1024px'
 		},
 		extend: {
 			colors: {
@@ -49,7 +47,9 @@ export default {
 			},
 			spacing: {
 				'header-h': 'var(--header-h)',
-				'content-fill-h': 'calc(100vh - var(--header-h) - 15px)'
+				'mobile-nav-h': 'var(--mobile-nav-h)',
+				'content-fill-h':
+					'calc(100vh - var(--header-h) - var(--mobile-nav-h) - 15px)'
 			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif']

@@ -1,3 +1,4 @@
+import type { MENUS } from '$entities/seals/model'
 import type { StatType } from '$widgets/select-seal-form/config'
 
 export type SealData = {
@@ -22,3 +23,5 @@ export type SealPrice = {
 }
 
 export type Stats = Record<StatType, number>
+
+export type Menus = (typeof MENUS)[number]

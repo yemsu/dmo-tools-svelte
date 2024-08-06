@@ -139,7 +139,7 @@
 <Section>
 	<Title>씰 계산기</Title>
 	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
-		<div class="flex items-center gap-2">
+		<div class="flex flex-col items-start gap-2 md:flex-row md:items-center">
 			<Tabs>
 				{#each STATS as stat (stat.type)}
 					<Tab
@@ -154,7 +154,7 @@
 			</Tabs>
 			<form
 				on:submit|preventDefault={onSubmit}
-				class="flex flex-1 items-center gap-2"
+				class="flex w-full flex-1 items-center gap-2 md:w-auto"
 			>
 				<input
 					bind:this={goalStatInput}

@@ -5,19 +5,25 @@
 	import { Inner } from '$shared/section'
 </script>
 
-<header>
+<header class="border-t border-t-gray-600">
 	<Inner size="full" class="flex h-header-h items-center justify-between">
-		<h1 class="relative font-tiny text-3xl font-bold tracking-[0.05em]">
+		<h1
+			class={cn(
+				'relative font-tiny text-2xl font-bold tracking-[0.05em] md:text-3xl'
+			)}
+		>
 			<span class="text-logo">DMO tools</span>
 		</h1>
 		<div class="flex-center gap-4">
 			<div class="relative">
-				<button class="peer text-xs text-point underline underline-offset-4">
+				<button
+					class="peer pb-2 text-[11px] text-point underline underline-offset-4 md:text-xs"
+				>
 					가격은 어떻게 설정되나요?
 				</button>
 				<div
 					class={cn(
-						'absolute -bottom-2 left-1/2 w-[330px] -translate-x-1/2 translate-y-full break-keep rounded-md bg-black/80 p-4 text-xs backdrop-blur-sm',
+						'absolute -bottom-2 right-0 w-[calc(100vw-30px)] translate-y-full break-keep rounded-md bg-black/80 p-4 text-xs backdrop-blur-sm md:left-1/2 md:w-[330px] md:-translate-x-1/2',
 						'hidden peer-hover:block'
 					)}
 				>
@@ -30,7 +36,7 @@
 				</div>
 			</div>
 			<button
-				class="rounded-md bg-primary-30 px-2 py-1 text-sm font-bold"
+				class="hidden rounded-md bg-primary-30 px-2 py-1 text-sm font-bold md:block"
 				on:click={() => isShowMySealPopup.set(true)}
 				title="자세히 보기"
 			>
