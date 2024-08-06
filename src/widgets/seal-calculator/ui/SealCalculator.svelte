@@ -2,7 +2,7 @@
 	import type { SealData } from '$entities/seals'
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals/model'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { cn } from '$shared/lib'
+	import { cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
@@ -182,19 +182,23 @@
 						<dl
 							class="flex flex-col gap-1 whitespace-nowrap rounded-sm bg-white/10 p-1 leading-none"
 						>
-							<div class="flex items-center gap-2">
+							<div class="flex items-center gap-1">
 								<dt class="text-[11px] text-gray-200">필요개수</dt>
-								<dd class="text-point">{effData.needCount}</dd>
+								<dd class="text-point">{numberFormatter(effData.needCount)}</dd>
 							</div>
-							<div class="flex items-center gap-2">
+							<div class="flex items-center gap-1">
 								<dt class="text-[11px] text-gray-200">필요금액</dt>
-								<dd class="text-point">{effData.needPrice}</dd>
+								<dd class="text-point">
+									{numberFormatter(effData.needPrice)}
+								</dd>
 							</div>
-							<div class="flex items-center gap-2">
+							<div class="flex items-center gap-1">
 								<dt class="text-[11px] text-gray-200">획득능력치</dt>
-								<dd class="text-point">{effData.willGetStat}</dd>
+								<dd class="text-point">
+									{numberFormatter(effData.willGetStat)}
+								</dd>
 							</div>
-							<div class="flex items-center gap-2">
+							<div class="flex items-center gap-1">
 								<dt
 									class="text-[11px] text-gray-200"
 									title="1M당 얻게되는 능력치"
@@ -202,7 +206,7 @@
 									효율
 								</dt>
 								<dd class="text-point">
-									{effData.efficiency.toFixed(5)}
+									{numberFormatter(effData.efficiency, 5)}
 								</dd>
 							</div>
 						</dl>

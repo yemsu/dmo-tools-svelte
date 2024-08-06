@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Stats } from '$entities/seals'
+	import { numberFormatter } from '$shared/lib'
 	import { STATS } from '$widgets/select-seal-form'
 	import { StatBarSeparator, StatBarTotalPrice } from '$widgets/stat-bar'
 	import StatBarWrap from '$widgets/stat-bar/ui/StatBarWrap.svelte'
@@ -19,7 +20,7 @@
 				<div class="sm:text-md flex items-center gap-2 rounded-full text-sm">
 					<dt class="text-xs text-gray-200">{stat.type}</dt>
 					<dd class="font-bold text-point">
-						{stats[stat.type].toLocaleString()}
+						{numberFormatter(stats[stat.type])}
 					</dd>
 				</div>
 			{/each}

@@ -1,1 +1,1 @@
-export { objectBy, cn } from './helper'
+export { objectBy, cn, numberFormatter } from './helper'

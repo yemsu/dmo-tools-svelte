@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { mySeals } from '$entities/seals'
+	import { numberFormatter } from '$shared/lib'
 
 	export let sealId: number
 	export let isCountEditable: boolean = true
@@ -72,7 +73,7 @@
 					width={15}
 					height={15}
 				/>
-				{count.toLocaleString()}개
+				{numberFormatter(count)}개
 			</button>
 		{:else}
 			<p class={priceStyle}>
@@ -81,7 +82,7 @@
 					width={15}
 					height={15}
 				/>
-				{count.toLocaleString()}개
+				{numberFormatter(count)}개
 			</p>
 		{/if}
 	</div>
