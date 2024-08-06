@@ -73,7 +73,7 @@ button {
 }
 
 input {
-	@apply rounded-md border-solid bg-gray-800 px-[0.5em] py-[0.4em] focus:border focus:border-primary-90 focus:outline-none focus:drop-shadow-primary-90;
+	@apply rounded-md border-solid bg-gray-700 px-[0.5em] py-[0.5em] focus:border focus:border-primary-90 focus:outline-none focus:drop-shadow-primary-90;
 }
 
 input[type='number']::-webkit-outer-spin-button,

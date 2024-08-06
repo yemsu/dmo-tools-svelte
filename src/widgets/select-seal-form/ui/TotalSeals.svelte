@@ -4,22 +4,28 @@
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
+	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
 	import { SealItem, SealList } from '$widgets/seal-list'
-	import { STAT_TYPES, type StatType } from '$widgets/select-seal-form/config'
+	import {
+		STAT_TYPES,
+		STATS,
+		type StatType
+	} from '$widgets/select-seal-form/config'
 	import { choseongIncludes } from 'es-hangul'
 
 	type StatTypeOptions = StatType | 'ALL'
 	const STAT_TYPE_OPTIONS: StatTypeOptions[] = ['ALL', ...STAT_TYPES]
-	export const statColorStyles: Record<StatTypeOptions, string> = {
-		ALL: 'border border-white/50 bg-white/10 px-2 py-1 text-white',
-		AT: 'bg-stat-at/10 text-stat-at border border-stat-at/50',
-		HT: 'bg-stat-ht/10 text-stat-ht border border-stat-ht/50',
-		CT: 'bg-stat-ct/10 text-stat-ct border border-stat-ct/50'
-	}
 	let statTypeSelected: StatTypeOptions = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
 	$: searchResults = $seals
+
+	export const statColorStyles: Record<StatTypeOptions, string> = {
+		ALL: 'text-white',
+		AT: 'text-stat-at',
+		HT: 'text-stat-ht',
+		CT: 'text-stat-ct'
+	}
 
 	const updateSearchResult = (_searchText: string) => {
 		const filterStatTypeSelected =
@@ -58,6 +64,20 @@
 	<Title>전체 씰</Title>
 	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
 		<div class="flex w-full items-center justify-between gap-3">
+			<Tabs>
+				{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
+					<Tab
+						class={statColorStyles[statTypeOption]}
+						isActive={statTypeSelected === statTypeOption}
+						on:click={() => onClickStatType(statTypeOption)}
+						title={statTypeOption === 'ALL'
+							? '전체'
+							: STATS.find(({ type }) => type === statTypeOption)?.name}
+					>
+						{statTypeOption}
+					</Tab>
+				{/each}
+			</Tabs>
 			<Input
 				id="search"
 				maxlength={30}
@@ -66,18 +86,6 @@
 				bind:value={searchText}
 				on:input={onSearchInput}
 			/>
-			<ul class="flex items-center gap-2 text-xs font-bold">
-				{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
-					<li>
-						<Button
-							class={cn(statColorStyles[statTypeOption])}
-							isActive={statTypeSelected === statTypeOption}
-							on:click={() => onClickStatType(statTypeOption)}
-							>{statTypeOption}</Button
-						>
-					</li>
-				{/each}
-			</ul>
 		</div>
 		<div class="flex flex-1 flex-col overflow-hidden">
 			<p class="mb-2 text-xs text-primary-50">

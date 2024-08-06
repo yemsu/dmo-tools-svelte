@@ -37,7 +37,7 @@ export const sortByEffDataList = (effDataList: SealEfficiency[]) => {
 
 export const resultMerged = (effDataList: SealEfficiency[]) => {
 	const result: SealEfficiency[] = []
-	const effDataListBySealId = objectBy(effDataList, (data) => data.sealId + '')
+	const effDataListBySealId = objectBy(effDataList, (data) => data.id + '')
 	for (const sealId in effDataListBySealId) {
 		const effDataListSealId = effDataListBySealId[sealId]
 		const totalNeedCount = {

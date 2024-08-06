@@ -22,15 +22,15 @@ const createMySeals = () => {
 				update((prev) => sortBy([...prev, ...JSON.parse(savedData)], 'sealId'))
 			}
 		},
-		updateCount: (sealId: number, count: number) => {
+		updateCount: (id: number, count: number) => {
 			update((prev) => {
-				const prevItem = prev.find((prevItem) => prevItem.sealId === sealId)
+				const prevItem = prev.find((prevItem) => prevItem.id === id)
 				if (prevItem) {
 					return prev.map((mySeal) =>
-						mySeal.sealId === sealId ? { sealId, count } : mySeal
+						mySeal.id === id ? { id, count } : mySeal
 					)
 				} else {
-					return [...prev, { sealId, count }]
+					return [...prev, { id, count }]
 				}
 			})
 			subscribe((value) => {
@@ -38,7 +38,7 @@ const createMySeals = () => {
 			})
 		},
 		remove: (_sealId: number) => {
-			update((prev) => [...prev.filter(({ sealId }) => sealId !== _sealId)])
+			update((prev) => [...prev.filter(({ id }) => id !== _sealId)])
 			subscribe((value) => {
 				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
 			})

@@ -8,7 +8,7 @@ export type SealData = {
 }
 
 export type MySeal = {
-	sealId: number
+	id: number
 	count: number
 }
 

@@ -1,32 +1,39 @@
 <script lang="ts">
 	import type { SealData } from '$entities/seals'
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals/model'
+	import Button from '$shared/button/ui/Button.svelte'
 	import { Section } from '$shared/section'
+	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
+	import { SealItem, SealList } from '$widgets/seal-list'
+	import { STATS, type StatType } from '$widgets/select-seal-form'
 	import {
 		getNextSteps,
 		getPrevStep,
 		resultMerged,
 		sortByEffDataList
 	} from '../lib/calculate'
-	import { SealItem, SealList } from '$widgets/seal-list'
-	import { STATS, type StatType } from '$widgets/select-seal-form'
 	import type { SealEfficiency } from '../type'
-	import Button from '$shared/button/ui/Button.svelte'
 
-	let selectedStatType: StatType = STATS[0].type
+	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
 	let effDataListSorted: SealEfficiency[] = []
 	let willGetStatTotal = 0
 	let willNeedMoneyTotal = 0
 	let goalStatInput: HTMLInputElement
 
+	export const statColorStyles: Record<StatType, string> = {
+		AT: 'text-stat-at',
+		HT: 'text-stat-ht',
+		CT: 'text-stat-ct'
+	}
+
 	$: getSealPrice = (_sealId: number) => {
 		return $sealPrices.find(({ sealId }) => sealId === _sealId)?.price
 	}
 
 	$: getMySealCount = (_sealId: number) => {
-		return $mySeals.find(({ sealId }) => sealId === _sealId)?.count || 0
+		return $mySeals.find(({ id }) => id === _sealId)?.count || 0
 	}
 
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
@@ -44,7 +51,7 @@
 			const needPrice = price ? needCount * price : 0
 
 			result.push({
-				sealId: seal.id,
+				id: seal.id,
 				price,
 				count: mySealCount,
 				willGetStat,
@@ -69,7 +76,7 @@
 		resetPrevResult()
 
 		const statSeals = $seals.filter(
-			({ statType }) => statType === selectedStatType
+			({ statType }) => statType === statTypeSelected
 		)
 
 		// 효율 리스트 뽑기
@@ -84,7 +91,7 @@
 		// 효율별로 소팅
 		const sortedEfficiencyData = sortByEffDataList(allSealsEffData)
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
-		const needStatCount = goalStat - $myStats[selectedStatType]
+		const needStatCount = goalStat - $myStats[statTypeSelected]
 		const result: SealEfficiency[] = []
 		for (const effData of sortedEfficiencyData) {
 			if (willGetStatTotal >= needStatCount) break
@@ -96,7 +103,8 @@
 		effDataListSorted = resultMerged(result)
 	}
 
-	const onStatTypeChange = () => {
+	const onClickStatType = (statType: StatType) => {
+		statTypeSelected = statType
 		setTimeout(() => {
 			goalStat = ''
 			goalStatInput.focus()
@@ -104,9 +112,9 @@
 	}
 
 	const addToMySeal = (effData: SealEfficiency) => {
-		mySeals.updateCount(effData.sealId, effData.needCount)
+		mySeals.updateCount(effData.id, effData.needCount)
 		const updateEffDataListSorted = effDataListSorted.filter(
-			({ sealId }) => effData.sealId !== sealId
+			({ id }) => effData.id !== id
 		)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
@@ -117,43 +125,45 @@
 <Section>
 	<Title>씰 계산기</Title>
 	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
-		<form on:submit|preventDefault={onSubmit} class="flex flex-col gap-2">
-			<ul class="flex items-center gap-2">
-				{#each STATS as stat, i (stat.type)}
-					<li>
-						<label for="calc{stat.type}">
-							<input
-								id="calc{stat.type}"
-								type="radio"
-								class="radio"
-								value={stat.type}
-								checked={i === 0}
-								bind:group={selectedStatType}
-								on:change={onStatTypeChange}
-							/>
-							{stat.name}
-						</label>
-					</li>
+		<div class="flex items-center gap-2">
+			<Tabs>
+				{#each STATS as stat (stat.type)}
+					<Tab
+						class={statColorStyles[stat.type]}
+						isActive={statTypeSelected === stat.type}
+						on:click={() => onClickStatType(stat.type)}
+						title={stat.name}
+					>
+						{stat.type}
+					</Tab>
 				{/each}
-			</ul>
-			<div class="flex gap-2">
+			</Tabs>
+			<form
+				on:submit|preventDefault={onSubmit}
+				class="flex flex-1 items-center gap-2"
+			>
 				<input
 					bind:this={goalStatInput}
 					type="number"
-					class="w-[200px]"
+					class="flex-1"
 					placeholder="목표 수치 입력"
 					bind:value={goalStat}
 				/>
-				<button class="variant-filled-primary"> 결과보기 </button>
-			</div>
-		</form>
+				<Button
+					rounded="md"
+					size="lg"
+					class="border border-point/80 bg-point/20 font-bold text-point"
+					>결과보기</Button
+				>
+			</form>
+		</div>
 		<div class="flex flex-1 flex-col overflow-hidden">
 			<SealList
 				seals={effDataListSorted}
 				let:seal={effData}
 				noDataText="목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!"
 			>
-				{@const seal = $seals.find(({ id }) => id === effData.sealId)}
+				{@const seal = $seals.find(({ id }) => id === effData.id)}
 				{#if seal}
 					<SealItem {seal} isCountEditable={false}>
 						<dl>
@@ -182,8 +192,8 @@
 		{#if effDataListSorted.length > 0}
 			<div>
 				<p>
-					{$myStats[selectedStatType]} + {willGetStatTotal} = {$myStats[
-						selectedStatType
+					{$myStats[statTypeSelected]} + {willGetStatTotal} = {$myStats[
+						statTypeSelected
 					] + willGetStatTotal}
 				</p>
 				<p>{willNeedMoneyTotal}</p>

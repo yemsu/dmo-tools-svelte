@@ -3,7 +3,7 @@
 
 	export let sealId: number
 	export let isCountEditable: boolean = true
-	$: count = $mySeals.find((mySeal) => mySeal.sealId === sealId)?.count ?? 0
+	$: count = $mySeals.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | undefined = undefined
 	let inputElement: HTMLInputElement
 	let isOnInput = false

@@ -1,3 +1,4 @@
-import Button from '$shared/button/ui/Button.svelte'
+import Button from './ui/Button.svelte'
+import TabButtons from './ui/TabButtons.svelte'
 
-export { Button }
+export { Button, TabButtons }

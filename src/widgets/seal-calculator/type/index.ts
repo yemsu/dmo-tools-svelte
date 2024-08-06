@@ -1,7 +1,7 @@
 import type { SEAL_STAT_TABLE } from '$widgets/select-seal-form/config'
 
 export type SealEfficiency = {
-	sealId: number
+	id: number
 	count: number
 	price: number
 	efficiency: number

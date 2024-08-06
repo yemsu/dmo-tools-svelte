@@ -50,7 +50,7 @@
 	$: statCalc = (statType: StatType) => {
 		const mySealsByStatType = objectBy(
 			$mySeals,
-			({ sealId }) => getMySealData($seals, sealId).statType
+			({ id }) => getMySealData($seals, id).statType
 		)
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
@@ -58,7 +58,7 @@
 			return 0
 		}
 		let resultValue = 0
-		sealsByStatType.forEach(({ sealId, count }) => {
+		sealsByStatType.forEach(({ id, count }) => {
 			let sealPercent = 0
 			for (const statTable of SEAL_STAT_TABLE) {
 				if (count >= statTable.sealCount) {
@@ -67,7 +67,7 @@
 					break
 				}
 			}
-			const seal = getMySealData($seals, sealId)
+			const seal = getMySealData($seals, id)
 			const maxIncrease = seal.maxIncrease
 			resultValue += maxIncrease * (sealPercent / 100)
 		})
