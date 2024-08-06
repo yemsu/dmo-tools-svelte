@@ -48,10 +48,12 @@
 		const nextSteps = getNextSteps(mySealCount)
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
-			const prevStepPercent = getPrevStep(nextStep.sealCount)?.percent || 0
+			const prevStep = getPrevStep(nextStep.sealCount)
+			const prevStepPercent = prevStep?.percent || 0
 			const willGetStat =
 				seal.maxIncrease * ((nextStep.percent - prevStepPercent) / 100)
-			const needCount = nextStep.sealCount - mySealCount
+			const sealCount = nextStep.sealCount - (prevStep?.sealCount || 0)
+			const needCount = sealCount - mySealCount
 			const needPrice = price ? needCount * price : 0
 
 			result.push({
