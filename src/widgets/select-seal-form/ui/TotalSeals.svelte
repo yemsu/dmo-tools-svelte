@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { seals, type MySeal, type SealData } from '$entities/seals'
+	import { Button } from '$shared/button'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
@@ -68,17 +69,12 @@
 			<ul class="flex items-center gap-2 text-xs font-bold">
 				{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 					<li>
-						<button
-							class={cn(
-								'w-[3.5em] rounded-full px-2 py-1 opacity-40 transition-opacity hover:opacity-100',
-								statColorStyles[statTypeOption],
-								'data-[active=true]:border-2 data-[active=true]:opacity-100'
-							)}
-							data-active={statTypeSelected === statTypeOption}
+						<Button
+							class={cn(statColorStyles[statTypeOption])}
+							isInActive={statTypeSelected !== statTypeOption}
 							on:click={() => onClickStatType(statTypeOption)}
+							>{statTypeOption}</Button
 						>
-							{statTypeOption}
-						</button>
 					</li>
 				{/each}
 			</ul>
