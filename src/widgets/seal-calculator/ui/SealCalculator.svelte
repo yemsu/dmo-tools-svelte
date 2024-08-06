@@ -9,6 +9,11 @@
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { STATS, type StatType } from '$widgets/select-seal-form'
 	import {
+		StatBarSeparator,
+		StatBarTotalPrice,
+		StatBarWrap
+	} from '$widgets/stat-bar'
+	import {
 		getNextSteps,
 		getPrevStep,
 		resultMerged,
@@ -212,14 +217,34 @@
 			{/if}
 		</div>
 		{#if effDataListSorted.length > 0}
-			<div>
-				<p>
-					{$myStats[statTypeSelected]} + {willGetStatTotal} = {$myStats[
-						statTypeSelected
-					] + willGetStatTotal}
+			<StatBarWrap>
+				<div>
+					<p class="flex-center gap-2 text-lg leading-none">
+						<span class="flex flex-col">
+							<span class="text-xs text-gray-300">현재 내 능력치</span>
+							<span class="font-bold text-point">
+								{$myStats[statTypeSelected]}</span
+							>
+						</span>
+						<span>+</span>
+						<span class="flex flex-col gap-1">
+							<span class="text-xs text-gray-300">얻어야하는 능력치</span>
+							<span class="font-bold text-point">{willGetStatTotal}</span>
+						</span>
+						<span>=</span>
+						<span class="flex flex-col gap-1">
+							<span class="text-xs text-gray-300">최종 능력치</span>
+							<span class="font-bold text-point">
+								{$myStats[statTypeSelected] + willGetStatTotal}
+							</span>
+						</span>
+					</p>
+				</div>
+				<StatBarSeparator />
+				<p class="flex-center">
+					<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
 				</p>
-				<p>{willNeedMoneyTotal}</p>
-			</div>
+			</StatBarWrap>
 		{/if}
 	</div>
 </Section>

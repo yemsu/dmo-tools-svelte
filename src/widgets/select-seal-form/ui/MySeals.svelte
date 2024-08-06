@@ -34,15 +34,6 @@
 		!$isShowMySealPopup && 'opacity-0 md:translate-x-full'
 	)}
 >
-	<!-- <div
-		class={cn(
-			'absolute left-0 top-0 size-full bg-black/50 backdrop-blur-sm',
-			'transition-opacity',
-			!$isShowMySealPopup && 'opacity-0'
-		)}
-		aria-hidden
-		on:click={() => isShowMySealPopup.set(!$isShowMySealPopup)}
-	></div> -->
 	<Inner size="full" class="flex flex-col items-center justify-center">
 		<Section
 			class={cn(

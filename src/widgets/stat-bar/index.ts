@@ -1,3 +1,6 @@
-import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
+import StatBar from './ui/StatBar.svelte'
+import StatBarSeparator from './ui/StatBarSeparator.svelte'
+import StatBarTotalPrice from './ui/StatBarTotalPrice.svelte'
+import StatBarWrap from './ui/StatBarWrap.svelte'
 
-export { StatBar }
+export { StatBar, StatBarWrap, StatBarSeparator, StatBarTotalPrice }

@@ -1,26 +1,20 @@
 <script lang="ts">
 	import type { Stats } from '$entities/seals'
-	import { cn } from '$shared/lib'
 	import { STATS } from '$widgets/select-seal-form'
+	import { StatBarSeparator, StatBarTotalPrice } from '$widgets/stat-bar'
+	import StatBarWrap from '$widgets/stat-bar/ui/StatBarWrap.svelte'
 
 	export let stats: Stats
 	export let totalPrice: number
-
-	const convertToTMB = (mPrice: number) => {
-		const T = Math.floor(mPrice / 1000)
-		const remainingM = mPrice % 1000
-		const M = Math.floor(remainingM)
-		const B = Math.round((remainingM - M) * 1000)
-
-		return [T, M, B]
-	}
-	$: [tPrice, mPrice, bPrice] = convertToTMB(totalPrice)
 </script>
 
-<div class="rounded-md border border-primary-50 bg-primary-10 p-3">
+<StatBarWrap>
 	<h3 class="ir">내 능력치</h3>
 	<dl>
-		<div class="flex flex-wrap items-center justify-center gap-4">
+		<div
+			class="flex flex-wrap items-center justify-center gap-4"
+			title="보유 씰 총 스탯"
+		>
 			{#each STATS as stat (stat.type)}
 				<div class="sm:text-md flex items-center gap-2 rounded-full text-sm">
 					<dt class="text-xs text-gray-200">{stat.type}</dt>
@@ -30,39 +24,15 @@
 				</div>
 			{/each}
 		</div>
+		<StatBarSeparator />
 		<div
-			class="mt-4 flex items-center justify-center gap-2 border-t border-t-primary-90/30 pt-2 text-center"
+			class="flex items-center justify-center gap-2"
+			title="보유 씰의 총 가격"
 		>
-			<dt class="text-xs text-gray-200">등록된 씰의 총 가격</dt>
-			<dd class="flex items-center gap-2 text-sm font-bold">
-				<span class="flex items-center gap-1">
-					<span
-						class={cn(
-							'h-[16px] w-[16px] text-xs leading-none',
-							'bg-price-t-2 text-price-t-1 border-price-t-1 border'
-						)}>T</span
-					>
-					<span>{tPrice}</span>
-				</span>
-				<span class="flex items-center gap-1">
-					<span
-						class={cn(
-							'h-[16px] w-[16px] text-xs leading-none',
-							'bg-price-m-2 text-price-m-1 border-price-m-1 border'
-						)}>M</span
-					>
-					<span>{mPrice}</span>
-				</span>
-				<span class="flex items-center gap-1">
-					<span
-						class={cn(
-							'h-[16px] w-[16px] text-xs leading-none',
-							'bg-price-b-2 text-price-b-1 border-price-b-1 border'
-						)}>B</span
-					>
-					<span>{bPrice}</span>
-				</span>
+			<dt class="ir">등록된 씰의 총 가격</dt>
+			<dd>
+				<StatBarTotalPrice {totalPrice} />
 			</dd>
 		</div>
 	</dl>
-</div>
+</StatBarWrap>
