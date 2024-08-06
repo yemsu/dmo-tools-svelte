@@ -29,12 +29,12 @@
 
 <div
 	class={cn(
-		'fixed left-0 top-0 flex size-full flex-col justify-end md:justify-center',
-		'transition-transform ',
-		!$isShowMySealPopup && 'translate-y-full opacity-0'
+		'fixed right-0 top-header-h flex flex-col justify-end md:justify-center',
+		'transition-opacity ',
+		!$isShowMySealPopup && 'opacity-0 md:translate-x-full'
 	)}
 >
-	<div
+	<!-- <div
 		class={cn(
 			'absolute left-0 top-0 size-full bg-black/50 backdrop-blur-sm',
 			'transition-opacity',
@@ -42,20 +42,20 @@
 		)}
 		aria-hidden
 		on:click={() => isShowMySealPopup.set(!$isShowMySealPopup)}
-	></div>
-	<Inner class="flex flex-col items-center justify-center">
+	></div> -->
+	<Inner size="full" class="flex flex-col items-center justify-center">
 		<Section
 			class={cn(
-				'bg-secondary-10 h-[calc(100vh-90px)]',
+				'h-[calc(100vh-90px)] bg-secondary-10',
 				'w-full max-w-[650px]',
-				'border-t border-t-primary-90 drop-shadow-primary-90'
+				'border border-primary-90/70 border-l-transparent border-r-transparent drop-shadow-primary-90'
 			)}
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="popupTitle"
 		>
 			<div class={cn('relative flex items-center justify-center')}>
-				<Title size="sm" id="popupTitle">보유중인 씰 ({$mySeals.length})</Title>
+				<Title size="sm" id="popupTitle">보유 씰 ({$mySeals.length})</Title>
 				<button
 					class="absolute right-0 top-0"
 					on:click={() => isShowMySealPopup.set(!$isShowMySealPopup)}
