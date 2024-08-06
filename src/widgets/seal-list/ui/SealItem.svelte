@@ -15,11 +15,14 @@
 	class="group relative flex flex-col justify-center bg-primary-10 text-center"
 >
 	<span
-		class="flex h-[4em] items-center justify-center text-balance break-keep border-b border-t border-b-white/30 border-t-white/30 bg-black/40 font-bold"
+		class="relative flex h-[4em] items-center justify-center text-balance break-keep border-b border-t border-b-white/30 border-t-white/30 bg-black/40 font-bold"
 	>
 		<span class="{statColorStyles[seal.statType]} flex items-start">
 			{seal.name}
 		</span>
+		<span class="absolute left-[3px] top-0 text-[10px] text-gray-600"
+			>#{seal.id}</span
+		>
 	</span>
 	<span class="flex flex-col gap-1 p-1">
 		<SealItemCount sealId={seal.id} />
