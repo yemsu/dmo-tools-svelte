@@ -177,15 +177,32 @@
 				{@const seal = $seals.find(({ id }) => id === effData.id)}
 				{#if seal}
 					<SealItem {seal} isCountEditable={false}>
-						<dl>
-							<dt>필요개수</dt>
-							{effData.needCount} <br />
-							<dt>필요금액</dt>
-							{effData.needPrice} <br />
-							<dt>얻게될 능력치</dt>
-							{effData.willGetStat} <br />
-							<dt>1M당 능력치</dt>
-							{effData.efficiency.toFixed(5)}
+						<dl
+							class="flex flex-col gap-1 whitespace-nowrap rounded-sm bg-white/10 p-1 leading-none"
+						>
+							<div class="flex items-center gap-2">
+								<dt class="text-[11px] text-gray-200">필요개수</dt>
+								<dd class="text-point">{effData.needCount}</dd>
+							</div>
+							<div class="flex items-center gap-2">
+								<dt class="text-[11px] text-gray-200">필요금액</dt>
+								<dd class="text-point">{effData.needPrice}</dd>
+							</div>
+							<div class="flex items-center gap-2">
+								<dt class="text-[11px] text-gray-200">획득능력치</dt>
+								<dd class="text-point">{effData.willGetStat}</dd>
+							</div>
+							<div class="flex items-center gap-2">
+								<dt
+									class="text-[11px] text-gray-200"
+									title="1M당 얻게되는 능력치"
+								>
+									효율
+								</dt>
+								<dd class="text-point">
+									{effData.efficiency.toFixed(5)}
+								</dd>
+							</div>
 						</dl>
 						<Button
 							type="button"
