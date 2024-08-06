@@ -6,10 +6,10 @@
 </script>
 
 {#if price}
-	<span class="inline-flex items-end justify-center gap-[0.2em]">
-		<span>{price.toLocaleString()}</span>
+	<p class="inline-flex items-end justify-center gap-[0.2em]">
+		<span>{price.toFixed(3).toLocaleString()}</span>
 		<span class="text-[10px] font-bold text-secondary-50">M</span>
-	</span>
+	</p>
 {:else}
-	<span class="text-secondary-50">???</span>
+	<p class="text-secondary-50">???</p>
 {/if}

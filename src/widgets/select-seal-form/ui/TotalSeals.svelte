@@ -71,7 +71,7 @@
 					<li>
 						<Button
 							class={cn(statColorStyles[statTypeOption])}
-							isInActive={statTypeSelected !== statTypeOption}
+							isActive={statTypeSelected === statTypeOption}
 							on:click={() => onClickStatType(statTypeOption)}
 							>{statTypeOption}</Button
 						>

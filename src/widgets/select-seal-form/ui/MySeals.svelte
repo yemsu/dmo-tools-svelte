@@ -75,14 +75,15 @@
 				let:seal={mySeal}
 				noDataText="세팅된 보유 씰이 없습니다."
 			>
-				<SealItem seal={getMySealData($seals, mySeal.sealId)} />
-				<button
-					class="absolute right-[1px] top-[1px]"
-					on:click={() => mySeals.remove(mySeal.sealId)}
-					title="삭제"
+				<SealItem seal={getMySealData($seals, mySeal.sealId)}
+					><button
+						class="absolute right-[1px] top-[1px]"
+						on:click={() => mySeals.remove(mySeal.sealId)}
+						title="삭제"
+					>
+						<iconify-icon icon="mdi:close" width={14} height={14} />
+					</button></SealItem
 				>
-					<iconify-icon icon="mdi:close" width={14} height={14} />
-				</button>
 			</SealList>
 		</Section>
 	</Inner>

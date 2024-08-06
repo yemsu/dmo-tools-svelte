@@ -9,28 +9,28 @@
 		CT: 'text-stat-ct'
 	}
 	export let seal: SealData
+	export let isCountEditable: boolean = true
 </script>
 
-<span
-	class="group relative flex flex-col justify-center bg-primary-10 text-center"
->
-	<span
+<div class="group relative flex flex-col justify-center text-center">
+	<div
 		class="relative flex h-[4em] items-center justify-center text-balance break-keep border-b border-t border-b-white/30 border-t-white/30 bg-black/40 font-bold"
 	>
-		<span class="{statColorStyles[seal.statType]} flex items-start">
+		<p class="{statColorStyles[seal.statType]} flex items-start">
 			{seal.name}
-		</span>
-		<span class="absolute left-[3px] top-0 text-[10px] text-gray-600"
-			>#{seal.id}</span
-		>
-	</span>
-	<span class="flex flex-col gap-1 p-1">
-		<SealItemCount sealId={seal.id} />
+		</p>
+		<p class="absolute left-[3px] top-0 text-[10px] text-gray-600">
+			#{seal.id}
+		</p>
+	</div>
+	<div class="flex flex-col gap-1 p-1">
+		<SealItemCount sealId={seal.id} {isCountEditable} />
 		<SealItemPrice sealId={seal.id} />
-	</span>
-	<span
+		<slot></slot>
+	</div>
+	<div
 		class="absolute -right-1 top-2 z-10 hidden translate-x-full rounded-md bg-primary-90/90 p-2 text-xs font-bold text-black group-hover:block"
 	>
-		<span>MAX {seal.maxIncrease}</span>
-	</span>
-</span>
+		<p>MAX {seal.maxIncrease}</p>
+	</div>
+</div>

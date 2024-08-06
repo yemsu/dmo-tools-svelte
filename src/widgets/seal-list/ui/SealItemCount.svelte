@@ -2,6 +2,7 @@
 	import { mySeals } from '$entities/seals'
 
 	export let sealId: number
+	export let isCountEditable: boolean = true
 	$: count = $mySeals.find((mySeal) => mySeal.sealId === sealId)?.count ?? 0
 	let inputValue: number | undefined = undefined
 	let inputElement: HTMLInputElement
@@ -31,22 +32,12 @@
 		isOnInput = false
 	}
 
-	const sumCount = (changeNun: number) => {
-		const newCount = count + changeNun
-		if (newCount > 3000) {
-			alert('최대 3000개까지 설정 가능합니다.')
-			return
-		} else if (newCount < 0) {
-			alert('최저 0개까지 설정 가능합니다.')
-			return
-		}
-		mySeals.updateCount(sealId, newCount)
-	}
-
 	const onBlurInput = () => {
 		inputValue = undefined
 		isOnInput = false
 	}
+
+	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1 py-0.5'
 </script>
 
 {#if isOnInput}
@@ -68,22 +59,12 @@
 		>
 	</form>
 {:else}
-	<menu class="flex items-center justify-between">
-		<li>
+	<div class="flex-center">
+		{#if isCountEditable}
 			<button
 				type="button"
-				class="flex h-[14px] w-[14px] items-center justify-center rounded-full bg-primary-20"
-				title="보유 개수 -1"
-				on:click={() => sumCount(-1)}
-			>
-				<iconify-icon icon="mdi:minus" width={12} height={12} />
-			</button>
-		</li>
-		<li class="min-w-[60%]">
-			<button
-				type="button"
-				class="flex w-full items-center justify-center gap-1 rounded-md bg-primary-20/50 px-1 py-0.5"
-				title="보유 개수 직접 입력하기"
+				class="{priceStyle} rounded-md bg-primary-20/50"
+				title="보유 개수 수정하기"
 				on:click={onClickInputOn}
 			>
 				<iconify-icon
@@ -93,16 +74,15 @@
 				/>
 				{count.toLocaleString()}개
 			</button>
-		</li>
-		<li>
-			<button
-				type="button"
-				class="flex h-[14px] w-[14px] items-center justify-center rounded-full bg-primary-20"
-				title="보유 개수 +1"
-				on:click={() => sumCount(1)}
-			>
-				<iconify-icon icon="mdi:plus" width={12} height={12} />
-			</button>
-		</li>
-	</menu>
+		{:else}
+			<p class={priceStyle}>
+				<iconify-icon
+					icon="mdi:treasure-chest-outline"
+					width={15}
+					height={15}
+				/>
+				{count.toLocaleString()}개
+			</p>
+		{/if}
+	</div>
 {/if}

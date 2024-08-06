@@ -25,11 +25,11 @@
 {:else if seals.length === 0}
 	<NoData>{noDataText} 검색 결과가 존재하지 않습니다.</NoData>
 {:else}
-	<ul class={wrapClassName} {...restProps}>
+	<div class={wrapClassName} {...restProps}>
 		{#each seals as seal}
-			<li class="transition-opacity">
+			<div class="bg-primary-10 transition-opacity">
 				<slot {seal}></slot>
-			</li>
+			</div>
 		{/each}
-	</ul>
+	</div>
 {/if}

@@ -12,6 +12,7 @@
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { STATS, type StatType } from '$widgets/select-seal-form'
 	import type { SealEfficiency } from '../type'
+	import Button from '$shared/button/ui/Button.svelte'
 
 	let selectedStatType: StatType = STATS[0].type
 	let goalStat: number | '' = ''
@@ -58,8 +59,6 @@
 
 	const resetPrevResult = () => {
 		effDataListSorted = []
-		willGetStatTotal = 0
-		willNeedMoneyTotal = 0
 	}
 
 	$: onSubmit = () => {
@@ -97,12 +96,21 @@
 		effDataListSorted = resultMerged(result)
 	}
 
-	const onStatTypeChange = (e: Event) => {
-		const target = e.target as HTMLInputElement
+	const onStatTypeChange = () => {
 		setTimeout(() => {
 			goalStat = ''
 			goalStatInput.focus()
 		}, 60)
+	}
+
+	const addToMySeal = (effData: SealEfficiency) => {
+		mySeals.updateCount(effData.sealId, effData.needCount)
+		const updateEffDataListSorted = effDataListSorted.filter(
+			({ sealId }) => effData.sealId !== sealId
+		)
+		effDataListSorted = updateEffDataListSorted
+		willGetStatTotal -= effData.willGetStat
+		willNeedMoneyTotal -= effData.needPrice
 	}
 </script>
 
@@ -147,17 +155,39 @@
 			>
 				{@const seal = $seals.find(({ id }) => id === effData.sealId)}
 				{#if seal}
-					<div class="relative">
-						<SealItem {seal} isCountEditable={false} />
-						필요개수 {effData.needCount} <br />
-						필요금액 {effData.needPrice} <br />
-						얻게될 능력치 {effData.willGetStat} <br />
-						1M당 능력치 {effData.efficiency.toFixed(5)} <br />
-					</div>
+					<SealItem {seal} isCountEditable={false}>
+						<dl>
+							<dt>필요개수</dt>
+							{effData.needCount} <br />
+							<dt>필요금액</dt>
+							{effData.needPrice} <br />
+							<dt>얻게될 능력치</dt>
+							{effData.willGetStat} <br />
+							<dt>1M당 능력치</dt>
+							{effData.efficiency.toFixed(5)}
+						</dl>
+						<Button
+							type="button"
+							size="sm"
+							class="bg-primary-30"
+							on:click={() => addToMySeal(effData)}
+						>
+							<iconify-icon icon="mdi:check" width={15} height={15} />
+							씰등록 완료
+						</Button>
+					</SealItem>
 				{/if}
 			</SealList>
 		</div>
-		<p>{willGetStatTotal}</p>
-		<p>{willNeedMoneyTotal}</p>
+		{#if effDataListSorted.length > 0}
+			<div>
+				<p>
+					{$myStats[selectedStatType]} + {willGetStatTotal} = {$myStats[
+						selectedStatType
+					] + willGetStatTotal}
+				</p>
+				<p>{willNeedMoneyTotal}</p>
+			</div>
+		{/if}
 	</div>
 </Section>

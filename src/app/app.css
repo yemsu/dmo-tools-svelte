@@ -69,7 +69,7 @@ dd {
 
 input,
 button {
-	@apply appearance-none bg-transparent text-inherit;
+	@apply appearance-none border-transparent bg-transparent text-inherit;
 }
 
 input {
@@ -93,6 +93,12 @@ button:focus:not(:focus-visible) {
 	.ir {
 		@apply absolute m-0 h-auto w-[1px] overflow-hidden whitespace-nowrap border-none p-0;
 		clip: rect(0 0 0 0);
+	}
+	.flex-center {
+		@apply flex items-center justify-center;
+	}
+	.flex-col-center {
+		@apply flex flex-col items-center justify-center;
 	}
 	.scroll-box {
 		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
