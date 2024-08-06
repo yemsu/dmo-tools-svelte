@@ -230,7 +230,11 @@
 				<button class="variant-filled-primary"> 결과보기 </button>
 			</div>
 		</form>
-		<SealList seals={effDataListSorted} let:seal={effData}>
+		<SealList
+			seals={effDataListSorted}
+			let:seal={effData}
+			noDataText="목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!"
+		>
 			{@const seal = $seals.find(({ id }) => id === effData.sealId)}
 			{#if seal}
 				<li class="relative">

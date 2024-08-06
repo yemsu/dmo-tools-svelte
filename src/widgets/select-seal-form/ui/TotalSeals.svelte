@@ -4,15 +4,10 @@
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Title } from '$shared/text'
-	import { SealItem } from '$widgets/seal-list'
-	import SealMenuList from '$widgets/seal-list/ui/SealMenuList.svelte'
+	import { SealItem, SealList } from '$widgets/seal-list'
 	import { STAT_TYPES, type StatType } from '$widgets/select-seal-form/config'
 	import { choseongIncludes } from 'es-hangul'
-	import { onMount } from 'svelte'
 
-	type Form = Partial<MySeal>
-
-	const defaultForm: Form = {}
 	type StatTypeOptions = StatType | 'ALL'
 	const STAT_TYPE_OPTIONS: StatTypeOptions[] = ['ALL', ...STAT_TYPES]
 	export const statColorStyles: Record<StatTypeOptions, string> = {
@@ -21,7 +16,6 @@
 		HT: 'bg-stat-ht/10 text-stat-ht border border-stat-ht/50',
 		CT: 'bg-stat-ct/10 text-stat-ct border border-stat-ct/50'
 	}
-	let form: Form = defaultForm
 	let statTypeSelected: StatTypeOptions = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
 	$: searchResults = $seals
@@ -53,7 +47,7 @@
 		updateSearchResult(_searchText)
 	}
 
-	$: onCheck = (statTypeOption: StatTypeOptions) => {
+	$: onClickStatType = (statTypeOption: StatTypeOptions) => {
 		statTypeSelected = statTypeOption
 		updateSearchResult(searchText)
 	}
@@ -81,7 +75,7 @@
 								'data-[active=true]:border-2 data-[active=true]:opacity-100'
 							)}
 							data-active={statTypeSelected === statTypeOption}
-							on:click={() => onCheck(statTypeOption)}
+							on:click={() => onClickStatType(statTypeOption)}
 						>
 							{statTypeOption}
 						</button>
@@ -89,26 +83,20 @@
 				{/each}
 			</ul>
 		</div>
-		<button class="variant-filled-primary py-1 text-xs"
-			>최신 가격 일괄 적용</button
-		>
-		<button class="variant-filled-primary text-xs"
-			>많이 입력된 가격 일괄 적용</button
-		>
-		<p class="text-xs text-primary-50">
-			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
-			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
-			({searchResults.length}개)
-		</p>
 		<div class="flex flex-1 flex-col overflow-hidden">
-			<SealMenuList
+			<p class="mb-2 text-xs text-primary-50">
+				{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
+				{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
+				({searchResults.length}개)
+			</p>
+			<SealList
 				seals={searchResults}
 				isLoading={$seals.length === 0}
 				let:seal
-				selectedSealId={form.sealId}
+				noDataText="검색 결과가 존재하지 않습니다."
 			>
 				<SealItem {seal} />
-			</SealMenuList>
+			</SealList>
 		</div>
 	</div>
 </Section>

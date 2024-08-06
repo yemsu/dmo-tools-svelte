@@ -5,7 +5,7 @@
 </script>
 
 <header>
-	<Inner size="full" class="h-header-h flex items-center justify-between">
+	<Inner size="full" class="flex h-header-h items-center justify-between">
 		<h1 class="relative font-tiny text-3xl font-bold tracking-[0.05em]">
 			<span class="text-logo">DMO tools</span>
 		</h1>
@@ -14,7 +14,7 @@
 			on:click={() => isShowMySealPopup.set(true)}
 			title="자세히 보기"
 		>
-			보유중인 씰 ({$mySeals.length})
+			보유 씰 ({$mySeals.length})
 		</button>
 	</Inner>
 </header>

@@ -70,7 +70,11 @@
 				</button>
 			</div>
 			<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
-			<SealList seals={$mySeals} let:seal={mySeal}>
+			<SealList
+				seals={$mySeals}
+				let:seal={mySeal}
+				noDataText="세팅된 보유 씰이 없습니다."
+			>
 				<SealItem seal={getMySealData($seals, mySeal.sealId)} />
 				<button
 					class="absolute right-[1px] top-[1px]"

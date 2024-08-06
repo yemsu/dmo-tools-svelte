@@ -95,9 +95,8 @@
 	/>
 </svelte:head>
 
-<Inner class="md:h-content-fill-h grid gap-2 overflow-hidden md:grid-cols-2">
+<Inner class="grid gap-2 overflow-hidden md:h-content-fill-h md:grid-cols-2">
 	<TotalSeals />
-	<!-- <SealPriceForm {saveMySealPrices} /> -->
 	<SealCalculator />
 	<MySeals />
 </Inner>
