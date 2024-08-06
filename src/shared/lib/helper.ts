@@ -21,3 +21,8 @@ export const cn = (
 ) => {
 	return classNames.filter((className) => className).join(' ')
 }
+
+export const numberFormatter = (number: number, fractionDigits: number = 2) => {
+	const numberCut = +number.toFixed(fractionDigits)
+	return (numberCut * 1).toLocaleString()
+}

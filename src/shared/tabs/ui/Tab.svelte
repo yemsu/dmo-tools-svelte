@@ -11,8 +11,8 @@
 		class={cn(
 			'min-w-[45px] rounded-md px-2 py-1 font-bold transition-colors md:py-1.5',
 			isActive
-				? 'bg-black/90'
-				: 'opacity-30 hover:bg-black/50 hover:opacity-100',
+				? 'bg-secondary-10'
+				: 'opacity-30 hover:bg-secondary-10/60 hover:opacity-100',
 			className
 		)}
 		on:click
