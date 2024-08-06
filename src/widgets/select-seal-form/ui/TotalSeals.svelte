@@ -53,9 +53,9 @@
 	}
 </script>
 
-<Section class="md:h-full md:overflow-hidden">
+<Section class="md:h-full">
 	<Title>전체 씰</Title>
-	<div class="flex flex-1 flex-col gap-4 overflow-hidden">
+	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
 		<div class="flex w-full items-center justify-between gap-3">
 			<Input
 				id="search"

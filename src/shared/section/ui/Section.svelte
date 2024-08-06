@@ -6,7 +6,7 @@
 
 <section
 	class={cn(
-		'border-secondary-30 bg-secondary-10 flex flex-col gap-4 rounded-md border p-2 sm:p-4',
+		'flex flex-col gap-4 overflow-hidden rounded-md border border-secondary-30 bg-secondary-10 p-2 sm:p-4',
 		className
 	)}
 	{...restProps}
