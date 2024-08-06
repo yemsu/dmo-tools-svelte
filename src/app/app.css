@@ -109,4 +109,7 @@ button:focus:not(:focus-visible) {
 		-webkit-text-fill-color: transparent;
 		filter: drop-shadow(0 0 5px #0267b6);
 	}
+	.point-neon {
+		@apply border border-point/80 bg-point/20 text-point;
+	}
 }

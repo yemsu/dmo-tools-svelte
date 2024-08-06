@@ -2,6 +2,7 @@
 	import type { SealData } from '$entities/seals'
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals/model'
 	import Button from '$shared/button/ui/Button.svelte'
+	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
@@ -21,6 +22,7 @@
 	let willGetStatTotal = 0
 	let willNeedMoneyTotal = 0
 	let goalStatInput: HTMLInputElement
+	let isMySealsChanged = false
 
 	export const statColorStyles: Record<StatType, string> = {
 		AT: 'text-stat-at',
@@ -32,15 +34,12 @@
 		return $sealPrices.find(({ sealId }) => sealId === _sealId)?.price
 	}
 
-	$: getMySealCount = (_sealId: number) => {
-		return $mySeals.find(({ id }) => id === _sealId)?.count || 0
-	}
-
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
 		const price = getSealPrice(seal.id)
 		if (!price) return result
-		const mySealCount = getMySealCount(seal.id)
+		const mySealCount = $mySeals.find(({ id }) => id === seal.id)?.count || 0
+
 		const nextSteps = getNextSteps(mySealCount)
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
@@ -66,6 +65,9 @@
 
 	const resetPrevResult = () => {
 		effDataListSorted = []
+		willGetStatTotal = 0
+		willNeedMoneyTotal = 0
+		isMySealsChanged = false
 	}
 
 	$: onSubmit = () => {
@@ -74,7 +76,6 @@
 			return
 		}
 		resetPrevResult()
-
 		const statSeals = $seals.filter(
 			({ statType }) => statType === statTypeSelected
 		)
@@ -120,6 +121,14 @@
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 	}
+
+	const mySealsChanged = () => {
+		if (effDataListSorted.length > 0) {
+			isMySealsChanged = true
+		}
+	}
+
+	$: $mySeals && mySealsChanged()
 </script>
 
 <Section>
@@ -149,15 +158,12 @@
 					placeholder="목표 수치 입력"
 					bind:value={goalStat}
 				/>
-				<Button
-					rounded="md"
-					size="lg"
-					class="border border-point/80 bg-point/20 font-bold text-point"
+				<Button rounded="md" size="lg" class="point-neon font-bold"
 					>결과보기</Button
 				>
 			</form>
 		</div>
-		<div class="flex flex-1 flex-col overflow-hidden">
+		<div class="relative flex flex-1 flex-col overflow-hidden">
 			<SealList
 				seals={effDataListSorted}
 				let:seal={effData}
@@ -188,6 +194,22 @@
 					</SealItem>
 				{/if}
 			</SealList>
+			{#if isMySealsChanged}
+				<div
+					class={cn(
+						'absolute left-0 top-0',
+						'flex-col-center size-full gap-4 bg-primary-5/60 backdrop-blur-sm'
+					)}
+				>
+					<p class="text-center">
+						효율 계산 이후에 보유 씰이 업데이트 되었습니다. <br />
+						아래 버튼을 클릭하여 다시 계산해주세요!
+					</p>
+					<Button rounded="md" size="lg" class="point-neon" on:click={onSubmit}>
+						계산 다시하기
+					</Button>
+				</div>
+			{/if}
 		</div>
 		{#if effDataListSorted.length > 0}
 			<div>
