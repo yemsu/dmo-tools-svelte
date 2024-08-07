@@ -63,7 +63,7 @@
 	<CrrMenuTitle />
 	<div
 		class={cn(
-			'flex w-full flex-col items-start gap-3',
+			'flex w-full flex-col items-start gap-2',
 			'md:flex-row md:items-center md:justify-between'
 		)}
 	>
@@ -84,14 +84,14 @@
 		<Input
 			id="search"
 			maxlength={30}
-			placeholder="씰이름을 검색하세요"
+			placeholder="씰 이름을 검색하세요"
 			class="w-full flex-1 md:w-auto"
 			bind:value={searchText}
 			on:input={onSearchInput}
 		/>
 	</div>
 	<div class="flex flex-1 flex-col overflow-hidden">
-		<p class="mb-2 text-xs text-primary-50">
+		<p class="mb-2 text-xs font-bold text-point">
 			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
 			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
 			({searchResults.length}개)

@@ -23,7 +23,7 @@
 		{/each}
 	</div>
 {:else if seals.length === 0}
-	<NoData>{noDataText} 검색 결과가 존재하지 않습니다.</NoData>
+	<NoData>{noDataText}</NoData>
 {:else}
 	<div class={wrapClassName} {...restProps}>
 		{#each seals as seal}
