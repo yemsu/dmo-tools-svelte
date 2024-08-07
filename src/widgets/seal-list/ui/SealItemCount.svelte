@@ -49,7 +49,7 @@
 	const countStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
-<div class="min-w-[80%]">
+<div class="w-full min-w-[80%] min-w-[80%]">
 	{#if isOnInput}
 		<form on:submit|preventDefault={onSubmit} class="flex gap-1">
 			<input
@@ -75,7 +75,10 @@
 			{#if isEditable}
 				<button
 					type="button"
-					class={cn('w-full rounded-md bg-primary-20/50 py-1', countStyle)}
+					class={cn(
+						'w-full rounded-md bg-primary-20/50 py-1.5 md:py-1',
+						countStyle
+					)}
 					title="보유 개수 수정하기"
 					on:click={onClickInputOn}
 				>

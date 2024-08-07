@@ -47,7 +47,7 @@
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
-<div class="min-w-[80%]">
+<div class="w-full min-w-[80%] md:w-auto">
 	{#if isOnInput}
 		<form on:submit|preventDefault={onSubmit} class="flex gap-1">
 			<input
@@ -73,7 +73,7 @@
 		<div class="flex w-full overflow-hidden rounded-md">
 			{#if myPrice !== undefined}
 				<button
-					class="flex-center bg-warning w-[35%] shrink-0 py-1"
+					class="flex-center bg-warning w-[35%] shrink-0"
 					on:click={() => myPrices.remove(sealId)}
 				>
 					<iconify-icon
@@ -86,7 +86,7 @@
 			{/if}
 			<button
 				type="button"
-				class="flex-1 bg-primary-20/50 py-1 {priceStyle}"
+				class="flex-1 bg-primary-20/50 py-1.5 md:py-1 {priceStyle}"
 				title="씰 가격 수정하기"
 				on:click={onClickInputOn}
 			>

@@ -14,7 +14,7 @@
 	<div
 		class={cn(
 			'relative flex items-center justify-center',
-			'h-[3.6em] w-auto',
+			'h-[3.2em] w-auto md:h-[3.6em]',
 			'gradient-black-op border-b border-t border-b-white/30 border-t-white/30 px-1',
 			'text-balance break-keep font-bold'
 		)}
