@@ -30,7 +30,7 @@
 	const positionStyles = {
 		top: 'top-0',
 		bottom: 'bottom-0',
-		left: '-left-1 -translate-x-full',
+		left: 'md:-left-1 -translate-x-full left-10',
 		right: 'md:-right-1 translate-x-full right-10'
 	}
 	const sizeStyles = {
