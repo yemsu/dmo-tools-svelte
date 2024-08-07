@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { seals, type MySeal, type SealData } from '$entities/seals'
-	import { Button } from '$shared/button'
+	import { seals, type SealData } from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'

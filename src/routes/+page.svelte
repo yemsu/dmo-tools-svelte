@@ -12,7 +12,11 @@
 	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import { SealCalculator } from '$widgets/seal-calculator'
-	import { MySeals, TotalSeals, getMySealData } from '$widgets/select-seal-form'
+	import {
+		MySeals,
+		SettingSeals,
+		getMySealData
+	} from '$widgets/select-seal-form'
 	import {
 		SEAL_STAT_TABLE,
 		STATS,
@@ -78,7 +82,7 @@
 
 <Inner class="grid h-content-fill-h gap-2 overflow-hidden pb-4">
 	{#if $activeMenu === 'EVERY'}
-		<TotalSeals />
+		<SettingSeals />
 	{:else if $activeMenu === 'MY'}
 		<MySeals />
 	{:else}
