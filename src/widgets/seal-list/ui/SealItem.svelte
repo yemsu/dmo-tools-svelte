@@ -10,10 +10,10 @@
 	export let isPriceEditable: boolean = true
 </script>
 
-<div class={cn('group relative flex flex-col justify-center text-center')}>
+<div class={cn('relative flex flex-col justify-center text-center')}>
 	<div
 		class={cn(
-			'relative flex items-center justify-center',
+			'group relative flex items-center justify-center',
 			'h-[3.2em] w-auto md:h-[3.6em]',
 			'gradient-black-op border-b border-t border-b-white/30 border-t-white/30 px-1',
 			'text-balance break-keep font-bold'
@@ -27,29 +27,29 @@
 		>
 			#{seal.id}
 		</p>
+		<Tooltip size="sm" useAdaptiveX={true} class="top-4">
+			<dl class="flex flex-col gap-1 whitespace-nowrap">
+				<div class="flex items-center gap-2">
+					<dt class="text-gray-300">최대 스탯</dt>
+					<dd class="text-point">{seal.maxIncrease.toLocaleString()}</dd>
+				</div>
+				<div class="flex items-center gap-2">
+					<dt class="text-gray-300">마스터 개수</dt>
+					<dd class="text-point">{seal.masterCount.toLocaleString()}</dd>
+				</div>
+				<div class="flex items-center gap-2">
+					<dt class="text-gray-300">가격 업데이트</dt>
+					<dd class="text-point">
+						{$sealPrices.length > 0 &&
+							timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
+					</dd>
+				</div>
+			</dl>
+		</Tooltip>
 	</div>
 	<div class="flex flex-col items-center gap-1 p-1">
 		<SealItemCount sealId={seal.id} isEditable={isCountEditable} />
 		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} />
 		<slot></slot>
 	</div>
-	<Tooltip size="sm" useAdaptiveX={true}>
-		<dl class="flex flex-col gap-1 whitespace-nowrap">
-			<div class="flex items-center gap-2">
-				<dt class="text-gray-300">최대 스탯</dt>
-				<dd class="text-point">{seal.maxIncrease.toLocaleString()}</dd>
-			</div>
-			<div class="flex items-center gap-2">
-				<dt class="text-gray-300">마스터 개수</dt>
-				<dd class="text-point">{seal.masterCount.toLocaleString()}</dd>
-			</div>
-			<div class="flex items-center gap-2">
-				<dt class="text-gray-300">가격 업데이트</dt>
-				<dd class="text-point">
-					{$sealPrices.length > 0 &&
-						timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
-				</dd>
-			</div>
-		</dl>
-	</Tooltip>
 </div>
