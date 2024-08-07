@@ -8,7 +8,7 @@
 
 <div
 	class={cn(
-		'relative flex min-h-[100vh] flex-col',
+		'relative flex min-h-[100svh] flex-col',
 		'bg-secondary-5/70 md:mx-auto md:max-w-[800px]',
 		'drop-shadow-white border border-white/10 border-y-transparent'
 	)}
