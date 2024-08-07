@@ -14,6 +14,7 @@
 	import CrrMenuTitle from '$shared/text/ui/CrrMenuTitle.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
+		getMyAndFinalPrice,
 		statColorStyles,
 		STATS,
 		type StatType
@@ -42,13 +43,9 @@
 	$: calcNum = statTypeSelected === 'CT' ? 100 : 1
 	$: resultUnit = statTypeSelected === 'CT' ? '%' : ''
 
-	$: getSealPrice = (_sealId: number) => {
-		return $sealPrices.find(({ sealId }) => sealId === _sealId)?.price
-	}
-
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
-		const price = getSealPrice(seal.id)
+		const { final: price } = getMyAndFinalPrice($sealPrices, $myPrices, seal.id)
 		if (!price) return result
 		const mySealCount = $mySeals.find(({ id }) => id === seal.id)?.count || 0
 

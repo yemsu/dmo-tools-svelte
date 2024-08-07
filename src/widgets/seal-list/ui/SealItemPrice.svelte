@@ -2,20 +2,19 @@
 	import { myPrices, sealPrices } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
+	import { getMyAndFinalPrice } from '$widgets/select-seal-form'
 
 	export let sealId: number
 	export let isEditable: boolean = true
-	$: price = $sealPrices.find((sealPrice) => sealPrice.sealId === sealId)?.price
-	$: myPrice = $myPrices.find(({ id }) => id === sealId)?.price
-	$: finalPrice = myPrice === undefined ? price : myPrice
+	$: prices = getMyAndFinalPrice($sealPrices, $myPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
 	let isOnInput = false
 
 	const onClickInputOn = () => {
 		isOnInput = true
-		if (price) {
-			inputValue = price
+		if (prices.final) {
+			inputValue = prices.final
 		}
 		setTimeout(() => {
 			inputElement.focus()
@@ -80,7 +79,7 @@
 		</form>
 	{:else if isEditable}
 		<div class="flex w-full overflow-hidden rounded-md">
-			{#if myPrice !== undefined}
+			{#if prices.my !== undefined}
 				<button
 					class="flex-center bg-warning w-[35%] shrink-0"
 					on:click={() => removeSavedPrice()}
@@ -99,12 +98,12 @@
 				title="씰 가격 수정하기"
 				on:click={onClickInputOn}
 			>
-				<SealItemPriceText price={finalPrice} />
+				<SealItemPriceText price={prices.final} />
 			</button>
 		</div>
 	{:else}
 		<p class={cn(priceStyle)}>
-			{#if myPrice !== undefined}
+			{#if prices.my !== undefined}
 				<iconify-icon
 					title="저장됨"
 					icon="material-symbols:lock-outline"
@@ -112,7 +111,7 @@
 					height={15}
 				/>
 			{/if}
-			<SealItemPriceText price={finalPrice} />
+			<SealItemPriceText price={prices.final} />
 		</p>
 	{/if}
 </div>

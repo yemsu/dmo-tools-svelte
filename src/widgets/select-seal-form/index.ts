@@ -10,4 +10,4 @@ export {
 	type StatTypeOption,
 	STAT_TYPE_OPTIONS
 } from './config'
-export { getMySealData } from './lib/helper'
+export { getMySealData, getMyAndFinalPrice } from './lib/helper'
