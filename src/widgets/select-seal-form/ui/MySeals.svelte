@@ -43,7 +43,9 @@
 
 <Section class="flex w-full overflow-hidden">
 	<CrrMenuTitle />
-	<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
+	{#if $myStats}
+		<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
+	{/if}
 
 	<Tabs>
 		{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
