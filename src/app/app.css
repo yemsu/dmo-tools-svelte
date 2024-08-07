@@ -95,28 +95,40 @@ button:focus:not(:focus-visible) {
 		@apply absolute m-0 h-auto w-[1px] overflow-hidden whitespace-nowrap border-none p-0;
 		clip: rect(0 0 0 0);
 	}
-	.flex-center {
-		@apply flex items-center justify-center;
-	}
-	.flex-col-center {
-		@apply flex flex-col items-center justify-center;
-	}
-	.position-center {
-		@apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
-	}
-	.scroll-box {
-		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
-	}
+	/* logo text */
 	.text-logo {
 		background: linear-gradient(to bottom, #fef102, #ed7000);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		filter: drop-shadow(0 0 5px #0267b6);
 	}
+	/* flex */
+	.flex-center {
+		@apply flex items-center justify-center;
+	}
+	.flex-col-center {
+		@apply flex flex-col items-center justify-center;
+	}
+	/* position */
+	.position-center {
+		@apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+	}
+	/* scroll box */
+	.scroll-box {
+		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
+	}
+	/* border */
 	.point-neon {
 		@apply border border-point/80 bg-point/20 text-point;
 	}
 	.point-border-neon {
 		@apply border border-primary-90/70 border-l-transparent border-r-transparent drop-shadow-primary-90;
+	}
+	/* gradient */
+	.gradient-gray-800 {
+		@apply bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900;
+	}
+	.gradient-black-op {
+		@apply bg-gradient-to-br from-black/40 via-black/15 to-black/40;
 	}
 }

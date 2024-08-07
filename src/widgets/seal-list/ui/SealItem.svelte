@@ -1,9 +1,10 @@
 <script lang="ts">
 	import SealItemPrice from './SealItemPrice.svelte'
 	import SealItemCount from './SealItemCount.svelte'
-	import type { SealData } from '$entities/seals'
+	import { type SealData, sealPrices, getSealPrice } from '$entities/seals'
 	import { type StatType } from '$widgets/select-seal-form/config'
-	import { cn } from '$shared/lib'
+	import { cn, timeElapsedString } from '$shared/lib'
+	import { Tooltip } from '$shared/tooltip'
 	const statColorStyles: Record<StatType, string> = {
 		AT: 'text-stat-at',
 		HT: 'text-stat-ht',
@@ -13,12 +14,12 @@
 	export let isCountEditable: boolean = true
 </script>
 
-<div class={cn('group relative flex flex-col justify-center text-center ')}>
+<div class={cn('group relative flex flex-col justify-center text-center')}>
 	<div
 		class={cn(
 			'relative flex items-center justify-center',
 			'h-[3.6em] w-auto',
-			'border-b border-t border-b-white/30 border-t-white/30 bg-black/40',
+			'gradient-black-op border-b border-t border-b-white/30 border-t-white/30 px-1',
 			'text-balance break-keep font-bold'
 		)}
 	>
@@ -36,9 +37,22 @@
 		<SealItemPrice sealId={seal.id} />
 		<slot></slot>
 	</div>
-	<div
-		class="absolute -right-1 top-2 z-10 hidden translate-x-full rounded-md bg-primary-90/90 p-2 text-xs font-bold text-black group-hover:block"
-	>
-		<p>MAX {seal.maxIncrease}</p>
-	</div>
+	<Tooltip size="sm" useAdaptiveX={true}>
+		<dl class="flex flex-col gap-1 whitespace-nowrap">
+			<div class="flex items-center gap-2">
+				<dt class="text-gray-300">최대 스탯</dt>
+				<dd class="text-point">{seal.maxIncrease.toLocaleString()}</dd>
+			</div>
+			<div class="flex items-center gap-2">
+				<dt class="text-gray-300">마스터 개수</dt>
+				<dd class="text-point">{seal.masterCount.toLocaleString()}</dd>
+			</div>
+			<div class="flex items-center gap-2">
+				<dt class="text-gray-300">가격 업데이트</dt>
+				<dd class="text-point">
+					{timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
+				</dd>
+			</div>
+		</dl>
+	</Tooltip>
 </div>

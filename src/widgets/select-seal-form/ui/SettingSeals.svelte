@@ -4,7 +4,7 @@
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { Title } from '$shared/text'
+	import { CrrMenuTitle, Title } from '$shared/text'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
 		STAT_TYPES,
@@ -60,6 +60,7 @@
 </script>
 
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden md:h-full">
+	<CrrMenuTitle />
 	<div
 		class={cn(
 			'flex w-full flex-col items-start gap-3',

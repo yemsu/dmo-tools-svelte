@@ -1,3 +1,4 @@
+import type { SealMaterCount } from '$widgets/seal-calculator'
 import type { StatType } from '$widgets/select-seal-form/config'
 
 export type SealData = {
@@ -5,6 +6,8 @@ export type SealData = {
 	name: string
 	maxIncrease: number
 	statType: StatType
+	buyable: boolean
+	masterCount: SealMaterCount
 }
 
 export type MySeal = {

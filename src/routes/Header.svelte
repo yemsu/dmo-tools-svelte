@@ -22,7 +22,7 @@
 				>
 					가격은 어떻게 <br class="md:hidden" /> 설정되나요?
 				</button>
-				<Tooltip>
+				<Tooltip class="-bottom-2 right-0 w-[310px] translate-y-full pr-2">
 					<p>
 						각 씰의 위탁 거래소 1페이지 매물 가격의 <br />가중 평균으로
 						책정됩니다. <br />

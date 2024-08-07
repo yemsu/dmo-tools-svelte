@@ -46,7 +46,7 @@
 		isOnInput = false
 	}
 
-	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1 py-0.5'
+	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
 <div class="min-w-[80%]">

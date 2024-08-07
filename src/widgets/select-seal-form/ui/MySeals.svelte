@@ -1,15 +1,7 @@
 <script lang="ts">
-	import {
-		sealPrices,
-		myStats,
-		mySeals,
-		seals,
-		isShowMySealPopup
-	} from '$entities/seals'
-	import { cn } from '$shared/lib'
+	import { mySeals, myStats, sealPrices, seals } from '$entities/seals'
 	import { Section } from '$shared/section'
-	import Inner from '$shared/section/ui/Inner.svelte'
-	import { Title } from '$shared/text'
+	import { CrrMenuTitle } from '$shared/text'
 	import { SealItem } from '$widgets/seal-list'
 	import SealList from '$widgets/seal-list/ui/SealList.svelte'
 	import { getMySealData } from '$widgets/select-seal-form/lib/helper'
@@ -28,6 +20,7 @@
 </script>
 
 <Section class="flex w-full overflow-hidden">
+	<CrrMenuTitle />
 	<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
 	<SealList
 		seals={$mySeals}

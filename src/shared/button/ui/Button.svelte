@@ -10,7 +10,7 @@
 		md: 'rounded-md'
 	}
 	const sizeStyles = {
-		sm: 'px-1 py-1 text-md text-xs',
+		sm: 'px-2 py-1 text-md text-xs',
 		md: 'min-w-[3.5em] px-2 py-1 text-md',
 		lg: 'px-[0.8em] py-[0.5em] text-md'
 	}

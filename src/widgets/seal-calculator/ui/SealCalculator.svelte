@@ -5,6 +5,7 @@
 	import { cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
+	import CrrMenuTitle from '$shared/text/ui/CrrMenuTitle.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { STATS, type StatType } from '$widgets/select-seal-form'
 	import {
@@ -18,7 +19,7 @@
 		resultMerged,
 		sortByEffDataList
 	} from '../lib/calculate'
-	import type { SealEfficiency } from '../type'
+	import type { SealEfficiency } from '../types'
 
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
@@ -44,9 +45,10 @@
 		if (!price) return result
 		const mySealCount = $mySeals.find(({ id }) => id === seal.id)?.count || 0
 
-		const nextSteps = getNextSteps(mySealCount)
+		const nextSteps = getNextSteps(seal, mySealCount)
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
+			if (nextStep.sealCount === null) continue
 			const prevStep = getPrevStep(nextStep.sealCount)
 			const prevStepPercent = prevStep?.percent || 0
 			const willGetStat =
@@ -138,6 +140,7 @@
 </script>
 
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden">
+	<CrrMenuTitle />
 	<div class="flex flex-col items-start gap-2 md:flex-row md:items-center">
 		<Tabs>
 			{#each STATS as stat (stat.type)}
@@ -176,37 +179,37 @@
 			{@const seal = $seals.find(({ id }) => id === effData.id)}
 			{#if seal}
 				<SealItem {seal} isCountEditable={false}>
-					<dl
-						class="flex flex-col gap-1 whitespace-nowrap rounded-sm bg-white/10 p-1 leading-none"
-					>
-						<div class="flex items-center gap-1">
-							<dt class="text-[11px] text-gray-200">필요개수</dt>
-							<dd class="text-point">{numberFormatter(effData.needCount)}</dd>
-						</div>
-						<div class="flex items-center gap-1">
-							<dt class="text-[11px] text-gray-200">필요금액</dt>
-							<dd class="text-point">
-								{numberFormatter(effData.needPrice)}
-							</dd>
-						</div>
-						<div class="flex items-center gap-1">
-							<dt class="text-[11px] text-gray-200">획득능력치</dt>
-							<dd class="text-point">
-								{numberFormatter(effData.willGetStat)}
-							</dd>
-						</div>
-						<div class="flex items-center gap-1">
-							<dt
-								class="text-[11px] text-gray-200"
-								title="1M당 얻게되는 능력치"
-							>
-								효율
-							</dt>
-							<dd class="text-point">
-								{numberFormatter(effData.efficiency, 5)}
-							</dd>
-						</div>
-					</dl>
+					<div class="flex-col-center w-full rounded-sm bg-white/10 p-2">
+						<dl class="flex flex-col gap-1 whitespace-nowrap leading-none">
+							<div class="flex items-center gap-1">
+								<dt class="text-[11px] text-gray-200">필요개수</dt>
+								<dd class="text-point">{numberFormatter(effData.needCount)}</dd>
+							</div>
+							<div class="flex items-center gap-1">
+								<dt class="text-[11px] text-gray-200">필요금액</dt>
+								<dd class="text-point">
+									{numberFormatter(effData.needPrice)}
+								</dd>
+							</div>
+							<div class="flex items-center gap-1">
+								<dt class="text-[11px] text-gray-200">획득능력치</dt>
+								<dd class="text-point">
+									{numberFormatter(effData.willGetStat)}
+								</dd>
+							</div>
+							<div class="flex items-center gap-1">
+								<dt
+									class="text-[11px] text-gray-200"
+									title="1M당 얻게되는 능력치"
+								>
+									효율
+								</dt>
+								<dd class="text-point">
+									{numberFormatter(effData.efficiency, 5)}
+								</dd>
+							</div>
+						</dl>
+					</div>
 					<Button
 						type="button"
 						size="sm"
