@@ -19,7 +19,7 @@
 		<div class="flex items-center gap-2 rounded-full">
 			<dt class="text-xs text-gray-200">{stat.type}</dt>
 			<dd class="font-bold text-point">
-				{numberFormatter(stats[stat.type])}{#if stat.type === 'CT'}
+				{stats ? numberFormatter(stats[stat.type]) : 0}{#if stat.type === 'CT'}
 					%
 				{/if}
 			</dd>
