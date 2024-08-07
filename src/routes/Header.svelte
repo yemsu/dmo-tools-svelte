@@ -9,7 +9,7 @@
 		size="full"
 		class="relative flex h-header-h items-center justify-between"
 	>
-		<h1 class="font-tiny text-xl font-bold leading-none md:text-3xl">
+		<h1 class="font-tiny text-2xl font-bold leading-none md:text-3xl">
 			<span class="text-logo">DMO tools</span>
 		</h1>
 		<div class="flex-center gap-4">
