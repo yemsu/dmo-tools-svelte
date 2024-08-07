@@ -17,12 +17,12 @@
 	<div
 		class={cn(
 			'relative flex items-center justify-center',
-			'h-[4em] w-auto px-0 py-1',
+			'h-[3.6em] w-auto',
 			'border-b border-t border-b-white/30 border-t-white/30 bg-black/40',
 			'text-balance break-keep font-bold'
 		)}
 	>
-		<p class="{statColorStyles[seal.statType]} flex items-start">
+		<p class="{statColorStyles[seal.statType]} flex items-start leading-4">
 			{seal.name}
 		</p>
 		<p

@@ -41,7 +41,7 @@
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1 py-0.5'
 </script>
 
-<div class="w-[80%]">
+<div class="min-w-[80%]">
 	{#if isOnInput}
 		<form on:submit|preventDefault={onSubmit} class="flex gap-1">
 			<input
@@ -49,8 +49,7 @@
 				type="number"
 				id={`count-${sealId}`}
 				class={cn(
-					'w-full rounded-sm bg-primary-20 px-1 py-[1px] text-xs text-white',
-					'h-[20px] md:h-auto'
+					'w-full rounded-sm bg-primary-20 px-1 py-[1px] text-xs text-white'
 				)}
 				placeholder="씰 개수"
 				bind:value={inputValue}
@@ -68,11 +67,7 @@
 			{#if isCountEditable}
 				<button
 					type="button"
-					class={cn(
-						'rounded-md bg-primary-20/50',
-						'h-[30px] w-full md:h-auto',
-						priceStyle
-					)}
+					class={cn('w-full rounded-md bg-primary-20/50 py-1', priceStyle)}
 					title="보유 개수 수정하기"
 					on:click={onClickInputOn}
 				>
