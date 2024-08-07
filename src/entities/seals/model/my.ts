@@ -10,7 +10,11 @@ const sortBy = <ArrItem extends Record<string, number>>(
 }
 
 const MY_SEALS_STORAGE = 'seals'
-
+const save = (mySeals: MySeal[]) => {
+	const params = new URLSearchParams(window.location.search)
+	params.set(MY_SEALS_STORAGE, JSON.stringify(mySeals))
+	goto(`?${params.toString()}`)
+}
 const createMySeals = () => {
 	const { subscribe, update } = writable<MySeal[]>([])
 
@@ -36,18 +40,11 @@ const createMySeals = () => {
 				}
 				return sortBy([...result], 'id')
 			})
-			const params = new URLSearchParams(window.location.search)
-			subscribe((value) => {
-				params.set(MY_SEALS_STORAGE, JSON.stringify(value))
-				goto(`?${params.toString()}`)
-				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
-			})
+			subscribe((value) => save(value))
 		},
 		remove: (sealId: number) => {
 			update((prev) => [...prev.filter(({ id }) => id !== sealId)])
-			subscribe((value) => {
-				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
-			})
+			subscribe((value) => save(value))
 		}
 	}
 }

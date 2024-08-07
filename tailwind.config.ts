@@ -43,7 +43,8 @@ export default {
 					'b-1': 'var(--price-b-1))',
 					'b-2': 'var(--price-b-2))'
 				},
-				point: 'hsl(var(--point))'
+				point: 'hsl(var(--point))',
+				warning: 'hsl(var(--warning))'
 			},
 			spacing: {
 				'header-h': 'var(--header-h)',

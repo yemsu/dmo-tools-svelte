@@ -17,6 +17,7 @@
 		SettingSeals,
 		getMySealData
 	} from '$widgets/select-seal-form'
+	import { myPrices } from '$entities/seals'
 	import {
 		SEAL_STAT_TABLE,
 		STATS,
@@ -28,12 +29,16 @@
 		// seals
 		const sealsFetched = await getSeals()
 		seals.set(sealsFetched)
-		// sealPrices
-		const sealPricesFetched = await getSealPrices('modifiedAt')
-		sealPrices.set(sealPricesFetched)
 		// my seals
 		if ($mySeals.length === 0) {
 			mySeals.loadSavedData()
+		}
+		// sealPrices
+		const sealPricesFetched = await getSealPrices('modifiedAt')
+		sealPrices.set(sealPricesFetched)
+		// my prices
+		if ($myPrices.length === 0) {
+			myPrices.loadSavedData()
 		}
 	})
 	$: statCalc = (statType: StatType) => {

@@ -11,7 +11,7 @@ export type SealData = {
 }
 
 export type MySeal = {
-	id: number
+	id: SealData['id']
 	count: number
 }
 
@@ -19,9 +19,14 @@ export type SealPrice = {
 	id: number
 	price: number
 	regCount: number
-	sealId: number
+	sealId: SealData['id']
 	createAt: string
 	modifiedAt: string
+}
+
+export type MyPrice = {
+	id: SealData['id']
+	price: number
 }
 
 export type Stats = Record<StatType, number>

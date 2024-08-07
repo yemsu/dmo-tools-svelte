@@ -1,5 +1,6 @@
 export { getSeals, getSealPrices, postSealPrice } from './api'
-export { seals, sealPrices, isShowMySealPopup } from './model'
+export { seals, isShowMySealPopup } from './model'
 export { mySeals, myStats } from './model/my'
-export type { SealData, MySeal, SealPrice, Stats } from './type'
+export { sealPrices, myPrices } from './model/price'
+export type { SealData, MySeal, SealPrice, Stats, MyPrice } from './type'
 export { getSealPrice } from './lib'
