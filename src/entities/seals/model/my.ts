@@ -20,19 +20,21 @@ const createMySeals = () => {
 			const params = new URLSearchParams(window.location.search)
 			const savedData = params.get(MY_SEALS_STORAGE)
 			if (savedData) {
-				update(() => sortBy([...JSON.parse(savedData)], 'sealId'))
+				update(() => sortBy([...JSON.parse(savedData)], 'id'))
 			}
 		},
 		updateCount: (id: number, count: number) => {
 			update((prev) => {
 				const prevItem = prev.find((prevItem) => prevItem.id === id)
+				let result = []
 				if (prevItem) {
-					return prev.map((mySeal) =>
+					result = prev.map((mySeal) =>
 						mySeal.id === id ? { id, count } : mySeal
 					)
 				} else {
-					return [...prev, { id, count }]
+					result = [...prev, { id, count }]
 				}
+				return sortBy([...result], 'id')
 			})
 			const params = new URLSearchParams(window.location.search)
 			subscribe((value) => {

@@ -26,7 +26,7 @@
 			{seal.name}
 		</p>
 		<p
-			class="absolute right-[3px] top-0 text-[9px] text-gray-600 md:left-[3px] md:right-auto md:text-[10px]"
+			class="absolute left-[3px] top-0 text-[9px] text-gray-600 md:text-[10px]"
 		>
 			#{seal.id}
 		</p>
