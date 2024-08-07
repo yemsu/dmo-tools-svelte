@@ -55,7 +55,7 @@
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
-<div class="w-full min-w-[80%] md:w-auto">
+<div class="w-full">
 	{#if isOnInput}
 		<form on:submit|preventDefault={onSubmit} class="flex gap-1">
 			<input
