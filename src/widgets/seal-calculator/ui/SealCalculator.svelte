@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { SealData } from '$entities/seals'
+	import type { MySeal, SealData } from '$entities/seals'
 	import {
 		myPrices,
 		mySeals,
@@ -19,6 +19,7 @@
 		STATS,
 		type StatType
 	} from '$widgets/select-seal-form'
+	import MySeals from '$widgets/select-seal-form/ui/MySeals.svelte'
 	import {
 		MyStatBox,
 		StatBarSeparator,
@@ -46,11 +47,13 @@
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
 
+	const getMySealCount = (mySeals: MySeal[], sealId: number) =>
+		mySeals.find(({ id }) => id === sealId)?.count || 0
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
 		const { final: price } = getMyAndFinalPrice($sealPrices, $myPrices, seal.id)
 		if (!price) return result
-		const mySealCount = $mySeals.find(({ id }) => id === seal.id)?.count || 0
+		const mySealCount = getMySealCount($mySeals, seal.id)
 
 		const nextSteps = getNextSteps(seal, mySealCount)
 
@@ -140,8 +143,9 @@
 		}, 60)
 	}
 
-	const addToMySeal = (effData: SealEfficiency) => {
-		mySeals.updateCount(effData.id, effData.needCount)
+	const addToMySeal = (effData: SealEfficiency, sealId: number) => {
+		const mySealCount = getMySealCount($mySeals, sealId)
+		mySeals.updateCount(effData.id, mySealCount + effData.needCount)
 		const updateEffDataListSorted = effDataListSorted.filter(
 			({ id }) => effData.id !== id
 		)
@@ -239,10 +243,10 @@
 						type="button"
 						size="sm"
 						class="bg-primary-30"
-						on:click={() => addToMySeal(effData)}
+						on:click={() => addToMySeal(effData, seal.id)}
 					>
 						<iconify-icon icon="mdi:check" width={15} height={15} />
-						씰등록 완료
+						씰 등록 완료
 					</Button>
 				</SealItem>
 			{/if}
