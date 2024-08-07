@@ -31,7 +31,7 @@
 	let willGetStatTotal = 0
 	let willNeedMoneyTotal = 0
 	let goalStatInput: HTMLInputElement
-	let isMySealsChanged = false
+	let isSealPriceChanged = false
 	let searchInputPlaceholder = '목표 수치 입력'
 
 	$: getSealPrice = (_sealId: number) => {
@@ -77,7 +77,7 @@
 		effDataListSorted = []
 		willGetStatTotal = 0
 		willNeedMoneyTotal = 0
-		isMySealsChanged = false
+		isSealPriceChanged = false
 	}
 
 	$: onSubmit = () => {
@@ -144,6 +144,14 @@
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 	}
+
+	const onChangedSealPrice = () => {
+		if (effDataListSorted.length > 0) {
+			isSealPriceChanged = true
+		}
+	}
+
+	$: $sealPrices && onChangedSealPrice()
 </script>
 
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden">
@@ -229,7 +237,7 @@
 				</SealItem>
 			{/if}
 		</SealList>
-		{#if isMySealsChanged}
+		{#if isSealPriceChanged}
 			<div
 				class={cn(
 					'absolute left-0 top-0',
@@ -237,7 +245,7 @@
 				)}
 			>
 				<p class="text-center">
-					효율 계산 이후에 보유 씰이 업데이트 되었습니다. <br />
+					효율 계산 이후에 씰 가격이 업데이트 되었습니다. <br />
 					아래 버튼을 클릭하여 다시 계산해주세요!
 				</p>
 				<Button rounded="md" size="lg" class="point-neon" on:click={onSubmit}>

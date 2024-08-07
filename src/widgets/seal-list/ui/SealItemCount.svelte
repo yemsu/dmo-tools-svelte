@@ -3,7 +3,7 @@
 	import { cn, numberFormatter } from '$shared/lib'
 
 	export let sealId: number
-	export let isCountEditable: boolean = true
+	export let isEditable: boolean = true
 	$: count = $mySeals.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -46,7 +46,7 @@
 		isOnInput = false
 	}
 
-	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
+	const countStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
 <div class="min-w-[80%]">
@@ -72,10 +72,10 @@
 		</form>
 	{:else}
 		<div class="flex-center">
-			{#if isCountEditable}
+			{#if isEditable}
 				<button
 					type="button"
-					class={cn('w-full rounded-md bg-primary-20/50 py-1', priceStyle)}
+					class={cn('w-full rounded-md bg-primary-20/50 py-1', countStyle)}
 					title="보유 개수 수정하기"
 					on:click={onClickInputOn}
 				>
@@ -87,7 +87,7 @@
 					{numberFormatter(count)}개
 				</button>
 			{:else}
-				<p class={priceStyle}>
+				<p class={countStyle}>
 					<iconify-icon
 						icon="mdi:treasure-chest-outline"
 						width={15}

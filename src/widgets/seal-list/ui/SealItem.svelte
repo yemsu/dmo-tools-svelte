@@ -7,6 +7,7 @@
 	import SealItemPrice from './SealItemPrice.svelte'
 	export let seal: SealData
 	export let isCountEditable: boolean = true
+	export let isPriceEditable: boolean = true
 </script>
 
 <div class={cn('group relative flex flex-col justify-center text-center')}>
@@ -28,8 +29,8 @@
 		</p>
 	</div>
 	<div class="flex flex-col items-center gap-1 p-1">
-		<SealItemCount sealId={seal.id} {isCountEditable} />
-		<SealItemPrice sealId={seal.id} />
+		<SealItemCount sealId={seal.id} isEditable={isCountEditable} />
+		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} />
 		<slot></slot>
 	</div>
 	<Tooltip size="sm" useAdaptiveX={true}>

@@ -66,6 +66,7 @@
 		return resultValue
 	}
 	const setMyStats = () => {
+		if ($mySeals.length === 0) return
 		const newStats = STATS.reduce((result, { type }) => {
 			result[type] = statCalc(type)
 			return result
