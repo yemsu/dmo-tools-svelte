@@ -40,8 +40,10 @@
 	}
 
 	const onBlurInput = () => {
-		inputValue = null
-		isOnInput = false
+		setTimeout(() => {
+			inputValue = null
+			isOnInput = false
+		}, 100)
 	}
 
 	const removeSavedPrice = () => {

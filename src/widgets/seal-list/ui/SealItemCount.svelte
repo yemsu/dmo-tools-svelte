@@ -42,8 +42,10 @@
 	}
 
 	const onBlurInput = () => {
-		inputValue = null
-		isOnInput = false
+		setTimeout(() => {
+			inputValue = null
+			isOnInput = false
+		}, 100)
 	}
 
 	const countStyle = 'flex-center min-w-[60%] gap-1 px-1'
