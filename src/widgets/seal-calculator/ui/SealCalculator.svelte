@@ -163,9 +163,9 @@
 	$: $myPrices && onChangedSealPrice()
 </script>
 
-<Section class="flex flex-1 flex-col gap-3 overflow-hidden">
+<Section>
 	<CrrMenuTitle />
-	<div class="flex flex-col items-start gap-2 md:flex-row md:items-center">
+	<div class="flex flex-col gap-2">
 		<div class="flex w-full gap-2">
 			<Tabs class="flex-1">
 				{#each STATS as stat (stat.type)}
@@ -271,23 +271,28 @@
 	{#if effDataListSorted.length > 0}
 		<StatBarWrap>
 			<div>
-				<p class="flex-center gap-2 text-lg leading-none">
+				<p class="flex-center text-md gap-2 leading-none md:text-lg">
 					<span class="flex flex-col">
-						<span class="text-xs text-gray-300">현재 내 능력치</span>
+						<span class="text-[10px] text-gray-300 md:text-xs"
+							>현재 내 능력치</span
+						>
 						<span class="font-bold text-point">
 							{$myStats[statTypeSelected]}{resultUnit}</span
 						>
 					</span>
 					<span>+</span>
 					<span class="flex flex-col gap-1">
-						<span class="text-xs text-gray-300">얻어야하는 능력치</span>
+						<span class="text-[10px] text-gray-300 md:text-xs"
+							>얻어야하는 능력치</span
+						>
 						<span class="font-bold text-point"
 							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
 						>
 					</span>
 					<span>=</span>
 					<span class="flex flex-col gap-1">
-						<span class="text-xs text-gray-300">최종 능력치</span>
+						<span class="text-[10px] text-gray-300 md:text-xs">최종 능력치</span
+						>
 						<span class="font-bold text-point">
 							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
 						</span>

@@ -41,7 +41,7 @@
 	}
 </script>
 
-<Section class="flex w-full overflow-hidden">
+<Section>
 	<CrrMenuTitle />
 	{#if $myStats}
 		<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />

@@ -21,13 +21,13 @@
 	}
 </script>
 
-<span class="flex items-center gap-2 font-bold">
+<span class="flex items-center gap-4 font-bold">
 	{#each CURRENCY_UNITS as currencyUnit}
-		<span class="flex items-center gap-1">
+		<span class="flex items-center gap-1 text-xs md:text-sm">
 			<span>{price[currencyUnit]}</span>
 			<span
 				class={cn(
-					'h-[16px] w-[16px] text-xs leading-none',
+					' h-[12px] w-[12px] text-[10px] leading-none md:h-[16px] md:w-[16px] md:text-xs',
 					styles[currencyUnit]
 				)}>{currencyUnit}</span
 			>

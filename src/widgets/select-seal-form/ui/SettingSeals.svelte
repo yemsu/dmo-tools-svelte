@@ -51,7 +51,7 @@
 	}
 </script>
 
-<Section class="flex flex-1 flex-col gap-3 overflow-hidden md:h-full">
+<Section>
 	<CrrMenuTitle />
 	<div
 		class={cn(
