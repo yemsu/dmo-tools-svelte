@@ -117,7 +117,14 @@
 		// 효율별로 소팅
 		const sortedEfficiencyData = sortByEffDataList(allSealsEffData)
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
-		const needStatCount = goalStat * calcNum - $myStats[statTypeSelected]
+		const needStatCount =
+			goalStat * calcNum - $myStats[statTypeSelected] * calcNum
+		console.log(
+			'needStatCount',
+			goalStat * calcNum,
+			needStatCount,
+			$myStats[statTypeSelected]
+		)
 		const result: SealEfficiency[] = []
 		for (const effData of sortedEfficiencyData) {
 			if (willGetStatTotal >= needStatCount) break
@@ -281,7 +288,7 @@
 						>
 					</span>
 					<span>+</span>
-					<span class="flex flex-col gap-1">
+					<span class="flex flex-col">
 						<span class="text-[10px] text-gray-300 md:text-xs"
 							>얻어야하는 능력치</span
 						>
@@ -290,7 +297,7 @@
 						>
 					</span>
 					<span>=</span>
-					<span class="flex flex-col gap-1">
+					<span class="flex flex-col">
 						<span class="text-[10px] text-gray-300 md:text-xs">최종 능력치</span
 						>
 						<span class="font-bold text-point">
