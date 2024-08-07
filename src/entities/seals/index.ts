@@ -1,10 +1,4 @@
 export { getSeals, getSealPrices, postSealPrice } from './api'
-export {
-	seals,
-	sealPrices,
-	isShowMySealPopup,
-	MENUS,
-	activeMenu
-} from './model'
+export { seals, sealPrices, isShowMySealPopup } from './model'
 export { mySeals, myStats } from './model/my'
-export type { SealData, MySeal, SealPrice, Stats, Menus } from './type'
+export type { SealData, MySeal, SealPrice, Stats } from './type'

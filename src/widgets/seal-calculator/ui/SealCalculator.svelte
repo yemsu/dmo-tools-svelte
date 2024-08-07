@@ -5,7 +5,6 @@
 	import { cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { Title } from '$shared/text'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { STATS, type StatType } from '$widgets/select-seal-form'
 	import {
@@ -138,136 +137,133 @@
 	$: $mySeals && mySealsChanged()
 </script>
 
-<Section>
-	<Title>씰 계산기</Title>
-	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
-		<div class="flex flex-col items-start gap-2 md:flex-row md:items-center">
-			<Tabs>
-				{#each STATS as stat (stat.type)}
-					<Tab
-						class={statColorStyles[stat.type]}
-						isActive={statTypeSelected === stat.type}
-						on:click={() => onClickStatType(stat.type)}
-						title={stat.name}
+<Section class="flex flex-1 flex-col gap-3 overflow-hidden">
+	<div class="flex flex-col items-start gap-2 md:flex-row md:items-center">
+		<Tabs>
+			{#each STATS as stat (stat.type)}
+				<Tab
+					class={statColorStyles[stat.type]}
+					isActive={statTypeSelected === stat.type}
+					on:click={() => onClickStatType(stat.type)}
+					title={stat.name}
+				>
+					{stat.type}
+				</Tab>
+			{/each}
+		</Tabs>
+		<form
+			on:submit|preventDefault={onSubmit}
+			class="flex w-full flex-1 items-center gap-2 md:w-auto"
+		>
+			<input
+				bind:this={goalStatInput}
+				type="number"
+				class="flex-1"
+				placeholder="목표 수치 입력"
+				bind:value={goalStat}
+			/>
+			<Button rounded="md" size="lg" class="point-neon font-bold"
+				>결과보기</Button
+			>
+		</form>
+	</div>
+	<div class="relative flex flex-1 flex-col overflow-hidden">
+		<SealList
+			seals={effDataListSorted}
+			let:seal={effData}
+			noDataText="목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!"
+		>
+			{@const seal = $seals.find(({ id }) => id === effData.id)}
+			{#if seal}
+				<SealItem {seal} isCountEditable={false}>
+					<dl
+						class="flex flex-col gap-1 whitespace-nowrap rounded-sm bg-white/10 p-1 leading-none"
 					>
-						{stat.type}
-					</Tab>
-				{/each}
-			</Tabs>
-			<form
-				on:submit|preventDefault={onSubmit}
-				class="flex w-full flex-1 items-center gap-2 md:w-auto"
-			>
-				<input
-					bind:this={goalStatInput}
-					type="number"
-					class="flex-1"
-					placeholder="목표 수치 입력"
-					bind:value={goalStat}
-				/>
-				<Button rounded="md" size="lg" class="point-neon font-bold"
-					>결과보기</Button
-				>
-			</form>
-		</div>
-		<div class="relative flex flex-1 flex-col overflow-hidden">
-			<SealList
-				seals={effDataListSorted}
-				let:seal={effData}
-				noDataText="목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!"
-			>
-				{@const seal = $seals.find(({ id }) => id === effData.id)}
-				{#if seal}
-					<SealItem {seal} isCountEditable={false}>
-						<dl
-							class="flex flex-col gap-1 whitespace-nowrap rounded-sm bg-white/10 p-1 leading-none"
-						>
-							<div class="flex items-center gap-1">
-								<dt class="text-[11px] text-gray-200">필요개수</dt>
-								<dd class="text-point">{numberFormatter(effData.needCount)}</dd>
-							</div>
-							<div class="flex items-center gap-1">
-								<dt class="text-[11px] text-gray-200">필요금액</dt>
-								<dd class="text-point">
-									{numberFormatter(effData.needPrice)}
-								</dd>
-							</div>
-							<div class="flex items-center gap-1">
-								<dt class="text-[11px] text-gray-200">획득능력치</dt>
-								<dd class="text-point">
-									{numberFormatter(effData.willGetStat)}
-								</dd>
-							</div>
-							<div class="flex items-center gap-1">
-								<dt
-									class="text-[11px] text-gray-200"
-									title="1M당 얻게되는 능력치"
-								>
-									효율
-								</dt>
-								<dd class="text-point">
-									{numberFormatter(effData.efficiency, 5)}
-								</dd>
-							</div>
-						</dl>
-						<Button
-							type="button"
-							size="sm"
-							class="bg-primary-30"
-							on:click={() => addToMySeal(effData)}
-						>
-							<iconify-icon icon="mdi:check" width={15} height={15} />
-							씰등록 완료
-						</Button>
-					</SealItem>
-				{/if}
-			</SealList>
-			{#if isMySealsChanged}
-				<div
-					class={cn(
-						'absolute left-0 top-0',
-						'flex-col-center size-full gap-4 bg-primary-5/60 backdrop-blur-sm'
-					)}
-				>
-					<p class="text-center">
-						효율 계산 이후에 보유 씰이 업데이트 되었습니다. <br />
-						아래 버튼을 클릭하여 다시 계산해주세요!
-					</p>
-					<Button rounded="md" size="lg" class="point-neon" on:click={onSubmit}>
-						계산 다시하기
-					</Button>
-				</div>
-			{/if}
-		</div>
-		{#if effDataListSorted.length > 0}
-			<StatBarWrap>
-				<div>
-					<p class="flex-center gap-2 text-lg leading-none">
-						<span class="flex flex-col">
-							<span class="text-xs text-gray-300">현재 내 능력치</span>
-							<span class="font-bold text-point">
-								{$myStats[statTypeSelected]}</span
+						<div class="flex items-center gap-1">
+							<dt class="text-[11px] text-gray-200">필요개수</dt>
+							<dd class="text-point">{numberFormatter(effData.needCount)}</dd>
+						</div>
+						<div class="flex items-center gap-1">
+							<dt class="text-[11px] text-gray-200">필요금액</dt>
+							<dd class="text-point">
+								{numberFormatter(effData.needPrice)}
+							</dd>
+						</div>
+						<div class="flex items-center gap-1">
+							<dt class="text-[11px] text-gray-200">획득능력치</dt>
+							<dd class="text-point">
+								{numberFormatter(effData.willGetStat)}
+							</dd>
+						</div>
+						<div class="flex items-center gap-1">
+							<dt
+								class="text-[11px] text-gray-200"
+								title="1M당 얻게되는 능력치"
 							>
-						</span>
-						<span>+</span>
-						<span class="flex flex-col gap-1">
-							<span class="text-xs text-gray-300">얻어야하는 능력치</span>
-							<span class="font-bold text-point">{willGetStatTotal}</span>
-						</span>
-						<span>=</span>
-						<span class="flex flex-col gap-1">
-							<span class="text-xs text-gray-300">최종 능력치</span>
-							<span class="font-bold text-point">
-								{$myStats[statTypeSelected] + willGetStatTotal}
-							</span>
-						</span>
-					</p>
-				</div>
-				<StatBarSeparator />
-				<p class="flex-center">
-					<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
+								효율
+							</dt>
+							<dd class="text-point">
+								{numberFormatter(effData.efficiency, 5)}
+							</dd>
+						</div>
+					</dl>
+					<Button
+						type="button"
+						size="sm"
+						class="bg-primary-30"
+						on:click={() => addToMySeal(effData)}
+					>
+						<iconify-icon icon="mdi:check" width={15} height={15} />
+						씰등록 완료
+					</Button>
+				</SealItem>
+			{/if}
+		</SealList>
+		{#if isMySealsChanged}
+			<div
+				class={cn(
+					'absolute left-0 top-0',
+					'flex-col-center size-full gap-4 bg-primary-5/60 backdrop-blur-sm'
+				)}
+			>
+				<p class="text-center">
+					효율 계산 이후에 보유 씰이 업데이트 되었습니다. <br />
+					아래 버튼을 클릭하여 다시 계산해주세요!
 				</p>
-			</StatBarWrap>
+				<Button rounded="md" size="lg" class="point-neon" on:click={onSubmit}>
+					계산 다시하기
+				</Button>
+			</div>
 		{/if}
 	</div>
+	{#if effDataListSorted.length > 0}
+		<StatBarWrap>
+			<div>
+				<p class="flex-center gap-2 text-lg leading-none">
+					<span class="flex flex-col">
+						<span class="text-xs text-gray-300">현재 내 능력치</span>
+						<span class="font-bold text-point">
+							{$myStats[statTypeSelected]}</span
+						>
+					</span>
+					<span>+</span>
+					<span class="flex flex-col gap-1">
+						<span class="text-xs text-gray-300">얻어야하는 능력치</span>
+						<span class="font-bold text-point">{willGetStatTotal}</span>
+					</span>
+					<span>=</span>
+					<span class="flex flex-col gap-1">
+						<span class="text-xs text-gray-300">최종 능력치</span>
+						<span class="font-bold text-point">
+							{$myStats[statTypeSelected] + willGetStatTotal}
+						</span>
+					</span>
+				</p>
+			</div>
+			<StatBarSeparator />
+			<p class="flex-center">
+				<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
+			</p>
+		</StatBarWrap>
+	{/if}
 </Section>

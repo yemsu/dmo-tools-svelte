@@ -4,25 +4,30 @@
 </script>
 
 <header>
-	<Inner size="full" class="flex h-header-h items-center justify-between">
-		<h1
-			class={cn(
-				'relative font-tiny text-2xl font-bold tracking-[0.05em] md:text-3xl'
-			)}
-		>
+	<Inner
+		size="full"
+		class="relative flex h-header-h items-center justify-between"
+	>
+		<h1 class="font-tiny text-xl font-bold leading-none md:text-3xl">
 			<span class="text-logo">DMO tools</span>
 		</h1>
 		<div class="flex-center gap-4">
 			<div class="relative">
 				<button
-					class="peer pb-2 text-[11px] text-point underline underline-offset-4 md:text-xs"
+					class={cn(
+						'peer text-right text-[10px] text-point/90',
+						'md:pb-2 md:text-left md:text-[11px] md:text-xs md:text-point md:underline md:underline-offset-4'
+					)}
 				>
-					가격은 어떻게 설정되나요?
+					가격은 어떻게 <br class="md:hidden" /> 설정되나요?
 				</button>
 				<div
 					class={cn(
-						'absolute -bottom-2 right-0 w-[calc(100vw-30px)] translate-y-full break-keep rounded-md bg-black/80 p-4 text-xs backdrop-blur-sm md:left-1/2 md:w-[330px] md:-translate-x-1/2',
-						'hidden peer-hover:block'
+						'hidden peer-hover:block',
+						'absolute -bottom-2 right-0',
+						'w-[calc(100vw-30px)] translate-y-full break-keep rounded-md p-4 text-xs ',
+						'md:left-1/2 md:w-[330px] md:-translate-x-1/2',
+						'bg-black/80 backdrop-blur-sm'
 					)}
 				>
 					<p>

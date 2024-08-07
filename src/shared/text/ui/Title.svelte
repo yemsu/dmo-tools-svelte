@@ -1,18 +1,20 @@
 <script lang="ts">
+	import { cn } from '$shared/lib'
+
 	export let tag: string = 'h2'
 	export let size: 'sm' | 'md' | 'lg' = 'md'
 
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
-		sm: 'text-sm md:text-md',
-		md: 'text-md md:text-lg',
+		sm: 'text-[15px] font-semibold',
+		md: 'text-md md:text-lg font-bold',
 		lg: ''
 	}
 </script>
 
 <svelte:element
 	this={tag}
-	class="font-bold {sizeStyles[size]} {className}"
+	class={cn(sizeStyles[size], className)}
 	{...restProps}
 >
 	<slot></slot>

@@ -1,16 +1,22 @@
 <script lang="ts">
-	import { activeMenu, mySeals, type Menus } from '$entities/seals'
+	import {
+		activeMenuType,
+		getActiveMenuName,
+		MENUS,
+		type Menus
+	} from '$entities/menus'
+	import { mySeals } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
 
-	const menuDataList: {
-		type: Menus
-		name: string
+	type MenuData = {
+		type: Menus['type']
 		icon: { name: string; width: number; height: number; class?: string }
-	}[] = [
+	}
+
+	const menuDataList: MenuData[] = [
 		{
 			type: 'EVERY',
-			name: '모든 씰',
 			icon: {
 				name: 'streamline:cards',
 				width: 18,
@@ -20,7 +26,6 @@
 		},
 		{
 			type: 'CALC',
-			name: '씰 계산기',
 			icon: {
 				name: 'circum:calculator-2',
 				width: 24,
@@ -30,7 +35,6 @@
 		},
 		{
 			type: 'MY',
-			name: '보유 씰',
 			icon: {
 				name: 'ph:treasure-chest-light',
 				width: 21,
@@ -45,7 +49,7 @@
 		<h2 class="ir">글로벌 네비게이션</h2>
 		<ul
 			class={cn(
-				'flex-center h-mobile-nav-h w-full gap-[10%] whitespace-nowrap pt-1 md:pt-0',
+				'flex-center h-mobile-nav-h w-full gap-[8%] whitespace-nowrap py-2',
 				'text-center text-[9px] md:text-sm'
 			)}
 		>
@@ -53,12 +57,12 @@
 				<li>
 					<button
 						class={cn(
-							'flex-col-center gap-[2px] px-[2vw] transition-opacity md:flex-row md:gap-2',
-							$activeMenu === menuData.type
-								? 'font-bold opacity-100'
-								: 'opacity-50 hover:opacity-100'
+							'flex-col-center transition-opacity md:flex-row md:gap-2',
+							$activeMenuType === menuData.type
+								? 'h-full flex-row gap-2 rounded-full bg-primary-20 px-4 py-2 text-sm font-bold opacity-100 md:px-6'
+								: 'gap-[2px] px-2 opacity-50 hover:opacity-100'
 						)}
-						on:click={() => activeMenu.set(menuData.type)}
+						on:click={() => activeMenuType.set(menuData.type)}
 					>
 						<iconify-icon
 							icon={menuData.icon.name}
@@ -67,7 +71,7 @@
 							class={cn(menuData.icon.class)}
 						/>
 						<span>
-							{menuData.name}
+							{getActiveMenuName(menuData.type)}
 							{#if menuData.type === 'MY'}
 								<span>({$mySeals.length})</span>
 							{/if}

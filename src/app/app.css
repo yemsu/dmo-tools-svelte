@@ -101,6 +101,9 @@ button:focus:not(:focus-visible) {
 	.flex-col-center {
 		@apply flex flex-col items-center justify-center;
 	}
+	.position-center {
+		@apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+	}
 	.scroll-box {
 		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
 	}

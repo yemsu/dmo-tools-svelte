@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { activeMenuType } from '$entities/menus'
 	import {
-		activeMenu,
 		getSealPrices,
 		getSeals,
 		mySeals,
@@ -81,9 +81,9 @@
 </svelte:head>
 
 <Inner class="grid h-content-fill-h gap-2 overflow-hidden pb-4">
-	{#if $activeMenu === 'EVERY'}
+	{#if $activeMenuType === 'EVERY'}
 		<SettingSeals />
-	{:else if $activeMenu === 'MY'}
+	{:else if $activeMenuType === 'MY'}
 		<MySeals />
 	{:else}
 		<SealCalculator />

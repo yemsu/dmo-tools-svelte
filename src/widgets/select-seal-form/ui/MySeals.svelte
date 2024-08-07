@@ -28,9 +28,6 @@
 </script>
 
 <Section class="flex w-full overflow-hidden">
-	<div class={cn('flex items-center justify-center')}>
-		<Title size="sm" id="popupTitle">보유 씰 ({$mySeals.length})</Title>
-	</div>
 	<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
 	<SealList
 		seals={$mySeals}

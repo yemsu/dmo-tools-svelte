@@ -59,52 +59,49 @@
 	}
 </script>
 
-<Section class="md:h-full">
-	<Title>전체 씰</Title>
-	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
-		<div
-			class={cn(
-				'flex w-full flex-col items-start gap-3',
-				'md:flex-row md:items-center md:justify-between'
-			)}
+<Section class="flex flex-1 flex-col gap-3 overflow-hidden md:h-full">
+	<div
+		class={cn(
+			'flex w-full flex-col items-start gap-3',
+			'md:flex-row md:items-center md:justify-between'
+		)}
+	>
+		<Tabs>
+			{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
+				<Tab
+					class={statColorStyles[statTypeOption]}
+					isActive={statTypeSelected === statTypeOption}
+					on:click={() => onClickStatType(statTypeOption)}
+					title={statTypeOption === 'ALL'
+						? '전체'
+						: STATS.find(({ type }) => type === statTypeOption)?.name}
+				>
+					{statTypeOption}
+				</Tab>
+			{/each}
+		</Tabs>
+		<Input
+			id="search"
+			maxlength={30}
+			placeholder="씰이름을 검색하세요"
+			class="w-full flex-1 md:w-auto"
+			bind:value={searchText}
+			on:input={onSearchInput}
+		/>
+	</div>
+	<div class="flex flex-1 flex-col overflow-hidden">
+		<p class="mb-2 text-xs text-primary-50">
+			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
+			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
+			({searchResults.length}개)
+		</p>
+		<SealList
+			seals={searchResults}
+			isLoading={$seals.length === 0}
+			let:seal
+			noDataText="검색 결과가 존재하지 않습니다."
 		>
-			<Tabs>
-				{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
-					<Tab
-						class={statColorStyles[statTypeOption]}
-						isActive={statTypeSelected === statTypeOption}
-						on:click={() => onClickStatType(statTypeOption)}
-						title={statTypeOption === 'ALL'
-							? '전체'
-							: STATS.find(({ type }) => type === statTypeOption)?.name}
-					>
-						{statTypeOption}
-					</Tab>
-				{/each}
-			</Tabs>
-			<Input
-				id="search"
-				maxlength={30}
-				placeholder="씰이름을 검색하세요"
-				class="w-full flex-1 md:w-auto"
-				bind:value={searchText}
-				on:input={onSearchInput}
-			/>
-		</div>
-		<div class="flex flex-1 flex-col overflow-hidden">
-			<p class="mb-2 text-xs text-primary-50">
-				{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
-				{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
-				({searchResults.length}개)
-			</p>
-			<SealList
-				seals={searchResults}
-				isLoading={$seals.length === 0}
-				let:seal
-				noDataText="검색 결과가 존재하지 않습니다."
-			>
-				<SealItem {seal} />
-			</SealList>
-		</div>
+			<SealItem {seal} />
+		</SealList>
 	</div>
 </Section>
