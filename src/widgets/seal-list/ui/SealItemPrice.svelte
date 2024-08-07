@@ -44,6 +44,15 @@
 		inputValue = null
 		isOnInput = false
 	}
+
+	const removeSavedPrice = () => {
+		const isConfirmed = confirm(
+			'설정한 가격을 제거하시겠어요? 제거 후에는 서버에 저장된 가격이 노출됩니다.'
+		)
+		if (!isConfirmed) return
+		myPrices.remove(sealId)
+	}
+
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
@@ -74,7 +83,7 @@
 			{#if myPrice !== undefined}
 				<button
 					class="flex-center bg-warning w-[35%] shrink-0"
-					on:click={() => myPrices.remove(sealId)}
+					on:click={() => removeSavedPrice()}
 				>
 					<iconify-icon
 						icon="clarity:lock-solid"
