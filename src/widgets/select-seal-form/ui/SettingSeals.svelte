@@ -59,7 +59,7 @@
 			'md:flex-row md:items-center md:justify-between'
 		)}
 	>
-		<Tabs>
+		<Tabs class="w-full">
 			{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 				<Tab
 					class={statTypeOptionStyles[statTypeOption]}

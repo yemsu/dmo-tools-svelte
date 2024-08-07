@@ -1,8 +1,21 @@
 <script lang="ts">
+	import { cn } from '$shared/lib'
+
+	export let size: 'sm' | 'md' = 'md'
+	const { class: className, ...restProps } = $$restProps
+	const sizeStyles = {
+		sm: 'px-2 py-1 text-xs',
+		md: 'p-3 text-sm'
+	}
 </script>
 
 <div
-	class="rounded-md border border-primary-50 bg-primary-10 p-3 text-center text-sm"
+	class={cn(
+		'rounded-md border border-primary-50 bg-primary-10 text-center',
+		sizeStyles[size],
+		className
+	)}
+	{...restProps}
 >
 	<slot></slot>
 </div>

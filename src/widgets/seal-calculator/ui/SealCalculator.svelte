@@ -20,6 +20,7 @@
 		type StatType
 	} from '$widgets/select-seal-form'
 	import {
+		MyStatBox,
 		StatBarSeparator,
 		StatBarTotalPrice,
 		StatBarWrap
@@ -159,18 +160,23 @@
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden">
 	<CrrMenuTitle />
 	<div class="flex flex-col items-start gap-2 md:flex-row md:items-center">
-		<Tabs>
-			{#each STATS as stat (stat.type)}
-				<Tab
-					class={statColorStyles[stat.type]}
-					isActive={statTypeSelected === stat.type}
-					on:click={() => onClickStatType(stat.type)}
-					title={stat.name}
-				>
-					{stat.type}
-				</Tab>
-			{/each}
-		</Tabs>
+		<div class="flex w-full gap-2">
+			<Tabs class="flex-1">
+				{#each STATS as stat (stat.type)}
+					<Tab
+						class={statColorStyles[stat.type]}
+						isActive={statTypeSelected === stat.type}
+						on:click={() => onClickStatType(stat.type)}
+						title={stat.name}
+					>
+						{stat.type}
+					</Tab>
+				{/each}
+			</Tabs>
+			<StatBarWrap size="sm" class="flex-center">
+				<MyStatBox stats={$myStats} size="sm" />
+			</StatBarWrap>
+		</div>
 		<form
 			on:submit|preventDefault={onSubmit}
 			class="flex w-full flex-1 items-center gap-2 md:w-auto"
