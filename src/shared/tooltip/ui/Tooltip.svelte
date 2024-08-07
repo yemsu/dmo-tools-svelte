@@ -31,7 +31,7 @@
 		top: 'top-0',
 		bottom: 'bottom-0',
 		left: '-left-1 -translate-x-full',
-		right: '-right-1 translate-x-full'
+		right: 'md:-right-1 translate-x-full right-10'
 	}
 	const sizeStyles = {
 		sm: 'p-2',
