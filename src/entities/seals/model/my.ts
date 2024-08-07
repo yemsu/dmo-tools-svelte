@@ -10,6 +10,7 @@ const sortBy = <ArrItem extends Record<string, number>>(
 }
 
 const MY_SEALS_STORAGE = 'seals'
+
 const createMySeals = () => {
 	const { subscribe, update } = writable<MySeal[]>([])
 
@@ -40,8 +41,8 @@ const createMySeals = () => {
 				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
 			})
 		},
-		remove: (_sealId: number) => {
-			update((prev) => [...prev.filter(({ id }) => id !== _sealId)])
+		remove: (sealId: number) => {
+			update((prev) => [...prev.filter(({ id }) => id !== sealId)])
 			subscribe((value) => {
 				localStorage.setItem(MY_SEALS_STORAGE, JSON.stringify(value))
 			})

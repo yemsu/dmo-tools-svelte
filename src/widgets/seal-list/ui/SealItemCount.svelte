@@ -5,7 +5,7 @@
 	export let sealId: number
 	export let isCountEditable: boolean = true
 	$: count = $mySeals.find((mySeal) => mySeal.id === sealId)?.count ?? 0
-	let inputValue: number | undefined = undefined
+	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
 	let isOnInput = false
 
@@ -26,15 +26,23 @@
 	}
 
 	const onSubmit = () => {
-		if (inputValue === undefined) {
-			inputValue = 0
+		if (inputValue === null) {
+			alert('변경할 개수를 입력해주세요.')
+			setTimeout(() => {
+				onClickInputOn()
+			}, 100)
+		} else {
+			if (inputValue === 0) {
+				mySeals.remove(sealId)
+			} else {
+				mySeals.updateCount(sealId, inputValue)
+			}
+			isOnInput = false
 		}
-		mySeals.updateCount(sealId, inputValue)
-		isOnInput = false
 	}
 
 	const onBlurInput = () => {
-		inputValue = undefined
+		inputValue = null
 		isOnInput = false
 	}
 
