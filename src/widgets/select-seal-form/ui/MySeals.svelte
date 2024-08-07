@@ -31,6 +31,13 @@
 		}
 	}
 
+	const onClickMySealDelete = (sealId: number) => {
+		const isConfirmed = confirm(
+			'해당 씰을 제거하시겠어요? 삭제된 데이터는 복구가 불가능 합니다.'
+		)
+		if (!isConfirmed) return
+		mySeals.remove(sealId)
+	}
 	$: getTotalMySealPrice = () => {
 		let totalPrice = 0
 		for (const { id, count } of $mySeals) {
@@ -82,7 +89,7 @@
 				<MySealGrade {mySeal} />
 				<button
 					class="absolute right-[1px] top-[1px]"
-					on:click={() => mySeals.remove(mySeal.id)}
+					on:click={() => onClickMySealDelete(mySeal.id)}
 					title="삭제"
 				>
 					<iconify-icon icon="mdi:close" width={14} height={14} />
