@@ -83,6 +83,10 @@
 			alert('목표 수치를 입력해주세요.')
 			return
 		}
+		if (goalStat <= $myStats[statTypeSelected]) {
+			alert('현재 스탯과 동일하거나 더 작은 값입니다. 꿈을 크게 가지세요!')
+			return
+		}
 		resetPrevResult()
 		const statSeals = $seals.filter(
 			({ statType }) => statType === statTypeSelected
