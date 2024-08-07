@@ -16,14 +16,18 @@
 			'group relative flex items-center justify-center',
 			'h-[3.2em] w-auto md:h-[3.6em]',
 			'gradient-black-op border-b border-t border-b-white/30 border-t-white/30 px-1',
-			'text-balance break-keep font-bold'
+			'text-balance break-keep'
 		)}
 	>
-		<p class="{statColorStyles[seal.statType]} flex items-start leading-4">
+		<p
+			class="{statColorStyles[
+				seal.statType
+			]} flex items-start font-bold leading-4"
+		>
 			{seal.name}
 		</p>
 		<p
-			class="absolute left-[3px] top-0 text-[9px] text-gray-600 md:text-[10px]"
+			class="absolute left-[3px] top-0 text-[8px] text-gray-600 md:text-[10px]"
 		>
 			#{seal.id}
 		</p>
