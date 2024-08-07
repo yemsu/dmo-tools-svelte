@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { activeMenuType } from '$entities/menus'
 	import type { SealData } from '$entities/seals'
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
@@ -130,8 +129,6 @@
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 	}
-
-	// $: $activeMenuType && mySealsChanged()
 </script>
 
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden">
