@@ -5,7 +5,7 @@
 		mySeals,
 		seals,
 		isShowMySealPopup
-	} from '$entities/seals/model'
+	} from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import Inner from '$shared/section/ui/Inner.svelte'

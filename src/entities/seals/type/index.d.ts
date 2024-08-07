@@ -1,4 +1,4 @@
-import type { MENUS } from '$entities/seals/model'
+import type { MENUS } from '$entities/seals'
 import type { StatType } from '$widgets/select-seal-form/config'
 
 export type SealData = {

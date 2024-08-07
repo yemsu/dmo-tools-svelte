@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SealData } from '$entities/seals'
-	import { mySeals, myStats, sealPrices, seals } from '$entities/seals/model'
+	import { mySeals, myStats, sealPrices, seals } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
