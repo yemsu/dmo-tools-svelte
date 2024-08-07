@@ -12,10 +12,12 @@
 		type StatTypeOption
 	} from '$widgets/select-seal-form'
 	import { getMySealData } from '$widgets/select-seal-form/lib/helper'
+	import MySealGrade from '$widgets/select-seal-form/ui/MySealGrade.svelte'
 	import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
 
 	let statTypeSelected = 'ALL'
 	$: mySealsFiltered = $mySeals
+
 	const onClickStatType = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
 		if (statTypeOption === 'ALL') {
@@ -76,8 +78,9 @@
 			let:seal={mySeal}
 			noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!"
 		>
-			<SealItem seal={getMySealData($seals, mySeal.id)}
-				><button
+			<SealItem seal={getMySealData($seals, mySeal.id)}>
+				<MySealGrade {mySeal} />
+				<button
 					class="absolute right-[1px] top-[1px]"
 					on:click={() => mySeals.remove(mySeal.id)}
 					title="삭제"

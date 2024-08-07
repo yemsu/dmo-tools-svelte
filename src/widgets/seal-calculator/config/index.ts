@@ -4,7 +4,14 @@ export const SEAL_MASTER_COUNT_TYPE = [
 	50, 150, 200, 300, 400, 500, 700, 1000, 3000
 ] as const
 export const SEAL_PERCENT_BY_STEPS = [10, 20, 40, 60, 80, 100] as const
-
+export const SEAL_GRADES = [
+	'노말',
+	'브론즈',
+	'실버',
+	'골드',
+	'플래티넘',
+	'마스터'
+] as const
 export const SEAL_COUNT_STEPS_BY_MASTER: SealStepsByMaster = {
 	3000: [1, 50, 200, 500, 1000, 3000],
 	1000: [1, 50, 200, 500, 700, 1000],
