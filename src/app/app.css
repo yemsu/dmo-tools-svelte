@@ -39,10 +39,7 @@
 
 		/* size */
 		--header-h: 50px;
-		--mobile-nav-h: 0;
-		@media screen and (max-width: 767px) {
-			--mobile-nav-h: 50px;
-		}
+		--mobile-nav-h: 50px;
 	}
 }
 

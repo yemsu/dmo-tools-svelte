@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { mySeals } from '$entities/seals'
-	import { isShowMySealPopup } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
 </script>
 
-<header class="border-t border-t-gray-600">
+<header>
 	<Inner size="full" class="flex h-header-h items-center justify-between">
 		<h1
 			class={cn(
@@ -35,13 +33,6 @@
 					</p>
 				</div>
 			</div>
-			<button
-				class="hidden rounded-md bg-primary-30 px-2 py-1 text-sm font-bold md:block"
-				on:click={() => isShowMySealPopup.set(true)}
-				title="자세히 보기"
-			>
-				보유 씰 ({$mySeals.length})
-			</button>
 		</div>
 	</Inner>
 </header>

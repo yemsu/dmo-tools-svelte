@@ -64,7 +64,10 @@
 	<Title>전체 씰</Title>
 	<div class="flex flex-1 flex-col gap-3 overflow-hidden">
 		<div
-			class="flex w-full flex-col items-start gap-3 md:flex-row md:items-center md:justify-between"
+			class={cn(
+				'flex w-full flex-col items-start gap-3',
+				'md:flex-row md:items-center md:justify-between'
+			)}
 		>
 			<Tabs>
 				{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}

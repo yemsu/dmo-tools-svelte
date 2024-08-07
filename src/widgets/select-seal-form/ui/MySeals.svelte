@@ -27,9 +27,7 @@
 	}
 </script>
 
-<Section
-	class={cn('flex overflow-hidden bg-secondary-10', 'w-full max-w-[650px]')}
->
+<Section class="flex w-full overflow-hidden">
 	<div class={cn('flex items-center justify-center')}>
 		<Title size="sm" id="popupTitle">보유 씰 ({$mySeals.length})</Title>
 	</div>

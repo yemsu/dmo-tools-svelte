@@ -13,17 +13,12 @@
 	export let isCountEditable: boolean = true
 </script>
 
-<div
-	class={cn(
-		'group relative flex flex-col justify-center text-center ',
-		'border-b border-t border-b-white/10 border-t-white/10'
-	)}
->
+<div class={cn('group relative flex flex-col justify-center text-center ')}>
 	<div
 		class={cn(
 			'relative flex items-center justify-center',
 			'h-[4em] w-auto px-0 py-1',
-			'bg-black/40 md:border-b md:border-t md:border-b-white/30 md:border-t-white/30',
+			'border-b border-t border-b-white/30 border-t-white/30 bg-black/40',
 			'text-balance break-keep font-bold'
 		)}
 	>

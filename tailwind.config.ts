@@ -48,14 +48,14 @@ export default {
 			spacing: {
 				'header-h': 'var(--header-h)',
 				'mobile-nav-h': 'var(--mobile-nav-h)',
-				'content-fill-h':
-					'calc(100vh - var(--header-h) - var(--mobile-nav-h) - 15px)'
+				'content-fill-h': 'calc(100vh - var(--header-h) - var(--mobile-nav-h))'
 			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif']
 			},
 			dropShadow: {
-				'primary-90': '0 0 3px hsl(var(--primary-90))'
+				'primary-90': '0 0 3px hsl(var(--primary-90))',
+				'primary-30': '0 0 40px hsl(var(--primary-30)/30%)'
 			}
 		}
 	},
