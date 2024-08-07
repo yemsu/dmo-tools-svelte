@@ -6,7 +6,7 @@
 	export let stats: Stats
 	export let size: 'sm' | 'md' = 'md'
 	const sizeStyles = {
-		sm: 'gap-2',
+		sm: 'gap-2 md:gap-4',
 		md: 'gap-4'
 	}
 </script>
