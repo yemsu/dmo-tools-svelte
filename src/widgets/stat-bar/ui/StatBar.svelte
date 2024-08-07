@@ -20,10 +20,8 @@
 				<div class="md:text-md flex items-center gap-2 rounded-full text-sm">
 					<dt class="text-xs text-gray-200">{stat.type}</dt>
 					<dd class="font-bold text-point">
-						{#if stat.type === 'CT'}
-							{numberFormatter(stats[stat.type] / 100)}%
-						{:else}
-							{numberFormatter(stats[stat.type])}
+						{numberFormatter(stats[stat.type])}{#if stat.type === 'CT'}
+							%
 						{/if}
 					</dd>
 				</div>

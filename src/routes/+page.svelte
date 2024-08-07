@@ -60,16 +60,20 @@
 			const maxIncrease = seal.maxIncrease
 			resultValue += maxIncrease * (sealPercent / 100)
 		})
+		if (statType === 'CT') {
+			resultValue / 1000
+		}
 		return resultValue
 	}
-
-	$: {
+	const setMyStats = () => {
 		const newStats = STATS.reduce((result, { type }) => {
 			result[type] = statCalc(type)
 			return result
 		}, {} as Stats)
 		myStats.set(newStats)
 	}
+
+	$: $mySeals && setMyStats()
 </script>
 
 <svelte:head>

@@ -28,6 +28,7 @@
 	let willNeedMoneyTotal = 0
 	let goalStatInput: HTMLInputElement
 	let isMySealsChanged = false
+	let searchInputPlaceholder = '목표 수치 입력'
 
 	export const statColorStyles: Record<StatType, string> = {
 		AT: 'text-stat-at',
@@ -84,7 +85,7 @@
 			return
 		}
 		if (goalStat <= $myStats[statTypeSelected]) {
-			alert('현재 스탯과 동일하거나 더 작은 값입니다. 꿈을 크게 가지세요!')
+			alert('현재 스탯과 동일하거나 더 작은 값입니다.')
 			return
 		}
 		resetPrevResult()
@@ -118,6 +119,11 @@
 
 	const onClickStatType = (statType: StatType) => {
 		statTypeSelected = statType
+		if (statType === 'CT') {
+			searchInputPlaceholder = '목표 수치 입력 (퍼센트 값)'
+		} else {
+			searchInputPlaceholder = '목표 수치 입력'
+		}
 		setTimeout(() => {
 			goalStat = ''
 			goalStatInput.focus()
@@ -158,7 +164,7 @@
 				bind:this={goalStatInput}
 				type="number"
 				class="flex-1"
-				placeholder="목표 수치 입력"
+				placeholder={searchInputPlaceholder}
 				bind:value={goalStat}
 			/>
 			<Button rounded="md" size="lg" class="point-neon font-bold"
@@ -254,7 +260,10 @@
 					<span class="flex flex-col gap-1">
 						<span class="text-xs text-gray-300">최종 능력치</span>
 						<span class="font-bold text-point">
-							{$myStats[statTypeSelected] + willGetStatTotal}
+							{$myStats[statTypeSelected] +
+								willGetStatTotal}{#if statTypeSelected === 'CT'}
+								%
+							{/if}
 						</span>
 					</span>
 				</p>
