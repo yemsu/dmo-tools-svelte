@@ -50,7 +50,8 @@
 			<div class="flex items-center gap-2">
 				<dt class="text-gray-300">가격 업데이트</dt>
 				<dd class="text-point">
-					{timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
+					{$sealPrices.length > 0 &&
+						timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
 				</dd>
 			</div>
 		</dl>

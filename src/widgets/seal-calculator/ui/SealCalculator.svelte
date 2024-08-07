@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { activeMenuType } from '$entities/menus'
 	import type { SealData } from '$entities/seals'
 	import { mySeals, myStats, sealPrices, seals } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
@@ -130,13 +131,7 @@
 		willNeedMoneyTotal -= effData.needPrice
 	}
 
-	const mySealsChanged = () => {
-		if (effDataListSorted.length > 0) {
-			isMySealsChanged = true
-		}
-	}
-
-	$: $mySeals && mySealsChanged()
+	// $: $activeMenuType && mySealsChanged()
 </script>
 
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden">

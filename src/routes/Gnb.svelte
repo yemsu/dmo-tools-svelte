@@ -16,7 +16,7 @@
 
 	const menuDataList: MenuData[] = [
 		{
-			type: 'EVERY',
+			type: 'SETTING',
 			icon: {
 				name: 'streamline:cards',
 				width: 18,
