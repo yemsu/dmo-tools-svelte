@@ -49,9 +49,9 @@
 	const countStyle = 'flex-center min-w-[60%] gap-1 px-1'
 </script>
 
-<div class="w-full min-w-[80%] min-w-[80%]">
+<div class="w-full min-w-[80%]">
 	{#if isOnInput}
-		<form on:submit|preventDefault={onSubmit} class="flex gap-1">
+		<form on:submit|preventDefault={onSubmit} class="flex h-[24px] gap-1">
 			<input
 				bind:this={inputElement}
 				type="number"
