@@ -127,10 +127,14 @@
 		} else {
 			searchInputPlaceholder = '목표 수치 입력'
 		}
-		setTimeout(() => {
-			goalStat = ''
-			goalStatInput.focus()
-		}, 60)
+		if (goalStat) {
+			onSubmit()
+		} else {
+			setTimeout(() => {
+				goalStat = ''
+				goalStatInput.focus()
+			}, 60)
+		}
 	}
 
 	const addToMySeal = (effData: SealEfficiency) => {
