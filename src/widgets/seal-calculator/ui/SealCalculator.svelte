@@ -1,6 +1,12 @@
 <script lang="ts">
 	import type { SealData } from '$entities/seals'
-	import { mySeals, myStats, sealPrices, seals } from '$entities/seals'
+	import {
+		myPrices,
+		mySeals,
+		myStats,
+		sealPrices,
+		seals
+	} from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
@@ -150,7 +156,7 @@
 		}
 	}
 
-	$: $sealPrices && onChangedSealPrice()
+	$: $myPrices && onChangedSealPrice()
 </script>
 
 <Section class="flex flex-1 flex-col gap-3 overflow-hidden">
