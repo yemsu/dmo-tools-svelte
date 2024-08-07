@@ -48,7 +48,7 @@ export default {
 			spacing: {
 				'header-h': 'var(--header-h)',
 				'mobile-nav-h': 'var(--mobile-nav-h)',
-				'content-fill-h': 'calc(100vh - var(--header-h) - var(--mobile-nav-h))'
+				'content-fill-h': 'calc(100svh - var(--header-h) - var(--mobile-nav-h))'
 			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif']
