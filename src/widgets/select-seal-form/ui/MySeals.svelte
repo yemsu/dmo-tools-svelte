@@ -64,7 +64,7 @@
 	<SealList
 		seals={mySealsFiltered}
 		let:seal={mySeal}
-		noDataText="보유 씰이 없습니다."
+		noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴로 가서 씰을 설정해 보세요!"
 	>
 		<SealItem seal={getMySealData($seals, mySeal.id)}
 			><button
