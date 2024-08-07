@@ -47,6 +47,7 @@
 		const mySealCount = $mySeals.find(({ id }) => id === seal.id)?.count || 0
 
 		const nextSteps = getNextSteps(seal, mySealCount)
+
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
 			if (nextStep.sealCount === null) continue
@@ -54,9 +55,11 @@
 			const prevStepPercent = prevStep?.percent || 0
 			const willGetStat =
 				seal.maxIncrease * ((nextStep.percent - prevStepPercent) / 100)
-			const sealCount = nextStep.sealCount - (prevStep?.sealCount || 0)
-			const needCount = sealCount - mySealCount
+			const prevCount = prevStep?.sealCount || 0
+			const removeCount = Math.max(prevCount, mySealCount)
+			const needCount = nextStep.sealCount - removeCount // prev step count, my count중 더 큰거 빼
 			const needPrice = price ? needCount * price : 0
+			const efficiency = +(willGetStat / needPrice).toFixed(5) || 0
 
 			result.push({
 				id: seal.id,
@@ -65,7 +68,7 @@
 				willGetStat,
 				needCount,
 				needPrice,
-				efficiency: +(willGetStat / needPrice).toFixed(5) || 0,
+				efficiency,
 				step: nextStep
 			})
 		}
