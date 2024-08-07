@@ -41,6 +41,19 @@ export type Seal = {
 	maxValue: number
 }
 
+export const statColorStyles: Record<StatType, string> = {
+	AT: 'text-stat-at',
+	HT: 'text-stat-ht',
+	CT: 'text-stat-ct'
+}
+
+export const STAT_TYPE_OPTIONS: StatTypeOption[] = ['ALL', ...STAT_TYPES]
+export type StatTypeOption = StatType | 'ALL'
+export const statTypeOptionStyles: Record<StatTypeOption, string> = {
+	ALL: 'text-white',
+	...statColorStyles
+}
+
 export const seals: Seal[] = [
 	{
 		name: '아구몬',

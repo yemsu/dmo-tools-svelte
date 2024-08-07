@@ -4,27 +4,19 @@
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { CrrMenuTitle, Title } from '$shared/text'
+	import { CrrMenuTitle } from '$shared/text'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
-		STAT_TYPES,
+		STAT_TYPE_OPTIONS,
 		STATS,
-		type StatType
-	} from '$widgets/select-seal-form/config'
+		statTypeOptionStyles,
+		type StatTypeOption
+	} from '$widgets/select-seal-form'
 	import { choseongIncludes } from 'es-hangul'
 
-	type StatTypeOptions = StatType | 'ALL'
-	const STAT_TYPE_OPTIONS: StatTypeOptions[] = ['ALL', ...STAT_TYPES]
-	let statTypeSelected: StatTypeOptions = STAT_TYPE_OPTIONS[0]
+	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
 	$: searchResults = $seals
-
-	export const statColorStyles: Record<StatTypeOptions, string> = {
-		ALL: 'text-white',
-		AT: 'text-stat-at',
-		HT: 'text-stat-ht',
-		CT: 'text-stat-ct'
-	}
 
 	const updateSearchResult = (_searchText: string) => {
 		const filterStatTypeSelected =
@@ -53,7 +45,7 @@
 		updateSearchResult(_searchText)
 	}
 
-	$: onClickStatType = (statTypeOption: StatTypeOptions) => {
+	$: onClickStatType = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
 		updateSearchResult(searchText)
 	}
@@ -70,7 +62,7 @@
 		<Tabs>
 			{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 				<Tab
-					class={statColorStyles[statTypeOption]}
+					class={statTypeOptionStyles[statTypeOption]}
 					isActive={statTypeSelected === statTypeOption}
 					on:click={() => onClickStatType(statTypeOption)}
 					title={statTypeOption === 'ALL'

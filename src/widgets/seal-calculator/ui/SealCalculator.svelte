@@ -7,7 +7,11 @@
 	import { Tab, Tabs } from '$shared/tabs'
 	import CrrMenuTitle from '$shared/text/ui/CrrMenuTitle.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
-	import { STATS, type StatType } from '$widgets/select-seal-form'
+	import {
+		statColorStyles,
+		STATS,
+		type StatType
+	} from '$widgets/select-seal-form'
 	import {
 		StatBarSeparator,
 		StatBarTotalPrice,
@@ -29,12 +33,6 @@
 	let goalStatInput: HTMLInputElement
 	let isMySealsChanged = false
 	let searchInputPlaceholder = '목표 수치 입력'
-
-	export const statColorStyles: Record<StatType, string> = {
-		AT: 'text-stat-at',
-		HT: 'text-stat-ht',
-		CT: 'text-stat-ct'
-	}
 
 	$: getSealPrice = (_sealId: number) => {
 		return $sealPrices.find(({ sealId }) => sealId === _sealId)?.price

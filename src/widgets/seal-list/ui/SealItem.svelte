@@ -1,15 +1,10 @@
 <script lang="ts">
-	import SealItemPrice from './SealItemPrice.svelte'
-	import SealItemCount from './SealItemCount.svelte'
-	import { type SealData, sealPrices, getSealPrice } from '$entities/seals'
-	import { type StatType } from '$widgets/select-seal-form/config'
+	import { getSealPrice, type SealData, sealPrices } from '$entities/seals'
 	import { cn, timeElapsedString } from '$shared/lib'
 	import { Tooltip } from '$shared/tooltip'
-	const statColorStyles: Record<StatType, string> = {
-		AT: 'text-stat-at',
-		HT: 'text-stat-ht',
-		CT: 'text-stat-ct'
-	}
+	import { statColorStyles } from '$widgets/select-seal-form'
+	import SealItemCount from './SealItemCount.svelte'
+	import SealItemPrice from './SealItemPrice.svelte'
 	export let seal: SealData
 	export let isCountEditable: boolean = true
 </script>
