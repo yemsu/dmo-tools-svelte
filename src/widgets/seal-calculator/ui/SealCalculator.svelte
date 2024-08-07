@@ -33,6 +33,8 @@
 	let goalStatInput: HTMLInputElement
 	let isSealPriceChanged = false
 	let searchInputPlaceholder = '목표 수치 입력'
+	$: calcNum = statTypeSelected === 'CT' ? 100 : 1
+	$: resultUnit = statTypeSelected === 'CT' ? '%' : ''
 
 	$: getSealPrice = (_sealId: number) => {
 		return $sealPrices.find(({ sealId }) => sealId === _sealId)?.price
@@ -106,7 +108,7 @@
 		// 효율별로 소팅
 		const sortedEfficiencyData = sortByEffDataList(allSealsEffData)
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
-		const needStatCount = goalStat - $myStats[statTypeSelected]
+		const needStatCount = goalStat * calcNum - $myStats[statTypeSelected]
 		const result: SealEfficiency[] = []
 		for (const effData of sortedEfficiencyData) {
 			if (willGetStatTotal >= needStatCount) break
@@ -125,14 +127,11 @@
 		} else {
 			searchInputPlaceholder = '목표 수치 입력'
 		}
-		if (goalStat) {
-			onSubmit()
-		} else {
-			setTimeout(() => {
-				goalStat = ''
-				goalStatInput.focus()
-			}, 60)
-		}
+		resetPrevResult()
+		setTimeout(() => {
+			goalStat = ''
+			goalStatInput.focus()
+		}, 60)
 	}
 
 	const addToMySeal = (effData: SealEfficiency) => {
@@ -261,22 +260,24 @@
 					<span class="flex flex-col">
 						<span class="text-xs text-gray-300">현재 내 능력치</span>
 						<span class="font-bold text-point">
-							{$myStats[statTypeSelected]}</span
+							{$myStats[statTypeSelected]}{resultUnit}</span
 						>
 					</span>
 					<span>+</span>
 					<span class="flex flex-col gap-1">
 						<span class="text-xs text-gray-300">얻어야하는 능력치</span>
-						<span class="font-bold text-point">{willGetStatTotal}</span>
+						<span class="font-bold text-point"
+							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
+						>
 					</span>
 					<span>=</span>
 					<span class="flex flex-col gap-1">
 						<span class="text-xs text-gray-300">최종 능력치</span>
 						<span class="font-bold text-point">
-							{$myStats[statTypeSelected] +
-								willGetStatTotal}{#if statTypeSelected === 'CT'}
-								%
-							{/if}
+							{numberFormatter(
+								($myStats[statTypeSelected] * 100 + willGetStatTotal) / calcNum,
+								5
+							)}{resultUnit}
 						</span>
 					</span>
 				</p>

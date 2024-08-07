@@ -66,7 +66,7 @@
 			resultValue += maxIncrease * (sealPercent / 100)
 		})
 		if (statType === 'CT') {
-			resultValue / 1000
+			resultValue = resultValue / 100
 		}
 		return resultValue
 	}
