@@ -61,19 +61,30 @@
 			</Tab>
 		{/each}
 	</Tabs>
-	<SealList
-		seals={mySealsFiltered}
-		let:seal={mySeal}
-		noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴로 가서 씰을 설정해 보세요!"
-	>
-		<SealItem seal={getMySealData($seals, mySeal.id)}
-			><button
-				class="absolute right-[1px] top-[1px]"
-				on:click={() => mySeals.remove(mySeal.id)}
-				title="삭제"
-			>
-				<iconify-icon icon="mdi:close" width={14} height={14} />
-			</button>
-		</SealItem>
-	</SealList>
+	<div class="flex flex-1 flex-col overflow-hidden">
+		<p class="mb-2 text-xs font-bold text-point">
+			<iconify-icon
+				icon="ep:warn-triangle-filled"
+				width={15}
+				height={15}
+				class="-mb-[0.3em]"
+			/>
+			설정한 씰과 가격 데이터는 모두 url에 저장됩니다. url을 잘 보관해 주세요!
+		</p>
+		<SealList
+			seals={mySealsFiltered}
+			let:seal={mySeal}
+			noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴로 가서 씰을 설정해 보세요!"
+		>
+			<SealItem seal={getMySealData($seals, mySeal.id)}
+				><button
+					class="absolute right-[1px] top-[1px]"
+					on:click={() => mySeals.remove(mySeal.id)}
+					title="삭제"
+				>
+					<iconify-icon icon="mdi:close" width={14} height={14} />
+				</button>
+			</SealItem>
+		</SealList>
+	</div>
 </Section>
