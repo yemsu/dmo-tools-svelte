@@ -1,26 +1,24 @@
 <script lang="ts">
-	import { getSealPrices, getSeals } from '$entities/seals'
 	import {
-		mySealPrices,
+		activeMenu,
+		getSealPrices,
+		getSeals,
 		mySeals,
 		myStats,
 		sealPrices,
-		seals,
-		activeMenu
+		seals
 	} from '$entities/seals'
-	import type { Menus } from '$entities/seals'
 	import type { Stats } from '$entities/seals/type'
-	import { cn, objectBy } from '$shared/lib'
+	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
-	import { MySeals, TotalSeals, getMySealData } from '$widgets/select-seal-form'
 	import { SealCalculator } from '$widgets/seal-calculator'
+	import { MySeals, TotalSeals, getMySealData } from '$widgets/select-seal-form'
 	import {
 		SEAL_STAT_TABLE,
 		STATS,
 		type StatType
 	} from '$widgets/select-seal-form/config'
 	import { onMount } from 'svelte'
-	import Gnb from './Gnb.svelte'
 
 	onMount(async () => {
 		// seals
@@ -28,13 +26,7 @@
 		seals.set(sealsFetched)
 		// sealPrices
 		const sealPricesFetched = await getSealPrices('modifiedAt')
-		const newSealPrices = sealPricesFetched.map((sealPrice) => {
-			const mySealPrice = $mySealPrices.find(
-				({ sealId }) => sealId === sealPrice.sealId
-			)
-			return mySealPrice || sealPrice
-		})
-		sealPrices.set(newSealPrices)
+		sealPrices.set(sealPricesFetched)
 		// my seals
 		if ($mySeals.length === 0) {
 			mySeals.loadSavedData()

@@ -2,7 +2,6 @@ export { getSeals, getSealPrices, postSealPrice } from './api'
 export {
 	seals,
 	sealPrices,
-	mySealPrices,
 	isShowMySealPopup,
 	MENUS,
 	activeMenu

@@ -4,7 +4,6 @@ import { writable } from 'svelte/store'
 export const seals = writable<SealData[]>([])
 
 export const sealPrices = writable<SealPrice[]>([])
-export const mySealPrices = writable<SealPrice[]>([])
 
 export const isShowMySealPopup = writable<boolean>(false)
 
