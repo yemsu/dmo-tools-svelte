@@ -46,7 +46,7 @@
 		'hidden group-hover:block peer-hover:block',
 		'absolute z-[99]',
 		'break-keep rounded-md text-xs ',
-		'border border-primary-30 bg-primary-5/50 backdrop-blur-sm',
+		'border border-primary-30 bg-primary-5/80',
 		'drop-shadow-lg',
 		sizeStyles[size],
 		useAdaptiveX && positionStyles[tooltipPosition],
