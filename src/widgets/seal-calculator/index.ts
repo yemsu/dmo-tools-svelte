@@ -12,3 +12,4 @@ export type {
 	SealMaterCount,
 	SealStep
 } from './types'
+export { getCurrentStep } from './lib/calculate'

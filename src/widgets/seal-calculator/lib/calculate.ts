@@ -2,9 +2,9 @@ import type { SealData } from '$entities/seals'
 import { objectBy } from '$shared/lib'
 import {
 	SEAL_COUNT_STEPS_BY_MASTER,
+	SEAL_GRADES,
 	SEAL_PERCENT_BY_STEPS
 } from '$widgets/seal-calculator/config'
-import { SEAL_STAT_TABLE } from '$widgets/select-seal-form'
 import type { SealEfficiency, SealStep } from '../types'
 
 export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
@@ -14,10 +14,7 @@ export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
 		console.error(
 			`${seal.name}: "${masterCount}": 잘못된 masterCount를 가지고 있는 씰이 존재합니다. 확인해주세요.`
 		)
-		return [{ percent: 10, sealCount: null }]
-		throw Error(
-			`${seal.name}: "${masterCount}": 잘못된 masterCount를 가지고 있는 씰이 존재합니다. 확인해주세요.`
-		)
+		return [{ percent: 10, sealCount: 0 }]
 	}
 	const nextSteps: SealStep[] = []
 	sealCountSteps.forEach((sealCountStep, i) => {
@@ -30,15 +27,37 @@ export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
 	return nextSteps
 }
 
-export const getPrevStep = (crrStepSealCount: number) => {
-	let step: (typeof SEAL_STAT_TABLE)[number] | undefined
-	for (const statTable of SEAL_STAT_TABLE) {
-		if (crrStepSealCount > statTable.sealCount) {
-			step = statTable
-		} else {
-			break
+export const getCurrentStep = (seal: SealData, crrStepSealCount: number) => {
+	const { masterCount } = seal
+	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[masterCount]
+	let step: SealStep | undefined
+	sealCountSteps.forEach((sealCountStep, i) => {
+		if (crrStepSealCount < sealCountStep) return
+		step = {
+			percent: SEAL_PERCENT_BY_STEPS[i],
+			sealCount: sealCountStep,
+			grade: SEAL_GRADES[i]
 		}
+	})
+	if (!step) {
+		throw Error(
+			`ERROR getCurrentStep : ${seal.id}-${seal.name}-${seal.maxIncrease}에 해당하는 step을 찾을 수 없습니다.`
+		)
 	}
+	return step
+}
+
+export const getPrevStep = (seal: SealData, crrStepSealCount: number) => {
+	const { masterCount } = seal
+	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[masterCount]
+	let step: SealStep | undefined
+	sealCountSteps.forEach((sealCountStep, i) => {
+		if (crrStepSealCount <= sealCountStep) return
+		step = {
+			percent: SEAL_PERCENT_BY_STEPS[i],
+			sealCount: sealCountStep
+		}
+	})
 	return step
 }
 

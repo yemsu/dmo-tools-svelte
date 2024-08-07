@@ -1,30 +1,3 @@
-export const SEAL_STAT_TABLE = [
-	{
-		sealCount: 1,
-		percent: 10
-	},
-	{
-		sealCount: 50,
-		percent: 20
-	},
-	{
-		sealCount: 200,
-		percent: 40
-	},
-	{
-		sealCount: 500,
-		percent: 60
-	},
-	{
-		sealCount: 1000,
-		percent: 80
-	},
-	{
-		sealCount: 3000,
-		percent: 100
-	}
-] as const
-
 export const STATS = [
 	{ type: 'AT', name: '공격력' },
 	{ type: 'CT', name: '치명타' },

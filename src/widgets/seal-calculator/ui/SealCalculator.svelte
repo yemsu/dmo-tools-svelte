@@ -19,7 +19,6 @@
 		STATS,
 		type StatType
 	} from '$widgets/select-seal-form'
-	import MySeals from '$widgets/select-seal-form/ui/MySeals.svelte'
 	import {
 		MyStatBox,
 		StatBarSeparator,
@@ -60,7 +59,7 @@
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
 			if (nextStep.sealCount === null) continue
-			const prevStep = getPrevStep(nextStep.sealCount)
+			const prevStep = getPrevStep(seal, nextStep.sealCount)
 			const prevStepPercent = prevStep?.percent || 0
 			const willGetStat =
 				seal.maxIncrease * ((nextStep.percent - prevStepPercent) / 100)

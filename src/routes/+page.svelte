@@ -3,6 +3,7 @@
 	import {
 		getSealPrices,
 		getSeals,
+		myPrices,
 		mySeals,
 		myStats,
 		sealPrices,
@@ -11,18 +12,13 @@
 	import type { Stats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
-	import { SealCalculator } from '$widgets/seal-calculator'
+	import { getCurrentStep, SealCalculator } from '$widgets/seal-calculator'
 	import {
+		getMySealData,
 		MySeals,
-		SettingSeals,
-		getMySealData
+		SettingSeals
 	} from '$widgets/select-seal-form'
-	import { myPrices } from '$entities/seals'
-	import {
-		SEAL_STAT_TABLE,
-		STATS,
-		type StatType
-	} from '$widgets/select-seal-form/config'
+	import { STATS, type StatType } from '$widgets/select-seal-form/config'
 	import { onMount } from 'svelte'
 
 	onMount(async () => {
@@ -54,14 +50,9 @@
 		let resultValue = 0
 		sealsByStatType.forEach(({ id, count }) => {
 			let sealPercent = 0
-			for (const statTable of SEAL_STAT_TABLE) {
-				if (count >= statTable.sealCount) {
-					sealPercent = statTable.percent
-				} else {
-					break
-				}
-			}
 			const seal = getMySealData($seals, id)
+			const crrStat = getCurrentStep(seal, count)
+			sealPercent = crrStat.percent
 			const maxIncrease = seal.maxIncrease
 			resultValue += maxIncrease * (sealPercent / 100)
 		})
