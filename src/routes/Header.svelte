@@ -24,10 +24,11 @@
 				</button>
 				<Tooltip class="-bottom-2 right-0 w-[310px] translate-y-full pr-2">
 					<p>
-						각 씰의 위탁 거래소 1페이지 매물 가격의 <br />가중 평균으로
-						책정됩니다. <br />
+						<span class="text-point">루체 서버</span>를 기준으로, 각 씰의
+						<span class="text-point">위탁 거래소 <br />1페이지 매물 가격</span
+						>의 가중 평균으로 책정됩니다. <br />
 						가격 간 편차, 오류 등으로 인해 부정확한 가격이 책정될 가능성이 있으니
-						구매 전 확인이 필요합니다.
+						<span class="text-point">구매 전 확인</span>이 필요합니다.
 					</p>
 				</Tooltip>
 			</div>
