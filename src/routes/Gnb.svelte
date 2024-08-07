@@ -79,6 +79,21 @@
 					</button>
 				</li>
 			{/each}
+			<li>
+				<a
+					href="https://open.kakao.com/o/skcN4IDg"
+					target="_blank"
+					title="새창(오픈채팅)"
+					class="flex-col-center gap-[2px] px-2 opacity-50 transition-opacity hover:opacity-100 md:flex-row md:gap-2"
+				>
+					<iconify-icon
+						icon="hugeicons:customer-support"
+						width="20"
+						height="20"
+					/>
+					<span> 문의/제보</span>
+				</a>
+			</li>
 		</ul>
 	</nav>
 </Inner>
