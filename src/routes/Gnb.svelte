@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { activeMenu, type Menus } from '$entities/seals'
+	import { activeMenu, mySeals, type Menus } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
 
@@ -66,7 +66,12 @@
 							height={menuData.icon.height}
 							class={cn(menuData.icon.class)}
 						/>
-						<span>{menuData.name}</span>
+						<span>
+							{menuData.name}
+							{#if menuData.type === 'MY'}
+								<span>({$mySeals.length})</span>
+							{/if}
+						</span>
 					</button>
 				</li>
 			{/each}
