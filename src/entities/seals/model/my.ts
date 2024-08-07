@@ -50,4 +50,8 @@ const createMySeals = () => {
 }
 
 export const mySeals = createMySeals()
-export const myStats = writable<Stats>()
+export const myStats = writable<Stats>({
+	AT: 0,
+	CT: 0,
+	HT: 0
+})
