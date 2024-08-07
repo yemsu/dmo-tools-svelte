@@ -43,6 +43,8 @@
 	let searchInputPlaceholder = '목표 수치 입력'
 	$: calcNum = statTypeSelected === 'CT' ? 100 : 1
 	$: resultUnit = statTypeSelected === 'CT' ? '%' : ''
+	$: calcResultStatTotal =
+		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
 
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
@@ -283,10 +285,7 @@
 					<span class="flex flex-col gap-1">
 						<span class="text-xs text-gray-300">최종 능력치</span>
 						<span class="font-bold text-point">
-							{numberFormatter(
-								($myStats[statTypeSelected] * 100 + willGetStatTotal) / calcNum,
-								5
-							)}{resultUnit}
+							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
 						</span>
 					</span>
 				</p>
