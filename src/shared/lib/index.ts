@@ -1,2 +1,2 @@
 export { objectBy, cn, numberFormatter, timeElapsedString } from './helper'
-export { $remove } from '$shared/lib/util'
+export { _remove } from '$shared/lib/util'

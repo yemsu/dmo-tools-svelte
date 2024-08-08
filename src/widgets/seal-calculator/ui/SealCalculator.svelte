@@ -8,7 +8,7 @@
 		seals
 	} from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { cn, numberFormatter } from '$shared/lib'
+	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import CrrMenuTitle from '$shared/text/ui/CrrMenuTitle.svelte'
@@ -152,9 +152,7 @@
 	const addToMySeal = (effData: SealEfficiency, sealId: number) => {
 		const mySealCount = getMySealCount($mySeals, sealId)
 		mySeals.updateCount(effData.id, mySealCount + effData.needCount)
-		const updateEffDataListSorted = effDataListSorted.filter(
-			({ id }) => effData.id !== id
-		)
+		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice

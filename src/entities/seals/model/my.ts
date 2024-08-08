@@ -1,5 +1,5 @@
 import { createLoadSaveFn, updateOrAddData } from '$entities/seals/lib'
-import { $remove } from '$shared/lib'
+import { _remove } from '$shared/lib'
 import type { MySeal, Stats } from '../type'
 import { writable } from 'svelte/store'
 
@@ -30,7 +30,7 @@ const createMySeals = () => {
 			subscribe((value) => save(value))
 		},
 		remove: (sealId: number) => {
-			update((prev) => [...$remove(prev, sealId)])
+			update((prev) => [..._remove(prev, sealId)])
 			subscribe((value) => save(value))
 		}
 	}
