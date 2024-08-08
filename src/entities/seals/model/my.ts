@@ -11,7 +11,7 @@ const sortBy = <ArrItem extends Record<string, number>>(
 }
 
 const MY_SEALS_STORAGE = 'seals'
-const { save, load } = createLoadSaveFn(MY_SEALS_STORAGE)
+const { save, load } = createLoadSaveFn(MY_SEALS_STORAGE, 'count')
 const createMySeals = () => {
 	const { subscribe, update } = writable<MySeal[]>([])
 

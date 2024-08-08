@@ -4,7 +4,7 @@ import { _remove } from '$shared/lib'
 import { writable } from 'svelte/store'
 
 const MY_PRICE_STORAGE = 'prices'
-const { save, load } = createLoadSaveFn(MY_PRICE_STORAGE)
+const { save, load } = createLoadSaveFn(MY_PRICE_STORAGE, 'price')
 const createMyPrices = () => {
 	const { subscribe, set, update } = writable<MyPrice[]>([])
 

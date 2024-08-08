@@ -11,19 +11,42 @@ export const getSealPrice = (prices: SealPrice[], sealId: number) => {
 	return result
 }
 
-export const createLoadSaveFn = <T>(storageName: string) => {
+export const createLoadSaveFn = <
+	T extends { id: number; [key: string]: string | number }
+>(
+	storageName: string,
+	dataKeyName: keyof T
+) => {
 	return {
 		load: () => {
 			const params = new URLSearchParams(window.location.search)
 			const savedData = params.get(storageName)
 			if (!savedData) return
-			const isNotEncodedData = savedData?.includes('[{')
-			const data = isNotEncodedData ? savedData : atob(savedData)
-			return JSON.parse(data)
+			if (savedData?.includes('[{')) {
+				return JSON.parse(savedData)
+			} else {
+				const decodedData = atob(savedData)
+				if (decodedData?.includes('[[')) {
+					const parsedData = JSON.parse(decodedData)
+					const mapToOBj = Array.from(parsedData, ([id, value]) => ({
+						id,
+						[dataKeyName]: value
+					}))
+					return mapToOBj
+				} else {
+					return JSON.parse(decodedData)
+				}
+			}
 		},
 		save: (data: T[]) => {
 			const params = new URLSearchParams(window.location.search)
-			const dataEncoded = btoa(JSON.stringify(data))
+			// object > map
+			const map = data.reduce((result, item: T) => {
+				result.set(item.id, item[dataKeyName])
+				return result
+			}, new Map<number, string | number>())
+			// encoding
+			const dataEncoded = btoa(JSON.stringify([...map]))
 			params.set(storageName, dataEncoded)
 			goto(`?${params.toString()}`)
 		}
