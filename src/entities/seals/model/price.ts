@@ -1,42 +1,29 @@
-import { goto } from '$app/navigation'
+import { createLoadSaveFn, updateOrAddData } from '$entities/seals/lib'
 import type { MyPrice, SealData, SealPrice } from '$entities/seals/type'
+import { $remove } from '$shared/lib'
 import { writable } from 'svelte/store'
 
 const MY_PRICE_STORAGE = 'prices'
-const save = (myPrices: MyPrice[]) => {
-	const params = new URLSearchParams(window.location.search)
-	params.set(MY_PRICE_STORAGE, JSON.stringify(myPrices))
-	goto(`?${params.toString()}`)
-}
+const { save, load } = createLoadSaveFn(MY_PRICE_STORAGE)
 const createMyPrices = () => {
 	const { subscribe, set, update } = writable<MyPrice[]>([])
 
 	return {
 		subscribe,
 		loadSavedData: () => {
-			const params = new URLSearchParams(window.location.search)
-			const savedData = params.get(MY_PRICE_STORAGE)
-			if (savedData) {
-				set([...JSON.parse(savedData)])
-			}
+			const savedData = load()
+			if (!savedData) return
+			set([...savedData])
 		},
 		updatePrice: (id: SealData['id'], price: number) => {
 			update((prev) => {
-				const prevItem = prev.find((prevItem) => prevItem.id === id)
-				let result = []
-				if (prevItem) {
-					result = prev.map((myPrice) =>
-						myPrice.id === id ? { id, price } : myPrice
-					)
-				} else {
-					result = [...prev, { id, price }]
-				}
+				const result = updateOrAddData(prev, { id, price })
 				return result
 			})
 			subscribe((value) => save(value))
 		},
 		remove: (sealId: number) => {
-			update((prev) => [...prev.filter(({ id }) => id !== sealId)])
+			update((prev) => [...$remove(prev, sealId)])
 			subscribe((value) => save(value))
 		}
 	}
