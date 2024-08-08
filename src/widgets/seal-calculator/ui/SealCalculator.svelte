@@ -67,7 +67,7 @@
 			const removeCount = Math.max(prevCount, mySealCount)
 			const needCount = nextStep.sealCount - removeCount // prev step count, my count중 더 큰거 빼
 			const needPrice = price ? needCount * price : 0
-			const efficiency = +(willGetStat / needPrice).toFixed(5) || 0
+			const efficiency = +(willGetStat / needPrice) || 0
 
 			result.push({
 				id: seal.id,

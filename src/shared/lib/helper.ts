@@ -24,7 +24,7 @@ export const cn = (
 
 export const numberFormatter = (number: number, fractionDigits: number = 2) => {
 	const numberCut = +number.toFixed(fractionDigits)
-	return (numberCut * 1).toLocaleString()
+	return numberCut > 100 ? numberCut.toLocaleString() : numberCut * 1
 }
 
 export const timeElapsedString = (createdAt: string) => {
