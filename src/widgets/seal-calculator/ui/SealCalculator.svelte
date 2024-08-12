@@ -48,24 +48,19 @@
 
 	const getMySealCount = (mySeals: MySeal[], sealId: number) =>
 		mySeals.find(({ id }) => id === sealId)?.count || 0
+
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
 		const { final: price } = getMyAndFinalPrice($sealPrices, $myPrices, seal.id)
 		if (!price) return result
 		const mySealCount = getMySealCount($mySeals, seal.id)
-
 		const nextSteps = getNextSteps(seal, mySealCount)
 
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
 			if (nextStep.sealCount === null) continue
-			const prevStep = getPrevStep(seal, nextStep.sealCount)
-			const prevStepPercent = prevStep?.percent || 0
-			const willGetStat =
-				seal.maxIncrease * ((nextStep.percent - prevStepPercent) / 100)
-			const prevCount = prevStep?.sealCount || 0
-			const removeCount = Math.max(prevCount, mySealCount)
-			const needCount = nextStep.sealCount - removeCount // prev step count, my count중 더 큰거 빼
+			const willGetStat = seal.maxIncrease * (nextStep.percent / 100)
+			const needCount = nextStep.sealCount - mySealCount
 			const needPrice = price ? needCount * price : 0
 			const efficiency = +(willGetStat / needPrice) || 0
 
@@ -76,8 +71,7 @@
 				willGetStat,
 				needCount,
 				needPrice,
-				efficiency,
-				step: nextStep
+				efficiency
 			})
 		}
 		return result
@@ -118,21 +112,27 @@
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
 		const needStatCount =
 			goalStat * calcNum - $myStats[statTypeSelected] * calcNum
-		console.log(
-			'needStatCount',
-			goalStat * calcNum,
-			needStatCount,
-			$myStats[statTypeSelected]
-		)
-		const result: SealEfficiency[] = []
+		let result: SealEfficiency[] = []
 		for (const effData of sortedEfficiencyData) {
 			if (willGetStatTotal >= needStatCount) break
+			const prevResult = result.find(({ id }) => id === effData.id)
+			if (prevResult) {
+				if (
+					prevResult.efficiency > effData.efficiency &&
+					prevResult.willGetStat > effData.willGetStat
+				)
+					continue
+				result = result.filter(({ id }) => id !== effData.id)
+				willGetStatTotal -= prevResult.willGetStat
+				willNeedMoneyTotal -= prevResult.needPrice
+			}
 			result.push(effData)
 			willGetStatTotal += effData.willGetStat
 			willNeedMoneyTotal += effData.needPrice
 		}
 		// 결과 리스트에 같은 씰이 여러개인 케이스 merge
-		effDataListSorted = resultMerged(result)
+		// effDataListSorted = resultMerged(result)
+		effDataListSorted = result
 	}
 
 	const onClickStatType = (statType: StatType) => {

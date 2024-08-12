@@ -27,5 +27,4 @@ export type SealEfficiency = {
 	needCount: number
 	needPrice: number
 	willGetStat: number
-	step: SealStep
 }
