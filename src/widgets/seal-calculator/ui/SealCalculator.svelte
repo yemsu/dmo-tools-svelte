@@ -27,6 +27,7 @@
 	} from '$widgets/stat-bar'
 	import {
 		getNextSteps,
+		getCurrentStep,
 		getPrevStep,
 		resultMerged,
 		sortByEffDataList
@@ -54,12 +55,15 @@
 		const { final: price } = getMyAndFinalPrice($sealPrices, $myPrices, seal.id)
 		if (!price) return result
 		const mySealCount = getMySealCount($mySeals, seal.id)
+		const crrMyStep = getCurrentStep(seal, mySealCount)
 		const nextSteps = getNextSteps(seal, mySealCount)
 
 		if (nextSteps.length === 0) return result
 		for (const nextStep of nextSteps) {
 			if (nextStep.sealCount === null) continue
-			const willGetStat = seal.maxIncrease * (nextStep.percent / 100)
+
+			const willGetStat =
+				seal.maxIncrease * ((nextStep.percent - crrMyStep.percent) / 100)
 			const needCount = nextStep.sealCount - mySealCount
 			const needPrice = price ? needCount * price : 0
 			const efficiency = +(willGetStat / needPrice) || 0
