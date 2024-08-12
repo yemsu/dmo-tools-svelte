@@ -4,28 +4,30 @@
 		mySeals,
 		myStats,
 		sealPrices,
-		seals
+		seals,
+		type MySeal
 	} from '$entities/seals'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { CrrMenuTitle } from '$shared/text'
-	import { SealItem } from '$widgets/seal-list'
-	import SealList from '$widgets/seal-list/ui/SealList.svelte'
+	import { SealList, SealItem } from '$widgets/seal-list'
 	import {
 		STAT_TYPE_OPTIONS,
 		STATS,
 		statTypeOptionStyles,
 		type StatTypeOption
-	} from '$widgets/select-seal-form'
-	import {
-		getMyAndFinalPrice,
-		getMySealData
-	} from '$widgets/select-seal-form/lib/helper'
-	import MySealGrade from '$widgets/select-seal-form/ui/MySealGrade.svelte'
-	import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
+	} from '../config'
+	import { getMyAndFinalPrice, getMySealData } from '../lib/helper'
+	import MySealGrade from './MySealGrade.svelte'
+	import { StatBar } from '$widgets/stat-bar'
+	import { onMount } from 'svelte'
 
 	let statTypeSelected = 'ALL'
-	$: mySealsFiltered = $mySeals
+	let mySealsFiltered: MySeal[] = []
+
+	onMount(() => {
+		mySealsFiltered = $mySeals
+	})
 
 	const onClickStatType = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
