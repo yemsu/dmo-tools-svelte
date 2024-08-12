@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { mySeals, myStats, sealPrices, seals } from '$entities/seals'
+	import {
+		myPrices,
+		mySeals,
+		myStats,
+		sealPrices,
+		seals
+	} from '$entities/seals'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { CrrMenuTitle } from '$shared/text'
@@ -11,7 +17,10 @@
 		statTypeOptionStyles,
 		type StatTypeOption
 	} from '$widgets/select-seal-form'
-	import { getMySealData } from '$widgets/select-seal-form/lib/helper'
+	import {
+		getMyAndFinalPrice,
+		getMySealData
+	} from '$widgets/select-seal-form/lib/helper'
 	import MySealGrade from '$widgets/select-seal-form/ui/MySealGrade.svelte'
 	import StatBar from '$widgets/stat-bar/ui/StatBar.svelte'
 
@@ -38,12 +47,12 @@
 		if (!isConfirmed) return
 		mySeals.remove(sealId)
 	}
+
 	$: getTotalMySealPrice = () => {
 		let totalPrice = 0
 		for (const { id, count } of $mySeals) {
-			const sumSealPrice =
-				($sealPrices.find((sealPrice) => sealPrice.sealId === id)?.price || 0) *
-				count
+			const price = getMyAndFinalPrice($sealPrices, $myPrices, id)
+			const sumSealPrice = price.final * count
 			if (sumSealPrice) totalPrice += sumSealPrice
 		}
 		return totalPrice
