@@ -14,7 +14,7 @@
 </script>
 
 <StatBarWrap>
-	<h3 class="ir">내 능력치</h3>
+	<h3 class="ir">보유 씰에 따른 총 능력치와 자산</h3>
 	<dl>
 		<MyStatBox {stats} />
 		<StatBarSeparator />

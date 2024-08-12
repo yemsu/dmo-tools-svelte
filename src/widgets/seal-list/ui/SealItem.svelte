@@ -15,7 +15,7 @@
 	export let isPriceEditable: boolean = true
 </script>
 
-<div class={cn('relative flex flex-col justify-center text-center')}>
+<article class={cn('relative flex flex-col justify-center text-center')}>
 	<div
 		class={cn(
 			'group relative flex items-center justify-center',
@@ -24,13 +24,13 @@
 			'text-balance break-keep'
 		)}
 	>
-		<p
+		<h2
 			class="{statColorStyles[
 				seal.statType
 			]} flex items-start font-bold leading-4"
 		>
 			{seal.name}
-		</p>
+		</h2>
 		<p
 			class="absolute left-[3px] top-0 text-[8px] text-gray-600 md:text-[10px]"
 		>
@@ -85,4 +85,4 @@
 		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} />
 		<slot></slot>
 	</div>
-</div>
+</article>
