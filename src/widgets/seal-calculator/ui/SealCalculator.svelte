@@ -56,7 +56,8 @@
 		const { final: price } = getMyAndFinalPrice($sealPrices, $myPrices, seal.id)
 		if (!price) return result
 		const mySealCount = getMySealCount($mySeals, seal.id)
-		const crrMyStep = getCurrentStep(seal, mySealCount)
+		const crrMyStep =
+			mySealCount !== 0 ? getCurrentStep(seal, mySealCount) : { percent: 0 }
 		const nextSteps = getNextSteps(seal, mySealCount)
 
 		if (nextSteps.length === 0) return result
@@ -64,7 +65,7 @@
 			if (nextStep.sealCount === null) continue
 
 			const willGetStat =
-				seal.maxIncrease * ((nextStep.percent - crrMyStep.percent) / 100)
+				seal.maxIncrease * ((nextStep.percent - crrMyStep?.percent) / 100)
 			const needCount = nextStep.sealCount - mySealCount
 			const needPrice = price ? needCount * price : 0
 			const efficiency = +(willGetStat / needPrice) || 0
