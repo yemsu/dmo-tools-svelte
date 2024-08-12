@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { mySeals } from '$entities/seals'
 	import { cn, numberFormatter } from '$shared/lib'
+	import type { SealStep } from '$widgets/seal-calculator'
 
 	export let sealId: number
 	export let isEditable: boolean = true
+	export let myStep: SealStep | undefined = undefined
 	$: count = $mySeals.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -74,6 +76,7 @@
 		</form>
 	{:else}
 		<div class="flex-center">
+			<!-- {myStep ? myStep.percent * sealId.max : 0} -->
 			{#if isEditable}
 				<button
 					type="button"

@@ -12,6 +12,7 @@
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import CrrMenuTitle from '$shared/text/ui/CrrMenuTitle.svelte'
+	import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
 		getMyAndFinalPrice,
@@ -75,7 +76,8 @@
 				willGetStat,
 				needCount,
 				needPrice,
-				efficiency
+				efficiency,
+				myStep: crrMyStep
 			})
 		}
 		return result
@@ -215,38 +217,8 @@
 		>
 			{@const seal = $seals.find(({ id }) => id === effData.id)}
 			{#if seal}
-				<SealItem {seal} isCountEditable={false}>
-					<div class="flex-col-center w-full rounded-sm bg-white/10 p-2">
-						<dl class="flex flex-col gap-1 whitespace-nowrap leading-none">
-							<div class="flex items-center gap-1">
-								<dt class="text-[11px] text-gray-200">필요개수</dt>
-								<dd class="text-point">{numberFormatter(effData.needCount)}</dd>
-							</div>
-							<div class="flex items-center gap-1">
-								<dt class="text-[11px] text-gray-200">필요금액</dt>
-								<dd class="text-point">
-									{numberFormatter(effData.needPrice)}
-								</dd>
-							</div>
-							<div class="flex items-center gap-1">
-								<dt class="text-[11px] text-gray-200">획득능력치</dt>
-								<dd class="text-point">
-									{numberFormatter(effData.willGetStat)}
-								</dd>
-							</div>
-							<div class="flex items-center gap-1">
-								<dt
-									class="text-[11px] text-gray-200"
-									title="1M당 얻게되는 능력치"
-								>
-									효율
-								</dt>
-								<dd class="text-point">
-									{numberFormatter(effData.efficiency, 5)}
-								</dd>
-							</div>
-						</dl>
-					</div>
+				<SealItem {seal} myStep={effData.myStep} isCountEditable={false}>
+					<SealCalcData {effData} />
 					<Button
 						type="button"
 						size="sm"

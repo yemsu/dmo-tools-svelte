@@ -2,10 +2,15 @@
 	import { getSealPrice, type SealData, sealPrices } from '$entities/seals'
 	import { cn, timeElapsedString } from '$shared/lib'
 	import { Tooltip } from '$shared/tooltip'
+	import {
+		SEAL_COUNT_STEPS_BY_MASTER,
+		type SealStep
+	} from '$widgets/seal-calculator'
 	import { statColorStyles } from '$widgets/select-seal-form'
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'
 	export let seal: SealData
+	export let myStep: SealStep | undefined = undefined
 	export let isCountEditable: boolean = true
 	export let isPriceEditable: boolean = true
 </script>
@@ -48,11 +53,35 @@
 							timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
 					</dd>
 				</div>
+				{#if myStep}
+					<div class="rounded-sm bg-white/10 p-1">
+						<p class="mb-1 text-[10px]">현재 내 능력치</p>
+						<ol class="flex items-center gap-1 text-[10px] leading-none">
+							{#each SEAL_COUNT_STEPS_BY_MASTER[seal.masterCount] as sealCount}
+								<li
+									class={cn(
+										myStep.sealCount === sealCount
+											? 'rounded-md bg-primary-30 p-1'
+											: 'text-gray-400'
+									)}
+								>
+									{sealCount}
+								</li>
+							{/each}
+						</ol>
+						<span class="text-gray-300">
+							{seal.maxIncrease} * {myStep?.percent}% =
+						</span>
+						<span class="font-bold text-point">
+							+{myStep ? seal.maxIncrease * (myStep?.percent / 100) : 0}
+						</span>
+					</div>
+				{/if}
 			</dl>
 		</Tooltip>
 	</div>
 	<div class="flex flex-col items-center gap-1 p-1">
-		<SealItemCount sealId={seal.id} isEditable={isCountEditable} />
+		<SealItemCount sealId={seal.id} {myStep} isEditable={isCountEditable} />
 		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} />
 		<slot></slot>
 	</div>
