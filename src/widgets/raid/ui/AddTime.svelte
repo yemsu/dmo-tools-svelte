@@ -119,7 +119,7 @@
 					</Tab>
 				{/each}
 			</Tabs>
-			<form on:submit={onSubmit} class="flex gap-2">
+			<form on:submit|preventDefault={onSubmit} class="flex gap-2">
 				<input
 					bind:this={inputElement}
 					type="number"

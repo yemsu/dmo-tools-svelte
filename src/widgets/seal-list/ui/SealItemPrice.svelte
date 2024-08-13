@@ -59,7 +59,7 @@
 
 <div class="w-full">
 	{#if isOnInput}
-		<form on:submit={onSubmit} class="flex h-[24px] gap-1">
+		<form on:submit|preventDefault={onSubmit} class="flex h-[24px] gap-1">
 			<input
 				bind:this={inputElement}
 				type="number"
