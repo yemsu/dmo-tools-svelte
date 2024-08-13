@@ -49,7 +49,7 @@
 		<h2 class="ir">글로벌 네비게이션</h2>
 		<ul
 			class={cn(
-				'flex-center h-mobile-nav-h w-full gap-[4%] whitespace-nowrap py-2',
+				'flex-center h-gnb-h w-full gap-[4%] whitespace-nowrap py-2',
 				'text-center text-[9px] md:text-sm'
 			)}
 		>

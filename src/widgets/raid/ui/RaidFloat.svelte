@@ -108,7 +108,7 @@
 	$: $crrServerType && onChangeCrrServerType()
 </script>
 
-<aside class="z-[99] mb-3">
+<aside class="z-[99]">
 	<h2 class="ir">레이드 타이머</h2>
 	<Inner class="w-full">
 		{#if isModalOn}

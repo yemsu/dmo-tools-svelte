@@ -59,7 +59,7 @@
 
 <div class="w-full">
 	{#if isOnInput}
-		<form on:submit|preventDefault={onSubmit} class="flex h-[24px] gap-1">
+		<form on:submit={onSubmit} class="flex h-[24px] gap-1">
 			<input
 				bind:this={inputElement}
 				type="number"
@@ -83,7 +83,7 @@
 		<div class="flex w-full overflow-hidden rounded-md">
 			{#if prices.my !== undefined}
 				<button
-					class="flex-center bg-warning w-[35%] shrink-0"
+					class="flex-center w-[35%] shrink-0 bg-warning"
 					on:click={() => removeSavedPrice()}
 				>
 					<iconify-icon

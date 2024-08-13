@@ -12,7 +12,7 @@
 </script>
 
 <div
-	class={cn('lg:px-8 max-w-full px-4', sizeStyles[size], className)}
+	class={cn('px-content-side max-w-full', sizeStyles[size], className)}
 	{...restProps}
 >
 	<slot></slot>

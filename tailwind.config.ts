@@ -48,8 +48,11 @@ export default {
 			},
 			spacing: {
 				'header-h': 'var(--header-h)',
-				'mobile-nav-h': 'var(--mobile-nav-h)',
-				'content-fill-h': 'calc(100svh - var(--header-h) - var(--mobile-nav-h))'
+				'gnb-h': 'var(--gnb-h)',
+				'content-fill-h':
+					'calc(100svh - var(--header-h) - var(--gnb-h) - var(--raid-bar-h))',
+				'content-side': 'var(--content-side)',
+				'raid-bar-h': 'var(--raid-bar-h)'
 			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif']

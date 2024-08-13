@@ -12,7 +12,7 @@
 
 <div
 	class={cn(
-		'flex h-[30px] items-center',
+		'h-raid-bar-h flex items-center',
 		'border border-primary-50 bg-primary-5/80',
 		'text-[11px] leading-none',
 		'whitespace-nowrap rounded-md drop-shadow-md'

@@ -40,7 +40,14 @@
 
 		/* size */
 		--header-h: 50px;
-		--mobile-nav-h: 50px;
+		--gnb-h: 50px;
+		--raid-bar-h: 30px;
+		--content-side: 16px;
+	}
+	@media screen and (max-width: 767px) {
+		:root {
+			--content-side: 14px;
+		}
 	}
 }
 

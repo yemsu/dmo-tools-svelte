@@ -81,7 +81,7 @@
 	/>
 </svelte:head>
 
-<Inner class="grid h-content-fill-h gap-2 overflow-hidden pb-4">
+<Inner class="py-content-side grid h-content-fill-h gap-2 overflow-hidden">
 	{#if $activeMenuType === 'SETTING'}
 		<SettingSeals />
 	{:else if $activeMenuType === 'MY'}

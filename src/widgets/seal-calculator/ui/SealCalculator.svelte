@@ -195,7 +195,7 @@
 			</StatBarWrap>
 		</div>
 		<form
-			on:submit|preventDefault={onSubmit}
+			on:submit={onSubmit}
 			class="flex w-full flex-1 items-center gap-2 md:w-auto"
 		>
 			<input
