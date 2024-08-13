@@ -7,23 +7,24 @@
 		type RaidTimeData
 	} from '$entities/raid'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { cn, timeRemaining, timeRemainingString } from '$shared/lib'
+	import { cn, timeRemainingString } from '$shared/lib'
+	import { toast } from '$shared/toast'
 
 	export let raid: RaidData
 
-	const onClickVote = async (raid: RaidData, time: RaidTimeData) => {
+	$: onClickVote = async (raid: RaidData, time: RaidTimeData) => {
 		if (!$crrServerType) {
 			throw Error('onClickVote: crrServerType is undefined')
 		}
 		const isConfirmed = confirm(
-			`이 제보가 맞나요? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${time.channel}채널] ${timeRemainingString(time.startAt)} 후 출연`
+			`이 제보가 맞나요? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${time.channel}채널] ${timeRemainingString(time.startAt)} 출현`
 		)
 		if (!isConfirmed) {
 			return
 		}
 		const res = await putRaidTimeVote(time.id)
 		if (res) {
-			alert('투표 감사합니다!')
+			toast.on('투표가 완료되었습니다!')
 		}
 	}
 
@@ -36,7 +37,7 @@
 
 {#if raid.times}
 	<ol>
-		{#each raid.times as time, i (time.id)}
+		{#each raid.times as time, i (raid.id + time.id)}
 			<li>
 				<span class="ir">정확도 {i + 1}순위</span>
 				<div class="flex items-center gap-2">

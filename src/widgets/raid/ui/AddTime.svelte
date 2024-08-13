@@ -8,6 +8,7 @@
 	import Button from '$shared/button/ui/Button.svelte'
 	import { cn } from '$shared/lib'
 	import { Tab, Tabs } from '$shared/tabs'
+	import { toast } from '$shared/toast'
 
 	export let raid: RaidData
 	let isShowForm = false
@@ -72,7 +73,7 @@
 
 		isShowForm = false
 		form = { channel: null, timeRemaining: null }
-		alert('제보 감사합니다!')
+		toast.on('보스 제보가 완료되었습니다!')
 	}
 </script>
 

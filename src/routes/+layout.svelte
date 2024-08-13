@@ -5,6 +5,7 @@
 	import { cn } from '$shared/lib'
 	import Gnb from './Gnb.svelte'
 	import RaidFloat from '$widgets/raid/ui/RaidFloat.svelte'
+	import { ToastPopup } from '$shared/toast'
 </script>
 
 <div
@@ -21,4 +22,5 @@
 		<slot></slot>
 	</main>
 	<Gnb />
+	<ToastPopup />
 </div>
