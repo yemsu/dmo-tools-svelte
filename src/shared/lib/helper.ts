@@ -82,8 +82,10 @@ export const timeRemaining = (startAt: string) => {
 }
 
 export const timeRemainingString = (startAt: string) => {
-	if (!startAt) return '-'
 	const { h, m, s } = timeRemaining(startAt)
+	if (!h && !m && !s) {
+		return '보스 출현!'
+	}
 	if (m === 0 && s > 0) {
 		return '곧 출현!'
 	}

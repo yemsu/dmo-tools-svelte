@@ -13,14 +13,18 @@
 
 	let nextRaid: { raid: RaidData; time: RaidTimeData } | undefined
 
-	const updateNextRaid = () => {
-		const times = $raids
+	const updateNextRaid = (_raids: RaidData[]) => {
+		if (_raids.length === 0) return
+		const times = _raids
 			.map(({ times }) => (times.length > 0 ? times[0] : []))
 			.flat()
 		const timesSorted = timeSortByStartAt(times)
-		if (timesSorted.length === 0) return
+		if (timesSorted.length === 0) {
+			nextRaid = undefined
+			return
+		}
 		const nextTime = timesSorted[0]
-		const nextRaidInfo = $raids.find(({ id }) => nextTime.raidId === id)
+		const nextRaidInfo = _raids.find(({ id }) => nextTime.raidId === id)
 		if (!nextRaidInfo) {
 			throw Error(
 				`time - id:${nextTime.id}, raidId: ${nextTime.raidId} 에 해당하는 raid 데이터를 찾을 수 없습니다.`
@@ -29,7 +33,7 @@
 		nextRaid = { raid: nextRaidInfo, time: nextTime }
 	}
 
-	$: $raids.length > 0 && updateNextRaid()
+	$: $raids && updateNextRaid($raids)
 </script>
 
 <div
@@ -47,6 +51,7 @@
 		on:click
 	>
 		{#if nextRaid}
+			{@const timeString = timeRemainingString(nextRaid.time.startAt)}
 			<span>
 				{nextRaid.raid.name}
 				<span class="text-[11px] text-gray-400">
@@ -71,7 +76,7 @@
 					height={13}
 					class="-mb-[2px]"
 				/>
-				{timeRemainingString(nextRaid.time.startAt)} 출현
+				{timeString.includes('출현') ? timeString : `${timeString} 출현`}
 			</span>
 		{:else if $raids.length > 0}
 			제보된 레이드 정보가 없습니다. 보스 출현 정보를 제보해주세요!

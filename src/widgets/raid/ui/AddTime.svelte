@@ -1,6 +1,8 @@
 <script lang="ts">
 	import {
+		crrServerType,
 		GAME_CHANNELS,
+		GAME_SERVERS,
 		postRaidTime,
 		type GameChannel,
 		type RaidData
@@ -60,15 +62,19 @@
 			alert('보스가 출현하는 채널을 선택해 주세요')
 			return
 		}
+		if (!$crrServerType) {
+			alert('현재 서버 정보가 없습니다. 새로고침 후 다시 시도해주세요.')
+			return
+		}
 
 		const isConfirmed = confirm(
-			`${raid.name} 보스를 제보하시겠습니까? \n ${channel}채널 - ${timeRemaining}분 후 출연`
+			`보스를 제보하시겠습니까? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${channel}채널] ${timeRemaining}분 후 출연`
 		)
 		if (!isConfirmed) return
 		await postRaidTime(raid.id, {
 			timeRemaining,
 			channel,
-			server: 'luce'
+			server: $crrServerType
 		})
 
 		isShowForm = false

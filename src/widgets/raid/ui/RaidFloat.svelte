@@ -7,7 +7,8 @@
 		raids,
 		selectedRaidId,
 		subscribeClientId,
-		type RaidTimeData
+		type RaidTimeData,
+		type ServerType
 	} from '$entities/raid'
 	import { _objKeys } from '$shared/lib'
 	import { Inner } from '$shared/section'
@@ -44,64 +45,65 @@
 		}
 	}
 
-	const handleEventSource = async (eventSource: EventSource) => {
-		if (eventSource.readyState === EventSource.CONNECTING) {
+	const handleEventSource = async (_eventSource: EventSource) => {
+		console.log('new SSE', eventSource)
+		if (_eventSource.readyState === EventSource.CONNECTING) {
 			console.log('SSE is connecting...')
-		} else if (eventSource.readyState === EventSource.OPEN) {
+		} else if (_eventSource.readyState === EventSource.OPEN) {
 			console.log('SSE connection is open')
-		} else if (eventSource.readyState === EventSource.CLOSED) {
+		} else if (_eventSource.readyState === EventSource.CLOSED) {
 			console.log('SSE connection is closed')
 		}
-		eventSource.addEventListener('sub', function (e) {
+		_eventSource.addEventListener('sub', function (e) {
 			const data = JSON.parse(e.data)
 			console.log('sub!!! ', data)
 			subscribeClientId.set(data.clientId)
 		})
-		eventSource.addEventListener('created', function (e) {
+		_eventSource.addEventListener('created', function (e) {
 			const createdTime = JSON.parse(e.data) as RaidTimeData
 			console.log('created!!!', createdTime)
 			raids.addNewTime(createdTime)
 		})
-		eventSource.addEventListener('voted', function (e) {
+		_eventSource.addEventListener('voted', function (e) {
 			const votedTime = JSON.parse(e.data)
 			raids.voteTime(votedTime)
 		})
-		eventSource.addEventListener('removed', function (e) {
+		_eventSource.addEventListener('removed', function (e) {
 			const removedTime = JSON.parse(e.data)
 			raids.removeTime(removedTime)
 		})
-		eventSource.addEventListener('notify', function (e) {
+		_eventSource.addEventListener('notify', function (e) {
 			const data = JSON.parse(e.data)
 			console.log('notify!!!', data)
 		})
-		eventSource.addEventListener('error', function (e) {
+		_eventSource.addEventListener('error', function (e) {
 			console.error('error occurred', e)
 		})
 	}
 
-	const subscribeSSE = async () => {
+	const subscribeSSE = async (serverType: ServerType) => {
+		console.log('sse', serverType)
 		checkSseSupported()
 		await clearPrevSubscribe()
 		eventSource = new EventSource(
-			`${API_BASE_URL}/alarms/subscribe/${$crrServerType}`
+			`${API_BASE_URL}/alarms/subscribe/${serverType}`
 		)
 		handleEventSource(eventSource)
 	}
 
-	const onChangeCrrServerType = async () => {
-		if (!$crrServerType) return
-
-		const raidsFetched = await getRaids($crrServerType)
+	$: onChangeCrrServerType = async (serverType: ServerType | undefined) => {
+		if (!serverType) return
+		const raidsFetched = await getRaids(serverType)
 		raids.set(raidsFetched)
 		selectedRaidId.set(raidsFetched[0].id)
-		subscribeSSE()
+		subscribeSSE(serverType)
 	}
 
 	onMount(async () => {
 		crrServerType.set(_objKeys(GAME_SERVERS)[0])
 	})
 
-	$: $crrServerType && onChangeCrrServerType()
+	$: $crrServerType && onChangeCrrServerType($crrServerType)
 </script>
 
 <aside class="z-[99]">
