@@ -14,6 +14,7 @@
 	import FloatModal from '$widgets/raid/ui/FloatModal.svelte'
 	import { onMount } from 'svelte'
 	import { RaidBar } from '$widgets/raid-bar'
+	import { timeSortByVote } from '$widgets/raid'
 
 	let isModalOn = false
 	let eventSource: EventSource | undefined
@@ -93,13 +94,6 @@
 		const raidsFetched = await getRaids($crrServerType)
 		raids.set(raidsFetched)
 		selectedRaidId.set(raidsFetched[0].id)
-		console.log('raidsFetched', raidsFetched)
-		// const sorted = allRaidTimers.sort((a, b) => {
-		// 	const dateA = new Date(a.startAt)
-		// 	const dateB = new Date(b.startAt)
-		// 	return dateA.getTime() - dateB.getTime()
-		// })
-		// console.log('allRaidTimers', sorted[0])
 		subscribeSSE()
 	}
 
@@ -115,7 +109,7 @@
 	<Inner class="w-full">
 		{#if isModalOn}
 			<Inner
-				class="py-content-side absolute left-0 top-0 z-[99] size-full overflow-hidden"
+				class="absolute left-0 top-0 z-[99] size-full overflow-hidden py-content-side"
 			>
 				<FloatModal />
 				<button class="absolute right-4 top-4" on:click={toggleIsModalOn}
@@ -123,8 +117,6 @@
 				>
 			</Inner>
 		{/if}
-		{#if $raids.length > 0}
-			<RaidBar on:click={toggleIsModalOn} />
-		{/if}
+		<RaidBar on:click={toggleIsModalOn} />
 	</Inner>
 </aside>

@@ -1,32 +1,37 @@
 <script lang="ts">
 	import type { RaidData } from '$entities/raid'
-	import { cn } from '$shared/lib'
+	import { cn, timeRemainingString } from '$shared/lib'
 
 	export let raid: RaidData
+	$: time = raid.times.length > 0 && raid.times[0]
 	const { class: className, ...restProps } = $$restProps
 </script>
 
-<dl
+<ra
 	class={cn(
-		'grid grid-cols-2 gap-1 break-keep p-2 md:grid-cols-6 md:gap-2 ',
+		'grid grid-cols-2 gap-1 break-keep p-2 text-center md:grid-cols-6 md:gap-2',
 		className
 	)}
 	{...restProps}
 >
-	<div class="col-span-2">
-		<dt class="text-[10px] text-gray-300">레이드명</dt>
+	<div class="col-span-2 text-left">
+		<dt class="text-[10px] text-gray-400">레이드명</dt>
 		<dd class="text-xs">{raid.name}</dd>
 	</div>
-	<div class="col-span-2">
-		<dt class="text-[10px] text-gray-300">위치</dt>
+	<div class="col-span-2 text-left">
+		<dt class="text-[10px] text-gray-400">위치</dt>
 		<dd class="text-xs">{raid.location}</dd>
 	</div>
 	<div class="col-span-1">
-		<dt class="text-[10px] text-gray-300">채널</dt>
-		<dd class="text-xs">????</dd>
+		<dt class="text-[10px] text-gray-400">채널</dt>
+		<dd class="text-xs text-point">
+			{time ? time.channel : '-'}
+		</dd>
 	</div>
 	<div class="col-span-1">
-		<dt class="text-[10px] text-gray-300">남은시간</dt>
-		<dd class="text-xs">????</dd>
+		<dt class="text-[10px] text-gray-400">시간</dt>
+		<dd class="text-xs text-point">
+			{time ? timeRemainingString(time.startAt) : '-'}
+		</dd>
 	</div>
-</dl>
+</ra>

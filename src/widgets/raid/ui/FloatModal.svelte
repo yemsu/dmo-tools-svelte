@@ -18,7 +18,7 @@
 <Section
 	class={cn(
 		'size-full gap-3 p-2 md:p-4',
-		'border border-point bg-secondary-10/80',
+		'border border-point bg-secondary-10/90',
 		'rounded-md backdrop-blur-sm'
 	)}
 >
@@ -42,7 +42,7 @@
 			{#if $selectedRaidId}
 				{@const raid = _pick($raids, $selectedRaidId)}
 				<section
-					class="size-full rounded-md bg-primary-5/60 p-3 backdrop-blur-sm"
+					class="size-full rounded-md bg-secondary-5/40 p-3 backdrop-blur-sm"
 				>
 					<Title class="mb-3">{raid.name}</Title>
 					{#if raid.times.length > 0}

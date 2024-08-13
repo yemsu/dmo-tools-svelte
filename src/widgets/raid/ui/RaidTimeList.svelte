@@ -7,7 +7,7 @@
 		type RaidTimeData
 	} from '$entities/raid'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { cn, timeRemainingString } from '$shared/lib'
+	import { cn, timeRemaining, timeRemainingString } from '$shared/lib'
 
 	export let raid: RaidData
 
@@ -29,7 +29,7 @@
 
 	const timeDataKeyMaps: { key: keyof RaidTimeData; text: string }[] = [
 		{ key: 'channel', text: '채널' },
-		{ key: 'startAt', text: '남은 시간' },
+		{ key: 'startAt', text: '시간' },
 		{ key: 'voteCount', text: '투표수' }
 	]
 </script>

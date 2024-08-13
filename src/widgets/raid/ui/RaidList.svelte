@@ -11,7 +11,7 @@
 <div
 	class={cn(
 		'scroll-box h-full',
-		'flex w-[50%] flex-col gap-1 pr-2 md:w-[430px] md:gap-1.5'
+		'flex w-[50%] flex-col gap-1 pr-1 md:w-[430px] md:gap-1.5'
 	)}
 >
 	{#each $raids as raid (raid.id)}

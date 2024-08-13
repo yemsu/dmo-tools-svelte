@@ -15,12 +15,12 @@
 	title="채널 변경하기"
 	on:click={() => (isTabOpen = !isTabOpen)}
 >
-	{$crrServerType && GAME_SERVERS[$crrServerType]}
+	{$crrServerType ? GAME_SERVERS[$crrServerType] : ''}
 </button>
 {#if isTabOpen}
 	<Tabs
 		dir="ver"
-		class="drop-shadow-primary-50 absolute bottom-0 w-[100px] translate-y-full  border border-primary-50/50"
+		class="absolute bottom-0 w-[100px] translate-y-full border  border-primary-50/50 drop-shadow-primary-50"
 	>
 		{#each _objKeys(GAME_SERVERS) as serverType (serverType)}
 			<Tab
