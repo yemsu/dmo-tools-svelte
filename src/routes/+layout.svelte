@@ -4,6 +4,7 @@
 	import Header from './Header.svelte'
 	import { cn } from '$shared/lib'
 	import Gnb from './Gnb.svelte'
+	import RaidFloat from '$widgets/raid/ui/RaidFloat.svelte'
 </script>
 
 <div
@@ -14,8 +15,9 @@
 	)}
 >
 	<Header></Header>
+	<RaidFloat />
 
-	<main class="flex-1">
+	<main class="relative flex-1">
 		<slot></slot>
 	</main>
 	<Gnb />

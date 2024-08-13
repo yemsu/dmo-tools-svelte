@@ -56,6 +56,7 @@ export default {
 			},
 			dropShadow: {
 				'primary-90': '0 0 3px hsl(var(--primary-90))',
+				'primary-50': '0 0 5px hsl(var(--primary-50)/50%)',
 				'primary-30': '0 0 40px hsl(var(--primary-30)/30%)',
 				lg: '3px 3px 6px rgba(0,0,0,0.6)'
 			}

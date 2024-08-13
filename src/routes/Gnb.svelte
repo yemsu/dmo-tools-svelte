@@ -44,7 +44,7 @@
 	]
 </script>
 
-<Inner size="full" class="absolute bottom-0 left-0 h-[50px] w-full bg-gray-800">
+<Inner size="full" class="h-[50px] w-full bg-gray-800">
 	<nav>
 		<h2 class="ir">글로벌 네비게이션</h2>
 		<ul
