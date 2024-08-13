@@ -8,16 +8,16 @@
 
 <dl
 	class={cn(
-		'grid grid-cols-2 gap-1 break-keep p-2 md:grid-cols-7 md:gap-2 ',
+		'grid grid-cols-2 gap-1 break-keep p-2 md:grid-cols-6 md:gap-2 ',
 		className
 	)}
 	{...restProps}
 >
-	<div class="col-span-2 md:col-span-3">
+	<div class="col-span-2">
 		<dt class="text-[10px] text-gray-300">레이드명</dt>
 		<dd class="text-xs">{raid.name}</dd>
 	</div>
-	<div class="col-span-2 md:col-span-2">
+	<div class="col-span-2">
 		<dt class="text-[10px] text-gray-300">위치</dt>
 		<dd class="text-xs">{raid.location}</dd>
 	</div>

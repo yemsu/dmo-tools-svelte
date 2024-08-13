@@ -5,8 +5,9 @@
 		GAME_SERVERS,
 		getRaids,
 		raids,
-		selectedRaidTab,
-		subscribeClientId
+		selectedRaidId,
+		subscribeClientId,
+		type RaidTimeData
 	} from '$entities/raid'
 	import { _objKeys } from '$shared/lib'
 	import { Inner } from '$shared/section'
@@ -56,16 +57,17 @@
 			subscribeClientId.set(data.clientId)
 		})
 		eventSource.addEventListener('created', function (e) {
-			const data = JSON.parse(e.data)
-			console.log('created!!!', data)
+			const createdTime = JSON.parse(e.data) as RaidTimeData
+			console.log('created!!!', createdTime)
+			raids.addNewTime(createdTime)
 		})
 		eventSource.addEventListener('voted', function (e) {
-			const data = JSON.parse(e.data)
-			console.log('voted!!!', data)
+			const votedTime = JSON.parse(e.data)
+			raids.voteTime(votedTime)
 		})
 		eventSource.addEventListener('removed', function (e) {
-			const data = JSON.parse(e.data)
-			console.log('removed!!!', data)
+			const removedTime = JSON.parse(e.data)
+			raids.removeTime(removedTime)
 		})
 		eventSource.addEventListener('notify', function (e) {
 			const data = JSON.parse(e.data)
@@ -90,7 +92,7 @@
 
 		const raidsFetched = await getRaids($crrServerType)
 		raids.set(raidsFetched)
-		selectedRaidTab.set(raidsFetched[0])
+		selectedRaidId.set(raidsFetched[0].id)
 		console.log('raidsFetched', raidsFetched)
 		// const sorted = allRaidTimers.sort((a, b) => {
 		// 	const dateA = new Date(a.startAt)
@@ -112,7 +114,9 @@
 	<h2 class="ir">레이드 타이머</h2>
 	<Inner class="w-full">
 		{#if isModalOn}
-			<Inner class="absolute left-0 top-0 z-[99] size-full overflow-hidden">
+			<Inner
+				class="py-content-side absolute left-0 top-0 z-[99] size-full overflow-hidden"
+			>
 				<FloatModal />
 				<button class="absolute right-4 top-4" on:click={toggleIsModalOn}
 					>닫기</button

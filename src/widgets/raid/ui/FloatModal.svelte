@@ -1,12 +1,18 @@
 <script lang="ts">
-	import { crrServerType, GAME_SERVERS } from '$entities/raid'
-	import { _objKeys, cn } from '$shared/lib'
+	import {
+		crrServerType,
+		GAME_SERVERS,
+		raids,
+		selectedRaidId
+	} from '$entities/raid'
+	import { _objKeys, _pick, cn } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
-	import { Title } from '$shared/text'
-	import RaidDetailView from '$widgets/raid/ui/RaidDetailView.svelte'
+	import { NoData, Title } from '$shared/text'
+	import AddTime from '$widgets/raid/ui/AddTime.svelte'
 	import RaidList from '$widgets/raid/ui/RaidList.svelte'
+	import RaidTimeList from '$widgets/raid/ui/RaidTimeList.svelte'
 </script>
 
 <Section
@@ -31,9 +37,22 @@
 		</Tabs>
 	</div>
 	<div class="flex flex-1 overflow-hidden">
-		<RaidList></RaidList>
-		<div class="flex-1">
-			<RaidDetailView></RaidDetailView>
+		<RaidList />
+		<div class="w-1/2 shrink-0">
+			{#if $selectedRaidId}
+				{@const raid = _pick($raids, $selectedRaidId)}
+				<section
+					class="size-full rounded-md bg-primary-5/60 p-3 backdrop-blur-sm"
+				>
+					<Title class="mb-3">{raid.name}</Title>
+					{#if raid.times.length > 0}
+						<RaidTimeList {raid} />
+					{:else}
+						<NoData>아직 제보된 보스 출현 정보가 없습니다.</NoData>
+					{/if}
+					<AddTime {raid} />
+				</section>
+			{/if}
 		</div>
 	</div>
 </Section>

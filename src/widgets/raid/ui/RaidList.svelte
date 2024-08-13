@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { selectedRaidTab, raids, type RaidData } from '$entities/raid'
+	import { selectedRaidId, raids, type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import RaidInfo from '$widgets/raid/ui/RaidInfo.svelte'
 
 	const onClickView = (raid: RaidData) => {
-		selectedRaidTab.set(raid)
+		selectedRaidId.set(raid.id)
 	}
 </script>
 
@@ -19,9 +19,9 @@
 			class={cn(
 				'relative rounded-md',
 				'hover:bg-secondary-20/80 hover:opacity-100',
-				$selectedRaidTab.id === raid.id
+				$selectedRaidId === raid.id
 					? 'border border-secondary-40 bg-secondary-20/80 opacity-100'
-					: 'bg-secondary-20/50 opacity-70'
+					: 'bg-secondary-20/50 opacity-40'
 			)}
 		>
 			<RaidInfo {raid} />

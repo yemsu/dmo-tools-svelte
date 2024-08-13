@@ -1,32 +1,86 @@
 <script lang="ts">
-	import type { RaidData } from '$entities/raid'
-	import AddTime from '$widgets/raid/ui/AddTime.svelte'
+	import {
+		crrServerType,
+		GAME_SERVERS,
+		putRaidTimeVote,
+		type RaidData,
+		type RaidTimeData
+	} from '$entities/raid'
+	import Button from '$shared/button/ui/Button.svelte'
+	import { cn, timeRemainingString } from '$shared/lib'
 
 	export let raid: RaidData
-	const getTime = (time: string) => {
-		const date = new Date(time)
-		return date.toLocaleTimeString('en-US')
+
+	const onClickVote = async (raid: RaidData, time: RaidTimeData) => {
+		if (!$crrServerType) {
+			throw Error('onClickVote: crrServerType is undefined')
+		}
+		const isConfirmed = confirm(
+			`이 제보가 맞나요? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${time.channel}채널] ${timeRemainingString(time.startAt)} 후 출연`
+		)
+		if (!isConfirmed) {
+			return
+		}
+		const res = await putRaidTimeVote(time.id)
+		if (res) {
+			alert('투표 감사합니다!')
+		}
 	}
+
+	const timeDataKeyMaps: { key: keyof RaidTimeData; text: string }[] = [
+		{ key: 'channel', text: '채널' },
+		{ key: 'startAt', text: '남은 시간' },
+		{ key: 'voteCount', text: '투표수' }
+	]
 </script>
 
-<div>
-	<AddTime {raid} />
-	{#if raid.times}
-		{#each raid.times as time (time.id)}
-			<dl class="grid grid-cols-5">
-				<div class="col-span-2">
-					<dt class="text-[10px] text-gray-300">시작 시간</dt>
-					<dd class="text-xs">{getTime(time.startAt)}</dd>
+{#if raid.times}
+	<ol>
+		{#each raid.times as time, i (time.id)}
+			<li>
+				<span class="ir">정확도 {i + 1}순위</span>
+				<div class="flex items-center gap-2">
+					<dl class="grid flex-1 grid-cols-3 border-b border-gray-700">
+						{#each timeDataKeyMaps as timeDataKeyMap (time.id + timeDataKeyMap.key)}
+							<div class={cn('text-center')}>
+								<dt
+									class={cn(
+										'bg-gray-700/50 py-1',
+										'text-[10px] text-gray-300',
+										i !== 0 && 'ir'
+									)}
+								>
+									{timeDataKeyMap.text}
+								</dt>
+								<dd class="flex-center h-[35px] py-1 text-xs">
+									{#if timeDataKeyMap.key === 'startAt'}
+										{timeRemainingString(time.startAt)}
+									{:else if timeDataKeyMap.key === 'voteCount'}
+										<span>
+											<Button
+												size="sm"
+												rounded="md"
+												class="bg-primary-30"
+												title="투표"
+												on:click={() => onClickVote(raid, time)}
+											>
+												{time[timeDataKeyMap.key] + 1}
+												<iconify-icon
+													icon="fa-solid:vote-yea"
+													width={12}
+													height={12}
+												/>
+											</Button>
+										</span>
+									{:else}
+										{time[timeDataKeyMap.key]}
+									{/if}
+								</dd>
+							</div>
+						{/each}
+					</dl>
 				</div>
-				<div>
-					<dt class="text-[10px] text-gray-300">채널</dt>
-					<dd class="text-center text-xs">{time.channel}</dd>
-				</div>
-				<div>
-					<dt class="text-[10px] text-gray-300">투표수</dt>
-					<dd class="text-center text-xs">{time.voteCount}</dd>
-				</div>
-			</dl>
+			</li>
 		{/each}
-	{/if}
-</div>
+	</ol>
+{/if}

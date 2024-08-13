@@ -1,8 +1,8 @@
-export { getRaids, postRaidTime, disSubscribe } from './api'
+export { getRaids, postRaidTime, disSubscribe, putRaidTimeVote } from './api'
 export { GAME_CHANNELS, GAME_SERVERS } from './config'
 export {
 	raids,
-	selectedRaidTab,
+	selectedRaidId,
 	crrServerType,
 	subscribeClientId
 } from './model'

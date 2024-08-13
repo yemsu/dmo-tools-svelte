@@ -52,3 +52,22 @@ export const timeElapsedString = (createdAt: string) => {
 		return '방금 전'
 	}
 }
+
+export const timeRemainingString = (startAt: string) => {
+	const startAtTime = new Date(startAt)
+	const currentTime = new Date()
+	const remainingMilliseconds = startAtTime.getTime() - currentTime.getTime()
+	const remainingSeconds = Math.floor(remainingMilliseconds / 1000)
+	const remainingMinutes = Math.floor(remainingSeconds / 60)
+	const remainingHours = Math.floor(remainingMinutes / 60)
+	if (remainingHours <= 0 && remainingMinutes <= 0) {
+		return '곧 출현!'
+	}
+	let result = ''
+	if (remainingHours > 0) {
+		result += `${remainingHours}시간`
+	} else if (remainingMinutes > 0) {
+		result += ` ${remainingMinutes}분`
+	}
+	return result
+}
