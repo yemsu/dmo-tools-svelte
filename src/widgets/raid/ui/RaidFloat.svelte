@@ -100,7 +100,7 @@
 	}
 
 	onMount(async () => {
-		crrServerType.set(_objKeys(GAME_SERVERS)[0])
+		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
 	})
 
 	$: $crrServerType && onChangeCrrServerType($crrServerType)

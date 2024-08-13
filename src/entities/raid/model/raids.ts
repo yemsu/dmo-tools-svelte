@@ -1,11 +1,6 @@
-import type { RaidData, RaidTimeData, ServerType } from '$entities/raid/types'
+import type { RaidData, RaidTimeData } from '$entities/raid/types'
 import { timeSortByVote } from '$widgets/raid'
 import { writable } from 'svelte/store'
-
-export const crrServerType = writable<ServerType | undefined>()
-export const selectedRaidId = writable<RaidData['id']>()
-
-export const subscribeClientId = writable<string | undefined>()
 
 const createRaidsStore = () => {
 	const { subscribe, set, update } = writable<RaidData[]>([])
