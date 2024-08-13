@@ -19,11 +19,11 @@ export const postRaidTime = (raidId: RaidData['id'], body: PostRaidTimeBody) =>
 	})
 
 export const putRaidTimeVote = (timerId: RaidTimeData['id']) =>
-	apiFetch<RaidData[]>(`/raids/timers/${timerId}/vote`, {
+	apiFetch<RaidTimeData>(`/raids/timers/${timerId}/vote`, {
 		method: 'PUT'
 	})
 
 export const disSubscribe = (clientId: string) =>
-	apiFetch<RaidData[]>(`/alarms/${clientId}/dis-subscribe`, {
+	apiFetch<boolean>(`/alarms/${clientId}/dis-subscribe`, {
 		method: 'POST'
 	})
