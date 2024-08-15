@@ -7,7 +7,7 @@
 	const { class: className, ...restProps } = $$restProps
 </script>
 
-<ra
+<div
 	class={cn(
 		'grid grid-cols-2 gap-1 break-keep p-2 text-center md:grid-cols-6 md:gap-2',
 		className
@@ -34,4 +34,4 @@
 			{time ? timeRemainingString(time.startAt) : '-'}
 		</dd>
 	</div>
-</ra>
+</div>

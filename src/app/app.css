@@ -47,6 +47,7 @@
 	@media screen and (max-width: 767px) {
 		:root {
 			--content-side: 14px;
+			--raid-bar-h: 35px;
 		}
 	}
 }

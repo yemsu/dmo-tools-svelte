@@ -22,8 +22,7 @@
 		'rounded-md backdrop-blur-sm'
 	)}
 >
-	<div class="flex gap-4">
-		<Title>보스 출현 정보</Title>
+	<div class="flex items-center gap-4">
 		<Tabs>
 			{#each _objKeys(GAME_SERVERS) as serverType (serverType)}
 				<Tab
@@ -35,16 +34,22 @@
 				</Tab>
 			{/each}
 		</Tabs>
+		<div>
+			<Title class="leading-none">보스 출현 정보</Title>
+			<p class="text-xs text-gray-300">
+				보스 출현 정보를 제보하거나 투표하여 알람을 받아보세요!
+			</p>
+		</div>
 	</div>
 	<div class="flex flex-1 overflow-hidden">
 		<RaidList />
 		<div class="w-1/2 shrink-0">
-			{#if $selectedRaidId}
+			{#if $raids.length > 0 && $selectedRaidId}
 				{@const raid = _pick($raids, $selectedRaidId)}
 				<section
-					class="size-full rounded-md bg-secondary-5/40 p-3 backdrop-blur-sm"
+					class="size-full rounded-md bg-secondary-5/40 p-1 py-2 backdrop-blur-sm md:p-3"
 				>
-					<Title class="mb-3">{raid.name}</Title>
+					<Title class="mb-3 text-center">{raid.name}</Title>
 					{#if raid.times.length > 0}
 						<RaidTimeList {raid} />
 					{:else}
