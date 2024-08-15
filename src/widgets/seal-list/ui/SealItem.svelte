@@ -81,7 +81,7 @@
 		</Tooltip>
 	</div>
 	<div class="flex flex-col items-center gap-1 p-1">
-		<SealItemCount sealId={seal.id} {myStep} isEditable={isCountEditable} />
+		<SealItemCount sealId={seal.id} isEditable={isCountEditable} />
 		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} />
 		<slot></slot>
 	</div>

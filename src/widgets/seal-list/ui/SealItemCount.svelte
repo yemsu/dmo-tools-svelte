@@ -5,7 +5,7 @@
 
 	export let sealId: number
 	export let isEditable: boolean = true
-	export let myStep: SealStep | undefined = undefined
+
 	$: count = $mySeals.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
