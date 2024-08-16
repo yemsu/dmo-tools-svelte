@@ -1,5 +1,5 @@
 import { createLoadSaveFn, updateOrAddData } from '$entities/seals/lib'
-import type { MyPrice, SealData, SealPrice } from '$entities/seals/type'
+import type { MyPrice, SealData } from '$entities/seals/type'
 import { _remove } from '$shared/lib'
 import { writable } from 'svelte/store'
 
@@ -29,5 +29,4 @@ const createMyPrices = () => {
 	}
 }
 
-export const sealPrices = writable<SealPrice[]>([])
 export const myPrices = createMyPrices()

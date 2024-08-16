@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { myPrices, sealPrices } from '$entities/seals'
+	import { page } from '$app/stores'
+	import { myPrices } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { getMyAndFinalPrice } from '$widgets/select-seal-form'
 
 	export let sealId: number
 	export let isEditable: boolean = true
-	$: prices = getMyAndFinalPrice($sealPrices, $myPrices, sealId)
+
+	$: prices = getMyAndFinalPrice($page.data.sealPrices, $myPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
 	let isOnInput = false

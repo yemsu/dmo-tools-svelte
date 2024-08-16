@@ -12,10 +12,9 @@
 	} from '$entities/raid'
 	import { _objKeys } from '$shared/lib'
 	import { Inner } from '$shared/section'
+	import { RaidBar } from '$widgets/raid-bar'
 	import FloatModal from '$widgets/raid/ui/FloatModal.svelte'
 	import { onMount } from 'svelte'
-	import { RaidBar } from '$widgets/raid-bar'
-	import { timeSortByVote } from '$widgets/raid'
 
 	let isModalOn = false
 	let eventSource: EventSource | undefined

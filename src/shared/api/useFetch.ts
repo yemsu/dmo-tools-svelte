@@ -1,3 +1,5 @@
+import { error } from '@sveltejs/kit'
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export type FetchState<ResponseData> = [
@@ -29,7 +31,10 @@ export const apiFetch = async <ResponseData>(
 			)
 		}
 		return data.result
-	} catch (err) {
-		throw Error((err as Error).message)
+	} catch (e) {
+		const err = e as { body: { message: string; status: number } }
+		error(err.body.status, {
+			message: `${err.body.message}! endpoint: ${endpoint}`
+		})
 	}
 }

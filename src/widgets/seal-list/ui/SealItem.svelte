@@ -1,18 +1,18 @@
 <script lang="ts">
-	import { getSealPrice, type SealData, sealPrices } from '$entities/seals'
+	import { page } from '$app/stores'
+	import { getSealPrice, type SealData } from '$entities/seals'
 	import { cn, timeElapsedString } from '$shared/lib'
 	import { Tooltip } from '$shared/tooltip'
-	import {
-		SEAL_COUNT_STEPS_BY_MASTER,
-		type SealStep
-	} from '$widgets/seal-calculator'
+	import { SEAL_COUNT_STEPS_BY_MASTER } from '$widgets/seal-calculator'
+	import type { SealEfficiency } from '$widgets/seal-calculator/types'
 	import { statColorStyles } from '$widgets/select-seal-form'
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'
 	export let seal: SealData
-	export let myStep: SealStep | undefined = undefined
+	export let myStep: SealEfficiency['myStep'] = undefined
 	export let isCountEditable: boolean = true
 	export let isPriceEditable: boolean = true
+	let sealPrices = $page.data.sealPrices
 </script>
 
 <div class={cn('relative flex flex-col justify-center text-center')}>
@@ -49,8 +49,8 @@
 				<div class="flex items-center gap-2">
 					<dt class="text-gray-300">가격 업데이트</dt>
 					<dd class="text-point">
-						{$sealPrices.length > 0 &&
-							timeElapsedString(getSealPrice($sealPrices, seal.id).modifiedAt)}
+						{sealPrices.length > 0 &&
+							timeElapsedString(getSealPrice(sealPrices, seal.id).modifiedAt)}
 					</dd>
 				</div>
 				{#if myStep}

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { mySeals } from '$entities/seals'
 	import { cn, numberFormatter } from '$shared/lib'
-	import type { SealStep } from '$widgets/seal-calculator'
 
 	export let sealId: number
 	export let isEditable: boolean = true

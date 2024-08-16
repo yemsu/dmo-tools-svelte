@@ -1,14 +1,7 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { activeMenuType } from '$entities/menus'
-	import {
-		getSealPrices,
-		getSeals,
-		myPrices,
-		mySeals,
-		myStats,
-		sealPrices,
-		seals
-	} from '$entities/seals'
+	import { myPrices, mySeals, myStats } from '$entities/seals'
 	import type { Stats } from '$entities/seals/type'
 	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
@@ -22,17 +15,10 @@
 	import { onMount } from 'svelte'
 
 	onMount(async () => {
-		// seals
-		const sealsFetched = await getSeals()
-		seals.set(sealsFetched)
-		// my seals
 		if ($mySeals.length === 0) {
 			mySeals.loadSavedData()
 		}
-		// sealPrices
-		const sealPricesFetched = await getSealPrices('modifiedAt')
-		sealPrices.set(sealPricesFetched)
-		// my prices
+
 		if ($myPrices.length === 0) {
 			myPrices.loadSavedData()
 		}
@@ -40,7 +26,7 @@
 	$: statCalc = (statType: StatType) => {
 		const mySealsByStatType = objectBy(
 			$mySeals,
-			({ id }) => getMySealData($seals, id).statType
+			({ id }) => getMySealData($page.data.seals, id).statType
 		)
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
@@ -50,7 +36,7 @@
 		let resultValue = 0
 		sealsByStatType.forEach(({ id, count }) => {
 			let sealPercent = 0
-			const seal = getMySealData($seals, id)
+			const seal = getMySealData($page.data.seals, id)
 			const crrStat = getCurrentStep(seal, count)
 			sealPercent = crrStat.percent
 			const maxIncrease = seal.maxIncrease
@@ -81,7 +67,7 @@
 	/>
 </svelte:head>
 
-<Inner class="py-content-side grid h-content-fill-h gap-2 overflow-hidden">
+<Inner class="grid h-content-fill-h gap-2 overflow-hidden py-content-side">
 	{#if $activeMenuType === 'SETTING'}
 		<SettingSeals />
 	{:else if $activeMenuType === 'MY'}

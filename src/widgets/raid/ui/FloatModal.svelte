@@ -37,7 +37,7 @@
 		<div>
 			<Title class="leading-none">보스 출현 정보</Title>
 			<p class="text-xs text-gray-300">
-				보스 출현 정보를 제보하거나 투표하여 알람을 받아보세요!
+				보스를 제보하거나 투표하여 알람을 받아보세요.
 			</p>
 		</div>
 	</div>

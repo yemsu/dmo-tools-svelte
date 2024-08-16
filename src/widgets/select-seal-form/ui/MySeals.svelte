@@ -1,16 +1,12 @@
 <script lang="ts">
-	import {
-		myPrices,
-		mySeals,
-		myStats,
-		sealPrices,
-		seals,
-		type MySeal
-	} from '$entities/seals'
+	import { page } from '$app/stores'
+	import { myPrices, mySeals, myStats, type MySeal } from '$entities/seals'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { CrrMenuTitle } from '$shared/text'
-	import { SealList, SealItem } from '$widgets/seal-list'
+	import { SealItem, SealList } from '$widgets/seal-list'
+	import { StatBar } from '$widgets/stat-bar'
+	import { onMount } from 'svelte'
 	import {
 		STAT_TYPE_OPTIONS,
 		STATS,
@@ -19,8 +15,6 @@
 	} from '../config'
 	import { getMyAndFinalPrice, getMySealData } from '../lib/helper'
 	import MySealGrade from './MySealGrade.svelte'
-	import { StatBar } from '$widgets/stat-bar'
-	import { onMount } from 'svelte'
 
 	let statTypeSelected = 'ALL'
 	let mySealsFiltered: MySeal[] = []
@@ -36,7 +30,8 @@
 		} else {
 			const mySealDataList = $mySeals.filter(
 				(mySeal) =>
-					getMySealData($seals, mySeal.id)?.statType === statTypeSelected
+					getMySealData($page.data.seals, mySeal.id)?.statType ===
+					statTypeSelected
 			)
 			mySealsFiltered = mySealDataList
 		}
@@ -53,7 +48,7 @@
 	$: getTotalMySealPrice = () => {
 		let totalPrice = 0
 		for (const { id, count } of $mySeals) {
-			const price = getMyAndFinalPrice($sealPrices, $myPrices, id)
+			const price = getMyAndFinalPrice($page.data.sealPrices, $myPrices, id)
 			const sumSealPrice = price.final * count
 			if (sumSealPrice) totalPrice += sumSealPrice
 		}
@@ -96,7 +91,7 @@
 			let:seal={mySeal}
 			noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!"
 		>
-			<SealItem seal={getMySealData($seals, mySeal.id)}>
+			<SealItem seal={getMySealData($page.data.seals, mySeal.id)}>
 				<MySealGrade {mySeal} />
 				<button
 					class="absolute right-[1px] top-[1px]"

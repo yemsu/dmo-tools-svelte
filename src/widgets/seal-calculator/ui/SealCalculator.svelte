@@ -1,12 +1,7 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import type { MySeal, SealData } from '$entities/seals'
-	import {
-		myPrices,
-		mySeals,
-		myStats,
-		sealPrices,
-		seals
-	} from '$entities/seals'
+	import { myPrices, mySeals, myStats } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
@@ -27,10 +22,8 @@
 		StatBarWrap
 	} from '$widgets/stat-bar'
 	import {
-		getNextSteps,
 		getCurrentStep,
-		getPrevStep,
-		resultMerged,
+		getNextSteps,
 		sortByEffDataList
 	} from '../lib/calculate'
 	import type { SealEfficiency } from '../types'
@@ -53,11 +46,15 @@
 
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
-		const { final: price } = getMyAndFinalPrice($sealPrices, $myPrices, seal.id)
+		const { final: price } = getMyAndFinalPrice(
+			$page.data.sealPrices,
+			$myPrices,
+			seal.id
+		)
 		if (!price) return result
 		const mySealCount = getMySealCount($mySeals, seal.id)
 		const crrMyStep =
-			mySealCount !== 0 ? getCurrentStep(seal, mySealCount) : { percent: 0 }
+			mySealCount !== 0 ? getCurrentStep(seal, mySealCount) : undefined
 		const nextSteps = getNextSteps(seal, mySealCount)
 
 		if (nextSteps.length === 0) return result
@@ -65,7 +62,8 @@
 			if (nextStep.sealCount === null) continue
 
 			const willGetStat =
-				seal.maxIncrease * ((nextStep.percent - crrMyStep?.percent) / 100)
+				seal.maxIncrease *
+				((nextStep.percent - (crrMyStep?.percent || 0)) / 100)
 			const needCount = nextStep.sealCount - mySealCount
 			const needPrice = price ? needCount * price : 0
 			const efficiency = +(willGetStat / needPrice) || 0
@@ -101,7 +99,7 @@
 			return
 		}
 		resetPrevResult()
-		const statSeals = $seals.filter(
+		const statSeals = $page.data.seals.filter(
 			({ statType }) => statType === statTypeSelected
 		)
 
@@ -216,7 +214,7 @@
 			let:seal={effData}
 			noDataText="목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!"
 		>
-			{@const seal = $seals.find(({ id }) => id === effData.id)}
+			{@const seal = $page.data.seals.find(({ id }) => id === effData.id)}
 			{#if seal}
 				<SealItem {seal} myStep={effData.myStep} isCountEditable={false}>
 					<SealCalcData {effData} />

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { seals, type SealData } from '$entities/seals'
+	import { page } from '$app/stores'
+	import { type SealData } from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { Section } from '$shared/section'
@@ -16,13 +17,14 @@
 
 	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
-	$: searchResults = $seals
+	let seals = $page.data.seals
+	$: searchResults = seals
 
 	const updateSearchResult = (_searchText: string) => {
 		const filterStatTypeSelected =
 			statTypeSelected === 'ALL'
-				? $seals
-				: $seals.filter(({ statType }) => statType === statTypeSelected)
+				? seals
+				: seals.filter(({ statType }) => statType === statTypeSelected)
 		if (_searchText === '') {
 			searchResults = filterStatTypeSelected
 			return
@@ -46,6 +48,7 @@
 	}
 
 	$: onClickStatType = (statTypeOption: StatTypeOption) => {
+		console.log('sdf?', seals)
 		statTypeSelected = statTypeOption
 		updateSearchResult(searchText)
 	}
@@ -90,7 +93,7 @@
 		</p>
 		<SealList
 			seals={searchResults}
-			isLoading={$seals.length === 0}
+			isLoading={seals.length === 0}
 			let:seal
 			noDataText="검색 결과가 존재하지 않습니다."
 		>

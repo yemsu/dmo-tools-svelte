@@ -1,7 +1,5 @@
 <script lang="ts">
 	import type { Stats } from '$entities/seals'
-	import { numberFormatter } from '$shared/lib'
-	import { STATS } from '$widgets/select-seal-form'
 	import {
 		MyStatBox,
 		StatBarSeparator,
