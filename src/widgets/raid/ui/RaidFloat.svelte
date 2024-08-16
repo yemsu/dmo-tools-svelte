@@ -36,24 +36,19 @@
 	}
 
 	$: clearPrevSubscribe = async () => {
-		console.log('eventSource', eventSource, $subscribeClientId)
-		if (eventSource && $subscribeClientId) {
-			console.log('$subscribeClientId', $subscribeClientId)
-			eventSource.close()
-			eventSource = undefined
-			return await disSubscribe($subscribeClientId)
-		}
+		if (!eventSource || !$subscribeClientId) return
+		console.log(
+			'clearPrevSubscribe eventSource',
+			eventSource,
+			$subscribeClientId
+		)
+		eventSource.close()
+		eventSource = undefined
+		return await disSubscribe($subscribeClientId)
 	}
 
 	const handleEventSource = async (_eventSource: EventSource) => {
 		console.log('new SSE', eventSource)
-		if (_eventSource.readyState === EventSource.CONNECTING) {
-			console.log('SSE is connecting...')
-		} else if (_eventSource.readyState === EventSource.OPEN) {
-			console.log('SSE connection is open')
-		} else if (_eventSource.readyState === EventSource.CLOSED) {
-			console.log('SSE connection is closed')
-		}
 		_eventSource.addEventListener('sub', function (e) {
 			const data = JSON.parse(e.data)
 			console.log('sub!!! ', data)
@@ -82,11 +77,16 @@
 	}
 
 	const subscribeSSE = async (serverType: ServerType) => {
-		console.log('sse', serverType)
+		const ipRes = await fetch('https://ipinfo.io/json?token=d49252de2b4da0')
+		if (!ipRes.ok) {
+			throw Error(`HTTP error! get ip Failed! ${ipRes.status}`)
+		}
+		const data: { ip: string } = await ipRes.json()
+
 		checkSseSupported()
 		await clearPrevSubscribe()
 		eventSource = new EventSource(
-			`${API_BASE_URL}/alarms/subscribe/${serverType}`
+			`${API_BASE_URL}/alarms/subscribe/${serverType}?ipAddress=${data.ip}`
 		)
 		handleEventSource(eventSource)
 	}

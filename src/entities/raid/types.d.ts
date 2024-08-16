@@ -12,6 +12,7 @@ export type RaidTimeData = {
 	voteCount: number
 	server: ServerType
 	raidId: RaidData['id']
+	clientId: number
 }
 
 export type RaidData = {

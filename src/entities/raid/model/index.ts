@@ -3,4 +3,4 @@ import { writable } from 'svelte/store'
 
 export const selectedRaidId = writable<RaidData['id']>()
 
-export const subscribeClientId = writable<string | undefined>()
+export const subscribeClientId = writable<number | undefined>()

@@ -4,6 +4,7 @@
 		GAME_CHANNELS,
 		GAME_SERVERS,
 		postRaidTime,
+		subscribeClientId,
 		type GameChannel,
 		type RaidData
 	} from '$entities/raid'
@@ -51,6 +52,9 @@
 
 	$: onSubmit = async () => {
 		const { channel, timeRemaining } = form
+		if (!$subscribeClientId) {
+			throw Error('onSubmit: subscribeClientId 정보가 없습니다.')
+		}
 		if (timeRemaining === null) {
 			alert('보스 출현까지 남은 시간(분)을 입력해 주세요')
 			setTimeout(() => {
@@ -74,7 +78,8 @@
 		await postRaidTime(raid.id, {
 			timeRemaining,
 			channel,
-			server: $crrServerType
+			server: $crrServerType,
+			clientId: $subscribeClientId
 		})
 
 		isShowForm = false

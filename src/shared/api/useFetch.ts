@@ -6,16 +6,28 @@ export type FetchState<ResponseData> = [
 	error: string | null
 ]
 
+type ErrorResponse = {
+	errorCode: string
+	errorMessage: string
+	errorType: string
+}
+
 export const apiFetch = async <ResponseData>(
 	endpoint: string,
 	option?: RequestInit
 ): Promise<ResponseData> => {
 	try {
 		const response = await fetch(`${API_BASE_URL}${endpoint}`, option)
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`)
+		const data: { result: ResponseData | ErrorResponse } = await response.json()
+		if (
+			data.result &&
+			typeof data.result === 'object' &&
+			'errorMessage' in data.result
+		) {
+			throw new Error(
+				`GET ERROR RESPONSE - [${data.result.errorCode}]${data.result.errorType}: ${data.result.errorMessage} (${endpoint})`
+			)
 		}
-		const data: { result: ResponseData } = await response.json()
 		return data.result
 	} catch (err) {
 		throw Error((err as Error).message)

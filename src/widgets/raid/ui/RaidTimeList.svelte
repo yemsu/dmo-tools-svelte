@@ -3,27 +3,31 @@
 		crrServerType,
 		GAME_SERVERS,
 		putRaidTimeVote,
+		subscribeClientId,
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
-	import Button from '$shared/button/ui/Button.svelte'
-	import { cn, timeRemainingString } from '$shared/lib'
+	import { timeRemainingString } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import RaidItemTime from '$widgets/raid-bar/ui/RaidItemTime.svelte'
 
 	export let raid: RaidData
 
 	$: onClickVote = async (raid: RaidData, time: RaidTimeData) => {
-		if (!$crrServerType) {
-			throw Error('onClickVote: crrServerType is undefined')
+		if (!$crrServerType || !$subscribeClientId) {
+			throw Error(
+				`onClickVote: crrServerType||subscribeClientId(${crrServerType},${subscribeClientId}) is undefined`
+			)
+		}
+		if (time.clientId === $subscribeClientId) {
+			alert('내 제보에는 투표할 수 없습니다.')
+			return
 		}
 		const isConfirmed = confirm(
 			`이 제보가 맞나요? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${time.channel}채널] ${timeRemainingString(time.startAt)} 출현`
 		)
-		if (!isConfirmed) {
-			return
-		}
-		const res = await putRaidTimeVote(time.id)
+		if (!isConfirmed) return
+		const res = await putRaidTimeVote($subscribeClientId, time.id)
 		if (res) {
 			toast.on('투표가 완료되었습니다!')
 		}
