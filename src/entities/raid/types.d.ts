@@ -19,5 +19,6 @@ export type RaidData = {
 	id: number
 	name: string
 	location: string
+	channels: string
 	times: RaidTimeData[]
 }

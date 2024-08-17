@@ -1,10 +1,10 @@
 <script lang="ts">
 	import {
 		crrServerType,
-		GAME_CHANNELS,
 		GAME_SERVERS,
 		putRaidTimeVote,
 		subscribeClientId,
+		type GameChannel,
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
@@ -15,6 +15,8 @@
 	import RaidItemChannel from '$widgets/raid-bar/ui/RaidItemChannel.svelte'
 
 	export let raid: RaidData
+	export let raidChannels: GameChannel[]
+
 	$: raidTimeByChannel = objectBy(raid.times, (time) => time.channel)
 	$: onClickVote = async (raid: RaidData, time: RaidTimeData) => {
 		if (!$crrServerType || !$subscribeClientId) {
@@ -49,45 +51,43 @@
 	}
 </script>
 
-{#if raid.times}
-	<ul class="flex flex-col gap-4">
-		{#each GAME_CHANNELS as channel (channel)}
-			<li class="flex flex-col items-start gap-1.5">
-				<RaidItemChannel {channel} />
-				{#if raidTimeByChannel[channel] && raidTimeByChannel[channel].length > 0}
-					<ol class="flex w-full flex-col gap-2">
-						{#each raidTimeByChannel[channel] as time, i}
-							<li
-								class={cn(
-									'rounded-md bg-gray-800',
-									i === 0 ? 'border-b border-t border-primary-50/50' : ''
-								)}
+<ul class="flex flex-col gap-4">
+	{#each raidChannels as channel (channel)}
+		<li class="flex flex-col items-start gap-1.5">
+			<RaidItemChannel {channel} />
+			{#if raidTimeByChannel[channel] && raidTimeByChannel[channel].length > 0}
+				<ol class="flex w-full flex-col gap-2">
+					{#each raidTimeByChannel[channel] as time, i}
+						<li
+							class={cn(
+								'rounded-md bg-gray-800',
+								i === 0 ? 'border-b border-t border-primary-50/50' : ''
+							)}
+						>
+							<span class="ir">정확도 {i + 1}순위</span>
+							<button
+								class="flex w-full items-center justify-between px-1.5 py-1.5 text-xs md:p-2"
+								title="투표"
+								on:click={() => onClickVote(raid, time)}
 							>
-								<span class="ir">정확도 {i + 1}순위</span>
-								<button
-									class="flex w-full items-center justify-between px-1.5 py-1.5 text-xs md:p-2"
-									title="투표"
-									on:click={() => onClickVote(raid, time)}
-								>
-									<span class="flex-center flex-1">
-										<Timer targetTime={time.startAt} />
-									</span>
-									<span>
-										{time.voteCount + 1}
-										<iconify-icon
-											icon="fa-solid:vote-yea"
-											width={12}
-											height={12}
-										/>
-									</span>
-								</button>
-							</li>
-						{/each}
-					</ol>
-				{:else}
-					<NoData class="w-full leading-none" compact>-</NoData>
-				{/if}
-			</li>
-		{/each}
-	</ul>
-{/if}
+								<span class="flex-center flex-1">
+									<Timer targetTime={time.startAt} />
+								</span>
+								<span>
+									{time.voteCount + 1}
+									<iconify-icon
+										icon="fa-solid:vote-yea"
+										width={12}
+										height={12}
+									/>
+								</span>
+							</button>
+						</li>
+					{/each}
+				</ol>
+			{:else}
+				<NoData class="w-full leading-none" compact>-</NoData>
+			{/if}
+		</li>
+	{/each}
+</ul>

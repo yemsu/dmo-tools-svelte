@@ -21,13 +21,8 @@
 	<span
 		class="flex flex-col gap-1 text-left md:flex-row md:items-center md:text-center"
 	>
-		<span class="flex gap-[1px] break-keep font-bold leading-[1.2]">
-			<iconify-icon
-				icon="mdi:dinosaur-pixel"
-				width={13}
-				height={13}
-				class="-mb-[2px]"
-			/>
+		<span class="flex gap-1 break-keep font-bold leading-[1.2]">
+			<iconify-icon icon="mdi:dinosaur-pixel" width={12} height={12} />
 			{raid.name}
 		</span>
 		<RaidLocation location={raid.location} />

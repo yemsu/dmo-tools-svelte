@@ -1,7 +1,6 @@
 <script lang="ts">
 	import {
 		crrServerType,
-		GAME_CHANNELS,
 		GAME_SERVERS,
 		postRaidTime,
 		subscribeClientId,
@@ -14,6 +13,8 @@
 	import { toast } from '$shared/toast'
 
 	export let raid: RaidData
+	export let raidChannels: GameChannel[]
+
 	let isShowForm = false
 
 	type Form = {
@@ -37,6 +38,10 @@
 	const selectChannel = (channel: GameChannel) => {
 		form = { ...form, channel }
 		inputElement.focus()
+	}
+
+	const hideForm = () => {
+		isShowForm = false
 	}
 
 	$: onInput = () => {
@@ -82,10 +87,12 @@
 			clientId: $subscribeClientId
 		})
 
-		isShowForm = false
+		hideForm()
 		form = { channel: null, timeRemaining: null }
 		toast.on('보스 제보가 완료되었습니다!')
 	}
+
+	$: raid && hideForm()
 </script>
 
 {#if !isShowForm}
@@ -101,7 +108,11 @@
 {:else}
 	<div class="mt-2 flex items-center justify-between gap-2">
 		<p class="break-keep text-xs text-gray-300">
-			보스가 출현할 채널과 남은 시간을 입력해주세요
+			{#if raidChannels.length > 1}
+				보스가 출현할 채널과 남은 시간을 입력해주세요
+			{:else}
+				보스 출현까지 남은 시간을 입력해주세요
+			{/if}
 		</p>
 		<Button
 			on:click={onToggleShowForm}
@@ -113,20 +124,21 @@
 	<section class="mt-2">
 		<h2 class="ir">보스 제보</h2>
 		<div class="flex flex-col gap-2">
-			<div class="flex items-center rounded-md bg-gray-800">
-				<p class="p-1.5 text-[11px]">채널</p>
+			{#if raidChannels.length > 1}
 				<Tabs class="flex-1">
-					{#each GAME_CHANNELS as channel (channel)}
+					{#each raidChannels as channel (channel)}
 						<Tab
 							isActive={form.channel === channel}
 							on:click={() => selectChannel(channel)}
-							class="text-xs"
+							class="flex-center text-xs"
 						>
 							{channel}
+							<span class="hidden text-[11px] font-normal md:inline">채널</span>
+							<span class="text-[9px] font-normal md:hidden">채널</span>
 						</Tab>
 					{/each}
 				</Tabs>
-			</div>
+			{/if}
 			<form on:submit|preventDefault={onSubmit} class="flex gap-2">
 				<input
 					bind:this={inputElement}
