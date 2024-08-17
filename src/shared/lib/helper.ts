@@ -1,4 +1,4 @@
-export const objectBy = <ArrItem, KeyName extends string>(
+export const objectBy = <ArrItem, KeyName extends string | number>(
 	arr: ArrItem[],
 	keyNameCB: (arrItem: ArrItem) => KeyName
 ) => {

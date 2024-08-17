@@ -1,19 +1,21 @@
 <script lang="ts">
 	import {
 		crrServerType,
+		GAME_CHANNELS,
 		GAME_SERVERS,
 		putRaidTimeVote,
 		subscribeClientId,
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
-	import { cn, timeRemainingString } from '$shared/lib'
+	import { cn, objectBy, timeRemainingString } from '$shared/lib'
+	import { NoData } from '$shared/text'
 	import Timer from '$shared/time/ui/Timer.svelte'
 	import { toast } from '$shared/toast'
 	import RaidItemChannel from '$widgets/raid-bar/ui/RaidItemChannel.svelte'
 
 	export let raid: RaidData
-
+	$: raidTimeByChannel = objectBy(raid.times, (time) => time.channel)
 	$: onClickVote = async (raid: RaidData, time: RaidTimeData) => {
 		if (!$crrServerType || !$subscribeClientId) {
 			throw Error(
@@ -48,28 +50,44 @@
 </script>
 
 {#if raid.times}
-	<ol class="flex flex-col gap-2">
-		{#each raid.times as time, i (raid.id + time.id)}
-			<li
-				class={cn(
-					'rounded-md bg-gray-800',
-					i === 0 ? 'border-b border-t border-primary-50/50' : ''
-				)}
-			>
-				<span class="ir">정확도 {i + 1}순위</span>
-				<button
-					class="flex w-full items-center justify-between px-1.5 py-2 text-xs md:p-2"
-					title="투표"
-					on:click={() => onClickVote(raid, time)}
-				>
-					<RaidItemChannel channel={time.channel} />
-					<Timer targetTime={time.startAt} />
-					<span>
-						{time.voteCount + 1}
-						<iconify-icon icon="fa-solid:vote-yea" width={12} height={12} />
-					</span>
-				</button>
+	<ul class="flex flex-col gap-4">
+		{#each GAME_CHANNELS as channel (channel)}
+			<li class="flex flex-col items-start gap-1.5">
+				<RaidItemChannel {channel} />
+				{#if raidTimeByChannel[channel] && raidTimeByChannel[channel].length > 0}
+					<ol class="flex w-full flex-col gap-2">
+						{#each raidTimeByChannel[channel] as time, i}
+							<li
+								class={cn(
+									'rounded-md bg-gray-800',
+									i === 0 ? 'border-b border-t border-primary-50/50' : ''
+								)}
+							>
+								<span class="ir">정확도 {i + 1}순위</span>
+								<button
+									class="flex w-full items-center justify-between px-1.5 py-1.5 text-xs md:p-2"
+									title="투표"
+									on:click={() => onClickVote(raid, time)}
+								>
+									<span class="flex-center flex-1">
+										<Timer targetTime={time.startAt} />
+									</span>
+									<span>
+										{time.voteCount + 1}
+										<iconify-icon
+											icon="fa-solid:vote-yea"
+											width={12}
+											height={12}
+										/>
+									</span>
+								</button>
+							</li>
+						{/each}
+					</ol>
+				{:else}
+					<NoData class="w-full leading-none" compact>-</NoData>
+				{/if}
 			</li>
 		{/each}
-	</ol>
+	</ul>
 {/if}
