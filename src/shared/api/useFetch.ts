@@ -38,3 +38,19 @@ export const apiFetch = async <ResponseData>(
 		})
 	}
 }
+
+export const apiFetchCustomError = async <ResponseData>(
+	endpoint: string,
+	option?: RequestInit
+): Promise<ResponseData | ErrorResponse> => {
+	try {
+		const response = await fetch(`${API_BASE_URL}${endpoint}`, option)
+		const data: { result: ResponseData | ErrorResponse } = await response.json()
+		return data.result
+	} catch (e) {
+		const err = e as { body: { message: string; status: number } }
+		error(err.body.status, {
+			message: `${err.body.message}! endpoint: ${endpoint}`
+		})
+	}
+}

@@ -29,7 +29,19 @@
 		)
 		if (!isConfirmed) return
 		const res = await putRaidTimeVote($subscribeClientId, time.id)
-		if (res) {
+		if ('errorMessage' in res) {
+			switch (res.errorMessage) {
+				case '이미 투표했습니다.':
+					alert('이미 투표했습니다.')
+					break
+				case '권한이 없습니다.':
+					alert('내 제보에는 투표할 수 없습니다.')
+					break
+				default:
+					alert(res.errorMessage)
+					break
+			}
+		} else {
 			toast.on('투표가 완료되었습니다!')
 		}
 	}
