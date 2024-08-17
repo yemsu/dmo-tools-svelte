@@ -16,8 +16,8 @@
 
 		--secondary-5: 208 46% 8%; /* hsl(208 46% 8%) */
 		--secondary-10: 207 48% 9.8%; /* hsl(207 48% 9.8%) */
-		--secondary-20: 190 33.33% 14.12%; /* hsl(190 33.33% 14.12%) */
-		--secondary-30: 196.36 34.02% 19.02%; /* hsl(196.36 34.02% 19.02%) */
+		--secondary-20: 203 25% 14.12%; /* hsl(203 25% 14.12%) */
+		--secondary-30: 196.36 30.02% 19.02%; /* hsl(196.36 34.02% 19.02%) */
 		--secondary-40: 195.43 22.88% 30%; /* hsl(195.43 22.88% 30%) */
 		--secondary-50: 188.28 12.13% 46.86%; /* hsl(188.28 12.13% 46.86%) */
 
@@ -41,13 +41,12 @@
 		/* size */
 		--header-h: 50px;
 		--gnb-h: 50px;
-		--raid-bar-h: 30px;
+		--raid-bar-h: 35px;
 		--content-side: 16px;
 	}
 	@media screen and (max-width: 767px) {
 		:root {
 			--content-side: 14px;
-			--raid-bar-h: 35px;
 		}
 	}
 }
@@ -139,5 +138,9 @@ button:focus:not(:focus-visible) {
 	}
 	.gradient-black-op {
 		@apply bg-gradient-to-br from-black/40 via-black/15 to-black/40;
+	}
+	.border-gradient {
+		@apply border-transparent;
+		border-image: linear-gradient(45deg, #01bff9, #2150a1) 1;
 	}
 }

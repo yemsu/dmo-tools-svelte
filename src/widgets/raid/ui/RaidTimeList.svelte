@@ -7,9 +7,10 @@
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
-	import { timeRemainingString } from '$shared/lib'
+	import { cn, timeRemainingString } from '$shared/lib'
+	import Timer from '$shared/time/ui/Timer.svelte'
 	import { toast } from '$shared/toast'
-	import RaidItemTime from '$widgets/raid-bar/ui/RaidItemTime.svelte'
+	import RaidItemChannel from '$widgets/raid-bar/ui/RaidItemChannel.svelte'
 
 	export let raid: RaidData
 
@@ -35,16 +36,22 @@
 </script>
 
 {#if raid.times}
-	<ol>
+	<ol class="flex flex-col gap-2">
 		{#each raid.times as time, i (raid.id + time.id)}
-			<li>
+			<li
+				class={cn(
+					'rounded-md bg-gray-800',
+					i === 0 ? 'border-b border-t border-primary-50/50' : ''
+				)}
+			>
 				<span class="ir">정확도 {i + 1}순위</span>
 				<button
-					class="flex w-full items-center justify-between rounded-md bg-gray-800 px-1.5 py-2 text-xs md:p-2"
+					class="flex w-full items-center justify-between px-1.5 py-2 text-xs md:p-2"
 					title="투표"
 					on:click={() => onClickVote(raid, time)}
 				>
-					<RaidItemTime {time} />
+					<RaidItemChannel channel={time.channel} />
+					<Timer targetTime={time.startAt} />
 					<span>
 						{time.voteCount + 1}
 						<iconify-icon icon="fa-solid:vote-yea" width={12} height={12} />

@@ -16,6 +16,7 @@
 	import FloatModal from '$widgets/raid/ui/FloatModal.svelte'
 	import { onMount } from 'svelte'
 
+	let isSseSupported: boolean | undefined = undefined
 	let isModalOn = false
 	let eventSource: EventSource | undefined
 	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -25,51 +26,40 @@
 	}
 
 	const checkSseSupported = () => {
-		//브라우저가 SSE지원하는지 체크
 		if (typeof EventSource !== 'undefined') {
-			console.log('sse지원')
+			isSseSupported = true
 		} else {
-			console.log('sse미지원')
+			isSseSupported = false
 			return
 		}
 	}
 
 	$: clearPrevSubscribe = async () => {
 		if (!eventSource || !$subscribeClientId) return
-		console.log(
-			'clearPrevSubscribe eventSource',
-			eventSource,
-			$subscribeClientId
-		)
 		eventSource.close()
 		eventSource = undefined
 		return await disSubscribe($subscribeClientId)
 	}
 
 	const handleEventSource = async (_eventSource: EventSource) => {
-		console.log('new SSE', eventSource)
 		_eventSource.addEventListener('sub', function (e) {
 			const data = JSON.parse(e.data)
-			console.log('sub!!! ', data)
+			console.log('subscribe')
 			subscribeClientId.set(data.clientId)
 		})
 		_eventSource.addEventListener('created', function (e) {
 			const createdTime = JSON.parse(e.data) as RaidTimeData
-			console.log('created!!!', createdTime)
+			console.log('created')
 			raids.addNewTime(createdTime)
 		})
 		_eventSource.addEventListener('voted', function (e) {
 			const votedTime = JSON.parse(e.data)
 			raids.voteTime(votedTime)
 		})
-		_eventSource.addEventListener('removed', function (e) {
-			const removedTime = JSON.parse(e.data)
-			raids.removeTime(removedTime)
-		})
-		_eventSource.addEventListener('notify', function (e) {
-			const data = JSON.parse(e.data)
-			console.log('notify!!!', data)
-		})
+		// _eventSource.addEventListener('notify', function (e) {
+		// 	const data = JSON.parse(e.data)
+		// 	console.log('notify')
+		// })
 		_eventSource.addEventListener('error', function (e) {
 			console.error('error occurred', e)
 		})
@@ -105,19 +95,21 @@
 	$: $crrServerType && onChangeCrrServerType($crrServerType)
 </script>
 
-<aside class="z-[99]">
+<aside class="z-raidBar">
 	<h2 class="ir">레이드 타이머</h2>
 	<Inner class="w-full">
 		{#if isModalOn}
-			<Inner
-				class="absolute left-0 top-0 z-[99] size-full overflow-hidden py-content-side"
-			>
+			<div class="z-modal absolute left-0 top-0 size-full overflow-hidden p-2">
 				<FloatModal />
-				<button class="absolute right-4 top-4" on:click={toggleIsModalOn}
-					>닫기</button
+				<button
+					class="absolute right-2 top-3 p-2 md:right-4 md:top-5"
+					on:click={toggleIsModalOn}
+					title="닫기"
 				>
-			</Inner>
+					<iconify-icon icon="mdi:close" width={25} height={25} />
+				</button>
+			</div>
 		{/if}
-		<RaidBar on:click={toggleIsModalOn} />
+		<RaidBar on:click={toggleIsModalOn} {isSseSupported} />
 	</Inner>
 </aside>

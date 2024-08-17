@@ -14,7 +14,7 @@
 
 {#if $toast}
 	<div
-		class="flex-center absolute bottom-gnb-h z-[999] mb-3 w-full translate-y-full"
+		class="flex-center z-toast absolute bottom-gnb-h mb-3 w-full translate-y-full"
 	>
 		<p
 			class={cn(

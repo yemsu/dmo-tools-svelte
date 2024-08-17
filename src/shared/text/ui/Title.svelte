@@ -14,7 +14,7 @@
 
 <svelte:element
 	this={tag}
-	class={cn(sizeStyles[size], className)}
+	class={cn('text-balance break-keep', sizeStyles[size], className)}
 	{...restProps}
 >
 	<slot></slot>

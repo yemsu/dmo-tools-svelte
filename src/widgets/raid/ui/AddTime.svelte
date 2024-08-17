@@ -99,8 +99,8 @@
 		>
 	</div>
 {:else}
-	<div class="flex-center mt-2 flex-wrap gap-2">
-		<p class="text-xs text-gray-300">
+	<div class="mt-2 flex items-center justify-between gap-2">
+		<p class="break-keep text-xs text-gray-300">
 			보스가 출현할 채널과 남은 시간을 입력해주세요
 		</p>
 		<Button
@@ -113,17 +113,20 @@
 	<section class="mt-2">
 		<h2 class="ir">보스 제보</h2>
 		<div class="flex flex-col gap-2">
-			<Tabs>
-				{#each GAME_CHANNELS as channel (channel)}
-					<Tab
-						isActive={form.channel === channel}
-						on:click={() => selectChannel(channel)}
-						class="text-xs"
-					>
-						{channel}채
-					</Tab>
-				{/each}
-			</Tabs>
+			<div class="flex items-center rounded-md bg-gray-800">
+				<p class="p-1.5 text-[11px]">채널</p>
+				<Tabs class="flex-1">
+					{#each GAME_CHANNELS as channel (channel)}
+						<Tab
+							isActive={form.channel === channel}
+							on:click={() => selectChannel(channel)}
+							class="text-xs"
+						>
+							{channel}
+						</Tab>
+					{/each}
+				</Tabs>
+			</div>
 			<form on:submit|preventDefault={onSubmit} class="flex gap-2">
 				<input
 					bind:this={inputElement}
@@ -144,3 +147,6 @@
 		</div>
 	</section>
 {/if}
+<p class="mt-4 text-center text-xs font-bold text-warning">
+	허위제보 시 사이트 이용이 제한될 수 있습니다
+</p>

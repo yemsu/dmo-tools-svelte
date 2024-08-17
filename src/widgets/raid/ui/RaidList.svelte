@@ -19,13 +19,17 @@
 		<li
 			class={cn(
 				'relative rounded-md',
-				'p-1.5 pt-1 text-xs md:p-2 md:hover:bg-secondary-20/80 md:hover:opacity-100',
+				'p-1.5 pt-1 text-xs md:p-2 md:hover:bg-secondary-20 md:hover:opacity-100',
 				$selectedRaidId === raid.id
-					? 'border border-secondary-40 bg-secondary-20/80 opacity-100'
-					: 'bg-secondary-20/50 opacity-40'
+					? 'border border-secondary-40 bg-secondary-20 opacity-100'
+					: 'bg-secondary-20 opacity-40'
 			)}
 		>
-			<button title="자세히 보기" on:click={() => onClickView(raid)}>
+			<button
+				class="w-full"
+				title="자세히 보기"
+				on:click={() => onClickView(raid)}
+			>
 				<RaidItem {raid} compact />
 			</button>
 		</li>
