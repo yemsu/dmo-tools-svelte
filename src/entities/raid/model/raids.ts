@@ -46,7 +46,7 @@ const createRaidsStore = () => {
 						? {
 								...prevRaidData,
 								times: prevRaidData.times.filter(
-									(prevTime) => prevTime.id !== time.id
+									(prevTime) => prevTime.channel !== time.channel
 								)
 							}
 						: prevRaidData
