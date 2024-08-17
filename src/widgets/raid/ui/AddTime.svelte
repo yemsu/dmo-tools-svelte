@@ -72,7 +72,7 @@
 		}
 
 		const isConfirmed = confirm(
-			`보스를 제보하시겠습니까? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${channel}채널] ${timeRemaining}분 후 출연`
+			`보스를 제보하시겠습니까? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${channel}채널] ${timeRemaining}분 후 출현`
 		)
 		if (!isConfirmed) return
 		await postRaidTime(raid.id, {
