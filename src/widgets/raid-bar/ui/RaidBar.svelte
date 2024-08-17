@@ -6,6 +6,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import RaidBarServerButton from './RaidBarServerButton.svelte'
 	import { toast } from '$shared/toast'
+	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
 
 	export let isSseSupported: boolean | undefined
 	let nextRaid: RaidData | undefined
@@ -77,12 +78,6 @@
 		setAlarm(nextRaid)
 	}
 
-	onMount(() => {
-		if (Notification.permission !== 'denied') {
-			Notification.requestPermission()
-		}
-	})
-
 	onDestroy(() => {
 		clearInterval(alarmTimer)
 	})
@@ -92,7 +87,7 @@
 
 <div
 	class={cn(
-		'flex h-raid-bar-h items-center',
+		'relative flex h-raid-bar-h items-center',
 		'bg-primary-10',
 		'text-[11px] leading-none',
 		'whitespace-nowrap rounded-md drop-shadow-md'
@@ -103,7 +98,7 @@
 		<button
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-1 px-2',
-				'border-gradient border'
+				'border-gradient border-b border-t'
 			)}
 			title="레이드 정보 자세히 보기"
 			on:click
@@ -115,6 +110,7 @@
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
 		</button>
+		<NotificationToggleButton />
 		<button
 			class="h-full rounded-br-md rounded-tr-md bg-primary-30 px-2"
 			title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}

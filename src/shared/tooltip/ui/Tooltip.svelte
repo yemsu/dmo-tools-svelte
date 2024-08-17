@@ -44,7 +44,7 @@
 	bind:this={tooltip}
 	class={cn(
 		'hidden group-hover:block peer-hover:block',
-		'z-tooltip absolute',
+		'absolute z-tooltip',
 		'break-keep rounded-md text-xs ',
 		'border border-primary-30 bg-primary-5/80',
 		'drop-shadow-lg',

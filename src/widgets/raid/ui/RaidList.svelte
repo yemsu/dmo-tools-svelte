@@ -2,7 +2,6 @@
 	import { selectedRaidId, raids, type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import { RaidItem } from '$widgets/raid-bar'
-	import RaidInfo from '$widgets/raid/ui/RaidInfo.svelte'
 
 	const onClickView = (raid: RaidData) => {
 		selectedRaidId.set(raid.id)
