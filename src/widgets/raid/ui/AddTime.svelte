@@ -160,5 +160,5 @@
 	</section>
 {/if}
 <p class="mt-4 text-center text-xs font-bold text-warning">
-	허위제보 시 사이트 이용이 제한될 수 있습니다
+	허위제보 시 <br class="md:hidden" />사이트 이용이 제한될 수 있습니다
 </p>
