@@ -48,7 +48,7 @@
 
 	$: getTotalMySealPrice = () => {
 		let totalPrice = 0
-		for (const { id, count } of $mySeals) {
+		for (const { id, count } of mySealsFiltered) {
 			const price = getMyAndFinalPrice($page.data.sealPrices, $myPrices, id)
 			const sumSealPrice = price.final * count
 			if (sumSealPrice) totalPrice += sumSealPrice
