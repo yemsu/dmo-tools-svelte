@@ -6,8 +6,8 @@
 	import { Inner } from '$shared/section'
 	import { Tooltip } from '$shared/tooltip'
 	import { getCurrentStep } from '$widgets/seal-calculator'
-	import { getMySealData } from '$widgets/select-seal-form'
-	import { STATS, type StatType } from '$widgets/select-seal-form/config'
+	import { getMySealData } from '$widgets/my-seals'
+	import { STATS, type StatType } from '$widgets/my-seals/config'
 	import { onMount } from 'svelte'
 	onMount(async () => {
 		if ($mySeals.length === 0) {

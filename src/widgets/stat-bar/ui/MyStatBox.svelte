@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Stats } from '$entities/seals'
 	import { numberFormatter } from '$shared/lib'
-	import { STATS } from '$widgets/select-seal-form'
+	import { STATS } from '$widgets/my-seals'
 
 	export let stats: Stats
 	export let size: 'sm' | 'md' = 'md'

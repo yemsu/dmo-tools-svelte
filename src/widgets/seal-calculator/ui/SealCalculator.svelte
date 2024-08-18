@@ -15,7 +15,7 @@
 		statColorStyles,
 		STATS,
 		type StatType
-	} from '$widgets/select-seal-form'
+	} from '$widgets/my-seals'
 	import {
 		MyStatBox,
 		StatBarSeparator,

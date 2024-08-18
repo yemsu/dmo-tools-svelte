@@ -5,7 +5,7 @@
 	import { Tooltip } from '$shared/tooltip'
 	import { SEAL_COUNT_STEPS_BY_MASTER } from '$widgets/seal-calculator'
 	import type { SealEfficiency } from '$widgets/seal-calculator/types'
-	import { statColorStyles } from '$widgets/select-seal-form'
+	import { statColorStyles } from '$widgets/my-seals'
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'
 	export let seal: SealData

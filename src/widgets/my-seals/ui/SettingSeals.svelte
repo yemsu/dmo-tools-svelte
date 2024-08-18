@@ -13,7 +13,7 @@
 		STATS,
 		statTypeOptionStyles,
 		type StatTypeOption
-	} from '$widgets/select-seal-form'
+	} from '$widgets/my-seals'
 	import { choseongIncludes } from 'es-hangul'
 
 	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]

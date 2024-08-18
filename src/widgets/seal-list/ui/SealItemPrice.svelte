@@ -5,7 +5,7 @@
 	import { cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
-	import { getMyAndFinalPrice } from '$widgets/select-seal-form'
+	import { getMyAndFinalPrice } from '$widgets/my-seals'
 
 	export let sealId: number
 	export let isEditable: boolean = true

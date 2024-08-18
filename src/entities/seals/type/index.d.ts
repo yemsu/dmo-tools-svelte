@@ -1,5 +1,5 @@
+import type { StatType } from '$widgets/my-seals/config'
 import type { SealMaterCount } from '$widgets/seal-calculator'
-import type { StatType } from '$widgets/select-seal-form/config'
 
 export type SealData = {
 	id: number
