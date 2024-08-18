@@ -4,18 +4,17 @@
 		GAME_SERVERS,
 		postRaidTime,
 		subscribeClientId,
+		selectedRaidId,
 		type GameChannel,
 		type RaidData
 	} from '$entities/raid'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { Input } from '$shared/form'
-	import { cn } from '$shared/lib'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { toast } from '$shared/toast'
 
 	export let raid: RaidData
 	export let raidChannels: GameChannel[]
-
 	let isShowForm = false
 
 	type Form = {
@@ -32,11 +31,6 @@
 	let inputElement: HTMLInputElement
 
 	const onToggleShowForm = () => {
-		const _defaultForm =
-			raidChannels.length > 1
-				? { ...defaultForm }
-				: { ...form, channel: raidChannels[0] }
-		form = _defaultForm
 		isShowForm = !isShowForm
 		setTimeout(() => {
 			inputElement && inputElement.focus()
@@ -96,6 +90,13 @@
 		form = { channel: null, timeRemaining: null }
 		toast.on('보스 제보가 완료되었습니다!')
 	}
+
+	const resetForm = () => {
+		hideForm()
+		form = { ...defaultForm }
+	}
+
+	$: $selectedRaidId && resetForm()
 </script>
 
 {#if !isShowForm}
