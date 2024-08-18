@@ -12,13 +12,11 @@
 </script>
 
 <span
-	class={cn('flex gap-[0.2em] leading-none text-gray-400', sizeStyles[size])}
+	class={cn(
+		'flex items-center gap-[0.2em] overflow-hidden break-keep leading-[1.2] text-gray-400',
+		sizeStyles[size]
+	)}
 >
-	<iconify-icon
-		icon="el:map-marker"
-		width="0.9em"
-		height="0.9em"
-		class="-mb-[1.5px]"
-	/>
+	<iconify-icon icon="el:map-marker" width="0.9em" height="0.9em" />
 	<span>{location}</span>
 </span>

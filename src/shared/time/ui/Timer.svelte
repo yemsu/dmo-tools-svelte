@@ -44,4 +44,6 @@
 </script>
 
 <!-- 타이머 출력 -->
-<span class={cn('text-point', className)} {...restProps}>{$remainingTime}</span>
+<span class={cn('text-[11px] text-point md:text-xs', className)} {...restProps}
+	>{$remainingTime}</span
+>

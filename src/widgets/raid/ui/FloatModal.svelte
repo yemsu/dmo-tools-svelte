@@ -5,6 +5,7 @@
 		raids,
 		selectedRaidId
 	} from '$entities/raid'
+	import Badge from '$shared/badge/Badge.svelte'
 	import { _objKeys, _pick, cn } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
@@ -22,7 +23,10 @@
 	)}
 >
 	<div class="flex items-center gap-4">
-		<Title class="leading-none">보스 출현 정보</Title>
+		<Title class="leading-none">
+			보스 출현 정보
+			<Badge color="warning" shape="square" class="pt-0 italic">Beta</Badge>
+		</Title>
 		<Tabs>
 			{#each _objKeys(GAME_SERVERS) as serverType (serverType)}
 				<Tab
@@ -37,7 +41,7 @@
 	</div>
 	<div class="flex flex-1 overflow-hidden">
 		<RaidList />
-		<div class="w-[65%] shrink-0 md:w-1/2">
+		<div class="w-[60%] shrink-0 md:w-1/2">
 			{#if $raids.length > 0 && $selectedRaidId}
 				<RaidTimeView raid={_pick($raids, $selectedRaidId)} />
 			{/if}

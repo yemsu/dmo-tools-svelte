@@ -18,16 +18,21 @@
 			: 'flex items-center gap-1'
 	)}
 >
-	<span
-		class="flex flex-col gap-1 text-left md:flex-row md:items-center md:text-center"
-	>
-		<span class="flex gap-1 break-keep font-bold leading-[1.2]">
-			<iconify-icon icon="mdi:dinosaur-pixel" width={12} height={12} />
+	<span class="flex flex-col gap-1 text-left md:flex-row md:items-center">
+		<span
+			class="overflow-hiddenflex shrink-0 gap-1 break-keep font-bold leading-[1.2]"
+		>
+			<iconify-icon
+				icon="mdi:dinosaur-pixel"
+				width={12}
+				height={12}
+				class="-mb-[1px]"
+			/>
 			{raid.name}
 		</span>
 		<RaidLocation location={raid.location} />
 	</span>
-	<span class="flex items-center gap-1">
+	<span class="flex shrink-0 items-center gap-1">
 		<iconify-icon
 			icon="line-md:chevron-triple-right"
 			width={12}

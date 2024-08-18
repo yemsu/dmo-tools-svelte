@@ -7,6 +7,7 @@
 	import RaidBarServerButton from './RaidBarServerButton.svelte'
 	import { toast } from '$shared/toast'
 	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
+	import Badge from '$shared/badge/Badge.svelte'
 
 	export let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
@@ -102,6 +103,7 @@
 			title="레이드 정보 자세히 보기"
 			on:click
 		>
+			<Badge color="warning" shape="square" class="pt-0 italic">Beta</Badge>
 			{#if nextRaid}
 				<RaidItem raid={{ ...nextRaid, times: [nextRaid.time] }} />
 			{:else if $raids.length > 0}
