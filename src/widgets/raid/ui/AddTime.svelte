@@ -55,9 +55,6 @@
 	$: onInput = () => {
 		const { timeRemaining } = form
 		if (timeRemaining === null) return
-		if (timeRemaining < 1) {
-			form = { ...form, timeRemaining: 1 }
-		}
 		if (`${timeRemaining}`.length > 3) {
 			form = { ...form, timeRemaining: +`${timeRemaining}`.substring(0, 3) }
 		}
@@ -68,7 +65,7 @@
 		if (!$subscribeClientId) {
 			throw Error('onSubmit: subscribeClientId 정보가 없습니다.')
 		}
-		if (timeRemaining === null) {
+		if (timeRemaining === null || timeRemaining < 1) {
 			alert('보스 출현까지 남은 시간(분)을 입력해 주세요')
 			setTimeout(() => {
 				inputElement.focus()
