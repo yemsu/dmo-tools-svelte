@@ -75,6 +75,7 @@
 				)}
 				step="0.1"
 				placeholder="씰 가격"
+				size="xs"
 				bind:value={inputValue}
 				on:input={checkPriceInputValue}
 				on:blur|once={onBlurInput}
