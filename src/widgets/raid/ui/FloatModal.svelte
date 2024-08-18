@@ -41,7 +41,7 @@
 	</div>
 	<div class="flex flex-1 overflow-hidden">
 		<RaidList />
-		<div class="w-[60%] shrink-0 md:w-1/2">
+		<div class="w-[60%] shrink-0 md:w-[45%]">
 			{#if $raids.length > 0 && $selectedRaidId}
 				<RaidTimeView raid={_pick($raids, $selectedRaidId)} />
 			{/if}
