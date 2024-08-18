@@ -16,7 +16,8 @@
 	let alarmTimer: NodeJS.Timeout | undefined
 	const ALARM_READY_MINUTE = 1
 
-	$: toggleAudioAlarm = () => {
+	const toggleAudioAlarm = () => {
+		console.log('toggleAudioAlarm', isAudioOn)
 		audio = isAudioOn ? new Audio('/sound-alarm.mp3') : undefined
 		toast.on(
 			isAudioOn
@@ -25,7 +26,7 @@
 		)
 	}
 
-	$: isAudioOn && toggleAudioAlarm()
+	$: isAudioOn !== undefined && toggleAudioAlarm()
 
 	const notify = (_nextRaid: NextRaidData) => {
 		new Notification(`🐉 ${_nextRaid.name}`, {
