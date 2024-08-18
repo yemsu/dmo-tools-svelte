@@ -11,7 +11,7 @@
 </script>
 
 <button
-	class="relative h-full w-[50px] rounded-bl-md rounded-tl-md bg-primary-50 px-2 text-center font-bold text-primary-5"
+	class="relative h-full w-[40px] rounded-bl-md rounded-tl-md bg-primary-50 text-center text-xs font-bold text-primary-5 md:w-[50px] md:px-2 md:text-sm"
 	title="채널 변경하기"
 	on:click={() => (isTabOpen = !isTabOpen)}
 >
