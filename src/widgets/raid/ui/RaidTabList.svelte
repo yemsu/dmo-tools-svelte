@@ -3,10 +3,10 @@
 	import { cn } from '$shared/lib'
 	import { RaidItem } from '$widgets/raid-bar'
 
-	let selectedTabIndex = 0
+	$: selectedRaidId = $raids[0]?.id
 
-	const onClickView = (tabIndex: number) => {
-		selectedTabIndex = tabIndex
+	const onClickView = (raidId: number) => {
+		selectedRaidId = raidId
 	}
 </script>
 
@@ -23,21 +23,21 @@
 			<li
 				class={cn(
 					'relative rounded-md',
-					'p-1.5 pt-1 text-xs md:p-2 md:hover:bg-secondary-20 md:hover:opacity-100',
-					selectedTabIndex === i
+					'md:hover:bg-secondary-20 md:hover:opacity-100',
+					selectedRaidId === raid.id
 						? 'border border-secondary-40 bg-secondary-20 opacity-100'
 						: 'bg-secondary-20 opacity-40'
 				)}
 				role="presentation"
 			>
 				<button
-					class="w-full"
+					class="w-full p-1.5 pt-1 text-xs md:p-2"
 					title="자세히 보기"
-					on:click={() => onClickView(i)}
+					on:click={() => onClickView(raid.id)}
 					id="raid-tab-{raid.id}"
 					aria-controls="raid-panel-{raid.id}"
 					role="tab"
-					aria-selected={selectedTabIndex === i}
+					aria-selected={selectedRaidId === raid.id}
 				>
 					<RaidItem {raid} compact />
 				</button>
@@ -49,10 +49,10 @@
 			id="raid-panel-{raid.id}"
 			role="tabpanel"
 			aria-labelledby="raid-tab-{raid.id}"
-			hidden={selectedTabIndex !== i}
+			hidden={selectedRaidId !== raid.id}
 			class={cn(
 				'w-[60%] shrink-0 md:w-[45%]',
-				selectedTabIndex !== i && 'hidden'
+				selectedRaidId !== raid.id && 'hidden'
 			)}
 		>
 			<slot {raid}></slot>
