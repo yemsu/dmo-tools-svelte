@@ -8,7 +8,7 @@
 	export let inputElement: HTMLInputElement | null = null
 	export let size: 'xs' | 'sm' | 'md' = 'md'
 
-	const { name, placeholder, class: className } = $$restProps
+	const { name, placeholder, class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
 		xs: 'h-[25px] text-xs',
@@ -41,7 +41,7 @@
 		bind:this={inputElement}
 		on:input={handleInput}
 		on:blur={handleBlur}
-		class={cn('w-full', sizeStyles[size])}
-		{...$$restProps}
+		class={cn('w-full', sizeStyles[size], className)}
+		{...restProps}
 	/>
 </label>

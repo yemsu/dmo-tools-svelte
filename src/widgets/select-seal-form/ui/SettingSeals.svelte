@@ -81,7 +81,7 @@
 			id="search"
 			maxlength={30}
 			placeholder="씰 이름을 검색하세요"
-			class="w-full flex-1 md:w-auto"
+			class="flex-1"
 			bind:value={searchText}
 			on:input={onSearchInput}
 		/>
