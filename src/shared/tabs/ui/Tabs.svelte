@@ -5,14 +5,14 @@
 	const { class: className, ...restProps } = $$restProps
 
 	const dirStyles = {
-		hor: 'flex items-center flex-wrap',
+		hor: 'flex items-center flex-wrap h-input-h',
 		ver: 'flex flex-col justify-center'
 	}
 </script>
 
 <menu
 	class={cn(
-		'md:text-md h-input-h overflow-hidden rounded-md bg-gray-700 p-1 text-sm',
+		'md:text-md overflow-hidden rounded-md bg-gray-700 p-1 text-sm',
 		dirStyles[dir],
 		className
 	)}
