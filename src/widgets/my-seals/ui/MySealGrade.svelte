@@ -2,7 +2,7 @@
 	import { page } from '$app/stores'
 	import { type MySeal } from '$entities/seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
-	import { getMySealData } from '$widgets/select-seal-form/lib/helper'
+	import { getMySealData } from '$widgets/my-seals/lib/helper'
 
 	export let mySeal: MySeal
 	$: sealData = getMySealData($page.data.seals, mySeal.id)
