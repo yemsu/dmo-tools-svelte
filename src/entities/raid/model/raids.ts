@@ -7,16 +7,19 @@ const raidTimeString = (raid: RaidData) => {
 		? new Date(raid.times[0].startAt).getTime()
 		: 9999999999999
 }
+const raidSortByTime = (raids: RaidData[]) =>
+	raids.sort((a, b) => {
+		const aTime = raidTimeString(a)
+		const bTime = raidTimeString(b)
+		return aTime - bTime
+	})
+
 const createRaidsStore = () => {
 	const { subscribe, set, update } = writable<RaidData[]>([])
 	return {
 		subscribe,
 		set: (raids: RaidData[]) => {
-			const raidSorted = raids.sort((a, b) => {
-				const aTime = raidTimeString(a)
-				const bTime = raidTimeString(b)
-				return aTime - bTime
-			})
+			const raidSorted = raidSortByTime(raids)
 			const raidsTimeSorted = raidSorted.map((raid) => {
 				raid.times = timeSortByVote(raid.times)
 				return raid
@@ -25,17 +28,18 @@ const createRaidsStore = () => {
 		},
 		addNewTime: (time: RaidTimeData) => {
 			update((prev) => {
-				return prev.map((prevRaidData) => {
+				const newRaids = prev.map((prevRaidData) => {
 					const newTimes = [...prevRaidData.times, time]
 					return prevRaidData.id === time.raidId
 						? { ...prevRaidData, times: timeSortByVote(newTimes) }
 						: prevRaidData
 				})
+				return raidSortByTime(newRaids)
 			})
 		},
 		voteTime: (time: RaidTimeData) => {
 			update((prev) => {
-				return prev.map((prevRaidData) => {
+				const newRaids = prev.map((prevRaidData) => {
 					if (prevRaidData.id !== time.raidId) return prevRaidData
 					const newTimes = prevRaidData.times.map((prevTime) =>
 						prevTime.id === time.id
@@ -47,11 +51,12 @@ const createRaidsStore = () => {
 						times: timeSortByVote(newTimes)
 					}
 				})
+				return raidSortByTime(newRaids)
 			})
 		},
 		removeTime: (time: RaidTimeData) => {
 			update((prev) => {
-				return prev.map((prevRaidData) =>
+				const newRaids = prev.map((prevRaidData) =>
 					prevRaidData.id === time.raidId
 						? {
 								...prevRaidData,
@@ -61,6 +66,7 @@ const createRaidsStore = () => {
 							}
 						: prevRaidData
 				)
+				return raidSortByTime(newRaids)
 			})
 		}
 	}
