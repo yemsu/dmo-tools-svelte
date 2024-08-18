@@ -14,7 +14,7 @@
 	import { Inner } from '$shared/section'
 	import { RaidBar } from '$widgets/raid-bar'
 	import FloatModal from '$widgets/raid/ui/FloatModal.svelte'
-	import { onMount } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
 
 	let isSseSupported: boolean | undefined = undefined
 	let isModalOn = false
@@ -65,6 +65,18 @@
 		})
 	}
 
+	$: checkEventSourceConnect = () => {
+		if (
+			!eventSource ||
+			document.visibilityState !== 'visible' ||
+			eventSource.readyState !== EventSource.CLOSED
+		)
+			return
+
+		clearPrevSubscribe()
+		initRaidSubscribe()
+	}
+
 	const subscribeSSE = async (serverType: ServerType) => {
 		const ipRes = await fetch('https://ipinfo.io/json?token=d49252de2b4da0')
 		if (!ipRes.ok) {
@@ -80,26 +92,32 @@
 		handleEventSource(eventSource)
 	}
 
-	$: onChangeCrrServerType = async (serverType: ServerType | undefined) => {
-		if (!serverType) return
-		const raidsFetched = await getRaids(serverType)
+	$: initRaidSubscribe = async () => {
+		if (!$crrServerType) return
+		const raidsFetched = await getRaids($crrServerType)
 		raids.set(raidsFetched)
 		selectedRaidId.set(raidsFetched[0].id)
-		subscribeSSE(serverType)
+		subscribeSSE($crrServerType)
 	}
 
 	onMount(async () => {
 		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
+		document.addEventListener('visibilitychange', checkEventSourceConnect)
 	})
 
-	$: $crrServerType && onChangeCrrServerType($crrServerType)
+	onDestroy(() => {
+		if (typeof window === 'undefined') return
+		document.removeEventListener('visibilitychange', checkEventSourceConnect)
+	})
+
+	$: $crrServerType && initRaidSubscribe()
 </script>
 
 <aside class="z-raidBar">
 	<h2 class="ir">레이드 타이머</h2>
 	<Inner class="w-full">
 		{#if isModalOn}
-			<div class="z-modal absolute left-0 top-0 size-full overflow-hidden p-2">
+			<div class="absolute left-0 top-0 z-modal size-full overflow-hidden p-2">
 				<FloatModal />
 				<button
 					class="absolute right-2 top-3 p-2 md:right-4 md:top-5"
