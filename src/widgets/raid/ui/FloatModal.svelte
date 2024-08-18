@@ -1,17 +1,12 @@
 <script lang="ts">
-	import {
-		crrServerType,
-		GAME_SERVERS,
-		raids,
-		selectedRaidId
-	} from '$entities/raid'
+	import { crrServerType, GAME_SERVERS } from '$entities/raid'
 	import Badge from '$shared/badge/Badge.svelte'
-	import { _objKeys, _pick, cn } from '$shared/lib'
+	import { _objKeys, cn } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { Title } from '$shared/text'
-	import RaidList from '$widgets/raid/ui/RaidList.svelte'
+	import RaidTabList from '$widgets/raid/ui/RaidTabList.svelte'
 	import RaidTimeView from '$widgets/raid/ui/RaidTimeView.svelte'
 </script>
 
@@ -39,12 +34,7 @@
 			{/each}
 		</Tabs>
 	</div>
-	<div class="flex flex-1 overflow-hidden">
-		<RaidList />
-		<div class="w-[60%] shrink-0 md:w-[45%]">
-			{#if $raids.length > 0 && $selectedRaidId}
-				<RaidTimeView raid={_pick($raids, $selectedRaidId)} />
-			{/if}
-		</div>
-	</div>
+	<RaidTabList let:raid>
+		<RaidTimeView {raid} />
+	</RaidTabList>
 </Section>

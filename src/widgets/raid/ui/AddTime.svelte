@@ -4,7 +4,6 @@
 		GAME_SERVERS,
 		postRaidTime,
 		subscribeClientId,
-		selectedRaidId,
 		type GameChannel,
 		type RaidData
 	} from '$entities/raid'
@@ -90,13 +89,6 @@
 		form = { channel: null, timeRemaining: null }
 		toast.on('보스 제보가 완료되었습니다!')
 	}
-
-	const resetForm = () => {
-		hideForm()
-		form = { ...defaultForm }
-	}
-
-	$: $selectedRaidId && resetForm()
 </script>
 
 {#if !isShowForm}

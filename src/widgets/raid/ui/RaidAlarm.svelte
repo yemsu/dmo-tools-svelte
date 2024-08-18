@@ -6,7 +6,6 @@
 		getClientId,
 		getRaids,
 		raids,
-		selectedRaidId,
 		subscribeClientId,
 		type RaidTimeData,
 		type ServerType
@@ -101,7 +100,6 @@
 		if (!$crrServerType) return
 		const raidsFetched = await getRaids($crrServerType)
 		raids.set(raidsFetched)
-		selectedRaidId.set(raidsFetched[0].id)
 		subscribeSSE($crrServerType)
 	}
 
