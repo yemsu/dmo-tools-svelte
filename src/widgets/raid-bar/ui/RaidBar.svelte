@@ -43,7 +43,7 @@
 			if (alarmTimer) clearTimeout(alarmTimer)
 			alarmTimer = setTimeout(() => {
 				notify(_nextRaid)
-				audio && audio.play()
+				audio && isAudioOn && audio.play()
 			}, timeDifference - alarmTiming)
 			setTimeout(() => {
 				raids.removeTime(time)
