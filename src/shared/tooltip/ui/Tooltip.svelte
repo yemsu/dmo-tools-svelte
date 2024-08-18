@@ -45,7 +45,7 @@
 	class={cn(
 		'hidden group-hover:block peer-hover:block',
 		'absolute z-tooltip',
-		'break-keep rounded-md text-xs ',
+		'mc:text-sm break-keep rounded-md text-xs',
 		'border border-primary-30 bg-primary-5/80',
 		'drop-shadow-lg',
 		sizeStyles[size],
