@@ -3,6 +3,7 @@
 	import { type SealData } from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
+	import { ListReferText } from '$shared/list'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { CrrMenuTitle } from '$shared/text'
@@ -86,11 +87,11 @@
 		/>
 	</div>
 	<section class="flex flex-1 flex-col overflow-hidden">
-		<h2 class="text-xs2 mb-2 font-semibold text-point">
+		<ListReferText tagName="h2">
 			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
 			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
 			({searchResults.length}개)
-		</h2>
+		</ListReferText>
 		<SealList
 			seals={searchResults}
 			isLoading={seals.length === 0}

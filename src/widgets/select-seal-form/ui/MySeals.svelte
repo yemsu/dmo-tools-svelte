@@ -15,6 +15,7 @@
 	} from '../config'
 	import { getMyAndFinalPrice, getMySealData } from '../lib/helper'
 	import MySealGrade from './MySealGrade.svelte'
+	import ListReferText from '$shared/list/ui/ListReferText.svelte'
 
 	let statTypeSelected = 'ALL'
 	let mySealsFiltered: MySeal[] = []
@@ -77,7 +78,7 @@
 		{/each}
 	</Tabs>
 	<div class="flex flex-1 flex-col overflow-hidden">
-		<p class="text-xs2 mb-2 font-semibold text-point">
+		<ListReferText tagName="p">
 			<iconify-icon
 				icon="ep:warn-triangle-filled"
 				width={15}
@@ -85,7 +86,7 @@
 				class="-mb-[0.3em]"
 			/>
 			설정한 씰과 가격 데이터는 모두 url에 저장됩니다. url을 잘 보관해 주세요!
-		</p>
+		</ListReferText>
 		<section class="flex flex-1 flex-col overflow-hidden">
 			<h2 class="ir">
 				보유 씰 리스트({statTypeSelected}): 총 {mySealsFiltered.length}개
