@@ -85,12 +85,12 @@
 			on:input={onSearchInput}
 		/>
 	</div>
-	<div class="flex flex-1 flex-col overflow-hidden">
-		<p class="mb-2 text-xs font-bold text-point">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<h2 class="mb-2 text-xs font-bold text-point">
 			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
 			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
 			({searchResults.length}개)
-		</p>
+		</h2>
 		<SealList
 			seals={searchResults}
 			isLoading={seals.length === 0}
@@ -99,5 +99,5 @@
 		>
 			<SealItem {seal} />
 		</SealList>
-	</div>
+	</section>
 </Section>

@@ -86,21 +86,27 @@
 			/>
 			설정한 씰과 가격 데이터는 모두 url에 저장됩니다. url을 잘 보관해 주세요!
 		</p>
-		<SealList
-			seals={mySealsFiltered}
-			let:seal={mySeal}
-			noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!"
-		>
-			<SealItem seal={getMySealData($page.data.seals, mySeal.id)}>
-				<MySealGrade {mySeal} />
-				<button
-					class="absolute right-[1px] top-[1px]"
-					on:click={() => onClickMySealDelete(mySeal.id)}
-					title="삭제"
-				>
-					<iconify-icon icon="mdi:close" width={14} height={14} />
-				</button>
-			</SealItem>
-		</SealList>
+		<section class="flex flex-1 flex-col overflow-hidden">
+			<h2 class="ir">
+				보유 씰 리스트({statTypeSelected}): 총 {mySealsFiltered.length}개
+			</h2>
+			<SealList
+				seals={mySealsFiltered}
+				let:seal={mySeal}
+				noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!"
+				class="h-full"
+			>
+				<SealItem seal={getMySealData($page.data.seals, mySeal.id)}>
+					<MySealGrade {mySeal} />
+					<button
+						class="absolute right-[1px] top-[1px]"
+						on:click={() => onClickMySealDelete(mySeal.id)}
+						title="삭제"
+					>
+						<iconify-icon icon="mdi:close" width={14} height={14} />
+					</button>
+				</SealItem>
+			</SealList>
+		</section>
 	</div>
 </Section>

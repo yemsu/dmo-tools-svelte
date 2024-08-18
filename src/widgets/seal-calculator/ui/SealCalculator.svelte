@@ -208,7 +208,12 @@
 			>
 		</form>
 	</div>
-	<div class="relative flex flex-1 flex-col overflow-hidden">
+	<section class="relative flex flex-1 flex-col overflow-hidden">
+		<h2 class="ir">
+			선택된 능력치: {statTypeSelected} &gt; 목표 스탯: {goalStat || 0} &gt; 결과
+			씰 개수:
+			{effDataListSorted.length}
+		</h2>
 		<SealList
 			seals={effDataListSorted}
 			let:seal={effData}
@@ -246,42 +251,46 @@
 				</Button>
 			</div>
 		{/if}
-	</div>
+	</section>
 	{#if effDataListSorted.length > 0}
-		<StatBarWrap>
-			<div>
-				<p class="flex-center text-md gap-2 leading-none md:text-lg">
-					<span class="flex flex-col">
-						<span class="text-[10px] text-gray-300 md:text-xs"
-							>현재 내 능력치</span
-						>
-						<span class="font-bold text-point">
-							{$myStats[statTypeSelected]}{resultUnit}</span
-						>
-					</span>
-					<span>+</span>
-					<span class="flex flex-col">
-						<span class="text-[10px] text-gray-300 md:text-xs"
-							>얻어야하는 능력치</span
-						>
-						<span class="font-bold text-point"
-							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
-						>
-					</span>
-					<span>=</span>
-					<span class="flex flex-col">
-						<span class="text-[10px] text-gray-300 md:text-xs">최종 능력치</span
-						>
-						<span class="font-bold text-point">
-							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
+		<section>
+			<h2 class="ir">계산 결과 - 총 능력치, 총 비용</h2>
+			<StatBarWrap>
+				<div>
+					<p class="flex-center text-md gap-2 leading-none md:text-lg">
+						<span class="flex flex-col">
+							<span class="text-[10px] text-gray-300 md:text-xs"
+								>현재 내 능력치</span
+							>
+							<span class="font-bold text-point">
+								{$myStats[statTypeSelected]}{resultUnit}</span
+							>
 						</span>
-					</span>
+						<span>+</span>
+						<span class="flex flex-col">
+							<span class="text-[10px] text-gray-300 md:text-xs"
+								>얻어야하는 능력치</span
+							>
+							<span class="font-bold text-point"
+								>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
+							>
+						</span>
+						<span>=</span>
+						<span class="flex flex-col">
+							<span class="text-[10px] text-gray-300 md:text-xs"
+								>최종 능력치</span
+							>
+							<span class="font-bold text-point">
+								{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
+							</span>
+						</span>
+					</p>
+				</div>
+				<StatBarSeparator />
+				<p class="flex-center">
+					<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
 				</p>
-			</div>
-			<StatBarSeparator />
-			<p class="flex-center">
-				<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
-			</p>
-		</StatBarWrap>
+			</StatBarWrap>
+		</section>
 	{/if}
 </Section>
