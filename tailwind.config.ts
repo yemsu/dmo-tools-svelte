@@ -1,5 +1,6 @@
 import tailwindScrollBar from 'tailwind-scrollbar'
 import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
@@ -52,10 +53,12 @@ export default {
 				'content-fill-h':
 					'calc(100svh - var(--header-h) - var(--gnb-h) - var(--raid-bar-h))',
 				'content-side': 'var(--content-side)',
-				'raid-bar-h': 'var(--raid-bar-h)'
+				'raid-bar-h': 'var(--raid-bar-h)',
+				'input-h': 'var(--input-h)'
 			},
 			fontFamily: {
-				tiny: ['Tiny5', 'sans-serif']
+				tiny: ['Tiny5', 'sans-serif'],
+				pretendard: ['"Pretendard Variable", Pretendard', ...fontFamily.sans]
 			},
 			dropShadow: {
 				'primary-90': '0 0 3px hsl(var(--primary-90))',
@@ -68,6 +71,16 @@ export default {
 				raidBar: '90',
 				modal: '990',
 				toast: '999'
+			},
+			fontSize: {
+				xs4: '9px',
+				xs3: '10px',
+				xs2: '11px',
+				xs: '12px',
+				sm: '13px',
+				md: '14px',
+				lg: '16px',
+				lg2: '18px'
 			}
 		}
 	},

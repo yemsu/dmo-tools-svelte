@@ -17,7 +17,7 @@
 			<button
 				type="button"
 				class={cn(
-					'w-[50px] rounded-md py-1 font-bold transition-colors',
+					'w-[50px] rounded-md py-1 font-semibold transition-colors',
 					styleByTabButtons(tabButton),
 					isActive(tabButton)
 						? 'bg-black/90'

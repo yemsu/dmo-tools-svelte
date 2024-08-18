@@ -3,6 +3,7 @@
 	import type { MySeal, SealData } from '$entities/seals'
 	import { myPrices, mySeals, myStats } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
+	import { Input } from '$shared/form'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
@@ -196,14 +197,14 @@
 			on:submit|preventDefault={onSubmit}
 			class="flex w-full flex-1 items-center gap-2 md:w-auto"
 		>
-			<input
-				bind:this={goalStatInput}
+			<Input
+				bind:inputElement={goalStatInput}
 				type="number"
 				class="flex-1"
 				placeholder={searchInputPlaceholder}
 				bind:value={goalStat}
 			/>
-			<Button rounded="md" size="lg" class="point-neon font-bold"
+			<Button rounded="md" size="lg" class="point-neon font-semibold"
 				>결과보기</Button
 			>
 		</form>
@@ -257,30 +258,28 @@
 			<h2 class="ir">계산 결과 - 총 능력치, 총 비용</h2>
 			<StatBarWrap>
 				<div>
-					<p class="flex-center text-md gap-2 leading-none md:text-lg">
+					<p class="flex-center text-md md:text-lg2 gap-2 leading-none">
 						<span class="flex flex-col">
-							<span class="text-[10px] text-gray-300 md:text-xs"
+							<span class="text-xs3 text-gray-300 md:text-xs"
 								>현재 내 능력치</span
 							>
-							<span class="font-bold text-point">
+							<span class="font-semibold text-point">
 								{$myStats[statTypeSelected]}{resultUnit}</span
 							>
 						</span>
 						<span>+</span>
 						<span class="flex flex-col">
-							<span class="text-[10px] text-gray-300 md:text-xs"
+							<span class="text-xs3 text-gray-300 md:text-xs"
 								>얻어야하는 능력치</span
 							>
-							<span class="font-bold text-point"
+							<span class="font-semibold text-point"
 								>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
 							>
 						</span>
 						<span>=</span>
 						<span class="flex flex-col">
-							<span class="text-[10px] text-gray-300 md:text-xs"
-								>최종 능력치</span
-							>
-							<span class="font-bold text-point">
+							<span class="text-xs3 text-gray-300 md:text-xs">최종 능력치</span>
+							<span class="font-semibold text-point">
 								{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
 							</span>
 						</span>

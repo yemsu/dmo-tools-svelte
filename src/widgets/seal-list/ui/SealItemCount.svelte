@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { mySeals } from '$entities/seals'
+	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
 
 	export let sealId: number
@@ -55,8 +56,9 @@
 <div class="w-full min-w-[80%]">
 	{#if isOnInput}
 		<form on:submit|preventDefault={onSubmit} class="flex h-[24px] gap-1">
-			<input
-				bind:this={inputElement}
+			<Input
+				bind:inputElement
+				size="xs"
 				type="number"
 				id={`count-${sealId}`}
 				class={cn(
@@ -69,7 +71,7 @@
 			/>
 			<button
 				type="submit"
-				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-bold text-black md:px-1"
+				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-semibold text-black md:px-1"
 				>완료</button
 			>
 		</form>

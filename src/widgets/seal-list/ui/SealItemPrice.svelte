@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { myPrices } from '$entities/seals'
+	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { getMyAndFinalPrice } from '$widgets/select-seal-form'
@@ -62,8 +63,8 @@
 <div class="w-full">
 	{#if isOnInput}
 		<form on:submit|preventDefault={onSubmit} class="flex h-[24px] gap-1">
-			<input
-				bind:this={inputElement}
+			<Input
+				bind:inputElement
 				type="number"
 				id={`price-${sealId}`}
 				class={cn(
@@ -77,7 +78,7 @@
 			/>
 			<button
 				type="submit"
-				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-bold text-black md:px-1"
+				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-semibold text-black md:px-1"
 				>완료</button
 			>
 		</form>

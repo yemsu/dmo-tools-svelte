@@ -4,11 +4,23 @@
 	const dispatch = createEventDispatcher()
 
 	export let label: string | undefined = undefined
-	export let value: string | number | undefined = undefined
+	export let value: string | number | null = null
+	export let inputElement: HTMLInputElement | null = null
+	export let size: 'xs' | 'sm' | 'md' = 'md'
 
 	const { name, placeholder, class: className } = $$restProps
+
+	const sizeStyles = {
+		xs: 'h-[25px] text-xs',
+		sm: 'h-[30px] text-xs',
+		md: 'h-input-h px-2 text-md'
+	}
+
 	const handleInput = (event: Event) => {
 		dispatch('input', event)
+	}
+	const handleBlur = (event: Event) => {
+		dispatch('blur', event)
 	}
 </script>
 
@@ -24,9 +36,12 @@
 		<span class="min-w-[40px]">{label}</span>
 	{/if}
 	<input
-		{...$$restProps}
 		placeholder={placeholder || (label && `${label}를 입력하세요`)}
 		bind:value
+		bind:this={inputElement}
 		on:input={handleInput}
+		on:blur={handleBlur}
+		class={cn('w-full', sizeStyles[size])}
+		{...$$restProps}
 	/>
 </label>

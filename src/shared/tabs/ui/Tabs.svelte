@@ -12,7 +12,7 @@
 
 <menu
 	class={cn(
-		'md:text-md overflow-hidden rounded-md bg-gray-700 p-1 text-sm',
+		'md:text-md h-input-h overflow-hidden rounded-md bg-gray-700 p-1 text-sm',
 		dirStyles[dir],
 		className
 	)}

@@ -7,7 +7,7 @@
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
 		sm: 'text-[15px] font-semibold',
-		md: 'text-md md:text-lg font-bold',
+		md: 'text-lg md:text-lg2 font-semibold',
 		lg: ''
 	}
 </script>

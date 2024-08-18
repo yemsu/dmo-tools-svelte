@@ -6,7 +6,7 @@
 	export let size: 'sm' | 'md' = 'sm'
 
 	const sizeStyles = {
-		sm: 'text-[10px]',
+		sm: 'text-xs3',
 		md: 'text-xs'
 	}
 </script>

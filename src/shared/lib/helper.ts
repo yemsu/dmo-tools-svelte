@@ -23,7 +23,8 @@ export const cn = (
 }
 
 export const numberFormatter = (number: number, fractionDigits: number = 2) => {
-	const numberCut = +number.toFixed(fractionDigits)
+	const numberChecked = number * 1
+	const numberCut = +numberChecked.toFixed(fractionDigits)
 	return numberCut > 100 ? numberCut.toLocaleString() : numberCut * 1
 }
 

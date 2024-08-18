@@ -77,7 +77,7 @@
 		{/each}
 	</Tabs>
 	<div class="flex flex-1 flex-col overflow-hidden">
-		<p class="mb-2 text-xs font-bold text-point">
+		<p class="text-xs2 mb-2 font-semibold text-point">
 			<iconify-icon
 				icon="ep:warn-triangle-filled"
 				width={15}

@@ -19,7 +19,7 @@
 	<dl class="flex flex-col gap-1 whitespace-nowrap leading-none">
 		{#each datalist as data (data.key)}
 			<div class="flex items-center gap-1">
-				<dt class="text-[11px] text-gray-200">{data.text}</dt>
+				<dt class="text-xs2 text-gray-200">{data.text}</dt>
 				<dd class="text-point">
 					{numberFormatter(effData[data.key], 5)}
 				</dd>

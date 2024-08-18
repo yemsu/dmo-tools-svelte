@@ -62,7 +62,7 @@
 			'md:flex-row md:items-center md:justify-between'
 		)}
 	>
-		<Tabs class="w-full">
+		<Tabs class="w-full md:w-[40%]">
 			{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 				<Tab
 					class={statTypeOptionStyles[statTypeOption]}
@@ -86,7 +86,7 @@
 		/>
 	</div>
 	<section class="flex flex-1 flex-col overflow-hidden">
-		<h2 class="mb-2 text-xs font-bold text-point">
+		<h2 class="text-xs2 mb-2 font-semibold text-point">
 			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
 			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
 			({searchResults.length}개)

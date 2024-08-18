@@ -27,13 +27,11 @@
 		<h2
 			class="{statColorStyles[
 				seal.statType
-			]} flex items-start font-bold leading-4"
+			]} flex items-start font-semibold leading-4"
 		>
 			{seal.name}
 		</h2>
-		<p
-			class="absolute left-[3px] top-0 text-[8px] text-gray-600 md:text-[10px]"
-		>
+		<p class="md:text-xs3 text-xs4 absolute left-[3px] top-0 text-gray-600">
 			#{seal.id}
 		</p>
 		<Tooltip size="sm" useAdaptiveX={true} class="top-4">
@@ -55,8 +53,8 @@
 				</div>
 				{#if myStep}
 					<div class="rounded-sm bg-white/10 p-1">
-						<p class="mb-1 text-[10px]">현재 내 능력치</p>
-						<ol class="flex items-center gap-1 text-[10px] leading-none">
+						<p class="text-xs3 mb-1">현재 내 능력치</p>
+						<ol class="text-xs3 flex items-center gap-1 leading-none">
 							{#each SEAL_COUNT_STEPS_BY_MASTER[seal.masterCount] as sealCount}
 								<li
 									class={cn(
@@ -72,7 +70,7 @@
 						<span class="text-gray-300">
 							{seal.maxIncrease} * {myStep?.percent}% =
 						</span>
-						<span class="font-bold text-point">
+						<span class="font-semibold text-point">
 							+{myStep ? seal.maxIncrease * (myStep?.percent / 100) : 0}
 						</span>
 					</div>

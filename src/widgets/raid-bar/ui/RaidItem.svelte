@@ -18,9 +18,9 @@
 			: 'flex items-center gap-1'
 	)}
 >
-	<span class="flex flex-col gap-1 text-left md:flex-row md:items-center">
+	<span class="flex flex-col text-left md:flex-row md:items-center md:gap-1">
 		<span
-			class="overflow-hiddenflex shrink-0 gap-1 break-keep font-bold leading-[1.2]"
+			class="overflow-hiddenflex shrink-0 gap-1 break-keep text-xs leading-[1.2] md:text-sm"
 		>
 			<iconify-icon
 				icon="mdi:dinosaur-pixel"
@@ -43,7 +43,7 @@
 			<RaidItemChannel channel={nextTime.channel} />
 			<Timer targetTime={nextTime.startAt} />
 		{:else}
-			<span class="text-[11px] text-gray-400 md:text-xs">제보 없음</span>
+			<span class="text-xs2 text-gray-400 md:text-xs">제보 없음</span>
 		{/if}
 	</span>
 </span>

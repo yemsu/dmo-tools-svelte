@@ -50,7 +50,7 @@
 		<ul
 			class={cn(
 				'flex-center h-gnb-h w-full gap-[4%] whitespace-nowrap py-2',
-				'text-center text-[9px] md:text-sm'
+				'text-xs4 text-center md:text-sm'
 			)}
 		>
 			{#each menuDataList as menuData (menuData.type)}
@@ -59,7 +59,7 @@
 						class={cn(
 							'flex-col-center transition-opacity md:flex-row md:gap-2',
 							$activeMenuType === menuData.type
-								? 'h-full flex-row gap-2 rounded-full bg-primary-20 px-4 py-2 text-sm font-bold opacity-100 md:px-6'
+								? 'h-full flex-row gap-2 rounded-full bg-primary-20 px-4 py-2 text-sm font-semibold opacity-100 md:px-6'
 								: 'gap-[2px] px-2 opacity-50 hover:opacity-100'
 						)}
 						on:click={() => activeMenuType.set(menuData.type)}

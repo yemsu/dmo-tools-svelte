@@ -25,7 +25,7 @@
 	<div class="flex items-center gap-4">
 		<Title class="leading-none">
 			보스 출현 정보
-			<Badge color="warning" shape="square" class="pt-0 italic">Beta</Badge>
+			<Badge color="warning" shape="square" class="italic">Beta</Badge>
 		</Title>
 		<Tabs>
 			{#each _objKeys(GAME_SERVERS) as serverType (serverType)}

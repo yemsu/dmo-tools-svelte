@@ -33,14 +33,14 @@
 <p class="mt-1 rounded-full bg-black/90 pr-2">
 	<span
 		class="rounded-full px-1 py-0.5 md:px-2 {grade &&
-			gradeBgStyles[grade]} text-[9px] md:text-[10px]"
+			gradeBgStyles[grade]} text-xs4 md:text-xs3"
 		title="등급">{grade}</span
 	>
 	<span
-		class="font-extrabold {grade &&
+		class="font-bold {grade &&
 			gradeTextStyles[
 				grade
-			]} py-0.5 text-[11px] brightness-150 saturate-200 md:text-xs"
+			]} text-xs2 py-0.5 brightness-150 saturate-200 md:text-xs"
 		>+{result / calcNum}{dataUnit}</span
 	>
 </p>

@@ -8,6 +8,7 @@
 		type RaidData
 	} from '$entities/raid'
 	import Button from '$shared/button/ui/Button.svelte'
+	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { toast } from '$shared/toast'
@@ -106,7 +107,7 @@
 		<Button
 			on:click={onToggleShowForm}
 			size="sm"
-			class="bg-primary-50 font-extrabold text-secondary-5"
+			class="bg-primary-50 font-bold text-secondary-5"
 			rounded="md">보스 제보하기</Button
 		>
 	</div>
@@ -138,22 +139,20 @@
 							class="flex-center text-xs"
 						>
 							{channel}
-							<span class="hidden text-[11px] font-normal md:inline">채널</span>
-							<span class="text-[9px] font-normal md:hidden">채널</span>
+							<span class="text-xs2 hidden font-normal md:inline">채널</span>
+							<span class="text-xs4 font-normal md:hidden">채널</span>
 						</Tab>
 					{/each}
 				</Tabs>
 			{/if}
 			<form on:submit|preventDefault={onSubmit} class="flex gap-2">
-				<input
-					bind:this={inputElement}
+				<Input
+					bind:inputElement
 					type="number"
 					id={`raid-${raid.id}`}
-					class={cn(
-						'w-full rounded-sm bg-primary-20 px-1 py-[1px] text-xs text-white'
-					)}
 					step="0.1"
 					placeholder="남은 시간(분)"
+					size="sm"
 					bind:value={form.timeRemaining}
 					on:input={onInput}
 				/>
@@ -164,6 +163,6 @@
 		</div>
 	</section>
 {/if}
-<p class="mt-4 text-center text-xs font-bold text-warning">
+<p class="mt-4 text-center text-xs font-semibold text-warning">
 	허위제보 시 <br class="md:hidden" />사이트 이용이 제한될 수 있습니다
 </p>

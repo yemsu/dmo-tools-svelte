@@ -89,7 +89,7 @@
 	class={cn(
 		'relative flex h-raid-bar-h items-center',
 		'bg-primary-10',
-		'text-[11px] leading-none',
+		'text-xs2 leading-none',
 		'whitespace-nowrap rounded-md drop-shadow-md'
 	)}
 >
@@ -103,7 +103,7 @@
 			title="레이드 정보 자세히 보기"
 			on:click
 		>
-			<Badge color="warning" shape="square" class="pt-0 italic">Beta</Badge>
+			<Badge color="warning" shape="square" class="italic">Beta</Badge>
 			{#if nextRaid}
 				<RaidItem raid={{ ...nextRaid, times: [nextRaid.time] }} />
 			{:else if $raids.length > 0}
