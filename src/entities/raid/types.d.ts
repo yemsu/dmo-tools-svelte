@@ -22,3 +22,11 @@ export type RaidData = {
 	channels: string
 	times: RaidTimeData[]
 }
+
+export type NextRaidData = Omit<RaidData, 'times'> & {
+	id: number
+	name: string
+	location: string
+	channels: string
+	time: RaidTimeData
+}

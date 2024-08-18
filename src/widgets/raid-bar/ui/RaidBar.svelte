@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { raids, type RaidData } from '$entities/raid'
+	import { raids, type NextRaidData, type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import { timeSortByStartAt } from '$widgets/raid'
 	import RaidItem from '$widgets/raid-bar/ui/RaidItem.svelte'
@@ -9,7 +9,7 @@
 	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
 
 	export let isSseSupported: boolean | undefined
-	let nextRaid: RaidData | undefined
+	let nextRaid: NextRaidData | undefined
 	let isAudioOn: boolean = false
 	let audio: HTMLAudioElement | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
@@ -26,15 +26,14 @@
 
 	$: isAudioOn && toggleAudioAlarm()
 
-	const notify = (_nextRaid: RaidData) => {
-		const time = _nextRaid.times[0]
+	const notify = (_nextRaid: NextRaidData) => {
 		new Notification(`🐉 ${_nextRaid.name}`, {
-			body: `[${time.channel}채널] ${_nextRaid.location} 에서\n보스가 곧 출현합니다!`
+			body: `[${_nextRaid.time.channel}채널] ${_nextRaid.location} 에서\n보스가 곧 출현합니다!`
 		})
 	}
 
-	$: setAlarm = (_nextRaid: RaidData) => {
-		const time = _nextRaid.times[0]
+	$: setAlarm = (_nextRaid: NextRaidData) => {
+		const { time } = _nextRaid
 		const bossTime = new Date(time.startAt).getTime()
 		const currentTime = new Date().getTime()
 		const alarmTiming = ALARM_READY_MINUTE * 60 * 1000
@@ -71,10 +70,10 @@
 				`time - id:${nextTime.id}, raidId: ${nextTime.raidId} 에 해당하는 raid 데이터를 찾을 수 없습니다.`
 			)
 		}
-		if (nextRaid?.times[0].id === nextTime.id) {
+		if (nextRaid?.time.id === nextTime.id) {
 			return
 		}
-		nextRaid = { ...nextRaidInfo, times: [nextTime] }
+		nextRaid = { ...nextRaidInfo, time: nextTime }
 		setAlarm(nextRaid)
 	}
 
@@ -104,7 +103,7 @@
 			on:click
 		>
 			{#if nextRaid}
-				<RaidItem raid={nextRaid} />
+				<RaidItem raid={{ ...nextRaid, times: [nextRaid.time] }} />
 			{:else if $raids.length > 0}
 				보스 출현 정보를 제보해주세요!
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />

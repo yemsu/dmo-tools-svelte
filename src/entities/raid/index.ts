@@ -8,5 +8,6 @@ export type {
 	ServerName,
 	RaidTimeData,
 	RaidData,
-	ServerType
+	ServerType,
+	NextRaidData
 } from './types'
