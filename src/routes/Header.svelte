@@ -1,7 +1,57 @@
 <script lang="ts">
-	import { cn } from '$shared/lib'
+	import { page } from '$app/stores'
+	import { myPrices, mySeals, myStats } from '$entities/seals'
+	import type { Stats } from '$entities/seals/type'
+	import { cn, objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import { Tooltip } from '$shared/tooltip'
+	import { getCurrentStep } from '$widgets/seal-calculator'
+	import { getMySealData } from '$widgets/select-seal-form'
+	import { STATS, type StatType } from '$widgets/select-seal-form/config'
+	import { onMount } from 'svelte'
+	onMount(async () => {
+		if ($mySeals.length === 0) {
+			mySeals.loadSavedData()
+		}
+		if ($myPrices.length === 0) {
+			myPrices.loadSavedData()
+		}
+	})
+
+	$: statCalc = (statType: StatType) => {
+		const mySealsByStatType = objectBy(
+			$mySeals,
+			({ id }) => getMySealData($page.data.seals, id).statType
+		)
+		if (!mySealsByStatType) return 0
+		const sealsByStatType = mySealsByStatType[statType]
+		if (!sealsByStatType || sealsByStatType.length === 0) {
+			return 0
+		}
+		let resultValue = 0
+		sealsByStatType.forEach(({ id, count }) => {
+			let sealPercent = 0
+			const seal = getMySealData($page.data.seals, id)
+			const crrStat = getCurrentStep(seal, count)
+			sealPercent = crrStat.percent
+			const maxIncrease = seal.maxIncrease
+			resultValue += maxIncrease * (sealPercent / 100)
+		})
+		if (statType === 'CT') {
+			resultValue = resultValue / 100
+		}
+		return resultValue
+	}
+	const setMyStats = () => {
+		if ($mySeals.length === 0) return
+		const newStats = STATS.reduce((result, { type }) => {
+			result[type] = statCalc(type)
+			return result
+		}, {} as Stats)
+		myStats.set(newStats)
+	}
+
+	$: $mySeals && setMyStats()
 </script>
 
 <header>

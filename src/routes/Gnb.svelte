@@ -1,22 +1,25 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import {
 		activeMenuType,
 		getActiveMenuName,
-		MENUS,
 		type Menus
 	} from '$entities/menus'
 	import { mySeals } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
+	import { onMount } from 'svelte'
 
 	type MenuData = {
 		type: Menus['type']
+		path: string
 		icon: { name: string; width: number; height: number; class?: string }
 	}
 
 	const menuDataList: MenuData[] = [
 		{
 			type: 'SETTING',
+			path: '/',
 			icon: {
 				name: 'streamline:cards',
 				width: 18,
@@ -26,6 +29,7 @@
 		},
 		{
 			type: 'CALC',
+			path: '/calculator',
 			icon: {
 				name: 'circum:calculator-2',
 				width: 24,
@@ -35,6 +39,7 @@
 		},
 		{
 			type: 'MY',
+			path: '/my',
 			icon: {
 				name: 'ph:treasure-chest-light',
 				width: 21,
@@ -42,6 +47,18 @@
 			}
 		}
 	]
+
+	let activeMenuPath: string | undefined = undefined
+
+	const onClickMenu = (path: string) => {
+		activeMenuPath = path
+		const params = new URLSearchParams(window.location.search)
+		goto(`${path}${params ? `?${params}` : ''}`)
+	}
+
+	onMount(() => {
+		activeMenuPath = window.location.pathname
+	})
 </script>
 
 <Inner size="full" class="h-[50px] w-full bg-gray-800">
@@ -53,16 +70,16 @@
 				'text-xs4 text-center md:text-sm'
 			)}
 		>
-			{#each menuDataList as menuData (menuData.type)}
+			{#each menuDataList as menuData, i (menuData.type)}
 				<li>
 					<button
 						class={cn(
 							'flex-col-center transition-opacity md:flex-row md:gap-2',
-							$activeMenuType === menuData.type
+							activeMenuPath === menuData.path
 								? 'h-full flex-row gap-2 rounded-full bg-primary-20 px-4 py-2 text-sm font-semibold opacity-100 md:px-6'
 								: 'gap-[2px] px-2 opacity-50 hover:opacity-100'
 						)}
-						on:click={() => activeMenuType.set(menuData.type)}
+						on:click={() => onClickMenu(menuData.path)}
 					>
 						<iconify-icon
 							icon={menuData.icon.name}
