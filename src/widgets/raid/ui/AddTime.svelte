@@ -22,13 +22,20 @@
 		timeRemaining: number | null
 	}
 
-	let form: Form = {
+	const defaultForm: Form = {
 		channel: null,
 		timeRemaining: null
 	}
+
+	let form = defaultForm
 	let inputElement: HTMLInputElement
 
 	const onToggleShowForm = () => {
+		const _defaultForm =
+			raidChannels.length > 1
+				? { ...defaultForm }
+				: { ...form, channel: raidChannels[0] }
+		form = _defaultForm
 		isShowForm = !isShowForm
 		setTimeout(() => {
 			inputElement && inputElement.focus()
@@ -91,8 +98,6 @@
 		form = { channel: null, timeRemaining: null }
 		toast.on('보스 제보가 완료되었습니다!')
 	}
-
-	$: raid && hideForm()
 </script>
 
 {#if !isShowForm}
