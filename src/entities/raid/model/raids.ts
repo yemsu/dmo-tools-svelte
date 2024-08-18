@@ -19,12 +19,12 @@ const createRaidsStore = () => {
 	return {
 		subscribe,
 		set: (raids: RaidData[]) => {
-			const raidSorted = raidSortByTime(raids)
-			const raidsTimeSorted = raidSorted.map((raid) => {
+			const raidsTimeSorted = raids.map((raid) => {
 				raid.times = timeSortByVote(raid.times)
 				return raid
 			})
-			set(raidsTimeSorted)
+			const raidSorted = raidSortByTime(raidsTimeSorted)
+			set(raidSorted)
 		},
 		addNewTime: (time: RaidTimeData) => {
 			update((prev) => {
