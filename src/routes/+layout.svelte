@@ -18,18 +18,18 @@
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content={META.TITLE} />
 	<meta property="og:description" content={META.DESC} />
-	<meta property="og:image" content="%sveltekit.assets%/og-image.jpg" />
-	<meta property="og:url" content="%sveltekit.assets%/og-image.jpg" />
+	<meta property="og:image" content="/og-image.jpg" />
+	<meta property="og:url" content="/og-image.jpg" />
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content={META.TITLE} />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="628" />
 
 	<!-- Twitter Card Meta Tags -->
-	<meta name="twitter:card" content="%sveltekit.assets%/og-image.jpg" />
+	<meta name="twitter:card" content="/og-image.jpg" />
 	<meta name="twitter:title" content={META.TITLE} />
 	<meta name="twitter:description" content={META.DESC} />
-	<meta name="twitter:image" content="%sveltekit.assets%/og-image.jpg" />
+	<meta name="twitter:image" content="/og-image.jpg" />
 </svelte:head>
 
 <div
