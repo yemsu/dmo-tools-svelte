@@ -13,9 +13,7 @@
 </script>
 
 {#if $toast}
-	<div
-		class="flex-center z-toast absolute bottom-gnb-h mb-3 w-full translate-y-full"
-	>
+	<div class="flex-center absolute bottom-gnb-h z-toast mb-3 w-full">
 		<p
 			class={cn(
 				'min-w-[200px] p-3',
