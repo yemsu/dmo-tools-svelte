@@ -30,6 +30,9 @@
 	let inputElement: HTMLInputElement
 
 	const onToggleShowForm = () => {
+		if (raidChannels.length === 1) {
+			form = { ...form, channel: raidChannels[0] }
+		}
 		isShowForm = !isShowForm
 		setTimeout(() => {
 			inputElement && inputElement.focus()
