@@ -16,7 +16,7 @@
 	let alarmTimer: NodeJS.Timeout | undefined
 	const ALARM_READY_MINUTE = 1
 
-	const toggleAudioAlarm = () => {
+	$: toggleAudioAlarm = () => {
 		audio = isAudioOn ? new Audio('/sound-alarm.mp3') : undefined
 		toast.on(
 			isAudioOn
