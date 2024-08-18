@@ -2,6 +2,7 @@
 	import { mySeals } from '$entities/seals'
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
+	import { toast } from '$shared/toast'
 
 	export let sealId: number
 	export let isEditable: boolean = true
@@ -40,6 +41,7 @@
 				mySeals.updateCount(sealId, inputValue)
 			}
 			isOnInput = false
+			toast.on('씰 개수가 변경되었습니다. url을 저장해주세요.')
 		}
 	}
 

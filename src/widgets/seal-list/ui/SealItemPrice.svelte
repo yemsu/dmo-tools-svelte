@@ -3,6 +3,7 @@
 	import { myPrices } from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
+	import { toast } from '$shared/toast'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { getMyAndFinalPrice } from '$widgets/select-seal-form'
 
@@ -39,6 +40,7 @@
 		} else {
 			myPrices.updatePrice(sealId, inputValue)
 			isOnInput = false
+			toast.on('씰 가격이 설정되었습니다. url을 저장해주세요.')
 		}
 	}
 
@@ -55,6 +57,7 @@
 		)
 		if (!isConfirmed) return
 		myPrices.remove(sealId)
+		toast.on('씰 가격 설정이 제거되었습니다. url을 저장해주세요.')
 	}
 
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
