@@ -16,7 +16,6 @@
 
 	export let raid: RaidData
 	export let raidChannels: GameChannel[]
-
 	$: raidTimeByChannel = objectBy(raid.times, (time) => time.channel)
 	$: onClickVote = async (raid: RaidData, time: RaidTimeData) => {
 		if (!$crrServerType || !$subscribeClientId) {
@@ -71,7 +70,7 @@
 								on:click={() => onClickVote(raid, time)}
 							>
 								<span class="flex-center flex-1">
-									<Timer targetTime={time.startAt} />
+									<Timer {time} />
 								</span>
 								<span>
 									{time.voteCount + 1}

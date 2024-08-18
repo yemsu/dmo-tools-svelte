@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { raids, type RaidTimeData } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import { onMount, onDestroy } from 'svelte'
 	import { writable } from 'svelte/store'
 
 	// 외부에서 받을 타겟 시간
-	export let targetTime: string
+	export let time: RaidTimeData
+	$: targetTime = time?.startAt
 	const { class: className, ...restProps } = $$restProps
 
 	const remainingTime = writable('')
@@ -16,6 +18,7 @@
 
 		if (timeDifference <= 0) {
 			remainingTime.set('출현 중')
+			raids.removeTime(time)
 			clearInterval(timerInterval)
 			return
 		}

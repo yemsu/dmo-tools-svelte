@@ -61,6 +61,21 @@ const createRaidsStore = () => {
 						? {
 								...prevRaidData,
 								times: prevRaidData.times.filter(
+									(prevTime) => prevTime.id !== time.id
+								)
+							}
+						: prevRaidData
+				)
+				return raidSortByTime(newRaids)
+			})
+		},
+		removeChannelTimes: (time: RaidTimeData) => {
+			update((prev) => {
+				const newRaids = prev.map((prevRaidData) =>
+					prevRaidData.id === time.raidId
+						? {
+								...prevRaidData,
+								times: prevRaidData.times.filter(
 									(prevTime) => prevTime.channel !== time.channel
 								)
 							}

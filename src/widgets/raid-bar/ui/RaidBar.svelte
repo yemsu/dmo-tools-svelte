@@ -46,10 +46,10 @@
 				audio && isAudioOn && audio.play()
 			}, timeDifference - alarmTiming)
 			setTimeout(() => {
-				raids.removeTime(time)
+				raids.removeChannelTimes(time)
 			}, timeDifference)
 		} else {
-			raids.removeTime(time)
+			raids.removeChannelTimes(time)
 			console.log('이미 시간이 지났습니다.')
 		}
 	}

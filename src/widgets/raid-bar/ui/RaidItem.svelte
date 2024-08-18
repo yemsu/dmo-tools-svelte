@@ -41,7 +41,7 @@
 		/>
 		{#if nextTime}
 			<RaidItemChannel channel={nextTime.channel} />
-			<Timer targetTime={nextTime.startAt} />
+			<Timer time={nextTime} />
 		{:else}
 			<span class="text-xs2 text-gray-400 md:text-xs">제보 없음</span>
 		{/if}
