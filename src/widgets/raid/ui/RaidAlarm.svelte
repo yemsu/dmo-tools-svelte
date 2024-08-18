@@ -3,6 +3,7 @@
 		crrServerType,
 		disSubscribe,
 		GAME_SERVERS,
+		getClientId,
 		getRaids,
 		raids,
 		selectedRaidId,
@@ -44,7 +45,6 @@
 	const handleEventSource = async (_eventSource: EventSource) => {
 		_eventSource.addEventListener('sub', function (e) {
 			const data = JSON.parse(e.data)
-			console.log('subscribe')
 			subscribeClientId.set(data.clientId)
 		})
 		_eventSource.addEventListener('created', function (e) {
@@ -65,7 +65,7 @@
 		})
 	}
 
-	$: checkEventSourceConnect = () => {
+	$: checkEventSourceConnect = async () => {
 		if (
 			!eventSource ||
 			document.visibilityState !== 'visible' ||
@@ -73,21 +73,26 @@
 		)
 			return
 
-		clearPrevSubscribe()
+		await clearPrevSubscribe()
 		initRaidSubscribe()
 	}
 
-	const subscribeSSE = async (serverType: ServerType) => {
+	const getIp = async () => {
 		const ipRes = await fetch('https://ipinfo.io/json?token=d49252de2b4da0')
 		if (!ipRes.ok) {
 			throw Error(`HTTP error! get ip Failed! ${ipRes.status}`)
 		}
 		const data: { ip: string } = await ipRes.json()
+		return data.ip
+	}
 
-		checkSseSupported()
+	const subscribeSSE = async (serverType: ServerType) => {
 		await clearPrevSubscribe()
+		checkSseSupported()
+		const ip = await getIp()
+		const clientId = await getClientId(ip)
 		eventSource = new EventSource(
-			`${API_BASE_URL}/alarms/subscribe/${serverType}?ipAddress=${data.ip}`
+			`${API_BASE_URL}/alarms/subscribe/${serverType}?clientId=${clientId}`
 		)
 		handleEventSource(eventSource)
 	}
