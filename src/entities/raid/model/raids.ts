@@ -2,12 +2,22 @@ import type { RaidData, RaidTimeData } from '$entities/raid/types'
 import { timeSortByVote } from '$widgets/raid'
 import { writable } from 'svelte/store'
 
+const raidTimeString = (raid: RaidData) => {
+	return raid.times[0]
+		? new Date(raid.times[0].startAt).getTime()
+		: 9999999999999
+}
 const createRaidsStore = () => {
 	const { subscribe, set, update } = writable<RaidData[]>([])
 	return {
 		subscribe,
 		set: (raids: RaidData[]) => {
-			const raidsTimeSorted = raids.map((raid) => {
+			const raidSorted = raids.sort((a, b) => {
+				const aTime = raidTimeString(a)
+				const bTime = raidTimeString(b)
+				return aTime - bTime
+			})
+			const raidsTimeSorted = raidSorted.map((raid) => {
 				raid.times = timeSortByVote(raid.times)
 				return raid
 			})

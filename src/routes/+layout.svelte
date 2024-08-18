@@ -4,7 +4,7 @@
 	import Header from './Header.svelte'
 	import { cn } from '$shared/lib'
 	import Gnb from './Gnb.svelte'
-	import RaidFloat from '$widgets/raid/ui/RaidFloat.svelte'
+	import RaidAlarm from '$widgets/raid/ui/RaidAlarm.svelte'
 	import { ToastPopup } from '$shared/toast'
 </script>
 
@@ -16,7 +16,7 @@
 	)}
 >
 	<Header></Header>
-	<RaidFloat />
+	<RaidAlarm />
 
 	<main class="relative flex-1">
 		<slot></slot>

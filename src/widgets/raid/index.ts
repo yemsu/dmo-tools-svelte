@@ -1,4 +1,4 @@
-import RaidFloat from '$widgets/raid/ui/RaidFloat.svelte'
+import RaidAlarm from '$widgets/raid/ui/RaidAlarm.svelte'
 
-export { RaidFloat }
+export { RaidAlarm }
 export { timeSortByVote, timeSortByStartAt } from './lib/helper'
