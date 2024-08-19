@@ -22,6 +22,7 @@
 		MySealGrade
 	} from '$widgets/my-seals'
 	import { MENUS } from '$entities/menus'
+	import { META } from '$shared/config'
 
 	let statTypeSelected = 'ALL'
 	let mySealsFiltered: MySeal[] = []
@@ -62,6 +63,11 @@
 		return totalPrice
 	}
 </script>
+
+<svelte:head>
+	<title>{META.MY.TITLE}</title>
+	<meta name="description" content={META.MY.DESC} />
+</svelte:head>
 
 <Section>
 	<h2 class="ir">{MENUS.MY.name} 씰</h2>

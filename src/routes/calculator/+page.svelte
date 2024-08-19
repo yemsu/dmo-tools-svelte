@@ -30,6 +30,7 @@
 		type SealEfficiency
 	} from '$widgets/seal-calculator'
 	import { toast } from '$shared/toast'
+	import { META } from '$shared/config'
 
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
@@ -176,6 +177,11 @@
 
 	$: $myPrices && onChangedSealPrice()
 </script>
+
+<svelte:head>
+	<title>{META.CALCULATOR.TITLE}</title>
+	<meta name="description" content={META.CALCULATOR.DESC} />
+</svelte:head>
 
 <Section>
 	<h2 class="ir">{MENUS.CALC.name}</h2>

@@ -7,29 +7,24 @@
 	import '../app/app.css'
 	import Gnb from './Gnb.svelte'
 	import Header from './Header.svelte'
-	const META = {
-		TITLE: '디지몬 마스터즈 도구 모음 - DMO tools',
-		DESC: '디지몬 마스터즈 온라인 도구 모음 DMO tools 입니다. 보유 씰을 등록하여 목표 스탯까지의 효율적인 구매리스트를 확인하고, 유저들과 보스 레이드 정보도 공유하여 알람을 받아보세요!'
-	}
+	import { META } from '$shared/config'
 </script>
 
 <svelte:head>
-	<title>{META.TITLE}</title>
-	<meta name="description" content={META.DESC} />
 	<!-- Open Graph Meta Tags -->
-	<meta property="og:title" content={META.TITLE} />
-	<meta property="og:description" content={META.DESC} />
+	<meta property="og:title" content={META.COMMON.TITLE} />
+	<meta property="og:description" content={META.COMMON.DESC} />
 	<meta property="og:image" content="/og-image.jpg" />
 	<meta property="og:url" content="/og-image.jpg" />
 	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content={META.TITLE} />
+	<meta property="og:site_name" content={META.COMMON.TITLE} />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="628" />
 
 	<!-- Twitter Card Meta Tags -->
 	<meta name="twitter:card" content="/og-image.jpg" />
-	<meta name="twitter:title" content={META.TITLE} />
-	<meta name="twitter:description" content={META.DESC} />
+	<meta name="twitter:title" content={META.COMMON.TITLE} />
+	<meta name="twitter:description" content={META.COMMON.DESC} />
 	<meta name="twitter:image" content="/og-image.jpg" />
 </svelte:head>
 

@@ -7,6 +7,7 @@
 		STATS,
 		type StatTypeOption
 	} from '$entities/seals'
+	import { META } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
@@ -54,6 +55,11 @@
 		updateSearchResult(searchText)
 	}
 </script>
+
+<svelte:head>
+	<title>{META.SETTING.TITLE}</title>
+	<meta name="description" content={META.SETTING.DESC} />
+</svelte:head>
 
 <Section>
 	<h2 class="ir">{MENUS.SETTING.name}</h2>
