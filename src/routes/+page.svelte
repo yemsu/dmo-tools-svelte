@@ -63,7 +63,7 @@
 			'md:flex-row md:items-center md:justify-between'
 		)}
 	>
-		<Tabs class="w-full md:w-[40%]">
+		<Tabs class="w-full md:w-[70%]">
 			{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 				<Tab
 					class={statTypeOptionStyles[statTypeOption]}
@@ -81,7 +81,7 @@
 			id="search"
 			maxlength={30}
 			placeholder="씰 이름을 검색하세요"
-			class="flex-1"
+			class="w-full flex-1 md:w-auto"
 			bind:value={searchText}
 			on:input={onSearchInput}
 		/>

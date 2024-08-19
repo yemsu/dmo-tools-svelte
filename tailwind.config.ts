@@ -33,7 +33,9 @@ export default {
 					at: 'hsl(var(--stat-at))',
 					ht: 'hsl(var(--stat-ht))',
 					ct: 'hsl(var(--stat-ct))',
+					hp: 'hsl(var(--stat-hp))',
 					ds: 'hsl(var(--stat-ds))',
+					bl: 'hsl(var(--stat-bl))',
 					ev: 'hsl(var(--stat-ev))',
 					de: 'hsl(var(--stat-de))'
 				},

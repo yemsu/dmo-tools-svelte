@@ -184,7 +184,10 @@
 <Section>
 	<h2 class="ir">{MENUS.CALC.name}</h2>
 	<div class="flex flex-col gap-2">
-		<div class="flex w-full gap-2">
+		<div class="flex w-full flex-col gap-2">
+			<StatBarWrap class="flex-center">
+				<MyStatBox stats={$myStats} size="sm" />
+			</StatBarWrap>
 			<Tabs class="flex-1">
 				{#each STATS as stat (stat.type)}
 					<Tab
@@ -197,9 +200,6 @@
 					</Tab>
 				{/each}
 			</Tabs>
-			<StatBarWrap size="sm" class="flex-center">
-				<MyStatBox stats={$myStats} size="sm" />
-			</StatBarWrap>
 		</div>
 		<form
 			on:submit|preventDefault={onSubmit}
