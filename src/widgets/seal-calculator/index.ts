@@ -1,6 +1,3 @@
-import SealCalculator from './ui/SealCalculator.svelte'
-
-export { SealCalculator }
 export {
 	SEAL_MASTER_COUNT_TYPE,
 	SEAL_PERCENT_BY_STEPS,
@@ -10,6 +7,11 @@ export type {
 	SealCount,
 	SealStepsByMaster,
 	SealMaterCount,
-	SealStep
+	SealStep,
+	SealEfficiency
 } from './types'
-export { getCurrentStep } from './lib/calculate'
+export {
+	getCurrentStep,
+	getNextSteps,
+	sortByEffDataList
+} from './lib/calculate'
