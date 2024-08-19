@@ -28,6 +28,7 @@
 		sortByEffDataList
 	} from '../lib/calculate'
 	import type { SealEfficiency } from '../types'
+	import { toast } from '$shared/toast'
 
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
@@ -155,13 +156,20 @@
 		}, 60)
 	}
 
-	const addToMySeal = (effData: SealEfficiency, sealId: number) => {
-		const mySealCount = getMySealCount($mySeals, sealId)
+	const addToMySeal = (effData: SealEfficiency, seal: SealData) => {
+		const mySealCount = getMySealCount($mySeals, seal.id)
+		const isConfirmed = confirm(
+			`${seal.name}씰 ${effData.needCount}개를 보유 씰에 추가하시겠어요?`
+		)
+		if (!isConfirmed) return
 		mySeals.updateCount(effData.id, mySealCount + effData.needCount)
 		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
+		toast.on(
+			`${seal.name}씰 보유 개수가 ${mySealCount + effData.needCount}로 업데이트 되었습니다.`
+		)
 	}
 
 	const onChangedSealPrice = () => {
@@ -228,7 +236,7 @@
 						type="button"
 						size="sm"
 						class="bg-primary-30"
-						on:click={() => addToMySeal(effData, seal.id)}
+						on:click={() => addToMySeal(effData, seal)}
 					>
 						<iconify-icon icon="mdi:check" width={15} height={15} />
 						씰 등록 완료
