@@ -32,9 +32,9 @@ export default {
 					at: 'hsl(var(--stat-at))',
 					ht: 'hsl(var(--stat-ht))',
 					ct: 'hsl(var(--stat-ct))',
-					ds: 'hsl(var(--stat-cds))',
-					ev: 'hsl(var(--stat-cev))',
-					de: 'hsl(var(--stat-cde))'
+					ds: 'hsl(var(--stat-ds))',
+					ev: 'hsl(var(--stat-ev))',
+					de: 'hsl(var(--stat-de))'
 				},
 				price: {
 					't-1': 'var(--price-t-1)',

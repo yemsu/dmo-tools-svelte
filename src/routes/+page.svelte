@@ -5,7 +5,7 @@
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
-	import { Inner, Section } from '$shared/section'
+	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import {
 		STAT_TYPE_OPTIONS,
