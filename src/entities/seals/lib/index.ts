@@ -25,7 +25,7 @@ export const createLoadSaveFn = <
 					const parsedData = JSON.parse(decodedData)
 					const mapToOBj = Array.from(parsedData, ([id, value]) => ({
 						id,
-						[dataKeyName]: value
+						[dataKeyName]: isNaN(value * 1) ? value : value * 1
 					}))
 					return mapToOBj
 				} else {

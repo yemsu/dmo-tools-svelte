@@ -258,7 +258,7 @@
 			<h2 class="ir">계산 결과 - 총 능력치, 총 비용</h2>
 			<StatBarWrap>
 				<div>
-					<p class="flex-center text-md md:text-lg2 gap-2 leading-none">
+					<p class="flex-center gap-2 text-md leading-none md:text-lg2">
 						<span class="flex flex-col">
 							<span class="text-xs3 text-gray-300 md:text-xs"
 								>현재 내 능력치</span
