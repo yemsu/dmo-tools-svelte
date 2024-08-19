@@ -10,13 +10,13 @@
 	}
 </script>
 
-<menu
+<ul
 	class={cn(
-		'md:text-md overflow-hidden rounded-md bg-gray-700 p-1 text-sm',
+		'overflow-hidden rounded-md bg-gray-700 p-1 text-sm md:text-md',
 		dirStyles[dir],
 		className
 	)}
 	{...restProps}
 >
 	<slot></slot>
-</menu>
+</ul>
