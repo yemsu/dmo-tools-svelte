@@ -5,7 +5,9 @@
 	import { mySeals } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
+	import { onMount } from 'svelte'
 	import GnbButton from './GnbButton.svelte'
+	import { decodeJwtResponse, onGoogleScriptLoad } from './login'
 
 	type MenuData = {
 		type: MenuType
@@ -49,6 +51,10 @@
 			}
 		}
 	]
+
+	onMount(() => {
+		onGoogleScriptLoad(decodeJwtResponse)
+	})
 </script>
 
 <div class="h-gnb-h w-full">

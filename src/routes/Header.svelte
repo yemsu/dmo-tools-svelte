@@ -87,5 +87,6 @@
 				</p>
 			</Tooltip>
 		</div>
+		<div id="googleSignIn"></div>
 	</Inner>
 </header>
