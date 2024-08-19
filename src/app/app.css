@@ -11,6 +11,7 @@
 		--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
 		--primary-20: 219 67% 31%; /* hsl(219 67% 31%) */
 		--primary-30: 218 66% 38%; /* hsl(218 66% 38%) */
+		--primary-35: 212 71% 45%; /* hsl(212 71% 45%) */
 		--primary-40: 206 76% 51%; /* hsl(206 76% 51) */
 		--primary-50: 194 99% 49%; /* hsl(194 99% 49%) */
 		--primary-90: 181 100% 71%; /* hsl(181 100% 71%) */
@@ -144,6 +145,6 @@ button:focus:not(:focus-visible) {
 	}
 	.border-gradient {
 		@apply border-transparent;
-		border-image: linear-gradient(45deg, #01bff9, #2150a1) 1;
+		border-image: linear-gradient(45deg, #01bff9, #216dc4) 1;
 	}
 }

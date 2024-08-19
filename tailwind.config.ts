@@ -16,6 +16,7 @@ export default {
 					10: 'hsl(var(--primary-10))',
 					20: 'hsl(var(--primary-20))',
 					30: 'hsl(var(--primary-30))',
+					35: 'hsl(var(--primary-35))',
 					40: 'hsl(var(--primary-40))',
 					50: 'hsl(var(--primary-50))',
 					90: 'hsl(var(--primary-90))'

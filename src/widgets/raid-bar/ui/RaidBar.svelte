@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MENUS } from '$entities/menus'
 	import {
+		alarmMinute,
 		crrServerType,
 		disSubscribe,
 		GAME_SERVERS,
@@ -27,7 +28,7 @@
 	let isAudioOn: boolean = false
 	let audio: HTMLAudioElement | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
-	const ALARM_READY_MINUTE = 1
+	let removeChannelTimer: NodeJS.Timeout | undefined
 
 	let eventSource: EventSource | undefined
 	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -102,6 +103,7 @@
 
 	onMount(async () => {
 		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
+		alarmMinute.loadSavedData()
 		document.addEventListener('visibilitychange', checkEventSourceConnect)
 	})
 
@@ -134,15 +136,16 @@
 		const { time } = _nextRaid
 		const bossTime = new Date(time.startAt).getTime()
 		const currentTime = new Date().getTime()
-		const alarmTiming = ALARM_READY_MINUTE * 60 * 1000
+		const alarmTiming = $alarmMinute * 60 * 1000
 		const timeDifference = bossTime - currentTime
 		if (timeDifference > 0) {
 			if (alarmTimer) clearTimeout(alarmTimer)
+			if (removeChannelTimer) clearTimeout(removeChannelTimer)
 			alarmTimer = setTimeout(() => {
 				notify(_nextRaid)
 				audio && isAudioOn && audio.play()
 			}, timeDifference - alarmTiming)
-			setTimeout(() => {
+			removeChannelTimer = setTimeout(() => {
 				raids.removeChannelTimes(time)
 			}, timeDifference)
 		} else {
@@ -182,17 +185,19 @@
 			isSseSupported = false
 			return
 		}
-	}),
-		onDestroy(() => {
-			clearInterval(alarmTimer)
-		})
+	})
+
+	onDestroy(() => {
+		clearInterval(alarmTimer)
+	})
 
 	$: $raids && updateNextRaid()
+	$: nextRaid && $alarmMinute && setAlarm(nextRaid)
 </script>
 
 <div
 	class={cn(
-		'relative flex h-raid-bar-h items-center',
+		'relative z-raidBar flex h-raid-bar-h items-center',
 		'bg-primary-10',
 		'text-xs2 leading-none',
 		'whitespace-nowrap rounded-md drop-shadow-md'

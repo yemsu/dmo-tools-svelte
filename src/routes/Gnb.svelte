@@ -49,11 +49,6 @@
 			}
 		}
 	]
-
-	const onClickMenu = (path: string) => {
-		const params = new URLSearchParams(window.location.search)
-		goto(`${path}${params ? `?${params}` : ''}`)
-	}
 </script>
 
 <div class="h-gnb-h w-full">

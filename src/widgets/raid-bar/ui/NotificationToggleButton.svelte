@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { alarmMinute } from '$entities/raid'
+	import { Tab, Tabs } from '$shared/tabs'
 	import { Tooltip } from '$shared/tooltip'
 	import { onMount } from 'svelte'
 
 	let isNotificationSupported: boolean
 	let isNotificationOn: boolean
+	let isTabOpen: boolean
 
 	const askNotificationPermission = () => {
 		Notification.requestPermission().then(checkPermission)
@@ -15,6 +18,11 @@
 		} else {
 			isNotificationOn = true
 		}
+	}
+
+	const onClickTab = (alarmMinuteOption: number) => {
+		alarmMinute.set(alarmMinuteOption)
+		isTabOpen = false
 	}
 
 	onMount(() => {
@@ -52,4 +60,31 @@
 			>해주세요.
 		</p>
 	</Tooltip>
+{:else}
+	<button
+		class="bg-primary-35 relative h-full px-2"
+		title="알림 타이머 설정"
+		on:click={() => (isTabOpen = !isTabOpen)}
+	>
+		<iconify-icon icon="majesticons:timer" width={16} height={16} />
+		<span
+			class="absolute left-1/2 top-1/2 -translate-x-[55%] -translate-y-[52%] rounded-full bg-white text-xs3 font-extrabold leading-none tracking-[-0.1em] text-primary-30"
+			>{$alarmMinute}</span
+		>
+	</button>
+	{#if isTabOpen}
+		<Tabs
+			dir="ver"
+			class="absolute bottom-0 right-0 w-[100px] translate-y-full border border-primary-50/50 drop-shadow-primary-50"
+		>
+			{#each [1, 3, 5, 10] as alarmMinuteOption (alarmMinuteOption)}
+				<Tab
+					isActive={alarmMinuteOption === $alarmMinute}
+					on:click={() => onClickTab(alarmMinuteOption)}
+				>
+					{alarmMinuteOption}분 전
+				</Tab>
+			{/each}
+		</Tabs>
+	{/if}
 {/if}

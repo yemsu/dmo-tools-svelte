@@ -9,6 +9,7 @@ export { GAME_CHANNELS, GAME_SERVERS } from './config'
 export { subscribeClientId } from './model'
 export { raids } from './model/raids'
 export { crrServerType } from './model/serverType'
+export { alarmMinute } from './model/alarmMinute'
 export type {
 	GameChannel,
 	ServerName,
