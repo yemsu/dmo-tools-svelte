@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import { MENUS } from '$entities/menus'
 	import type { MySeal, SealData } from '$entities/seals'
 	import { myPrices, mySeals, myStats } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
@@ -7,15 +8,14 @@
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import CrrMenuTitle from '$shared/text/ui/CrrMenuTitle.svelte'
-	import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
-	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
 		getMyAndFinalPrice,
 		statColorStyles,
 		STATS,
 		type StatType
 	} from '$widgets/my-seals'
+	import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
+	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
 		MyStatBox,
 		StatBarSeparator,
@@ -182,7 +182,7 @@
 </script>
 
 <Section>
-	<CrrMenuTitle />
+	<h2 class="ir">{MENUS.CALC.name}</h2>
 	<div class="flex flex-col gap-2">
 		<div class="flex w-full gap-2">
 			<Tabs class="flex-1">

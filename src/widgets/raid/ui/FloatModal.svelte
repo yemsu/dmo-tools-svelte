@@ -10,13 +10,7 @@
 	import RaidTimeView from '$widgets/raid/ui/RaidTimeView.svelte'
 </script>
 
-<Section
-	class={cn(
-		'size-full gap-3 p-2 md:p-4',
-		'border border-gray-500 bg-secondary-10/90',
-		'rounded-md backdrop-blur-sm'
-	)}
->
+<Section class={cn('size-full')} size="sm">
 	<div class="flex items-center gap-4">
 		<Title class="leading-none">
 			보스 출현 정보

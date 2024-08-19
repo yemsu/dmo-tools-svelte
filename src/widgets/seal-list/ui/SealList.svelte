@@ -7,7 +7,6 @@
 	export let seals: T[] = []
 	export let isLoading: boolean = false
 	export let noDataText: string
-
 	const wrapClassName = cn(
 		'grid items-start md:grid-cols-5 grid-cols-3 gap-1 md:gap-2',
 		'w-full',

@@ -1,20 +1,116 @@
 <script lang="ts">
-	import { raids, type NextRaidData } from '$entities/raid'
+	import { MENUS } from '$entities/menus'
+	import {
+		crrServerType,
+		disSubscribe,
+		GAME_SERVERS,
+		getClientId,
+		getRaids,
+		raids,
+		subscribeClientId,
+		type NextRaidData,
+		type RaidTimeData,
+		type ServerType
+	} from '$entities/raid'
 	import Badge from '$shared/badge/Badge.svelte'
-	import { cn } from '$shared/lib'
+	import { _objKeys, cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import { timeSortByStartAt } from '$widgets/raid'
 	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
 	import RaidItem from '$widgets/raid-bar/ui/RaidItem.svelte'
-	import { onDestroy } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
+	import GnbButton from '../../../routes/GnbButton.svelte'
 	import RaidBarServerButton from './RaidBarServerButton.svelte'
 
-	export let isSseSupported: boolean | undefined
+	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
 	let isAudioOn: boolean = false
 	let audio: HTMLAudioElement | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
 	const ALARM_READY_MINUTE = 1
+
+	let eventSource: EventSource | undefined
+	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
+	$: clearPrevSubscribe = async () => {
+		if (!eventSource || !$subscribeClientId) return
+		eventSource.close()
+		eventSource = undefined
+		return await disSubscribe($subscribeClientId)
+	}
+
+	const handleEventSource = async (_eventSource: EventSource) => {
+		_eventSource.addEventListener('sub', function (e) {
+			const data = JSON.parse(e.data)
+			subscribeClientId.set(data.clientId)
+		})
+		_eventSource.addEventListener('created', function (e) {
+			const createdTime = JSON.parse(e.data) as RaidTimeData
+			console.log('created')
+			raids.addNewTime(createdTime)
+		})
+		_eventSource.addEventListener('voted', function (e) {
+			const votedTime = JSON.parse(e.data)
+			raids.voteTime(votedTime)
+		})
+		// _eventSource.addEventListener('notify', function (e) {
+		// 	const data = JSON.parse(e.data)
+		// 	console.log('notify')
+		// })
+		_eventSource.addEventListener('error', function (e) {
+			console.error('error occurred', e)
+		})
+	}
+
+	$: checkEventSourceConnect = async () => {
+		if (
+			!eventSource ||
+			document.visibilityState !== 'visible' ||
+			eventSource.readyState !== EventSource.CLOSED
+		)
+			return
+
+		await clearPrevSubscribe()
+		initRaidSubscribe()
+	}
+
+	const getIp = async () => {
+		const ipRes = await fetch('https://ipinfo.io/json?token=d49252de2b4da0')
+		if (!ipRes.ok) {
+			throw Error(`HTTP error! get ip Failed! ${ipRes.status}`)
+		}
+		const data: { ip: string } = await ipRes.json()
+		return data.ip
+	}
+
+	const subscribeSSE = async (serverType: ServerType) => {
+		await clearPrevSubscribe()
+		const ip = await getIp()
+		const clientId = await getClientId(ip)
+		eventSource = new EventSource(
+			`${API_BASE_URL}/alarms/subscribe/${serverType}?clientId=${clientId}`
+		)
+		handleEventSource(eventSource)
+	}
+
+	$: initRaidSubscribe = async () => {
+		if (!$crrServerType) return
+		const raidsFetched = await getRaids($crrServerType)
+		raids.set(raidsFetched)
+		subscribeSSE($crrServerType)
+	}
+
+	onMount(async () => {
+		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
+		document.addEventListener('visibilitychange', checkEventSourceConnect)
+	})
+
+	onDestroy(() => {
+		if (typeof window === 'undefined') return
+		document.removeEventListener('visibilitychange', checkEventSourceConnect)
+	})
+
+	$: $crrServerType && initRaidSubscribe()
 
 	const toggleAudioAlarm = () => {
 		console.log('toggleAudioAlarm', isAudioOn)
@@ -79,9 +175,17 @@
 		setAlarm(nextRaid)
 	}
 
-	onDestroy(() => {
-		clearInterval(alarmTimer)
-	})
+	onMount(() => {
+		if (typeof EventSource !== 'undefined') {
+			isSseSupported = true
+		} else {
+			isSseSupported = false
+			return
+		}
+	}),
+		onDestroy(() => {
+			clearInterval(alarmTimer)
+		})
 
 	$: $raids && updateNextRaid()
 </script>
@@ -96,13 +200,13 @@
 >
 	{#if isSseSupported === true}
 		<RaidBarServerButton />
-		<button
+		<GnbButton
+			path={MENUS.RAID.path}
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-1 px-2',
 				'border-gradient border-b border-t'
 			)}
-			title="레이드 정보 자세히 보기"
-			on:click
+			title="보스 타이머 페이지 가기"
 		>
 			<Badge color="warning" shape="square" class="italic">Beta</Badge>
 			{#if nextRaid}
@@ -111,7 +215,7 @@
 				보스 출현 정보를 제보해주세요!
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
-		</button>
+		</GnbButton>
 		<NotificationToggleButton />
 		<button
 			class="h-full rounded-br-md rounded-tr-md bg-primary-30 px-2"

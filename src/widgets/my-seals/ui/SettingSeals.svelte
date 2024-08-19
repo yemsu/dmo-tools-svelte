@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import { MENUS } from '$entities/menus'
 	import { type SealData } from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { CrrMenuTitle } from '$shared/text'
-	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
 		STAT_TYPE_OPTIONS,
 		STATS,
 		statTypeOptionStyles,
 		type StatTypeOption
 	} from '$widgets/my-seals'
+	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
 
 	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]
@@ -56,7 +56,7 @@
 </script>
 
 <Section>
-	<CrrMenuTitle />
+	<h2 class="ir">{MENUS.SETTING.name}</h2>
 	<div
 		class={cn(
 			'flex w-full flex-col items-start gap-2',

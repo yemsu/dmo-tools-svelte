@@ -1,11 +1,12 @@
 <script>
+	import { cn } from '$shared/lib'
+	import Inner from '$shared/section/ui/Inner.svelte'
+	import { ToastPopup } from '$shared/toast'
+	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
 	import 'iconify-icon'
 	import '../app/app.css'
-	import Header from './Header.svelte'
-	import { cn } from '$shared/lib'
 	import Gnb from './Gnb.svelte'
-	import RaidAlarm from '$widgets/raid/ui/RaidAlarm.svelte'
-	import { ToastPopup } from '$shared/toast'
+	import Header from './Header.svelte'
 	const META = {
 		TITLE: '디지몬 마스터즈 도구 모음 - DMO tools',
 		DESC: '디지몬 마스터즈 온라인 도구 모음 DMO tools 입니다. 보유 씰을 등록하여 목표 스탯까지의 효율적인 구매리스트를 확인하고, 유저들과 보스 레이드 정보도 공유하여 알람을 받아보세요!'
@@ -40,7 +41,9 @@
 	)}
 >
 	<Header></Header>
-	<RaidAlarm />
+	<Inner class="w-full">
+		<RaidBar />
+	</Inner>
 
 	<main class="relative flex-1">
 		<slot></slot>

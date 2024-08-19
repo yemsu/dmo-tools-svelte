@@ -5,7 +5,7 @@
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
 		sm: 'gap-2 md:gap-3',
-		md: 'gap-3 md:gap-4'
+		md: 'gap-3 md:gap-3'
 	}
 </script>
 

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { myPrices, mySeals, myStats, type MySeal } from '$entities/seals'
+	import ListReferText from '$shared/list/ui/ListReferText.svelte'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { CrrMenuTitle } from '$shared/text'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { StatBar } from '$widgets/stat-bar'
 	import { onMount } from 'svelte'
@@ -15,7 +15,7 @@
 	} from '../config'
 	import { getMyAndFinalPrice, getMySealData } from '../lib/helper'
 	import MySealGrade from './MySealGrade.svelte'
-	import ListReferText from '$shared/list/ui/ListReferText.svelte'
+	import { MENUS } from '$entities/menus'
 
 	let statTypeSelected = 'ALL'
 	let mySealsFiltered: MySeal[] = []
@@ -58,7 +58,7 @@
 </script>
 
 <Section>
-	<CrrMenuTitle />
+	<h2 class="ir">{MENUS.MY.name} 씰</h2>
 	{#if $myStats}
 		<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
 	{/if}

@@ -1,3 +1,3 @@
 import type { MENUS } from '../config'
 
-export type Menus = (typeof MENUS)[number]
+export type MenuType = keyof typeof MENUS
