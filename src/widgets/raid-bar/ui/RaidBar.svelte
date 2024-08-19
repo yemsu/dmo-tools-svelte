@@ -1,13 +1,13 @@
 <script lang="ts">
-	import { raids, type NextRaidData, type RaidData } from '$entities/raid'
-	import { cn } from '$shared/lib'
-	import { timeSortByStartAt } from '$widgets/raid'
-	import RaidItem from '$widgets/raid-bar/ui/RaidItem.svelte'
-	import { onDestroy, onMount } from 'svelte'
-	import RaidBarServerButton from './RaidBarServerButton.svelte'
-	import { toast } from '$shared/toast'
-	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
+	import { raids, type NextRaidData } from '$entities/raid'
 	import Badge from '$shared/badge/Badge.svelte'
+	import { cn } from '$shared/lib'
+	import { toast } from '$shared/toast'
+	import { timeSortByStartAt } from '$widgets/raid'
+	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
+	import RaidItem from '$widgets/raid-bar/ui/RaidItem.svelte'
+	import { onDestroy } from 'svelte'
+	import RaidBarServerButton from './RaidBarServerButton.svelte'
 
 	export let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
