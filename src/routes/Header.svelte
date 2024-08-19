@@ -1,13 +1,19 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { myPrices, mySeals, myStats } from '$entities/seals'
-	import type { Stats } from '$entities/seals/type'
+	import {
+		myPrices,
+		mySeals,
+		myStats,
+		type Stats,
+		STATS,
+		STATS_PERCENT_TYPE,
+		type StatType
+	} from '$entities/seals'
 	import { cn, objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import { Tooltip } from '$shared/tooltip'
 	import { getCurrentStep } from '$widgets/seal-calculator'
 	import { getMySealData } from '$widgets/my-seals'
-	import { STATS, type StatType } from '$widgets/my-seals/config'
 	import { onMount } from 'svelte'
 	onMount(async () => {
 		if ($mySeals.length === 0) {
@@ -37,7 +43,7 @@
 			const maxIncrease = seal.maxIncrease
 			resultValue += maxIncrease * (sealPercent / 100)
 		})
-		if (statType === 'CT') {
+		if (STATS_PERCENT_TYPE.includes(statType)) {
 			resultValue = resultValue / 100
 		}
 		return resultValue
@@ -65,7 +71,7 @@
 		<div class="flex-center relative gap-4">
 			<button
 				class={cn(
-					'text-xs3 peer text-right text-point/90',
+					'peer text-right text-xs3 text-point/90',
 					'md:text-left md:text-xs md:text-point md:underline md:underline-offset-4'
 				)}
 			>

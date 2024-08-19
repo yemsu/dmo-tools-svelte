@@ -1,6 +1,6 @@
 import { createLoadSaveFn, updateOrAddData } from '$entities/seals/lib'
 import { _remove } from '$shared/lib'
-import type { MySeal, Stats } from '../type'
+import type { MySeal, Stats } from '../type/type'
 import { writable } from 'svelte/store'
 
 const sortBy = <ArrItem extends Record<string, number>>(

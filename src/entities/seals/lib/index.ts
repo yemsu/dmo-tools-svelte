@@ -1,5 +1,5 @@
 import { goto } from '$app/navigation'
-import type { SealPrice } from '../type'
+import type { SealPrice } from '../type/type'
 
 export const getSealPrice = (prices: SealPrice[], sealId: number) => {
 	const result = prices.find((price) => price.sealId === sealId)

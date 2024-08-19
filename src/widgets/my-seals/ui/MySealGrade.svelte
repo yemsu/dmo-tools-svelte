@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { type MySeal } from '$entities/seals'
+	import { STATS_PERCENT_TYPE, type MySeal } from '$entities/seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
 	import { getMySealData } from '$widgets/my-seals/lib/helper'
 
@@ -9,8 +9,9 @@
 	$: crrStep = getCurrentStep(sealData, mySeal.count)
 	$: grade = crrStep.grade
 	$: result = sealData.maxIncrease * (crrStep?.percent / 100)
-	$: calcNum = sealData.statType === 'CT' ? 100 : 1
-	$: dataUnit = sealData.statType === 'CT' ? '%' : ''
+	$: isPercentType = STATS_PERCENT_TYPE.includes(sealData.statType)
+	$: calcNum = isPercentType ? 100 : 1
+	$: dataUnit = isPercentType ? '%' : ''
 
 	const gradeBgStyles = {
 		노말: 'bg-[#0C73AE]',
@@ -40,7 +41,7 @@
 		class="font-bold {grade &&
 			gradeTextStyles[
 				grade
-			]} text-xs2 py-0.5 brightness-150 saturate-200 md:text-xs"
+			]} py-0.5 text-xs2 brightness-150 saturate-200 md:text-xs"
 		>+{result / calcNum}{dataUnit}</span
 	>
 </p>

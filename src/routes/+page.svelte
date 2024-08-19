@@ -1,18 +1,18 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
-	import { type SealData } from '$entities/seals'
+	import {
+		type SealData,
+		STAT_TYPE_OPTIONS,
+		STATS,
+		type StatTypeOption
+	} from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import {
-		STAT_TYPE_OPTIONS,
-		STATS,
-		statTypeOptionStyles,
-		type StatTypeOption
-	} from '$widgets/my-seals'
+	import { statTypeOptionStyles } from '$widgets/my-seals'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
 

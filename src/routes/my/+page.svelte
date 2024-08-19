@@ -1,6 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { myPrices, mySeals, myStats, type MySeal } from '$entities/seals'
+	import {
+		myPrices,
+		mySeals,
+		myStats,
+		type MySeal,
+		STAT_TYPE_OPTIONS,
+		STATS,
+		type StatTypeOption
+	} from '$entities/seals'
 	import ListReferText from '$shared/list/ui/ListReferText.svelte'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
@@ -8,10 +16,7 @@
 	import { StatBar } from '$widgets/stat-bar'
 	import { onMount } from 'svelte'
 	import {
-		STAT_TYPE_OPTIONS,
-		STATS,
 		statTypeOptionStyles,
-		type StatTypeOption,
 		getMyAndFinalPrice,
 		getMySealData,
 		MySealGrade

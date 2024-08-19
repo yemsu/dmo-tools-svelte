@@ -4,11 +4,12 @@
 	const dispatch = createEventDispatcher()
 
 	export let label: string | undefined = undefined
+	export let placeholder: string | undefined
 	export let value: string | number | null = null
 	export let inputElement: HTMLInputElement | null = null
 	export let size: 'xs' | 'sm' | 'md' = 'md'
 
-	const { name, placeholder, class: className, ...restProps } = $$restProps
+	const { name, class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
 		xs: 'h-[25px] text-xs',

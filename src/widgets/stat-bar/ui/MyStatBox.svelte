@@ -1,7 +1,6 @@
 <script lang="ts">
-	import type { Stats } from '$entities/seals'
+	import { type Stats, STATS, STATS_PERCENT_TYPE } from '$entities/seals'
 	import { numberFormatter } from '$shared/lib'
-	import { STATS } from '$widgets/my-seals'
 
 	export let stats: Stats
 	export let size: 'sm' | 'md' = 'md'
@@ -19,7 +18,9 @@
 		<div class="flex items-center gap-2 rounded-full">
 			<dt class="text-xs text-gray-200">{stat.type}</dt>
 			<dd class="font-semibold text-point">
-				{stats ? numberFormatter(stats[stat.type]) : 0}{#if stat.type === 'CT'}
+				{stats
+					? numberFormatter(stats[stat.type])
+					: 0}{#if STATS_PERCENT_TYPE.includes(stat.type)}
 					%
 				{/if}
 			</dd>

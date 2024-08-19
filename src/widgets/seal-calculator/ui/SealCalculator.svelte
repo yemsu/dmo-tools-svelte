@@ -1,19 +1,20 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
-	import type { MySeal, SealData } from '$entities/seals'
+	import {
+		type MySeal,
+		type SealData,
+		STATS,
+		STATS_PERCENT_TYPE,
+		type StatType
+	} from '$entities/seals'
 	import { myPrices, mySeals, myStats } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { Input } from '$shared/form'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import {
-		getMyAndFinalPrice,
-		statColorStyles,
-		STATS,
-		type StatType
-	} from '$widgets/my-seals'
+	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
@@ -37,9 +38,9 @@
 	let willNeedMoneyTotal = 0
 	let goalStatInput: HTMLInputElement
 	let isSealPriceChanged = false
-	let searchInputPlaceholder = '목표 수치 입력'
-	$: calcNum = statTypeSelected === 'CT' ? 100 : 1
-	$: resultUnit = statTypeSelected === 'CT' ? '%' : ''
+	$: isPercentType = STATS_PERCENT_TYPE.includes(statTypeSelected)
+	$: calcNum = isPercentType ? 100 : 1
+	$: resultUnit = isPercentType ? '%' : ''
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
 
@@ -144,11 +145,6 @@
 
 	const onClickStatType = (statType: StatType) => {
 		statTypeSelected = statType
-		if (statType === 'CT') {
-			searchInputPlaceholder = '목표 수치 입력 (퍼센트 값)'
-		} else {
-			searchInputPlaceholder = '목표 수치 입력'
-		}
 		resetPrevResult()
 		setTimeout(() => {
 			goalStat = ''
@@ -209,7 +205,9 @@
 				bind:inputElement={goalStatInput}
 				type="number"
 				class="flex-1"
-				placeholder={searchInputPlaceholder}
+				placeholder={STATS_PERCENT_TYPE.includes(statTypeSelected)
+					? '목표 수치 입력 (퍼센트 값)'
+					: '목표 수치 입력'}
 				bind:value={goalStat}
 			/>
 			<Button rounded="md" size="lg" class="point-neon font-semibold"

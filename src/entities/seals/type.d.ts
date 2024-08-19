@@ -30,3 +30,13 @@ export type MyPrice = {
 }
 
 export type Stats = Record<StatType, number>
+
+export type StatType = (typeof STATS)[number]['type']
+
+export type Seal = {
+	name: string
+	stat: StatType
+	maxValue: number
+}
+
+export type StatTypeOption = StatType | 'ALL'
