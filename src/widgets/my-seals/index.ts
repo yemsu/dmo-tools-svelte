@@ -1,7 +1,6 @@
-import MySeals from './ui/MySeals.svelte'
-import SettingSeals from './ui/SettingSeals.svelte'
+import MySealGrade from './ui/MySealGrade.svelte'
 
-export { SettingSeals, MySeals }
+export { MySealGrade }
 export { STATS, STAT_TYPES } from './config/index'
 export {
 	type StatType,

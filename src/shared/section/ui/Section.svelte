@@ -10,7 +10,11 @@
 </script>
 
 <section
-	class={cn('flex flex-col overflow-hidden', sizeStyles[size], className)}
+	class={cn(
+		'flex h-content-fill-h flex-col gap-2 overflow-hidden p-content-side',
+		sizeStyles[size],
+		className
+	)}
 	{...restProps}
 >
 	<slot></slot>
