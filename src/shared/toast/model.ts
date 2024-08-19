@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store'
 
+let timer: NodeJS.Timeout | undefined
 const createToastStore = () => {
 	const { subscribe, set } = writable<string | undefined>()
 
@@ -7,7 +8,8 @@ const createToastStore = () => {
 		subscribe,
 		on: (text: string) => {
 			set(text)
-			setTimeout(() => {
+			if (timer) clearTimeout(timer)
+			timer = setTimeout(() => {
 				set(undefined)
 			}, 3000)
 		}
