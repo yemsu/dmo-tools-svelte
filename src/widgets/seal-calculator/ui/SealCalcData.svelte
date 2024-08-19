@@ -3,6 +3,7 @@
 	import type { SealEfficiency } from '$widgets/seal-calculator/types'
 
 	export let effData: SealEfficiency
+	export let isPercentType: boolean
 	const datalist: {
 		key: keyof Omit<SealEfficiency, 'myStep'>
 		text: string
@@ -21,7 +22,11 @@
 			<div class="flex items-center gap-1">
 				<dt class="text-xs2 text-gray-200">{data.text}</dt>
 				<dd class="text-point">
-					{numberFormatter(effData[data.key], 5)}
+					{#if data.key === 'willGetStat' && isPercentType}
+						{effData[data.key] / 100}%
+					{:else}
+						{numberFormatter(effData[data.key], 5)}
+					{/if}
 				</dd>
 			</div>
 		{/each}

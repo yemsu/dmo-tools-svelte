@@ -229,7 +229,7 @@
 			{@const seal = $page.data.seals.find(({ id }) => id === effData.id)}
 			{#if seal}
 				<SealItem {seal} myStep={effData.myStep} isCountEditable={false}>
-					<SealCalcData {effData} />
+					<SealCalcData {effData} {isPercentType} />
 					<Button
 						type="button"
 						size="sm"
