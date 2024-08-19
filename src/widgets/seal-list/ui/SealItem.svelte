@@ -13,6 +13,7 @@
 	export let isCountEditable: boolean = true
 	export let isPriceEditable: boolean = true
 	let sealPrices = $page.data.sealPrices
+	$: sealPrice = getSealPrice(sealPrices, seal.id)
 </script>
 
 <article class={cn('relative flex flex-col justify-center text-center')}>
@@ -31,7 +32,7 @@
 		>
 			{seal.name}
 		</h2>
-		<p class="md:text-xs3 text-xs4 absolute left-[3px] top-0 text-gray-600">
+		<p class="absolute left-[3px] top-0 text-xs4 text-gray-600 md:text-xs3">
 			#{seal.id}
 		</p>
 		<Tooltip size="sm" useAdaptiveX={true} class="top-4">
@@ -44,17 +45,18 @@
 					<dt class="text-gray-300">마스터 개수</dt>
 					<dd class="text-point">{seal.masterCount.toLocaleString()}</dd>
 				</div>
-				<div class="flex items-center gap-2">
-					<dt class="text-gray-300">가격 업데이트</dt>
-					<dd class="text-point">
-						{sealPrices.length > 0 &&
-							timeElapsedString(getSealPrice(sealPrices, seal.id).modifiedAt)}
-					</dd>
-				</div>
+				{#if sealPrice}
+					<div class="flex items-center gap-2">
+						<dt class="text-gray-300">가격 업데이트</dt>
+						<dd class="text-point">
+							{sealPrices.length > 0 && timeElapsedString(sealPrice.modifiedAt)}
+						</dd>
+					</div>
+				{/if}
 				{#if myStep}
 					<div class="rounded-sm bg-white/10 p-1">
-						<p class="text-xs3 mb-1">현재 내 능력치</p>
-						<ol class="text-xs3 flex items-center gap-1 leading-none">
+						<p class="mb-1 text-xs3">현재 내 능력치</p>
+						<ol class="flex items-center gap-1 text-xs3 leading-none">
 							{#each SEAL_COUNT_STEPS_BY_MASTER[seal.masterCount] as sealCount}
 								<li
 									class={cn(
