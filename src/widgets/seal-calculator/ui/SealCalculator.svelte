@@ -162,7 +162,7 @@
 			`${seal.name}씰 ${effData.needCount}개를 보유 씰에 추가하시겠어요?`
 		)
 		if (!isConfirmed) return
-		mySeals.updateCount(effData.id, mySealCount + effData.needCount)
+		mySeals.updateCount(effData.id, +mySealCount + effData.needCount)
 		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
