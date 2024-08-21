@@ -1,8 +1,13 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-	import { gToken, postLogin, setTokenCookie, user } from '$entities/user'
-	import { removeTokenCookie } from '$entities/user/lib'
+	import {
+		postLogin,
+		setTokenCookie,
+		removeTokenCookie,
+		user,
+		G_TOKEN_NAME
+	} from '$entities/user'
 	import { Button } from '$shared/button'
 	import { onGoogleScriptLoad } from '$shared/layout/lib/login'
 	import { Tab } from '$shared/tabs'
@@ -22,7 +27,7 @@
 	const onGoogleLogin = async (token: string) => {
 		const res = await postLogin(token)
 		if (res === null) {
-			gToken.set(token)
+			setTokenCookie(G_TOKEN_NAME, token)
 			goto('/join')
 		} else {
 			setTokenCookie(res.token)
@@ -47,7 +52,7 @@
 
 	onMount(() => {
 		checkLogin()
-		onGoogleScriptLoad(onGoogleLogin)
+		!$page.data.session && onGoogleScriptLoad(onGoogleLogin)
 	})
 </script>
 

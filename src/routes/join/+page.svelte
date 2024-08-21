@@ -1,9 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import {
+		G_TOKEN_NAME,
 		getNickCheck,
-		gToken,
+		getTokenCookie,
 		postSignup,
+		removeTokenCookie,
 		TOKEN_NAME,
 		user
 	} from '$entities/user'
@@ -76,7 +78,8 @@
 			alert('닉네임을 입력해주세요.')
 			return
 		}
-		if (!$gToken) {
+		const googleToken = getTokenCookie(G_TOKEN_NAME)
+		if (!googleToken) {
 			error(
 				550,
 				'구글 로그인 정보가 만료되었습니다. 구글 로그인을 다시 진행해주세요.'
@@ -86,9 +89,9 @@
 			`${value}: 이 닉네임으로 회원 가입을 진행하시겠어요?\n가입 후 닉네임은 변경할 수 없어요.`
 		)
 		if (!isConfirmed) return
-		const res = await postSignup($gToken, value)
+		const res = await postSignup(googleToken, value)
 		user.set(res)
-		gToken.set(null)
+		removeTokenCookie(G_TOKEN_NAME)
 		sessionStorage.setItem(TOKEN_NAME, res.token)
 		toast.on(`${value}님 환영합니다!`)
 		goto('/')
