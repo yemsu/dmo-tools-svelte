@@ -15,10 +15,7 @@ export const postSignup = (idToken: string, nickname: string) =>
 		body: JSON.stringify({
 			idToken,
 			nickname
-		}),
-		headers: {
-			'Content-Type': 'application/json'
-		}
+		})
 	})
 
 export const postResign = () =>

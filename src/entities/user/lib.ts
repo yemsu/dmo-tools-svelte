@@ -7,6 +7,7 @@ export const setTokenCookie = (token: string, tokenName?: string) => {
 }
 
 export const getTokenCookie = (tokenName?: string): string | null => {
+	if (import.meta.env.SSR) return null
 	const cookies = document.cookie.split('; ')
 	for (const cookie of cookies) {
 		const [name, value] = cookie.split('=')

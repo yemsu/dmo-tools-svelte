@@ -8,3 +8,6 @@ export const getSealPrices = (sortBy: 'regCount' | 'modifiedAt' = 'regCount') =>
 
 export const postSealPrice = (sealId: number, price: number) =>
 	apiFetch<SealPrice>(`/seals/${sealId}?price=${price}`, { method: 'POST' })
+
+export const putMySeals = () =>
+	apiFetch<SealData[]>('/seals/my', { method: 'put' })

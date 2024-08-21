@@ -1,4 +1,4 @@
-import { TOKEN_NAME } from '$entities/user'
+import { getTokenCookie, TOKEN_NAME } from '$entities/user'
 import { error } from '@sveltejs/kit'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -17,10 +17,15 @@ type ErrorResponse = {
 
 export const apiFetch = async <ResponseData>(
 	endpoint: string,
-	options?: RequestInit
+	options: RequestInit = {}
 ): Promise<ResponseData> => {
+	const token = getTokenCookie(TOKEN_NAME)
+	const headers: HeadersInit = { Authorization: token || '' }
 	try {
-		const response = await fetch(`${API_BASE_URL}${endpoint}`, options)
+		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+			...options,
+			headers: { ...options.headers, ...headers }
+		})
 		const data: { result: ResponseData | ErrorResponse } = await response.json()
 		if (
 			data.result &&
