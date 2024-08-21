@@ -12,7 +12,7 @@
 
 <ul
 	class={cn(
-		'overflow-hidden rounded-md bg-gray-700 p-1 text-sm md:text-md',
+		'min-w-[100px] overflow-hidden rounded-md bg-gray-700 p-1 text-sm md:text-md',
 		dirStyles[dir],
 		className
 	)}

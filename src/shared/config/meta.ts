@@ -22,5 +22,9 @@ export const META = {
 	RAID_TIMER: {
 		TITLE: `레이드 타이머 | ${META_COMMON.TITLE}`,
 		DESC: `${META_COMMON.TITLE} 보스 출현 시간을 제보하여 유저들과 공유하고 알림을 받아보세요.`
+	},
+	JOIN: {
+		TITLE: `닉네임 설정 | ${META_COMMON.TITLE}`,
+		DESC: META_COMMON.TITLE
 	}
 }

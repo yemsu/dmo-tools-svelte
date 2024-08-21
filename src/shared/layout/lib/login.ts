@@ -1,16 +1,7 @@
-export const onGoogleScriptLoad = (decodeJwtResponse) => {
+export const onGoogleScriptLoad = (cb: (token: string) => void) => {
 	try {
-		const handleCredentialResponse = (response) => {
-			// decodeJwtResponse() is a custom function defined by you
-			// to decode the credential response.
-			const responsePayload = decodeJwtResponse(response.credential)
-			console.log('ID: ' + responsePayload.sub)
-			console.log('Full Name: ' + responsePayload.name)
-			console.log('Given Name: ' + responsePayload.given_name)
-			console.log('Family Name: ' + responsePayload.family_name)
-			console.log('Image URL: ' + responsePayload.picture)
-			console.log('Email: ' + responsePayload.email)
-			console.log('Encoded JWT ID token: ' + response.credential)
+		const handleCredentialResponse = (response: { credential: string }) => {
+			cb(response.credential)
 		}
 		google.accounts.id.initialize({
 			client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
@@ -20,9 +11,9 @@ export const onGoogleScriptLoad = (decodeJwtResponse) => {
 			document.getElementById('googleSignIn'),
 			{
 				theme: 'outline',
-				size: 'large',
-				text: 'signin_with',
-				shape: 'rectangular',
+				size: 'small',
+				text: 'signin',
+				shape: 'pill',
 				logo_alignment: 'left'
 			} // customization attributes
 		)

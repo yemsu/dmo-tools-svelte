@@ -1,13 +1,10 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import { MENUS, type MenuType } from '$entities/menus'
 	import { mySeals } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
-	import { onMount } from 'svelte'
 	import GnbButton from './GnbButton.svelte'
-	import { decodeJwtResponse, onGoogleScriptLoad } from './login'
 
 	type MenuData = {
 		type: MenuType
@@ -51,10 +48,6 @@
 			}
 		}
 	]
-
-	onMount(() => {
-		onGoogleScriptLoad(decodeJwtResponse)
-	})
 </script>
 
 <div class="h-gnb-h w-full">

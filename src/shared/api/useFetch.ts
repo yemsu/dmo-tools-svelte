@@ -1,3 +1,4 @@
+import { TOKEN_NAME } from '$entities/user'
 import { error } from '@sveltejs/kit'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -16,10 +17,10 @@ type ErrorResponse = {
 
 export const apiFetch = async <ResponseData>(
 	endpoint: string,
-	option?: RequestInit
+	options?: RequestInit
 ): Promise<ResponseData> => {
 	try {
-		const response = await fetch(`${API_BASE_URL}${endpoint}`, option)
+		const response = await fetch(`${API_BASE_URL}${endpoint}`, options)
 		const data: { result: ResponseData | ErrorResponse } = await response.json()
 		if (
 			data.result &&
@@ -32,8 +33,8 @@ export const apiFetch = async <ResponseData>(
 		}
 		return data.result
 	} catch (e) {
-		const err = e as { body: { message: string; status: number } }
-		error(err.body.status, {
+		const err = e as { body: { message: string; status?: number } }
+		error(err.body.status || 0, {
 			message: `${err.body.message}! endpoint: ${endpoint}`
 		})
 	}
