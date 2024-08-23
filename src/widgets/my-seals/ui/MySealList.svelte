@@ -35,12 +35,7 @@
 	}
 </script>
 
-<SealList
-	seals={mySealsFiltered || []}
-	isLoading={!!($user && $mySealCounts.length === 0)}
-	let:seal={mySeal}
-	class="h-full"
->
+<SealList seals={mySealsFiltered || []} let:seal={mySeal} class="h-full">
 	<SealItem seal={getMySealCount($page.data.seals, mySeal.id)}>
 		<MySealGrade {mySeal} />
 		<button
