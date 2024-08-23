@@ -27,7 +27,7 @@
 	const onGoogleLogin = async (token: string) => {
 		const res = await postLogin(token)
 		if (res === null) {
-			setTokenCookie(G_TOKEN_NAME, token)
+			setTokenCookie(token, G_TOKEN_NAME)
 			goto('/join')
 		} else {
 			setTokenCookie(res.token)
