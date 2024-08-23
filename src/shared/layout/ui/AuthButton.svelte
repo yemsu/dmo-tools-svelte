@@ -32,7 +32,7 @@
 		} else {
 			setTokenCookie(res.token)
 			user.set(res)
-			toast.on(`${res.nickname}님 환영합니다!`)
+			toast.on(`환영합니다 ${res.nickname}님!`)
 		}
 	}
 
@@ -68,8 +68,15 @@
 		</Button>
 		{#if isShowTab}
 			<Tabs
-				class="absolute -bottom-2 right-0 z-tooltip translate-y-full peer-focus:flex"
+				dir="ver"
+				class="absolute -bottom-2 right-0 z-tooltip translate-y-full drop-shadow-lg peer-focus:flex"
 			>
+				<Tab
+					on:click={() => {
+						goto('/save-url')
+						isShowTab = false
+					}}>url 데이터 저장</Tab
+				>
 				<Tab on:click={logout}>로그아웃</Tab>
 			</Tabs>
 		{/if}

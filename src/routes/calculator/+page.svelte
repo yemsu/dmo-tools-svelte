@@ -2,19 +2,29 @@
 	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
 	import {
-		type MySeal,
-		type SealData,
+		mySealCounts,
+		mySealPrices,
+		myStats,
 		STATS,
 		STATS_PERCENT_TYPE,
+		type MySealCount,
+		type SealData,
 		type StatType
 	} from '$entities/seals'
-	import { myPrices, mySeals, myStats } from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
+	import { META } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
+	import { toast } from '$shared/toast'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
+	import {
+		getCurrentStep,
+		getNextSteps,
+		sortByEffDataList,
+		type SealEfficiency
+	} from '$widgets/seal-calculator'
 	import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
@@ -23,14 +33,6 @@
 		StatBarTotalPrice,
 		StatBarWrap
 	} from '$widgets/stat-bar'
-	import {
-		getCurrentStep,
-		getNextSteps,
-		sortByEffDataList,
-		type SealEfficiency
-	} from '$widgets/seal-calculator'
-	import { toast } from '$shared/toast'
-	import { META } from '$shared/config'
 
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
@@ -45,18 +47,18 @@
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
 
-	const getMySealCount = (mySeals: MySeal[], sealId: number) =>
-		mySeals.find(({ id }) => id === sealId)?.count || 0
+	const getMySealCount = (mySeal: MySealCount[], sealId: number) =>
+		mySeal.find(({ id }) => id === sealId)?.count || 0
 
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
 		const { final: price } = getMyAndFinalPrice(
 			$page.data.sealPrices,
-			$myPrices,
+			$mySealPrices,
 			seal.id
 		)
 		if (!price) return result
-		const mySealCount = getMySealCount($mySeals, seal.id)
+		const mySealCount = getMySealCount($mySealCounts, seal.id)
 		const crrMyStep =
 			mySealCount !== 0 ? getCurrentStep(seal, mySealCount) : undefined
 		const nextSteps = getNextSteps(seal, mySealCount)
@@ -154,12 +156,15 @@
 	}
 
 	const addToMySeal = (effData: SealEfficiency, seal: SealData) => {
-		const mySealCount = getMySealCount($mySeals, seal.id)
+		const mySealCount = getMySealCount($mySealCounts, seal.id)
 		const isConfirmed = confirm(
 			`${seal.name}씰 ${effData.needCount}개를 보유 씰에 추가하시겠어요?`
 		)
 		if (!isConfirmed) return
-		mySeals.updateCount(effData.id, +mySealCount + effData.needCount)
+		mySealCounts.updateCount({
+			id: effData.id,
+			count: +mySealCount + effData.needCount
+		})
 		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
@@ -175,7 +180,7 @@
 		}
 	}
 
-	$: $myPrices && onChangedSealPrice()
+	$: $mySealPrices && onChangedSealPrice()
 </script>
 
 <svelte:head>

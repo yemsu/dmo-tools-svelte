@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { STATS_PERCENT_TYPE, type MySeal } from '$entities/seals'
+	import { STATS_PERCENT_TYPE, type MySealCount } from '$entities/seals'
+	import { getMySealCount } from '$widgets/my-seals/lib/helper'
 	import { getCurrentStep } from '$widgets/seal-calculator'
-	import { getMySealData } from '$widgets/my-seals/lib/helper'
 
-	export let mySeal: MySeal
-	$: sealData = getMySealData($page.data.seals, mySeal.id)
+	export let mySeal: MySealCount
+	$: sealData = getMySealCount($page.data.seals, mySeal.id)
 	$: crrStep = getCurrentStep(sealData, mySeal.count)
 	$: grade = crrStep.grade
 	$: result = sealData.maxIncrease * (crrStep?.percent / 100)

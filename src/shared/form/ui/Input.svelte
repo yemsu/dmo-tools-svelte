@@ -4,8 +4,8 @@
 	const dispatch = createEventDispatcher()
 
 	export let label: string | undefined = undefined
-	export let placeholder: string | undefined
-	export let value: string | number | null = null
+	export let placeholder: string | undefined = undefined
+	export let value: string | number | null
 	export let inputElement: HTMLInputElement | null = null
 	export let size: 'xs' | 'sm' | 'md' = 'md'
 

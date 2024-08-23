@@ -6,7 +6,7 @@
 	type T = $$Generic
 	export let seals: T[] = []
 	export let isLoading: boolean = false
-	export let noDataText: string
+	export let noDataText: string | undefined = undefined
 	const wrapClassName = cn(
 		'grid items-start md:grid-cols-5 grid-cols-3 gap-1 md:gap-2',
 		'w-full',
@@ -21,7 +21,7 @@
 			<div class="h-[96px] rounded-sm bg-gray-800"></div>
 		{/each}
 	</div>
-{:else if seals.length === 0}
+{:else if seals.length === 0 && noDataText}
 	<NoData>{noDataText}</NoData>
 {:else}
 	<div class={wrapClassName} {...restProps}>

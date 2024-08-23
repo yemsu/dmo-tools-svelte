@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { MENUS, type MenuType } from '$entities/menus'
-	import { mySeals } from '$entities/seals'
+	import { mySealCounts } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import GnbButton from './GnbButton.svelte'
@@ -80,7 +80,7 @@
 							<span>
 								{MENUS[menuData.type].name}
 								{#if menuData.type === 'MY'}
-									<span>({$mySeals.length})</span>
+									<span>({$mySealCounts.length})</span>
 								{/if}
 							</span>
 						</GnbButton>

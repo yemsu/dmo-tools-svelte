@@ -93,7 +93,7 @@
 		user.set(res)
 		removeTokenCookie(G_TOKEN_NAME)
 		sessionStorage.setItem(TOKEN_NAME, res.token)
-		toast.on(`${value}님 환영합니다!`)
+		toast.on(`환영합니다 ${value}님!`)
 		goto('/')
 	}
 
@@ -104,40 +104,34 @@
 	})
 </script>
 
-<Section class="items-center justify-center">
-	<div class="flex-col-center w-[400px] max-w-full gap-10 pb-[2vh]">
-		<div class="flex-col-center w-[400px] max-w-full gap-10 pb-[2vh]">
-			<Title>사이트에서 사용할 닉네임을 작성해주세요.</Title>
-			<form
-				on:submit|preventDefault={onSubmit}
-				class="flex w-full items-start gap-2"
-			>
-				<div class="flex flex-1 flex-col gap-2">
-					<Input
-						placeholder="닉네임"
-						bind:value
-						bind:inputElement
-						on:input={onInput}
-					/>
-					<div class="h-[4em]">
-						{#if inValidTypes.length > 0}
-							{#each inValidTypes as inValidType (inValidType)}
-								<p class="text-xs text-warning">{VALIDATIONS[inValidType]}</p>
-							{/each}
-						{:else if value !== null}
-							<p class="text-xs text-point">좋은 닉네임이예요!</p>
-						{/if}
-					</div>
-				</div>
-				<Button
-					size="lg"
-					rounded="md"
-					class="bg-primary-30"
-					disabled={!isValid}
-				>
-					결정했어요
-				</Button>
-			</form>
+<Section size="sm" class="gap-10">
+	<Title>
+		아직 저장된 닉네임이 없으시네요! <br />사이트에서 사용할 닉네임을
+		작성해주세요.
+	</Title>
+	<form
+		on:submit|preventDefault={onSubmit}
+		class="flex w-full items-start gap-2"
+	>
+		<div class="flex flex-1 flex-col gap-2">
+			<Input
+				placeholder="닉네임"
+				bind:value
+				bind:inputElement
+				on:input={onInput}
+			/>
+			<div class="h-[4em]">
+				{#if inValidTypes.length > 0}
+					{#each inValidTypes as inValidType (inValidType)}
+						<p class="text-xs text-warning">{VALIDATIONS[inValidType]}</p>
+					{/each}
+				{:else if value !== null}
+					<p class="text-xs text-point">좋은 닉네임이예요!</p>
+				{/if}
+			</div>
 		</div>
-	</div></Section
->
+		<Button size="lg" rounded="md" class="bg-primary-30" disabled={!isValid}>
+			결정했어요
+		</Button>
+	</form>
+</Section>

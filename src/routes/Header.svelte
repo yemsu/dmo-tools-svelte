@@ -1,34 +1,26 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import {
-		myPrices,
-		mySeals,
+		mySealCounts,
+		mySealPrices,
 		myStats,
 		type Stats,
 		STATS,
 		STATS_PERCENT_TYPE,
 		type StatType
 	} from '$entities/seals'
-	import { AuthButton } from '$shared/layout/ui'
-	import { cn, objectBy } from '$shared/lib'
+	import { user } from '$entities/user'
+	import { AuthButton } from '$shared/layout'
+	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
-	import { Tooltip } from '$shared/tooltip'
-	import { getMySealData } from '$widgets/my-seals'
+	import { getMySealCount } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
-	import { onMount } from 'svelte'
-	onMount(async () => {
-		if ($mySeals.length === 0) {
-			mySeals.loadSavedData()
-		}
-		if ($myPrices.length === 0) {
-			myPrices.loadSavedData()
-		}
-	})
 
 	$: statCalc = (statType: StatType) => {
+		if ($mySealCounts.length === 0) return
 		const mySealsByStatType = objectBy(
-			$mySeals,
-			({ id }) => getMySealData($page.data.seals, id).statType
+			$mySealCounts,
+			({ id }) => getMySealCount($page.data.seals, id).statType
 		)
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
@@ -38,7 +30,7 @@
 		let resultValue = 0
 		sealsByStatType.forEach(({ id, count }) => {
 			let sealPercent = 0
-			const seal = getMySealData($page.data.seals, id)
+			const seal = getMySealCount($page.data.seals, id)
 			const crrStat = getCurrentStep(seal, count)
 			sealPercent = crrStat.percent
 			const maxIncrease = seal.maxIncrease
@@ -49,16 +41,32 @@
 		}
 		return resultValue
 	}
+	// my seals
+	const setMyData = async () => {
+		await mySealCounts.load()
+		await mySealPrices.load()
+	}
+	$: $user && setMyData()
+
+	const resetMyData = () => {
+		mySealCounts.reset()
+		mySealPrices.reset()
+	}
+	$: !$user && resetMyData()
+
+	// my stats
 	const setMyStats = () => {
-		if ($mySeals.length === 0) return
+		if ($mySealCounts.length === 0) return
 		const newStats = STATS.reduce((result, { type }) => {
-			result[type] = statCalc(type)
+			const statTypeCalc = statCalc(type)
+			if (statTypeCalc === undefined) return result
+			result[type] = statTypeCalc
 			return result
 		}, {} as Stats)
 		myStats.set(newStats)
 	}
 
-	$: $mySeals && setMyStats()
+	$: $mySealCounts && setMyStats()
 </script>
 
 <header>

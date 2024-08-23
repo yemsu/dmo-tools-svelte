@@ -20,7 +20,11 @@ export const apiFetch = async <ResponseData>(
 	options: RequestInit = {}
 ): Promise<ResponseData> => {
 	const token = getTokenCookie(TOKEN_NAME)
-	const headers: HeadersInit = { Authorization: token || '' }
+	const headers: HeadersInit = {
+		'Content-Type': 'application/json',
+		Authorization: token ? `Bearer ${token}` : ''
+	}
+	// console.log('headers', { ...options.headers, ...headers })
 	try {
 		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
 			...options,

@@ -68,7 +68,8 @@ h6 {
 	@apply m-0;
 }
 
-p {
+p,
+textarea {
 	@apply leading-[1.5];
 }
 
@@ -83,12 +84,18 @@ dd {
 }
 
 input,
+textarea,
 button {
 	@apply appearance-none border-transparent bg-transparent text-inherit;
 }
 
-input {
+input,
+textarea {
 	@apply rounded-md border-solid bg-gray-700 px-[0.5em] py-[0.5em] focus:border focus:border-primary-90 focus:outline-none focus:drop-shadow-primary-90;
+}
+
+textarea {
+	@apply scroll-box;
 }
 
 input[type='number']::-webkit-outer-spin-button,
@@ -138,9 +145,18 @@ button:focus:not(:focus-visible) {
 	.point-border-neon {
 		@apply border border-primary-90/70 border-l-transparent border-r-transparent drop-shadow-primary-90;
 	}
+	.border-primary-50-neon {
+		@apply border border-primary-50 drop-shadow-primary-50;
+	}
+	.border2-primary-50-neon {
+		@apply border-2 border-primary-50 drop-shadow-primary-50;
+	}
 	/* gradient */
 	.gradient-gray-800 {
 		@apply bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900;
+	}
+	.gradient-black-op {
+		@apply bg-gradient-to-br from-black/40 via-black/15 to-black/40;
 	}
 	.gradient-black-op {
 		@apply bg-gradient-to-br from-black/40 via-black/15 to-black/40;

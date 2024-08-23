@@ -1,7 +1,14 @@
-export { getSeals, getSealPrices, postSealPrice } from './api'
-export { isShowMySealPopup } from './model'
-export { mySeals, myStats } from './model/my'
-export { myPrices } from './model/price'
+export {
+	getSeals,
+	getSealPrices,
+	getMySealsCount,
+	putMySealCount,
+	getMySealsPrice,
+	putMySealPrice
+} from './api'
+export { isShowMySealPopup, myStats } from './model'
+export { mySealCounts } from './model/mySealCounts'
+export { mySealPrices } from './model/mySealPrices'
 export type {
 	SealData,
 	MySeal,
@@ -10,9 +17,11 @@ export type {
 	MyPrice,
 	StatType,
 	Seal,
-	StatTypeOption
+	StatTypeOption,
+	MySealCount,
+	MySealPrice
 } from './type'
-export { getSealPrice } from './lib'
+export { getSealPrice, queryStringToData } from './lib'
 export {
 	STATS,
 	STAT_TYPES,

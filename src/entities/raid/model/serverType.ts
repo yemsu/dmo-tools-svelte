@@ -1,15 +1,14 @@
-import { goto } from '$app/navigation'
 import type { ServerType } from '$entities/raid/types'
+import { toast } from '$shared/toast'
 import { writable } from 'svelte/store'
 
-const PARAM_NAME = 'server'
+const NAME = 'DMO_SERVER'
 const createCrrServerType = () => {
 	const { subscribe, set } = writable<ServerType>()
 	return {
 		subscribe,
 		loadSavedData: (defaultData: ServerType) => {
-			const params = new URLSearchParams(window.location.search)
-			const savedData = params.get(PARAM_NAME) as ServerType
+			const savedData = localStorage.getItem(NAME) as ServerType
 			if (!savedData) {
 				set(defaultData)
 				return
@@ -18,10 +17,9 @@ const createCrrServerType = () => {
 			set(savedData)
 		},
 		set: (serverType: ServerType) => {
-			const params = new URLSearchParams(window.location.search)
-			params.set(PARAM_NAME, serverType)
+			localStorage.setItem(NAME, `${serverType}`)
 			set(serverType)
-			goto(`?${params.toString()}`)
+			subscribe((value) => toast.on(`게임 서버가 ${value}로 설정되었습니다.`))
 		}
 	}
 }

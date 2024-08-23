@@ -7,7 +7,8 @@ export default {
 
 	theme: {
 		screens: {
-			md: '768px'
+			md: '768px',
+			sm: { max: '767px' }
 		},
 		extend: {
 			colors: {
@@ -72,6 +73,7 @@ export default {
 			zIndex: {
 				tooltip: '99',
 				raidBar: '90',
+				dim: '980',
 				modal: '990',
 				toast: '999'
 			},

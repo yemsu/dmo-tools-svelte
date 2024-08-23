@@ -28,7 +28,6 @@
 	onMount(() => {
 		if (!('Notification' in window)) {
 			isNotificationSupported = false
-			console.log('지원11')
 		} else {
 			isNotificationSupported = true
 			askNotificationPermission()
@@ -62,7 +61,7 @@
 	</Tooltip>
 {:else}
 	<button
-		class="bg-primary-35 relative h-full px-2"
+		class="relative h-full bg-primary-35 px-2"
 		title="알림 타이머 설정"
 		on:click={() => (isTabOpen = !isTabOpen)}
 	>
@@ -75,7 +74,7 @@
 	{#if isTabOpen}
 		<Tabs
 			dir="ver"
-			class="absolute bottom-0 right-0 w-[100px] translate-y-full border border-primary-50/50 drop-shadow-primary-50"
+			class="border-primary-50-neon absolute bottom-0 right-0 w-[100px] translate-y-full"
 		>
 			{#each [1, 3, 5, 10] as alarmMinuteOption (alarmMinuteOption)}
 				<Tab

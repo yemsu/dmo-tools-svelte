@@ -15,6 +15,16 @@ export type MySeal = {
 	count: number
 }
 
+export type MySealCount = {
+	id: SealData['id']
+	count: number
+}
+
+export type MySealPrice = {
+	id: SealData['id']
+	price: number
+}
+
 export type SealPrice = {
 	id: number
 	price: number

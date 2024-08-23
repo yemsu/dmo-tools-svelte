@@ -14,7 +14,7 @@
 	{...restProps}
 >
 	<p
-		class="text-balance break-keep text-xs md:w-[60%] md:min-w-[285px] md:text-sm"
+		class="text-balance break-keep text-xs md:w-[60%] md:min-w-[285px] md:text-md"
 	>
 		<slot></slot>
 	</p>

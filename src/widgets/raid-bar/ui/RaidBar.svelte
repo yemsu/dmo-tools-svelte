@@ -47,7 +47,6 @@
 		})
 		_eventSource.addEventListener('created', function (e) {
 			const createdTime = JSON.parse(e.data) as RaidTimeData
-			console.log('created')
 			raids.addNewTime(createdTime)
 		})
 		_eventSource.addEventListener('voted', function (e) {
@@ -115,7 +114,6 @@
 	$: $crrServerType && initRaidSubscribe()
 
 	const toggleAudioAlarm = () => {
-		console.log('toggleAudioAlarm', isAudioOn)
 		audio = isAudioOn ? new Audio('/sound-alarm.mp3') : undefined
 		toast.on(
 			isAudioOn
