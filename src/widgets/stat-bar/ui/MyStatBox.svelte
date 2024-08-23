@@ -5,8 +5,8 @@
 	export let stats: Stats
 	export let size: 'sm' | 'md' = 'md'
 	const sizeStyles = {
-		sm: 'gap-2 md:gap-4',
-		md: 'gap-4'
+		sm: 'gap-x-3 gap-y-2 md:gap-x-4',
+		md: 'gap-x-3 gap-y-2 md:gap-x-4'
 	}
 </script>
 
@@ -15,9 +15,9 @@
 	title="보유 씰 총 스탯"
 >
 	{#each STATS as stat (stat.type)}
-		<div class="flex items-center gap-2 rounded-full">
-			<dt class="text-xs text-gray-200">{stat.type}</dt>
-			<dd class="font-semibold text-point">
+		<div class="flex items-center gap-1 rounded-full md:gap-2">
+			<dt class="text-xs2 text-gray-200 md:text-xs">{stat.type}</dt>
+			<dd class="text-xs2 font-semibold text-point md:text-sm">
 				{stats
 					? numberFormatter(stats[stat.type])
 					: 0}{#if STATS_PERCENT_TYPE.includes(stat.type)}
