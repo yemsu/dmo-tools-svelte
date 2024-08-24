@@ -87,15 +87,6 @@
 		{/each}
 	</Tabs>
 	<div class="flex flex-1 flex-col overflow-hidden">
-		<ListReferText tagName="p">
-			<iconify-icon
-				icon="ep:warn-triangle-filled"
-				width={15}
-				height={15}
-				class="-mb-[0.3em]"
-			/>
-			설정한 씰과 가격 데이터는 모두 url에 저장됩니다. url을 잘 보관해 주세요!
-		</ListReferText>
 		<section class="flex flex-1 flex-col overflow-hidden">
 			<h2 class="ir">
 				보유 씰 리스트({statTypeSelected}):
