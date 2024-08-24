@@ -65,7 +65,7 @@
 <div class="relative flex min-w-[100px] justify-end">
 	{#if $user}
 		<Button
-			class="flex-center border border-white text-sm text-white"
+			class="flex-center border border-white/80 text-xs text-white/80 md:text-sm"
 			title="유저 메뉴 열기"
 			on:click={() => (isShowTab = !isShowTab)}
 		>
