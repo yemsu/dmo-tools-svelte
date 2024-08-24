@@ -31,6 +31,7 @@
 	let audio: HTMLAudioElement | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
 	let removeChannelTimer: NodeJS.Timeout | undefined
+	let isSseConnected = false
 
 	let eventSource: EventSource | undefined
 	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -44,6 +45,7 @@
 
 	const handleEventSource = async (_eventSource: EventSource) => {
 		_eventSource.addEventListener('sub', function (e) {
+			isSseConnected = true
 			const data = JSON.parse(e.data)
 			subscribeClientId.set(data.clientId)
 		})
@@ -55,16 +57,23 @@
 			const votedTime = JSON.parse(e.data)
 			raids.voteTime(votedTime)
 		})
+		_eventSource
 		// _eventSource.addEventListener('notify', function (e) {
 		// 	const data = JSON.parse(e.data)
 		// 	console.log('notify')
 		// })
 		_eventSource.addEventListener('error', function (e) {
 			console.error('error occurred', e)
+			isSseConnected = false
 		})
 	}
 
-	$: checkEventSourceConnect = async () => {
+	const reConnectSse = async () => {
+		await clearPrevSubscribe()
+		initRaidSubscribe()
+	}
+
+	$: checkEventSourceConnect = () => {
 		if (
 			!eventSource ||
 			document.visibilityState !== 'visible' ||
@@ -72,8 +81,7 @@
 		)
 			return
 
-		await clearPrevSubscribe()
-		initRaidSubscribe()
+		reConnectSse()
 	}
 
 	const getIp = async () => {
@@ -230,18 +238,30 @@
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
 		</a>
-		<NotificationToggleButton />
-		<button
-			class="h-full rounded-br-md rounded-tr-md bg-primary-30 px-2"
-			title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
-			on:click={() => (isAudioOn = !isAudioOn)}
-		>
-			<iconify-icon
-				icon="mdi:bell{isAudioOn ? '' : '-off'}"
-				width={14}
-				height={14}
-			/>
-		</button>
+		<div class="flex h-full overflow-hidden rounded-br-md rounded-tr-md">
+			{#if !isSseConnected}
+				<button
+					class="flex-center h-full gap-1 bg-warning px-4"
+					on:click={reConnectSse}
+				>
+					<iconify-icon icon="ooui:network-off" width={14} height={14} />
+					연결 재시도
+				</button>
+			{:else}
+				<NotificationToggleButton />
+				<button
+					class="h-full bg-primary-30 px-2"
+					title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
+					on:click={() => (isAudioOn = !isAudioOn)}
+				>
+					<iconify-icon
+						icon="mdi:bell{isAudioOn ? '' : '-off'}"
+						width={14}
+						height={14}
+					/>
+				</button>
+			{/if}
+		</div>
 	{:else if isSseSupported === false}
 		<p class="w-full text-center text-gray-300">
 			현재 브라우저에서는 보스 출현 알람 기능이 지원되지 않습니다. <br />다른
