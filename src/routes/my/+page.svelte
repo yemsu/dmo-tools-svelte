@@ -13,7 +13,6 @@
 	import { user } from '$entities/user'
 	import { META } from '$shared/config'
 	import SaveUrlLink from '$shared/layout/ui/SaveUrlLink.svelte'
-	import ListReferText from '$shared/list/ui/ListReferText.svelte'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { NoData } from '$shared/text'
@@ -29,7 +28,11 @@
 	let mySealsFiltered: MySealCount[] | null = null
 
 	$: initMySealFiltered = () => {
-		if (mySealsFiltered && mySealsFiltered.length > 0) return
+		if (
+			statTypeSelected !== 'ALL' ||
+			(mySealsFiltered && mySealsFiltered.length > 0)
+		)
+			return
 		mySealsFiltered = $mySealCounts
 	}
 
