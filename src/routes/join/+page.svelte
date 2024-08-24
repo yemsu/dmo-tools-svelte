@@ -105,10 +105,7 @@
 </script>
 
 <Section size="sm" class="gap-10">
-	<Title>
-		아직 저장된 닉네임이 없으시네요! <br />사이트에서 사용할 닉네임을
-		작성해주세요.
-	</Title>
+	<Title class="text-center">사이트에서 사용할 닉네임을 입력해 주세요.</Title>
 	<form
 		on:submit|preventDefault={onSubmit}
 		class="flex w-full items-start gap-2"
@@ -126,7 +123,7 @@
 						<p class="text-xs text-warning">{VALIDATIONS[inValidType]}</p>
 					{/each}
 				{:else if value !== null}
-					<p class="text-xs text-point">좋은 닉네임이예요!</p>
+					<p class="text-xs text-point">사용 가능한 닉네임 입니다.</p>
 				{/if}
 			</div>
 		</div>
