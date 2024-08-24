@@ -69,20 +69,17 @@
 								on:click={() => onClickVote(raid, time)}
 							>
 								<span
-									class="flex-center min-w-[3em] gap-[0.3em] border-r border-gray-700 text-xs2 md:min-w-[4em] md:text-xs"
+									class="flex-center min-w-[3em] gap-[0.3em] border-r border-gray-700 text-xs3 md:min-w-[4em] md:text-xs2"
 								>
-									<iconify-icon
-										icon="oi:heart"
-										width={11}
-										height={11}
-										class="-mt-[0.2em]"
-									/>
+									<iconify-icon icon="oi:heart" width="1em" height="1em" />
 									{time.voteCount + 1}
 								</span>
 								<span class="flex-center flex-1 border-r border-gray-700">
 									<Timer {time} />
 								</span>
-								<span class="px-[0.6em] md:px-[1em]">
+								<span
+									class="flex-center min-w-[7em] px-[0.6em] md:min-w-[9em] md:px-[1em]"
+								>
 									<RaidInformant user={time.user} />
 								</span>
 							</button>

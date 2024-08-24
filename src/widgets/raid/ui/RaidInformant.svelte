@@ -14,12 +14,13 @@
 
 <span
 	class={cn(
-		'flex-center gap-[0.1em] text-gray-300',
+		'flex items-center gap-[0.1em]',
+		!user?.nickname ? 'text-gray-500' : 'text-gray-300',
 		sizeStyles[size],
 		className
 	)}
 	{...restProps}
 >
 	<iconify-icon icon="mdi:user" width="1em" height="1em" />
-	{user?.nickname || '-'}
+	{user?.nickname || '비회원'}
 </span>
