@@ -103,9 +103,9 @@
 					총 {mySealsFiltered.length}개
 				{/if}
 			</h2>
-			{#if $user && mySealsFiltered}
+			{#if $user && mySealsFiltered && mySealsFiltered.length > 0}
 				<MySealList {mySealsFiltered} />
-			{:else}
+			{:else if mySealsFiltered}
 				<NoData>
 					보유 씰이 아직 없습니다. <br /> 씰 설정 메뉴에서 보유하고 있는 씰의
 					개수를 업데이트 해주세요! <br /><br />

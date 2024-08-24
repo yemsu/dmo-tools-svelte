@@ -1,28 +1,8 @@
 <script lang="ts">
-	import { user } from '$entities/user'
 	import { page } from '$app/stores'
-	import { MENUS } from '$entities/menus'
-	import {
-		mySealCounts,
-		mySealPrices,
-		myStats,
-		STAT_TYPE_OPTIONS,
-		STATS,
-		type MySealCount,
-		type StatTypeOption
-	} from '$entities/seals'
-	import { META } from '$shared/config'
-	import ListReferText from '$shared/list/ui/ListReferText.svelte'
-	import { Section } from '$shared/section'
-	import { Tab, Tabs } from '$shared/tabs'
-	import {
-		getMyAndFinalPrice,
-		getMySealCount,
-		MySealGrade,
-		statTypeOptionStyles
-	} from '$widgets/my-seals'
+	import { mySealCounts, type MySealCount } from '$entities/seals'
+	import { getMySealCount, MySealGrade } from '$widgets/my-seals'
 	import { SealItem, SealList } from '$widgets/seal-list'
-	import { StatBar } from '$widgets/stat-bar'
 
 	export let mySealsFiltered: MySealCount[]
 
@@ -35,7 +15,7 @@
 	}
 </script>
 
-<SealList seals={mySealsFiltered || []} let:seal={mySeal} class="h-full">
+<SealList seals={mySealsFiltered} let:seal={mySeal} class="h-full">
 	<SealItem seal={getMySealCount($page.data.seals, mySeal.id)}>
 		<MySealGrade {mySeal} />
 		<button
