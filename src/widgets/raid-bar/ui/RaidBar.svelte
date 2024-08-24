@@ -18,14 +18,12 @@
 	import { toast } from '$shared/toast'
 	import { timeSortByStartAt } from '$widgets/raid'
 	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
-	import RaidItem from '$widgets/raid-bar/ui/RaidItem.svelte'
-	import { onDestroy, onMount } from 'svelte'
-	import GnbButton from '../../../routes/GnbButton.svelte'
-	import RaidBarServerButton from './RaidBarServerButton.svelte'
-	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
+	import RaidAppearInfo from '$widgets/raid/ui/RaidAppearInfo.svelte'
 	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
-	import RaidAppearInfo from '$widgets/raid/ui/RaidAppearInfo.svelte'
+	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
+	import { onDestroy, onMount } from 'svelte'
+	import RaidBarServerButton from './RaidBarServerButton.svelte'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
@@ -207,13 +205,13 @@
 >
 	{#if isSseSupported === true}
 		<RaidBarServerButton />
-		<GnbButton
-			path={MENUS.RAID.path}
+		<a
+			href={MENUS.RAID.path}
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-2 px-2',
 				'border-gradient border-b border-t'
 			)}
-			title="보스 타이머 페이지 가기"
+			title="레이드 타이머 전체 보기"
 		>
 			<Badge color="warning" shape="square" class="italic">Beta</Badge>
 			{#if nextRaid}
@@ -231,7 +229,7 @@
 				보스 출현 정보를 제보해주세요!
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
-		</GnbButton>
+		</a>
 		<NotificationToggleButton />
 		<button
 			class="h-full rounded-br-md rounded-tr-md bg-primary-30 px-2"

@@ -4,7 +4,6 @@
 	import { mySealCounts } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
-	import GnbButton from './GnbButton.svelte'
 
 	type MenuData = {
 		type: MenuType
@@ -62,8 +61,8 @@
 			>
 				{#each menuDataList as menuData (menuData.type)}
 					<li>
-						<GnbButton
-							path={MENUS[menuData.type].path}
+						<a
+							href={MENUS[menuData.type].path}
 							class={cn(
 								'flex-col-center leading-none transition-opacity md:flex-row md:gap-2',
 								$page.url.pathname === MENUS[menuData.type].path
@@ -83,7 +82,7 @@
 									<span>({$mySealCounts.length})</span>
 								{/if}
 							</span>
-						</GnbButton>
+						</a>
 					</li>
 				{/each}
 			</ul>
