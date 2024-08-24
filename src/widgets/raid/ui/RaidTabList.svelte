@@ -51,7 +51,7 @@
 			aria-labelledby="raid-tab-{raid.id}"
 			hidden={selectedRaidId !== raid.id}
 			class={cn(
-				'w-[60%] shrink-0 md:w-[45%]',
+				'w-[60%] shrink-0 md:w-[50%]',
 				selectedRaidId !== raid.id && 'hidden'
 			)}
 		>

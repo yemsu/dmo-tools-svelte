@@ -19,6 +19,7 @@
 		sizeStyles[size],
 		className
 	)}
+	title="제보자"
 	{...restProps}
 >
 	<iconify-icon icon="mdi:user" width="1em" height="1em" />

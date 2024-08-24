@@ -12,21 +12,15 @@
 	$: nextTime = raid.times[0]
 </script>
 
-<span class={cn('flex leading-none md:items-center md:gap-1 sm:flex-col')}>
-	<span
-		class={cn(
-			'flex flex-wrap gap-0.5 text-left',
-			'md:items-center md:gap-1',
-			'sm:flex-col'
-		)}
-	>
+<span class={cn('flex leading-none md:items-center md:gap-3 sm:flex-col')}>
+	<span class={cn('flex flex-col flex-wrap gap-0.5 text-left')}>
 		<RaidTitle title={raid.name} />
 		<RaidLocation location={raid.location} />
 	</span>
 	<RaidNextIcon class="sm:hidden" />
 	<span
 		class={cn(
-			'flex shrink-0  items-center gap-1',
+			'flex shrink-0 items-center gap-1.5',
 			'sm:mt-1.5 sm:flex-col sm:items-start sm:border-t sm:border-gray-800 sm:pt-1.5'
 		)}
 	>
