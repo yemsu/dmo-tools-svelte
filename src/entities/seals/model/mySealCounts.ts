@@ -34,11 +34,7 @@ const createMySealCounts = () => {
 			})
 		},
 		remove: async (sealId: number) => {
-			const res = await putMySealCount({ id: sealId, count: 0 })
-			if (!res) {
-				alert('씰 삭제에 실패하였습니다.')
-				return
-			}
+			await putMySealCount({ id: sealId, count: 0 })
 			update((prev) => {
 				return prev.filter((prevItem) => prevItem.id !== sealId)
 			})
