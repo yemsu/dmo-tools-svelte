@@ -7,7 +7,8 @@ export default {
 
 	theme: {
 		screens: {
-			md: '768px'
+			md: '768px',
+			sm: { max: '767px' }
 		},
 		extend: {
 			colors: {
@@ -53,8 +54,6 @@ export default {
 			spacing: {
 				'header-h': 'var(--header-h)',
 				'gnb-h': 'var(--gnb-h)',
-				'content-fill-h':
-					'calc(100svh - var(--header-h) - var(--gnb-h) - var(--raid-bar-h))',
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)'
@@ -72,6 +71,7 @@ export default {
 			zIndex: {
 				tooltip: '99',
 				raidBar: '90',
+				dim: '980',
 				modal: '990',
 				toast: '999'
 			},

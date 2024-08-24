@@ -20,7 +20,7 @@
 {#if isTabOpen}
 	<Tabs
 		dir="ver"
-		class="absolute bottom-0 w-[100px] translate-y-full border border-primary-50/50 drop-shadow-primary-50"
+		class="border-primary-50-neon absolute bottom-0 w-[100px] translate-y-full"
 	>
 		{#each _objKeys(GAME_SERVERS) as serverType (serverType)}
 			<Tab

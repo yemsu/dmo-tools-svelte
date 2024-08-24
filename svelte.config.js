@@ -1,5 +1,6 @@
-import adapter from '@sveltejs/adapter-static'
+import adapter from '@sveltejs/adapter-auto'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
+import { VitePWA } from 'vite-plugin-pwa'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -18,7 +19,12 @@ const config = {
 			$widgets: 'src/widgets',
 			$shared: 'src/shared'
 		}
-	}
+	},
+	plugins: [
+		VitePWA({
+			registerType: 'autoUpdate'
+		})
+	]
 }
 
 export default config

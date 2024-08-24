@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { mySeals } from '$entities/seals'
+	import { mySealCounts } from '$entities/seals'
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { toast } from '$shared/toast'
@@ -7,7 +7,7 @@
 	export let sealId: number
 	export let isEditable: boolean = true
 
-	$: count = $mySeals.find((mySeal) => mySeal.id === sealId)?.count ?? 0
+	$: count = $mySealCounts.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
 	let isOnInput = false
@@ -36,12 +36,12 @@
 			}, 100)
 		} else {
 			if (inputValue === 0) {
-				mySeals.remove(sealId)
+				mySealCounts.remove(sealId)
 			} else {
-				mySeals.updateCount(sealId, inputValue)
+				mySealCounts.updateCount({ id: sealId, count: inputValue })
 			}
 			isOnInput = false
-			toast.on('씰 개수가 변경되었습니다. url을 저장해주세요.')
+			toast.on('씰 개수가 변경되었습니다.')
 		}
 	}
 

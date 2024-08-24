@@ -17,9 +17,9 @@
 		<p
 			class={cn(
 				'min-w-[200px] p-3',
-				'border-2 border-primary-50 bg-secondary-5/90',
+				'border2-primary-50-neon bg-secondary-5/90',
 				'text-center text-sm',
-				'rounded-md drop-shadow-primary-50 backdrop-blur-sm',
+				'rounded-md backdrop-blur-sm',
 				'transition-all',
 				isToastOn ? '' : 'translate-y-full opacity-0'
 			)}

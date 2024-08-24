@@ -1,4 +1,9 @@
-import type { SealData, SealPrice } from '$entities/seals/type'
+import type {
+	MySealCount,
+	MySealPrice,
+	SealData,
+	SealPrice
+} from '$entities/seals/type'
 import { apiFetch } from '$shared/api'
 
 export const getSeals = () => apiFetch<SealData[]>('/seals')
@@ -6,5 +11,22 @@ export const getSeals = () => apiFetch<SealData[]>('/seals')
 export const getSealPrices = (sortBy: 'regCount' | 'modifiedAt' = 'regCount') =>
 	apiFetch<SealPrice[]>(`/seals/price${sortBy ? `?sortBy=${sortBy}` : ''}`)
 
-export const postSealPrice = (sealId: number, price: number) =>
-	apiFetch<SealPrice>(`/seals/${sealId}?price=${price}`, { method: 'POST' })
+// seal count
+export const getMySealsCount = () => apiFetch<MySealCount[]>(`/seals/my/count`)
+
+export const putMySealCount = ({ id, count }: MySealCount) => {
+	return apiFetch<MySealCount>(`/seals/my/${id}/count`, {
+		method: 'PUT',
+		body: JSON.stringify({ count })
+	})
+}
+
+// seal price
+export const getMySealsPrice = () => apiFetch<MySealPrice[]>(`/seals/my/price`)
+
+export const putMySealPrice = ({ id, price }: MySealPrice) => {
+	return apiFetch<MySealPrice>(`/seals/my/${id}/price`, {
+		method: 'PUT',
+		body: JSON.stringify({ price })
+	})
+}

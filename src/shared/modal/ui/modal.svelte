@@ -6,24 +6,28 @@
 
 <div
 	class={cn(
-		'fixed right-0 top-header-h flex flex-col justify-end md:justify-center',
-		'transition-opacity ',
-		!$isShowMySealPopup && 'opacity-0 md:translate-x-full'
+		'fixed left-0 top-0 z-modal size-full',
+		'transition-opacity',
+		!$isShowMySealPopup && 'translate-x-full opacity-0'
 	)}
 >
-	<Inner size="full" class="flex flex-col items-center justify-center">
-		<slot></slot>
-		<button
-			class="absolute right-0 top-0"
-			on:click={() => isShowMySealPopup.set(!$isShowMySealPopup)}
-			title="닫기"
-		>
-			<iconify-icon
-				icon="mdi:close"
-				class={$isShowMySealPopup ? 'rotate-90' : '-rotate-90'}
-				width={24}
-				height={24}
-			/>
-		</button>
-	</Inner>
+	<button
+		class={cn(
+			'absolute left-0 top-0 size-full bg-secondary-5/60 backdrop-blur-sm',
+			'transition-opacity'
+		)}
+		on:click={() => isShowMySealPopup.set(false)}
+		title="팝업 닫기"
+	></button>
+	<div
+		class={cn(
+			'absolute left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2 ',
+			'flex flex-col justify-end md:justify-center',
+			'rounded-md bg-secondary-5 p-5 md:min-h-[400px] md:min-w-[400px]'
+		)}
+	>
+		<Inner size="full" class="flex flex-col items-center justify-center">
+			<slot></slot>
+		</Inner>
+	</div>
 </div>

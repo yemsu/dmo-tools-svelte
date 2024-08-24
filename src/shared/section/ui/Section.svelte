@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { cn } from '$shared/lib'
 
-	let size: 'sm' | 'md' = 'md'
+	export let size: 'sm' | 'md' = 'md'
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
-		sm: 'gap-2 md:gap-3',
-		md: 'gap-3 md:gap-3'
+		sm: 'flex-col-center w-[400px] max-w-full pb-[2vh] mx-auto',
+		md: 'flex flex-col gap-3 md:gap-3'
 	}
 </script>
 
 <section
 	class={cn(
-		'flex h-content-fill-h flex-col gap-2 overflow-hidden p-content-side',
+		'h-full overflow-hidden p-content-side',
 		sizeStyles[size],
 		className
 	)}

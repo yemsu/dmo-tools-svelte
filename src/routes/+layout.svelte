@@ -8,6 +8,7 @@
 	import Gnb from './Gnb.svelte'
 	import Header from './Header.svelte'
 	import { META } from '$shared/config'
+	import { NoticeBar } from '$shared/layout'
 </script>
 
 <svelte:head>
@@ -28,21 +29,24 @@
 	<meta name="twitter:image" content="/og-image.jpg" />
 </svelte:head>
 
-<div
-	class={cn(
-		'relative flex min-h-[100svh] flex-col',
-		'bg-secondary-5/70 md:mx-auto md:max-w-[800px]',
-		'drop-shadow-white border border-white/10 border-y-transparent'
-	)}
->
-	<Header></Header>
-	<Inner class="w-full">
-		<RaidBar />
-	</Inner>
+<div class={cn('relative flex h-full flex-col')}>
+	<NoticeBar />
+	<div
+		class={cn(
+			'relative flex flex-1 flex-col overflow-hidden',
+			'bg-secondary-5/70 md:mx-auto md:w-[800px]',
+			'drop-shadow-white border border-white/10 border-y-transparent'
+		)}
+	>
+		<Header />
+		<Inner class="w-full">
+			<RaidBar />
+		</Inner>
 
-	<main class="relative flex-1">
-		<slot></slot>
-	</main>
-	<Gnb />
-	<ToastPopup />
+		<main class="relative flex-1 overflow-hidden">
+			<slot></slot>
+		</main>
+		<Gnb />
+		<ToastPopup />
+	</div>
 </div>

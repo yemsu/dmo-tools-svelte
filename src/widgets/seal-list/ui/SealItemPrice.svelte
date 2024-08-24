@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { myPrices } from '$entities/seals'
+	import { mySealPrices } from '$entities/seals'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
@@ -10,7 +10,7 @@
 	export let sealId: number
 	export let isEditable: boolean = true
 
-	$: prices = getMyAndFinalPrice($page.data.sealPrices, $myPrices, sealId)
+	$: prices = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
 	let isOnInput = false
@@ -38,9 +38,9 @@
 				onClickInputOn()
 			}, 100)
 		} else {
-			myPrices.updatePrice(sealId, inputValue)
+			mySealPrices.updatePrice({ id: sealId, price: inputValue })
 			isOnInput = false
-			toast.on('씰 가격이 설정되었습니다. url을 저장해주세요.')
+			toast.on('씰 가격이 설정되었습니다.')
 		}
 	}
 
@@ -56,8 +56,8 @@
 			'설정한 가격을 제거하시겠어요? 제거 후에는 서버에 저장된 가격이 노출됩니다.'
 		)
 		if (!isConfirmed) return
-		myPrices.remove(sealId)
-		toast.on('씰 가격 설정이 제거되었습니다. url을 저장해주세요.')
+		mySealPrices.remove(sealId)
+		toast.on('씰 가격 설정이 제거되었습니다.')
 	}
 
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'

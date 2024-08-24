@@ -1,47 +1,42 @@
 <script lang="ts">
 	import type { RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
-	import Timer from '$shared/time/ui/Timer.svelte'
-	import RaidItemChannel from '$widgets/raid-bar/ui/RaidItemChannel.svelte'
-	import RaidLocation from '$widgets/raid-bar/ui/RaidLocation.svelte'
-
+	import {
+		RaidLocation,
+		RaidAppearInfo,
+		RaidInformant,
+		RaidNextIcon,
+		RaidTitle
+	} from '$widgets/raid'
 	export let raid: RaidData
-	export let compact: true | undefined = undefined
 	$: nextTime = raid.times[0]
 </script>
 
-<span
-	class={cn(
-		'leading-none',
-		compact
-			? 'flex flex-col gap-1.5 md:flex-row md:items-center md:gap-1'
-			: 'flex items-center gap-1'
-	)}
->
-	<span class="flex flex-col text-left md:flex-row md:items-center md:gap-1">
-		<span
-			class="overflow-hiddenflex shrink-0 gap-1 break-keep text-xs leading-[1.2] md:text-sm"
-		>
-			<iconify-icon
-				icon="mdi:dinosaur-pixel"
-				width={12}
-				height={12}
-				class="-mb-[1px]"
-			/>
-			{raid.name}
-		</span>
+<span class={cn('flex leading-none md:items-center md:gap-1 sm:flex-col')}>
+	<span
+		class={cn(
+			'flex flex-wrap gap-0.5 text-left',
+			'md:items-center md:gap-1',
+			'sm:flex-col'
+		)}
+	>
+		<RaidTitle title={raid.name} />
 		<RaidLocation location={raid.location} />
 	</span>
-	<span class="flex shrink-0 items-center gap-1">
-		<iconify-icon
-			icon="line-md:chevron-triple-right"
-			width={12}
-			height={12}
-			class="-mb-[2px] text-gray-300 {compact ? 'hidden md:inline' : ''}"
-		/>
+	<RaidNextIcon class="sm:hidden" />
+	<span
+		class={cn(
+			'flex shrink-0  items-center gap-1',
+			'sm:mt-1.5 sm:flex-col sm:items-start sm:border-t sm:border-gray-800 sm:pt-1.5'
+		)}
+	>
 		{#if nextTime}
-			<RaidItemChannel channel={nextTime.channel} />
-			<Timer time={nextTime} />
+			<span>
+				<RaidAppearInfo time={nextTime} />
+			</span>
+			<span>
+				<RaidInformant user={nextTime.user} size="sm" class="opacity-80" />
+			</span>
 		{:else}
 			<span class="text-xs2 text-gray-400 md:text-xs">제보 없음</span>
 		{/if}

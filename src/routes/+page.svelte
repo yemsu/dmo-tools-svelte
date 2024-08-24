@@ -13,6 +13,7 @@
 	import { ListReferText } from '$shared/list'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
+	import { Tooltip } from '$shared/tooltip'
 	import { statTypeOptionStyles } from '$widgets/my-seals'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
@@ -50,7 +51,6 @@
 	}
 
 	$: onClickStatType = (statTypeOption: StatTypeOption) => {
-		console.log('sdf?', seals)
 		statTypeSelected = statTypeOption
 		updateSearchResult(searchText)
 	}
@@ -93,11 +93,34 @@
 		/>
 	</div>
 	<section class="flex flex-1 flex-col overflow-hidden">
-		<ListReferText tagName="h2">
-			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
-			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
-			({searchResults.length}개)
-		</ListReferText>
+		<div class="mb-2 flex items-center justify-between">
+			<ListReferText tagName="h2" mb={false}>
+				{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
+				{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
+				({searchResults.length}개)
+			</ListReferText>
+
+			<div class="flex-center relative gap-4">
+				<button
+					class={cn(
+						'flex-center peer gap-0.5 text-right text-xs3',
+						'text-gray-300 md:text-left md:text-xs'
+					)}
+				>
+					<iconify-icon icon="ic:outline-info" width={14} height={14} />
+					가격은 어떻게 <br class="md:hidden" /> 설정되나요?
+				</button>
+				<Tooltip class="-bottom-2 right-0 w-[310px] translate-y-full pr-2">
+					<p>
+						<span class="text-point">루체 서버</span>를 기준으로, 각 씰의
+						<span class="text-point">위탁 거래소 <br />1페이지 매물 가격</span
+						>의 가중 평균으로 책정됩니다. <br />
+						가격 간 편차, 오류 등으로 인해 부정확한 가격이 책정될 가능성이 있으니
+						<span class="text-point">구매 전 확인</span>이 필요합니다.
+					</p>
+				</Tooltip>
+			</div>
+		</div>
 		<SealList
 			seals={searchResults}
 			isLoading={seals.length === 0}

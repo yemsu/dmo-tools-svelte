@@ -1,3 +1,4 @@
+import type { UserData } from '$entities/user'
 import { GAME_CHANNELS, GAME_SERVERS } from './config'
 
 export type GameChannel = (typeof GAME_CHANNELS)[number]
@@ -13,6 +14,7 @@ export type RaidTimeData = {
 	server: ServerType
 	raidId: RaidData['id']
 	clientId: number
+	user: UserData
 }
 
 export type RaidData = {

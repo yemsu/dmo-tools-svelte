@@ -2,9 +2,10 @@
 	import { cn } from '$shared/lib'
 
 	export let tagName: 'h2' | 'p'
+	export let mb: boolean = true
 	const { class: className, ...restProps } = $$restProps
 	const attrs = {
-		class: cn('text-xs2 mb-2 text-point', className),
+		class: cn('text-xs2 text-point', mb && 'mb-2', className),
 		...restProps
 	}
 </script>

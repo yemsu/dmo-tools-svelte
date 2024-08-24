@@ -1,62 +1,59 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import { MENUS } from '$entities/menus'
 	import {
-		myPrices,
-		mySeals,
+		mySealCounts,
+		mySealPrices,
 		myStats,
-		type MySeal,
 		STAT_TYPE_OPTIONS,
 		STATS,
+		type MySealCount,
 		type StatTypeOption
 	} from '$entities/seals'
+	import { user } from '$entities/user'
+	import { META } from '$shared/config'
+	import SaveUrlLink from '$shared/layout/ui/SaveUrlLink.svelte'
 	import ListReferText from '$shared/list/ui/ListReferText.svelte'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { SealItem, SealList } from '$widgets/seal-list'
-	import { StatBar } from '$widgets/stat-bar'
-	import { onMount } from 'svelte'
+	import { NoData } from '$shared/text'
 	import {
-		statTypeOptionStyles,
 		getMyAndFinalPrice,
-		getMySealData,
-		MySealGrade
+		getMySealCount,
+		statTypeOptionStyles
 	} from '$widgets/my-seals'
-	import { MENUS } from '$entities/menus'
-	import { META } from '$shared/config'
+	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
+	import { StatBar } from '$widgets/stat-bar'
 
 	let statTypeSelected = 'ALL'
-	let mySealsFiltered: MySeal[] = []
+	let mySealsFiltered: MySealCount[] | null = null
 
-	onMount(() => {
-		mySealsFiltered = $mySeals
-	})
+	$: initMySealFiltered = () => {
+		if (mySealsFiltered && mySealsFiltered.length > 0) return
+		mySealsFiltered = $mySealCounts
+	}
+
+	$: $mySealCounts && initMySealFiltered()
 
 	const onClickStatType = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
 		if (statTypeOption === 'ALL') {
-			mySealsFiltered = $mySeals
+			mySealsFiltered = $mySealCounts
 		} else {
-			const mySealDataList = $mySeals.filter(
+			const mySealCounts = $mySealCounts.filter(
 				(mySeal) =>
-					getMySealData($page.data.seals, mySeal.id)?.statType ===
+					getMySealCount($page.data.seals, mySeal.id)?.statType ===
 					statTypeSelected
 			)
-			mySealsFiltered = mySealDataList
+			mySealsFiltered = mySealCounts
 		}
 	}
 
-	const onClickMySealDelete = (sealId: number) => {
-		const isConfirmed = confirm(
-			'해당 씰을 제거하시겠어요? 삭제된 데이터는 복구가 불가능 합니다.'
-		)
-		if (!isConfirmed) return
-		mySeals.remove(sealId)
-	}
-
 	$: getTotalMySealPrice = () => {
+		if (!mySealsFiltered) return 0
 		let totalPrice = 0
 		for (const { id, count } of mySealsFiltered) {
-			const price = getMyAndFinalPrice($page.data.sealPrices, $myPrices, id)
+			const price = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, id)
 			const sumSealPrice = price.final * count
 			if (sumSealPrice) totalPrice += sumSealPrice
 		}
@@ -101,25 +98,27 @@
 		</ListReferText>
 		<section class="flex flex-1 flex-col overflow-hidden">
 			<h2 class="ir">
-				보유 씰 리스트({statTypeSelected}): 총 {mySealsFiltered.length}개
+				보유 씰 리스트({statTypeSelected}):
+				{#if mySealsFiltered}
+					총 {mySealsFiltered.length}개
+				{/if}
 			</h2>
-			<SealList
-				seals={mySealsFiltered}
-				let:seal={mySeal}
-				noDataText="보유 씰이 아직 없습니다. 씰 설정 메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!"
-				class="h-full"
-			>
-				<SealItem seal={getMySealData($page.data.seals, mySeal.id)}>
-					<MySealGrade {mySeal} />
-					<button
-						class="absolute right-[1px] top-[1px]"
-						on:click={() => onClickMySealDelete(mySeal.id)}
-						title="삭제"
+			{#if $user && mySealsFiltered && mySealsFiltered.length > 0}
+				<MySealList {mySealsFiltered} />
+			{:else if mySealsFiltered}
+				<NoData>
+					보유 씰이 아직 없습니다. <br /> 씰 설정 메뉴에서 보유하고 있는 씰의
+					개수를 업데이트 해주세요! <br /><br />
+					<span
+						class="flex-center flex-wrap gap-2 rounded-md bg-primary-50 p-2 sm:flex-col"
 					>
-						<iconify-icon icon="mdi:close" width={14} height={14} />
-					</button>
-				</SealItem>
-			</SealList>
+						<span class="font-extrabold text-primary-5">
+							설정해놨던 보유 씰이 모두 사라졌나요?
+						</span>
+						<SaveUrlLink />
+					</span>
+				</NoData>
+			{/if}
 		</section>
 	</div>
 </Section>

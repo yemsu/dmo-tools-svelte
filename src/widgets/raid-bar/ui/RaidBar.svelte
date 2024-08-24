@@ -22,6 +22,10 @@
 	import { onDestroy, onMount } from 'svelte'
 	import GnbButton from '../../../routes/GnbButton.svelte'
 	import RaidBarServerButton from './RaidBarServerButton.svelte'
+	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
+	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
+	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
+	import RaidAppearInfo from '$widgets/raid/ui/RaidAppearInfo.svelte'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
@@ -47,7 +51,6 @@
 		})
 		_eventSource.addEventListener('created', function (e) {
 			const createdTime = JSON.parse(e.data) as RaidTimeData
-			console.log('created')
 			raids.addNewTime(createdTime)
 		})
 		_eventSource.addEventListener('voted', function (e) {
@@ -115,7 +118,6 @@
 	$: $crrServerType && initRaidSubscribe()
 
 	const toggleAudioAlarm = () => {
-		console.log('toggleAudioAlarm', isAudioOn)
 		audio = isAudioOn ? new Audio('/sound-alarm.mp3') : undefined
 		toast.on(
 			isAudioOn
@@ -208,14 +210,23 @@
 		<GnbButton
 			path={MENUS.RAID.path}
 			class={cn(
-				'flex-center relative h-full w-full flex-1 gap-1 px-2',
+				'flex-center relative h-full w-full flex-1 gap-2 px-2',
 				'border-gradient border-b border-t'
 			)}
 			title="보스 타이머 페이지 가기"
 		>
 			<Badge color="warning" shape="square" class="italic">Beta</Badge>
 			{#if nextRaid}
-				<RaidItem raid={{ ...nextRaid, times: [nextRaid.time] }} />
+				<span class="flex items-center gap-2 leading-none">
+					<span class="flex md:gap-1 sm:flex-col">
+						<RaidTitle title={nextRaid.name} />
+						<RaidLocation location={nextRaid.location} />
+					</span>
+					<RaidNextIcon />
+					<span>
+						<RaidAppearInfo time={nextRaid.time} />
+					</span>
+				</span>
 			{:else if $raids.length > 0}
 				보스 출현 정보를 제보해주세요!
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />

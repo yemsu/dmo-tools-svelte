@@ -14,7 +14,7 @@
 	<ul
 		class={cn(
 			'scroll-box h-full',
-			'flex w-[50%] flex-col gap-1 rounded-md bg-gray-800 p-1.5 md:w-[430px] md:gap-1.5'
+			'flex w-[50%] flex-col gap-1 rounded-md bg-gray-800 p-1 pr-2 md:w-[430px] md:gap-1.5 md:p-1.5'
 		)}
 		role="tablist"
 		aria-label="레이드 채널별 시간 제보 자세히 보기 탭"
@@ -31,7 +31,7 @@
 				role="presentation"
 			>
 				<button
-					class="w-full p-1.5 pt-1 text-xs md:p-2 md:py-3"
+					class="w-full px-1.5 py-2 text-xs md:p-2 md:py-3"
 					title="자세히 보기"
 					on:click={() => onClickView(raid.id)}
 					id="raid-tab-{raid.id}"
@@ -39,7 +39,7 @@
 					role="tab"
 					aria-selected={selectedRaidId === raid.id}
 				>
-					<RaidItem {raid} compact />
+					<RaidItem {raid} />
 				</button>
 			</li>
 		{/each}

@@ -13,6 +13,7 @@
 	import Timer from '$shared/time/ui/Timer.svelte'
 	import { toast } from '$shared/toast'
 	import RaidItemChannel from '$widgets/raid-bar/ui/RaidItemChannel.svelte'
+	import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 
 	export let raid: RaidData
 	export let raidChannels: GameChannel[]
@@ -24,7 +25,7 @@
 			)
 		}
 		if (time.clientId === $subscribeClientId) {
-			alert('내 제보에는 투표할 수 없습니다.')
+			alert('내가 등록한 제보에는 좋아요를 할 수 없어요.')
 			return
 		}
 		const isConfirmed = confirm(
@@ -35,17 +36,15 @@
 		if ('errorMessage' in res) {
 			switch (res.errorMessage) {
 				case '이미 투표했습니다.':
-					alert('이미 투표했습니다.')
+					alert('이미 좋아요를 눌렀어요.')
 					break
 				case '권한이 없습니다.':
-					alert('내 제보에는 투표할 수 없습니다.')
+					alert('내가 등록한 제보에는 좋아요를 할 수 없어요.')
 					break
 				default:
 					alert(res.errorMessage)
 					break
 			}
-		} else {
-			toast.on('투표가 완료되었습니다!')
 		}
 	}
 </script>
@@ -65,20 +64,26 @@
 						>
 							<span class="ir">정확도 {i + 1}순위</span>
 							<button
-								class="flex w-full items-center justify-between px-1.5 py-1.5 text-xs md:p-2"
-								title="투표"
+								class="flex h-[35px] w-full items-center justify-between py-1.5 text-xs"
+								title="좋아요"
 								on:click={() => onClickVote(raid, time)}
 							>
-								<span class="flex-center flex-1">
+								<span
+									class="flex-center min-w-[3em] gap-[0.3em] border-r border-gray-700 text-xs2 md:min-w-[4em] md:text-xs"
+								>
+									<iconify-icon
+										icon="oi:heart"
+										width={11}
+										height={11}
+										class="-mt-[0.2em]"
+									/>
+									{time.voteCount + 1}
+								</span>
+								<span class="flex-center flex-1 border-r border-gray-700">
 									<Timer {time} />
 								</span>
-								<span>
-									{time.voteCount + 1}
-									<iconify-icon
-										icon="fa-solid:vote-yea"
-										width={12}
-										height={12}
-									/>
+								<span class="px-[0.6em] md:px-[1em]">
+									<RaidInformant user={time.user} />
 								</span>
 							</button>
 						</li>
