@@ -18,7 +18,10 @@ export const onGoogleScriptLoad = (cb: (token: string) => void) => {
 			} // customization attributes
 		)
 		google.accounts.id.prompt() // also display the One Tap dialog
-	} catch {}
+		return true
+	} catch {
+		return false
+	}
 }
 export const decodeJwtResponse = (token: string) => {
 	const base64Url = token.split('.')[1]

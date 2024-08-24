@@ -10,6 +10,7 @@
 	} from '$entities/user'
 	import { Button } from '$shared/button'
 	import { onGoogleScriptLoad } from '$shared/layout/lib/login'
+	import { delay } from '$shared/lib'
 	import { Tab } from '$shared/tabs'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { toast } from '$shared/toast'
@@ -17,10 +18,17 @@
 	import { onMount } from 'svelte'
 
 	let isShowTab = false
+	let isLoginButtonRendered = false
 
-	const checkLogin = () => {
+	const checkLogin = async () => {
 		if ($page.data.session) {
 			user.set($page.data.session)
+		} else {
+			isLoginButtonRendered = onGoogleScriptLoad(onGoogleLogin)
+			if (!isLoginButtonRendered) {
+				await delay(50)
+				onGoogleScriptLoad(onGoogleLogin)
+			}
 		}
 	}
 
@@ -36,23 +44,21 @@
 		}
 	}
 
-	const logout = () => {
+	const logout = async () => {
 		try {
 			removeTokenCookie()
 			user.set(null)
 			toast.on('로그아웃이 완료되었습니다.')
 			isShowTab = false
-			setTimeout(() => {
-				onGoogleScriptLoad(onGoogleLogin)
-			}, 100)
+			await delay(100)
+			onGoogleScriptLoad(onGoogleLogin)
 		} catch (e) {
 			error(550, '로그아웃 실패')
 		}
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		checkLogin()
-		!$page.data.session && onGoogleScriptLoad(onGoogleLogin)
 	})
 </script>
 
