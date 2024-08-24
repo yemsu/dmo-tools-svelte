@@ -99,7 +99,7 @@
 					width="20"
 					height="20"
 				/>
-				<span class="text-xs2"> 문의/제보</span>
+				<span class="text-xs4 md:text-xs2"> 문의/제보</span>
 			</a>
 		</div>
 	</Inner>
