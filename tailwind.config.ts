@@ -54,8 +54,6 @@ export default {
 			spacing: {
 				'header-h': 'var(--header-h)',
 				'gnb-h': 'var(--gnb-h)',
-				'content-fill-h':
-					'calc(100svh - var(--header-h) - var(--gnb-h) - var(--raid-bar-h))',
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)'

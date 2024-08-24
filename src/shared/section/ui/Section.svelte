@@ -11,7 +11,7 @@
 
 <section
 	class={cn(
-		'h-content-fill-h overflow-hidden p-content-side',
+		'h-full overflow-hidden p-content-side',
 		sizeStyles[size],
 		className
 	)}
