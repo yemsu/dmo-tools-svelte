@@ -75,7 +75,7 @@
 		class="relative flex h-header-h items-center justify-between"
 	>
 		<h1 class="font-tiny text-2xl font-semibold leading-none md:text-3xl">
-			<span class="text-logo">DMO tools</span>
+			<a href="/" class="text-logo block">DMO tools</a>
 		</h1>
 		<AuthButton />
 	</Inner>
