@@ -8,6 +8,7 @@
 	} from '$entities/raid'
 	import {
 		mySealCounts,
+		mySealPrices,
 		putMySealCount,
 		putMySealPrice,
 		queryStringToData,
@@ -19,6 +20,7 @@
 	import urlExampleSrc from '$lib/images/url-example.jpg'
 	import { Button } from '$shared/button'
 	import { META } from '$shared/config'
+	import { delay } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
@@ -80,6 +82,7 @@
 		server && crrServerType.set(server as ServerType)
 		alarm && alarmMinute.set(+alarm)
 		await mySealCounts.load()
+		await mySealPrices.load()
 	}
 
 	const onSubmit = async () => {
