@@ -44,6 +44,7 @@
 	"type": "module",
 	"dependencies": {
 		"es-hangul": "^1.4.7",
-		"iconify-icon": "^2.1.0"
+		"iconify-icon": "^2.1.0",
+		"vite-plugin-pwa": "^0.20.1"
 	}
 }
