@@ -86,7 +86,7 @@
 			)
 		}
 		const isConfirmed = confirm(
-			`${value}: 이 닉네임으로 회원 가입을 진행하시겠어요?\n가입 후 닉네임은 변경할 수 없어요.`
+			`${value}: 이 닉네임으로 회원 가입을 진행하시겠어요?`
 		)
 		if (!isConfirmed) return
 		const res = await postSignup(googleToken, value)
