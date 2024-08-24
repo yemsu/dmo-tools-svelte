@@ -68,11 +68,6 @@
 		})
 	}
 
-	const reConnectSse = async () => {
-		await clearPrevSubscribe()
-		initRaidSubscribe()
-	}
-
 	$: checkEventSourceConnect = () => {
 		if (
 			!eventSource ||
@@ -81,7 +76,7 @@
 		)
 			return
 
-		reConnectSse()
+		initRaidSubscribe()
 	}
 
 	const getIp = async () => {
@@ -104,10 +99,16 @@
 	}
 
 	$: initRaidSubscribe = async () => {
-		if (!$crrServerType) return
-		const raidsFetched = await getRaids($crrServerType)
+		const server = $crrServerType || 'luce'
+		const raidsFetched = await getRaids(server)
 		raids.set(raidsFetched)
-		subscribeSSE($crrServerType)
+		subscribeSSE(server)
+		setTimeout(() => {
+			if (!isSseConnected)
+				alert(
+					'연결에 실패하였습니다. 화면을 새로고침 해주세요. \n문제가 해결되지 않는다면 관리자에게 문의해주세요.'
+				)
+		}, 2000)
 	}
 
 	onMount(async () => {
@@ -242,7 +243,7 @@
 			{#if !isSseConnected}
 				<button
 					class="flex-center h-full gap-1 bg-warning px-4"
-					on:click={reConnectSse}
+					on:click={initRaidSubscribe}
 				>
 					<iconify-icon icon="ooui:network-off" width={14} height={14} />
 					연결 재시도
