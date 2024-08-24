@@ -1,13 +1,20 @@
 <script lang="ts">
-	import { raids, type RaidData } from '$entities/raid'
+	import { raids } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import { RaidItem } from '$widgets/raid-bar'
 
-	$: selectedRaidId = $raids[0]?.id
+	let selectedRaidId: number | null = null
 
 	const onClickView = (raidId: number) => {
 		selectedRaidId = raidId
 	}
+
+	const initSelectedRaidId = () => {
+		if ($raids.length == 0 || selectedRaidId !== null) return
+		selectedRaidId = $raids[0].id
+	}
+
+	$: $raids && initSelectedRaidId()
 </script>
 
 <div class="flex flex-1 overflow-hidden">
