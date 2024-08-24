@@ -31,7 +31,7 @@
 				role="presentation"
 			>
 				<button
-					class="w-full px-1.5 py-2 text-xs md:p-2 md:py-3"
+					class="w-full px-1.5 py-2 text-xs md:p-2"
 					title="자세히 보기"
 					on:click={() => onClickView(raid.id)}
 					id="raid-tab-{raid.id}"
