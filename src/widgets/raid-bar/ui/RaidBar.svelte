@@ -137,7 +137,7 @@
 
 	const notify = (_nextRaid: NextRaidData) => {
 		new Notification(`🐉 ${_nextRaid.name}`, {
-			body: `[${_nextRaid.time.channel}채널] ${_nextRaid.location} 에서\n보스가 곧 출현합니다!`
+			body: `[${_nextRaid.time.channel}채널] ${_nextRaid.location} 에서\n보스가 ${$alarmMinute}분 후 출현 합니다!`
 		})
 	}
 
