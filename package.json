@@ -32,6 +32,7 @@
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"prettier-plugin-tailwindcss": "^0.6.4",
+		"super-sitemap": "^0.15.1",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
 		"tailwind-scrollbar": "^3.1.0",
@@ -45,7 +46,6 @@
 	"dependencies": {
 		"es-hangul": "^1.4.7",
 		"iconify-icon": "^2.1.0",
-		"vite-plugin-pwa": "^0.20.1",
-		"vite-plugin-sitemap": "^0.7.1"
+		"vite-plugin-pwa": "^0.20.1"
 	}
 }

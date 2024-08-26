@@ -1,7 +1,6 @@
 import adapter from '@sveltejs/adapter-auto'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { VitePWA } from 'vite-plugin-pwa'
-import sitemap from 'vite-plugin-sitemap'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -24,9 +23,6 @@ const config = {
 	plugins: [
 		VitePWA({
 			registerType: 'autoUpdate'
-		}),
-		sitemap({
-			hostname: process.env.VITE_BASE_URL
 		})
 	]
 }
