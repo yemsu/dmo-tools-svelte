@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { user } from '$entities/user'
 	import { page } from '$app/stores'
 	import { mySealPrices } from '$entities/seals'
 	import { Input } from '$shared/form'
@@ -6,6 +7,8 @@
 	import { toast } from '$shared/toast'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { getMyAndFinalPrice } from '$widgets/my-seals'
+	import { goto } from '$app/navigation'
+	import { TOAST } from '$shared/config'
 
 	export let sealId: number
 	export let isEditable: boolean = true
@@ -16,6 +19,11 @@
 	let isOnInput = false
 
 	const onClickInputOn = () => {
+		if (!$user) {
+			goto('/login')
+			toast.on(TOAST.NEED_LOGIN)
+			return
+		}
 		isOnInput = true
 		if (prices.final) {
 			inputValue = prices.final

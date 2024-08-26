@@ -1,8 +1,11 @@
 <script lang="ts">
+	import { user } from '$entities/user'
 	import { mySealCounts } from '$entities/seals'
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { toast } from '$shared/toast'
+	import { goto } from '$app/navigation'
+	import { TOAST } from '$shared/config'
 
 	export let sealId: number
 	export let isEditable: boolean = true
@@ -13,6 +16,11 @@
 	let isOnInput = false
 
 	const onClickInputOn = () => {
+		if (!$user) {
+			goto('/login')
+			toast.on(TOAST.NEED_LOGIN)
+			return
+		}
 		isOnInput = true
 		if (count) {
 			inputValue = count
