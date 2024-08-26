@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { afterNavigate } from '$app/navigation'
 	import SaveUrlLink from '$shared/layout/ui/SaveUrlLink.svelte'
 	import { onMount } from 'svelte'
 
@@ -10,10 +10,18 @@
 	})
 
 	const handleShowNotice = () => {
-		showNotice = $page.url.searchParams.size > 0
+		if (import.meta.env.SSR) return null
+		const searchParams = new URLSearchParams(window.location.search)
+		showNotice = searchParams.size > 0
 	}
 
-	$: $page.url.searchParams && handleShowNotice()
+	onMount(() => {
+		handleShowNotice()
+	})
+
+	afterNavigate(() => {
+		handleShowNotice()
+	})
 </script>
 
 {#if showNotice}
