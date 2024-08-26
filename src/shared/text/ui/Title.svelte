@@ -8,7 +8,7 @@
 	const sizeStyles = {
 		sm: 'text-[15px] font-semibold',
 		md: 'text-lg md:text-lg2 font-semibold',
-		lg: ''
+		lg: 'text-xl font-semibold'
 	}
 </script>
 

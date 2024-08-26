@@ -83,7 +83,8 @@ export default {
 				sm: '13px',
 				md: '14px',
 				lg: '16px',
-				lg2: '18px'
+				lg2: '18px',
+				xl: '25px'
 			}
 		}
 	},

@@ -1,4 +1,8 @@
-export const onGoogleScriptLoad = (cb: (token: string) => void) => {
+export const onGoogleScriptLoad = (
+	targetId: string,
+	cb: (token: string) => void,
+	options: Record<string, string> = {}
+) => {
 	try {
 		const handleCredentialResponse = (response: { credential: string }) => {
 			cb(response.credential)
@@ -8,13 +12,14 @@ export const onGoogleScriptLoad = (cb: (token: string) => void) => {
 			callback: handleCredentialResponse
 		})
 		google.accounts.id.renderButton(
-			document.getElementById('googleSignIn'),
+			document.getElementById(targetId),
 			{
 				theme: 'outline',
 				size: 'small',
 				text: 'signin',
 				shape: 'pill',
-				logo_alignment: 'left'
+				logo_alignment: 'left',
+				...options
 			} // customization attributes
 		)
 		google.accounts.id.prompt() // also display the One Tap dialog

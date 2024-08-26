@@ -6,6 +6,11 @@
 	import { delay } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import { onMount } from 'svelte'
+
+	export let id: string = 'googleLogin'
+	export let size: 'small' | 'large' = 'small'
+	export let text: 'signin' | 'signin_with' = 'signin'
+
 	let isLoginButtonRendered = false
 
 	const onGoogleLogin = async (token: string) => {
@@ -23,7 +28,10 @@
 	const renderButton = async () => {
 		await delay(80)
 		if ($user) return
-		isLoginButtonRendered = onGoogleScriptLoad(onGoogleLogin)
+		isLoginButtonRendered = onGoogleScriptLoad(id, onGoogleLogin, {
+			size,
+			text
+		})
 		if (!isLoginButtonRendered) renderButton()
 	}
 
@@ -35,9 +43,8 @@
 		}
 	}
 	onMount(() => {
-		onGoogleScriptLoad(onGoogleLogin)
 		checkLogin()
 	})
 </script>
 
-<div id="googleSignIn"></div>
+<div {id}></div>
