@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation'
 	import { removeTokenCookie, user } from '$entities/user'
 	import { Button } from '$shared/button'
+	import { PATH } from '$shared/config'
 	import { GoogleLoginButton } from '$shared/layout'
 	import { delay } from '$shared/lib'
 	import { Tab } from '$shared/tabs'
@@ -41,7 +42,7 @@
 			>
 				<Tab
 					on:click={() => {
-						goto('/save-url')
+						goto(PATH.SAVE_URL)
 						isShowTab = false
 					}}>url 데이터 저장</Tab
 				>

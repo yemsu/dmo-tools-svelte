@@ -8,6 +8,7 @@
 		TOKEN_NAME,
 		user
 	} from '$entities/user'
+	import { PATH } from '$shared/config'
 	import {
 		decodeJwtResponse,
 		onGoogleScriptLoad
@@ -26,7 +27,7 @@
 		const res = await postLogin(token)
 		if (res === null) {
 			setTokenCookie(token, G_TOKEN_NAME)
-			goto('/join')
+			goto(PATH.JOIN)
 		} else {
 			setTokenCookie(res.token)
 			user.set(res)

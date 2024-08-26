@@ -8,7 +8,7 @@
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { getMyAndFinalPrice } from '$widgets/my-seals'
 	import { goto } from '$app/navigation'
-	import { TOAST } from '$shared/config'
+	import { PATH, TOAST } from '$shared/config'
 
 	export let sealId: number
 	export let isEditable: boolean = true
@@ -20,7 +20,7 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto('/login')
+			goto(PATH.LOGIN)
 			toast.on(TOAST.NEED_LOGIN)
 			return
 		}

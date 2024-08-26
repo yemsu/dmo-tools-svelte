@@ -10,6 +10,7 @@
 		user
 	} from '$entities/user'
 	import { Button } from '$shared/button'
+	import { PATH } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { checkNoMember, checkJoinProcess } from '$shared/lib'
 	import { Section } from '$shared/section'
@@ -95,7 +96,7 @@
 		removeTokenCookie(G_TOKEN_NAME)
 		sessionStorage.setItem(TOKEN_NAME, res.token)
 		toast.on(`환영합니다 ${value}님!`)
-		goto('/')
+		goto(PATH.SETTING_SEALS)
 	}
 
 	onMount(() => {

@@ -19,7 +19,7 @@
 	import { user } from '$entities/user'
 	import urlExampleSrc from '$lib/images/url-example.jpg'
 	import { Button } from '$shared/button'
-	import { META } from '$shared/config'
+	import { META, PATH } from '$shared/config'
 	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { Title } from '$shared/text'
@@ -116,7 +116,7 @@
 		if (!isConfirmed) return
 		await uploadData(paramsData)
 		toast.on('데이터 저장이 완료되었습니다.')
-		goto('/my')
+		goto(PATH.MY_SEALS)
 	}
 
 	onMount(() => {
@@ -126,7 +126,7 @@
 		}, 60)
 	})
 
-	$: !$user && !import.meta.env.SSR && goto('/')
+	$: !$user && !import.meta.env.SSR && goto(PATH.RAID_TIMER)
 </script>
 
 <svelte:head>
