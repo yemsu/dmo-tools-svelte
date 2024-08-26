@@ -16,6 +16,8 @@
 		</p>
 	</div>
 	<div class="flex-center w-full rounded-md bg-gray-800 py-8">
-		<GoogleLoginButton id="mainLogin" size="large" text="signin_with" />
+		<div class="h-[38px]">
+			<GoogleLoginButton id="mainLogin" size="large" text="signin_with" />
+		</div>
 	</div>
 </Section>
