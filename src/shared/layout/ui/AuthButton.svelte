@@ -1,48 +1,15 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
-	import {
-		postLogin,
-		setTokenCookie,
-		removeTokenCookie,
-		user,
-		G_TOKEN_NAME
-	} from '$entities/user'
+	import { removeTokenCookie, user } from '$entities/user'
 	import { Button } from '$shared/button'
-	import { onGoogleScriptLoad } from '$shared/layout/lib/login'
+	import { GoogleLoginButton } from '$shared/layout'
 	import { delay } from '$shared/lib'
 	import { Tab } from '$shared/tabs'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { toast } from '$shared/toast'
 	import { error } from '@sveltejs/kit'
-	import { onMount } from 'svelte'
 
 	let isShowTab = false
-	let isLoginButtonRendered = false
-
-	const checkLogin = async () => {
-		if ($page.data.session) {
-			user.set($page.data.session)
-		} else {
-			isLoginButtonRendered = onGoogleScriptLoad(onGoogleLogin)
-			if (!isLoginButtonRendered) {
-				await delay(50)
-				onGoogleScriptLoad(onGoogleLogin)
-			}
-		}
-	}
-
-	const onGoogleLogin = async (token: string) => {
-		const res = await postLogin(token)
-		if (res === null) {
-			setTokenCookie(token, G_TOKEN_NAME)
-			goto('/join')
-		} else {
-			setTokenCookie(res.token)
-			user.set(res)
-			toast.on(`환영합니다 ${res.nickname}님!`)
-		}
-	}
 
 	const logout = async () => {
 		try {
@@ -51,15 +18,10 @@
 			toast.on('로그아웃이 완료되었습니다.')
 			isShowTab = false
 			await delay(100)
-			onGoogleScriptLoad(onGoogleLogin)
 		} catch (e) {
 			error(550, '로그아웃 실패')
 		}
 	}
-
-	onMount(async () => {
-		checkLogin()
-	})
 </script>
 
 <div class="relative flex min-w-[100px] justify-end">
@@ -87,6 +49,6 @@
 			</Tabs>
 		{/if}
 	{:else}
-		<div id="googleSignIn"></div>
+		<GoogleLoginButton />
 	{/if}
 </div>
