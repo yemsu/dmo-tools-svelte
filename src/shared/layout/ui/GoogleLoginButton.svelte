@@ -1,8 +1,17 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
-	import { G_TOKEN_NAME, postLogin, setTokenCookie, user } from '$entities/user'
-	import { onGoogleScriptLoad } from '$shared/layout/lib/login'
+	import {
+		G_TOKEN_NAME,
+		getTokenCookie,
+		postLogin,
+		setTokenCookie,
+		TOKEN_NAME,
+		user
+	} from '$entities/user'
+	import {
+		decodeJwtResponse,
+		onGoogleScriptLoad
+	} from '$shared/layout/lib/login'
 	import { delay } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import { onMount } from 'svelte'
@@ -36,8 +45,9 @@
 	}
 
 	const checkLogin = () => {
-		if ($page.data.session) {
-			user.set($page.data.session)
+		const session = getTokenCookie(TOKEN_NAME)
+		if (session) {
+			user.set(decodeJwtResponse(session))
 		} else {
 			renderButton()
 		}
