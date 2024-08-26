@@ -1,10 +1,16 @@
 <script lang="ts">
 	import { user } from '$entities/user'
 	import { GoogleLoginButton } from '$shared/layout'
+	import { checkNoMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import Title from '$shared/text/ui/Title.svelte'
+	import { onMount } from 'svelte'
 
 	$: $user && history.back()
+
+	onMount(() => {
+		checkNoMember()
+	})
 </script>
 
 <Section size="sm" class="gap-10">

@@ -11,6 +11,7 @@
 	} from '$entities/user'
 	import { Button } from '$shared/button'
 	import { Input } from '$shared/form'
+	import { checkNoMember, checkJoinProcess } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
@@ -98,6 +99,8 @@
 	}
 
 	onMount(() => {
+		checkNoMember()
+		checkJoinProcess()
 		setTimeout(() => {
 			inputElement.focus()
 		}, 100)

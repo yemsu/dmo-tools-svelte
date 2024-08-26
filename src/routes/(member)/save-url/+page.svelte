@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
+	import { afterNavigate, goto } from '$app/navigation'
 	import {
 		alarmMinute,
 		crrServerType,
@@ -20,7 +20,7 @@
 	import urlExampleSrc from '$lib/images/url-example.jpg'
 	import { Button } from '$shared/button'
 	import { META } from '$shared/config'
-	import { delay } from '$shared/lib'
+	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
@@ -120,12 +120,13 @@
 	}
 
 	onMount(() => {
+		checkMember()
 		setTimeout(() => {
 			textareaElement.focus()
 		}, 60)
 	})
 
-	$: !$user && goto('/')
+	$: !$user && !import.meta.env.SSR && goto('/')
 </script>
 
 <svelte:head>
