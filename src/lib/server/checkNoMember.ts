@@ -18,6 +18,6 @@ export const checkJoinProcess: ServerLoad = async (event) => {
 export const checkMember: ServerLoad = async (event) => {
 	const token = await event.cookies.get(TOKEN_NAME)
 	if (!token) {
-		redirect(302, '/')
+		redirect(302, '/login')
 	}
 }

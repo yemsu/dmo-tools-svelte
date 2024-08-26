@@ -1,15 +1,14 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { user } from '$entities/user'
+	import { TOAST } from '$shared/config'
+	import { toast } from '$shared/toast'
 
 	$: onClickSaveData = () => {
-		if (!$user) {
-			alert(
-				'로그인 후 이용할 수 있는 기능입니다. \n 우측 상단에 구글 로그인 버튼을 클릭하여 로그인 해주세요.'
-			)
-			return
-		}
 		goto('/save-url')
+		if (!$user) {
+			toast.on(TOAST.NEED_LOGIN)
+		}
 	}
 </script>
 

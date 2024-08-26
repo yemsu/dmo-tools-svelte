@@ -1,3 +1,2 @@
-import { META } from '$shared/config/meta'
-
-export { META }
+export { META } from '$shared/config/meta'
+export { TOAST } from '$shared/config/toast'
