@@ -45,6 +45,7 @@
 	"dependencies": {
 		"es-hangul": "^1.4.7",
 		"iconify-icon": "^2.1.0",
-		"vite-plugin-pwa": "^0.20.1"
+		"vite-plugin-pwa": "^0.20.1",
+		"vite-plugin-sitemap": "^0.7.1"
 	}
 }
