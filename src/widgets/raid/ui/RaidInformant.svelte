@@ -32,12 +32,17 @@
 	{...restProps}
 >
 	{#if user}
-		<span
-			class="text-xs3 contrast-75"
-			title={`제보: ${user?.timerCompleteCount}회`}
-		>
-			{getUserGrade(user?.timerCompleteCount)}
-		</span>
+		{#if user.id === 20}
+			<!-- 관리자 -->
+			<span class="text-xs2" title={`관리자`}>🦀</span>
+		{:else}
+			<span
+				class="text-xs3 contrast-75"
+				title={`제보: ${user?.timerCompleteCount}회`}
+			>
+				{getUserGrade(user?.timerCompleteCount)}
+			</span>
+		{/if}
 		{user?.nickname}
 	{:else}
 		<iconify-icon icon="mdi:user" width="1em" height="1em" />

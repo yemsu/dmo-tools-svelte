@@ -49,10 +49,7 @@
 		)
 		if (!isConfirmed) return
 		const res = await postSignup(googleToken, value)
-		user.set({
-			nickname: res.nickname,
-			email: res.email
-		})
+		user.set(res)
 		removeTokenCookie(G_TOKEN_NAME)
 		sessionStorage.setItem(TOKEN_NAME, res.token)
 		toast.on(TOAST.JOIN(value))

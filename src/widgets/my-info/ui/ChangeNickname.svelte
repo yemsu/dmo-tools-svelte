@@ -27,10 +27,7 @@
 		const isConfirm = confirm(`"${newNickname}"으로 닉네임을 변경하시겠어요?`)
 		if (!isConfirm) return
 		const res = await putNickname(newNickname)
-		user.set({
-			email: res.email,
-			nickname: res.nickname
-		})
+		user.set(res)
 		setTokenCookie(res.token)
 		toast.on(TOAST.CHANGE_NICK(newNickname))
 		return res
