@@ -28,7 +28,7 @@
 		sizeStyles[size],
 		className
 	)}
-	title="제보자"
+	title={`제보: ${user?.timerCompleteCount}회`}
 	{...restProps}
 >
 	{#if user}
@@ -36,10 +36,7 @@
 			<!-- 관리자 -->
 			<span class="text-xs2" title={`관리자`}>🦀</span>
 		{:else}
-			<span
-				class="text-xs3 contrast-75"
-				title={`제보: ${user?.timerCompleteCount}회`}
-			>
+			<span class="text-xs3 contrast-75">
 				{getUserGrade(user?.timerCompleteCount)}
 			</span>
 		{/if}
