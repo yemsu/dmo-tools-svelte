@@ -29,8 +29,9 @@
 			setTokenCookie(token, G_TOKEN_NAME)
 			goto(PATH.JOIN)
 		} else {
+			const { token, ...userData } = res
 			setTokenCookie(res.token)
-			user.set(res)
+			user.set(userData)
 			toast.on(`환영합니다 ${res.nickname}님!`)
 		}
 	}
@@ -48,11 +49,16 @@
 	const checkLogin = () => {
 		const session = getTokenCookie(TOKEN_NAME)
 		if (session) {
-			user.set(decodeJwtResponse(session))
+			const tokenParsed = decodeJwtResponse(session)
+			user.set({
+				email: tokenParsed.sub,
+				nickname: tokenParsed.nickname
+			})
 		} else {
 			renderButton()
 		}
 	}
+
 	onMount(() => {
 		checkLogin()
 	})

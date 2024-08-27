@@ -1,3 +1,5 @@
+import type { UserToken } from '$entities/user'
+
 export const onGoogleScriptLoad = (
 	targetId: string,
 	cb: (token: string) => void,
@@ -40,5 +42,5 @@ export const decodeJwtResponse = (token: string) => {
 			.join('')
 	)
 
-	return JSON.parse(jsonPayload)
+	return JSON.parse(jsonPayload) as UserToken
 }
