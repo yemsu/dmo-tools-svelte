@@ -78,7 +78,7 @@
 									<Timer {time} />
 								</span>
 								<span
-									class="flex-center min-w-[8em] px-[0.6em] md:min-w-[10em] md:px-[1em]"
+									class="flex-center min-w-[6em] shrink-0 text-balance px-[0.6em] md:min-w-[10em] md:px-[1em] sm:max-w-[7em]"
 								>
 									<RaidInformant user={time.user} />
 								</span>

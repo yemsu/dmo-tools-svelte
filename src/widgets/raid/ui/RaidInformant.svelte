@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { UserData } from '$entities/user'
-	import { cn } from '$shared/lib'
+	import { _objKeys, cn } from '$shared/lib'
+	import { GRADES } from '$widgets/raid/config'
 
 	export let user: UserData | null
 	export let size: 'sm' | 'md' = 'md'
@@ -9,6 +10,14 @@
 	const sizeStyles = {
 		sm: 'text-xs3 md:text-xs2',
 		md: 'text-xs3 md:text-xs'
+	}
+
+	const getUserGrade = (timerCompleteCount: number) => {
+		const gradeTypes = _objKeys(GRADES)
+		const userGradeType =
+			gradeTypes.find((_gradeType) => timerCompleteCount <= _gradeType) ||
+			gradeTypes[gradeTypes.length - 1]
+		return GRADES[userGradeType]
 	}
 </script>
 
@@ -22,6 +31,16 @@
 	title="제보자"
 	{...restProps}
 >
-	<iconify-icon icon="mdi:user" width="1em" height="1em" />
-	{user?.nickname || '비회원'}
+	{#if user}
+		<span
+			class="text-xs3 contrast-75"
+			title={`제보: ${user?.timerCompleteCount}회`}
+		>
+			{getUserGrade(user?.timerCompleteCount)}
+		</span>
+		{user?.nickname}
+	{:else}
+		<iconify-icon icon="mdi:user" width="1em" height="1em" />
+		비회원
+	{/if}
 </span>

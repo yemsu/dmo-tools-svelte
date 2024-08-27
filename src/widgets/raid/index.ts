@@ -18,3 +18,5 @@ export {
 	RaidAppearInfo,
 	RaidInformant
 }
+export { GRADES } from './config/index'
+export type { GradeTypes } from './type'

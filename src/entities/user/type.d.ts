@@ -16,4 +16,5 @@ export type UserToken = {
 export type UserData = {
 	email: string
 	nickname: string
+	timerCompleteCount: number
 }
