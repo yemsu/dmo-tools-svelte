@@ -28,7 +28,7 @@
 		sizeStyles[size],
 		className
 	)}
-	title={`제보: ${user?.timerCompleteCount}회`}
+	title={`제보 달성: ${user?.timerCompleteCount}회`}
 	{...restProps}
 >
 	{#if user}
