@@ -3,7 +3,7 @@
 
 	export let isActive: Boolean | undefined = undefined
 	export let rounded: 'full' | 'md' = 'full'
-	export let size: 'icon' | 'sm' | 'md' | 'lg' = 'md'
+	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let disabled: boolean | undefined = undefined
 	const { class: className, ...restProps } = $$restProps
 	const shapeStyles = {
@@ -14,6 +14,7 @@
 		icon: 'w-[1.5em] h-[1.5em] flex-center',
 		sm: 'px-2 py-1 text-xs',
 		md: 'min-w-[3.5em] px-2 py-1 text-md',
+		'md-lg': 'min-w-[3.5em] h-[30px] px-2',
 		lg: 'px-[1em] py-[0.5em] text-md min-w-[5em] h-input-h'
 	}
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }

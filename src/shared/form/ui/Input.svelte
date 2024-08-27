@@ -7,13 +7,14 @@
 	export let placeholder: string | undefined = undefined
 	export let value: string | number | null
 	export let inputElement: HTMLInputElement | null = null
-	export let size: 'xs' | 'sm' | 'md' = 'md'
+	export let size: 'xs' | 'sm' | 'sm-md' | 'md' = 'md'
 
 	const { name, class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
 		xs: 'h-[25px] text-xs',
 		sm: 'h-[30px] text-xs',
+		'sm-md': 'h-[30px] text-md',
 		md: 'h-input-h px-2 text-md'
 	}
 

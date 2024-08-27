@@ -1,4 +1,10 @@
-export { getNickCheck, postLogin, postSignup, postResign } from './api'
+export {
+	getNickCheck,
+	postLogin,
+	postSignup,
+	postResign,
+	putNickname
+} from './api'
 export {
 	setTokenCookie,
 	removeTokenCookie,

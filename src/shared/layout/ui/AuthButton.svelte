@@ -42,6 +42,12 @@
 			>
 				<Tab
 					on:click={() => {
+						goto(PATH.MY_INFO)
+						isShowTab = false
+					}}>마이 페이지</Tab
+				>
+				<Tab
+					on:click={() => {
 						goto(PATH.SAVE_URL)
 						isShowTab = false
 					}}>url 데이터 저장</Tab

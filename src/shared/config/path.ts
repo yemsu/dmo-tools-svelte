@@ -5,5 +5,6 @@ export const PATH = {
 	RAID_TIMER: '/raid-timer',
 	SAVE_URL: '/save-url',
 	JOIN: '/join',
-	LOGIN: '/login'
+	LOGIN: '/login',
+	MY_INFO: '/my/info'
 }

@@ -120,7 +120,8 @@
 	}
 
 	onMount(() => {
-		checkMember()
+		const isMember = checkMember()
+		if (!isMember) return
 		setTimeout(() => {
 			textareaElement.focus()
 		}, 60)

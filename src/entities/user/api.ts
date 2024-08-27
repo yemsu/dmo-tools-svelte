@@ -22,3 +22,8 @@ export const postResign = () =>
 	apiFetch<boolean>(`/users/resign`, {
 		method: 'POST'
 	})
+
+export const putNickname = (newNickname: string) =>
+	apiFetch<UserResponse>(`/users/modify?nickname=${newNickname}`, {
+		method: 'PUT'
+	})
