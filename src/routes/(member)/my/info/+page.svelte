@@ -2,6 +2,7 @@
 	import { alarmMinute, crrServerType, GAME_SERVERS } from '$entities/raid'
 	import { user } from '$entities/user'
 	import Button from '$shared/button/ui/Button.svelte'
+	import { PATH } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
@@ -68,5 +69,10 @@
 				{infoItemData.desc}
 			</InfoItem>
 		</div> -->
+		<div class="flex w-full justify-end">
+			<a href={PATH.PRIVACY_POLICY} class="text-xs2 text-gray-500"
+				>개인정보처리방침</a
+			>
+		</div>
 	</div>
 </Section>

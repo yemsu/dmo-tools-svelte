@@ -6,5 +6,6 @@ export const PATH = {
 	SAVE_URL: '/save-url',
 	JOIN: '/join',
 	LOGIN: '/login',
-	MY_INFO: '/my/info'
+	MY_INFO: '/my/info',
+	PRIVACY_POLICY: '/policy/privacy'
 }
