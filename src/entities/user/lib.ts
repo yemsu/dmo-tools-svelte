@@ -3,7 +3,9 @@ export const G_TOKEN_NAME = 'G_AUTH_T'
 
 export const setTokenCookie = (token: string, tokenName?: string) => {
 	const tokenValue = token.replace('Bearer ', '')
-	document.cookie = `${tokenName || TOKEN_NAME}=${tokenValue}; Secure;`
+	const hourSec = 3600
+	const daySec = hourSec * 24
+	document.cookie = `${tokenName || TOKEN_NAME}=${tokenValue}; Secure; max-age=${daySec * 70}`
 }
 
 export const getTokenCookie = (tokenName?: string): string | null => {
