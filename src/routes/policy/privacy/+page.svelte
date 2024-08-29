@@ -3,7 +3,7 @@
 	import Title from '$shared/text/ui/Title.svelte'
 </script>
 
-<Section class="text-sm leading-[1.4]">
+<Section class="text-sm leading-[1.4] text-gray-200">
 	<Title>개인정보처리방침</Title>
 	<div class="scroll-box flex flex-col gap-[1em] px-[1em]">
 		<section>

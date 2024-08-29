@@ -50,7 +50,7 @@
 </script>
 
 <Section class="mx-auto max-w-[450px]">
-	<div class="flex-col-center h-full gap-6">
+	<div class="flex-col-center h-full gap-3">
 		<div class="flex w-full flex-col gap-3">
 			<Title class="w-full">기본 정보</Title>
 			<InfoItem infoItems={baseInfoMap} let:infoItemData>
@@ -70,9 +70,12 @@
 			</InfoItem>
 		</div> -->
 		<div class="flex w-full justify-end">
-			<a href={PATH.PRIVACY_POLICY} class="text-xs2 text-gray-500"
-				>개인정보처리방침</a
+			<a
+				href={PATH.PRIVACY_POLICY}
+				class="text-xs2 text-gray-500 underline underline-offset-2"
 			>
+				개인정보처리방침
+			</a>
 		</div>
 	</div>
 </Section>
