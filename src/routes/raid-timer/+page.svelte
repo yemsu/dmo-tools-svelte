@@ -16,10 +16,7 @@
 
 <Section>
 	<div class="flex items-center gap-4">
-		<Title class="leading-none">
-			레이드 타이머
-			<Badge color="warning" shape="square" class="italic">Beta</Badge>
-		</Title>
+		<Title class="leading-none">레이드 타이머</Title>
 		<Tabs>
 			{#each _objKeys(GAME_SERVERS) as serverType (serverType)}
 				<Tab

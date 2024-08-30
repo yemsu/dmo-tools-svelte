@@ -222,7 +222,6 @@
 			)}
 			title="레이드 타이머 전체 보기"
 		>
-			<Badge color="warning" shape="square" class="italic">Beta</Badge>
 			{#if nextRaid}
 				<span class="flex items-center gap-2 leading-none">
 					<span class="flex md:gap-1 sm:flex-col">
