@@ -15,5 +15,5 @@ export type GachaData = {
 	name: string
 	ticketCost: number
 	maxDrawCount: number
-	items: GachaResultItem[]
+	gachaItems: GachaResultItem[]
 }

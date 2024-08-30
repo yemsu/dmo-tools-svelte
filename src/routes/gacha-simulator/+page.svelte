@@ -1,16 +1,8 @@
 <script lang="ts">
-	import imgInven from '$lib/images/gacha/inven.jpg'
-	import videoGachaBg from '$lib/images/gacha/gacha-bg.mp4'
 	import { page } from '$app/stores'
-	import { Section } from '$shared/section'
-	import { GachaSelectButton, GachaTitle } from '$widgets/gacha'
-	import type { GachaData } from '$entities/gacha'
-
-	let selectedGachaId: GachaData['id'] | null = null
-
-	const onSelectGacha = (id: number | null) => {
-		selectedGachaId = id
-	}
+	import videoGachaBg from '$lib/images/gacha/gacha-bg.mp4'
+	import { GachaTitle } from '$widgets/gacha'
+	import GachaCard from '$widgets/gacha/ui/GachaCard.svelte'
 </script>
 
 <section
@@ -28,7 +20,7 @@
 		<div>
 			<div class="flex gap-6">
 				{#each $page.data.gachaList as gachaData (gachaData.id)}
-					<GachaSelectButton {gachaData} {onSelectGacha} {selectedGachaId} />
+					<GachaCard {gachaData} />
 				{/each}
 			</div>
 			<!-- <div class="mt-4 flex w-full">
