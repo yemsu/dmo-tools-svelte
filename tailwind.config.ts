@@ -30,6 +30,15 @@ export default {
 					40: 'hsl(var(--secondary-40))',
 					50: 'hsl(var(--secondary-50))'
 				},
+				gacha: {
+					10: '#080813',
+					20: '#0e0e1d',
+					30: '#0f0e22',
+					40: '#081432',
+					gold: '#DEAD00',
+					'brown-30': '#2D2628',
+					'brown-20': '#1B1613'
+				},
 				stat: {
 					at: 'hsl(var(--stat-at))',
 					ht: 'hsl(var(--stat-ht))',
@@ -59,8 +68,10 @@ export default {
 				'input-h': 'var(--input-h)'
 			},
 			fontFamily: {
-				tiny: ['Tiny5', 'sans-serif'],
-				pretendard: ['"Pretendard Variable", Pretendard', ...fontFamily.sans]
+				tiny: ['Tiny5', 'sans-serif', ...fontFamily.sans],
+				pretendard: ['"Pretendard Variable", Pretendard', ...fontFamily.sans],
+				ns: ['NanumSquare', ...fontFamily.sans],
+				'ns-bold': ['NanumSquareBold', ...fontFamily.sans]
 			},
 			dropShadow: {
 				'primary-90': '0 0 3px hsl(var(--primary-90))',
