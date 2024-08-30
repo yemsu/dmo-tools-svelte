@@ -1,18 +1,23 @@
-import type { GachaData } from '$entities/gacha/type'
+import type { GachaData, GachaResultData } from '$entities/gacha/type'
 import { writable } from 'svelte/store'
 
 type GachaStore = {
-	clickedGacha: GachaData | null
+	currentGacha: GachaData | null
+	gachaResults: GachaResultData[]
 }
 
 const createGachaStore = () => {
 	const { subscribe, update } = writable<GachaStore>({
-		clickedGacha: null
+		currentGacha: null,
+		gachaResults: []
 	})
 	return {
 		subscribe,
 		selectGacha: (data: GachaData | null) => {
-			update((prev) => ({ ...prev, clickedGacha: data }))
+			update((prev) => ({ ...prev, currentGacha: data }))
+		},
+		setGachaResults: (newResults: GachaResultData[]) => {
+			update((prev) => ({ ...prev, gachaResults: newResults }))
 		}
 	}
 }

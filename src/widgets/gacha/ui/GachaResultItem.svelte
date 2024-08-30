@@ -1,11 +1,11 @@
 <script lang="ts">
-	import type { GachaResultItem } from '$entities/gacha'
+	import type { GachaResultData } from '$entities/gacha'
 
-	export let gachaItem: GachaResultItem
+	export let gachaResult: GachaResultData
 </script>
 
 <li class="flex justify-between gap-4">
-	<span>희귀도: {gachaItem.rarity}</span>
-	<h3>{gachaItem.item.name}</h3>
-	<span>확률:{gachaItem.probability}</span>
+	<span>희귀도: {gachaResult.rarity}</span>
+	<h3>{gachaResult.item.name}</h3>
+	<span>확률:{gachaResult.probability}</span>
 </li>

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import { gachaStore } from '$entities/gacha'
 	import videoGachaBg from '$lib/images/gacha/gacha-bg.mp4'
-	import { GachaTitle } from '$widgets/gacha'
+	import { GachaResultView, GachaTitle } from '$widgets/gacha'
 	import GachaCard from '$widgets/gacha/ui/GachaCard.svelte'
 </script>
 
@@ -14,7 +15,7 @@
 		</video>
 	</div>
 	<div
-		class="flex-col-center absolute top-1/2 w-full max-w-[500px] -translate-y-1/2 gap-10 pb-8"
+		class="flex-col-center absolute top-1/2 w-full max-w-[500px] -translate-y-1/2 gap-10"
 	>
 		<GachaTitle>소환할 데이터를 선택하세요.</GachaTitle>
 		<div>
@@ -30,4 +31,7 @@
 			</div> -->
 		</div>
 	</div>
+	{#if $gachaStore.gachaResults.length > 0}
+		<GachaResultView />
+	{/if}
 </section>

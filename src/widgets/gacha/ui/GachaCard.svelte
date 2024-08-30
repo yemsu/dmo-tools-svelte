@@ -1,18 +1,18 @@
 <script lang="ts">
 	import type { GachaData } from '$entities/gacha'
 	import { gachaStore } from '$entities/gacha'
+	import imgViewItemsHover from '$lib/images/gacha/view-items-hover.jpg'
 	import imgViewItems from '$lib/images/gacha/view-items.jpg'
 	import { cn } from '$shared/lib'
 	import { GachaResultItem, GachaSelectButton } from '$widgets/gacha'
 	import GachaItemPopup from '$widgets/gacha/ui/GachaItemPopup.svelte'
-	import GachaStartButtons from '$widgets/gacha/ui/GachaStartButtons.svelte'
+	import GachaStartButton from '$widgets/gacha/ui/start/GachaStartButton.svelte'
 
 	export let gachaData: GachaData
 	let isShowPopup = false
 
 	const onClickShowItems = () => {
 		isShowPopup = true
-		gachaStore.selectGacha(null)
 	}
 	const onClickPopupClose = () => {
 		isShowPopup = false
@@ -35,27 +35,41 @@
 	<div
 		class={cn(
 			'rounded-md transition-all hover:scale-[1.1]',
-			$gachaStore.clickedGacha?.id === gachaData.id
-				? 'bg-gacha-button-selected neon-gacha-gold scale-[1.1] border border-gacha-gold text-[#E6E1CE]'
-				: 'bg-gacha-button'
+			$gachaStore.currentGacha?.id === gachaData.id
+				? 'bg-gacha-card-selected neon-gacha-gold scale-[1.1] border border-gacha-gold text-[#E6E1CE]'
+				: 'bg-gacha-card'
 		)}
 	>
 		<GachaSelectButton {gachaData} {gachaType} />
 		<div class="flex p-2">
 			<button
-				class="ml-auto"
+				class="group ml-auto"
 				on:click={onClickShowItems}
 				title="보상 자세히 보기"
 			>
-				<img src={imgViewItems} alt="" />
+				<img
+					src={imgViewItems}
+					alt=""
+					width="25"
+					height="25"
+					class="group-hover:hidden"
+				/>
+				<img
+					src={imgViewItemsHover}
+					alt=""
+					width="25"
+					height="25"
+					class="hidden group-hover:block"
+				/>
 			</button>
 		</div>
 	</div>
-	{#if $gachaStore.clickedGacha?.id === gachaData.id}
-		<div class="flex-center -ml-[5%] mt-10 w-[110%] gap-[10%] text-sm">
-			<GachaStartButtons />
-		</div>
-	{/if}
+	<div class="flex-center -ml-[5%] mt-8 w-[110%] gap-[10%]">
+		{#if $gachaStore.currentGacha?.id === gachaData.id}
+			<GachaStartButton count={1} />
+			<GachaStartButton count={10} />
+		{/if}
+	</div>
 </div>
 {#if isShowPopup}
 	<GachaItemPopup
@@ -64,8 +78,8 @@
 		{gachaType}
 	>
 		<ul class="flex flex-col gap-4">
-			{#each gachaData.gachaItems as gachaItem (gachaItem.id)}
-				<GachaResultItem {gachaItem} />
+			{#each gachaData.gachaItems as gachaResult (gachaResult.id)}
+				<GachaResultItem {gachaResult} />
 			{/each}
 		</ul>
 	</GachaItemPopup>

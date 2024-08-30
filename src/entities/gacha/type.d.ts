@@ -1,13 +1,13 @@
-export type GachaItem = {
+export type GachaItemData = {
 	id: number
 	name: string
 }
 
-export type GachaResultItem = {
+export type GachaResultData = {
 	id: number
 	probability: number
 	rarity: number
-	item: GachaItem
+	item: GachaItemData
 }
 
 export type GachaData = {
@@ -15,5 +15,5 @@ export type GachaData = {
 	name: string
 	ticketCost: number
 	maxDrawCount: number
-	gachaItems: GachaResultItem[]
+	gachaItems: GachaResultData[]
 }
