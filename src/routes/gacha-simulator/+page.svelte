@@ -67,6 +67,10 @@
 	<section
 		class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200"
 	>
+		<p class="absolute left-0 top-5 w-full text-center text-xs text-[#db5841]">
+			❗ 뽑기 시뮬레이션 확률 오류로 인해 일부 아이템이 나오지 않는 현상이 있어
+			수정하였습니다. (오후 8:10)
+		</p>
 		<div class="relative">
 			<div class="flex-center">
 				<video
