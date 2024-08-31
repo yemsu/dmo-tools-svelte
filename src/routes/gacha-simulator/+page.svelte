@@ -43,7 +43,15 @@
 	onMount(() => {
 		checkMobile()
 		window.addEventListener('resize', checkMobile)
+
+		window.addEventListener('beforeunload', (event: BeforeUnloadEvent) => {
+			if ($gachaStore.inventory.length > 0) {
+				event.preventDefault()
+				event.returnValue = '' //for chrome
+			}
+		})
 	})
+
 	onDestroy(() => {
 		if (import.meta.env.SSR) return
 		window.removeEventListener('resize', checkMobile)
