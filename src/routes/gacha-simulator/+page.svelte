@@ -36,7 +36,6 @@
 	}
 
 	const checkMobile = () => {
-		console.log('checkMobile')
 		isMobile = window.innerWidth <= 530
 	}
 
