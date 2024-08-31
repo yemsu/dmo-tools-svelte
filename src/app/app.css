@@ -222,6 +222,14 @@ button:focus:not(:focus-visible) {
 	.neon-gacha-gold {
 		filter: drop-shadow(0 0 10px rgb(222 173 0 / 30%)) sepia(0.2);
 	}
+	.neon-best-item {
+		@apply border border-white;
+		filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
+	}
+	.animation-flare {
+		animation: 40s linear 0s flare;
+		animation-iteration-count: infinite;
+	}
 	.border-gacha-title {
 		@apply border-transparent;
 		border-image: linear-gradient(
@@ -232,5 +240,19 @@ button:focus:not(:focus-visible) {
 				transparent
 			)
 			1;
+	}
+}
+@keyframes flare {
+	25% {
+		transform: translate(-50%, -50%) rotate(80deg) scale(0.8);
+	}
+	50% {
+		transform: translate(-50%, -50%) rotate(160deg) scale(1.1);
+	}
+	75% {
+		transform: translate(-50%, -50%) rotate(240deg) scale(0.9);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
 	}
 }

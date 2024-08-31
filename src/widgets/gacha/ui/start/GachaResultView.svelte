@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { gachaStore } from '$entities/gacha'
 	import { cn } from '$shared/lib'
-	import { Section } from '$shared/section'
 	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
 	import GachaTitle from '$widgets/gacha/ui/GachaTitle.svelte'
 	import GachaButton from '$widgets/gacha/ui/start/GachaButton.svelte'
@@ -9,7 +8,6 @@
 	import { createEventDispatcher } from 'svelte'
 
 	$: resultLength = $gachaStore.gachaResults.length
-	$: bestItemId = $gachaStore.currentGacha?.gachaItems[0].id
 
 	const dispatch = createEventDispatcher()
 
@@ -35,7 +33,6 @@
 				<li
 					class={cn(
 						'flex-center group relative',
-						bestItemId === resultItem.id && 'border-2 border-[magenta]',
 						(i === 4 || i === 5) && 'col-span-2'
 					)}
 				>

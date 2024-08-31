@@ -33,7 +33,7 @@
 
 	$: startGacha = async () => {
 		gachaItemIdList = []
-		let resultIndexList: number[] = []
+		const resultIndexList: number[] = []
 		if (!currentGachaItems) {
 			alert(ALERT.NO_SELECTED_GACHA)
 			return
@@ -45,7 +45,7 @@
 		})
 		for (let i = 0; i < count; i++) {
 			const resultIndex = await getRandomNumber(gachaItemIdList)!
-			resultIndexList = [...resultIndexList, resultIndex]
+			resultIndexList.push(resultIndex)
 		}
 		const newGachaResults = resultIndexList.map((resultIndex) => {
 			const resultItem = currentGachaItems.find(
