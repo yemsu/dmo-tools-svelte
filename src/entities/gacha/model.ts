@@ -10,12 +10,16 @@ type GachaStore = {
 	results: GachaResultData[]
 	inventory: InventoryItem[]
 	isLoadingVolumeOn: boolean
+	myPlayCounts: Record<number, number>
 }
+
+const defaultPlayedCounts = { 1: 0, 2: 0 }
 
 const createGachaStore = () => {
 	const { subscribe, update } = writable<GachaStore>({
 		currentGacha: null,
 		results: [],
+		myPlayCounts: defaultPlayedCounts,
 		inventory: [],
 		isLoadingVolumeOn: true
 	})
@@ -54,8 +58,21 @@ const createGachaStore = () => {
 				isLoadingVolumeOn: !prev.isLoadingVolumeOn
 			}))
 		},
+		addPlayedCount: (gachaId: number, count: number) => {
+			update((prev) => ({
+				...prev,
+				myPlayCounts: {
+					...prev.myPlayCounts,
+					[gachaId]: prev.myPlayCounts[gachaId] + count
+				}
+			}))
+		},
 		cleanInventory: () => {
-			update((prev) => ({ ...prev, inventory: [] }))
+			update((prev) => ({
+				...prev,
+				myPlayCounts: defaultPlayedCounts,
+				inventory: []
+			}))
 		}
 	}
 }

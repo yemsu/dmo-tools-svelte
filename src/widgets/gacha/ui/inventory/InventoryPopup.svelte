@@ -7,11 +7,12 @@
 	import { createEventDispatcher } from 'svelte'
 	import { toast } from '$shared/toast'
 	import { TOAST } from '$shared/config'
+	import { page } from '$app/stores'
 
 	const dispatch = createEventDispatcher()
 
 	const cleanInventory = () => {
-		const isConfirm = confirm('가방을 비우시겠습니까?')
+		const isConfirm = confirm('뽑기 결과를 초기화 하시겠습니까?')
 		if (!isConfirm) return
 		gachaStore.cleanInventory()
 		toast.on(TOAST.GACHA.CLEAN_INVENTORY)
@@ -36,11 +37,22 @@
 		가방
 	</h2>
 	<div
-		class="flex justify-end border-b border-primary-5 bg-primary-10/20 p-1.5"
+		class="flex items-center justify-between border-b border-primary-5 bg-primary-10/20 p-1.5"
 	>
+		<div class="flex gap-2 text-xs2 text-gray-300">
+			<h3>뽑기 횟수 :</h3>
+			<dl class="flex gap-3">
+				{#each $page.data.gachaList as gacha (gacha.id)}
+					<div class="flex gap-1">
+						<dt>{gacha.name}</dt>
+						<dd>{$gachaStore.myPlayCounts[gacha.id]}회</dd>
+					</div>
+				{/each}
+			</dl>
+		</div>
 		<button
 			type="button"
-			class="rounded-sm bg-primary-40/20 p-1 pb-0.5 leading-none"
+			class="ml-auto rounded-sm bg-primary-40/20 p-1 pb-0.5 leading-none"
 			title="가방 비우기"
 			on:click={cleanInventory}
 		>

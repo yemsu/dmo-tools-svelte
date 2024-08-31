@@ -63,6 +63,11 @@
 			return resultItem
 		})
 		gachaStore.setResults(newGachaResults)
+		$gachaStore.currentGacha &&
+			gachaStore.addPlayedCount(
+				$gachaStore.currentGacha.id,
+				newGachaResults.length
+			)
 		dispatch('start')
 	}
 </script>
