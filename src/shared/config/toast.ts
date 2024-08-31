@@ -6,5 +6,8 @@ export const TOAST = {
 	RESIGN: {
 		SUCCESS: '회원 탈퇴가 완료되었습니다.',
 		FAIL: '회원 탈퇴에 실패하였습니다. 관리자에게 문의해주세요.'
+	},
+	GACHA: {
+		CLEAN_INVENTORY: '획득한 아이템이 모두 제거되었습니다.'
 	}
 }

@@ -1,0 +1,40 @@
+<script lang="ts">
+	import { cn } from '$shared/lib'
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+
+	let popupElement: HTMLElement
+
+	const dispatch = createEventDispatcher()
+	const { class: className } = $$restProps
+
+	const handleOutsideClick = (e: MouseEvent) => {
+		const target = e.target as HTMLElement
+		if (!popupElement.contains(target)) {
+			dispatch('close')
+		}
+	}
+
+	onMount(() => {
+		setTimeout(() => {
+			document.addEventListener('click', handleOutsideClick)
+		}, 100)
+	})
+
+	onDestroy(() => {
+		document.removeEventListener('click', handleOutsideClick)
+	})
+</script>
+
+<section
+	bind:this={popupElement}
+	class={cn('position-center h-[420px] w-full max-w-[500px]', className)}
+>
+	<slot></slot>
+	<button
+		class="absolute right-2 top-2 text-[yellow]"
+		on:click={() => dispatch('close')}
+		title="닫기"
+	>
+		<iconify-icon icon="mdi:close" width={20} height={20} />
+	</button>
+</section>

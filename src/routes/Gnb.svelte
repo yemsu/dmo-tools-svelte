@@ -45,6 +45,15 @@
 				height: 19,
 				class: '-ml-[1px]'
 			}
+		},
+		{
+			type: 'GACHA',
+			icon: {
+				name: 'mingcute:random-line',
+				width: 19,
+				height: 19,
+				class: '-ml-[1px]'
+			}
 		}
 	]
 </script>
