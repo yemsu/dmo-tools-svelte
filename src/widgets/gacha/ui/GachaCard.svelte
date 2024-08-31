@@ -7,6 +7,7 @@
 	import { GachaSelectButton } from '$widgets/gacha'
 	import ProbabilityPopup from '$widgets/gacha/ui/ProbabilityPopup.svelte'
 	import GachaStartButton from '$widgets/gacha/ui/start/GachaStartButton.svelte'
+	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData
 	let isShowPopup = false
@@ -28,6 +29,11 @@
 			default:
 				return 'unknown gacha'
 		}
+	}
+
+	const dispatch = createEventDispatcher()
+	const onStart = () => {
+		dispatch('start')
 	}
 	$: gachaType = getGachaType(gachaData.name)
 </script>
@@ -67,8 +73,8 @@
 	</div>
 	<div class="flex-center -ml-[5%] mt-8 w-[110%] gap-[10%]">
 		{#if $gachaStore.currentGacha?.id === gachaData.id}
-			<GachaStartButton count={1} />
-			<GachaStartButton count={10} />
+			<GachaStartButton count={1} on:start={onStart} />
+			<GachaStartButton count={10} on:start={onStart} />
 		{/if}
 	</div>
 </div>

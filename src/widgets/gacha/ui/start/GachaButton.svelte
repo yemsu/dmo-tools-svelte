@@ -9,6 +9,6 @@
 	}
 </script>
 
-<button class="{bgStyles[bg]} outline-gacha-call w-[45%] py-1 text-xs" on:click>
+<button class="{bgStyles[bg]} text-shadow w-[45%] py-1 text-xs" on:click>
 	<slot></slot>
 </button>

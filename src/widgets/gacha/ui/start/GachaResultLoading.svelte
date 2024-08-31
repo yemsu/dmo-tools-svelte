@@ -23,7 +23,7 @@
 
 	const videoSrc = () => {
 		const maxRarity = Math.max(
-			...$gachaStore.gachaResults.map(({ rarity }) => rarity)
+			...$gachaStore.results.map(({ rarity }) => rarity)
 		)
 		switch (maxRarity) {
 			case 3:
@@ -59,7 +59,7 @@
 
 <div
 	class={cn(
-		'flex-col-center absolute left-0 top-0 size-full bg-black transition-all duration-500',
+		'flex-col-center absolute left-0 top-0 z-20 size-full bg-black transition-all duration-500',
 		isVideoFadeOut && 'scale-150 opacity-0 blur-xl'
 	)}
 >

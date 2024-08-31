@@ -173,6 +173,12 @@ button:focus:not(:focus-visible) {
 	.bg-gacha-popup {
 		@apply bg-gradient-to-b from-gacha-30 to-black;
 	}
+	.bg-gacha-common {
+		@apply bg-gradient-to-b from-[#082036] to-[#071C30];
+	}
+	.bg-gr-b {
+		@apply bg-gradient-to-b from-transparent to-[#00000033];
+	}
 	.bg-gacha-card {
 		background: linear-gradient(
 			to bottom right,
@@ -216,7 +222,7 @@ button:focus:not(:focus-visible) {
 		@apply border-t border-[#4b1e29] bg-gradient-to-br from-[#6D424A] to-[#97200C];
 		box-shadow: inset 1px 1px 2px #825767;
 	}
-	.outline-gacha-call {
+	.text-shadow {
 		text-shadow: 1px 1px 2px black;
 	}
 	.neon-gacha-gold {

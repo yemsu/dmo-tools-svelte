@@ -1,39 +1,22 @@
 <script lang="ts">
 	import type { GachaData } from '$entities/gacha'
 	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
-	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+	import { GachaPopup } from '$widgets/gacha'
+	import { createEventDispatcher } from 'svelte'
 
 	export let gachaType: string
 	export let gachaData: GachaData
-	let popupElement: HTMLElement
 
 	const dispatch = createEventDispatcher()
 
 	const closePopup = () => {
 		dispatch('close')
 	}
-
-	const handleOutsideClick = (e: MouseEvent) => {
-		const target = e.target as HTMLElement
-		if (!popupElement.contains(target)) {
-			dispatch('close')
-		}
-	}
-
-	onMount(() => {
-		setTimeout(() => {
-			document.addEventListener('click', handleOutsideClick)
-		}, 500)
-	})
-
-	onDestroy(() => {
-		document.removeEventListener('click', handleOutsideClick)
-	})
 </script>
 
-<section
-	bind:this={popupElement}
-	class="position-center bg-gacha-popup flex h-[420px] w-full max-w-[500px] flex-col gap-1 px-2 pb-2 pt-3"
+<GachaPopup
+	on:close={closePopup}
+	class="bg-gacha-popup flex flex-col gap-1 px-2 pb-2 pt-3"
 >
 	<div class="flex-col-center gap-3 text-center">
 		<h2 class="font-ns-bold text-lg2 text-[yellow]">확률 정보</h2>
@@ -63,11 +46,4 @@
 			</ul>
 		</div>
 	</section>
-	<button
-		class="absolute right-2 top-2 text-[yellow]"
-		on:click={closePopup}
-		title="닫기"
-	>
-		<iconify-icon icon="mdi:close" width={20} height={20} />
-	</button>
-</section>
+</GachaPopup>

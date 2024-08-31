@@ -17,3 +17,8 @@ export type GachaData = {
 	maxDrawCount: number
 	gachaItems: GachaResultData[]
 }
+
+export type InventoryItem = {
+	item: GachaItemData
+	count: number
+}

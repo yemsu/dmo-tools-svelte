@@ -3,6 +3,7 @@
 	import { ALERT } from '$shared/config'
 	import GachaButton from '$widgets/gacha/ui/start/GachaButton.svelte'
 	import { error } from '@sveltejs/kit'
+	import { createEventDispatcher } from 'svelte'
 
 	export let count: 1 | 10
 	export let isRetry: boolean = false
@@ -11,6 +12,8 @@
 	const SETUP_ITEM_LENGTH = 100 / PROBABILITY_MIN
 	let gachaItemIdList: GachaItemData['id'][] = []
 	$: currentGachaItems = $gachaStore.currentGacha?.gachaItems
+
+	const dispatch = createEventDispatcher()
 
 	const createRandomNumber = (gachaItemIdList: GachaItemData['id'][]) => {
 		const randomNum = Math.floor(Math.random() * (SETUP_ITEM_LENGTH - 1))
@@ -59,7 +62,8 @@
 			}
 			return resultItem
 		})
-		gachaStore.setGachaResults(newGachaResults)
+		gachaStore.setResults(newGachaResults)
+		dispatch('start')
 	}
 </script>
 
