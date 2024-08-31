@@ -25,6 +25,14 @@
 		}
 	}
 
+	const shuffleArray = <T,>(array: T[]): T[] => {
+		for (let i = array.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1))
+			;[array[i], array[j]] = [array[j], array[i]]
+		}
+		return array
+	}
+
 	const getRandomNumber = (gachaItemIdList: GachaItemData['id'][]) => {
 		return new Promise<number>((resolve) => {
 			const randomNumber = createRandomNumber(gachaItemIdList)
@@ -36,7 +44,7 @@
 
 	$: startGacha = async () => {
 		gachaItemIdList = []
-		const resultIndexList: number[] = []
+		const resultItemIdList: number[] = []
 		if (!currentGachaItems) {
 			alert(ALERT.NO_SELECTED_GACHA)
 			return
@@ -46,18 +54,14 @@
 			const needSetupCount = probability / PROBABILITY_MIN
 			gachaItemIdList.push(...new Array(needSetupCount).fill(id))
 		})
-		for (let i = 0; i < count; i++) {
-			const resultIndex = await getRandomNumber(gachaItemIdList)!
-			resultIndexList.push(resultIndex)
-		}
-		const newGachaResults = resultIndexList.map((resultIndex) => {
-			const resultItem = currentGachaItems.find(
-				({ id }) => gachaItemIdList[resultIndex] === id
-			)
+		gachaItemIdList = shuffleArray(gachaItemIdList)
+		resultItemIdList.push(...gachaItemIdList.slice(0, count))
+		const newGachaResults = resultItemIdList.map((resultId) => {
+			const resultItem = currentGachaItems.find(({ id }) => resultId === id)
 			if (!resultItem) {
 				error(
 					400,
-					`ERROR: getGachaItem - 결과 index인 ${resultIndex}에 맞는 item을 찾을 수 없습니다.`
+					`ERROR: getGachaItem - 결과 id인 ${resultId}에 맞는 item을 찾을 수 없습니다.`
 				)
 			}
 			return resultItem
