@@ -49,7 +49,7 @@
 		>
 			<GachaTitle>소환할 데이터를 선택하세요.</GachaTitle>
 			<div>
-				<div class="flex gap-6">
+				<div class="flex gap-10">
 					{#each $page.data.gachaList as gachaData (gachaData.id)}
 						<GachaCard {gachaData} />
 					{/each}

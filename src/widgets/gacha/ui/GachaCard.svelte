@@ -4,8 +4,8 @@
 	import imgViewItemsHover from '$lib/images/gacha/view-items-hover.jpg'
 	import imgViewItems from '$lib/images/gacha/view-items.jpg'
 	import { cn } from '$shared/lib'
-	import { GachaResultItem, GachaSelectButton } from '$widgets/gacha'
-	import GachaItemPopup from '$widgets/gacha/ui/GachaItemPopup.svelte'
+	import { GachaSelectButton } from '$widgets/gacha'
+	import ProbabilityPopup from '$widgets/gacha/ui/ProbabilityPopup.svelte'
 	import GachaStartButton from '$widgets/gacha/ui/start/GachaStartButton.svelte'
 
 	export let gachaData: GachaData
@@ -13,6 +13,7 @@
 
 	const onClickShowItems = () => {
 		isShowPopup = true
+		gachaStore.selectGacha(gachaData)
 	}
 	const onClickPopupClose = () => {
 		isShowPopup = false
@@ -72,15 +73,5 @@
 	</div>
 </div>
 {#if isShowPopup}
-	<GachaItemPopup
-		on:close={onClickPopupClose}
-		gachaName={gachaData.name}
-		{gachaType}
-	>
-		<ul class="flex flex-col gap-4">
-			{#each gachaData.gachaItems as gachaResult (gachaResult.id)}
-				<GachaResultItem {gachaResult} />
-			{/each}
-		</ul>
-	</GachaItemPopup>
+	<ProbabilityPopup on:close={onClickPopupClose} {gachaData} {gachaType} />
 {/if}

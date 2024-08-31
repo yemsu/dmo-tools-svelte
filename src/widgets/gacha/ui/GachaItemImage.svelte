@@ -1,29 +1,18 @@
 <script lang="ts">
-	import BestItemGlowImage from '$lib/images/gacha/best-item-glow-1.png'
-	import { gachaStore, type GachaItemData } from '$entities/gacha'
+	import { type GachaItemData } from '$entities/gacha'
 	import { cn } from '$shared/lib'
 
 	export let id: GachaItemData['id']
-	$: isBestItem = $gachaStore.currentGacha?.gachaItems[0].id === id
+	const { class: className, ...restProps } = $$restProps
 </script>
 
-<span class={cn('relative', isBestItem && 'z-10')}>
-	{#if isBestItem}
-		<img
-			src={BestItemGlowImage}
-			alt=""
-			class="position-center animation-flare -z-[1] max-w-none"
-			width="220"
-			height="220"
-		/>
-	{/if}
-	{#await import(`$lib/images/gacha/items/item-${id}.jpg`) then { default: src }}
-		<img
-			{src}
-			alt=""
-			width="51"
-			height="53"
-			class={cn(isBestItem && 'neon-best-item ')}
-		/>
-	{/await}
-</span>
+{#await import(`$lib/images/gacha/items/item-${id}.jpg`) then { default: src }}
+	<img
+		{src}
+		alt=""
+		width="51"
+		height="53"
+		class={cn(className)}
+		{...restProps}
+	/>
+{/await}

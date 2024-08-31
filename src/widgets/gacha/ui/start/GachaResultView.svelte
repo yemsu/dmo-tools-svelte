@@ -4,6 +4,7 @@
 	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
 	import GachaTitle from '$widgets/gacha/ui/GachaTitle.svelte'
 	import GachaButton from '$widgets/gacha/ui/start/GachaButton.svelte'
+	import GachaResultItemImage from '$widgets/gacha/ui/start/GachaResultItemImage.svelte'
 	import GachaStartButton from '$widgets/gacha/ui/start/GachaStartButton.svelte'
 	import { createEventDispatcher } from 'svelte'
 
@@ -36,7 +37,7 @@
 						(i === 4 || i === 5) && 'col-span-2'
 					)}
 				>
-					<GachaItemImage id={resultItem.item.id}></GachaItemImage>
+					<GachaResultItemImage id={resultItem.item.id}></GachaResultItemImage>
 					<span
 						class="absolute bottom-0 left-1/2 z-10 hidden translate-y-1/2 whitespace-nowrap bg-[#1c1b36dd] p-3 text-xs group-hover:block"
 					>
