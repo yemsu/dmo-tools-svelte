@@ -28,6 +28,6 @@
 		<span>{gachaData.name}</span>
 	</h2>
 	<div>
-		<img src={getGachaImage(gachaData.id)} alt="" width="152" height="143" />
+		<img src={getGachaImage(gachaData.id)} alt="" width="152" height="138" />
 	</div>
 </button>
