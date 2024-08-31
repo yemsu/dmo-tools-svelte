@@ -4,12 +4,14 @@ import { writable } from 'svelte/store'
 type GachaStore = {
 	currentGacha: GachaData | null
 	gachaResults: GachaResultData[]
+	isLoadingVolumeOn: boolean
 }
 
 const createGachaStore = () => {
 	const { subscribe, update } = writable<GachaStore>({
 		currentGacha: null,
-		gachaResults: []
+		gachaResults: [],
+		isLoadingVolumeOn: true
 	})
 	return {
 		subscribe,
@@ -18,6 +20,12 @@ const createGachaStore = () => {
 		},
 		setGachaResults: (newResults: GachaResultData[]) => {
 			update((prev) => ({ ...prev, gachaResults: newResults }))
+		},
+		toggleLoadingVolume: () => {
+			update((prev) => ({
+				...prev,
+				isLoadingVolumeOn: !prev.isLoadingVolumeOn
+			}))
 		}
 	}
 }
