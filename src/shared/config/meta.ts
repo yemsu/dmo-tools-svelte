@@ -30,5 +30,9 @@ export const META = {
 	SAVE_URL: {
 		TITLE: `URL 데이터 저장하기 | ${META_COMMON.TITLE}`,
 		DESC: META_COMMON.TITLE
+	},
+	GACHA_SIMULATOR: {
+		TITLE: `뽑기 시뮬레이터 | ${META_COMMON.TITLE}`,
+		DESC: `${META_COMMON.TITLE} 뽑기 시뮬레이터로 운을 미리 시험해보세요!`
 	}
 }
