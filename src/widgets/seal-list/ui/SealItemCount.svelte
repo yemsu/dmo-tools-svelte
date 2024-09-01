@@ -71,9 +71,7 @@
 				size="xs"
 				type="number"
 				id={`count-${sealId}`}
-				class={cn(
-					'w-full rounded-sm bg-primary-20 px-1 py-[1px] text-xs text-white'
-				)}
+				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px]')}
 				placeholder="씰 개수"
 				bind:value={inputValue}
 				on:input={checkCountInputValue}

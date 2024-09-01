@@ -16,7 +16,11 @@
 	$: sealPrice = getSealPrice(sealPrices, seal.id)
 </script>
 
-<article class={cn('relative flex flex-col justify-center text-center')}>
+<article
+	class={cn(
+		'relative flex flex-col justify-center text-center text-xs2 md:text-xs'
+	)}
+>
 	<div
 		class={cn(
 			'group relative flex items-center justify-center',

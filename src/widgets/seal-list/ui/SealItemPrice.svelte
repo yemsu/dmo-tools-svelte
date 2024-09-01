@@ -78,9 +78,7 @@
 				bind:inputElement
 				type="number"
 				id={`price-${sealId}`}
-				class={cn(
-					'w-full rounded-sm bg-primary-20 px-1 py-[1px] text-xs text-white'
-				)}
+				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px] text-white')}
 				step="0.1"
 				placeholder="씰 가격"
 				size="xs"

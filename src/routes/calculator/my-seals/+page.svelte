@@ -69,50 +69,48 @@
 	<meta name="description" content={META.MY.DESC} />
 </svelte:head>
 
-<Section>
-	<h2 class="ir">{MENUS.MY.name} 씰</h2>
-	{#if $myStats}
-		<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
-	{/if}
+<h2 class="ir">보유 씰</h2>
+{#if $myStats}
+	<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
+{/if}
 
-	<Tabs>
-		{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
-			<Tab
-				class={statTypeOptionStyles[statTypeOption]}
-				isActive={statTypeSelected === statTypeOption}
-				on:click={() => onClickStatType(statTypeOption)}
-				title={statTypeOption === 'ALL'
-					? '전체'
-					: STATS.find(({ type }) => type === statTypeOption)?.name}
-			>
-				{statTypeOption}
-			</Tab>
-		{/each}
-	</Tabs>
-	<div class="flex flex-1 flex-col overflow-hidden">
-		<section class="flex flex-1 flex-col overflow-hidden">
-			<h2 class="ir">
-				보유 씰 리스트({statTypeSelected}):
-				{#if mySealsFiltered}
-					총 {mySealsFiltered.length}개
-				{/if}
-			</h2>
-			{#if $user && mySealsFiltered && mySealsFiltered.length > 0}
-				<MySealList {mySealsFiltered} />
-			{:else if mySealsFiltered}
-				<NoData>
-					보유 씰이 아직 없습니다. <br /> 씰 설정 메뉴에서 보유하고 있는 씰의
-					개수를 업데이트 해주세요! <br /><br />
-					<span
-						class="flex-center flex-wrap gap-2 rounded-md bg-primary-50 p-2 sm:flex-col"
-					>
-						<span class="font-extrabold text-primary-5">
-							설정해놨던 보유 씰이 모두 사라졌나요?
-						</span>
-						<SaveUrlLink />
-					</span>
-				</NoData>
+<Tabs>
+	{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
+		<Tab
+			class={statTypeOptionStyles[statTypeOption]}
+			isActive={statTypeSelected === statTypeOption}
+			on:click={() => onClickStatType(statTypeOption)}
+			title={statTypeOption === 'ALL'
+				? '전체'
+				: STATS.find(({ type }) => type === statTypeOption)?.name}
+		>
+			{statTypeOption}
+		</Tab>
+	{/each}
+</Tabs>
+<div class="flex flex-1 flex-col overflow-hidden">
+	<section class="flex flex-1 flex-col overflow-hidden">
+		<h2 class="ir">
+			보유 씰 리스트({statTypeSelected}):
+			{#if mySealsFiltered}
+				총 {mySealsFiltered.length}개
 			{/if}
-		</section>
-	</div>
-</Section>
+		</h2>
+		{#if $user && mySealsFiltered && mySealsFiltered.length > 0}
+			<MySealList {mySealsFiltered} />
+		{:else if mySealsFiltered}
+			<NoData>
+				보유 씰이 아직 없습니다. <br /> 씰 설정 메뉴에서 보유하고 있는 씰의
+				개수를 업데이트 해주세요! <br /><br />
+				<span
+					class="flex-center flex-wrap gap-2 rounded-md bg-primary-50 p-2 sm:flex-col"
+				>
+					<span class="font-extrabold text-primary-5">
+						설정해놨던 보유 씰이 모두 사라졌나요?
+					</span>
+					<SaveUrlLink />
+				</span>
+			</NoData>
+		{/if}
+	</section>
+</div>

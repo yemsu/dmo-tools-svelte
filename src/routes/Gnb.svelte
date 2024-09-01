@@ -12,15 +12,6 @@
 
 	const menuDataList: MenuData[] = [
 		{
-			type: 'SETTING',
-			icon: {
-				name: 'streamline:cards',
-				width: 18,
-				height: 18,
-				class: 'mb-[2px]'
-			}
-		},
-		{
 			type: 'CALC',
 			icon: {
 				name: 'circum:calculator-2',
@@ -30,20 +21,12 @@
 			}
 		},
 		{
-			type: 'MY',
-			icon: {
-				name: 'ph:treasure-chest-light',
-				width: 21,
-				height: 21
-			}
-		},
-		{
 			type: 'RAID',
 			icon: {
 				name: 'ph:timer',
 				width: 19,
 				height: 19,
-				class: '-ml-[1px]'
+				class: '-ml-[1px] pt-[4px] pb-[1px]'
 			}
 		},
 		{
@@ -52,31 +35,36 @@
 				name: 'mingcute:random-line',
 				width: 19,
 				height: 19,
-				class: '-ml-[1px]'
+				class: '-ml-[1px] pt-[4px] pb-[1px]'
 			}
 		}
 	]
+
+	$: getIsActive = (menuType: MenuType) =>
+		$page.url.pathname === MENUS[menuType].path
 </script>
 
 <div class="h-gnb-h w-full">
-	<Inner size="full" class="flex  items-center">
-		<nav class="flex-1 rounded-full bg-gray-800">
+	<Inner size="full" class="flex-center md:gap-5">
+		<nav class="flex-center flex-1 rounded-t-[20px] bg-gray-800">
 			<h2 class="ir">글로벌 네비게이션</h2>
 			<ul
 				class={cn(
-					'flex h-gnb-h w-full items-center justify-evenly whitespace-nowrap p-2',
+					'flex h-gnb-h w-full items-center justify-between whitespace-nowrap p-1 md:p-1.5',
+					'max-w-[600px]',
 					'text-center text-xs4 md:text-sm'
 				)}
 			>
 				{#each menuDataList as menuData (menuData.type)}
-					<li>
+					{@const isActive = getIsActive(menuData.type)}
+					<li class={cn('h-full', isActive ? 'w-[45%] md:w-[35%]' : 'flex-1')}>
 						<a
 							href={MENUS[menuData.type].path}
 							class={cn(
-								'flex-col-center leading-none transition-opacity md:flex-row md:gap-2',
-								$page.url.pathname === MENUS[menuData.type].path
-									? 'h-full flex-row gap-1 rounded-full bg-primary-20 px-3 py-2 text-xs font-semibold opacity-100 md:gap-2 md:px-6 md:text-sm'
-									: 'gap-[2px] px-2 opacity-50 hover:opacity-100'
+								'flex-col-center h-full rounded-t-[15px] px-1 leading-none transition-opacity md:flex-row md:gap-2',
+								isActive
+									? 'flex-row gap-1 bg-primary-20 py-2 text-xs font-semibold opacity-100 md:gap-2 md:px-8 md:text-sm'
+									: 'gap-[0.4em] opacity-50 hover:opacity-100'
 							)}
 						>
 							<iconify-icon
@@ -85,12 +73,7 @@
 								height={menuData.icon.height}
 								class={cn(menuData.icon.class)}
 							/>
-							<span>
-								{MENUS[menuData.type].name}
-								{#if menuData.type === 'MY'}
-									<span>({$mySealCounts.length})</span>
-								{/if}
-							</span>
+							{MENUS[menuData.type].name}
 						</a>
 					</li>
 				{/each}
@@ -101,7 +84,7 @@
 				href="https://open.kakao.com/o/skcN4IDg"
 				target="_blank"
 				title="새창(오픈채팅)"
-				class="flex-col-center gap-[2px] px-1.5 opacity-50 transition-opacity hover:opacity-100 md:gap-0.5 md:px-3"
+				class="flex-col-center gap-[2px] px-2 opacity-50 transition-opacity hover:opacity-100 md:gap-0.5 md:px-3"
 			>
 				<iconify-icon
 					icon="hugeicons:customer-support"

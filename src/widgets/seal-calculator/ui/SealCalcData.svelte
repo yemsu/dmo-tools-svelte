@@ -16,12 +16,12 @@
 	]
 </script>
 
-<div class="flex-col-center w-full rounded-sm bg-white/10 p-2">
+<div class="flex-col-center w-full rounded-sm bg-white/10 p-1 md:p-2">
 	<dl class="flex flex-col gap-1 whitespace-nowrap leading-none">
 		{#each datalist as data (data.key)}
 			<div class="flex items-center gap-1">
-				<dt class="text-xs2 text-gray-200">{data.text}</dt>
-				<dd class="text-point">
+				<dt class="text-xs2 text-gray-200 sm:text-xs3">{data.text}</dt>
+				<dd class="text-point sm:text-xs2">
 					{#if data.key === 'willGetStat' && isPercentType}
 						{effData[data.key] / 100}%
 					{:else}

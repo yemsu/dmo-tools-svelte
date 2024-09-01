@@ -1,7 +1,8 @@
 export const PATH = {
-	SETTING_SEALS: '/',
+	MAIN: '/',
+	SETTING_SEALS: '/calculator/setting-seals',
 	CALCULATOR: '/calculator',
-	MY_SEALS: '/my/seals',
+	MY_SEALS: '/calculator/my-seals',
 	RAID_TIMER: '/raid-timer',
 	SAVE_URL: '/save-url',
 	GACHA: '/gacha-simulator',

@@ -15,7 +15,7 @@
 		sm: 'px-2 py-1 text-xs',
 		md: 'min-w-[3.5em] px-2 py-1 text-md',
 		'md-lg': 'min-w-[3.5em] h-[30px] px-2',
-		lg: 'px-[1em] py-[0.5em] text-md min-w-[5em] h-input-h'
+		lg: 'px-[1em] py-[0.5em] text-xs md:text-md min-w-[5em] h-input-h'
 	}
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
 </script>
