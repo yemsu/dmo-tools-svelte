@@ -18,5 +18,8 @@
 			height="220"
 		/>
 	{/if}
-	<GachaItemImage {id} class={cn(isBestItem && 'neon-best-item sm:w-[40px]')} />
+	<GachaItemImage
+		{id}
+		class={cn('sm:w-[40px]', isBestItem && 'neon-best-item')}
+	/>
 </span>

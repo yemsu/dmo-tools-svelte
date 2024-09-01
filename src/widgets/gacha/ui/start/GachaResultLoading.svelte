@@ -63,7 +63,7 @@
 		isVideoFadeOut && 'scale-150 opacity-0 blur-xl'
 	)}
 >
-	<div class="relative w-full">
+	<div class="relative w-full overflow-hidden">
 		<div class="flex-center">
 			<video
 				bind:this={videoElement}
@@ -74,7 +74,7 @@
 			</video>
 		</div>
 		<button
-			class="bg-gacha-skip-loading absolute right-3 top-2 w-[80px] py-1.5 text-xs"
+			class="bg-gacha-skip-loading absolute right-3 top-4 w-[80px] py-1.5 text-xs md:top-2"
 			on:click={onVideoEnd}
 		>
 			SKIP
