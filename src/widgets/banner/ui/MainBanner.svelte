@@ -34,13 +34,15 @@
 	>
 		<div
 			class={cn(
-				'flex gap-2 px-3 sm:items-center sm:justify-center sm:px-5 sm:py-4 sm:text-center',
+				'flex gap-2 px-3 sm:items-center sm:justify-center sm:px-5 sm:py-3 sm:text-center',
 				'md:absolute md:top-0 md:h-full md:w-[25%] md:flex-col md:py-10',
 				xDir === 'left' ? 'md:right-0' : 'md:left-0 md:text-right ',
 				yDir === 'bottom' && 'md:justify-end'
 			)}
 		>
-			<Title size="md" class="text-primay-30 sm:w-[30%]">{title}</Title>
+			<Title size="md" class="text-primay-30 sm:w-[30%] sm:text-md"
+				>{title}</Title
+			>
 			<p class="text-balance break-keep text-xs text-gray-400 sm:flex-1">
 				{subTitle}
 			</p>
