@@ -5,7 +5,7 @@
 	const { class: className, ...restProps } = $$restProps
 
 	const dirStyles = {
-		hor: 'flex items-center flex-wrap h-input-h',
+		hor: 'flex items-center flex-wrap',
 		ver: 'flex flex-col justify-center'
 	}
 </script>

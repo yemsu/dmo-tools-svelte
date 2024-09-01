@@ -6,7 +6,7 @@
 	const { class: className, ...restProps } = $$restProps
 	$: commonProps = {
 		class: cn(
-			'flex-center size-full whitespace-nowrap rounded-md px-2 font-semibold transition-colors md:min-w-[45px] md:py-1.5',
+			'flex-center size-full whitespace-nowrap rounded-md px-2 font-semibold transition-colors md:min-w-[45px] md:py-1.5 h-tab-h',
 			isActive === true && 'bg-secondary-10',
 			isActive === false &&
 				'opacity-30 hover:bg-secondary-10/60 hover:opacity-100',
@@ -17,7 +17,7 @@
 	}
 </script>
 
-<li class="h-full flex-1">
+<li class="flex-1">
 	{#if tagName === 'a'}
 		<a href={restProps.href} {...commonProps}><slot></slot></a>
 	{:else}

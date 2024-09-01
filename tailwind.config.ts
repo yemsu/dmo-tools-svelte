@@ -65,7 +65,8 @@ export default {
 				'gnb-h': 'var(--gnb-h)',
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
-				'input-h': 'var(--input-h)'
+				'input-h': 'var(--input-h)',
+				'tab-h': 'var(--tab-h)'
 			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif', ...fontFamily.sans],
