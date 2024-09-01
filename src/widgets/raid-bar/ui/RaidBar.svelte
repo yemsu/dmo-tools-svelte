@@ -13,7 +13,6 @@
 		type RaidTimeData,
 		type ServerType
 	} from '$entities/raid'
-	import Badge from '$shared/badge/Badge.svelte'
 	import { _objKeys, cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import { timeSortByStartAt } from '$widgets/raid'
@@ -229,7 +228,7 @@
 						<RaidLocation location={nextRaid.location} />
 					</span>
 					<RaidNextIcon />
-					<span>
+					<span class="flex flex-wrap items-center gap-x-1 gap-y-[0.1em]">
 						<RaidAppearInfo time={nextRaid.time} />
 					</span>
 				</span>
@@ -241,11 +240,11 @@
 		<div class="flex h-full overflow-hidden rounded-br-md rounded-tr-md">
 			{#if !isSseConnected}
 				<button
-					class="flex-center h-full gap-1 bg-warning px-4"
+					class="flex-center h-full flex-wrap gap-1 bg-warning px-4"
 					on:click={initRaidSubscribe}
 				>
 					<iconify-icon icon="ooui:network-off" width={14} height={14} />
-					연결 재시도
+					<span>연결 재시도</span>
 				</button>
 			{:else}
 				<NotificationToggleButton />
