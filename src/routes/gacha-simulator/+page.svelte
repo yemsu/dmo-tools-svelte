@@ -60,6 +60,7 @@
 					autoplay
 					loop
 					muted
+					playsinline
 					class="h-[450px] w-[798px] max-w-none"
 				>
 					<track kind="captions" />
