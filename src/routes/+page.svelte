@@ -14,7 +14,7 @@
 </svelte:head>
 
 <Section>
-	<div class="scroll-box">
+	<div class="scroll-box flex flex-1 flex-col">
 		<div class="flex-center flex-1 sm:hidden">
 			<div class="flex-col-center gap-1">
 				<p class="text-right text-gray-300">디지몬 마스터즈 도구 모음</p>
