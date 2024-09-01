@@ -13,10 +13,10 @@
 		<img
 			src={BestItemGlowImage}
 			alt=""
-			class="position-center animation-flare -z-[1] max-w-none"
+			class="position-center animation-flare -z-[1] aspect-square w-[430%] max-w-none"
 			width="220"
 			height="220"
 		/>
 	{/if}
-	<GachaItemImage {id} class={cn(isBestItem && 'neon-best-item')} />
+	<GachaItemImage {id} class={cn(isBestItem && 'neon-best-item sm:w-[40px]')} />
 </span>

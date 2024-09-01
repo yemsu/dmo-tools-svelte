@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { gachaStore } from '$entities/gacha'
+	import { BackBlur } from '$shared/backBlur'
 	import { cn } from '$shared/lib'
 	import GachaTitle from '$widgets/gacha/ui/GachaTitle.svelte'
 	import ItemTooltip from '$widgets/gacha/ui/ItemTooltip.svelte'
@@ -22,13 +23,16 @@
 </script>
 
 <section
-	class="position-center flex-col-center h-full max-h-[500px] w-full bg-black/30 backdrop-blur-sm"
+	class="position-center flex-col-center h-full max-h-[500px] w-full bg-black/30 sm:px-content-side"
 >
-	<div class="flex-col-center h-full w-full max-w-[400px] gap-14">
+	<BackBlur />
+	<div
+		class="flex-col-center h-full w-full max-w-[300px] gap-10 md:max-w-[400px] md:gap-14"
+	>
 		<GachaTitle>획득 아이템</GachaTitle>
 		<ul
 			class={cn(
-				'max-h-[220px] w-full flex-1',
+				'max-h-[160px] w-full flex-1 md:max-h-[220px]',
 				$gachaStore.results.length === 1
 					? 'flex-center'
 					: 'grid grid-cols-4 justify-center gap-3'

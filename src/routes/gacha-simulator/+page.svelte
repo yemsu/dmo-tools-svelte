@@ -49,7 +49,7 @@
 </svelte:head>
 
 <section
-	class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200"
+	class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200 sm:px-content-side"
 >
 	<div class="relative">
 		<div class="flex-center">
@@ -65,12 +65,12 @@
 		</div>
 		{#if !isResultVisible}
 			<div
-				class="flex-col-center absolute top-1/2 w-full -translate-y-1/2 gap-10"
+				class="flex-col-center absolute top-1/2 z-20 w-full -translate-y-1/2 gap-10"
 			>
 				<GachaTitle class="max-w-[500px]">
 					소환할 데이터를 선택하세요.
 				</GachaTitle>
-				<div class="flex gap-10">
+				<div class="flex gap-5 md:gap-10">
 					{#each $page.data.gachaList as gachaData (gachaData.id)}
 						<GachaCard {gachaData} on:start={startLoading} />
 					{/each}

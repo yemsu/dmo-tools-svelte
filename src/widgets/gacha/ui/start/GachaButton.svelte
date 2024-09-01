@@ -9,6 +9,9 @@
 	}
 </script>
 
-<button class="{bgStyles[bg]} text-shadow w-[45%] py-1 text-xs" on:click>
+<button
+	class="{bgStyles[bg]} text-shadow w-[45%] py-1 text-xs2 md:text-xs"
+	on:click
+>
 	<slot></slot>
 </button>

@@ -17,12 +17,12 @@
 </script>
 
 <button
-	class="w-[152px]"
+	class="w-[120px] md:w-[152px]"
 	title="데이터 소환하기"
 	on:click={() => gachaStore.selectGacha(gachaData)}
 >
 	<h2
-		class="flex-col-center gap-2 whitespace-pre-line py-3 text-center text-xs"
+		class="flex-col-center gap-2 whitespace-pre-line py-3 text-center text-xs2 md:text-xs"
 	>
 		<span>{gachaType}</span>
 		<span>{gachaData.name}</span>

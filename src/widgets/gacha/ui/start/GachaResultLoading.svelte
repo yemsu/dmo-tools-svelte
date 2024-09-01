@@ -64,9 +64,15 @@
 	)}
 >
 	<div class="relative w-full">
-		<video bind:this={videoElement} src={videoSrc()} class="size-full">
-			<track kind="captions" />
-		</video>
+		<div class="flex-center">
+			<video
+				bind:this={videoElement}
+				src={videoSrc()}
+				class="pc:size-full h-[450px] w-[798px] max-w-none"
+			>
+				<track kind="captions" />
+			</video>
+		</div>
 		<button
 			class="bg-gacha-skip-loading absolute right-3 top-2 w-[80px] py-1.5 text-xs"
 			on:click={onVideoEnd}

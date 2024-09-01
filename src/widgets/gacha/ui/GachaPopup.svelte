@@ -27,11 +27,14 @@
 
 <section
 	bind:this={popupElement}
-	class={cn('position-center h-[420px] w-full max-w-[500px]', className)}
+	class={cn(
+		'position-center h-[380px] w-full max-w-[500px] md:h-[420px]',
+		className
+	)}
 >
 	<slot></slot>
 	<button
-		class="absolute right-2 top-2 text-[yellow]"
+		class="absolute right-2 top-1 text-[yellow] md:top-2"
 		on:click={() => dispatch('close')}
 		title="닫기"
 	>
