@@ -124,15 +124,15 @@
 		<h2 class="ir">보스 제보</h2>
 		<div class="flex flex-col gap-2">
 			{#if raidChannels.length > 1}
-				<Tabs class="flex-1">
+				<Tabs>
 					{#each raidChannels as channel (channel)}
 						<Tab
 							isActive={form.channel === channel}
 							on:click={() => selectChannel(channel)}
-							class="flex-center text-xs"
+							class="flex-center"
 						>
 							{channel}
-							<span class="text-xs2 hidden font-normal md:inline">채널</span>
+							<span class="hidden text-xs2 font-normal md:inline">채널</span>
 							<span class="text-xs4 font-normal md:hidden">채널</span>
 						</Tab>
 					{/each}
@@ -149,7 +149,12 @@
 					bind:value={form.timeRemaining}
 					on:input={onInput}
 				/>
-				<Button type="submit" size="sm" class="point-neon shrink-0">
+				<Button
+					type="submit"
+					size="sm"
+					rounded="md"
+					class="point-neon shrink-0"
+				>
 					+ 보스 제보
 				</Button>
 			</form>

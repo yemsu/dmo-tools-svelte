@@ -180,6 +180,9 @@ button:focus:not(:focus-visible) {
 	.bg-gr-b {
 		@apply bg-gradient-to-b from-transparent to-[#00000033];
 	}
+	.bg-gr-t {
+		@apply bg-gradient-to-t from-transparent to-[#00000033];
+	}
 	.bg-gacha-card {
 		background: linear-gradient(
 			to bottom right,

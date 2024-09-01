@@ -13,7 +13,7 @@ export const META = {
 	},
 	CALCULATOR: {
 		TITLE: `씰 효율 계산기 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 보유 씰을 바탕으로 목표 스탯까지의 효율적인 씰 구매리스트를 확인해보세요.`
+		DESC: `${META_COMMON.TITLE} 보유 씰을 바탕으로 목표 스탯까지의 효율적인 씰 구매리스트를 간편하게 확인해보세요.`
 	},
 	MY: {
 		TITLE: `보유 씰 | ${META_COMMON.TITLE}`,
@@ -33,6 +33,6 @@ export const META = {
 	},
 	GACHA_SIMULATOR: {
 		TITLE: `뽑기 시뮬레이터 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 뽑기 시뮬레이터로 운을 미리 시험해보세요!`
+		DESC: `${META_COMMON.TITLE} 뽑기 시뮬레이터로 운을 미리 시험해 보세요!`
 	}
 }
