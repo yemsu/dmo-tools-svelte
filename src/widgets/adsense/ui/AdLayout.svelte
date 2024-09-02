@@ -8,7 +8,7 @@
 	let debounceTimer: NodeJS.Timeout | null = null
 
 	const sideFixedCommonStyle =
-		'fixed top-0 flex h-full w-[clamp(192px,calc((100vw-var(--content-w))/2),260px)] justify-center bg-secondary-30 px-content-side py-header-h'
+		'fixed top-0 flex h-full w-[clamp(192px,calc((100vw-var(--content-w))/2),260px)] justify-center px-content-side py-header-h'
 	const isServer = import.meta.env.SSR
 
 	const resetAd = () => {
