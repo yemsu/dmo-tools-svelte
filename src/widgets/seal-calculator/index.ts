@@ -1,17 +1,20 @@
 export {
 	SEAL_MASTER_COUNT_TYPE,
-	SEAL_PERCENT_BY_STEPS,
-	SEAL_COUNT_STEPS_BY_MASTER
+	SEAL_PERCENT_STEPS,
+	SEAL_COUNT_STEPS_BY_MASTER,
+	SEAL_EXCEPTION_PERCENT,
+	SEAL_GRADES
 } from './config'
 export type {
-	SealCount,
 	SealStepsByMaster,
 	SealMaterCount,
 	SealStep,
-	SealEfficiency
+	SealEfficiency,
+	SealExceptionStep
 } from './types'
 export {
 	getCurrentStep,
 	getNextSteps,
-	sortByEffDataList
+	sortByEffDataList,
+	getMySealStat
 } from './lib/calculate'

@@ -1,11 +1,22 @@
 import type { SealData } from '$entities/seals'
-import { objectBy } from '$shared/lib'
+import { _objKeys, objectBy } from '$shared/lib'
 import {
 	SEAL_COUNT_STEPS_BY_MASTER,
+	SEAL_EXCEPTION_PERCENT,
 	SEAL_GRADES,
-	SEAL_PERCENT_BY_STEPS
+	SEAL_PERCENT_STEPS
 } from '$widgets/seal-calculator/config'
 import type { SealEfficiency, SealStep } from '../types'
+
+export const getSealPercentConfig = (sealId: number, stepIndex: number) => {
+	return _objKeys(SEAL_EXCEPTION_PERCENT).includes(sealId)
+		? SEAL_EXCEPTION_PERCENT[sealId][stepIndex]
+		: SEAL_PERCENT_STEPS[stepIndex]
+}
+
+export const getMySealStat = (seal: SealData, stepPercent: number) => {
+	return Math.round(seal.maxIncrease * (stepPercent / 100))
+}
 
 export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
 	const { masterCount } = seal
@@ -20,7 +31,7 @@ export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
 	sealCountSteps.forEach((sealCountStep, i) => {
 		if (sealCountStep === null || sealCount >= sealCountStep) return
 		nextSteps.push({
-			percent: SEAL_PERCENT_BY_STEPS[i],
+			percent: getSealPercentConfig(seal.id, i),
 			sealCount: sealCountStep
 		})
 	})
@@ -34,7 +45,7 @@ export const getCurrentStep = (seal: SealData, crrStepSealCount: number) => {
 	sealCountSteps.forEach((sealCountStep, i) => {
 		if (crrStepSealCount < sealCountStep) return
 		step = {
-			percent: SEAL_PERCENT_BY_STEPS[i],
+			percent: getSealPercentConfig(seal.id, i),
 			sealCount: sealCountStep,
 			grade: SEAL_GRADES[i]
 		}
@@ -54,7 +65,7 @@ export const getPrevStep = (seal: SealData, crrStepSealCount: number) => {
 	sealCountSteps.forEach((sealCountStep, i) => {
 		if (crrStepSealCount <= sealCountStep) return
 		step = {
-			percent: SEAL_PERCENT_BY_STEPS[i],
+			percent: getSealPercentConfig(seal.id, i),
 			sealCount: sealCountStep
 		}
 	})

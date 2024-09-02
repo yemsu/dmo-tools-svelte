@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { mySealCounts, type MySealCount } from '$entities/seals'
-	import { getMySealCount, MySealGrade } from '$widgets/my-seals'
+	import { getMySealData, MySealGrade } from '$widgets/my-seals'
+	import { getCurrentStep } from '$widgets/seal-calculator'
 	import { SealItem, SealList } from '$widgets/seal-list'
 
 	export let mySealsFiltered: MySealCount[]
@@ -16,7 +17,8 @@
 </script>
 
 <SealList seals={mySealsFiltered} let:seal={mySeal} class="h-full">
-	<SealItem seal={getMySealCount($page.data.seals, mySeal.id)}>
+	{@const seal = getMySealData($page.data.seals, mySeal.id)}
+	<SealItem {seal} myStep={getCurrentStep(seal, mySeal.count)}>
 		<MySealGrade {mySeal} />
 		<button
 			class="absolute right-[1px] top-[1px]"

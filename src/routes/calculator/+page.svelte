@@ -77,7 +77,7 @@
 				id: seal.id,
 				price,
 				count: mySealCount,
-				willGetStat,
+				willGetStat: Math.round(willGetStat),
 				needCount,
 				needPrice,
 				efficiency,

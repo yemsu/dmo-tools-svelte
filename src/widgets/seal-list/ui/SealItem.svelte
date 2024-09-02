@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { getSealPrice, type SealData } from '$entities/seals'
-	import { cn, timeElapsedString } from '$shared/lib'
+	import { _objKeys, cn, timeElapsedString } from '$shared/lib'
 	import { Tooltip } from '$shared/tooltip'
-	import { SEAL_COUNT_STEPS_BY_MASTER } from '$widgets/seal-calculator'
+	import {
+		getMySealStat,
+		SEAL_COUNT_STEPS_BY_MASTER,
+		SEAL_EXCEPTION_PERCENT
+	} from '$widgets/seal-calculator'
 	import type { SealEfficiency } from '$widgets/seal-calculator/types'
 	import { statColorStyles } from '$widgets/my-seals'
 	import SealItemCount from './SealItemCount.svelte'
@@ -74,10 +78,12 @@
 							{/each}
 						</ol>
 						<span class="text-gray-300">
-							{seal.maxIncrease} * {myStep?.percent}% =
+							{#if !_objKeys(SEAL_EXCEPTION_PERCENT).includes(seal.id)}
+								{seal.maxIncrease} * {myStep?.percent}% =
+							{/if}
 						</span>
 						<span class="font-semibold text-point">
-							+{myStep ? seal.maxIncrease * (myStep?.percent / 100) : 0}
+							+{getMySealStat(seal, myStep.percent)}
 						</span>
 					</div>
 				{/if}

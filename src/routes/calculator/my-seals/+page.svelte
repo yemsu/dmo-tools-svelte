@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { MENUS } from '$entities/menus'
 	import {
 		mySealCounts,
 		mySealPrices,
@@ -13,12 +12,11 @@
 	import { user } from '$entities/user'
 	import { META } from '$shared/config'
 	import SaveUrlLink from '$shared/layout/ui/SaveUrlLink.svelte'
-	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { NoData } from '$shared/text'
 	import {
 		getMyAndFinalPrice,
-		getMySealCount,
+		getMySealData,
 		statTypeOptionStyles
 	} from '$widgets/my-seals'
 	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
@@ -27,29 +25,28 @@
 	let statTypeSelected = 'ALL'
 	let mySealsFiltered: MySealCount[] | null = null
 
+	$: getSelectedSeals = (statTypeOption: StatTypeOption) => {
+		statTypeSelected = statTypeOption
+		if (statTypeOption === 'ALL') {
+			return $mySealCounts
+		} else {
+			const mySealCounts = $mySealCounts.filter(
+				(mySeal) =>
+					getMySealData($page.data.seals, mySeal.id)?.statType ===
+					statTypeSelected
+			)
+			return mySealCounts
+		}
+	}
+
 	$: initMySealFiltered = () => {
-		if (
-			statTypeSelected !== 'ALL' ||
-			(mySealsFiltered && mySealsFiltered.length > 0)
-		)
-			return
-		mySealsFiltered = $mySealCounts
+		mySealsFiltered = getSelectedSeals(statTypeSelected)
 	}
 
 	$: $mySealCounts && initMySealFiltered()
 
 	const onClickStatType = (statTypeOption: StatTypeOption) => {
-		statTypeSelected = statTypeOption
-		if (statTypeOption === 'ALL') {
-			mySealsFiltered = $mySealCounts
-		} else {
-			const mySealCounts = $mySealCounts.filter(
-				(mySeal) =>
-					getMySealCount($page.data.seals, mySeal.id)?.statType ===
-					statTypeSelected
-			)
-			mySealsFiltered = mySealCounts
-		}
+		mySealsFiltered = getSelectedSeals(statTypeOption)
 	}
 
 	$: getTotalMySealPrice = () => {

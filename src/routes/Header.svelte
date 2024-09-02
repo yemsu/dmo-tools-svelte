@@ -13,14 +13,14 @@
 	import { AuthButton } from '$shared/layout'
 	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
-	import { getMySealCount } from '$widgets/my-seals'
+	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
 
 	$: statCalc = (statType: StatType) => {
 		if ($mySealCounts.length === 0) return
 		const mySealsByStatType = objectBy(
 			$mySealCounts,
-			({ id }) => getMySealCount($page.data.seals, id).statType
+			({ id }) => getMySealData($page.data.seals, id).statType
 		)
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
@@ -30,7 +30,7 @@
 		let resultValue = 0
 		sealsByStatType.forEach(({ id, count }) => {
 			let sealPercent = 0
-			const seal = getMySealCount($page.data.seals, id)
+			const seal = getMySealData($page.data.seals, id)
 			const crrStat = getCurrentStep(seal, count)
 			sealPercent = crrStat.percent
 			const maxIncrease = seal.maxIncrease

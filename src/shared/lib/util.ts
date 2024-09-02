@@ -14,5 +14,10 @@ export const _pick = <T extends { id: number }>(arr: T[], _id: number) => {
 
 export const _objKeys = <T extends { [key: string]: unknown }>(obj: T) => {
 	const objKeys = Object.keys(obj) as (keyof typeof obj)[]
-	return objKeys
+	return objKeys.map((objKey) => {
+		if (typeof objKey !== 'symbol' && !isNaN(Number(objKey))) {
+			return Number(objKey)
+		}
+		return objKey
+	})
 }

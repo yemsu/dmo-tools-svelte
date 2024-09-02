@@ -1,6 +1,6 @@
 import type { MySealPrice, SealData, SealPrice } from '$entities/seals'
 
-export const getMySealCount = (seals: SealData[], sealId: number) => {
+export const getMySealData = (seals: SealData[], sealId: number) => {
 	const mySealData = seals.find(({ id }) => id === sealId)
 	if (!mySealData) {
 		throw Error(
