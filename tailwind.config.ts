@@ -8,7 +8,9 @@ export default {
 	theme: {
 		screens: {
 			md: '768px',
-			sm: { max: '767px' }
+			sm: { max: '767px' },
+			adPc: '1140px',
+			adMobile: { max: '1139px' }
 		},
 		extend: {
 			colors: {
@@ -63,6 +65,7 @@ export default {
 			spacing: {
 				'header-h': 'var(--header-h)',
 				'gnb-h': 'var(--gnb-h)',
+				'content-w': 'var(--content-w)',
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)',
