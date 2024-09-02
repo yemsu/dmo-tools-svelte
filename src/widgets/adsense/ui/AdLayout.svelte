@@ -48,7 +48,7 @@
 </script>
 
 {#if idAdVisibleRefreshFlag}
-	<div class="adPc:hidden">
+	<div class="adPc:hidden h-[70px]">
 		<Adsense
 			adType="top"
 			visibleDevice="mobile"
