@@ -9,6 +9,7 @@
 	import Header from './Header.svelte'
 	import { META } from '$shared/config'
 	import { NoticeBar } from '$shared/layout'
+	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
 </script>
 
 <svelte:head>
@@ -27,6 +28,11 @@
 	<meta name="twitter:title" content={META.COMMON.TITLE} />
 	<meta name="twitter:description" content={META.COMMON.DESC} />
 	<meta name="twitter:image" content="/og-image.jpg" />
+	<script
+		async
+		src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`}
+		crossorigin="anonymous"
+	></script>
 </svelte:head>
 
 <div class={cn('relative flex h-full flex-col')}>
@@ -34,7 +40,7 @@
 	<div
 		class={cn(
 			'relative flex flex-1 flex-col overflow-hidden',
-			'bg-secondary-5/70 md:mx-auto md:w-[800px]',
+			'bg-secondary-5/70 md:mx-auto md:w-content-w',
 			'drop-shadow-white border border-white/10 border-y-transparent'
 		)}
 	>

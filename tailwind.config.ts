@@ -63,6 +63,7 @@ export default {
 			spacing: {
 				'header-h': 'var(--header-h)',
 				'gnb-h': 'var(--gnb-h)',
+				'content-w': 'var(--content-w)',
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)',
