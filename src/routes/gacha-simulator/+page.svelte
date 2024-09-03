@@ -1,9 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { gachaStore } from '$entities/gacha'
 	import { META } from '$shared/config'
-	import { GachaResultLoading, GachaResultView } from '$widgets/gacha'
-	import { GachaBg, GachaCard, GachaTitle } from '$shared/gacha'
+	import { GachaBg } from '$shared/gacha'
+	import {
+		GachaResultLoading,
+		GachaResultView,
+		GachaSelectView
+	} from '$widgets/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
 
@@ -51,18 +54,7 @@
 		<div class="relative">
 			<GachaBg />
 			{#if !isResultVisible}
-				<div
-					class="flex-col-center absolute top-1/2 z-20 w-full -translate-y-1/2 gap-10"
-				>
-					<GachaTitle class="max-w-[500px]">
-						소환할 데이터를 선택하세요.
-					</GachaTitle>
-					<section class="flex gap-5 md:gap-10">
-						{#each $page.data.gachaList as gachaData (gachaData.id)}
-							<GachaCard {gachaData} on:start={startLoading} />
-						{/each}
-					</section>
-				</div>
+				<GachaSelectView on:start={startLoading} />
 			{/if}
 			<InventoryButton />
 		</div>
