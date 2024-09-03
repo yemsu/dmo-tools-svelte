@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { gachaStore } from '$entities/gacha'
-	import ItemTooltip from '$widgets/gacha/ui/ItemTooltip.svelte'
 	import { cn } from '$shared/lib'
-	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
-	import GachaPopup from '$widgets/gacha/ui/GachaPopup.svelte'
+	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
 	import { createEventDispatcher } from 'svelte'
 	import { toast } from '$shared/toast'
 	import { TOAST } from '$shared/config'

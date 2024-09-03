@@ -2,13 +2,8 @@
 	import { page } from '$app/stores'
 	import { gachaStore } from '$entities/gacha'
 	import { META } from '$shared/config'
-	import {
-		GachaBg,
-		GachaCard,
-		GachaResultLoading,
-		GachaResultView,
-		GachaTitle
-	} from '$widgets/gacha'
+	import { GachaResultLoading, GachaResultView } from '$widgets/gacha'
+	import { GachaBg, GachaCard, GachaTitle } from '$shared/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
 

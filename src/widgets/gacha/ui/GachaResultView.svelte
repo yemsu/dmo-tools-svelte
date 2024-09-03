@@ -2,11 +2,13 @@
 	import { gachaStore } from '$entities/gacha'
 	import { BackBlur } from '$shared/backBlur'
 	import { cn } from '$shared/lib'
-	import GachaTitle from '$widgets/gacha/ui/GachaTitle.svelte'
-	import ItemTooltip from '$widgets/gacha/ui/ItemTooltip.svelte'
-	import GachaButton from '$widgets/gacha/ui/start/GachaButton.svelte'
-	import GachaResultItemImage from '$widgets/gacha/ui/start/GachaResultItemImage.svelte'
-	import GachaStartButton from '$widgets/gacha/ui/start/GachaStartButton.svelte'
+	import {
+		ItemTooltip,
+		GachaButton,
+		GachaStartButton,
+		GachaTitle
+	} from '$shared/gacha'
+	import GachaResultItemImage from '$widgets/gacha/ui/GachaResultItemImage.svelte'
 	import { createEventDispatcher } from 'svelte'
 
 	$: resultLength = $gachaStore.results.length

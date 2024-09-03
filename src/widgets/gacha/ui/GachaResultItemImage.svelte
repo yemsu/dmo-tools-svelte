@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
+	import { GachaItemImage } from '$shared/gacha'
 	import BestItemGlowImage from '$lib/images/gacha/best-item-glow-1.png'
 	import { gachaStore, type GachaItemData } from '$entities/gacha'
 	import { cn } from '$shared/lib'

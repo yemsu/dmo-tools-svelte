@@ -4,9 +4,11 @@
 	import imgViewItemsHover from '$lib/images/gacha/view-items-hover.jpg'
 	import imgViewItems from '$lib/images/gacha/view-items.jpg'
 	import { cn } from '$shared/lib'
-	import { GachaSelectButton } from '$widgets/gacha'
-	import ProbabilityPopup from '$widgets/gacha/ui/ProbabilityPopup.svelte'
-	import GachaStartButton from '$widgets/gacha/ui/start/GachaStartButton.svelte'
+	import {
+		GachaSelectButton,
+		ProbabilityPopup,
+		GachaStartButton
+	} from '$shared/gacha'
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData

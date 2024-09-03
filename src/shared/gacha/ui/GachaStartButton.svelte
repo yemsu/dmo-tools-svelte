@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { gachaStore, type GachaItemData } from '$entities/gacha'
 	import { ALERT } from '$shared/config'
-	import GachaButton from '$widgets/gacha/ui/start/GachaButton.svelte'
+	import { GachaButton } from '$shared/gacha'
 	import { error } from '@sveltejs/kit'
 	import { createEventDispatcher } from 'svelte'
 
