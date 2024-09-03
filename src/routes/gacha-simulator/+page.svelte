@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { gachaStore } from '$entities/gacha'
-	import videoGachaBg from '$lib/images/gacha/videos/gacha-bg.mp4'
 	import { META } from '$shared/config'
 	import {
+		GachaBg,
 		GachaCard,
 		GachaResultLoading,
 		GachaResultView,
@@ -54,18 +54,7 @@
 	<h2 class="ir">뽑기 시뮬레이터</h2>
 	<section>
 		<div class="relative">
-			<div class="flex-center">
-				<video
-					src={videoGachaBg}
-					autoplay
-					loop
-					muted
-					playsinline
-					class="h-[450px] w-[798px] max-w-none"
-				>
-					<track kind="captions" />
-				</video>
-			</div>
+			<GachaBg />
 			{#if !isResultVisible}
 				<div
 					class="flex-col-center absolute top-1/2 z-20 w-full -translate-y-1/2 gap-10"

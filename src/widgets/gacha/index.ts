@@ -1,3 +1,4 @@
+import GachaBg from '$widgets/gacha/ui/GachaBg.svelte'
 import GachaCard from '$widgets/gacha/ui/GachaCard.svelte'
 import GachaPopup from '$widgets/gacha/ui/GachaPopup.svelte'
 import GachaSelectButton from '$widgets/gacha/ui/GachaSelectButton.svelte'
@@ -15,5 +16,6 @@ export {
 	GachaResultView,
 	GachaResultLoading,
 	InventoryButton,
-	InventoryPopup
+	InventoryPopup,
+	GachaBg
 }
