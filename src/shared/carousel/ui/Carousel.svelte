@@ -98,7 +98,7 @@
 >
 	<div
 		class={cn(
-			'sm:flex-center h-[310px] overflow-hidden pt-[12px]',
+			'sm:flex-center h-[var(--card-carousel-h)] overflow-hidden md:pt-[12px]',
 			'transition-opacity'
 		)}
 		use:emblaCarousel={{ options, plugins: [] }}

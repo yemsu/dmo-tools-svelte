@@ -3,25 +3,36 @@
 
 @layer base {
 	:root {
+		/* video */
+		--gacha-bg-w: 798px;
+		--gacha-bg-h: calc(798px * 0.5639);
+		/* title */
+		--gacha-title-max-w: 500px;
 		/* card sizes */
 		--card-w: 152px;
-		--card-h: 240px;
 		--current-card-scale: 1.1;
 		--current-card-w: calc(var(--card-w) * var(--current-card-scale));
 		--card-gap: 20px;
+		--gacha-select-view-h: calc(var(--gacha-bg-h) + (var(--tab-h) * 2));
 		--card-carousel-w: calc(
 			var(--current-card-w) + (var(--card-w) * 2) + (var(--card-gap) * 2)
 		);
+		--card-carousel-h: 310px;
 	}
-	@media screen and (max-width: var(--breakpoint-sm)) {
+	@media screen and (max-width: 768px) {
 		:root {
+			--gacha-title-max-w: 400px;
 			--card-gap: 0px;
+			--card-w: 135px;
 		}
 	}
 }
 
 @layer components {
 	/* 뽑기 시뮬레이터 */
+	.size-gacha-video {
+		@apply h-[var(--gacha-bg-h)] w-[var(--gacha-bg-w)];
+	}
 	.bg-gacha {
 		background-color: black;
 	}

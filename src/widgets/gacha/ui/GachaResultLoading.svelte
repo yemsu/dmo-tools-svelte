@@ -68,7 +68,7 @@
 			<video
 				bind:this={videoElement}
 				src={videoSrc()}
-				class="pc:size-full h-[450px] w-[798px] max-w-none"
+				class="pc:size-full size-gacha-video max-w-none"
 				playsinline
 			>
 				<track kind="captions" />

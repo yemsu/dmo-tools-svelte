@@ -23,8 +23,10 @@
 </script>
 
 {#if gachaList.length > 0}
-	<div class="flex-col-center gap-10">
-		<GachaTitle class="max-w-[500px]">{title}</GachaTitle>
+	<div
+		class="flex-col-center gap-6 pt-2 md:gap-10 md:pt-[calc(var(--tab-h)/2)]"
+	>
+		<GachaTitle class="max-w-[var(--gacha-title-max-w)]">{title}</GachaTitle>
 		<section class="flex w-full gap-5 overflow-hidden md:gap-10">
 			<Carousel
 				let:data
@@ -40,7 +42,7 @@
 					/>
 					<div
 						slot="startButtons"
-						class="flex-center -ml-[5%] mt-8 w-[110%] gap-[10%]"
+						class="flex-center -ml-[5%] mt-6 w-[110%] gap-[10%] md:mt-8"
 					>
 						<GachaStartButton count={1} on:start={() => dispatch('start')} />
 						<GachaStartButton count={10} on:start={() => dispatch('start')} />

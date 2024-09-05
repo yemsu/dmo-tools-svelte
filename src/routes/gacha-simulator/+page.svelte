@@ -53,10 +53,10 @@
 	class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200 sm:px-content-side"
 >
 	<h2 class="ir">뽑기 시뮬레이터</h2>
-	<section>
-		<div class="relative">
-			<GachaBg />
-			<div class={cn(isResultVisible && 'opacity-0')}>
+	<section class="flex-col-center h-full flex-1">
+		<GachaBg />
+		<div class="relative h-full w-full md:h-[var(--gacha-select-view-h)]">
+			<div class={cn('h-full', isResultVisible && 'opacity-0')}>
 				<GachaTypeTab let:gachaList let:title>
 					<GachaSelectView {title} {gachaList} on:start={startLoading} />
 				</GachaTypeTab>

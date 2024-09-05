@@ -7,9 +7,6 @@
 
 @layer base {
 	:root {
-		/* breakpoints */
-		--breakpoint-sm: 768px;
-
 		/* colors */
 		--primary-5: 214 82% 11%; /* hsl(214 82% 11%) */
 		--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
@@ -55,7 +52,7 @@
 		--input-h: 40px;
 		--tab-h: 30px;
 	}
-	@media screen and (max-width: var(--breakpoint-sm)) {
+	@media screen and (max-width: 768px) {
 		:root {
 			--content-side: 10px;
 			--gnb-h: 45px;
@@ -170,7 +167,7 @@ button:focus:not(:focus-visible) {
 	}
 	.border-gradient {
 		@apply border-transparent;
-		border-image: linear-gradient(45deg, #01bff9, #216dc4) 1;
+		border-image: linear-gradient(45deg, #2150a1, #216dc4) 1;
 	}
 }
 @keyframes flare {

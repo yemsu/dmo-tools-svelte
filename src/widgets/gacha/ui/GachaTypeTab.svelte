@@ -31,13 +31,13 @@
 </script>
 
 <div
-	class="flex-center absolute left-0 top-0 mb-5 w-full -translate-y-full bg-primary-20/60"
+	class="flex-center mb-3 bg-primary-20/40 md:mx-content-side sm:mx-auto sm:mt-4 sm:max-w-[300px]"
 >
 	{#each menus as menu (menu.id)}
 		<button
 			class={cn(
 				'flex-center h-tab-h flex-1 gap-2 py-1',
-				'border-2 text-xs transition-all',
+				'border text-xs2 transition-all md:border-2 md:text-xs',
 				'hover:border-primary-50 hover:bg-primary-50/20',
 				activeMenuId === menu.id
 					? 'border-primary-50 bg-primary-50/20'
@@ -56,9 +56,7 @@
 		</button>
 	{/each}
 </div>
-<div
-	class="absolute -left-content-side top-1/2 z-10 w-[100vw] -translate-y-1/2 md:w-full"
->
+<div class="relative -ml-content-side h-[80%] sm:w-[100vw]">
 	<slot
 		gachaList={gachaTabContents[activeMenuId].gachaList}
 		title={gachaTabContents[activeMenuId].title}

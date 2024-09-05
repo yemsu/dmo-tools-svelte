@@ -29,7 +29,7 @@
 			on:click={() => gachaStore.selectGacha(gachaData)}
 		>
 			<h2
-				class="flex-col-center gap-2 whitespace-pre-line py-3 text-center text-xs2 md:text-xs"
+				class="flex-col-center gap-[0.4em] whitespace-pre-line py-3 text-center text-xs2 md:text-xs"
 			>
 				<span>{gachaData.category}</span>
 				<span>{gachaData.name}</span>

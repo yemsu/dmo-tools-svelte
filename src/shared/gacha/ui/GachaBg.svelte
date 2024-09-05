@@ -2,15 +2,15 @@
 	import videoGachaBg from '$lib/images/gacha/videos/gacha-bg.mp4'
 </script>
 
-<div class="flex-center">
-  <video
-    src={videoGachaBg}
-    autoplay
-    loop
-    muted
-    playsinline
-    class="h-[450px] w-[798px] max-w-none"
-  >
-    <track kind="captions" />
-  </video>
+<div class="flex-center absolute size-full">
+	<video
+		src={videoGachaBg}
+		autoplay
+		loop
+		muted
+		playsinline
+		class="size-gacha-video max-w-none"
+	>
+		<track kind="captions" />
+	</video>
 </div>
