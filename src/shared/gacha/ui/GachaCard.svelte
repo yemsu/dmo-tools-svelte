@@ -12,7 +12,7 @@
 	<div
 		class={cn(
 			'w-[152px] rounded-md border transition-all',
-			isActive
+			$gachaStore.currentGacha?.id === gachaData.id
 				? 'bg-gacha-card-selected neon-gacha-gold scale-[1.1] border-gacha-gold text-[#E6E1CE]'
 				: 'bg-gacha-card border-transparent md:hover:-translate-y-2'
 		)}
@@ -45,7 +45,7 @@
 			<slot name="probabilityButton"></slot>
 		</div>
 	</div>
-	{#if isActive}
+	{#if $gachaStore.currentGacha?.id === gachaData.id}
 		<slot name="startButtons"></slot>
 	{/if}
 </div>
