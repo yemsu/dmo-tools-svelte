@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { gachaStore } from '$entities/gacha'
-	import ItemTooltip from '$widgets/gacha/ui/ItemTooltip.svelte'
 	import { cn } from '$shared/lib'
-	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
-	import GachaPopup from '$widgets/gacha/ui/GachaPopup.svelte'
+	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
 	import { createEventDispatcher } from 'svelte'
 	import { toast } from '$shared/toast'
 	import { TOAST } from '$shared/config'
@@ -43,13 +41,14 @@
 	>
 		<div
 			class="flex items-center gap-[0.5em] text-xs3 text-gray-300 md:text-xs2"
+			title="뽑기 횟수"
 		>
-			<h3>뽑기 횟수 :</h3>
-			<dl class="flex gap-[1em]">
-				{#each $page.data.gachaList as gacha (gacha.id)}
+			<h3 class="ir">뽑기 횟수</h3>
+			<dl class="flex flex-wrap gap-x-[1em]">
+				{#each $page.data.gachaSummons as gacha (gacha.id)}
 					<div class="flex gap-1">
 						<dt>{gacha.name}</dt>
-						<dd>{$gachaStore.myPlayCounts[gacha.id]}회</dd>
+						<dd>{$gachaStore.myPlayCounts[gacha.id] || 0}회</dd>
 					</div>
 				{/each}
 			</dl>

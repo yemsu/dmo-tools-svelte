@@ -44,6 +44,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"embla-carousel": "^8.2.0",
+		"embla-carousel-svelte": "^8.2.0",
 		"es-hangul": "^1.4.7",
 		"iconify-icon": "^2.1.0",
 		"vite-plugin-pwa": "^0.20.1"

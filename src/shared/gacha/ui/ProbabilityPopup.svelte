@@ -1,10 +1,8 @@
 <script lang="ts">
 	import type { GachaData } from '$entities/gacha'
-	import GachaItemImage from '$widgets/gacha/ui/GachaItemImage.svelte'
-	import { GachaPopup } from '$widgets/gacha'
+	import { GachaPopup, GachaItemImage } from '$shared/gacha'
 	import { createEventDispatcher } from 'svelte'
 
-	export let gachaType: string
 	export let gachaData: GachaData
 
 	const dispatch = createEventDispatcher()
@@ -21,7 +19,7 @@
 	<div class="flex-col-center gap-[0.6em] text-center">
 		<h2 class="font-ns-bold text-md text-[yellow] md:text-lg2">확률 정보</h2>
 		<div class="text-xs2 md:text-sm">
-			<p>{gachaType}</p>
+			<p>{gachaData.category}</p>
 			<p>{gachaData.name}</p>
 		</div>
 	</div>

@@ -1,16 +1,17 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import './gacha.css'
 	import { gachaStore } from '$entities/gacha'
-	import videoGachaBg from '$lib/images/gacha/videos/gacha-bg.mp4'
 	import { META } from '$shared/config'
+	import { GachaBg } from '$shared/gacha'
 	import {
-		GachaCard,
 		GachaResultLoading,
 		GachaResultView,
-		GachaTitle
+		GachaSelectView,
+		GachaTypeTab
 	} from '$widgets/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
+	import { cn } from '$shared/lib'
 
 	let isLoadingOn = false
 	let isResultVisible = false
@@ -54,32 +55,12 @@
 	<h2 class="ir">뽑기 시뮬레이터</h2>
 	<section>
 		<div class="relative">
-			<div class="flex-center">
-				<video
-					src={videoGachaBg}
-					autoplay
-					loop
-					muted
-					playsinline
-					class="h-[450px] w-[798px] max-w-none"
-				>
-					<track kind="captions" />
-				</video>
+			<GachaBg />
+			<div class={cn(isResultVisible && 'opacity-0')}>
+				<GachaTypeTab let:gachaList let:title>
+					<GachaSelectView {title} {gachaList} on:start={startLoading} />
+				</GachaTypeTab>
 			</div>
-			{#if !isResultVisible}
-				<div
-					class="flex-col-center absolute top-1/2 z-20 w-full -translate-y-1/2 gap-10"
-				>
-					<GachaTitle class="max-w-[500px]">
-						소환할 데이터를 선택하세요.
-					</GachaTitle>
-					<section class="flex gap-5 md:gap-10">
-						{#each $page.data.gachaList as gachaData (gachaData.id)}
-							<GachaCard {gachaData} on:start={startLoading} />
-						{/each}
-					</section>
-				</div>
-			{/if}
 			<InventoryButton />
 		</div>
 		{#if isResultVisible}
