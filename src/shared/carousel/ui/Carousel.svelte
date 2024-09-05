@@ -78,7 +78,7 @@
 		if (import.meta.env.SSR) return
 		window.removeEventListener('resize', onResize)
 	})
-	$: console.log("isCarouselActive'", isCarouselActive)
+
 	$: isMobile !== null && initCarousel()
 </script>
 
