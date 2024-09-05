@@ -12,48 +12,27 @@
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData
-	let isShowPopup = false
-
-	const onClickShowItems = () => {
-		isShowPopup = true
-		gachaStore.selectGacha(gachaData)
-	}
-	const onClickPopupClose = () => {
-		isShowPopup = false
-	}
-
-	const getGachaType = (name: string) => {
-		switch (name) {
-			case '궁극홍련기사':
-				return '프리미엄 데이터 소환'
-			case '[오메가몬 알파]':
-				return '일반 데이터 소환'
-			default:
-				return 'unknown gacha'
-		}
-	}
+	export let isActive: boolean
 
 	const dispatch = createEventDispatcher()
-	const onStart = () => {
-		dispatch('start')
-	}
-	$: gachaType = getGachaType(gachaData.name)
+
+	$: isActive && gachaStore.selectGacha(gachaData)
 </script>
 
 <div>
 	<div
 		class={cn(
-			'rounded-md transition-all hover:scale-[1.1]',
+			'w-[152px] rounded-md border transition-all',
 			$gachaStore.currentGacha?.id === gachaData.id
-				? 'bg-gacha-card-selected neon-gacha-gold scale-[1.1] border border-gacha-gold text-[#E6E1CE]'
-				: 'bg-gacha-card'
+				? 'bg-gacha-card-selected neon-gacha-gold scale-[1.1] border-gacha-gold text-[#E6E1CE]'
+				: 'bg-gacha-card border-transparent md:hover:-translate-y-2'
 		)}
 	>
-		<GachaSelectButton {gachaData} {gachaType} />
+		<GachaSelectButton {gachaData} />
 		<div class="flex p-2">
 			<button
 				class="group ml-auto"
-				on:click={onClickShowItems}
+				on:click={() => dispatch('showProbability', gachaData)}
 				title="보상 자세히 보기"
 			>
 				<img
@@ -75,11 +54,8 @@
 	</div>
 	<div class="flex-center -ml-[5%] mt-8 w-[110%] gap-[10%]">
 		{#if $gachaStore.currentGacha?.id === gachaData.id}
-			<GachaStartButton count={1} on:start={onStart} />
-			<GachaStartButton count={10} on:start={onStart} />
+			<GachaStartButton count={1} on:start={() => dispatch('start')} />
+			<GachaStartButton count={10} on:start={() => dispatch('start')} />
 		{/if}
 	</div>
 </div>
-{#if isShowPopup}
-	<ProbabilityPopup on:close={onClickPopupClose} {gachaData} {gachaType} />
-{/if}

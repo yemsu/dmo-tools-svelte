@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      embla-carousel:
+        specifier: ^8.2.0
+        version: 8.2.0
+      embla-carousel-svelte:
+        specifier: ^8.2.0
+        version: 8.2.0(svelte@4.2.18)
       es-hangul:
         specifier: ^1.4.7
         version: 1.4.7
@@ -1561,6 +1567,19 @@ packages:
 
   electron-to-chromium@1.5.4:
     resolution: {integrity: sha512-orzA81VqLyIGUEA77YkVA1D+N+nNfl2isJVjjmOyrlxuooZ19ynb+dOlaDTqd/idKRS9lDCSBmtzM+kyCsMnkA==}
+
+  embla-carousel-reactive-utils@8.2.0:
+    resolution: {integrity: sha512-ZdaPNgMydkPBiDRUv+wRIz3hpZJ3LKrTyz+XWi286qlwPyZFJDjbzPBiXnC3czF9N/nsabSc7LTRvGauUzwKEg==}
+    peerDependencies:
+      embla-carousel: 8.2.0
+
+  embla-carousel-svelte@8.2.0:
+    resolution: {integrity: sha512-0llMmUWjBxPfGa+AZd0gHjNiaCbQWrMDgabhM99DoH19yGTatlzVucH/NjPXXSivJ2N2Mn90Bq+4icwBxaRolQ==}
+    peerDependencies:
+      svelte: ^3.49.0 || ^4.0.0
+
+  embla-carousel@8.2.0:
+    resolution: {integrity: sha512-rf2GIX8rab9E6ZZN0Uhz05746qu2KrDje9IfFyHzjwxLwhvGjUt6y9+uaY1Sf+B0OPSa3sgas7BE2hWZCtopTA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -4818,6 +4837,18 @@ snapshots:
       jake: 10.9.2
 
   electron-to-chromium@1.5.4: {}
+
+  embla-carousel-reactive-utils@8.2.0(embla-carousel@8.2.0):
+    dependencies:
+      embla-carousel: 8.2.0
+
+  embla-carousel-svelte@8.2.0(svelte@4.2.18):
+    dependencies:
+      embla-carousel: 8.2.0
+      embla-carousel-reactive-utils: 8.2.0(embla-carousel@8.2.0)
+      svelte: 4.2.18
+
+  embla-carousel@8.2.0: {}
 
   emoji-regex@8.0.0: {}
 

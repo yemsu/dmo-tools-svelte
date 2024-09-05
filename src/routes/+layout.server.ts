@@ -11,6 +11,7 @@ export const load: ServerLoad = async () => {
 	return {
 		seals,
 		sealPrices,
-		gachaList
+		gachaSummons: gachaList.filter(({ type }) => type === 'DATA_SUMMON'),
+		gachaDraws: gachaList.filter(({ type }) => type === 'DIGITAL_DRAW')
 	}
 }

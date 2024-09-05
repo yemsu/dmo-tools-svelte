@@ -1,11 +1,13 @@
 <script lang="ts">
+	import './gacha.css'
 	import { gachaStore } from '$entities/gacha'
 	import { META } from '$shared/config'
 	import { GachaBg } from '$shared/gacha'
 	import {
 		GachaResultLoading,
 		GachaResultView,
-		GachaSelectView
+		GachaSelectView,
+		GachaTypeTab
 	} from '$widgets/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
@@ -54,7 +56,13 @@
 		<div class="relative">
 			<GachaBg />
 			{#if !isResultVisible}
-				<GachaSelectView on:start={startLoading} />
+				<GachaTypeTab let:gachaList let:title>
+					<GachaSelectView
+						{title}
+						{gachaList}
+						on:start={startLoading}
+					/></GachaTypeTab
+				>
 			{/if}
 			<InventoryButton />
 		</div>
