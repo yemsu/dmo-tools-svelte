@@ -8,15 +8,17 @@
 	const dispatch = createEventDispatcher<{ toDir: Direction }>()
 
 	const directionStyles = {
-		prev: 'md:left-0 left-5',
-		next: 'md:right-0 right-5'
+		prev: 'left-0 px-5',
+		next: 'right-0 px-5 justify-end'
 	}
 
 	const arrowStyles = ['brightness-100', 'brightness-125', 'brightness-150']
 </script>
 
 <button
-	class="group absolute top-1/2 -translate-y-1/2 {directionStyles[dir]} pb-10"
+	class="group absolute top-0 flex h-full w-[calc((100%-var(--current-card-w))/2)] items-center {directionStyles[
+		dir
+	]} pb-10"
 	on:click={() => dispatch('toDir', dir)}
 	{...$$restProps}
 >

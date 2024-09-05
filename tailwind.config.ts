@@ -7,8 +7,8 @@ export default {
 
 	theme: {
 		screens: {
-			md: '768px',
-			sm: { max: '767px' },
+			md: '769px',
+			sm: { max: '768px' },
 			adPc: '1140px',
 			adMobile: { max: '1139px' }
 		},
@@ -104,5 +104,20 @@ export default {
 		}
 	},
 
-	plugins: [tailwindScrollBar({ nocompatible: true })]
+	plugins: [
+		tailwindScrollBar({ nocompatible: true }),
+		function ({ addUtilities }) {
+			addUtilities({
+				'.env-3d': {
+					perspective: '1000px'
+				},
+				'.prev-card': {
+					transform: 'rotateY(-50deg) scale(95%);'
+				},
+				'.next-card': {
+					transform: 'rotateY(50deg) scale(95%)'
+				}
+			})
+		}
+	]
 } as Config

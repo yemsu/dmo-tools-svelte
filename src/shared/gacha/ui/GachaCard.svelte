@@ -4,17 +4,23 @@
 
 	export let gachaData: GachaData
 	export let isActive: boolean
+	export let isPrev: boolean
+	export let isNext: boolean
 
 	$: isActive && gachaStore.selectGacha(gachaData)
 </script>
 
-<div>
+<div class="env-3d">
 	<div
 		class={cn(
-			'w-[152px] rounded-md border transition-all',
+			'relative w-[var(--card-w)] rounded-md border transition-all',
 			$gachaStore.currentGacha?.id === gachaData.id
-				? 'bg-gacha-card-selected neon-gacha-gold scale-[1.1] border-gacha-gold text-[#E6E1CE]'
-				: 'bg-gacha-card border-transparent md:hover:-translate-y-2'
+				? 'bg-gacha-card-selected neon-gacha-gold scale-[var(--current-card-scale)] border-gacha-gold text-[#E6E1CE]'
+				: cn(
+						`bg-gacha-card inactive-card border-transparent md:hover:-translate-y-2 sm:brightness-50`,
+						isPrev && 'sm:prev-card',
+						isNext && 'sm:next-card'
+					)
 		)}
 	>
 		<button
@@ -44,6 +50,14 @@
 		<div class="flex p-2">
 			<slot name="probabilityButton"></slot>
 		</div>
+		{#if isNext || isPrev}
+			<div
+				class={cn(
+					'absolute left-0 top-0 size-full md:hidden',
+					isNext ? 'bg-gr-l' : 'bg-gr-r'
+				)}
+			></div>
+		{/if}
 	</div>
 	{#if $gachaStore.currentGacha?.id === gachaData.id}
 		<slot name="startButtons"></slot>

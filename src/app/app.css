@@ -7,6 +7,9 @@
 
 @layer base {
 	:root {
+		/* breakpoints */
+		--breakpoint-sm: 768px;
+
 		/* colors */
 		--primary-5: 214 82% 11%; /* hsl(214 82% 11%) */
 		--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
@@ -52,7 +55,7 @@
 		--input-h: 40px;
 		--tab-h: 30px;
 	}
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: var(--breakpoint-sm)) {
 		:root {
 			--content-side: 10px;
 			--gnb-h: 45px;

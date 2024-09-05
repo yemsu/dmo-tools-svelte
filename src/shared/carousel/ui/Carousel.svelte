@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { page } from '$app/stores'
+	import { gachaStore } from '$entities/gacha'
 	import Arrow from '$shared/carousel/ui/Arrow.svelte'
 	import { cn } from '$shared/lib'
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
@@ -9,7 +11,7 @@
 	export let dataList: T[] = []
 	let emblaApi: EmblaCarouselType | null = null
 	let options: EmblaOptionsType | null = {
-		align: 'center'
+		align: 'start'
 	}
 	let isCarouselActive: boolean | null = null
 	let activeIndex: number = 0
@@ -26,8 +28,14 @@
 		}
 	}
 
-	const initCarousel = () => {
+	const reset = () => {
 		if (isCarouselActive !== null) isCarouselActive = null
+		gachaStore.selectGacha($page.data.gachaSummons[0])
+		activeIndex = 0
+	}
+
+	const initCarousel = () => {
+		reset()
 		setTimeout(() => {
 			if (!emblaApi) return
 			emblaApi.reInit({ active: true, slidesToScroll: isMobile ? 1 : 3 })
@@ -84,27 +92,31 @@
 
 <div
 	class={cn(
-		'relative mx-auto w-full px-[50px] sm:w-[calc(360px-(var(--content-side)*2))]',
+		'relative mx-auto w-full sm:w-[clamp(0px,100%,calc(var(--current-card-w)*3))]',
 		isCarouselActive === null && 'opacity-0'
 	)}
 >
 	<div
 		class={cn(
-			'mx-auto h-[310px] overflow-hidden',
-			'p-[12px]',
-			'transition-opacity md:w-[calc(170px+(152px*2)+(20px*2))] sm:w-[176px]'
+			'sm:flex-center h-[310px] overflow-hidden pt-[12px]',
+			'transition-opacity'
 		)}
 		use:emblaCarousel={{ options, plugins: [] }}
 		on:emblaInit={onInit}
 	>
 		<div
 			class={cn(
-				'flex gap-[20px]',
+				'mx-auto flex md:w-[var(--card-carousel-w)] md:gap-[var(--card-gap)] sm:w-[var(--card-w)]',
 				isCarouselActive === false && 'justify-center'
 			)}
 		>
 			{#each dataList as data, i (data.id)}
-				<slot isSelected={activeIndex === i} {data}></slot>
+				<slot
+					isSelected={activeIndex === i}
+					isPrev={activeIndex - 1 === i}
+					isNext={activeIndex + 1 === i}
+					{data}
+				></slot>
 			{/each}
 		</div>
 	</div>

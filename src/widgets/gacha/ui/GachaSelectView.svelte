@@ -26,8 +26,14 @@
 	<div class="flex-col-center gap-10">
 		<GachaTitle class="max-w-[500px]">{title}</GachaTitle>
 		<section class="flex w-full gap-5 overflow-hidden md:gap-10">
-			<Carousel let:data let:isSelected dataList={gachaList}>
-				<GachaCard gachaData={data} isActive={isSelected}>
+			<Carousel
+				let:data
+				let:isSelected
+				let:isPrev
+				let:isNext
+				dataList={gachaList}
+			>
+				<GachaCard gachaData={data} isActive={isSelected} {isPrev} {isNext}>
 					<ShowProbabilityButton
 						slot="probabilityButton"
 						on:click={() => onClickShowProbability(data)}

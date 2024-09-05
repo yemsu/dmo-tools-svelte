@@ -1,4 +1,26 @@
-:root {
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+@layer base {
+	:root {
+		/* card sizes */
+		--card-w: 152px;
+		--card-h: 240px;
+		--current-card-scale: 1.1;
+		--current-card-w: calc(var(--card-w) * var(--current-card-scale));
+		--card-gap: 20px;
+		--card-carousel-w: calc(
+			var(--current-card-w) + (var(--card-w) * 2) + (var(--card-gap) * 2)
+		);
+	}
+	@media screen and (max-width: var(--breakpoint-sm)) {
+		:root {
+			--card-gap: 0px;
+		}
+	}
+}
+
+@layer components {
 	/* 뽑기 시뮬레이터 */
 	.bg-gacha {
 		background-color: black;
@@ -14,6 +36,12 @@
 	}
 	.bg-gr-t {
 		@apply bg-gradient-to-t from-transparent to-[#00000033];
+	}
+	.bg-gr-l {
+		@apply bg-gradient-to-l from-transparent to-[#00000033];
+	}
+	.bg-gr-r {
+		@apply bg-gradient-to-r from-transparent to-[#00000033];
 	}
 	.bg-gacha-card {
 		background: linear-gradient(

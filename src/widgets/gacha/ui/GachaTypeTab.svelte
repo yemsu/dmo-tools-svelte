@@ -56,7 +56,9 @@
 		</button>
 	{/each}
 </div>
-<div class="absolute top-1/2 z-10 w-full -translate-y-1/2">
+<div
+	class="absolute -left-content-side top-1/2 z-10 w-[100vw] -translate-y-1/2 md:w-full"
+>
 	<slot
 		gachaList={gachaTabContents[activeMenuId].gachaList}
 		title={gachaTabContents[activeMenuId].title}
