@@ -14,21 +14,29 @@
 		}
 	}
 
+	const onKeyUp = (e: KeyboardEvent) => {
+		if (e.key === 'Escape') {
+			dispatch('close')
+		}
+	}
+
 	onMount(() => {
 		setTimeout(() => {
 			document.addEventListener('click', handleOutsideClick)
+			document.addEventListener('keyup', onKeyUp)
 		}, 100)
 	})
 
 	onDestroy(() => {
 		document.removeEventListener('click', handleOutsideClick)
+		document.removeEventListener('keyup', onKeyUp)
 	})
 </script>
 
 <section
 	bind:this={popupElement}
 	class={cn(
-		'position-center h-[380px] w-full max-w-[500px] md:h-[420px]',
+		'position-center z-20 h-[380px] w-full max-w-[500px] md:h-[420px]',
 		className
 	)}
 >

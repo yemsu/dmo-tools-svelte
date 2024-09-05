@@ -13,7 +13,7 @@
 </script>
 
 <button
-	class="absolute bottom-3 right-0 z-10 ml-auto md:bottom-5 md:right-5 sm:w-[30px]"
+	class="absolute bottom-3 right-0 z-10 ml-auto md:bottom-[calc(var(--tab-h)+20px)] md:right-5 sm:w-[30px]"
 	title="인벤토리 열기"
 	on:click={openPopup}
 >
