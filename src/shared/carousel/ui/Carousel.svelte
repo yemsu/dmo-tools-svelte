@@ -42,7 +42,6 @@
 			if (!emblaApi) return
 			activeIndex = emblaApi.selectedScrollSnap()
 		})
-		handleCarouselActive()
 	}
 
 	$: onClickArrow = (e: CustomEvent<'prev' | 'next'>) => {
@@ -79,12 +78,15 @@
 		if (import.meta.env.SSR) return
 		window.removeEventListener('resize', onResize)
 	})
-
+	$: console.log("isCarouselActive'", isCarouselActive)
 	$: isMobile !== null && initCarousel()
 </script>
 
 <div
-	class="relative mx-auto w-full px-[50px] sm:w-[calc(360px-(var(--content-side)*2))]"
+	class={cn(
+		'relative mx-auto w-full px-[50px] sm:w-[calc(360px-(var(--content-side)*2))]',
+		isCarouselActive === null && 'opacity-0'
+	)}
 >
 	<div
 		class={cn(
