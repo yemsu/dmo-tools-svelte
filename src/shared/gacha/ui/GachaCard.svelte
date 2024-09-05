@@ -1,20 +1,9 @@
 <script lang="ts">
-	import type { GachaData } from '$entities/gacha'
-	import { gachaStore } from '$entities/gacha'
-	import imgViewItemsHover from '$lib/images/gacha/view-items-hover.jpg'
-	import imgViewItems from '$lib/images/gacha/view-items.jpg'
+	import { gachaStore, type GachaData } from '$entities/gacha'
 	import { cn } from '$shared/lib'
-	import {
-		GachaSelectButton,
-		ProbabilityPopup,
-		GachaStartButton
-	} from '$shared/gacha'
-	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData
 	export let isActive: boolean
-
-	const dispatch = createEventDispatcher()
 
 	$: isActive && gachaStore.selectGacha(gachaData)
 </script>
@@ -23,39 +12,40 @@
 	<div
 		class={cn(
 			'w-[152px] rounded-md border transition-all',
-			$gachaStore.currentGacha?.id === gachaData.id
+			isActive
 				? 'bg-gacha-card-selected neon-gacha-gold scale-[1.1] border-gacha-gold text-[#E6E1CE]'
 				: 'bg-gacha-card border-transparent md:hover:-translate-y-2'
 		)}
 	>
-		<GachaSelectButton {gachaData} />
-		<div class="flex p-2">
-			<button
-				class="group ml-auto"
-				on:click={() => dispatch('showProbability', gachaData)}
-				title="보상 자세히 보기"
+		<button
+			class="w-full"
+			title="데이터 소환하기"
+			on:click={() => gachaStore.selectGacha(gachaData)}
+		>
+			<h2
+				class="flex-col-center gap-2 whitespace-pre-line py-3 text-center text-xs2 md:text-xs"
 			>
-				<img
-					src={imgViewItems}
-					alt=""
-					width="25"
-					height="25"
-					class="group-hover:hidden"
-				/>
-				<img
-					src={imgViewItemsHover}
-					alt=""
-					width="25"
-					height="25"
-					class="hidden group-hover:block"
-				/>
-			</button>
+				<span>{gachaData.category}</span>
+				<span>{gachaData.name}</span>
+			</h2>
+			<div>
+				{#await import(`$lib/images/gacha/gacha-${gachaData.id}.jpg`) then { default: src }}
+					<img
+						{src}
+						alt=""
+						width="152"
+						height="138"
+						class="w-full"
+						draggable="false"
+					/>
+				{/await}
+			</div>
+		</button>
+		<div class="flex p-2">
+			<slot name="probabilityButton"></slot>
 		</div>
 	</div>
-	<div class="flex-center -ml-[5%] mt-8 w-[110%] gap-[10%]">
-		{#if $gachaStore.currentGacha?.id === gachaData.id}
-			<GachaStartButton count={1} on:start={() => dispatch('start')} />
-			<GachaStartButton count={10} on:start={() => dispatch('start')} />
-		{/if}
-	</div>
+	{#if isActive}
+		<slot name="startButtons"></slot>
+	{/if}
 </div>

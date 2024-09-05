@@ -2,6 +2,8 @@
 	import { gachaStore, type GachaData } from '$entities/gacha'
 	import { Carousel } from '$shared/carousel'
 	import { GachaCard, GachaTitle, ProbabilityPopup } from '$shared/gacha'
+	import GachaStartButton from '$shared/gacha/ui/GachaStartButton.svelte'
+	import ShowProbabilityButton from '$shared/gacha/ui/ShowProbabilityButton.svelte'
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaList: GachaData[]
@@ -10,8 +12,7 @@
 
 	const dispatch = createEventDispatcher()
 
-	const onClickShowProbability = (event: CustomEvent<GachaData>) => {
-		const gachaData = event.detail
+	const onClickShowProbability = (gachaData: GachaData) => {
 		activeProbabilityGacha = gachaData
 		gachaStore.selectGacha(gachaData)
 	}
@@ -25,13 +26,23 @@
 	<div class="flex-col-center gap-10">
 		<GachaTitle class="max-w-[500px]">{title}</GachaTitle>
 		<section class="flex w-full gap-5 overflow-hidden md:gap-10">
-			<Carousel let:data let:isActive dataList={gachaList}>
+			<Carousel let:data let:isSelected dataList={gachaList}>
 				<GachaCard
 					gachaData={data}
-					on:start={() => dispatch('start')}
-					on:showProbability={onClickShowProbability}
-					{isActive}
-				/>
+					isActive={isSelected || $gachaStore.currentGacha?.id === data.id}
+				>
+					<ShowProbabilityButton
+						slot="probabilityButton"
+						on:click={() => onClickShowProbability(data)}
+					/>
+					<div
+						slot="startButtons"
+						class="flex-center -ml-[5%] mt-8 w-[110%] gap-[10%]"
+					>
+						<GachaStartButton count={1} on:start={() => dispatch('start')} />
+						<GachaStartButton count={10} on:start={() => dispatch('start')} />
+					</div>
+				</GachaCard>
 			</Carousel>
 		</section>
 	</div>

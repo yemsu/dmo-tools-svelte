@@ -11,6 +11,7 @@
 	} from '$widgets/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
+	import { cn } from '$shared/lib'
 
 	let isLoadingOn = false
 	let isResultVisible = false
@@ -55,15 +56,11 @@
 	<section>
 		<div class="relative">
 			<GachaBg />
-			{#if !isResultVisible}
+			<div class={cn(isResultVisible && 'opacity-0')}>
 				<GachaTypeTab let:gachaList let:title>
-					<GachaSelectView
-						{title}
-						{gachaList}
-						on:start={startLoading}
-					/></GachaTypeTab
-				>
-			{/if}
+					<GachaSelectView {title} {gachaList} on:start={startLoading} />
+				</GachaTypeTab>
+			</div>
 			<InventoryButton />
 		</div>
 		{#if isResultVisible}

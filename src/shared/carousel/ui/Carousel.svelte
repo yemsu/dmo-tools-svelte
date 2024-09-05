@@ -19,7 +19,6 @@
 	const handleCarouselActive = () => {
 		if (!emblaApi) return
 		const snapLength = emblaApi.scrollSnapList().length
-		console.log('snapLength', emblaApi.scrollSnapList())
 		const isActive = snapLength > 1
 		isCarouselActive = isActive
 		if (!isActive) {
@@ -81,7 +80,6 @@
 		window.removeEventListener('resize', onResize)
 	})
 
-	$: dataList && initCarousel()
 	$: isMobile !== null && initCarousel()
 </script>
 
@@ -104,7 +102,7 @@
 			)}
 		>
 			{#each dataList as data, i (data.id)}
-				<slot isActive={activeIndex === i} {data}></slot>
+				<slot isSelected={activeIndex === i} {data}></slot>
 			{/each}
 		</div>
 	</div>
