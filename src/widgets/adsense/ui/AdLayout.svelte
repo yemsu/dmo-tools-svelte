@@ -47,15 +47,17 @@
 	$: $page.url && rerenderAd()
 </script>
 
-{#if idAdVisibleRefreshFlag}
-	<div class="adPc:hidden h-[70px]">
+<div class="h-[70px] adPc:hidden">
+	{#if idAdVisibleRefreshFlag}
 		<Adsense
 			adType="top"
 			visibleDevice="mobile"
 			style="display:inline-block;width:100%;height:70px"
 			randomFormat={false}
 		/>
-	</div>
+	{/if}
+</div>
+{#if idAdVisibleRefreshFlag}
 	<div
 		class={cn(
 			sideFixedCommonStyle,
