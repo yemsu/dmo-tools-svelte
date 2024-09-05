@@ -5,7 +5,7 @@
 	import { cn } from '$shared/lib'
 
 	export let id: GachaItemData['id']
-	$: isBestItem = $gachaStore.currentGacha?.gachaItems[0].id === id
+	$: isBestItem = $gachaStore.currentGacha?.gachaItems[0].item.id === id
 </script>
 
 <span class={cn('relative', isBestItem && 'z-10')}>
