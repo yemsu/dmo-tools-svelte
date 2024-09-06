@@ -1,14 +1,14 @@
 <script lang="ts">
-	import { page } from '$app/stores'
-	import { gachaStore } from '$entities/gacha'
+	import { type GachaData, type GachaDataType } from '$entities/gacha'
 	import Arrow from '$shared/carousel/ui/Arrow.svelte'
 	import { cn } from '$shared/lib'
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 	import emblaCarousel from 'embla-carousel-svelte'
-	import { onDestroy, onMount } from 'svelte'
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
-	type T = $$Generic<{ id: number }>
-	export let dataList: T[] = []
+	export let gachaList: GachaData[]
+	export let currentGachaType: GachaDataType
+	export let activeGacha: GachaData
 	let emblaApi: EmblaCarouselType | null = null
 	let options: EmblaOptionsType | null = {
 		align: 'start'
@@ -17,6 +17,8 @@
 	let activeIndex: number = 0
 	let resizeDebounceTimer: NodeJS.Timeout | null = null
 	let isMobile: boolean | null = null
+
+	const dispatch = createEventDispatcher()
 
 	const handleCarouselActive = () => {
 		if (!emblaApi) return
@@ -28,17 +30,33 @@
 		}
 	}
 
+	const onActiveGachaChange = () => {
+		let activeGachaIndex
+		gachaList.forEach(({ id }, i) => {
+			if (id === activeGacha.id) {
+				activeGachaIndex = i
+			}
+		})
+		if (activeGachaIndex !== undefined) {
+			emblaApi?.scrollTo(activeGachaIndex)
+		}
+	}
+
 	const reset = () => {
 		if (isCarouselActive !== null) isCarouselActive = null
-		gachaStore.selectGacha($page.data.gachaSummons[0])
+		dispatch('reset')
 		activeIndex = 0
+		emblaApi?.scrollTo(0)
 	}
 
 	const initCarousel = () => {
 		reset()
 		setTimeout(() => {
 			if (!emblaApi) return
-			emblaApi.reInit({ active: true, slidesToScroll: isMobile ? 1 : 3 })
+			emblaApi.reInit({
+				active: true,
+				slidesToScroll: 1
+			})
 			handleCarouselActive()
 		}, 60)
 	}
@@ -88,6 +106,8 @@
 	})
 
 	$: isMobile !== null && initCarousel()
+	$: currentGachaType && initCarousel()
+	$: activeGacha !== null && onActiveGachaChange()
 </script>
 
 <div
@@ -106,11 +126,11 @@
 	>
 		<div
 			class={cn(
-				'mx-auto flex md:w-[var(--card-carousel-w)] md:gap-[var(--card-gap)] sm:w-[var(--card-w)]',
+				'mx-auto flex w-[var(--card-w)] md:gap-[var(--card-gap)]',
 				isCarouselActive === false && 'justify-center'
 			)}
 		>
-			{#each dataList as data, i (data.id)}
+			{#each gachaList as data, i (data.id)}
 				<slot
 					isSelected={activeIndex === i}
 					isPrev={activeIndex - 1 === i}
@@ -125,7 +145,7 @@
 		<Arrow
 			dir="next"
 			on:toDir={onClickArrow}
-			disabled={activeIndex === dataList.length - 1}
+			disabled={activeIndex === gachaList.length - 1}
 		/>
 	{/if}
 </div>

@@ -1,8 +1,11 @@
 export { getGachaList } from './api'
+export { GACHA_TYPES } from './config'
 export type {
 	GachaResultData,
 	GachaData,
 	GachaItemData,
-	InventoryItem
+	InventoryItem,
+	GachaDataType,
+	GachaTabContents
 } from './type'
 export { gachaStore } from './model'

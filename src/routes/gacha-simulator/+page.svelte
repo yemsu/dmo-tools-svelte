@@ -1,47 +1,29 @@
 <script lang="ts">
-	import './gacha.css'
-	import { gachaStore } from '$entities/gacha'
+	import { page } from '$app/stores'
+	import {
+		GACHA_TYPES,
+		gachaStore,
+		type GachaTabContents
+	} from '$entities/gacha'
 	import { META } from '$shared/config'
 	import { GachaBg } from '$shared/gacha'
-	import {
-		GachaResultLoading,
-		GachaResultView,
-		GachaSelectView,
-		GachaTypeTab
-	} from '$widgets/gacha'
-	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
-	import { onMount } from 'svelte'
-	import { cn } from '$shared/lib'
+	import { _objKeys, cn } from '$shared/lib'
+	import { GachaTypeTabContent, GachaTypeTab } from '$widgets/gacha'
+	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
+	import './gacha.css'
 
-	let isLoadingOn = false
-	let isResultVisible = false
+	let currentGachaType = _objKeys(GACHA_TYPES)[0]
 
-	const endLoadingVideo = () => {
-		isLoadingOn = false
+	const gachaTabContents: GachaTabContents = {
+		DATA_SUMMON: {
+			title: '소환할 데이터를 선택하세요.',
+			gachaList: $page.data.gachaSummons
+		},
+		DIGITAL_DRAW: {
+			title: '디지털 드로우를 선택하세요.',
+			gachaList: $page.data.gachaDraws
+		}
 	}
-
-	const onResultViewConfirm = () => {
-		isResultVisible = false
-		gachaStore.setResults([])
-	}
-
-	$: startLoading = () => {
-		if ($gachaStore.results.length === 0) return
-		isLoadingOn = true
-		isResultVisible = false
-		setTimeout(() => {
-			isResultVisible = true
-		}, 100)
-	}
-
-	onMount(() => {
-		window.addEventListener('beforeunload', (event: BeforeUnloadEvent) => {
-			if ($gachaStore.inventory.length > 0) {
-				event.preventDefault()
-				event.returnValue = '' //for chrome
-			}
-		})
-	})
 </script>
 
 <svelte:head>
@@ -55,22 +37,29 @@
 	<h2 class="ir">뽑기 시뮬레이터</h2>
 	<section class="flex-col-center h-full flex-1">
 		<GachaBg />
-		<div class="relative h-full w-full md:h-[var(--gacha-select-view-h)]">
-			<div class={cn('h-full', isResultVisible && 'opacity-0')}>
-				<GachaTypeTab let:gachaList let:title>
-					<GachaSelectView {title} {gachaList} on:start={startLoading} />
-				</GachaTypeTab>
+		<div
+			class="relative flex h-full w-full flex-col md:h-[var(--gacha-select-view-h)] sm:-ml-content-side sm:w-[100vw]"
+		>
+			<div
+				class={cn(
+					'flex-center mx-auto mb-3 w-full bg-primary-20/40 md:max-w-[500px] sm:mt-4 sm:max-w-[300px]',
+					$gachaStore.isResultShow && 'opacity-0'
+				)}
+			>
+				{#each _objKeys(GACHA_TYPES) as gachaType (gachaType)}
+					<GachaTypeTabButton
+						{gachaType}
+						isActive={currentGachaType === gachaType}
+						on:click={() => (currentGachaType = gachaType)}
+					/>
+				{/each}
 			</div>
-			<InventoryButton />
+			<div class="flex-col-center flex-1">
+				<GachaTypeTabContent
+					{currentGachaType}
+					gachaTabContent={gachaTabContents[currentGachaType]}
+				/>
+			</div>
 		</div>
-		{#if isResultVisible}
-			<GachaResultView
-				on:confirm={onResultViewConfirm}
-				on:start={startLoading}
-			/>
-		{/if}
-		{#if isLoadingOn}
-			<GachaResultLoading on:endVideo={endLoadingVideo} />
-		{/if}
 	</section>
 </section>

@@ -1,17 +1,23 @@
 <script lang="ts">
-	import { gachaStore, type GachaItemData } from '$entities/gacha'
+	import {
+		gachaStore,
+		type GachaData,
+		type GachaDataType,
+		type GachaItemData
+	} from '$entities/gacha'
 	import { ALERT } from '$shared/config'
 	import { GachaButton } from '$shared/gacha'
 	import { error } from '@sveltejs/kit'
 	import { createEventDispatcher } from 'svelte'
 
-	export let count: 1 | 10
+	export let currentGachaType: GachaDataType
+	export let activeGacha: GachaData
+	export let count: 1 | 10 | 11
 	export let isRetry: boolean = false
 
 	const PROBABILITY_MIN = 0.01
 	const SETUP_ITEM_LENGTH = 100 / PROBABILITY_MIN
 	let gachaItemIdList: GachaItemData['id'][] = []
-	$: currentGachaItems = $gachaStore.currentGacha?.gachaItems
 
 	const dispatch = createEventDispatcher()
 
@@ -45,19 +51,21 @@
 	$: startGacha = async () => {
 		gachaItemIdList = []
 		const resultItemIdList: number[] = []
-		if (!currentGachaItems) {
+		if (!activeGacha.gachaItems) {
 			alert(ALERT.NO_SELECTED_GACHA)
 			return
 		}
 
-		currentGachaItems.forEach(({ id, probability }) => {
-			const needSetupCount = probability / PROBABILITY_MIN
+		activeGacha.gachaItems.forEach(({ id, probability }) => {
+			const needSetupCount = (probability * 1000) / (PROBABILITY_MIN * 1000)
 			gachaItemIdList.push(...new Array(needSetupCount).fill(id))
 		})
 		gachaItemIdList = shuffleArray(gachaItemIdList)
 		resultItemIdList.push(...gachaItemIdList.slice(0, count))
 		const newGachaResults = resultItemIdList.map((resultId) => {
-			const resultItem = currentGachaItems.find(({ id }) => resultId === id)
+			const resultItem = activeGacha.gachaItems.find(
+				({ id }) => resultId === id
+			)
 			if (!resultItem) {
 				error(
 					400,
@@ -66,10 +74,11 @@
 			}
 			return resultItem
 		})
-		gachaStore.setResults(newGachaResults)
-		$gachaStore.currentGacha &&
+		gachaStore.setResults(currentGachaType, newGachaResults)
+		activeGacha &&
 			gachaStore.addPlayedCount(
-				$gachaStore.currentGacha.id,
+				currentGachaType,
+				activeGacha.id,
 				newGachaResults.length
 			)
 		dispatch('start')
@@ -80,5 +89,7 @@
 	bg={isRetry ? 'retry' : `call-${count}`}
 	on:click={() => startGacha()}
 >
-	{isRetry ? '재소환' : `${count}회 소환`}
+	{isRetry
+		? '재소환'
+		: `${count}회 ${currentGachaType === 'DATA_SUMMON' ? '소환' : '드로우'}`}
 </GachaButton>

@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { gachaStore } from '$entities/gacha'
+	import {
+		gachaStore,
+		type GachaData,
+		type GachaDataType
+	} from '$entities/gacha'
 	import { BackBlur } from '$shared/backBlur'
 	import { cn } from '$shared/lib'
 	import {
@@ -11,6 +15,8 @@
 	import GachaResultItemImage from '$widgets/gacha/ui/GachaResultItemImage.svelte'
 	import { createEventDispatcher } from 'svelte'
 
+	export let currentGachaType: GachaDataType
+	export let activeGacha: GachaData
 	$: resultLength = $gachaStore.results.length
 
 	const dispatch = createEventDispatcher()
@@ -25,7 +31,7 @@
 </script>
 
 <section
-	class="position-center flex-col-center h-full max-h-[500px] w-full bg-black/30 sm:px-content-side"
+	class="position-center flex-col-center h-full max-h-[500px] w-full bg-black/30"
 >
 	<BackBlur />
 	<div
@@ -37,25 +43,41 @@
 				'max-h-[160px] w-full flex-1 md:max-h-[220px]',
 				$gachaStore.results.length === 1
 					? 'flex-center'
-					: 'grid grid-cols-4 justify-center gap-3'
+					: $gachaStore.results.length === 10
+						? 'grid grid-cols-4 justify-center'
+						: 'grid grid-cols-12 justify-center'
 			)}
 		>
 			{#each $gachaStore.results as resultItem, i}
 				<li
 					class={cn(
 						'flex-center group relative',
-						(i === 4 || i === 5) && 'col-span-2'
+						$gachaStore.results.length === 10
+							? (i === 4 || i === 5) && 'col-span-2'
+							: i === 4
+								? 'col-span-2 col-start-3'
+								: i === 5
+									? 'col-span-2 col-start-6'
+									: i === 6
+										? 'col-span-2 col-start-9'
+										: 'col-span-3'
 					)}
 				>
-					<GachaResultItemImage id={resultItem.item.id} />
+					<GachaResultItemImage
+						id={resultItem.item.id}
+						{activeGacha}
+						{currentGachaType}
+					/>
 					<ItemTooltip name={resultItem.item.name} />
 				</li>
 			{/each}
 		</ul>
 		<div class="flex-center w-[200px] gap-[10%]">
-			{#if resultLength === 1 || resultLength === 10}
+			{#if resultLength === 1 || resultLength === 10 || resultLength === 11}
 				<GachaButton bg="confirm" on:click={onConfirm}>확인</GachaButton>
 				<GachaStartButton
+					{currentGachaType}
+					{activeGacha}
 					count={resultLength}
 					isRetry={true}
 					on:start={onStart}

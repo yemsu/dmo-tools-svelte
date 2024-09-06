@@ -16,7 +16,7 @@
 </script>
 
 <button
-	class="group absolute top-0 flex h-full w-[calc((100%-var(--current-card-w))/2)] items-center {directionStyles[
+	class="group absolute top-0 flex h-full items-center {directionStyles[
 		dir
 	]} pb-10"
 	on:click={() => dispatch('toDir', dir)}

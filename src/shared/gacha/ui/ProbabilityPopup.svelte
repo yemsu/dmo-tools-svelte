@@ -19,7 +19,9 @@
 	<div class="flex-col-center gap-[0.6em] text-center">
 		<h2 class="font-ns-bold text-md text-[yellow] md:text-lg2">확률 정보</h2>
 		<div class="text-xs2 md:text-sm">
-			<p>{gachaData.category}</p>
+			{#if gachaData.category}
+				<p>{gachaData.category}</p>
+			{/if}
 			<p>{gachaData.name}</p>
 		</div>
 	</div>
@@ -36,6 +38,7 @@
 						<GachaItemImage
 							id={gachaResult.item.id}
 							class="w-[30px] md:w-[35px]"
+							skeletonWidth="w-[30px] md:w-[35px]"
 						/>
 						<h3 class="flex-1">{gachaResult.item.name}</h3>
 						<span class="text-[#E8C590]">{gachaResult.probability}%</span>
