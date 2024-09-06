@@ -16,9 +16,9 @@
 </script>
 
 <button
-	class="group absolute top-0 flex h-full items-center {directionStyles[
+	class="group absolute top-[calc(50%-20px)] flex -translate-y-1/2 items-center md:top-[calc(50%-40px)] {directionStyles[
 		dir
-	]} pb-10"
+	]}"
 	on:click={() => dispatch('toDir', dir)}
 	{...$$restProps}
 >
