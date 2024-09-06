@@ -280,7 +280,7 @@
 						<span class="text-xs3 text-gray-300 md:text-xs">현재 내 능력치</span
 						>
 						<span class="font-semibold text-point">
-							{$myStats[statTypeSelected]}{resultUnit}</span
+							{numberFormatter($myStats[statTypeSelected])}{resultUnit}</span
 						>
 					</span>
 					<span>+</span>
