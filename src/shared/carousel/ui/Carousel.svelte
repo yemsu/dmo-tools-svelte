@@ -42,7 +42,11 @@
 		reset()
 		setTimeout(() => {
 			if (!emblaApi) return
-			emblaApi.reInit({ active: true, slidesToScroll: isMobile ? 1 : 3 })
+			emblaApi.reInit({
+				active: true,
+				slidesToScroll: 1,
+				loop: isMobile ? false : true
+			})
 			handleCarouselActive()
 		}, 60)
 	}
@@ -111,7 +115,7 @@
 	>
 		<div
 			class={cn(
-				'mx-auto flex md:w-[var(--card-carousel-w)] md:gap-[var(--card-gap)] sm:w-[var(--card-w)]',
+				'mx-auto flex w-[var(--card-w)] md:gap-[var(--card-gap)]',
 				isCarouselActive === false && 'justify-center'
 			)}
 		>

@@ -42,7 +42,7 @@
 		>
 			<div
 				class={cn(
-					'flex-center mb-3 w-full bg-primary-20/40 md:mx-content-side sm:mx-auto sm:mt-4 sm:max-w-[300px]',
+					'flex-center mx-auto mb-3 w-full bg-primary-20/40 md:max-w-[500px] sm:mt-4 sm:max-w-[300px]',
 					$gachaStore.isResultShow && 'opacity-0'
 				)}
 			>
@@ -54,7 +54,7 @@
 					/>
 				{/each}
 			</div>
-			<div class="-ml-content-side flex-1 sm:w-[100vw]">
+			<div class="flex-1 sm:-ml-content-side sm:w-[100vw]">
 				<GachaTypeTabContent
 					{currentGachaType}
 					gachaTabContent={gachaTabContents[currentGachaType]}
