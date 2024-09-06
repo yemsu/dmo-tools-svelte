@@ -13,8 +13,8 @@
 	const sizeStyles = {
 		icon: 'w-[1.5em] h-[1.5em] flex-center',
 		sm: 'px-2 py-1 text-xs',
-		md: 'min-w-[3.5em] px-2 py-1 text-md',
-		'md-lg': 'min-w-[3.5em] h-[30px] px-2',
+		md: 'min-w-[3.5em] px-2 py-1 text-xs md:text-md',
+		'md-lg': 'min-w-[3.5em] h-[30px] px-2 text-xs md:text-md',
 		lg: 'px-[1em] py-[0.5em] text-xs md:text-md min-w-[5em] h-input-h'
 	}
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }

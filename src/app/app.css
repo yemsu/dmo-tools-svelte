@@ -56,7 +56,8 @@
 		:root {
 			--content-side: 10px;
 			--gnb-h: 45px;
-			--input-h: 35px;
+			--input-h: 30px;
+			--tab-h: 25px;
 		}
 	}
 }

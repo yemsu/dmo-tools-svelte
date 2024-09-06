@@ -64,7 +64,7 @@
 <h2 class="ir">씰 세팅</h2>
 <div
 	class={cn(
-		'flex w-full flex-col items-start gap-2',
+		'flex w-full flex-col items-start gap-1.5',
 		'md:flex-row md:items-center md:justify-between'
 	)}
 >

@@ -65,7 +65,7 @@
 					<div class="rounded-sm bg-white/10 p-1">
 						<p class="mb-1 text-xs3">현재 내 능력치</p>
 						<ol class="flex items-center gap-1 text-xs3 leading-none">
-							{#each SEAL_COUNT_STEPS_BY_MASTER[seal.masterCount] as sealCount}
+							{#each SEAL_COUNT_STEPS_BY_MASTER[`${seal.masterCount}`] as sealCount}
 								<li
 									class={cn(
 										myStep.sealCount === sealCount
@@ -78,7 +78,7 @@
 							{/each}
 						</ol>
 						<span class="text-gray-300">
-							{#if !_objKeys(SEAL_EXCEPTION_PERCENT).includes(seal.id)}
+							{#if !_objKeys(SEAL_EXCEPTION_PERCENT).includes(`${seal.id}`)}
 								{seal.maxIncrease} * {myStep?.percent}% =
 							{/if}
 						</span>

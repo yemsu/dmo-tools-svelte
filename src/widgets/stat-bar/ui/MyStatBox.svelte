@@ -3,17 +3,10 @@
 	import { numberFormatter } from '$shared/lib'
 
 	export let stats: Stats
-	export let size: 'sm' | 'md' = 'md'
-	const sizeStyles = {
-		sm: 'gap-x-3 gap-y-2 md:gap-x-4',
-		md: 'gap-x-3 gap-y-2 md:gap-x-4'
-	}
 </script>
 
 <div
-	class="flex flex-wrap items-center {sizeStyles[
-		size
-	]} mx-auto md:justify-center sm:w-[17.1em]"
+	class="mx-auto flex flex-wrap items-center gap-x-3 gap-y-1 md:justify-center md:gap-x-4 sm:w-[17.1em]"
 	title="보유 씰 총 스탯"
 >
 	{#each STATS as stat (stat.type)}

@@ -7,7 +7,7 @@ export type SealMaterCount = (typeof SEAL_MASTER_COUNT_TYPE)[number]
 
 export type SealStepValues = [number, number, number, number, number, number]
 
-export type SealStepsByMaster = Record<SealMaterCount, SealStepValues>
+export type SealStepsByMaster = Record<`${SealMaterCount}`, SealStepValues>
 
 export type SealStep = {
 	percent: number
@@ -26,6 +26,7 @@ export type SealEfficiency = {
 	myStep: SealStep | undefined
 }
 
-export type SealExceptionStep = {
-	[key: SealEfficiency['id']]: SealStepValues
-}
+export type SealExceptionStep = Record<
+	`${SealEfficiency['id']}`,
+	SealStepValues
+>

@@ -9,8 +9,9 @@ import {
 import type { SealEfficiency, SealStep } from '../types'
 
 export const getSealPercentConfig = (sealId: number, stepIndex: number) => {
-	return _objKeys(SEAL_EXCEPTION_PERCENT).includes(sealId)
-		? SEAL_EXCEPTION_PERCENT[sealId][stepIndex]
+	const exceptionSealIds = _objKeys(SEAL_EXCEPTION_PERCENT)
+	return exceptionSealIds.includes(`${sealId}`)
+		? SEAL_EXCEPTION_PERCENT[`${sealId}`][stepIndex]
 		: SEAL_PERCENT_STEPS[stepIndex]
 }
 
@@ -20,7 +21,7 @@ export const getMySealStat = (seal: SealData, stepPercent: number) => {
 
 export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
 	const { masterCount } = seal
-	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[masterCount]
+	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[`${masterCount}`]
 	if (!sealCountSteps) {
 		console.error(
 			`${seal.name}: "${masterCount}": 잘못된 masterCount를 가지고 있는 씰이 존재합니다. 확인해주세요.`
@@ -40,7 +41,7 @@ export const getNextSteps = (seal: SealData, sealCount: number): SealStep[] => {
 
 export const getCurrentStep = (seal: SealData, crrStepSealCount: number) => {
 	const { masterCount } = seal
-	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[masterCount]
+	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[`${masterCount}`]
 	let step: SealStep | undefined
 	sealCountSteps.forEach((sealCountStep, i) => {
 		if (crrStepSealCount < sealCountStep) return
@@ -60,7 +61,7 @@ export const getCurrentStep = (seal: SealData, crrStepSealCount: number) => {
 
 export const getPrevStep = (seal: SealData, crrStepSealCount: number) => {
 	const { masterCount } = seal
-	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[masterCount]
+	const sealCountSteps = SEAL_COUNT_STEPS_BY_MASTER[`${masterCount}`]
 	let step: SealStep | undefined
 	sealCountSteps.forEach((sealCountStep, i) => {
 		if (crrStepSealCount <= sealCountStep) return
