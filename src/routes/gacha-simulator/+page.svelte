@@ -54,7 +54,7 @@
 					/>
 				{/each}
 			</div>
-			<div class="flex-1">
+			<div class="flex-col-center flex-1">
 				<GachaTypeTabContent
 					{currentGachaType}
 					gachaTabContent={gachaTabContents[currentGachaType]}

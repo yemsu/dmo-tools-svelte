@@ -58,14 +58,6 @@
 		<div class="flex p-2">
 			<slot name="probabilityButton"></slot>
 		</div>
-		{#if isNext || isPrev}
-			<div
-				class={cn(
-					'absolute left-0 top-0 size-full md:hidden',
-					isNext ? 'bg-gr-l' : 'bg-gr-r'
-				)}
-			></div>
-		{/if}
 	</div>
 	{#if activeGacha?.id === gachaData.id}
 		<slot name="startButtons"></slot>

@@ -58,23 +58,25 @@
 	})
 </script>
 
-<GachaList
-	{currentGachaType}
-	{activeGacha}
-	title={gachaTabContent.title}
-	gachaList={gachaTabContent.gachaList}
-	on:select={selectGacha}
-	on:start={startLoading}
-/>
-<InventoryButton {currentGachaType} gachaList={gachaTabContent.gachaList} />
-{#if $gachaStore.isResultShow}
-	<GachaResultView
+<div class="w-full md:pb-10">
+	<GachaList
 		{currentGachaType}
 		{activeGacha}
-		on:confirm={onResultViewConfirm}
+		title={gachaTabContent.title}
+		gachaList={gachaTabContent.gachaList}
+		on:select={selectGacha}
 		on:start={startLoading}
 	/>
-{/if}
-{#if isLoadingOn}
-	<GachaResultLoading on:endVideo={endLoadingVideo} />
-{/if}
+	<InventoryButton {currentGachaType} gachaList={gachaTabContent.gachaList} />
+	{#if $gachaStore.isResultShow}
+		<GachaResultView
+			{currentGachaType}
+			{activeGacha}
+			on:confirm={onResultViewConfirm}
+			on:start={startLoading}
+		/>
+	{/if}
+	{#if isLoadingOn}
+		<GachaResultLoading on:endVideo={endLoadingVideo} />
+	{/if}
+</div>
