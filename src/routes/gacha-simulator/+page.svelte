@@ -32,13 +32,13 @@
 </svelte:head>
 
 <section
-	class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200 sm:px-content-side"
+	class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200"
 >
 	<h2 class="ir">뽑기 시뮬레이터</h2>
 	<section class="flex-col-center h-full flex-1">
 		<GachaBg />
 		<div
-			class="relative flex h-full w-full flex-col md:h-[var(--gacha-select-view-h)] sm:-ml-content-side sm:w-[100vw]"
+			class="relative flex h-full w-full flex-col md:h-[var(--gacha-select-view-h)]"
 		>
 			<div
 				class={cn(

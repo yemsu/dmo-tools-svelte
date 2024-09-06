@@ -32,6 +32,6 @@
 		</button>
 	{/each}
 </div>
-<div class="relative -ml-content-side h-[80%] sm:w-[100vw]">
+<div class="relative h-[80%] sm:w-[100vw]">
 	<slot {currentGachaType}></slot>
 </div>

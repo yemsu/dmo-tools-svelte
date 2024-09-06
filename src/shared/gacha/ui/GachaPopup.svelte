@@ -36,7 +36,7 @@
 <section
 	bind:this={popupElement}
 	class={cn(
-		'position-center z-20 h-[380px] w-full max-w-[500px] md:h-[420px]',
+		'position-center z-20 h-[90%] w-[calc(100%-(var(--content-side)*2))] max-w-[500px] md:h-[420px] md:w-full',
 		className
 	)}
 >
