@@ -11,24 +11,33 @@
 	import { cn } from '$shared/lib'
 	import { createEventDispatcher, onMount } from 'svelte'
 
-	export let activeGachaType: GachaDataType
+	export let currentGachaType: GachaDataType
 	export let gachaList: GachaData[]
+	export let activeGacha: GachaData
 	export let title: string
 	let activeProbabilityGacha: GachaData | null = null
 	const dispatch = createEventDispatcher()
 
+	const selectGacha = (gachaData: GachaData) => {
+		dispatch('select', gachaData)
+	}
+
+	const onSelectCard = (event: CustomEvent<GachaData>) => {
+		selectGacha(event.detail)
+	}
+
+	const onCarouselReset = () => {
+		selectGacha(gachaList[0])
+	}
+
 	const onClickShowProbability = (gachaData: GachaData) => {
 		activeProbabilityGacha = gachaData
-		gachaStore.selectGacha(gachaData)
+		selectGacha(gachaData)
 	}
 
 	const onClickPopupClose = () => {
 		activeProbabilityGacha = null
 	}
-
-	onMount(() => {
-		console.log('gachaList', gachaList)
-	})
 </script>
 
 {#if gachaList.length > 0}
@@ -46,8 +55,16 @@
 				let:isPrev
 				let:isNext
 				dataList={gachaList}
+				on:reset={onCarouselReset}
 			>
-				<GachaCard gachaData={data} isActive={isSelected} {isPrev} {isNext}>
+				<GachaCard
+					gachaData={data}
+					isActive={isSelected}
+					{activeGacha}
+					{isPrev}
+					{isNext}
+					on:select={onSelectCard}
+				>
 					<ShowProbabilityButton
 						slot="probabilityButton"
 						on:click={() => onClickShowProbability(data)}
@@ -57,12 +74,14 @@
 						class="flex-center -ml-[5%] mt-6 w-[110%] gap-[10%] md:mt-8"
 					>
 						<GachaStartButton
-							{activeGachaType}
+							{currentGachaType}
+							{activeGacha}
 							count={1}
 							on:start={() => dispatch('start')}
 						/>
 						<GachaStartButton
-							{activeGachaType}
+							{currentGachaType}
+							{activeGacha}
 							count={10}
 							on:start={() => dispatch('start')}
 						/>

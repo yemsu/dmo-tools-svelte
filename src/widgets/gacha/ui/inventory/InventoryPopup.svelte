@@ -11,7 +11,7 @@
 	import { toast } from '$shared/toast'
 	import { createEventDispatcher } from 'svelte'
 
-	export let activeGachaType: GachaDataType
+	export let currentGachaType: GachaDataType
 	export let gachaList: GachaData[]
 
 	const dispatch = createEventDispatcher()
@@ -19,12 +19,12 @@
 	const cleanInventory = () => {
 		const isConfirm = confirm('뽑기 결과를 초기화 하시겠습니까?')
 		if (!isConfirm) return
-		gachaStore.cleanInventory(activeGachaType)
+		gachaStore.cleanInventory(currentGachaType)
 		toast.on(TOAST.GACHA.CLEAN_INVENTORY)
 	}
 	$: inventorySlots = new Array(63)
 		.fill(null)
-		.map((_, i) => $gachaStore.inventory[activeGachaType][i])
+		.map((_, i) => $gachaStore.inventory[currentGachaType][i])
 </script>
 
 <GachaPopup
@@ -54,7 +54,7 @@
 					<div class="flex gap-1">
 						<dt>{gacha.name}</dt>
 						<dd>
-							{$gachaStore.myPlayCounts[activeGachaType][gacha.id] || 0}회
+							{$gachaStore.myPlayCounts[currentGachaType][gacha.id] || 0}회
 						</dd>
 					</div>
 				{/each}

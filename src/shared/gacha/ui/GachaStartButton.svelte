@@ -1,6 +1,7 @@
 <script lang="ts">
 	import {
 		gachaStore,
+		type GachaData,
 		type GachaDataType,
 		type GachaItemData
 	} from '$entities/gacha'
@@ -9,14 +10,14 @@
 	import { error } from '@sveltejs/kit'
 	import { createEventDispatcher } from 'svelte'
 
-	export let activeGachaType: GachaDataType
+	export let currentGachaType: GachaDataType
+	export let activeGacha: GachaData
 	export let count: 1 | 10
 	export let isRetry: boolean = false
 
 	const PROBABILITY_MIN = 0.01
 	const SETUP_ITEM_LENGTH = 100 / PROBABILITY_MIN
 	let gachaItemIdList: GachaItemData['id'][] = []
-	$: currentGachaItems = $gachaStore.currentGacha?.gachaItems
 
 	const dispatch = createEventDispatcher()
 
@@ -50,19 +51,21 @@
 	$: startGacha = async () => {
 		gachaItemIdList = []
 		const resultItemIdList: number[] = []
-		if (!currentGachaItems) {
+		if (!activeGacha.gachaItems) {
 			alert(ALERT.NO_SELECTED_GACHA)
 			return
 		}
 
-		currentGachaItems.forEach(({ id, probability }) => {
+		activeGacha.gachaItems.forEach(({ id, probability }) => {
 			const needSetupCount = (probability * 1000) / (PROBABILITY_MIN * 1000)
 			gachaItemIdList.push(...new Array(needSetupCount).fill(id))
 		})
 		gachaItemIdList = shuffleArray(gachaItemIdList)
 		resultItemIdList.push(...gachaItemIdList.slice(0, count))
 		const newGachaResults = resultItemIdList.map((resultId) => {
-			const resultItem = currentGachaItems.find(({ id }) => resultId === id)
+			const resultItem = activeGacha.gachaItems.find(
+				({ id }) => resultId === id
+			)
 			if (!resultItem) {
 				error(
 					400,
@@ -71,11 +74,11 @@
 			}
 			return resultItem
 		})
-		gachaStore.setResults(activeGachaType, newGachaResults)
-		$gachaStore.currentGacha &&
+		gachaStore.setResults(currentGachaType, newGachaResults)
+		activeGacha &&
 			gachaStore.addPlayedCount(
-				activeGachaType,
-				$gachaStore.currentGacha.id,
+				currentGachaType,
+				activeGacha.id,
 				newGachaResults.length
 			)
 		dispatch('start')

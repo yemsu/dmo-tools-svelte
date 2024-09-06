@@ -12,7 +12,7 @@
 	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
 	import './gacha.css'
 
-	let activeGachaType = _objKeys(GACHA_TYPES)[0]
+	let currentGachaType = _objKeys(GACHA_TYPES)[0]
 
 	const gachaTabContents: GachaTabContents = {
 		DATA_SUMMON: {
@@ -49,15 +49,15 @@
 				{#each _objKeys(GACHA_TYPES) as gachaType (gachaType)}
 					<GachaTypeTabButton
 						{gachaType}
-						isActive={activeGachaType === gachaType}
-						on:click={() => (activeGachaType = gachaType)}
+						isActive={currentGachaType === gachaType}
+						on:click={() => (currentGachaType = gachaType)}
 					/>
 				{/each}
 			</div>
 			<div class="-ml-content-side flex-1 sm:w-[100vw]">
 				<GachaTypeTabContent
-					{activeGachaType}
-					gachaTabContent={gachaTabContents[activeGachaType]}
+					{currentGachaType}
+					gachaTabContent={gachaTabContents[currentGachaType]}
 				/>
 			</div>
 		</div>

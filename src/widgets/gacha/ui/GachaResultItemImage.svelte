@@ -1,11 +1,16 @@
 <script lang="ts">
 	import { GachaItemImage } from '$shared/gacha'
 	import BestItemGlowImage from '$lib/images/gacha/best-item-glow-1.png'
-	import { gachaStore, type GachaItemData } from '$entities/gacha'
+	import {
+		gachaStore,
+		type GachaData,
+		type GachaItemData
+	} from '$entities/gacha'
 	import { cn } from '$shared/lib'
 
 	export let id: GachaItemData['id']
-	$: isBestItem = $gachaStore.currentGacha?.gachaItems[0].item.id === id
+	export let activeGacha: GachaData
+	$: isBestItem = activeGacha.gachaItems[0].item.id === id
 </script>
 
 <span class={cn('relative', isBestItem && 'z-10')}>

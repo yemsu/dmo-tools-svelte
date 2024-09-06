@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { gachaStore, type GachaDataType } from '$entities/gacha'
+	import {
+		gachaStore,
+		type GachaData,
+		type GachaDataType
+	} from '$entities/gacha'
 	import { BackBlur } from '$shared/backBlur'
 	import { cn } from '$shared/lib'
 	import {
@@ -11,7 +15,8 @@
 	import GachaResultItemImage from '$widgets/gacha/ui/GachaResultItemImage.svelte'
 	import { createEventDispatcher } from 'svelte'
 
-	export let activeGachaType: GachaDataType
+	export let currentGachaType: GachaDataType
+	export let activeGacha: GachaData
 	$: resultLength = $gachaStore.results.length
 
 	const dispatch = createEventDispatcher()
@@ -48,7 +53,7 @@
 						(i === 4 || i === 5) && 'col-span-2'
 					)}
 				>
-					<GachaResultItemImage id={resultItem.item.id} />
+					<GachaResultItemImage id={resultItem.item.id} {activeGacha} />
 					<ItemTooltip name={resultItem.item.name} />
 				</li>
 			{/each}
@@ -57,7 +62,8 @@
 			{#if resultLength === 1 || resultLength === 10}
 				<GachaButton bg="confirm" on:click={onConfirm}>확인</GachaButton>
 				<GachaStartButton
-					{activeGachaType}
+					{currentGachaType}
+					{activeGacha}
 					count={resultLength}
 					isRetry={true}
 					on:start={onStart}

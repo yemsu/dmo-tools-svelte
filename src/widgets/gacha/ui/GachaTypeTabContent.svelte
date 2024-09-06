@@ -2,6 +2,7 @@
 	import {
 		GACHA_TYPES,
 		gachaStore,
+		type GachaData,
 		type GachaDataType,
 		type GachaTabContents
 	} from '$entities/gacha'
@@ -14,17 +15,18 @@
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
 
-	export let activeGachaType: GachaDataType
+	export let currentGachaType: GachaDataType
 	export let gachaTabContent: GachaTabContents[GachaDataType]
 	let isLoadingOn = false
+	$: activeGacha = gachaTabContent.gachaList[0]
 
 	const endLoadingVideo = () => {
 		isLoadingOn = false
 	}
 
-	const onResultViewConfirm = () => {
+	$: onResultViewConfirm = () => {
 		gachaStore.setResultShow(false)
-		gachaStore.setResults(activeGachaType, [])
+		gachaStore.setResults(currentGachaType, [])
 	}
 
 	$: startLoading = () => {
@@ -34,6 +36,10 @@
 		setTimeout(() => {
 			gachaStore.setResultShow(true)
 		}, 100)
+	}
+
+	const selectGacha = (event: CustomEvent<GachaData>) => {
+		activeGacha = event.detail
 	}
 
 	onMount(() => {
@@ -53,15 +59,18 @@
 </script>
 
 <GachaList
-	{activeGachaType}
+	{currentGachaType}
+	{activeGacha}
 	title={gachaTabContent.title}
 	gachaList={gachaTabContent.gachaList}
+	on:select={selectGacha}
 	on:start={startLoading}
 />
-<InventoryButton {activeGachaType} gachaList={gachaTabContent.gachaList} />
+<InventoryButton {currentGachaType} gachaList={gachaTabContent.gachaList} />
 {#if $gachaStore.isResultShow}
 	<GachaResultView
-		{activeGachaType}
+		{currentGachaType}
+		{activeGacha}
 		on:confirm={onResultViewConfirm}
 		on:start={startLoading}
 	/>

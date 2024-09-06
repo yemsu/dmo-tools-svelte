@@ -7,7 +7,6 @@ import type {
 import { writable } from 'svelte/store'
 
 type GachaStore = {
-	currentGacha: GachaData | null
 	results: GachaResultData[]
 	inventory: Record<GachaDataType, InventoryItem[]>
 	isResultShow: boolean
@@ -20,7 +19,6 @@ const DEFAULT_PLAY_COUNTS = { DATA_SUMMON: {}, DIGITAL_DRAW: {} }
 
 const createGachaStore = () => {
 	const { subscribe, update } = writable<GachaStore>({
-		currentGacha: null,
 		results: [],
 		myPlayCounts: DEFAULT_PLAY_COUNTS,
 		inventory: DEFAULT_INVENTORY,
@@ -29,17 +27,14 @@ const createGachaStore = () => {
 	})
 	return {
 		subscribe,
-		selectGacha: (data: GachaData | null) => {
-			update((prev) => ({ ...prev, currentGacha: data }))
-		},
 		setResults: (
-			activeGachaType: GachaDataType,
+			currentGachaType: GachaDataType,
 			newResults: GachaResultData[]
 		) => {
 			const newItems = newResults.map((newResult) => newResult.item)
 			update((prev) => {
 				const { inventory } = prev
-				const newInventory: InventoryItem[] = [...inventory[activeGachaType]]
+				const newInventory: InventoryItem[] = [...inventory[currentGachaType]]
 				newItems.forEach((newItem) => {
 					const prevItem = newInventory.find(
 						({ item }) => item.id === newItem.id
@@ -58,7 +53,7 @@ const createGachaStore = () => {
 					results: newResults,
 					inventory: {
 						...inventory,
-						[activeGachaType]: newInventory
+						[currentGachaType]: newInventory
 					}
 				}
 			})
@@ -70,7 +65,7 @@ const createGachaStore = () => {
 			}))
 		},
 		addPlayedCount: (
-			activeGachaType: GachaDataType,
+			currentGachaType: GachaDataType,
 			gachaId: number,
 			count: number
 		) => {
@@ -80,19 +75,19 @@ const createGachaStore = () => {
 					...prev,
 					myPlayCounts: {
 						...myPlayCounts,
-						[activeGachaType]: {
-							...myPlayCounts[activeGachaType],
-							[gachaId]: (myPlayCounts[activeGachaType][gachaId] || 0) + count
+						[currentGachaType]: {
+							...myPlayCounts[currentGachaType],
+							[gachaId]: (myPlayCounts[currentGachaType][gachaId] || 0) + count
 						}
 					}
 				}
 			})
 		},
-		cleanInventory: (activeGachaType: GachaDataType) => {
+		cleanInventory: (currentGachaType: GachaDataType) => {
 			update((prev) => ({
 				...prev,
-				myPlayCounts: { ...prev.myPlayCounts, [activeGachaType]: {} },
-				inventory: { ...prev.inventory, [activeGachaType]: {} }
+				myPlayCounts: { ...prev.myPlayCounts, [currentGachaType]: {} },
+				inventory: { ...prev.inventory, [currentGachaType]: {} }
 			}))
 		},
 		setResultShow: (isResultShow: boolean) => {

@@ -3,7 +3,7 @@
 	import gachaSymbolImg from '$lib/images/gacha/gacha-symbol.jpg'
 	import { _objKeys, cn } from '$shared/lib'
 
-	let activeGachaType = _objKeys(GACHA_TYPES)[0]
+	let currentGachaType = _objKeys(GACHA_TYPES)[0]
 </script>
 
 <div
@@ -15,11 +15,11 @@
 				'flex-center h-tab-h flex-1 gap-2 py-1',
 				'border text-xs2 transition-all md:border-2 md:text-xs',
 				'hover:border-primary-50 hover:bg-primary-50/20',
-				activeGachaType === gachaType
+				currentGachaType === gachaType
 					? 'border-primary-50 bg-primary-50/20'
 					: 'border-transparent'
 			)}
-			on:click={() => (activeGachaType = gachaType)}
+			on:click={() => (currentGachaType = gachaType)}
 		>
 			<img
 				src={gachaSymbolImg}
@@ -33,5 +33,5 @@
 	{/each}
 </div>
 <div class="relative -ml-content-side h-[80%] sm:w-[100vw]">
-	<slot {activeGachaType}></slot>
+	<slot {currentGachaType}></slot>
 </div>

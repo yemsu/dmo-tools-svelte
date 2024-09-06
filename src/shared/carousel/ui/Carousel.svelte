@@ -5,7 +5,7 @@
 	import { cn } from '$shared/lib'
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 	import emblaCarousel from 'embla-carousel-svelte'
-	import { onDestroy, onMount } from 'svelte'
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
 	type T = $$Generic<{ id: number }>
 	export let dataList: T[] = []
@@ -17,6 +17,8 @@
 	let activeIndex: number = 0
 	let resizeDebounceTimer: NodeJS.Timeout | null = null
 	let isMobile: boolean | null = null
+
+	const dispatch = createEventDispatcher()
 
 	const handleCarouselActive = () => {
 		if (!emblaApi) return
@@ -30,7 +32,7 @@
 
 	const reset = () => {
 		if (isCarouselActive !== null) isCarouselActive = null
-		gachaStore.selectGacha($page.data.gachaSummons[0])
+		dispatch('reset')
 		activeIndex = 0
 	}
 

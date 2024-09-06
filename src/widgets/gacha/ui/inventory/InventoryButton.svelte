@@ -3,7 +3,7 @@
 	import invenImage from '$lib/images/gacha/inven.jpg'
 	import InventoryPopup from './InventoryPopup.svelte'
 
-	export let activeGachaType: GachaDataType
+	export let currentGachaType: GachaDataType
 	export let gachaList: GachaData[]
 	let isPopupShow = false
 
@@ -24,5 +24,5 @@
 	<img src={invenImage} alt="" width="34" height="34" />
 </button>
 {#if isPopupShow}
-	<InventoryPopup {activeGachaType} {gachaList} on:close={closePopup} />
+	<InventoryPopup {currentGachaType} {gachaList} on:close={closePopup} />
 {/if}
