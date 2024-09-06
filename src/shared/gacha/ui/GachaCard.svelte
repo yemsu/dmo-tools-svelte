@@ -34,7 +34,7 @@
 				<span>{gachaData.category}</span>
 				<span>{gachaData.name}</span>
 			</h2>
-			<div>
+			<div class="aspect-[1/0.9078] w-[var(--gacha-card-w)] bg-black/30">
 				{#await import(`$lib/images/gacha/gacha-${gachaData.id}.jpg`) then { default: src }}
 					<img
 						{src}
