@@ -36,6 +36,7 @@
 						<GachaItemImage
 							id={gachaResult.item.id}
 							class="w-[30px] md:w-[35px]"
+							skeletonWidth="w-[30px] md:w-[35px]"
 						/>
 						<h3 class="flex-1">{gachaResult.item.name}</h3>
 						<span class="text-[#E8C590]">{gachaResult.probability}%</span>
