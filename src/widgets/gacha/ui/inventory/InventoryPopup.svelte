@@ -22,7 +22,7 @@
 		gachaStore.cleanInventory(currentGachaType)
 		toast.on(TOAST.GACHA.CLEAN_INVENTORY)
 	}
-	$: inventorySlots = new Array(63)
+	$: inventorySlots = new Array(99)
 		.fill(null)
 		.map((_, i) => $gachaStore.inventory[currentGachaType][i])
 </script>
