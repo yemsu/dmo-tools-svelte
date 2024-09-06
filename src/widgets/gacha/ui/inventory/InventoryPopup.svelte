@@ -49,12 +49,24 @@
 			title="뽑기 횟수"
 		>
 			<h3 class="ir">뽑기 횟수</h3>
-			<dl class="flex flex-wrap gap-x-[1em]">
+			<dl class="flex flex-wrap gap-[0.2em] md:gap-[0.5em]">
 				{#each gachaList as gacha (gacha.id)}
-					<div class="flex gap-1">
-						<dt>{gacha.name}</dt>
-						<dd>
-							{$gachaStore.myPlayCounts[currentGachaType][gacha.id] || 0}회
+					{@const playCount =
+						$gachaStore.myPlayCounts[currentGachaType][gacha.id] || 0}
+					{@const playCountDivider =
+						currentGachaType === 'DATA_SUMMON' ? 1 : 11}
+					{@const playCountUnit =
+						currentGachaType === 'DATA_SUMMON' ? '회' : '번'}
+					<div
+						class="flex-center gap-1 rounded-full bg-black/30 px-[0.8em] pb-[0.35em] pt-[0.5em] leading-none"
+					>
+						<dt class="text-gray-400">
+							{gacha.name.replace(' 디지털 드로우', '')}
+						</dt>
+						<dd class="flex-center">
+							<span class={cn(playCount > 0 && 'font-semibold text-point')}>
+								{playCount / playCountDivider}
+							</span>{playCountUnit}
 						</dd>
 					</div>
 				{/each}
