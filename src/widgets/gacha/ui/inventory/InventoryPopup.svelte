@@ -1,25 +1,30 @@
 <script lang="ts">
-	import { gachaStore } from '$entities/gacha'
-	import { cn } from '$shared/lib'
-	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
-	import { createEventDispatcher } from 'svelte'
-	import { toast } from '$shared/toast'
-	import { TOAST } from '$shared/config'
-	import { page } from '$app/stores'
+	import {
+		gachaStore,
+		type GachaData,
+		type GachaDataType
+	} from '$entities/gacha'
 	import { BackBlur } from '$shared/backBlur'
+	import { TOAST } from '$shared/config'
+	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
+	import { cn } from '$shared/lib'
+	import { toast } from '$shared/toast'
+	import { createEventDispatcher } from 'svelte'
+
+	export let activeGachaType: GachaDataType
+	export let gachaList: GachaData[]
 
 	const dispatch = createEventDispatcher()
 
 	const cleanInventory = () => {
 		const isConfirm = confirm('뽑기 결과를 초기화 하시겠습니까?')
 		if (!isConfirm) return
-		gachaStore.cleanInventory()
+		gachaStore.cleanInventory(activeGachaType)
 		toast.on(TOAST.GACHA.CLEAN_INVENTORY)
 	}
-
 	$: inventorySlots = new Array(63)
 		.fill(null)
-		.map((_, i) => $gachaStore.inventory[i])
+		.map((_, i) => $gachaStore.inventory[activeGachaType][i])
 </script>
 
 <GachaPopup
@@ -45,10 +50,12 @@
 		>
 			<h3 class="ir">뽑기 횟수</h3>
 			<dl class="flex flex-wrap gap-x-[1em]">
-				{#each $page.data.gachaSummons as gacha (gacha.id)}
+				{#each gachaList as gacha (gacha.id)}
 					<div class="flex gap-1">
 						<dt>{gacha.name}</dt>
-						<dd>{$gachaStore.myPlayCounts[gacha.id] || 0}회</dd>
+						<dd>
+							{$gachaStore.myPlayCounts[activeGachaType][gacha.id] || 0}회
+						</dd>
 					</div>
 				{/each}
 			</dl>

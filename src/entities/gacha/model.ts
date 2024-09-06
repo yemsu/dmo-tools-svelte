@@ -1,5 +1,6 @@
 import type {
 	GachaData,
+	GachaDataType,
 	GachaResultData,
 	InventoryItem
 } from '$entities/gacha/type'
@@ -8,17 +9,22 @@ import { writable } from 'svelte/store'
 type GachaStore = {
 	currentGacha: GachaData | null
 	results: GachaResultData[]
-	inventory: InventoryItem[]
+	inventory: Record<GachaDataType, InventoryItem[]>
+	isResultShow: boolean
 	isLoadingVolumeOn: boolean
-	myPlayCounts: Record<number, number>
+	myPlayCounts: Record<GachaDataType, Record<GachaData['id'], number>>
 }
+
+const DEFAULT_INVENTORY = { DATA_SUMMON: [], DIGITAL_DRAW: [] }
+const DEFAULT_PLAY_COUNTS = { DATA_SUMMON: {}, DIGITAL_DRAW: {} }
 
 const createGachaStore = () => {
 	const { subscribe, update } = writable<GachaStore>({
 		currentGacha: null,
 		results: [],
-		myPlayCounts: {},
-		inventory: [],
+		myPlayCounts: DEFAULT_PLAY_COUNTS,
+		inventory: DEFAULT_INVENTORY,
+		isResultShow: false,
 		isLoadingVolumeOn: true
 	})
 	return {
@@ -26,10 +32,14 @@ const createGachaStore = () => {
 		selectGacha: (data: GachaData | null) => {
 			update((prev) => ({ ...prev, currentGacha: data }))
 		},
-		setResults: (newResults: GachaResultData[]) => {
+		setResults: (
+			activeGachaType: GachaDataType,
+			newResults: GachaResultData[]
+		) => {
 			const newItems = newResults.map((newResult) => newResult.item)
 			update((prev) => {
-				const newInventory: InventoryItem[] = [...prev.inventory]
+				const { inventory } = prev
+				const newInventory: InventoryItem[] = [...inventory[activeGachaType]]
 				newItems.forEach((newItem) => {
 					const prevItem = newInventory.find(
 						({ item }) => item.id === newItem.id
@@ -46,7 +56,10 @@ const createGachaStore = () => {
 				return {
 					...prev,
 					results: newResults,
-					inventory: newInventory
+					inventory: {
+						...inventory,
+						[activeGachaType]: newInventory
+					}
 				}
 			})
 		},
@@ -56,20 +69,36 @@ const createGachaStore = () => {
 				isLoadingVolumeOn: !prev.isLoadingVolumeOn
 			}))
 		},
-		addPlayedCount: (gachaId: number, count: number) => {
+		addPlayedCount: (
+			activeGachaType: GachaDataType,
+			gachaId: number,
+			count: number
+		) => {
+			update((prev) => {
+				const { myPlayCounts } = prev
+				return {
+					...prev,
+					myPlayCounts: {
+						...myPlayCounts,
+						[activeGachaType]: {
+							...myPlayCounts[activeGachaType],
+							[gachaId]: (myPlayCounts[activeGachaType][gachaId] || 0) + count
+						}
+					}
+				}
+			})
+		},
+		cleanInventory: (activeGachaType: GachaDataType) => {
 			update((prev) => ({
 				...prev,
-				myPlayCounts: {
-					...prev.myPlayCounts,
-					[gachaId]: (prev.myPlayCounts[gachaId] || 0) + count
-				}
+				myPlayCounts: { ...prev.myPlayCounts, [activeGachaType]: {} },
+				inventory: { ...prev.inventory, [activeGachaType]: {} }
 			}))
 		},
-		cleanInventory: () => {
+		setResultShow: (isResultShow: boolean) => {
 			update((prev) => ({
 				...prev,
-				myPlayCounts: {},
-				inventory: []
+				isResultShow
 			}))
 		}
 	}

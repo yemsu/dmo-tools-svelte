@@ -1,6 +1,10 @@
 <script lang="ts">
+	import type { GachaData, GachaDataType } from '$entities/gacha'
 	import invenImage from '$lib/images/gacha/inven.jpg'
 	import InventoryPopup from './InventoryPopup.svelte'
+
+	export let activeGachaType: GachaDataType
+	export let gachaList: GachaData[]
 	let isPopupShow = false
 
 	const openPopup = () => {
@@ -20,5 +24,5 @@
 	<img src={invenImage} alt="" width="34" height="34" />
 </button>
 {#if isPopupShow}
-	<InventoryPopup on:close={closePopup} />
+	<InventoryPopup {activeGachaType} {gachaList} on:close={closePopup} />
 {/if}

@@ -1,10 +1,15 @@
 <script lang="ts">
-	import { gachaStore, type GachaItemData } from '$entities/gacha'
+	import {
+		gachaStore,
+		type GachaDataType,
+		type GachaItemData
+	} from '$entities/gacha'
 	import { ALERT } from '$shared/config'
 	import { GachaButton } from '$shared/gacha'
 	import { error } from '@sveltejs/kit'
 	import { createEventDispatcher } from 'svelte'
 
+	export let activeGachaType: GachaDataType
 	export let count: 1 | 10
 	export let isRetry: boolean = false
 
@@ -51,7 +56,7 @@
 		}
 
 		currentGachaItems.forEach(({ id, probability }) => {
-			const needSetupCount = probability / PROBABILITY_MIN
+			const needSetupCount = (probability * 1000) / (PROBABILITY_MIN * 1000)
 			gachaItemIdList.push(...new Array(needSetupCount).fill(id))
 		})
 		gachaItemIdList = shuffleArray(gachaItemIdList)
@@ -66,9 +71,10 @@
 			}
 			return resultItem
 		})
-		gachaStore.setResults(newGachaResults)
+		gachaStore.setResults(activeGachaType, newGachaResults)
 		$gachaStore.currentGacha &&
 			gachaStore.addPlayedCount(
+				activeGachaType,
 				$gachaStore.currentGacha.id,
 				newGachaResults.length
 			)

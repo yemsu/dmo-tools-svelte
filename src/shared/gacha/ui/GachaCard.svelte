@@ -31,7 +31,9 @@
 			<h2
 				class="flex-col-center gap-[0.4em] whitespace-pre-line py-3 text-center text-xs2 md:text-xs"
 			>
-				<span>{gachaData.category}</span>
+				{#if gachaData.category}
+					<span>{gachaData.category}</span>
+				{/if}
 				<span>{gachaData.name}</span>
 			</h2>
 			<div class="aspect-[1/0.9078] w-[var(--gacha-card-w)] bg-black/30">

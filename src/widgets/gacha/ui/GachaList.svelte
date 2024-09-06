@@ -1,15 +1,20 @@
 <script lang="ts">
-	import { gachaStore, type GachaData } from '$entities/gacha'
+	import {
+		gachaStore,
+		type GachaData,
+		type GachaDataType
+	} from '$entities/gacha'
 	import { Carousel } from '$shared/carousel'
 	import { GachaCard, GachaTitle, ProbabilityPopup } from '$shared/gacha'
 	import GachaStartButton from '$shared/gacha/ui/GachaStartButton.svelte'
 	import ShowProbabilityButton from '$shared/gacha/ui/ShowProbabilityButton.svelte'
-	import { createEventDispatcher } from 'svelte'
+	import { cn } from '$shared/lib'
+	import { createEventDispatcher, onMount } from 'svelte'
 
+	export let activeGachaType: GachaDataType
 	export let gachaList: GachaData[]
 	export let title: string
 	let activeProbabilityGacha: GachaData | null = null
-
 	const dispatch = createEventDispatcher()
 
 	const onClickShowProbability = (gachaData: GachaData) => {
@@ -20,11 +25,18 @@
 	const onClickPopupClose = () => {
 		activeProbabilityGacha = null
 	}
+
+	onMount(() => {
+		console.log('gachaList', gachaList)
+	})
 </script>
 
 {#if gachaList.length > 0}
 	<div
-		class="flex-col-center gap-6 pt-2 md:gap-10 md:pt-[calc(var(--tab-h)/2)]"
+		class={cn(
+			'flex-col-center gap-6 pt-2 md:gap-10 md:pt-[calc(var(--tab-h)/2)]',
+			$gachaStore.isResultShow && 'opacity-0'
+		)}
 	>
 		<GachaTitle class="max-w-[var(--gacha-title-max-w)]">{title}</GachaTitle>
 		<section class="flex w-full gap-5 overflow-hidden md:gap-10">
@@ -44,8 +56,16 @@
 						slot="startButtons"
 						class="flex-center -ml-[5%] mt-6 w-[110%] gap-[10%] md:mt-8"
 					>
-						<GachaStartButton count={1} on:start={() => dispatch('start')} />
-						<GachaStartButton count={10} on:start={() => dispatch('start')} />
+						<GachaStartButton
+							{activeGachaType}
+							count={1}
+							on:start={() => dispatch('start')}
+						/>
+						<GachaStartButton
+							{activeGachaType}
+							count={10}
+							on:start={() => dispatch('start')}
+						/>
 					</div>
 				</GachaCard>
 			</Carousel>
