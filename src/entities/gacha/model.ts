@@ -87,7 +87,7 @@ const createGachaStore = () => {
 			update((prev) => ({
 				...prev,
 				myPlayCounts: { ...prev.myPlayCounts, [currentGachaType]: {} },
-				inventory: { ...prev.inventory, [currentGachaType]: {} }
+				inventory: { ...prev.inventory, [currentGachaType]: [] }
 			}))
 		},
 		setResultShow: (isResultShow: boolean) => {
