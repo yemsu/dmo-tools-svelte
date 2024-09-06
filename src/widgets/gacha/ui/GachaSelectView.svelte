@@ -60,7 +60,7 @@
 {:else}
 	<div class="flex-center size-full">
 		<p class="w-full rounded-md bg-black/50 p-10 text-center text-lg">
-			9월 6일 금요일 오후 8시 <br /> 업데이트 예정
+			9월 7일 토요일 오전 10시<br /> 업데이트 예정
 		</p>
 	</div>
 {/if}
