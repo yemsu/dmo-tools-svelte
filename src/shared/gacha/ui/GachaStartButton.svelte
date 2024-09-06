@@ -12,7 +12,7 @@
 
 	export let currentGachaType: GachaDataType
 	export let activeGacha: GachaData
-	export let count: 1 | 10
+	export let count: 1 | 10 | 11
 	export let isRetry: boolean = false
 
 	const PROBABILITY_MIN = 0.01
@@ -89,5 +89,7 @@
 	bg={isRetry ? 'retry' : `call-${count}`}
 	on:click={() => startGacha()}
 >
-	{isRetry ? '재소환' : `${count}회 소환`}
+	{isRetry
+		? '재소환'
+		: `${count}회 ${currentGachaType === 'DATA_SUMMON' ? '소환' : '드로우'}`}
 </GachaButton>

@@ -38,7 +38,7 @@
 	<section class="flex-col-center h-full flex-1">
 		<GachaBg />
 		<div
-			class="relative flex h-full w-full flex-col md:h-[var(--gacha-select-view-h)]"
+			class="relative flex h-full w-full flex-col md:h-[var(--gacha-select-view-h)] sm:-ml-content-side sm:w-[100vw]"
 		>
 			<div
 				class={cn(
@@ -54,7 +54,7 @@
 					/>
 				{/each}
 			</div>
-			<div class="flex-1 sm:-ml-content-side sm:w-[100vw]">
+			<div class="flex-1">
 				<GachaTypeTabContent
 					{currentGachaType}
 					gachaTabContent={gachaTabContents[currentGachaType]}

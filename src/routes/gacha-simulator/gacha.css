@@ -7,7 +7,7 @@
 		--gacha-bg-w: 798px;
 		--gacha-bg-h: calc(798px * 0.5639);
 		/* title */
-		--gacha-title-max-w: 500px;
+		--gacha-title-max-w: 400px;
 		/* card sizes */
 		--card-w: 152px;
 		--current-card-scale: 1.1;
@@ -21,7 +21,7 @@
 	}
 	@media screen and (max-width: 768px) {
 		:root {
-			--gacha-title-max-w: 400px;
+			--gacha-title-max-w: 300px;
 			--card-gap: 0px;
 			--card-w: 135px;
 		}

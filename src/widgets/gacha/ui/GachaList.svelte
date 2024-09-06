@@ -74,18 +74,27 @@
 						slot="startButtons"
 						class="flex-center -ml-[5%] mt-6 w-[110%] gap-[10%] md:mt-8"
 					>
-						<GachaStartButton
-							{currentGachaType}
-							{activeGacha}
-							count={1}
-							on:start={() => dispatch('start')}
-						/>
-						<GachaStartButton
-							{currentGachaType}
-							{activeGacha}
-							count={10}
-							on:start={() => dispatch('start')}
-						/>
+						{#if currentGachaType === 'DATA_SUMMON'}
+							<GachaStartButton
+								{currentGachaType}
+								{activeGacha}
+								count={1}
+								on:start={() => dispatch('start')}
+							/>
+							<GachaStartButton
+								{currentGachaType}
+								{activeGacha}
+								count={10}
+								on:start={() => dispatch('start')}
+							/>
+						{:else}
+							<GachaStartButton
+								{currentGachaType}
+								{activeGacha}
+								count={11}
+								on:start={() => dispatch('start')}
+							/>
+						{/if}
 					</div>
 				</GachaCard>
 			</Carousel>
