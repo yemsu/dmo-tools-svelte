@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { gachaStore } from '$entities/gacha'
+	import { gachaStore, type GachaDataType } from '$entities/gacha'
 	import Arrow from '$shared/carousel/ui/Arrow.svelte'
 	import { cn } from '$shared/lib'
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
@@ -9,6 +9,7 @@
 
 	type T = $$Generic<{ id: number }>
 	export let dataList: T[] = []
+	export let currentGachaType: GachaDataType
 	let emblaApi: EmblaCarouselType | null = null
 	let options: EmblaOptionsType | null = {
 		align: 'start'
@@ -34,6 +35,7 @@
 		if (isCarouselActive !== null) isCarouselActive = null
 		dispatch('reset')
 		activeIndex = 0
+		emblaApi?.scrollTo(0)
 	}
 
 	const initCarousel = () => {
@@ -90,6 +92,7 @@
 	})
 
 	$: isMobile !== null && initCarousel()
+	$: currentGachaType && initCarousel()
 </script>
 
 <div

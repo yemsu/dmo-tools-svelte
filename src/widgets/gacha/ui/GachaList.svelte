@@ -50,12 +50,13 @@
 		<GachaTitle class="max-w-[var(--gacha-title-max-w)]">{title}</GachaTitle>
 		<section class="flex w-full gap-5 overflow-hidden md:gap-10">
 			<Carousel
+				{currentGachaType}
+				dataList={gachaList}
+				on:reset={onCarouselReset}
 				let:data
 				let:isSelected
 				let:isPrev
 				let:isNext
-				dataList={gachaList}
-				on:reset={onCarouselReset}
 			>
 				<GachaCard
 					gachaData={data}

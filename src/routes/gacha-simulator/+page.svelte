@@ -42,7 +42,7 @@
 		>
 			<div
 				class={cn(
-					'flex-center mb-3 bg-primary-20/40 md:mx-content-side sm:mx-auto sm:mt-4 sm:max-w-[300px]',
+					'flex-center mb-3 w-full bg-primary-20/40 md:mx-content-side sm:mx-auto sm:mt-4 sm:max-w-[300px]',
 					$gachaStore.isResultShow && 'opacity-0'
 				)}
 			>
