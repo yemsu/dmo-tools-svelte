@@ -6,7 +6,7 @@
 	import {
 		GachaResultLoading,
 		GachaResultView,
-		GachaSelectView,
+		GachaList,
 		GachaTypeTab
 	} from '$widgets/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
@@ -58,7 +58,7 @@
 		<div class="relative h-full w-full md:h-[var(--gacha-select-view-h)]">
 			<div class={cn('h-full', isResultVisible && 'opacity-0')}>
 				<GachaTypeTab let:gachaList let:title>
-					<GachaSelectView {title} {gachaList} on:start={startLoading} />
+					<GachaList {title} {gachaList} on:start={startLoading} />
 				</GachaTypeTab>
 			</div>
 			<InventoryButton />
