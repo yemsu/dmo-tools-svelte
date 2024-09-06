@@ -188,11 +188,11 @@
 </svelte:head>
 
 <h2 class="ir">{MENUS.CALC.name}</h2>
-<div class="flex shrink-0 flex-col gap-2">
-	<div class="flex w-full flex-col gap-2">
+<div class="flex shrink-0 flex-col gap-1.5">
+	<div class="flex w-full flex-col gap-1.5">
 		<dl>
 			<StatBarWrap class="flex-center">
-				<MyStatBox stats={$myStats} size="sm" />
+				<MyStatBox stats={$myStats} />
 			</StatBarWrap>
 		</dl>
 		<Tabs>
@@ -210,7 +210,7 @@
 	</div>
 	<form
 		on:submit|preventDefault={onSubmit}
-		class="flex w-full flex-1 items-center gap-2 md:w-auto"
+		class="flex w-full flex-1 items-center gap-1 md:w-auto"
 	>
 		<Input
 			bind:inputElement={goalStatInput}
@@ -276,26 +276,27 @@
 		<StatBarWrap>
 			<div>
 				<p class="flex-center gap-2 text-md leading-none md:text-lg2">
-					<span class="flex flex-col">
-						<span class="text-xs3 text-gray-300 md:text-xs">현재 내 능력치</span
-						>
-						<span class="font-semibold text-point">
-							{$myStats[statTypeSelected]}{resultUnit}</span
-						>
+					<span class="flex flex-col sm:gap-[2px]">
+						<span class="text-xs4 text-gray-300 md:text-xs">
+							현재 내 능력치
+						</span>
+						<span class="text-xs2 font-semibold text-point md:text-md">
+							{numberFormatter($myStats[statTypeSelected])}{resultUnit}
+						</span>
 					</span>
 					<span>+</span>
-					<span class="flex flex-col">
+					<span class="flex flex-col sm:gap-[2px]">
 						<span class="text-xs3 text-gray-300 md:text-xs"
 							>얻어야하는 능력치</span
 						>
-						<span class="font-semibold text-point"
+						<span class="text-xs2 font-semibold text-point md:text-md"
 							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
 						>
 					</span>
 					<span>=</span>
-					<span class="flex flex-col">
+					<span class="flex flex-col sm:gap-[2px]">
 						<span class="text-xs3 text-gray-300 md:text-xs">최종 능력치</span>
-						<span class="font-semibold text-point">
+						<span class="text-xs2 font-semibold text-point md:text-md">
 							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
 						</span>
 					</span>

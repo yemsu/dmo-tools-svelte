@@ -14,8 +14,8 @@
 	const sizeStyles = {
 		xs: 'h-[25px] text-xs',
 		sm: 'h-[30px] text-xs',
-		'sm-md': 'h-[30px] text-md',
-		md: 'h-input-h px-2 text-md'
+		'sm-md': 'h-[30px] text-xs md:text-md',
+		md: 'h-input-h px-2 text-xs md:text-md'
 	}
 
 	const handleInput = (event: Event) => {
