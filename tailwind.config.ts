@@ -60,7 +60,8 @@ export default {
 					'b-2': 'var(--price-b-2))'
 				},
 				point: 'hsl(var(--point))',
-				warning: 'hsl(var(--warning))'
+				warning: 'hsl(var(--warning))',
+				red: 'hsl(var(--red))'
 			},
 			spacing: {
 				'header-h': 'var(--header-h)',

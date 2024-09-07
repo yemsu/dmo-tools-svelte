@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { GACHA_TYPES, type GachaDataType } from '$entities/gacha'
 	import gachaSymbolImg from '$lib/images/gacha/gacha-symbol.jpg'
+	import { NewBadge } from '$shared/badge'
 	import { _objKeys, cn } from '$shared/lib'
 
 	export let gachaType: GachaDataType
@@ -17,5 +18,10 @@
 	on:click
 >
 	<img src={gachaSymbolImg} alt="" width="22" height="23" class="w-[1.2em]" />
-	{GACHA_TYPES[gachaType]}
+	<span class="relative">
+		{GACHA_TYPES[gachaType]}
+		{#if gachaType === 'DIGITAL_DRAW'}
+			<NewBadge />
+		{/if}
+	</span>
 </button>

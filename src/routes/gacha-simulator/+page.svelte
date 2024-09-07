@@ -8,7 +8,7 @@
 	import { META } from '$shared/config'
 	import { GachaBg } from '$shared/gacha'
 	import { _objKeys, cn } from '$shared/lib'
-	import { GachaTypeTabContent, GachaTypeTab } from '$widgets/gacha'
+	import { GachaTypeTabContent } from '$widgets/gacha'
 	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
 	import './gacha.css'
 
