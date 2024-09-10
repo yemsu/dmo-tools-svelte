@@ -106,3 +106,8 @@ export const delay = (time: number) => {
 		}, time)
 	})
 }
+
+export const contentUrl = (path: string) => {
+	const CONTENT_URL = import.meta.env.VITE_CONTENT_URL
+	return `${CONTENT_URL}${path}`
+}

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { gachaStore, type GachaData } from '$entities/gacha'
-	import { cn } from '$shared/lib'
+	import { type GachaData } from '$entities/gacha'
+	import { cn, contentUrl } from '$shared/lib'
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData
@@ -43,16 +43,14 @@
 				<span>{gachaData.name}</span>
 			</h2>
 			<div class="aspect-[1/0.9078] w-[var(--gacha-card-w)] bg-black/30">
-				{#await import(`$lib/images/gacha/gacha-${gachaData.id}.jpg`) then { default: src }}
-					<img
-						{src}
-						alt=""
-						width="152"
-						height="138"
-						class="w-full"
-						draggable="false"
-					/>
-				{/await}
+				<img
+					src={contentUrl(`/gacha/gacha-${gachaData.id}.jpg`)}
+					alt=""
+					width="152"
+					height="138"
+					class="w-full"
+					draggable="false"
+				/>
 			</div>
 		</button>
 		<div class="flex p-2">

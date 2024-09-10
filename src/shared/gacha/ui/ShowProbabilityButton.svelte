@@ -1,18 +1,17 @@
 <script lang="ts">
-	import imgViewItemsHover from '$lib/images/gacha/view-items-hover.jpg'
-	import imgViewItems from '$lib/images/gacha/view-items.jpg'
+	import { contentUrl } from '$shared/lib'
 </script>
 
 <button class="group ml-auto" on:click title="보상 자세히 보기">
 	<img
-		src={imgViewItems}
+		src={contentUrl('/gacha/view-items-hover.jpg')}
 		alt=""
 		width="25"
 		height="25"
 		class="group-hover:hidden"
 	/>
 	<img
-		src={imgViewItemsHover}
+		src={contentUrl('/gacha/view-items.jpg')}
 		alt=""
 		width="25"
 		height="25"

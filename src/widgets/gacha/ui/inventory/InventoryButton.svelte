@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { GachaData, GachaDataType } from '$entities/gacha'
-	import invenImage from '$lib/images/gacha/inven.jpg'
+	import { contentUrl } from '$shared/lib'
 	import InventoryPopup from './InventoryPopup.svelte'
 
 	export let currentGachaType: GachaDataType
@@ -21,7 +21,7 @@
 	title="인벤토리 열기"
 	on:click={openPopup}
 >
-	<img src={invenImage} alt="" width="34" height="34" />
+	<img src={contentUrl('/gacha/inven.jpg')} alt="" width="34" height="34" />
 </button>
 {#if isPopupShow}
 	<InventoryPopup {currentGachaType} {gachaList} on:close={closePopup} />

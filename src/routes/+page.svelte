@@ -1,10 +1,7 @@
 <script lang="ts">
-	import imgBannerCalc from '$lib/images/main/main-banner-calc.png'
-	import imgBannerRaid from '$lib/images/main/main-banner-raid.png'
-	import imgBannerGacha from '$lib/images/main/main-banner-gacha.png'
 	import { META, PATH } from '$shared/config'
+	import { contentUrl } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
-	import { Title } from '$shared/text'
 	import { MainBanner } from '$widgets/banner'
 </script>
 
@@ -27,7 +24,7 @@
 		</div>
 		<div class="flex flex-col gap-3 md:gap-5">
 			<MainBanner
-				src={imgBannerCalc}
+				src={contentUrl('/main/main-banner-calc.png')}
 				href={PATH.CALCULATOR}
 				title="씰 효율 계산기"
 				subTitle="보유 씰을 설정하고 목표 스탯까지 씰 효율을 간편하게 확인해 보세요."
@@ -36,7 +33,7 @@
 				colorType="primary-30"
 			/>
 			<MainBanner
-				src={imgBannerRaid}
+				src={contentUrl('/main/main-banner-raid.png')}
 				href={PATH.RAID_TIMER}
 				title="레이드 타이머"
 				subTitle="보스 출현 시간을 제보하여 유저들과 공유하고 알림을 받아보세요."
@@ -45,7 +42,7 @@
 				colorType="primary-40"
 			/>
 			<MainBanner
-				src={imgBannerGacha}
+				src={contentUrl('/main/main-banner-gacha.png')}
 				href={PATH.GACHA}
 				title="뽑기 시뮬레이터"
 				subTitle="뽑기 시뮬레이터로 운을 미리 시험해 보세요."

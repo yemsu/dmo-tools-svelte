@@ -1,10 +1,10 @@
 <script lang="ts">
-	import videoGachaBg from '$lib/images/gacha/videos/gacha-bg.mp4'
+	import { contentUrl } from '$shared/lib'
 </script>
 
 <div class="flex-center absolute size-full">
 	<video
-		src={videoGachaBg}
+		src={contentUrl('/gacha/videos/gacha-bg.mp4')}
 		autoplay
 		loop
 		muted

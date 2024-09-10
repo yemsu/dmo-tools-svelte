@@ -4,9 +4,8 @@
 		type GachaDataType,
 		type GachaItemData
 	} from '$entities/gacha'
-	import BestItemGlowImage from '$lib/images/gacha/best-item-glow-1.png'
 	import { GachaItemImage } from '$shared/gacha'
-	import { cn } from '$shared/lib'
+	import { cn, contentUrl } from '$shared/lib'
 
 	export let id: GachaItemData['id']
 	export let activeGacha: GachaData
@@ -20,7 +19,7 @@
 <span class={cn('relative', isBestItem && 'z-10')}>
 	{#if isBestItem}
 		<img
-			src={BestItemGlowImage}
+			src={contentUrl('/gacha/best-item-glow-1.png')}
 			alt=""
 			class="position-center animation-flare -z-[1] aspect-square w-[430%] max-w-none"
 			width="220"

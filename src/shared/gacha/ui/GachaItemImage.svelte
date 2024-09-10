@@ -12,7 +12,7 @@
 	class={cn('aspect-[51/53]', skeletonWidth && `${skeletonWidth} bg-black/20`)}
 >
 	<img
-		src={`${CONTENT_URL}/item-${id}.jpg`}
+		src={`${CONTENT_URL}/items/item-${id}.jpg`}
 		alt=""
 		width="51"
 		height="53"

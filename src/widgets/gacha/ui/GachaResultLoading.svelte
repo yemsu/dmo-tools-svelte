@@ -1,11 +1,6 @@
 <script lang="ts">
-	import loadingVideo1 from '$lib/images/gacha/videos/loading-rarity-1.mp4'
-	import loadingVideo3 from '$lib/images/gacha/videos/loading-rarity-3.mp4'
-	import loadingVideo5 from '$lib/images/gacha/videos/loading-rarity-5.mp4'
-	import loadingVideo6 from '$lib/images/gacha/videos/loading-rarity-6.mp4'
-	import loadingVideo7 from '$lib/images/gacha/videos/loading-rarity-7.mp4'
 	import { gachaStore } from '$entities/gacha'
-	import { cn } from '$shared/lib'
+	import { cn, contentUrl } from '$shared/lib'
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
 
 	let isVideoFadeOut = false
@@ -21,22 +16,22 @@
 		}, 500)
 	}
 
-	const videoSrc = () => {
+	const videoNumber = () => {
 		const maxRarity = Math.max(
 			...$gachaStore.results.map(({ rarity }) => rarity)
 		)
 		switch (maxRarity) {
 			case 3:
 			case 4:
-				return loadingVideo3
+				return 3
 			case 5:
-				return loadingVideo5
+				return 5
 			case 6:
-				return loadingVideo6
+				return 6
 			case 7:
-				return loadingVideo7
+				return 7
 			default:
-				return loadingVideo1
+				return 1
 		}
 	}
 
@@ -67,7 +62,7 @@
 		<div class="flex-center">
 			<video
 				bind:this={videoElement}
-				src={videoSrc()}
+				src={contentUrl(`/gacha/videos/loading-rarity-${videoNumber()}.mp4`)}
 				class="pc:size-full size-gacha-video max-w-none"
 				playsinline
 			>
