@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { GACHA_TYPES, type GachaDataType } from '$entities/gacha'
-	import { NewBadge } from '$shared/badge'
 	import { _objKeys, cn, contentUrl } from '$shared/lib'
 
 	export let gachaType: GachaDataType
@@ -25,8 +24,5 @@
 	/>
 	<span class="relative">
 		{GACHA_TYPES[gachaType]}
-		{#if gachaType === 'DIGITAL_DRAW'}
-			<NewBadge />
-		{/if}
 	</span>
 </button>
