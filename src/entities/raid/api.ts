@@ -27,8 +27,7 @@ export const putRaidTimeVote = (clientId: number, timeId: RaidTimeData['id']) =>
 		}
 	)
 
-export const getClientId = (ip: string) =>
-	apiFetch<string>(`/alarms/client?ipAddress=${ip}`)
+export const getClientId = () => apiFetch<string>(`/alarms/client-id`)
 
 export const disSubscribe = (clientId: number) =>
 	apiFetch<boolean>(`/alarms/${clientId}/dis-subscribe`, {

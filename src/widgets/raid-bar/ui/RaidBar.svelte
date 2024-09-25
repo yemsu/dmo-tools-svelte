@@ -78,19 +78,9 @@
 		initRaidSubscribe()
 	}
 
-	const getIp = async () => {
-		const ipRes = await fetch('https://ipinfo.io/json?token=d49252de2b4da0')
-		if (!ipRes.ok) {
-			throw Error(`HTTP error! get ip Failed! ${ipRes.status}`)
-		}
-		const data: { ip: string } = await ipRes.json()
-		return data.ip
-	}
-
 	const subscribeSSE = async (serverType: ServerType) => {
 		await clearPrevSubscribe()
-		const ip = await getIp()
-		const clientId = await getClientId(ip)
+		const clientId = await getClientId()
 		eventSource = new EventSource(
 			`${API_BASE_URL}/alarms/subscribe/${serverType}?clientId=${clientId}`
 		)
