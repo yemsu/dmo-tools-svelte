@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { MENUS, type MenuType } from '$entities/menus'
+	import NewBadge from '$shared/badge/NewBadge.svelte'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
 
@@ -75,6 +76,9 @@
 							/>
 							<span class="relative">
 								{MENUS[menuData.type].name}
+								{#if MENUS[menuData.type].name === '뽑기 시뮬레이터'}
+									<NewBadge />
+								{/if}
 							</span>
 						</a>
 					</li>
