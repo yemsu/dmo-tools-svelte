@@ -19,6 +19,30 @@
 	export let activeGacha: GachaData
 	$: resultLength = $gachaStore.results.length
 
+	const colStyleByLengthByIndex: Record<
+		number,
+		Record<number | 'default', string>
+	> = {
+		10: {
+			default: '',
+			4: 'col-span-2',
+			5: 'col-span-2'
+		},
+		11: {
+			default: 'col-span-3',
+			4: 'col-span-2 col-start-3',
+			5: 'col-span-2 col-start-6',
+			6: 'col-span-2 col-start-9'
+		}
+	}
+
+	const getColStyle = (i: number) => {
+		const colStyleObj = colStyleByLengthByIndex[$gachaStore.results.length]
+		const colStyle = colStyleObj && (colStyleObj[i] || colStyleObj.default)
+
+		return colStyle
+	}
+
 	const dispatch = createEventDispatcher()
 
 	const onConfirm = () => {
@@ -49,20 +73,7 @@
 			)}
 		>
 			{#each $gachaStore.results as resultItem, i}
-				<li
-					class={cn(
-						'flex-center group relative',
-						$gachaStore.results.length === 10
-							? (i === 4 || i === 5) && 'col-span-2'
-							: i === 4
-								? 'col-span-2 col-start-3'
-								: i === 5
-									? 'col-span-2 col-start-6'
-									: i === 6
-										? 'col-span-2 col-start-9'
-										: 'col-span-3'
-					)}
-				>
+				<li class={cn('flex-center group relative', getColStyle(i))}>
 					<GachaResultItemImage
 						id={resultItem.item.id}
 						{activeGacha}
