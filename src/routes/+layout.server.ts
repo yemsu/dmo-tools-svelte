@@ -7,11 +7,11 @@ export const load: ServerLoad = async () => {
 	const seals = await getSeals()
 	const sealPrices = await getSealPrices('modifiedAt')
 	const gachaList = await getGachaList()
-
+	const gachaListSorted = gachaList.sort((a, b) => b.ticketCost - a.ticketCost)
 	return {
 		seals,
 		sealPrices,
-		gachaSummons: gachaList.filter(({ type }) => type === 'DATA_SUMMON'),
-		gachaDraws: gachaList.filter(({ type }) => type === 'DIGITAL_DRAW')
+		gachaSummons: gachaListSorted.filter(({ type }) => type === 'DATA_SUMMON'),
+		gachaDraws: gachaListSorted.filter(({ type }) => type === 'DIGITAL_DRAW')
 	}
 }
