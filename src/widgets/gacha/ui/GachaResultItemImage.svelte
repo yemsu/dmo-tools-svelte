@@ -11,9 +11,10 @@
 	export let activeGacha: GachaData
 	export let currentGachaType: GachaDataType
 
-	$: isBestItem =
-		currentGachaType !== 'DIGITAL_DRAW' &&
-		activeGacha.gachaItems[0].item.id === id
+	$: rareItems = activeGacha.gachaItems.map((item) =>
+		item.rarity === 7 ? item.item.id : undefined
+	)
+	$: isBestItem = currentGachaType !== 'DIGITAL_DRAW' && rareItems.includes(id)
 </script>
 
 <span class={cn('relative', isBestItem && 'z-10')}>
