@@ -204,7 +204,7 @@
 	{#if isSseSupported === true}
 		<RaidBarServerButton />
 		<a
-			href={MENUS.RAID.path}
+			href={MENUS.raid.path}
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-2 px-2',
 				'border-gradient border-b border-t'

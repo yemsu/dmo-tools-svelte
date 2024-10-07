@@ -187,7 +187,7 @@
 	<meta name="description" content={META.CALCULATOR.DESC} />
 </svelte:head>
 
-<h2 class="ir">{MENUS.CALC.name}</h2>
+<h2 class="ir">{MENUS.calc.name}</h2>
 <div class="flex shrink-0 flex-col gap-1.5">
 	<div class="flex w-full flex-col gap-1.5">
 		<dl>

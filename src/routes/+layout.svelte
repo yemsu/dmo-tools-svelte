@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
@@ -10,6 +10,7 @@
 	import { META } from '$shared/config'
 	import { NoticeBar } from '$shared/layout'
 	import { AdLayout } from '$widgets/adsense'
+	import '../lib/i18n'
 	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
 </script>
 

@@ -1,0 +1,9 @@
+{
+	"menus": {
+		"calc": "Seal Efficiency",
+		"raid": "레이드 타이머",
+		"gacha": "Gacha Simulator"
+	},
+	"data_summon": "Data Summon",
+	"digital_draw": "Digital Draw"
+}

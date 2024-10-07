@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
 	import { MENUS, type MenuType } from '$entities/menus'
 	import NewBadge from '$shared/badge/NewBadge.svelte'
@@ -12,7 +13,7 @@
 
 	const menuDataList: MenuData[] = [
 		{
-			type: 'CALC',
+			type: 'calc',
 			icon: {
 				name: 'circum:calculator-2',
 				width: 24,
@@ -21,7 +22,7 @@
 			}
 		},
 		{
-			type: 'RAID',
+			type: 'raid',
 			icon: {
 				name: 'ph:timer',
 				width: 19,
@@ -30,7 +31,7 @@
 			}
 		},
 		{
-			type: 'GACHA',
+			type: 'gacha',
 			icon: {
 				name: 'mingcute:random-line',
 				width: 19,
@@ -75,8 +76,8 @@
 								class={cn(menuData.icon.class)}
 							/>
 							<span class="relative">
-								{MENUS[menuData.type].name}
-								{#if MENUS[menuData.type].name === '뽑기 시뮬레이터'}
+								{$_(`menus.${menuData.type}`)}
+								{#if menuData.type === 'gacha'}
 									<NewBadge />
 								{/if}
 							</span>
