@@ -115,15 +115,15 @@
 	$: $crrServerType && initRaidSubscribe()
 
 	const toggleAudioAlarm = () => {
-		audio = isAudioOn ? new Audio('/sound-alarm.mp3') : undefined
+		const newIsAudioOn = !isAudioOn
+		isAudioOn = newIsAudioOn
+		audio = newIsAudioOn ? new Audio('/sound-alarm.mp3') : undefined
 		toast.on(
-			isAudioOn
+			newIsAudioOn
 				? '보스 등장 알림음이 활성화 되었습니다.'
 				: '보스 등장 알림음이 비활성화 되었습니다.'
 		)
 	}
-
-	$: isAudioOn !== undefined && toggleAudioAlarm()
 
 	const notify = (_nextRaid: NextRaidData) => {
 		new Notification(`🐉 ${_nextRaid.name}`, {
@@ -242,7 +242,7 @@
 				<button
 					class="h-full bg-primary-30 px-2"
 					title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
-					on:click={() => (isAudioOn = !isAudioOn)}
+					on:click={toggleAudioAlarm}
 				>
 					<iconify-icon
 						icon="mdi:bell{isAudioOn ? '' : '-off'}"
