@@ -1,12 +1,19 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
+	import { page } from '$app/stores'
 	import { crrServerType, GAME_SERVERS } from '$entities/raid'
-	import { Badge } from '$shared/badge'
-	import { META } from '$shared/config'
+	import { META, PATH } from '$shared/config'
 	import { _objKeys } from '$shared/lib'
 	import { Section } from '$shared/section'
-	import { Tabs, Tab } from '$shared/tabs'
+	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
 	import { RaidTabList, RaidTimeView } from '$widgets/raid'
+
+	const checkLang = () => {
+		const lang = $page.data.lang
+		lang !== 'kr' && goto(`/${lang}${PATH.MAIN}`)
+	}
+	$: $page.data.lang && checkLang()
 </script>
 
 <svelte:head>

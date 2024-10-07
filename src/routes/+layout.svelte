@@ -5,7 +5,8 @@
 	import { page } from '$app/stores'
 
 	onMount(() => {
-		if ($page.url.pathname === '/') {
+		const path = $page.url.pathname
+		if (!path.startsWith('/kr') && !path.startsWith('/en')) {
 			const userLocale = getLocaleFromNavigator() || 'en'
 			const lang = userLocale.startsWith('ko') ? 'kr' : 'en'
 
@@ -13,3 +14,5 @@
 		}
 	})
 </script>
+
+<slot />

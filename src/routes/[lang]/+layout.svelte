@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
 	import 'iconify-icon'
 	import '../../app/app.css'
-	import Gnb from './Gnb.svelte'
+	import { Gnb } from '$widgets/gnb'
 	import Header from './Header.svelte'
 	import { META } from '$shared/config'
 	import { NoticeBar } from '$shared/layout'
@@ -47,9 +48,11 @@
 		)}
 	>
 		<Header />
-		<Inner class="w-full">
-			<RaidBar />
-		</Inner>
+		{#if $page.data.lang === 'kr'}
+			<Inner class="w-full">
+				<RaidBar />
+			</Inner>
+		{/if}
 
 		<main class="relative flex-1 overflow-hidden">
 			<slot></slot>

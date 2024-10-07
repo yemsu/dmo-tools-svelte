@@ -1,15 +1,9 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
-	import { MENUS, type MenuType } from '$entities/menus'
-	import NewBadge from '$shared/badge/NewBadge.svelte'
+	import { type MenuData } from '$entities/menus'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
-
-	type MenuData = {
-		type: MenuType
-		icon: { name: string; width: number; height: number; class?: string }
-	}
+	import GnbMenu from '$widgets/gnb/ui/GnbMenu.svelte'
 
 	const menuDataList: MenuData[] = [
 		{
@@ -40,9 +34,6 @@
 			}
 		}
 	]
-
-	$: getIsActive = (menuType: MenuType) =>
-		$page.url.pathname === MENUS[menuType].path
 </script>
 
 <div class="h-gnb-h w-full">
@@ -57,32 +48,9 @@
 				)}
 			>
 				{#each menuDataList as menuData (menuData.type)}
-					{@const isActive = getIsActive(menuData.type)}
-					<li class={cn('h-full', isActive ? 'w-[45%] md:w-[35%]' : 'flex-1')}>
-						<a
-							href="/{$page.data.lang}{MENUS[menuData.type].path}"
-							class={cn(
-								'flex-col-center h-full px-1 md:flex-row md:gap-2',
-								'rounded-t-[15px] leading-none transition-opacity',
-								isActive
-									? 'flex-row gap-1 bg-primary-20 py-2 text-xs font-semibold opacity-100 md:gap-2 md:px-8 md:text-sm'
-									: 'gap-[0.4em] opacity-50 hover:opacity-100'
-							)}
-						>
-							<iconify-icon
-								icon={menuData.icon.name}
-								width={menuData.icon.width}
-								height={menuData.icon.height}
-								class={cn(menuData.icon.class)}
-							/>
-							<span class="relative">
-								{$_(`menus.${menuData.type}`)}
-								{#if menuData.type === 'gacha'}
-									<NewBadge />
-								{/if}
-							</span>
-						</a>
-					</li>
+					{#if !($page.data.lang === 'en' && menuData.type === 'raid')}
+						<GnbMenu {menuData} />
+					{/if}
 				{/each}
 			</ul>
 		</nav>

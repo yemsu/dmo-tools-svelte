@@ -11,6 +11,7 @@
 	} from '$entities/seals'
 	import { user } from '$entities/user'
 	import { AuthButton } from '$shared/layout'
+	import LangButton from '$shared/layout/ui/LangButton.svelte'
 	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import { getMySealData } from '$widgets/my-seals'
@@ -79,6 +80,9 @@
 				DMO tools
 			</a>
 		</h1>
-		<AuthButton />
+		<div class="flex-center gap-2">
+			<AuthButton />
+			<LangButton />
+		</div>
 	</Inner>
 </header>

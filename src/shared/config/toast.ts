@@ -9,5 +9,7 @@ export const TOAST = {
 	},
 	GACHA: {
 		CLEAN_INVENTORY: '획득한 아이템이 모두 제거되었습니다.'
-	}
+	},
+	CHANGE_LANG: (lang: string) =>
+		`사이트 언어가 ${lang === 'kr' ? '한국어' : 'English'}로 설정되었습니다.`
 }
