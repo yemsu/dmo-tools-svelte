@@ -28,16 +28,16 @@
 		sizeStyles[size],
 		className
 	)}
-	title={user?.nickname ? `제보 달성: ${user?.timerCompleteCount}회` : ''}
+	title={user?.nickname ? `제보 달성: ${user?.timerCompleteCount || 0}회` : ''}
 	{...restProps}
 >
 	{#if user}
-		{#if user.id === 20}
+		{#if user?.id === 20}
 			<!-- 관리자 -->
 			<span class="text-xs2" title={`관리자`}>🦀</span>
 		{:else}
 			<span class="text-xs3 contrast-75">
-				{getUserGrade(user?.timerCompleteCount)}
+				{getUserGrade(user?.timerCompleteCount || 0)}
 			</span>
 		{/if}
 		{user?.nickname}

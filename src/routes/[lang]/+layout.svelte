@@ -4,13 +4,13 @@
 	import { ToastPopup } from '$shared/toast'
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
 	import 'iconify-icon'
-	import '../app/app.css'
+	import '../../app/app.css'
 	import Gnb from './Gnb.svelte'
 	import Header from './Header.svelte'
 	import { META } from '$shared/config'
 	import { NoticeBar } from '$shared/layout'
 	import { AdLayout } from '$widgets/adsense'
-	import '../lib/i18n'
+	import '../../lib/i18n'
 	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
 </script>
 

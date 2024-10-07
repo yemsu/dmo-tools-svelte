@@ -75,7 +75,9 @@
 		class="relative flex h-header-h items-center justify-between"
 	>
 		<h1 class="font-tiny text-2xl font-semibold leading-none md:text-3xl">
-			<a href="/" class="text-logo block" title="메인으로">DMO tools</a>
+			<a href="/{$page.data.lang}" class="text-logo block" title="메인으로">
+				DMO tools
+			</a>
 		</h1>
 		<AuthButton />
 	</Inner>

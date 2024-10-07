@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import {
 		G_TOKEN_NAME,
@@ -27,7 +28,7 @@
 		const res = await postLogin(token)
 		if (res === null) {
 			setTokenCookie(token, G_TOKEN_NAME)
-			goto(PATH.JOIN)
+			goto(`/${$page.data.lang}${PATH.JOIN}`)
 		} else {
 			const { token, ...userData } = res
 			setTokenCookie(res.token)

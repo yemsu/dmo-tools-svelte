@@ -1,11 +1,11 @@
 import { UserResponse } from './type.d'
 
 export type UserResponse = {
-	id: number
+	id?: number
 	email: string
 	nickname: string
 	token: string
-	timerCompleteCount: number
+	timerCompleteCount?: number
 }
 
 export type UserToken = {

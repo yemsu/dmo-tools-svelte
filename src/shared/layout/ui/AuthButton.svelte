@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import { removeTokenCookie, user } from '$entities/user'
 	import { Button } from '$shared/button'
@@ -42,13 +43,13 @@
 			>
 				<Tab
 					on:click={() => {
-						goto(PATH.MY_INFO)
+						goto(`/${$page.data.lang}${PATH.MY_INFO}`)
 						isShowTab = false
 					}}>마이 페이지</Tab
 				>
 				<Tab
 					on:click={() => {
-						goto(PATH.SAVE_URL)
+						goto(`/${$page.data.lang}${PATH.SAVE_URL}`)
 						isShowTab = false
 					}}>url 데이터 저장</Tab
 				>

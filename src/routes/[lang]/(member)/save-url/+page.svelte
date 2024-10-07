@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { afterNavigate, goto } from '$app/navigation'
+	import { goto } from '$app/navigation'
+	import { page } from '$app/stores'
 	import {
 		alarmMinute,
 		crrServerType,
@@ -116,7 +117,7 @@
 		if (!isConfirmed) return
 		await uploadData(paramsData)
 		toast.on('데이터 저장이 완료되었습니다.')
-		goto(PATH.MY_SEALS)
+		goto(`/${$page.data.lang}${PATH.MY_SEALS}`)
 	}
 
 	onMount(() => {
@@ -127,7 +128,9 @@
 		}, 60)
 	})
 
-	$: !$user && !import.meta.env.SSR && goto(PATH.RAID_TIMER)
+	$: !$user &&
+		!import.meta.env.SSR &&
+		goto(`/${$page.data.lang}${PATH.RAID_TIMER}`)
 </script>
 
 <svelte:head>

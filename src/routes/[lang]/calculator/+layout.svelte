@@ -18,7 +18,7 @@
 		{#each SUB_MENUS as subMenu (subMenu.path)}
 			<Tab
 				tagName="a"
-				href={subMenu.path}
+				href="/{$page.data.lang}{subMenu.path}"
 				isActive={$page.url.pathname === subMenu.path}
 			>
 				{subMenu.menuName}

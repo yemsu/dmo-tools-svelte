@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
 	import {
 		alarmMinute,
@@ -204,7 +205,7 @@
 	{#if isSseSupported === true}
 		<RaidBarServerButton />
 		<a
-			href={MENUS.raid.path}
+			href="/{$page.data.lang}{MENUS.raid.path}"
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-2 px-2',
 				'border-gradient border-b border-t'

@@ -60,7 +60,7 @@
 					{@const isActive = getIsActive(menuData.type)}
 					<li class={cn('h-full', isActive ? 'w-[45%] md:w-[35%]' : 'flex-1')}>
 						<a
-							href={MENUS[menuData.type].path}
+							href="/{$page.data.lang}{MENUS[menuData.type].path}"
 							class={cn(
 								'flex-col-center h-full px-1 md:flex-row md:gap-2',
 								'rounded-t-[15px] leading-none transition-opacity',

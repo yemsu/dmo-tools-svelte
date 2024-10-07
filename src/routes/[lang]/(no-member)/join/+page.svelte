@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
+	import { page } from '$app/stores'
 	import {
 		G_TOKEN_NAME,
-		getNickCheck,
 		getTokenCookie,
 		postSignup,
 		removeTokenCookie,
@@ -12,7 +12,7 @@
 	import { Button } from '$shared/button'
 	import { ALERT, PATH, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
-	import { checkNoMember, checkJoinProcess } from '$shared/lib'
+	import { checkJoinProcess, checkNoMember } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
@@ -53,7 +53,7 @@
 		removeTokenCookie(G_TOKEN_NAME)
 		sessionStorage.setItem(TOKEN_NAME, res.token)
 		toast.on(TOAST.JOIN(value))
-		goto(PATH.SETTING_SEALS)
+		goto(`/${$page.data.lang}${PATH.SETTING_SEALS}`)
 	}
 
 	onMount(() => {
