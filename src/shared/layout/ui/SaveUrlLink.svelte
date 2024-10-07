@@ -2,10 +2,11 @@
 	import { goto } from '$app/navigation'
 	import { user } from '$entities/user'
 	import { PATH, TOAST } from '$shared/config'
+	import { page } from '$app/stores'
 	import { toast } from '$shared/toast'
 
 	$: onClickSaveData = () => {
-		goto(PATH.SAVE_URL)
+		goto(`/${$page.data.lang}${PATH.SAVE_URL}`)
 		if (!$user) {
 			toast.on(TOAST.NEED_LOGIN)
 		}

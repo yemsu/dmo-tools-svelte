@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import {
 		postResign,
@@ -20,7 +21,7 @@
 			removeTokenCookie(TOKEN_NAME)
 			user.set(null)
 			toast.on(TOAST.RESIGN.SUCCESS)
-			goto(PATH.SETTING_SEALS)
+			goto(`/${$page.data.lang}${PATH.SETTING_SEALS}`)
 		} else {
 			toast.on(TOAST.RESIGN.FAIL)
 		}

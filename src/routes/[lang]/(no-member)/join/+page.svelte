@@ -57,9 +57,10 @@
 	}
 
 	onMount(() => {
-		const isNoMember = checkNoMember()
+		const lang = $page.data.lang
+		const isNoMember = checkNoMember(lang)
 		if (!isNoMember) return
-		checkJoinProcess()
+		checkJoinProcess(lang)
 		setTimeout(() => {
 			inputElement.focus()
 		}, 100)

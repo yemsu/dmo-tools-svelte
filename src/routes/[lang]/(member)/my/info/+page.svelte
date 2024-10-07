@@ -1,9 +1,7 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { alarmMinute, crrServerType, GAME_SERVERS } from '$entities/raid'
 	import { user } from '$entities/user'
-	import Button from '$shared/button/ui/Button.svelte'
-	import { PATH } from '$shared/config'
-	import { Input } from '$shared/form'
 	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import Title from '$shared/text/ui/Title.svelte'
@@ -16,7 +14,7 @@
 	import { beforeUpdate } from 'svelte'
 
 	beforeUpdate(() => {
-		checkMember()
+		checkMember($page.data.lang)
 	})
 
 	$: baseInfoMap = [

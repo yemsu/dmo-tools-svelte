@@ -121,7 +121,7 @@
 	}
 
 	onMount(() => {
-		const isMember = checkMember()
+		const isMember = checkMember($page.data.lang)
 		if (!isMember) return
 		setTimeout(() => {
 			textareaElement.focus()

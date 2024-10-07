@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { user } from '$entities/user'
 	import { GoogleLoginButton } from '$shared/layout'
 	import { checkNoMember } from '$shared/lib'
@@ -9,7 +10,7 @@
 	$: $user && history.back()
 
 	onMount(() => {
-		checkNoMember()
+		checkNoMember($page.data.lang)
 	})
 </script>
 

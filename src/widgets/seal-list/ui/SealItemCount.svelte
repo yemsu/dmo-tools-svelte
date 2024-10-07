@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { user } from '$entities/user'
 	import { mySealCounts } from '$entities/seals'
 	import Input from '$shared/form/ui/Input.svelte'
@@ -17,7 +18,7 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto(PATH.LOGIN)
+			goto(`/${$page.data.lang}${PATH.LOGIN}`)
 			toast.on(TOAST.NEED_LOGIN)
 			return
 		}
