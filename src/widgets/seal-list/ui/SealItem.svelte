@@ -38,7 +38,7 @@
 				seal.statType
 			]} flex items-start font-semibold leading-4"
 		>
-			{seal.name}
+			{$page.data.lang === 'kr' ? seal.name : seal.engName}
 		</h2>
 		<p class="absolute left-[3px] top-0 text-xs4 text-gray-600 md:text-xs3">
 			#{seal.id}

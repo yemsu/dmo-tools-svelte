@@ -4,6 +4,7 @@ import type { SealMaterCount } from '$widgets/seal-calculator'
 export type SealData = {
 	id: number
 	name: string
+	engName: string
 	maxIncrease: number
 	statType: StatType
 	buyable: boolean
