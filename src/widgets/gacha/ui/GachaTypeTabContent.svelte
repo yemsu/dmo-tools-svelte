@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import {
 		GACHA_TYPES,
 		gachaStore,
@@ -14,11 +15,13 @@
 	} from '$widgets/gacha'
 	import InventoryButton from '$widgets/gacha/ui/inventory/InventoryButton.svelte'
 	import { onMount } from 'svelte'
+	import { page } from '$app/stores'
 
 	export let currentGachaType: GachaDataType
 	export let gachaTabContent: GachaTabContents[GachaDataType]
 	let isLoadingOn = false
 	$: activeGacha = gachaTabContent.gachaList[0]
+	$: lang = $page.data.lang as LangType
 
 	const endLoadingVideo = () => {
 		isLoadingOn = false
@@ -62,7 +65,7 @@
 	<GachaList
 		{currentGachaType}
 		{activeGacha}
-		title={gachaTabContent.title}
+		title={gachaTabContent.title[lang]}
 		gachaList={gachaTabContent.gachaList}
 		on:select={selectGacha}
 		on:start={startLoading}

@@ -9,7 +9,7 @@
 	import GachaStartButton from '$shared/gacha/ui/GachaStartButton.svelte'
 	import ShowProbabilityButton from '$shared/gacha/ui/ShowProbabilityButton.svelte'
 	import { cn } from '$shared/lib'
-	import { createEventDispatcher, onMount } from 'svelte'
+	import { createEventDispatcher } from 'svelte'
 
 	export let currentGachaType: GachaDataType
 	export let gachaList: GachaData[]

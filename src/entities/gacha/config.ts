@@ -1,4 +1,10 @@
 export const GACHA_TYPES = {
-	DATA_SUMMON: '데이터 소환',
-	DIGITAL_DRAW: '디지털 드로우'
+	DATA_SUMMON: {
+		name: '데이터 소환',
+		engName: 'Data Summon'
+	},
+	DIGITAL_DRAW: {
+		name: '디지털 드로우',
+		engName: 'Digital Draw'
+	}
 } as const

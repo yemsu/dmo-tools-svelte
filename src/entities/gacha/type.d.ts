@@ -3,6 +3,7 @@ import type { GACHA_TYPES } from '$entities/gacha/config'
 export type GachaItemData = {
 	id: number
 	name: string
+	engName: string
 }
 
 export type GachaResultData = {
@@ -17,7 +18,9 @@ export type GachaDataType = keyof typeof GACHA_TYPES
 export type GachaData = {
 	id: number
 	name: string
+	engName: string
 	category: string
+	engCategory: string
 	ticketCost: number
 	maxDrawCount: number
 	gachaItems: GachaResultData[]
@@ -31,5 +34,11 @@ export type InventoryItem = {
 
 export type GachaTabContents = Record<
 	GachaDataType,
-	{ title: string; gachaList: GachaData[] }
+	{
+		title: {
+			kr: string
+			en: string
+		}
+		gachaList: GachaData[]
+	}
 >

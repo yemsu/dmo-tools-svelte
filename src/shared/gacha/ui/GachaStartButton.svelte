@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
+	import { page } from '$app/stores'
 	import {
 		gachaStore,
 		type GachaData,
@@ -83,6 +85,26 @@
 			)
 		dispatch('start')
 	}
+
+	$: lang = $page.data.lang as LangType
+	const buttonTexts = {
+		resummon: {
+			kr: '재소환',
+			en: 'Re-summon'
+		},
+		summon: {
+			kr: '소환',
+			en: 'Summon'
+		},
+		draw: {
+			kr: '드로우',
+			en: 'Draw'
+		},
+		time: {
+			kr: '회',
+			en: ''
+		}
+	}
 </script>
 
 <GachaButton
@@ -90,6 +112,6 @@
 	on:click={() => startGacha()}
 >
 	{isRetry
-		? '재소환'
-		: `${count}회 ${currentGachaType === 'DATA_SUMMON' ? '소환' : '드로우'}`}
+		? buttonTexts.resummon[lang]
+		: `${count}${buttonTexts.time[lang]} ${currentGachaType === 'DATA_SUMMON' ? buttonTexts.summon[lang] : buttonTexts.draw[lang]}`}
 </GachaButton>

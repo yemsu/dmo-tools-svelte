@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	export let data: Record<string, unknown> | undefined
+	export let data: Record<string, unknown> | undefined = undefined
 	export let dataKey = ['name', 'engName'] as [string, string]
 	export let text: string | undefined = undefined
 	export let engText: string | undefined = undefined

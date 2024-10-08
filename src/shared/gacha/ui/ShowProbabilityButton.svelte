@@ -1,8 +1,13 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { contentUrl } from '$shared/lib'
 </script>
 
-<button class="group ml-auto" on:click title="보상 자세히 보기">
+<button
+	class="group ml-auto"
+	on:click
+	title={$page.data.lang === 'kr' ? '보상 자세히 보기' : 'Check Reward Items'}
+>
 	<img
 		src={contentUrl('/gacha/view-items-hover.jpg')}
 		alt=""

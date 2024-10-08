@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
+	import { page } from '$app/stores'
 	import {
 		gachaStore,
 		type GachaData,
@@ -10,10 +12,11 @@
 	import { cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import { createEventDispatcher } from 'svelte'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let currentGachaType: GachaDataType
 	export let gachaList: GachaData[]
-
+	$: lang = $page.data.lang as LangType
 	const dispatch = createEventDispatcher()
 
 	const cleanInventory = () => {
@@ -25,6 +28,17 @@
 	$: inventorySlots = new Array(99)
 		.fill(null)
 		.map((_, i) => $gachaStore.inventory[currentGachaType][i])
+
+	const unitTexts: Record<GachaDataType, { kr: string; en: string }> = {
+		DATA_SUMMON: {
+			kr: '회',
+			en: ''
+		},
+		DIGITAL_DRAW: {
+			kr: '번',
+			en: ''
+		}
+	}
 </script>
 
 <GachaPopup
@@ -39,29 +53,32 @@
 	<h2
 		class="text-shadow bg-gr-b border-b border-primary-5 py-2 text-center text-xs leading-none shadow-[0px_-2px_1px_1px_hsl(var(--primary-50)/60%)] md:py-3 md:text-md"
 	>
-		가방
+		<TextByLang text="가방" engText="Inventory" />
 	</h2>
 	<div
 		class="leading-0 flex items-center justify-between border-b border-primary-5 bg-primary-10/20 p-1.5 sm:py-1"
 	>
 		<div
 			class="flex items-center gap-[0.5em] text-xs3 text-gray-300 md:text-xs2"
-			title="뽑기 횟수"
 		>
-			<h3 class="ir">뽑기 횟수</h3>
+			<h3 class="ir">
+				<TextByLang text="뽑기 횟수" engText="Gacha Counts" />
+			</h3>
 			<dl class="flex flex-wrap gap-[0.2em] md:gap-[0.5em]">
 				{#each gachaList as gacha (gacha.id)}
 					{@const playCount =
 						$gachaStore.myPlayCounts[currentGachaType][gacha.id] || 0}
 					{@const playCountDivider =
 						currentGachaType === 'DATA_SUMMON' ? 1 : 11}
-					{@const playCountUnit =
-						currentGachaType === 'DATA_SUMMON' ? '회' : '번'}
+					{@const playCountUnit = unitTexts[currentGachaType][lang]}
 					<div
 						class="flex-center gap-1 rounded-full bg-black/30 px-[0.8em] pb-[0.35em] pt-[0.5em] leading-none"
 					>
 						<dt class="text-gray-400">
-							{gacha.name.replace(' 디지털 드로우', '')}
+							{(gacha[lang === 'kr' ? 'name' : 'engName'] || '').replace(
+								' 디지털 드로우',
+								''
+							)}
 						</dt>
 						<dd class="flex-center">
 							<span class={cn(playCount > 0 && 'font-semibold text-point')}>
@@ -75,7 +92,7 @@
 		<button
 			type="button"
 			class="ml-auto rounded-sm bg-primary-40/20 p-1 pb-0.5 leading-none"
-			title="가방 비우기"
+			title={lang === 'kr' ? '가방 비우기' : 'Clear Inventory'}
 			on:click={cleanInventory}
 		>
 			<iconify-icon icon="ph:trash" width={14} height={14} />

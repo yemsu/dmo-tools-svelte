@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { type GachaData } from '$entities/gacha'
 	import { cn, contentUrl } from '$shared/lib'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData
@@ -31,16 +33,23 @@
 	>
 		<button
 			class="w-full"
-			title="데이터 소환하기"
+			title={$page.data.lang === 'kr' ? '데이터 소환하기' : 'Summon Data'}
 			on:click={() => selectGacha(gachaData)}
 		>
 			<h2
 				class="flex-col-center gap-[0.4em] whitespace-pre-line py-3 text-center text-xs2 md:text-xs"
 			>
 				{#if gachaData.category}
-					<span>{gachaData.category}</span>
+					<span>
+						<TextByLang
+							data={gachaData}
+							dataKey={['category', 'engCategory']}
+						/>
+					</span>
 				{/if}
-				<span>{gachaData.name}</span>
+				<span>
+					<TextByLang data={gachaData} />
+				</span>
 			</h2>
 			<div class="aspect-[1/0.9078] w-[var(--gacha-card-w)] bg-black/30">
 				<img

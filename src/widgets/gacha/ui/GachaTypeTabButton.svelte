@@ -2,6 +2,7 @@
 	import { GACHA_TYPES, type GachaDataType } from '$entities/gacha'
 	import { NewBadge } from '$shared/badge'
 	import { _objKeys, cn, contentUrl } from '$shared/lib'
+	import { TextByLang } from '$shared/text'
 
 	export let gachaType: GachaDataType
 	export let isActive: boolean
@@ -24,7 +25,7 @@
 		class="w-[1.2em]"
 	/>
 	<span class="relative">
-		{GACHA_TYPES[gachaType]}
+		<TextByLang data={GACHA_TYPES[gachaType]} />
 		{#if gachaType === 'DATA_SUMMON'}
 			<NewBadge />
 		{/if}
