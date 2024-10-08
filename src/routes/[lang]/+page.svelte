@@ -4,11 +4,13 @@
 	import { contentUrl } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { MainBanner } from '$widgets/banner'
+	import type { LangType } from '$shared/types'
+	$: lang = $page.data.lang as LangType
 </script>
 
 <svelte:head>
-	<title>{META.COMMON.TITLE}</title>
-	<meta name="description" content={META.COMMON.DESC} />
+	<title>{META.COMMON.TITLE[lang]}</title>
+	<meta name="description" content={META.COMMON.DESC[lang]} />
 </svelte:head>
 
 <Section>

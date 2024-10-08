@@ -26,9 +26,11 @@
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { onMount } from 'svelte'
+	import type { LangType } from '$shared/types'
 
 	let textareaElement: HTMLTextAreaElement
 	let userUrl: string | null = null
+	$: lang = $page.data.lang as LangType
 
 	type ParamsData = {
 		seals: MySealCount[] | null
@@ -134,8 +136,8 @@
 </script>
 
 <svelte:head>
-	<title>{META.SAVE_URL.TITLE}</title>
-	<meta name="description" content={META.SAVE_URL.DESC} />
+	<title>{META.SAVE_URL.TITLE[lang]}</title>
+	<meta name="description" content={META.SAVE_URL.DESC[lang]} />
 </svelte:head>
 
 <Section size="sm" class="gap-10">

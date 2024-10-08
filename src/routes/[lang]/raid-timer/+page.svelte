@@ -8,17 +8,20 @@
 	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
 	import { RaidTabList, RaidTimeView } from '$widgets/raid'
+	import type { LangType } from '$shared/types'
+
+	$: lang = $page.data.lang as LangType
 
 	const checkLang = () => {
-		const lang = $page.data.lang
 		lang !== 'kr' && goto(`/${lang}${PATH.MAIN}`)
 	}
-	$: $page.data.lang && checkLang()
+
+	$: lang && checkLang()
 </script>
 
 <svelte:head>
-	<title>{META.RAID_TIMER.TITLE}</title>
-	<meta name="description" content={META.RAID_TIMER.DESC} />
+	<title>{META.RAID_TIMER.TITLE[lang]}</title>
+	<meta name="description" content={META.RAID_TIMER.DESC[lang]} />
 </svelte:head>
 
 <Section>

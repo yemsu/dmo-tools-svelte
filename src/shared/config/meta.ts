@@ -1,38 +1,77 @@
 const META_COMMON = {
-	TITLE: '디지몬 마스터즈 도구 모음 - DMO tools',
-	DESC: '디지몬 마스터즈 온라인 도구 모음 DMO tools 입니다.'
+	TITLE: {
+		kr: '디지몬 마스터즈 도구 모음 - DMO tools',
+		en: 'DMO Tools - Digimon Masters Tools Collection'
+	},
+	DESC: {
+		kr: '디지몬 마스터즈 온라인 도구 모음 DMO tools 입니다.',
+		en: 'This is the DMO Tools, a collection of tools for Digimon Masters Online.'
+	}
 }
 export const META = {
-	COMMON: {
-		TITLE: '디지몬 마스터즈 도구 모음 - DMO tools',
-		DESC: '디지몬 마스터즈 온라인 도구 모음 DMO tools 입니다. 보유씰 등록, 씰 효율 계산기, 레이드 타이머 등을 이용해 보세요!'
-	},
+	COMMON: META_COMMON,
 	SETTING: {
-		TITLE: `씰 설정 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 스탯 별 보유 씰 개수를 설정해보세요.`
+		TITLE: {
+			kr: `씰 설정 | ${META_COMMON.TITLE.kr}`,
+			en: `Seal Settings | ${META_COMMON.TITLE.en}`
+		},
+		DESC: {
+			kr: `${META_COMMON.TITLE.kr} 스탯 별 보유 씰 개수를 설정해보세요.`,
+			en: `${META_COMMON.TITLE.en} Set the number of seals you own for each stat.`
+		}
 	},
 	CALCULATOR: {
-		TITLE: `씰 효율 계산기 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 보유 씰을 바탕으로 목표 스탯까지의 효율적인 씰 구매리스트를 간편하게 확인해보세요.`
+		TITLE: {
+			kr: `씰 효율 계산기 | ${META_COMMON.TITLE.kr}`,
+			en: `Seal Efficiency Calculator | ${META_COMMON.TITLE.en}`
+		},
+		DESC: {
+			kr: `${META_COMMON.TITLE.kr} 보유 씰을 바탕으로 목표 스탯까지의 효율적인 씰 구매리스트를 간편하게 확인해보세요.`,
+			en: `${META_COMMON.TITLE.en} Easily check the efficient seal purchase list based on your owned seals to reach your target stats.`
+		}
 	},
 	MY: {
-		TITLE: `보유 씰 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 등록된 보유씰 리스트와 현재 시세 기준 씰 자산을 확인해보세요.`
+		TITLE: {
+			kr: `보유 씰 | ${META_COMMON.TITLE.kr}`,
+			en: `My Seals | ${META_COMMON.TITLE.en}`
+		},
+		DESC: {
+			kr: `${META_COMMON.TITLE.kr} 등록된 보유씰 리스트와 현재 시세 기준 씰 자산을 확인해보세요.`,
+			en: `${META_COMMON.TITLE.en} registered seal list, and current market value of your seal assets.`
+		}
 	},
 	RAID_TIMER: {
-		TITLE: `레이드 타이머 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 보스 출현 시간을 제보하여 유저들과 공유하고 알림을 받아보세요.`
+		TITLE: {
+			kr: `레이드 타이머 | ${META_COMMON.TITLE.kr}`,
+			en: `Raid Timer | ${META_COMMON.TITLE.en}`
+		},
+		DESC: {
+			kr: `${META_COMMON.TITLE.kr} 보스 출현 시간을 제보하여 유저들과 공유하고 알림을 받아보세요.`,
+			en: `${META_COMMON.TITLE.en} Share boss spawn times with other players and receive notifications.`
+		}
 	},
 	JOIN: {
-		TITLE: `회원가입 - 닉네임 설정 | ${META_COMMON.TITLE}`,
-		DESC: META_COMMON.TITLE
+		TITLE: {
+			kr: `회원가입 - 닉네임 설정 | ${META_COMMON.TITLE.kr}`,
+			en: `Sign Up - Set your nickname | ${META_COMMON.TITLE.en}`
+		},
+		DESC: { kr: META_COMMON.TITLE, en: META_COMMON.TITLE }
 	},
 	SAVE_URL: {
-		TITLE: `URL 데이터 저장하기 | ${META_COMMON.TITLE}`,
-		DESC: META_COMMON.TITLE
+		TITLE: {
+			kr: `URL 데이터 저장하기 | ${META_COMMON.TITLE.kr}`,
+			en: `Save URL data | ${META_COMMON.TITLE.en}`
+		},
+		DESC: { kr: META_COMMON.TITLE.kr, en: META_COMMON.TITLE.en }
 	},
 	GACHA_SIMULATOR: {
-		TITLE: `뽑기 시뮬레이터 | ${META_COMMON.TITLE}`,
-		DESC: `${META_COMMON.TITLE} 뽑기 시뮬레이터로 운을 미리 시험해 보세요!`
+		TITLE: {
+			kr: `뽑기 시뮬레이터 | ${META_COMMON.TITLE.kr}`,
+			en: `Gacha Simulator | ${META_COMMON.TITLE.en}`
+		},
+		DESC: {
+			kr: `${META_COMMON.TITLE.kr} 뽑기 시뮬레이터로 운을 미리 시험해 보세요!`,
+			en: `${META_COMMON.TITLE.en} Test your luck in the gacha simulator!`
+		}
 	}
 }

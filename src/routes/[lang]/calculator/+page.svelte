@@ -32,6 +32,7 @@
 		StatBarTotalPrice,
 		StatBarWrap
 	} from '$widgets/stat-bar'
+	import type { LangType } from '$shared/types'
 
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
@@ -45,7 +46,7 @@
 	$: resultUnit = isPercentType ? '%' : ''
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
-
+	$: lang = $page.data.lang as LangType
 	const getMySealCount = (mySeal: MySealCount[], sealId: number) =>
 		mySeal.find(({ id }) => id === sealId)?.count || 0
 
@@ -183,8 +184,8 @@
 </script>
 
 <svelte:head>
-	<title>{META.CALCULATOR.TITLE}</title>
-	<meta name="description" content={META.CALCULATOR.DESC} />
+	<title>{META.CALCULATOR.TITLE[lang]}</title>
+	<meta name="description" content={META.CALCULATOR.DESC[lang]} />
 </svelte:head>
 
 <h2 class="ir">{MENUS.calc.name}</h2>

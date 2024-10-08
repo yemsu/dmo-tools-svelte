@@ -1,1 +1,1 @@
-export type Lang = 'en' | 'kr'
+export type LangType = 'en' | 'kr'

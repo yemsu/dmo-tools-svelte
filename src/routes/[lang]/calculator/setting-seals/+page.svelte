@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { MENUS } from '$entities/menus'
 	import {
 		type SealData,
 		STAT_TYPE_OPTIONS,
@@ -11,18 +10,18 @@
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
-	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { Tooltip } from '$shared/tooltip'
 	import { statTypeOptionStyles } from '$widgets/my-seals'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
+	import type { LangType } from '$shared/types'
 
 	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
 	let seals = $page.data.seals
 	$: searchResults = seals
-
+	$: lang = $page.data.lang as LangType
 	const updateSearchResult = (_searchText: string) => {
 		const filterStatTypeSelected =
 			statTypeSelected === 'ALL'
@@ -57,8 +56,8 @@
 </script>
 
 <svelte:head>
-	<title>{META.SETTING.TITLE}</title>
-	<meta name="description" content={META.SETTING.DESC} />
+	<title>{META.SETTING.TITLE[lang]}</title>
+	<meta name="description" content={META.SETTING.DESC[lang]} />
 </svelte:head>
 
 <h2 class="ir">씰 세팅</h2>
