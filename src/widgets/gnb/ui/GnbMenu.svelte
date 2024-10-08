@@ -30,7 +30,7 @@
 			class={cn(icon.class)}
 		/>
 		<span class="relative">
-			{$_(`menus.${type}`)}
+			{MENUS[type][$page.data.lang === 'kr' ? 'name' : 'engName']}
 			{#if type === 'gacha'}
 				<NewBadge />
 			{/if}
