@@ -4,6 +4,7 @@
 	import { MENUS, type MenuData, type MenuType } from '$entities/menus'
 	import NewBadge from '$shared/badge/NewBadge.svelte'
 	import { cn } from '$shared/lib'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let menuData: MenuData
 	const { type, icon } = menuData
@@ -30,7 +31,7 @@
 			class={cn(icon.class)}
 		/>
 		<span class="relative">
-			{MENUS[type][$page.data.lang === 'kr' ? 'name' : 'engName']}
+			<TextByLang data={MENUS[type]} />
 			{#if type === 'gacha'}
 				<NewBadge />
 			{/if}
