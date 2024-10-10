@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
+	import { page } from '$app/stores'
 	import { putNickname, setTokenCookie, user } from '$entities/user'
 	import { ALERT, TOAST } from '$shared/config'
 	import { ToggleFormWrap } from '$shared/form'
@@ -7,6 +9,7 @@
 
 	let newNickname: string | null = null
 	let isValid: boolean
+	$: lang = $page.data.lang as LangType
 
 	const setIsValid = (_isValue: boolean) => {
 		isValid = _isValue
@@ -29,7 +32,7 @@
 		const res = await putNickname(newNickname)
 		user.set(res)
 		setTokenCookie(res.token)
-		toast.on(TOAST.CHANGE_NICK(newNickname))
+		toast.on(TOAST.CHANGE_NICK(newNickname)[lang])
 		return res
 	}
 </script>

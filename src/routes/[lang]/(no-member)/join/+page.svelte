@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { LangType } from '$shared/types'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import {
@@ -23,6 +24,7 @@
 	let value: string | null = null
 	let isValid: boolean
 	let inputElement: HTMLInputElement
+	$: lang = $page.data.lang as LangType
 
 	const setIsValid = (_isValue: boolean) => {
 		isValid = _isValue
@@ -52,7 +54,7 @@
 		user.set(res)
 		removeTokenCookie(G_TOKEN_NAME)
 		sessionStorage.setItem(TOKEN_NAME, res.token)
-		toast.on(TOAST.JOIN(value))
+		toast.on(TOAST.JOIN(value)[lang])
 		goto(`/${$page.data.lang}${PATH.SETTING_SEALS}`)
 	}
 

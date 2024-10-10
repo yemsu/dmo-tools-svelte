@@ -23,7 +23,7 @@
 		const isConfirm = confirm('뽑기 결과를 초기화 하시겠습니까?')
 		if (!isConfirm) return
 		gachaStore.cleanInventory(currentGachaType)
-		toast.on(TOAST.GACHA.CLEAN_INVENTORY)
+		toast.on(TOAST.GACHA.CLEAN_INVENTORY[lang])
 	}
 	$: inventorySlots = new Array(99)
 		.fill(null)

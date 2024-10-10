@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import { user } from '$entities/user'
 	import { page } from '$app/stores'
 	import { mySealPrices } from '$entities/seals'
@@ -12,7 +13,7 @@
 
 	export let sealId: number
 	export let isEditable: boolean = true
-
+	$: lang = $page.data.lang as LangType
 	$: prices = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -21,7 +22,7 @@
 	const onClickInputOn = () => {
 		if (!$user) {
 			goto(`/${$page.data.lang}${PATH.LOGIN}`)
-			toast.on(TOAST.NEED_LOGIN)
+			toast.on(TOAST.NEED_LOGIN[lang])
 			return
 		}
 		isOnInput = true
