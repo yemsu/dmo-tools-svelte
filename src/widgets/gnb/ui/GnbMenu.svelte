@@ -9,7 +9,8 @@
 	export let menuData: MenuData
 	const { type, icon } = menuData
 
-	$: getIsActive = (type: MenuType) => $page.url.pathname === MENUS[type].path
+	$: getIsActive = (type: MenuType) =>
+		$page.url.pathname.includes(MENUS[type].path)
 	$: isActive = getIsActive(type)
 </script>
 
