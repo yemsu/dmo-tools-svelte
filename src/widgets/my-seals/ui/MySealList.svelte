@@ -1,16 +1,18 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
+	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { mySealCounts, type MySealCount } from '$entities/seals'
+	import { CONFIRM } from '$shared/config'
 	import { getMySealData, MySealGrade } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
 	import { SealItem, SealList } from '$widgets/seal-list'
 
 	export let mySealsFiltered: MySealCount[]
+	$: lang = $page.data.lang as LangType
 
 	const onClickMySealDelete = (sealId: number) => {
-		const isConfirmed = confirm(
-			'해당 씰을 제거하시겠어요? 삭제된 데이터는 복구가 불가능 합니다.'
-		)
+		const isConfirmed = confirm(CONFIRM.DELETE_SEAL[lang])
 		if (!isConfirmed) return
 		mySealCounts.remove(sealId)
 	}
@@ -23,7 +25,7 @@
 		<button
 			class="absolute right-[1px] top-[1px]"
 			on:click={() => onClickMySealDelete(mySeal.id)}
-			title="삭제"
+			title={lang === 'kr' ? '삭제' : 'Delete'}
 		>
 			<iconify-icon icon="mdi:close" width={14} height={14} />
 		</button>

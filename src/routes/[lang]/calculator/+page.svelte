@@ -12,7 +12,7 @@
 		type StatType
 	} from '$entities/seals'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { META } from '$shared/config'
+	import { ALERT, CONFIRM, META, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { Tab, Tabs } from '$shared/tabs'
@@ -97,11 +97,11 @@
 
 	$: onSubmit = () => {
 		if (goalStat === '') {
-			alert('목표 수치를 입력해주세요.')
+			alert(ALERT.INPUT_TARGET_VALUE[lang])
 			return
 		}
 		if (goalStat <= $myStats[statTypeSelected]) {
-			alert('현재 스탯과 동일하거나 더 작은 값입니다.')
+			alert(ALERT.WRONG_TARGET_VALUE[lang])
 			return
 		}
 		resetPrevResult()
@@ -158,19 +158,22 @@
 	const addToMySeal = (effData: SealEfficiency, seal: SealData) => {
 		const mySealCount = getMySealCount($mySealCounts, seal.id)
 		const isConfirmed = confirm(
-			`${seal.name}씰 ${effData.needCount}개를 보유 씰에 추가하시겠어요?`
+			CONFIRM.ADD_MY_SEAL(seal.name, effData.needCount)[lang]
 		)
 		if (!isConfirmed) return
-		mySealCounts.updateCount({
-			id: effData.id,
-			count: +mySealCount + effData.needCount
-		})
+		mySealCounts.updateCount(
+			{
+				id: effData.id,
+				count: +mySealCount + effData.needCount
+			},
+			lang
+		)
 		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 		toast.on(
-			`${seal.name}씰 보유 개수가 ${mySealCount + effData.needCount}로 업데이트 되었습니다.`
+			TOAST.SEAL_COUNT_UPDATE(seal.name, mySealCount + effData.needCount)[lang]
 		)
 	}
 

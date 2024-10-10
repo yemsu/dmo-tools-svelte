@@ -9,11 +9,13 @@
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { getMyAndFinalPrice } from '$widgets/my-seals'
 	import { goto } from '$app/navigation'
-	import { PATH, TOAST } from '$shared/config'
+	import { ALERT, CONFIRM, PATH, TOAST } from '$shared/config'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let sealId: number
 	export let isEditable: boolean = true
 	$: lang = $page.data.lang as LangType
+	$: isKr = lang === 'kr'
 	$: prices = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -42,14 +44,14 @@
 
 	const onSubmit = () => {
 		if (inputValue === null) {
-			alert('변경할 가격을 입력해주세요.')
+			alert(ALERT.INPUT_CHANGE_PRICE[lang])
 			setTimeout(() => {
 				onClickInputOn()
 			}, 100)
 		} else {
-			mySealPrices.updatePrice({ id: sealId, price: inputValue })
+			mySealPrices.updatePrice({ id: sealId, price: inputValue }, lang)
 			isOnInput = false
-			toast.on('씰 가격이 설정되었습니다.')
+			toast.on(TOAST.SEAL_PRICE_UPDATED[lang])
 		}
 	}
 
@@ -61,12 +63,10 @@
 	}
 
 	const removeSavedPrice = () => {
-		const isConfirmed = confirm(
-			'설정한 가격을 제거하시겠어요? 제거 후에는 서버에 저장된 가격이 노출됩니다.'
-		)
+		const isConfirmed = confirm(CONFIRM.REMOVE_SEAL_PRICE[lang])
 		if (!isConfirmed) return
 		mySealPrices.remove(sealId)
-		toast.on('씰 가격 설정이 제거되었습니다.')
+		toast.on(TOAST.REMOVED_SEAL_PRICE[lang])
 	}
 
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'
@@ -81,7 +81,7 @@
 				id={`price-${sealId}`}
 				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px] text-white')}
 				step="0.1"
-				placeholder="씰 가격"
+				placeholder={isKr ? '씰 가격' : 'Seal Price'}
 				size="xs"
 				bind:value={inputValue}
 				on:input={checkPriceInputValue}
@@ -90,8 +90,9 @@
 			<button
 				type="submit"
 				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-semibold text-black md:px-1"
-				>완료</button
 			>
+				<TextByLang text="완료" engText="Done" />
+			</button>
 		</form>
 	{:else if isEditable}
 		<div class="flex w-full overflow-hidden rounded-md">
@@ -104,14 +105,16 @@
 						icon="clarity:lock-solid"
 						width={14}
 						height={14}
-						title="가격 설정 제거 (서버 가격 로딩)"
+						title={isKr
+							? '가격 설정 제거 (서버 가격 로딩)'
+							: 'Remove Price Setting (Loading Server Price)'}
 					/>
 				</button>
 			{/if}
 			<button
 				type="button"
 				class="flex-1 bg-primary-20/50 py-1.5 md:py-1 {priceStyle}"
-				title="씰 가격 수정하기"
+				title={isKr ? '씰 가격 수정하기' : 'Edit Seal Price'}
 				on:click={onClickInputOn}
 			>
 				<SealItemPriceText price={prices.final} />
@@ -121,7 +124,7 @@
 		<p class={cn(priceStyle)}>
 			{#if prices.my !== undefined}
 				<iconify-icon
-					title="저장됨"
+					title={isKr ? '저장됨' : 'Saved'}
 					icon="material-symbols:lock-outline"
 					width={15}
 					height={15}

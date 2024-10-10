@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import {
@@ -9,7 +10,7 @@
 		TOKEN_NAME,
 		user
 	} from '$entities/user'
-	import { PATH } from '$shared/config'
+	import { PATH, TOAST } from '$shared/config'
 	import {
 		decodeJwtResponse,
 		onGoogleScriptLoad
@@ -21,6 +22,7 @@
 	export let id: string = 'googleLogin'
 	export let size: 'small' | 'large' = 'small'
 	export let text: 'signin' | 'signin_with' = 'signin'
+	$: lang = $page.data.lang as LangType
 
 	let isLoginButtonRendered = false
 
@@ -33,7 +35,7 @@
 			const { token, ...userData } = res
 			setTokenCookie(res.token)
 			user.set(userData)
-			toast.on(`환영합니다 ${res.nickname}님!`)
+			toast.on(TOAST.WELCOME(res.nickname)[lang])
 		}
 	}
 

@@ -1,15 +1,37 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import { mySealCounts } from '$entities/seals'
 	import { page } from '$app/stores'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { PATH } from '$shared/config'
 	import { Section } from '$shared/section'
+	import { MENUS } from '$entities/menus'
+
+	$: lang = $page.data.lang as LangType
 
 	$: SUB_MENUS = [
-		{ menuName: '효율 계산기', path: PATH.CALCULATOR },
-		{ menuName: '씰 세팅', path: PATH.SETTING_SEALS },
-		{ menuName: '보유' + ` (${$mySealCounts.length})`, path: PATH.MY_SEALS }
+		{
+			menuName: {
+				kr: MENUS.calc.name,
+				en: MENUS.calc.engName
+			},
+			path: PATH.CALCULATOR
+		},
+		{
+			menuName: {
+				kr: '씰 세팅',
+				en: 'All Seals'
+			},
+			path: PATH.SETTING_SEALS
+		},
+		{
+			menuName: {
+				kr: `보유 (${$mySealCounts.length})`,
+				en: `My Seals (${$mySealCounts.length})`
+			},
+			path: PATH.MY_SEALS
+		}
 	]
 </script>
 
@@ -19,9 +41,9 @@
 			<Tab
 				tagName="a"
 				href="/{$page.data.lang}{subMenu.path}"
-				isActive={$page.url.pathname === subMenu.path}
+				isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
 			>
-				{subMenu.menuName}
+				{subMenu.menuName[lang]}
 			</Tab>
 		{/each}
 	</Tabs>

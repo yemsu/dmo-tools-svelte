@@ -1,5 +1,7 @@
 import { getMySealsPrice, putMySealPrice } from '$entities/seals/api'
 import { updateOrAddData } from '$entities/seals/lib'
+import { ALERT } from '$shared/config'
+import type { LangType } from '$shared/types'
 import type { MyPrice, MySealPrice } from '../type'
 import { writable } from 'svelte/store'
 
@@ -15,10 +17,10 @@ const createMySealPrices = () => {
 		reset: () => {
 			set([])
 		},
-		updatePrice: async (newData: MyPrice) => {
+		updatePrice: async (newData: MyPrice, lang: LangType) => {
 			const res = await putMySealPrice(newData)
 			if (!res) {
-				alert('씰 추가/수정에 실패하였습니다.')
+				alert(ALERT.FAILED_UPDATE_SEAL[lang])
 				return
 			}
 			update((prev) => {

@@ -9,15 +9,14 @@
 		user
 	} from '$entities/user'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { PATH, TOAST } from '$shared/config'
+	import { CONFIRM, PATH, TOAST } from '$shared/config'
 	import { toast } from '$shared/toast'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	$: lang = $page.data.lang as LangType
 
 	const onClickResign = async () => {
-		const isConfirm = confirm(
-			'정말 탈퇴하시겠어요?\n탈퇴 후엔 모든 데이터가 삭제되며 복구가 불가합니다.'
-		)
+		const isConfirm = confirm(CONFIRM.RESIGN[lang])
 		if (!isConfirm) return
 		const res = await postResign()
 		if (res) {
@@ -35,5 +34,7 @@
 	size="md-lg"
 	rounded="md"
 	class="bg-warning py-2"
-	on:click={onClickResign}>탈퇴</Button
+	on:click={onClickResign}
 >
+	<TextByLang text="탈퇴" engText="Withdrawal" />
+</Button>

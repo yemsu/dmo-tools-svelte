@@ -7,11 +7,13 @@
 	import { cn, numberFormatter } from '$shared/lib'
 	import { toast } from '$shared/toast'
 	import { goto } from '$app/navigation'
-	import { PATH, TOAST } from '$shared/config'
+	import { ALERT, PATH, TOAST } from '$shared/config'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let sealId: number
 	export let isEditable: boolean = true
 	$: lang = $page.data.lang as LangType
+	$: isKr = lang === 'kr'
 	$: count = $mySealCounts.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -40,7 +42,7 @@
 
 	const onSubmit = () => {
 		if (inputValue === null) {
-			alert('변경할 개수를 입력해주세요.')
+			alert(ALERT.INPUT_CHANGE_NUMBER[lang])
 			setTimeout(() => {
 				onClickInputOn()
 			}, 100)
@@ -48,10 +50,10 @@
 			if (inputValue === 0) {
 				mySealCounts.remove(sealId)
 			} else {
-				mySealCounts.updateCount({ id: sealId, count: inputValue })
+				mySealCounts.updateCount({ id: sealId, count: inputValue }, lang)
 			}
 			isOnInput = false
-			toast.on('씰 개수가 변경되었습니다.')
+			toast.on(TOAST.SEAL_COUNT_CHANGED[lang])
 		}
 	}
 
@@ -74,7 +76,7 @@
 				type="number"
 				id={`count-${sealId}`}
 				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px]')}
-				placeholder="씰 개수"
+				placeholder={isKr ? '씰 개수' : 'Seal Count'}
 				bind:value={inputValue}
 				on:input={checkCountInputValue}
 				on:blur|once={onBlurInput}
@@ -82,8 +84,9 @@
 			<button
 				type="submit"
 				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-semibold text-black md:px-1"
-				>완료</button
 			>
+				<TextByLang text="완료" engText="Done" />
+			</button>
 		</form>
 	{:else}
 		<div class="flex-center">
@@ -95,7 +98,7 @@
 						'w-full rounded-md bg-primary-20/50 py-1.5 md:py-1',
 						countStyle
 					)}
-					title="보유 개수 수정하기"
+					title={isKr ? '보유 개수 수정하기' : 'Update seal quantity'}
 					on:click={onClickInputOn}
 				>
 					<iconify-icon
@@ -103,7 +106,7 @@
 						width={15}
 						height={15}
 					/>
-					{numberFormatter(count)}개
+					{numberFormatter(count)}{isKr ? '개' : ''}
 				</button>
 			{:else}
 				<p class={countStyle}>
@@ -112,7 +115,7 @@
 						width={15}
 						height={15}
 					/>
-					{numberFormatter(count)}개
+					{numberFormatter(count)}{isKr ? '개' : ''}
 				</p>
 			{/if}
 		</div>

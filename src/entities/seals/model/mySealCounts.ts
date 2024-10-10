@@ -1,5 +1,7 @@
 import { getMySealsCount, putMySealCount } from '$entities/seals/api'
 import { updateOrAddData } from '$entities/seals/lib'
+import { ALERT } from '$shared/config'
+import type { LangType } from '$shared/types'
 import type { MySealCount } from '../type'
 import { writable } from 'svelte/store'
 
@@ -22,10 +24,10 @@ const createMySealCounts = () => {
 		reset: () => {
 			set([])
 		},
-		updateCount: async (newData: MySealCount) => {
+		updateCount: async (newData: MySealCount, lang: LangType) => {
 			const res = await putMySealCount(newData)
 			if (!res) {
-				alert('씰 추가/수정에 실패하였습니다.')
+				alert(ALERT.FAILED_UPDATE_SEAL[lang])
 				return
 			}
 			update((prev) => {

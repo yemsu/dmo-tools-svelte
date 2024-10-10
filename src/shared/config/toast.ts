@@ -3,7 +3,7 @@ export const TOAST = {
 		kr: '로그인 후 이용할 수 있는 기능입니다.',
 		en: 'This feature is available after logging in.'
 	},
-	JOIN: (nickname: string) => ({
+	WELCOME: (nickname: string) => ({
 		kr: `환영합니다 ${nickname}님!`,
 		en: `Welcome, ${nickname}!`
 	}),
@@ -11,6 +11,10 @@ export const TOAST = {
 		kr: `닉네임이 "${nickname}"으로 변경되었습니다.`,
 		en: `Your nickname has been changed to "${nickname}".`
 	}),
+	LOGOUT: {
+		kr: '로그아웃이 완료되었습니다.',
+		en: 'Log out complete.'
+	},
 	RESIGN: {
 		SUCCESS: {
 			kr: '회원 탈퇴가 완료되었습니다.',
@@ -30,5 +34,22 @@ export const TOAST = {
 	CHANGE_LANG: () => ({
 		kr: `사이트 언어가 한국어로 설정되었습니다.`,
 		en: 'The site language has been set to English.'
-	})
+	}),
+	// seal
+	SEAL_COUNT_UPDATE: (sealName: string, sealCount: number) => ({
+		kr: `${sealName}씰 보유 개수가 ${sealCount}개로 업데이트 되었습니다.`,
+		en: `Your ${sealName} seal count has been updated to ${sealCount}`
+	}),
+	REMOVED_SEAL_PRICE: {
+		kr: '씰 가격 설정이 제거되었습니다.',
+		en: 'The seal price setting has been removed.'
+	},
+	SEAL_COUNT_CHANGED: {
+		kr: '씰 개수가 변경되었습니다.',
+		en: 'The quantity of seals has been changed.'
+	},
+	SEAL_PRICE_UPDATED: {
+		kr: '씰 가격이 설정되었습니다.',
+		en: 'The seal price has been set.'
+	}
 }

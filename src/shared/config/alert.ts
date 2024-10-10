@@ -1,5 +1,34 @@
 export const ALERT = {
-	INVALID_NICKNAME: '닉네임이 올바른지 확인해 주세요.',
-	BLANK_NICKNAME: '닉네임을 입력해주세요.',
-	NO_SELECTED_GACHA: '소환할 데이터를 선택해주세요.'
+	INVALID_NICKNAME: {
+		kr: '닉네임이 올바른지 확인해 주세요.',
+		en: 'Please confirm if the nickname is correct.'
+	},
+	BLANK_NICKNAME: {
+		kr: '닉네임을 입력해주세요.',
+		en: 'Please enter your nickname.'
+	},
+	NO_SELECTED_GACHA: {
+		kr: '소환할 데이터를 선택해주세요.',
+		en: 'Please select the data to summon.'
+	},
+	INPUT_CHANGE_NUMBER: {
+		kr: '변경할 개수를 입력해주세요.',
+		en: 'Please enter the quantity to change.'
+	},
+	INPUT_CHANGE_PRICE: {
+		kr: '변경할 가격을 입력해주세요.',
+		en: 'Please enter the price you wish to change.'
+	},
+	FAILED_UPDATE_SEAL: {
+		kr: '씰 추가/수정에 실패하였습니다.',
+		en: 'Failed to add or update the seal.'
+	},
+	INPUT_TARGET_VALUE: {
+		kr: '목표 수치를 입력해주세요.',
+		en: 'Please enter the target stat value.'
+	},
+	WRONG_TARGET_VALUE: {
+		kr: '현재 스탯과 동일하거나 더 작은 값입니다.',
+		en: 'The value must be equal to or less than the current stat.'
+	}
 }

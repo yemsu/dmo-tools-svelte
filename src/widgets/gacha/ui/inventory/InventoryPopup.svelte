@@ -7,7 +7,7 @@
 		type GachaDataType
 	} from '$entities/gacha'
 	import { BackBlur } from '$shared/backBlur'
-	import { TOAST } from '$shared/config'
+	import { CONFIRM, TOAST } from '$shared/config'
 	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
 	import { cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
@@ -20,7 +20,7 @@
 	const dispatch = createEventDispatcher()
 
 	const cleanInventory = () => {
-		const isConfirm = confirm('뽑기 결과를 초기화 하시겠습니까?')
+		const isConfirm = confirm(CONFIRM.CLEAR_GACHA_RESULT[lang])
 		if (!isConfirm) return
 		gachaStore.cleanInventory(currentGachaType)
 		toast.on(TOAST.GACHA.CLEAN_INVENTORY[lang])

@@ -1,10 +1,12 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { type MenuData } from '$entities/menus'
 	import { cn } from '$shared/lib'
 	import { Inner } from '$shared/section'
 	import GnbMenu from '$widgets/gnb/ui/GnbMenu.svelte'
 
+	$: lang = $page.data.lang as LangType
 	const menuDataList: MenuData[] = [
 		{
 			type: 'calc',
@@ -48,26 +50,28 @@
 				)}
 			>
 				{#each menuDataList as menuData (menuData.type)}
-					{#if !($page.data.lang === 'en' && menuData.type === 'raid')}
+					{#if !(lang === 'en' && menuData.type === 'raid')}
 						<GnbMenu {menuData} />
 					{/if}
 				{/each}
 			</ul>
 		</nav>
-		<div class="flex-center h-full">
-			<a
-				href="https://open.kakao.com/o/skcN4IDg"
-				target="_blank"
-				title="새창(오픈채팅)"
-				class="flex-col-center gap-[2px] px-2 opacity-50 transition-opacity hover:opacity-100 md:gap-0.5 md:px-3"
-			>
-				<iconify-icon
-					icon="hugeicons:customer-support"
-					width="20"
-					height="20"
-				/>
-				<span class="text-xs4 md:text-xs2"> 문의/제보</span>
-			</a>
-		</div>
+		{#if lang === 'kr'}
+			<div class="flex-center h-full">
+				<a
+					href="https://open.kakao.com/o/skcN4IDg"
+					target="_blank"
+					title="새창(오픈채팅)"
+					class="flex-col-center gap-[2px] px-2 opacity-50 transition-opacity hover:opacity-100 md:gap-0.5 md:px-3"
+				>
+					<iconify-icon
+						icon="hugeicons:customer-support"
+						width="20"
+						height="20"
+					/>
+					<span class="text-xs4 md:text-xs2"> 문의/제보</span>
+				</a>
+			</div>
+		{/if}
 	</Inner>
 </div>

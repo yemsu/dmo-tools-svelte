@@ -16,6 +16,7 @@
 	export let activeGacha: GachaData
 	export let count: 1 | 10 | 11
 	export let isRetry: boolean = false
+	$: lang = $page.data.lang as LangType
 
 	const PROBABILITY_MIN = 0.01
 	const SETUP_ITEM_LENGTH = 100 / PROBABILITY_MIN
@@ -54,7 +55,7 @@
 		gachaItemIdList = []
 		const resultItemIdList: number[] = []
 		if (!activeGacha.gachaItems) {
-			alert(ALERT.NO_SELECTED_GACHA)
+			alert(ALERT.NO_SELECTED_GACHA[lang])
 			return
 		}
 
@@ -71,7 +72,7 @@
 			if (!resultItem) {
 				error(
 					400,
-					`ERROR: getGachaItem - 결과 id인 ${resultId}에 맞는 item을 찾을 수 없습니다.`
+					`ERROR: getGachaItem - id값이 ${resultId}인 item을 찾을 수 없습니다.`
 				)
 			}
 			return resultItem
@@ -86,7 +87,6 @@
 		dispatch('start')
 	}
 
-	$: lang = $page.data.lang as LangType
 	const buttonTexts = {
 		resummon: {
 			kr: '재소환',
