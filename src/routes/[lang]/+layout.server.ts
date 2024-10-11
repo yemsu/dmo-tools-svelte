@@ -6,13 +6,13 @@ import { locale, waitLocale } from 'svelte-i18n'
 export const prerender = true
 export const load: ServerLoad = async ({ url }) => {
 	const seals = await getSeals()
-	const sealPrices = await getSealPrices('modifiedAt')
 	const gachaList = await getGachaList()
 	const gachaListSorted = gachaList.sort((a, b) => b.ticketCost - a.ticketCost)
 	const path = url.pathname
 	const lang = path.startsWith('/en') ? 'en' : 'kr'
 	locale.set(lang)
 	await waitLocale()
+	const sealPrices = await getSealPrices('modifiedAt', lang)
 
 	return {
 		seals,

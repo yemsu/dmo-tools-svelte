@@ -5,11 +5,19 @@ import type {
 	SealPrice
 } from '$entities/seals/type'
 import { apiFetch } from '$shared/api'
+import type { LangType } from '$shared/types'
 
 export const getSeals = () => apiFetch<SealData[]>('/seals')
 
-export const getSealPrices = (sortBy: 'regCount' | 'modifiedAt' = 'regCount') =>
-	apiFetch<SealPrice[]>(`/seals/price${sortBy ? `?sortBy=${sortBy}` : ''}`)
+export const getSealPrices = (
+	sortBy: 'regCount' | 'modifiedAt' = 'regCount',
+	lang: LangType
+) => {
+	const langParam = lang === 'en' ? '&server=sOmega' : ''
+	return apiFetch<SealPrice[]>(
+		`/seals/price${sortBy ? `?sortBy=${sortBy}${langParam}` : ''}`
+	)
+}
 
 // seal count
 export const getMySealsCount = () => apiFetch<MySealCount[]>(`/seals/my/count`)
