@@ -10,7 +10,10 @@
 	"minute": "minute",
 	"just_now": "Just Now",
 	"seal_count": "",
+	"grade": "grade",
 	"seal": {
-		"allStatTypes": "All Stat"
+		"allStatTypes": "All Stat",
+		"myTotalStats": "My Total Stats",
+		"myTotalAssets": "Total Assets Based on Owned Seals"
 	}
 }

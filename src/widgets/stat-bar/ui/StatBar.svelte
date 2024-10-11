@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import type { Stats } from '$entities/seals'
 	import {
 		MyStatBox,
@@ -18,9 +19,9 @@
 		<StatBarSeparator />
 		<div
 			class="flex items-center justify-center gap-2"
-			title="보유 씰의 총 가격"
+			title={$_('seal.myTotalAssets')}
 		>
-			<dt class="ir">등록된 씰의 총 가격</dt>
+			<dt class="ir">{$_('seal.myTotalAssets')}</dt>
 			<dd>
 				<StatBarTotalPrice {totalPrice} />
 			</dd>

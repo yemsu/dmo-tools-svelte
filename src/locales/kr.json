@@ -10,7 +10,10 @@
 	"minute": "분",
 	"just_now": "방금 전",
 	"seal_count": " ",
+	"grade": "등급",
 	"seal": {
-		"allStatTypes": "모든 스탯 타입"
+		"allStatTypes": "모든 스탯 타입",
+		"myTotalStats": "보유 씰 총 스탯",
+		"myTotalAssets": "보유 씰 기준 총 자산"
 	}
 }

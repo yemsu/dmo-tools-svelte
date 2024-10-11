@@ -12,7 +12,7 @@
 		type StatTypeOption
 	} from '$entities/seals'
 	import { user } from '$entities/user'
-	import { META } from '$shared/config'
+	import { META, PATH } from '$shared/config'
 	import SaveUrlLink from '$shared/layout/ui/SaveUrlLink.svelte'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { NoData } from '$shared/text'
@@ -106,16 +106,28 @@
 			<MySealList {mySealsFiltered} />
 		{:else if mySealsFiltered}
 			<NoData>
-				보유 씰이 아직 없습니다. <br /> 씰 설정 메뉴에서 보유하고 있는 씰의
-				개수를 업데이트 해주세요! <br /><br />
-				<span
-					class="flex-center flex-wrap gap-2 rounded-md bg-primary-50 p-2 sm:flex-col"
-				>
-					<span class="font-extrabold text-primary-5">
-						설정해놨던 보유 씰이 모두 사라졌나요?
+				{#if isKr}
+					보유 씰이 아직 없습니다. <br />
+					<a href="/{lang}{PATH.SETTING_SEALS}" class="font-bold underline">
+						씰 설정
+					</a>
+					메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!
+					<br /><br />
+					<span
+						class="flex-center flex-wrap gap-2 rounded-md bg-primary-50 p-2 sm:flex-col"
+					>
+						<span class="font-extrabold text-primary-5">
+							설정해놨던 보유 씰이 모두 사라졌나요?
+						</span>
+						<SaveUrlLink />
 					</span>
-					<SaveUrlLink />
-				</span>
+				{:else}
+					There are no seals registered yet. <br /> Please update the number of
+					seals you own in the
+					<a href="/{lang}{PATH.SETTING_SEALS}" class="font-bold underline">
+						Setting Seals
+					</a> menu!
+				{/if}
 			</NoData>
 		{/if}
 	</section>

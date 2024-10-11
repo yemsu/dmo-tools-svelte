@@ -1,8 +1,10 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
 	import { STATS_PERCENT_TYPE, type MySealCount } from '$entities/seals'
 	import { getMySealData } from '$widgets/my-seals/lib/helper'
 	import { getCurrentStep, getMySealStat } from '$widgets/seal-calculator'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let mySeal: MySealCount
 	$: sealData = getMySealData($page.data.seals, mySeal.id)
@@ -34,13 +36,15 @@
 <p class="mt-1 rounded-full bg-black/90 pr-2">
 	<span
 		class="rounded-full px-1 py-0.5 md:px-2 {grade &&
-			gradeBgStyles[grade]} text-xs4 md:text-xs3"
-		title="등급">{grade}</span
+			gradeBgStyles[grade.name]} text-xs4 md:text-xs3"
+		title={$_('grade')}
 	>
+		<TextByLang data={grade} />
+	</span>
 	<span
 		class="font-bold {grade &&
 			gradeTextStyles[
-				grade
+				grade.name
 			]} py-0.5 text-xs2 brightness-150 saturate-200 md:text-xs"
 		>+{result / calcNum}{dataUnit}</span
 	>
