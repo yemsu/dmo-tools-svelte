@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
+	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import {
 		mySealCounts,
@@ -21,10 +23,12 @@
 	} from '$widgets/my-seals'
 	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
 	import { StatBar } from '$widgets/stat-bar'
+	import { cn } from '$shared/lib'
 
-	let statTypeSelected = 'ALL'
+	let statTypeSelected: StatTypeOption = 'ALL'
 	let mySealsFiltered: MySealCount[] | null = null
-
+	$: lang = $page.data.lang as LangType
+	$: isKr = lang === 'kr'
 	$: getSelectedSeals = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
 		if (statTypeOption === 'ALL') {
@@ -59,11 +63,18 @@
 		}
 		return totalPrice
 	}
+
+	const getStatName = (statTypeOption: StatTypeOption, _isKr: boolean) => {
+		const findStat = STATS.find(({ type }) => type === statTypeOption)
+		if (!findStat) return ''
+		const nameKey = _isKr ? 'name' : 'engName'
+		return findStat[nameKey]
+	}
 </script>
 
 <svelte:head>
-	<title>{META.MY.TITLE}</title>
-	<meta name="description" content={META.MY.DESC} />
+	<title>{META.MY.TITLE[lang]}</title>
+	<meta name="description" content={META.MY.DESC[lang]} />
 </svelte:head>
 
 <h2 class="ir">보유 씰</h2>
@@ -77,9 +88,7 @@
 			class={statTypeOptionStyles[statTypeOption]}
 			isActive={statTypeSelected === statTypeOption}
 			on:click={() => onClickStatType(statTypeOption)}
-			title={statTypeOption === 'ALL'
-				? '전체'
-				: STATS.find(({ type }) => type === statTypeOption)?.name}
+			title={cn(statTypeOption !== 'ALL' && getStatName(statTypeOption, isKr))}
 		>
 			{statTypeOption}
 		</Tab>

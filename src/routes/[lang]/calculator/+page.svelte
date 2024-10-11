@@ -241,7 +241,7 @@
 					class={statColorStyles[stat.type]}
 					isActive={statTypeSelected === stat.type}
 					on:click={() => onClickStatType(stat.type)}
-					title={stat.name}
+					title={isKr ? stat.name : stat.engName}
 				>
 					{stat.type}
 				</Tab>

@@ -1,5 +1,7 @@
-import type { StatType } from '$widgets/my-seals/config'
+import type { STATS } from '$entities/seals/config'
 import type { SealMaterCount } from '$widgets/seal-calculator'
+
+export type StatType = (typeof STATS)[number]['type']
 
 export type SealData = {
 	id: number
@@ -41,8 +43,6 @@ export type MyPrice = {
 }
 
 export type Stats = Record<StatType, number>
-
-export type StatType = (typeof STATS)[number]['type']
 
 export type Seal = {
 	name: string

@@ -48,6 +48,13 @@
 		searchResults = [...results]
 	}
 
+	const getStatName = (statTypeOption: StatTypeOption, _isKr: boolean) => {
+		const findStat = STATS.find(({ type }) => type === statTypeOption)
+		if (!findStat) return ''
+		const nameKey = _isKr ? 'name' : 'engName'
+		return findStat[nameKey]
+	}
+
 	$: onSearchInput = (e: CustomEvent) => {
 		const _searchText = e.detail.target.value
 		updateSearchResult(_searchText, lang)
@@ -77,9 +84,9 @@
 				class={statTypeOptionStyles[statTypeOption]}
 				isActive={statTypeSelected === statTypeOption}
 				on:click={() => onClickStatType(statTypeOption)}
-				title={statTypeOption === 'ALL'
-					? '전체'
-					: STATS.find(({ type }) => type === statTypeOption)?.name}
+				title={cn(
+					statTypeOption !== 'ALL' && getStatName(statTypeOption, isKr)
+				)}
 			>
 				{statTypeOption}
 			</Tab>
