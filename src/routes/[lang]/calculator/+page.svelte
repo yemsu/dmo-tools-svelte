@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
 	import {
@@ -32,8 +33,7 @@
 		StatBarTotalPrice,
 		StatBarWrap
 	} from '$widgets/stat-bar'
-	import type { LangType } from '$shared/types'
-
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
 	let effDataListSorted: SealEfficiency[] = []
@@ -47,6 +47,7 @@
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
 	$: lang = $page.data.lang as LangType
+	$: isKr = lang === 'kr'
 	const getMySealCount = (mySeal: MySealCount[], sealId: number) =>
 		mySeal.find(({ id }) => id === sealId)?.count || 0
 
@@ -158,7 +159,7 @@
 	const addToMySeal = (effData: SealEfficiency, seal: SealData) => {
 		const mySealCount = getMySealCount($mySealCounts, seal.id)
 		const isConfirmed = confirm(
-			CONFIRM.ADD_MY_SEAL(seal.name, effData.needCount)[lang]
+			CONFIRM.ADD_MY_SEAL(seal, effData.needCount)[lang]
 		)
 		if (!isConfirmed) return
 		mySealCounts.updateCount(
@@ -173,7 +174,7 @@
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 		toast.on(
-			TOAST.SEAL_COUNT_UPDATE(seal.name, mySealCount + effData.needCount)[lang]
+			TOAST.SEAL_COUNT_UPDATE(seal, mySealCount + effData.needCount)[lang]
 		)
 	}
 
@@ -184,6 +185,41 @@
 	}
 
 	$: $mySealPrices && onChangedSealPrice()
+
+	const TEXTS = {
+		TARGET_VALUES: {
+			kr: '목표 수치 입력',
+			en: 'Target Value'
+		},
+		PERCENT_VALUE: {
+			kr: '퍼센트 값',
+			en: 'Percentage'
+		},
+		VIEW_RESULT: {
+			kr: '결과보기',
+			en: 'View Results'
+		},
+		SELECTED_STAT: {
+			kr: '선택된 능력치',
+			en: 'Selected Stat'
+		},
+		TARGET_STAT: {
+			kr: '목표 스탯',
+			en: 'Target Stat'
+		},
+		RESULT_COUNT: {
+			kr: '결과 씰 개수',
+			en: 'Resulting Seal Count'
+		},
+		NO_DATA_TEXT: {
+			kr: '목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!',
+			en: 'Input the target value to find the most efficient seal configuration!'
+		},
+		SEAL_REGISTERED: {
+			kr: '씰 등록 완료',
+			en: 'Registration completed'
+		}
+	}
 </script>
 
 <svelte:head>
@@ -220,26 +256,27 @@
 			bind:inputElement={goalStatInput}
 			type="number"
 			class="flex-1"
-			placeholder={STATS_PERCENT_TYPE.includes(statTypeSelected)
-				? '목표 수치 입력 (퍼센트 값)'
-				: '목표 수치 입력'}
+			placeholder={TEXTS.TARGET_VALUES[lang] +
+				(STATS_PERCENT_TYPE.includes(statTypeSelected)
+					? ` (${TEXTS.PERCENT_VALUE[lang]})`
+					: '')}
 			bind:value={goalStat}
 		/>
 		<Button rounded="md" size="lg" class="point-neon h-input-h font-semibold">
-			결과보기
+			{TEXTS.VIEW_RESULT[lang]}
 		</Button>
 	</form>
 </div>
 <section class="relative flex flex-1 flex-col overflow-hidden">
 	<h2 class="ir">
-		선택된 능력치: {statTypeSelected} &gt; 목표 스탯: {goalStat || 0} &gt; 결과 씰
-		개수:
-		{effDataListSorted.length}
+		{TEXTS.SELECTED_STAT[lang]}: {statTypeSelected}
+		&gt; {TEXTS.TARGET_STAT[lang]}: {goalStat || 0}
+		&gt; {TEXTS.RESULT_COUNT[lang]}: {effDataListSorted.length}
 	</h2>
 	<SealList
 		seals={effDataListSorted}
 		let:seal={effData}
-		noDataText="목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!"
+		noDataText={TEXTS.NO_DATA_TEXT[lang]}
 	>
 		{@const seal = $page.data.seals.find(({ id }) => id === effData.id)}
 		{#if seal}
@@ -252,7 +289,7 @@
 					on:click={() => addToMySeal(effData, seal)}
 				>
 					<iconify-icon icon="mdi:check" width={15} height={15} />
-					씰 등록 완료
+					{TEXTS.SEAL_REGISTERED[lang]}
 				</Button>
 			</SealItem>
 		{/if}
@@ -264,25 +301,33 @@
 				'flex-col-center size-full gap-4 bg-primary-5/60 backdrop-blur-sm'
 			)}
 		>
-			<p class="text-center">
-				효율 계산 이후에 씰 가격이 업데이트 되었습니다. <br />
-				아래 버튼을 클릭하여 다시 계산해주세요!
+			<p class="whitespace-preline text-center">
+				<TextByLang
+					text="효율 계산 이후에 씰 가격이 업데이트 되었습니다. 
+				아래 버튼을 클릭하여 다시 계산해주세요!"
+					engText="The seal prices have been updated after the efficiency calculation. Please click the button below to recalculate!"
+				/>
 			</p>
 			<Button rounded="md" size="lg" class="point-neon" on:click={onSubmit}>
-				계산 다시하기
+				<TextByLang text="계산 다시하기" engText="Recalculate the values." />
 			</Button>
 		</div>
 	{/if}
 </section>
 {#if effDataListSorted.length > 0}
 	<section>
-		<h2 class="ir">계산 결과 - 총 능력치, 총 비용</h2>
+		<h2 class="ir">
+			<TextByLang
+				text="계산 결과 - 총 능력치, 총 비용"
+				engText="Calculation Results - Total Stats, Total Cost "
+			/>
+		</h2>
 		<StatBarWrap>
 			<div>
 				<p class="flex-center gap-2 text-md leading-none md:text-lg2">
 					<span class="flex flex-col sm:gap-[2px]">
 						<span class="text-xs4 text-gray-300 md:text-xs">
-							현재 내 능력치
+							<TextByLang text="현재 내 능력치" engText="Current Stats" />
 						</span>
 						<span class="text-xs2 font-semibold text-point md:text-md">
 							{numberFormatter($myStats[statTypeSelected])}{resultUnit}
@@ -290,16 +335,18 @@
 					</span>
 					<span>+</span>
 					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-xs3 text-gray-300 md:text-xs"
-							>얻어야하는 능력치</span
-						>
+						<span class="text-xs3 text-gray-300 md:text-xs">
+							<TextByLang text="얻어야하는 능력치" engText="Required Stats" />
+						</span>
 						<span class="text-xs2 font-semibold text-point md:text-md"
 							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
 						>
 					</span>
 					<span>=</span>
 					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-xs3 text-gray-300 md:text-xs">최종 능력치</span>
+						<span class="text-xs3 text-gray-300 md:text-xs">
+							<TextByLang text="최종 능력치" engText="Final Stats" />
+						</span>
 						<span class="text-xs2 font-semibold text-point md:text-md">
 							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
 						</span>

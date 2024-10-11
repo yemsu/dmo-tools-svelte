@@ -1,3 +1,5 @@
+import type { LangType } from '$shared/types'
+
 export const objectBy = <ArrItem, KeyName extends string | number>(
 	arr: ArrItem[],
 	keyNameCB: (arrItem: ArrItem) => KeyName
@@ -28,7 +30,9 @@ export const numberFormatter = (number: number, fractionDigits: number = 2) => {
 	return numberCut > 100 ? numberCut.toLocaleString() : numberCut * 1
 }
 
-export const timeElapsedString = (createdAt: string) => {
+export const timeElapsedString = (
+	createdAt: string
+): { value?: number; timeUnit: string } => {
 	const createdTime = new Date(createdAt)
 	const currentTime = new Date()
 	const elapsedMilliseconds = currentTime.getTime() - createdTime.getTime()
@@ -40,17 +44,17 @@ export const timeElapsedString = (createdAt: string) => {
 	const elapsedYears = Math.floor(elapsedDays / 365)
 
 	if (elapsedYears > 0) {
-		return `${elapsedYears}년 전`
+		return { value: elapsedYears, timeUnit: 'year' }
 	} else if (elapsedMonths > 0) {
-		return `${elapsedMonths}달 전`
+		return { value: elapsedMonths, timeUnit: 'month' }
 	} else if (elapsedDays > 0) {
-		return `${elapsedDays}일 전`
+		return { value: elapsedDays, timeUnit: 'day' }
 	} else if (elapsedHours > 0) {
-		return `${elapsedHours}시간 전`
+		return { value: elapsedHours, timeUnit: 'hour' }
 	} else if (elapsedMinutes > 0) {
-		return `${elapsedMinutes}분 전`
+		return { value: elapsedMinutes, timeUnit: 'minute' }
 	} else {
-		return '방금 전'
+		return { timeUnit: 'just_now' }
 	}
 }
 

@@ -1,3 +1,5 @@
+import type { SealData } from '$entities/seals'
+
 export const CONFIRM = {
 	FINAL_NICKNAME: {
 		kr: '이 닉네임으로 회원 가입을 진행하시겠어요?',
@@ -7,9 +9,9 @@ export const CONFIRM = {
 		kr: `"${nickname}"으로 닉네임을 변경하시겠어요?`,
 		en: `Would you like to change your nickname to "${nickname}"?`
 	}),
-	ADD_MY_SEAL: (sealName: string, sealCount: number) => ({
-		kr: `${sealName}씰 ${sealCount}개를 보유 씰에 추가하시겠어요?`,
-		en: `Would you like to add ${sealCount} ${sealName} seals to your collection?`
+	ADD_MY_SEAL: (seal: SealData, sealCount: number) => ({
+		kr: `${seal.name}씰 ${sealCount}개를 보유 씰에 추가하시겠어요?`,
+		en: `Would you like to add "${sealCount} ${seal.engName}" seals to your collection?`
 	}),
 	REMOVE_SEAL_PRICE: {
 		kr: '설정한 가격을 제거하시겠어요? 제거 후에는 서버에 저장된 가격이 노출됩니다.',

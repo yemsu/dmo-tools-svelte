@@ -28,7 +28,7 @@ export const ALERT = {
 		en: 'Please enter the target stat value.'
 	},
 	WRONG_TARGET_VALUE: {
-		kr: '현재 스탯과 동일하거나 더 작은 값입니다.',
-		en: 'The value must be equal to or less than the current stat.'
+		kr: '현재 스탯보다 큰 값이여야 합니다.',
+		en: 'It must be a value greater than the current stat.'
 	}
 }

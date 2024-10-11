@@ -1,0 +1,16 @@
+{
+	"delete": "삭제",
+	"count_unit": "개",
+	"all": "전체",
+	"ago": "전",
+	"year": "년",
+	"month": "달",
+	"day": "일",
+	"hour": "시간",
+	"minute": "분",
+	"just_now": "방금 전",
+	"seal_count": " ",
+	"seal": {
+		"allStatTypes": "모든 스탯 타입"
+	}
+}

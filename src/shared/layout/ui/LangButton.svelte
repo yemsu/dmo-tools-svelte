@@ -3,6 +3,7 @@
 	import { page } from '$app/stores'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { TOAST } from '$shared/config'
+	import { Icon } from '$shared/icon'
 	import { toast } from '$shared/toast'
 	import type { LangType } from '$shared/types'
 
@@ -14,9 +15,10 @@
 </script>
 
 <Button
-	class="flex-center border border-white/80 text-xs text-white/80 md:text-sm"
-	title="유저 메뉴 열기"
-	on:click={() => changeLang()}
+	class="flex-center border border-white/80  text-white/80"
+	size="sm"
+	on:click={changeLang}
 >
+	<Icon icon="material-symbols:language" />
 	{toLang.toUpperCase()}
 </Button>

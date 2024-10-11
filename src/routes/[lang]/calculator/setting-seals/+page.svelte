@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
 	import {
 		type SealData,
@@ -16,13 +17,15 @@
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
 	import type { LangType } from '$shared/types'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
 	let seals = $page.data.seals
 	$: searchResults = seals
 	$: lang = $page.data.lang as LangType
-	const updateSearchResult = (_searchText: string) => {
+	$: isKr = lang === 'kr'
+	const updateSearchResult = (_searchText: string, _lang: LangType) => {
 		const filterStatTypeSelected =
 			statTypeSelected === 'ALL'
 				? seals
@@ -34,9 +37,10 @@
 
 		const results: SealData[] = []
 		filterStatTypeSelected.forEach((seal) => {
+			const sealName = _lang === 'kr' ? seal.name : seal.engName.toLowerCase()
 			if (
-				seal.name.includes(_searchText) ||
-				choseongIncludes(seal.name, _searchText)
+				sealName.includes(_searchText) ||
+				(_lang === 'kr' && choseongIncludes(sealName, _searchText))
 			) {
 				results.push(seal)
 			}
@@ -44,14 +48,14 @@
 		searchResults = [...results]
 	}
 
-	const onSearchInput = (e: CustomEvent) => {
+	$: onSearchInput = (e: CustomEvent) => {
 		const _searchText = e.detail.target.value
-		updateSearchResult(_searchText)
+		updateSearchResult(_searchText, lang)
 	}
 
 	$: onClickStatType = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
-		updateSearchResult(searchText)
+		updateSearchResult(searchText, lang)
 	}
 </script>
 
@@ -84,7 +88,7 @@
 	<Input
 		id="search"
 		maxlength={30}
-		placeholder="씰 이름을 검색하세요"
+		placeholder={isKr ? '씰 이름을 검색하세요' : 'Search for seal names'}
 		class="w-full flex-1 md:w-auto"
 		bind:value={searchText}
 		on:input={onSearchInput}
@@ -93,9 +97,15 @@
 <section class="flex flex-1 flex-col overflow-hidden">
 	<div class="mb-2 flex items-center justify-between">
 		<ListReferText tagName="h2" mb={false}>
-			{searchText ? `'${searchText}'` : '모든'} 검색어 &gt;
-			{statTypeSelected === 'ALL' ? '모든 스탯 타입' : statTypeSelected}
-			({searchResults.length}개)
+			{#if searchText}
+				{searchText ? `'${searchText}'` : '모든 검색어'} &gt;
+				{statTypeSelected === 'ALL'
+					? $_('seal.allStatTypes')
+					: statTypeSelected}
+			{:else}
+				{$_('all')}
+			{/if}
+			({searchResults.length}{$_('count_unit')})
 		</ListReferText>
 
 		<div class="flex-center relative gap-4">
@@ -106,15 +116,28 @@
 				)}
 			>
 				<iconify-icon icon="ic:outline-info" width={14} height={14} />
-				가격은 어떻게 설정되나요?
+				<TextByLang
+					text="가격은 어떻게 설정되나요?"
+					engText="How are prices set?"
+				/>
 			</button>
 			<Tooltip class="-bottom-2 right-0 w-[310px] translate-y-full pr-2">
 				<p>
-					<span class="text-point">루체 서버</span>를 기준으로, 각 씰의
-					<span class="text-point">위탁 거래소 <br />1페이지 매물 가격</span>의
-					가중 평균으로 책정됩니다. <br />
-					가격 간 편차, 오류 등으로 인해 부정확한 가격이 책정될 가능성이 있으니
-					<span class="text-point">구매 전 확인</span>이 필요합니다.
+					{#if isKr}
+						<span class="text-point">루체 서버</span>를 기준으로, 각 씰의
+						<span class="text-point">위탁 거래소 <br />1페이지 매물 가격</span
+						>의 가중 평균으로 책정됩니다. <br />
+						가격 간 편차, 오류 등으로 인해 부정확한 가격이 책정될 가능성이 있으니
+						<span class="text-point">구매 전 확인</span>이 필요합니다.
+					{:else}
+						Based on the <span class="text-point">Omega server</span>, seal
+						prices are set using the weighted average of listings
+						<span class="text-point">on the first page of the marketplace</span
+						>. However, due to potential price fluctuations or listing errors,
+						there’s a chance that the prices may not be accurate. Please
+						<span class="text-point"> verify the prices </span> before making any
+						purchases.
+					{/if}
 				</p>
 			</Tooltip>
 		</div>
@@ -123,7 +146,7 @@
 		seals={searchResults}
 		isLoading={seals.length === 0}
 		let:seal
-		noDataText="검색 결과가 존재하지 않습니다."
+		noDataText={isKr ? '검색 결과가 존재하지 않습니다.' : 'No results found.'}
 	>
 		<SealItem {seal} />
 	</SealList>

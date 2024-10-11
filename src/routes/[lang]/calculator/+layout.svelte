@@ -21,7 +21,7 @@
 		{
 			menuName: {
 				kr: '씰 세팅',
-				en: 'All Seals'
+				en: 'Setting Seals'
 			},
 			path: PATH.SETTING_SEALS
 		},

@@ -1,3 +1,5 @@
+import type { SealData } from '$entities/seals'
+
 export const TOAST = {
 	NEED_LOGIN: {
 		kr: '로그인 후 이용할 수 있는 기능입니다.',
@@ -36,9 +38,9 @@ export const TOAST = {
 		en: 'The site language has been set to English.'
 	}),
 	// seal
-	SEAL_COUNT_UPDATE: (sealName: string, sealCount: number) => ({
-		kr: `${sealName}씰 보유 개수가 ${sealCount}개로 업데이트 되었습니다.`,
-		en: `Your ${sealName} seal count has been updated to ${sealCount}`
+	SEAL_COUNT_UPDATE: (seal: SealData, sealCount: number) => ({
+		kr: `${seal.name}씰 보유 개수가 ${sealCount}개로 업데이트 되었습니다.`,
+		en: `Your ${seal.engName} seal count has been updated to ${sealCount}`
 	}),
 	REMOVED_SEAL_PRICE: {
 		kr: '씰 가격 설정이 제거되었습니다.',

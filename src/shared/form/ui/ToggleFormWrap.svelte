@@ -3,6 +3,7 @@
 	import Button from '$shared/button/ui/Button.svelte'
 	import { Input } from '$shared/form'
 	import { delay } from '$shared/lib'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let text: string
 	export let value: string | null
@@ -43,15 +44,17 @@
 					class="bg-primary-30"
 					disabled={!isValid}
 				>
-					완료
+					<TextByLang text="완료" engText="Done" />
 				</Button>
 				<Button
 					type="button"
 					size="md-lg"
 					rounded="md"
 					class="bg-gray-500"
-					on:click={onClickCancel}>취소</Button
+					on:click={onClickCancel}
 				>
+					<TextByLang text="취소" engText="Cancel" />
+				</Button>
 			</div>
 		</form>
 		<slot name="validationText"></slot>
@@ -62,6 +65,8 @@
 		size="md-lg"
 		rounded="md"
 		class="ml-auto bg-primary-30"
-		on:click={onClickEdit}>수정</Button
+		on:click={onClickEdit}
 	>
+		<TextByLang text="수정" engText="Edit" />
+	</Button>
 {/if}

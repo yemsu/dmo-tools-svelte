@@ -1,4 +1,5 @@
 <script lang="ts">
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import type { InfoItemData } from '$widgets/my-info'
 
 	export let infoItems: InfoItemData[]
@@ -10,7 +11,7 @@
 			class="flex min-h-[50px] items-center gap-4 border-b border-gray-700/60 px-4 py-2 last:border-transparent"
 		>
 			<dt class="w-[70px] break-keep font-semibold md:w-[100px]">
-				{infoItemData.title}
+				<TextByLang data={infoItemData} dataKey={['title', 'engTitle']} />
 			</dt>
 			<dd class="flex flex-1 flex-wrap items-center gap-4">
 				<slot {infoItemData}></slot>

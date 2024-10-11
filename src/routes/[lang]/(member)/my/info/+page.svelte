@@ -4,6 +4,7 @@
 	import { user } from '$entities/user'
 	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import Title from '$shared/text/ui/Title.svelte'
 	import {
 		ChangeNickname,
@@ -20,28 +21,34 @@
 	$: baseInfoMap = [
 		{
 			title: '닉네임',
+			engTitle: 'Nickname',
 			desc: $user?.nickname
 		},
 		{
 			title: '이메일',
+			engTitle: 'E-Mail',
 			desc: $user?.email
 		},
 		{
-			title: '회원 탈퇴'
+			title: '회원 탈퇴',
+			engTitle: 'Withdrawal'
 		}
 	] as InfoItemData[]
 
 	$: raidInfoMap = [
 		{
 			title: '서버',
+			engTitle: 'Server',
 			desc: GAME_SERVERS[$crrServerType]
 		},
 		{
 			title: '타이머',
+			engTitle: 'Timer',
 			desc: `${$alarmMinute}분 전`
 		},
 		{
 			title: '제보 횟수',
+			engTitle: 'Report Count',
 			desc: 235
 		}
 	] as InfoItemData[]
@@ -50,7 +57,9 @@
 <Section class="mx-auto max-w-[450px]">
 	<div class="flex-col-center h-full gap-3">
 		<div class="flex w-full flex-col gap-3">
-			<Title class="w-full">기본 정보</Title>
+			<Title class="w-full">
+				<TextByLang text="내 정보" engText="My Information" />
+			</Title>
 			<InfoItem infoItems={baseInfoMap} let:infoItemData>
 				{#if infoItemData.title === '닉네임'}
 					<ChangeNickname />

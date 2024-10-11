@@ -7,6 +7,7 @@
 	import GnbMenu from '$widgets/gnb/ui/GnbMenu.svelte'
 
 	$: lang = $page.data.lang as LangType
+	$: path = $page.url.pathname
 	const menuDataList: MenuData[] = [
 		{
 			type: 'calc',

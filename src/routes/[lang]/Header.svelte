@@ -14,9 +14,11 @@
 	import LangButton from '$shared/layout/ui/LangButton.svelte'
 	import { objectBy } from '$shared/lib'
 	import { Inner } from '$shared/section'
+	import type { LangType } from '$shared/types'
 	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
 
+	$: lang = $page.data.lang as LangType
 	$: statCalc = (statType: StatType) => {
 		if ($mySealCounts.length === 0) return
 		const mySealsByStatType = objectBy(
@@ -76,7 +78,11 @@
 		class="relative flex h-header-h items-center justify-between"
 	>
 		<h1 class="font-tiny text-2xl font-semibold leading-none md:text-3xl">
-			<a href="/{$page.data.lang}" class="text-logo block" title="메인으로">
+			<a
+				href="/{$page.data.lang}"
+				class="text-logo block"
+				title={lang === 'kr' ? '메인으로' : 'Go to Main Page'}
+			>
 				DMO tools
 			</a>
 		</h1>

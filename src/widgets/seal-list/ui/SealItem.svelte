@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
 	import { getSealPrice, type SealData } from '$entities/seals'
 	import { _objKeys, cn, timeElapsedString } from '$shared/lib'
@@ -12,12 +13,38 @@
 	import { statColorStyles } from '$widgets/my-seals'
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	export let seal: SealData
 	export let myStep: SealEfficiency['myStep'] = undefined
 	export let isCountEditable: boolean = true
 	export let isPriceEditable: boolean = true
 	let sealPrices = $page.data.sealPrices
+	$: lang = $page.data.lang
 	$: sealPrice = getSealPrice(sealPrices, seal.id)
+	$: timeElapsed =
+		sealPrice && sealPrices.length > 0
+			? timeElapsedString(sealPrice.modifiedAt)
+			: undefined
+
+	$: data = [
+		{
+			name: '최대 스탯',
+			engName: 'Max Stat',
+			value: seal.maxIncrease.toLocaleString()
+		},
+		{
+			name: '마스터 개수',
+			engName: 'Master Count',
+			value: seal.masterCount.toLocaleString()
+		},
+		{
+			name: '가격 업데이트',
+			engName: 'Price Updated',
+			value:
+				timeElapsed &&
+				`${timeElapsed.value || ''} ${$_(timeElapsed.timeUnit)}${lang === 'en' && timeElapsed.value && timeElapsed.value > 1 ? 's' : ''} ${$_('ago')}`
+		}
+	]
 </script>
 
 <article
@@ -45,25 +72,21 @@
 		</p>
 		<Tooltip size="sm" useAdaptiveX={true} class="top-4">
 			<dl class="flex flex-col gap-1 whitespace-nowrap">
-				<div class="flex items-center gap-2">
-					<dt class="text-gray-300">최대 스탯</dt>
-					<dd class="text-point">{seal.maxIncrease.toLocaleString()}</dd>
-				</div>
-				<div class="flex items-center gap-2">
-					<dt class="text-gray-300">마스터 개수</dt>
-					<dd class="text-point">{seal.masterCount.toLocaleString()}</dd>
-				</div>
-				{#if sealPrice}
-					<div class="flex items-center gap-2">
-						<dt class="text-gray-300">가격 업데이트</dt>
-						<dd class="text-point">
-							{sealPrices.length > 0 && timeElapsedString(sealPrice.modifiedAt)}
-						</dd>
-					</div>
-				{/if}
+				{#each data as infoItem (infoItem.name)}
+					{#if infoItem.value}
+						<div class="flex items-center gap-2">
+							<dt class="text-gray-300">
+								<TextByLang data={infoItem} />
+							</dt>
+							<dd class="text-point">{infoItem.value}</dd>
+						</div>
+					{/if}
+				{/each}
 				{#if myStep}
 					<div class="rounded-sm bg-white/10 p-1">
-						<p class="mb-1 text-xs3">현재 내 능력치</p>
+						<p class="mb-1 text-xs3">
+							<TextByLang text="현재 내 능력치" engText="Current My Level" />
+						</p>
 						<ol class="flex items-center gap-1 text-xs3 leading-none">
 							{#each SEAL_COUNT_STEPS_BY_MASTER[`${seal.masterCount}`] as sealCount}
 								<li

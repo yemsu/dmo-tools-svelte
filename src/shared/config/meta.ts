@@ -26,8 +26,8 @@ export const META = {
 			en: `Seal Efficiency Calculator | ${META_COMMON.TITLE.en}`
 		},
 		DESC: {
-			kr: `${META_COMMON.TITLE.kr} 보유 씰을 바탕으로 목표 스탯까지의 효율적인 씰 구매리스트를 간편하게 확인해보세요.`,
-			en: `${META_COMMON.TITLE.en} Easily check the efficient seal purchase list based on your owned seals to reach your target stats.`
+			kr: `${META_COMMON.TITLE.kr} 보유 씰을 설정하고 목표 스탯까지의 씰 효율 우선순위를 간편하게 확인해보세요.`,
+			en: `${META_COMMON.TITLE.en} Set your current seals and easily check the priority of seal efficiency to reach your target stat.`
 		}
 	},
 	MY: {

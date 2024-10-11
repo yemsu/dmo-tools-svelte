@@ -23,7 +23,9 @@
 		</h2>
 		<div class="text-xs2 md:text-sm">
 			{#if gachaData.category}
-				<p>{gachaData.category}</p>
+				<p>
+					<TextByLang data={gachaData} dataKey={['category', 'engCategory']} />
+				</p>
 			{/if}
 			<p><TextByLang data={gachaData} /></p>
 		</div>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { user } from '$entities/user'
@@ -98,7 +99,7 @@
 						'w-full rounded-md bg-primary-20/50 py-1.5 md:py-1',
 						countStyle
 					)}
-					title={isKr ? '보유 개수 수정하기' : 'Update seal quantity'}
+					title={isKr ? '보유 개수 수정하기' : 'Edit Seal Quantity'}
 					on:click={onClickInputOn}
 				>
 					<iconify-icon
@@ -106,7 +107,8 @@
 						width={15}
 						height={15}
 					/>
-					{numberFormatter(count)}{isKr ? '개' : ''}
+					{numberFormatter(count)}
+					{$_('seal_count')}
 				</button>
 			{:else}
 				<p class={countStyle}>
@@ -115,7 +117,7 @@
 						width={15}
 						height={15}
 					/>
-					{numberFormatter(count)}{isKr ? '개' : ''}
+					{numberFormatter(count)}{$_('seal_count')}
 				</p>
 			{/if}
 		</div>

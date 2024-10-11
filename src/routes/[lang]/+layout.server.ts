@@ -1,6 +1,7 @@
 import { getGachaList } from '$entities/gacha'
 import { getSealPrices, getSeals } from '$entities/seals'
 import type { ServerLoad } from '@sveltejs/kit'
+import { locale, waitLocale } from 'svelte-i18n'
 
 export const prerender = true
 export const load: ServerLoad = async ({ url }) => {
@@ -10,6 +11,8 @@ export const load: ServerLoad = async ({ url }) => {
 	const gachaListSorted = gachaList.sort((a, b) => b.ticketCost - a.ticketCost)
 	const path = url.pathname
 	const lang = path.startsWith('/en') ? 'en' : 'kr'
+	locale.set(lang)
+	await waitLocale()
 
 	return {
 		seals,

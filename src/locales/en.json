@@ -1,3 +1,16 @@
 {
-	"delete": "delete"
+	"delete": "Delete",
+	"count_unit": " results",
+	"all": "All",
+	"ago": "ago",
+	"year": "year",
+	"month": "month",
+	"day": "day",
+	"hour": "hour",
+	"minute": "minute",
+	"just_now": "Just Now",
+	"seal_count": "",
+	"seal": {
+		"allStatTypes": "All Stat"
+	}
 }
