@@ -79,7 +79,7 @@
 	>
 		<h1 class="font-tiny text-2xl font-semibold leading-none md:text-3xl">
 			<a
-				href="/{$page.data.lang}"
+				href="/{lang}"
 				class="text-logo block"
 				title={lang === 'kr' ? '메인으로' : 'Go to Main Page'}
 			>

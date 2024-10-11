@@ -36,7 +36,7 @@
 		<div class="flex min-h-[60%] flex-col gap-3 md:gap-5">
 			<MainBanner
 				src={contentUrl('/main/main-banner-calc.png')}
-				href="/{$page.data.lang}{PATH.CALCULATOR}"
+				href="/{lang}{PATH.CALCULATOR}"
 				title={MENUS.calc[isKr ? 'name' : 'engName']}
 				subTitle={isKr
 					? '보유 씰을 설정하고 목표 스탯까지의 씰 효율 우선순위를 간편하게 확인해보세요.'
@@ -48,7 +48,7 @@
 			{#if isKr}
 				<MainBanner
 					src={contentUrl('/main/main-banner-raid.png')}
-					href="/{$page.data.lang}{PATH.RAID_TIMER}"
+					href="/{lang}{PATH.RAID_TIMER}"
 					title="레이드 타이머"
 					subTitle="보스 출현 시간을 제보하여 유저들과 공유하고 알림을 받아보세요."
 					xDir="left"
@@ -58,7 +58,7 @@
 			{/if}
 			<MainBanner
 				src={contentUrl('/main/main-banner-gacha.png')}
-				href="/{$page.data.lang}{PATH.GACHA}"
+				href="/{lang}{PATH.GACHA}"
 				title={MENUS.gacha[isKr ? 'name' : 'engName']}
 				subTitle={isKr
 					? '뽑기 시뮬레이터로 운을 미리 시험해 보세요.'
