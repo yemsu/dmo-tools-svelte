@@ -1,5 +1,6 @@
 {
 	"delete": "Delete",
+	"confirm": "Confirm",
 	"count_unit": " results",
 	"all": "All",
 	"ago": "ago",
@@ -15,5 +16,8 @@
 		"allStatTypes": "All Stat",
 		"myTotalStats": "My Total Stats",
 		"myTotalAssets": "Total Assets Based on Owned Seals"
+	},
+	"gacha": {
+		"resultItems": "Acquired Items"
 	}
 }

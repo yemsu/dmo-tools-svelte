@@ -107,7 +107,7 @@
 					>
 						{#if invenSlot}
 							<GachaItemImage id={invenSlot.item.id} />
-							<ItemTooltip name={invenSlot.item.name} />
+							<ItemTooltip item={invenSlot.item} />
 							<span
 								class="text-shadow absolute bottom-0 right-1 text-xs shadow-sm"
 								>{invenSlot.count}</span

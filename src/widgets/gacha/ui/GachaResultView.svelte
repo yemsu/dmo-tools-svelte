@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import {
 		gachaStore,
 		type GachaData,
@@ -61,7 +62,7 @@
 	<div
 		class="flex-col-center h-full w-full max-w-[300px] gap-10 md:max-w-[400px] md:gap-14"
 	>
-		<GachaTitle>획득 아이템</GachaTitle>
+		<GachaTitle>{$_('gacha.resultItems')}</GachaTitle>
 		<ul
 			class={cn(
 				'max-h-[160px] w-full flex-1 md:max-h-[220px]',
@@ -79,13 +80,15 @@
 						{activeGacha}
 						{currentGachaType}
 					/>
-					<ItemTooltip name={resultItem.item.name} />
+					<ItemTooltip item={resultItem.item} />
 				</li>
 			{/each}
 		</ul>
 		<div class="flex-center w-[200px] gap-[10%]">
 			{#if resultLength === 1 || resultLength === 10 || resultLength === 11}
-				<GachaButton bg="confirm" on:click={onConfirm}>확인</GachaButton>
+				<GachaButton bg="confirm" on:click={onConfirm}
+					>{$_('confirm')}</GachaButton
+				>
 				<GachaStartButton
 					{currentGachaType}
 					{activeGacha}

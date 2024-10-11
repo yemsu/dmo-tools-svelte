@@ -90,7 +90,7 @@
 	const buttonTexts = {
 		resummon: {
 			kr: '재소환',
-			en: 'Re-summon'
+			en: 'Resummon'
 		},
 		summon: {
 			kr: '소환',

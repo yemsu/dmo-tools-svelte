@@ -47,7 +47,7 @@
 						/>
 					</span>
 				{/if}
-				<span>
+				<span class="whitespace-nowrap">
 					<TextByLang data={gachaData} />
 				</span>
 			</h2>

@@ -1,5 +1,6 @@
 {
 	"delete": "삭제",
+	"confirm": "확인",
 	"count_unit": "개",
 	"all": "전체",
 	"ago": "전",
@@ -15,5 +16,8 @@
 		"allStatTypes": "모든 스탯 타입",
 		"myTotalStats": "보유 씰 총 스탯",
 		"myTotalAssets": "보유 씰 기준 총 자산"
+	},
+	"gacha": {
+		"resultItems": "획득 아이템"
 	}
 }
