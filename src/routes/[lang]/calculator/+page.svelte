@@ -301,10 +301,9 @@
 				'flex-col-center size-full gap-4 bg-primary-5/60 backdrop-blur-sm'
 			)}
 		>
-			<p class="whitespace-preline text-center">
+			<p class="text-balance break-keep text-center">
 				<TextByLang
-					text="효율 계산 이후에 씰 가격이 업데이트 되었습니다. 
-				아래 버튼을 클릭하여 다시 계산해주세요!"
+					text="효율 계산 이후에 씰 가격이 업데이트 되었습니다. 아래 버튼을 클릭하여 다시 계산해주세요!"
 					engText="The seal prices have been updated after the efficiency calculation. Please click the button below to recalculate!"
 				/>
 			</p>
