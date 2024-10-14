@@ -9,14 +9,18 @@
 	import { Title } from '$shared/text'
 	import { RaidTabList, RaidTimeView } from '$widgets/raid'
 	import type { LangType } from '$shared/types'
+	import { onMount } from 'svelte'
 
 	$: lang = $page.data.lang as LangType
 
-	const checkLang = () => {
-		lang !== 'kr' && goto(`/${lang}${PATH.MAIN}`)
+	$: {
+		if (lang !== 'kr') {
+			// 클라이언트에서만 실행되도록 onMount 내에서 goto 호출
+			onMount(() => {
+				goto(`/${lang}${PATH.MAIN}`)
+			})
+		}
 	}
-
-	$: lang && checkLang()
 </script>
 
 <svelte:head>
