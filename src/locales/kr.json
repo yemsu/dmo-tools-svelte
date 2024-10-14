@@ -18,6 +18,11 @@
 		"myTotalAssets": "보유 씰 기준 총 자산"
 	},
 	"gacha": {
-		"resultItems": "획득 아이템"
+		"resultItems": "획득 아이템",
+		"draw": "드로우",
+		"summon": "소환",
+		"resummon": "재소환",
+		"time": "회",
+		"times": "회"
 	}
 }

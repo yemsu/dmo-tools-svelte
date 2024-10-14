@@ -18,6 +18,11 @@
 		"myTotalAssets": "Total Assets Based on Owned Seals"
 	},
 	"gacha": {
-		"resultItems": "Acquired Items"
+		"resultItems": "Acquired Items",
+		"draw": "Draw",
+		"summon": "Summon",
+		"resummon": "Resummon",
+		"time": "time",
+		"times": "times"
 	}
 }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import {
@@ -86,25 +87,6 @@
 			)
 		dispatch('start')
 	}
-
-	const buttonTexts = {
-		resummon: {
-			kr: '재소환',
-			en: 'Resummon'
-		},
-		summon: {
-			kr: '소환',
-			en: 'Summon'
-		},
-		draw: {
-			kr: '드로우',
-			en: 'Draw'
-		},
-		time: {
-			kr: '회',
-			en: ''
-		}
-	}
 </script>
 
 <GachaButton
@@ -112,6 +94,6 @@
 	on:click={() => startGacha()}
 >
 	{isRetry
-		? buttonTexts.resummon[lang]
-		: `${count}${buttonTexts.time[lang]} ${currentGachaType === 'DATA_SUMMON' ? buttonTexts.summon[lang] : buttonTexts.draw[lang]}`}
+		? $_('gacha.resummon')
+		: `${count} ${count === 1 ? $_('gacha.time') : $_('gacha.times')} ${currentGachaType === 'DIGITAL_DRAW' ? $_('gacha.draw') : ''}`}
 </GachaButton>
