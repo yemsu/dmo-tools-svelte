@@ -18,6 +18,33 @@ const config = {
 			$features: 'src/features',
 			$widgets: 'src/widgets',
 			$shared: 'src/shared'
+		},
+		prerender: {
+			crawl: false,
+			entries: [
+				'/kr',
+				'/kr/calculator',
+				'/kr/calculator/my-seals',
+				'/kr/calculator/setting-seals',
+				'/kr/gacha-simulator',
+				'/kr/join',
+				'/kr/login',
+				'/kr/my/info',
+				'/kr/policy/privacy',
+				'/kr/raid-timer',
+				'/kr/save-url',
+				'/en',
+				'/en/calculator',
+				'/en/calculator/my-seals',
+				'/en/calculator/setting-seals',
+				'/en/gacha-simulator',
+				'/en/join',
+				'/en/login',
+				'/en/my/info',
+				'/en/policy/privacy',
+				'/en/raid-timer',
+				'/en/save-url'
+			]
 		}
 	},
 	plugins: [
