@@ -6,6 +6,7 @@
 
 	onMount(() => {
 		const path = $page.url.pathname
+		if (path.includes('sitemap.xml')) return
 		if (!path.startsWith('/kr') && !path.startsWith('/en')) {
 			const userLocale = getLocaleFromNavigator() || 'en'
 			const lang = userLocale.startsWith('ko') ? 'kr' : 'en'
