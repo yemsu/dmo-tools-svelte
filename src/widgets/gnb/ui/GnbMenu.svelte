@@ -14,7 +14,12 @@
 	$: isActive = getIsActive(type)
 </script>
 
-<li class={cn('h-full', isActive ? 'w-[45%] md:w-[35%]' : 'flex-1')}>
+<li
+	class={cn(
+		'h-full max-w-[45%] md:max-w-[35%]',
+		isActive ? 'w-[45%] md:w-[35%]' : 'flex-1'
+	)}
+>
 	<a
 		href="/{$page.data.lang}{MENUS[type].path}"
 		class={cn(
