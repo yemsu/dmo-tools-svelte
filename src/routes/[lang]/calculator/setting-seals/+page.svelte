@@ -137,8 +137,9 @@
 						가격 간 편차, 오류 등으로 인해 부정확한 가격이 책정될 가능성이 있으니
 						<span class="text-point">구매 전 확인</span>이 필요합니다.
 					{:else}
-						Based on the <span class="text-point">Omega server</span>, seal
-						prices are set using the weighted average of listings
+						Based on the <span class="text-point"
+							>Omega server of the Steam version</span
+						>, seal prices are set using the weighted average of listings
 						<span class="text-point">on the first page of the marketplace</span
 						>. However, due to potential price fluctuations or listing errors,
 						there’s a chance that the prices may not be accurate. Please
