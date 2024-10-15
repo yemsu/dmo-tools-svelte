@@ -33,14 +33,16 @@
 			path: PATH.MY_SEALS
 		}
 	]
+
+	$: console.log('lang', lang)
 </script>
 
 <Section>
 	<Tabs>
-		{#each SUB_MENUS as subMenu (subMenu.path)}
+		{#each SUB_MENUS as subMenu (lang + subMenu.path)}
 			<Tab
 				tagName="a"
-				href="/{$page.data.lang}{subMenu.path}"
+				href="/{lang}{subMenu.path}"
 				isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
 			>
 				{subMenu.menuName[lang]}
