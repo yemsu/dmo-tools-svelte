@@ -66,6 +66,8 @@
 		})
 		gachaItemIdList = shuffleArray(gachaItemIdList)
 		resultItemIdList.push(...gachaItemIdList.slice(0, count))
+		// 희귀도 7 아이템 노출
+		// resultItemIdList[0] = activeGacha.gachaItems[0].id
 		const newGachaResults = resultItemIdList.map((resultId) => {
 			const resultItem = activeGacha.gachaItems.find(
 				({ id }) => resultId === id
