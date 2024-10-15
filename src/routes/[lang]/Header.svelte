@@ -88,7 +88,7 @@
 		</h1>
 		<div class="flex-center gap-2">
 			<AuthButton />
-			<!-- <LangButton /> -->
+			<LangButton />
 		</div>
 	</Inner>
 </header>
