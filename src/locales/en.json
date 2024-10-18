@@ -12,6 +12,8 @@
 	"just_now": "Just Now",
 	"seal_count": "",
 	"grade": "grade",
+	"close_popup": "Close Popup",
+	"support": "Report Issue",
 	"seal": {
 		"allStatTypes": "All Stat",
 		"myTotalStats": "My Total Stats",
