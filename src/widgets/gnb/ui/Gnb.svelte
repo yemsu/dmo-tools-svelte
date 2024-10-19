@@ -2,7 +2,7 @@
 	import { page } from '$app/stores'
 	import { type MenuData } from '$entities/menus'
 	import { cn } from '$shared/lib'
-	import Modal from '$shared/modal/ui/Modal1.svelte'
+	import Modal from '$shared/modal/ui/Modal.svelte'
 	import { Inner } from '$shared/section'
 	import type { LangType } from '$shared/types'
 	import GnbMenu from '$widgets/gnb/ui/GnbMenu.svelte'
