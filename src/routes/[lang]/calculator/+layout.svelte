@@ -33,8 +33,6 @@
 			path: PATH.MY_SEALS
 		}
 	]
-
-	$: console.log('lang', lang)
 </script>
 
 <Section>
