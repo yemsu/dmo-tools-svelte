@@ -35,6 +35,8 @@
 
 	let eventSource: EventSource | undefined
 	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+	$: isGreuta =
+		typeof window !== 'undefined' && window.location.href.includes('greuta.org')
 
 	$: clearPrevSubscribe = async () => {
 		if (!eventSource || !$subscribeClientId) return
@@ -92,6 +94,7 @@
 		const server = $crrServerType || 'luce'
 		const raidsFetched = await getRaids(server)
 		raids.set(raidsFetched)
+		if (isGreuta) return
 		subscribeSSE(server)
 		setTimeout(() => {
 			if (!isSseConnected)
@@ -228,30 +231,32 @@
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
 		</a>
-		<div class="flex h-full overflow-hidden rounded-br-md rounded-tr-md">
-			{#if !isSseConnected}
-				<button
-					class="flex-center h-full flex-wrap gap-1 bg-warning px-4"
-					on:click={initRaidSubscribe}
-				>
-					<iconify-icon icon="ooui:network-off" width={14} height={14} />
-					<span>연결 재시도</span>
-				</button>
-			{:else}
-				<NotificationToggleButton />
-				<button
-					class="h-full bg-primary-30 px-2"
-					title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
-					on:click={toggleAudioAlarm}
-				>
-					<iconify-icon
-						icon="mdi:bell{isAudioOn ? '' : '-off'}"
-						width={14}
-						height={14}
-					/>
-				</button>
-			{/if}
-		</div>
+		{#if !isGreuta}
+			<div class="flex h-full overflow-hidden rounded-br-md rounded-tr-md">
+				{#if !isSseConnected}
+					<button
+						class="flex-center h-full flex-wrap gap-1 bg-warning px-4"
+						on:click={initRaidSubscribe}
+					>
+						<iconify-icon icon="ooui:network-off" width={14} height={14} />
+						<span>연결 재시도</span>
+					</button>
+				{:else}
+					<NotificationToggleButton />
+					<button
+						class="h-full bg-primary-30 px-2"
+						title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
+						on:click={toggleAudioAlarm}
+					>
+						<iconify-icon
+							icon="mdi:bell{isAudioOn ? '' : '-off'}"
+							width={14}
+							height={14}
+						/>
+					</button>
+				{/if}
+			</div>
+		{/if}
 	{:else if isSseSupported === false}
 		<p class="w-full text-center text-gray-300">
 			현재 브라우저에서는 보스 출현 알람 기능이 지원되지 않습니다. <br />다른
