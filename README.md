@@ -1,38 +1,40 @@
-# create-svelte
+# DMO tools
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+- 디지몬 마스터즈 도구 모음 사이트
+- 씰 계산기, 레이드 타이머, 뽑기 시뮬레이터 기능
+  
+![image](https://github.com/user-attachments/assets/b8e09b9c-3f7c-42c3-800f-e6becefb52fb)
 
-## Creating a project
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## 사용 기술
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+ <p>
+  <img src="https://img.shields.io/badge/Svelte-FF3E00?style=flat-square&logo=Svelte&logoColor=white" alt="Svelte"/>
+  <img src="https://img.shields.io/badge/Typescript-3178C6?style=flat-square&logo=Typescript&logoColor=white" alt="Typescript"/>
+  <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white" alt="Tailwind CSS"/>
+ </p>
 
-## Developing
+## 씰 계산기
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- 씰 가격 대비 높은 스탯을 얻을 수 있는 씰 리스트를 계산해주는 기능
 
-```bash
-npm run dev
+![image](https://github.com/user-attachments/assets/9a34b921-9aa2-4256-99c7-7d41d550e9cb)
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## 레이드 타이머
 
-## Building
+- 인게임에서 레이드 시간을 확인하기 위해서는 해당 지역으로 이동해서 확인해야하는 단점이 있어 만들게 된 레이드 타이머
+- 해당 지역에 있는 유저들이 직접 제보하는 시스템
+- 상단 바에서 알람 버튼 클릭하여 브라우저 알람을 받을 수 있고, 원하는 알람 시간을 설정할 수 있다.
 
-To create a production version of your app:
+![image](https://github.com/user-attachments/assets/6be9764b-6d7d-40b7-8486-3821256f5855)
 
-```bash
-npm run build
-```
 
-You can preview the production build with `npm run preview`.
+## 뽑기 시뮬레이터
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+- 운을 미리 시험해볼 수 있는 뽑기 시뮬레이터
+
+![image](https://github.com/user-attachments/assets/d7305eda-4467-4a5b-bf1e-de3fbeb6fb86)
+
+- 뽑기 결과들은 가방에서 한꺼번에 확인할 수 있다.
+![image](https://github.com/user-attachments/assets/28a1fa4b-b162-429b-829b-d6d8069910ab)
