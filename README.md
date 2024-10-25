@@ -3,7 +3,7 @@
 - 디지몬 마스터즈 도구 모음 사이트
 - 씰 계산기, 레이드 타이머, 뽑기 시뮬레이터 기능
   
-![image](https://github.com/user-attachments/assets/b8e09b9c-3f7c-42c3-800f-e6becefb52fb)
+![image](https://github.com/user-attachments/assets/79235dac-558d-46bb-8600-148f2ce4b7df)
 
 
 
@@ -27,7 +27,8 @@
 - 해당 지역에 있는 유저들이 직접 제보하는 시스템
 - 상단 바에서 알람 버튼 클릭하여 브라우저 알람을 받을 수 있고, 원하는 알람 시간을 설정할 수 있다.
 
-![image](https://github.com/user-attachments/assets/6be9764b-6d7d-40b7-8486-3821256f5855)
+![image](https://github.com/user-attachments/assets/117a4d24-d21a-4a9f-825a-7bcdb80b59db)
+
 
 
 ## 뽑기 시뮬레이터
