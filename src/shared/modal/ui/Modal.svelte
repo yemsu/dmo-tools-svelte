@@ -1,17 +1,14 @@
 <script lang="ts">
-	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { _ } from 'svelte-i18n'
-	export let buttonClassName: string | undefined = undefined
 	let isPopupVisible = false
+
+	const toggleModal = () => {
+		isPopupVisible = !isPopupVisible
+	}
 </script>
 
-<button
-	class={cn(buttonClassName)}
-	on:click={() => (isPopupVisible = !isPopupVisible)}
->
-	<slot name="buttonSlot"></slot>
-</button>
+<slot name="buttonSlot" {toggleModal}></slot>
 {#if isPopupVisible}
 	<div
 		class="bg-dim fixed left-0 top-0 z-dim size-full bg-secondary-5/30 backdrop-blur-sm"
