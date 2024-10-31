@@ -12,6 +12,7 @@
 	import { toast } from '$shared/toast'
 	import { error } from '@sveltejs/kit'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { Dropdown } from '$shared/dropdown'
 
 	$: lang = $page.data.lang as LangType
 	let isShowTab = false
@@ -31,23 +32,22 @@
 
 <div class="relative flex min-w-[100px] justify-end">
 	{#if $user}
-		<Button
-			class="flex-center border border-white/80 text-xs text-white/80 md:text-sm"
-			title={lang === 'kr' ? '유저 메뉴 열기' : 'User Menu'}
-			on:click={() => (isShowTab = !isShowTab)}
-		>
-			<iconify-icon icon="mdi:user" width={14} height={14} />
-			{$user.nickname}
-		</Button>
-		{#if isShowTab}
-			<Tabs
-				dir="ver"
-				class="absolute -bottom-2 right-0 z-tooltip translate-y-full drop-shadow-lg peer-focus:flex"
+		<Dropdown menuBoxAlign="center">
+			<Button
+				slot="buttonSlot"
+				let:toggleDropdown
+				class="flex-center border border-white/80 text-xs text-white/80 md:text-sm"
+				title={lang === 'kr' ? '유저 메뉴 열기' : 'User Menu'}
+				on:click={toggleDropdown}
 			>
+				<iconify-icon icon="mdi:user" width={14} height={14} />
+				{$user.nickname}
+			</Button>
+			<Tabs slot="contentSlot" let:closeDropdown dir="ver">
 				<Tab
 					on:click={() => {
 						goto(`/${$page.data.lang}${PATH.MY_INFO}`)
-						isShowTab = false
+						closeDropdown()
 					}}
 				>
 					<TextByLang text="마이 페이지" engText="My Page" />
@@ -62,7 +62,7 @@
 					<TextByLang text="로그아웃" engText="Log out" />
 				</Tab>
 			</Tabs>
-		{/if}
+		</Dropdown>
 	{:else}
 		<GoogleLoginButton />
 	{/if}

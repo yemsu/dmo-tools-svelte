@@ -5,20 +5,17 @@
 	import { Tab, Tabs } from '$shared/tabs'
 </script>
 
-<Dropdown
-	class="h-full"
-	title="채널 변경"
-	buttonClass="block relative h-full w-[40px] rounded-bl-md rounded-tl-md bg-primary-30 text-center text-xs md:w-[50px] md:px-2 md:text-sm"
->
-	<span slot="buttonSlot">
-		{$crrServerType ? GAME_SERVERS[$crrServerType] : ''}
-	</span>
-	<Tabs
-		slot="contentSlot"
-		let:closeDropdown
-		dir="ver"
-		class="border-primary-50-neon absolute bottom-0 w-[100px] translate-y-full"
+<Dropdown class="h-full">
+	<button
+		slot="buttonSlot"
+		let:toggleDropdown
+		on:click={toggleDropdown}
+		class="relative block h-full w-[40px] rounded-bl-md rounded-tl-md bg-primary-30 text-center text-xs md:w-[50px] md:px-2 md:text-sm"
+		title="채널 변경"
 	>
+		{$crrServerType ? GAME_SERVERS[$crrServerType] : ''}
+	</button>
+	<Tabs slot="contentSlot" let:closeDropdown dir="ver" class="w-[100px]">
 		{#each _objKeys(GAME_SERVERS) as serverType (serverType)}
 			<Tab
 				isActive={serverType === $crrServerType}
