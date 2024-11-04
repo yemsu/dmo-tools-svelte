@@ -10,6 +10,15 @@ export const load: ServerLoad = async ({ url }) => {
 	const gachaListSorted = gachaList.sort((a, b) => b.ticketCost - a.ticketCost)
 	const path = url.pathname
 	const lang = path.startsWith('/en') ? 'en' : 'kr'
+
+	if (lang === 'en') {
+		for (const seal of seals) {
+			if (seal.engName !== 'Grand Prix Seal') continue
+			seal.maxIncrease = 250
+			break
+		}
+	}
+
 	locale.set(lang)
 	await waitLocale()
 	const sealPrices = await getSealPrices('modifiedAt', lang)
