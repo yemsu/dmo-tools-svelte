@@ -39,7 +39,7 @@
 		filterStatTypeSelected.forEach((seal) => {
 			const sealName = _lang === 'kr' ? seal.name : seal.engName.toLowerCase()
 			if (
-				sealName.includes(_searchText) ||
+				sealName.includes(_searchText.toLowerCase()) ||
 				(_lang === 'kr' && choseongIncludes(sealName, _searchText))
 			) {
 				results.push(seal)
