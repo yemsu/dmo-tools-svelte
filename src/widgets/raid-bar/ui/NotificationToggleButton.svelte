@@ -33,7 +33,7 @@
 
 {#if !isNotificationOn}
 	<button
-		class="peer h-full bg-warning px-2"
+		class="button-hover peer h-full bg-warning px-2"
 		title="브라우저 알람 받기"
 		on:click={askNotificationPermission}
 	>
@@ -60,7 +60,7 @@
 			slot="buttonSlot"
 			let:toggleDropdown
 			on:click={toggleDropdown}
-			class="relative h-full bg-primary-35 px-2"
+			class="button-hover relative h-full bg-primary-35 px-2"
 			title="알림 타이머 설정"
 		>
 			<iconify-icon icon="majesticons:timer" width={16} height={16} />

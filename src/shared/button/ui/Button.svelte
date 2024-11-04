@@ -11,7 +11,7 @@
 		md: 'rounded-md'
 	}
 	const sizeStyles = {
-		icon: 'w-[1.5em] h-[1.5em] flex-center',
+		icon: 'p-2 flex-center',
 		sm: 'px-2 py-1 text-xs',
 		md: 'min-w-[3.5em] px-2 py-1 text-xs md:text-md',
 		'md-lg': 'min-w-[3.5em] h-[30px] px-2 text-xs md:text-md',
@@ -23,7 +23,7 @@
 <button
 	class={cn(
 		'flex-center gap-[0.2em] leading-none',
-		!disabled && 'transition-opacity hover:opacity-80',
+		!disabled && 'button-hover',
 		'text-balance break-keep disabled:bg-gray-500 disabled:text-gray-300',
 		isActive === true && 'border-2 opacity-100 ',
 		isActive === false && 'opacity-40 hover:opacity-100',
