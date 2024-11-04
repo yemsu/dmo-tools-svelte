@@ -1,8 +1,8 @@
 <script lang="ts">
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import type { InfoItemData } from '$widgets/my-info'
+	import type { LeftTitleTableData } from '$shared/table/types'
 
-	export let infoItems: InfoItemData[]
+	export let infoItems: LeftTitleTableData[]
 </script>
 
 <dl class="w-full rounded-md bg-gray-800 text-sm md:text-md">
