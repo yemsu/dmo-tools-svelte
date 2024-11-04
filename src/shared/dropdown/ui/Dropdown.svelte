@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
+	import { afterNavigate } from '$app/navigation'
 	import { cn } from '$shared/lib'
 	import { onDestroy, onMount } from 'svelte'
 
@@ -38,6 +39,10 @@
 	onDestroy(() => {
 		if (!browser) return
 		document.removeEventListener('click', handleOutsideClick)
+	})
+
+	afterNavigate(() => {
+		if (isDropdownOpen) isDropdownOpen = false
 	})
 </script>
 
