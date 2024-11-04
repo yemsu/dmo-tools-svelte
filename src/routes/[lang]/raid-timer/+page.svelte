@@ -1,26 +1,15 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import { crrServerType, GAME_SERVERS } from '$entities/raid'
-	import { META, PATH } from '$shared/config'
+	import { META } from '$shared/config'
 	import { _objKeys } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { Title } from '$shared/text'
-	import { RaidTabList, RaidTimeView } from '$widgets/raid'
 	import type { LangType } from '$shared/types'
-	import { onMount } from 'svelte'
+	import { RaidTabList, RaidTimeView } from '$widgets/raid'
 
 	$: lang = $page.data.lang as LangType
-
-	$: {
-		if (lang !== 'kr') {
-			// 클라이언트에서만 실행되도록 onMount 내에서 goto 호출
-			onMount(() => {
-				goto(`/${lang}${PATH.MAIN}`)
-			})
-		}
-	}
 </script>
 
 <svelte:head>
