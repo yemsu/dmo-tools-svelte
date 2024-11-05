@@ -30,5 +30,9 @@ export const ALERT = {
 	WRONG_TARGET_VALUE: {
 		kr: '현재 스탯보다 큰 값이여야 합니다.',
 		en: 'It must be a value greater than the current stat.'
+	},
+	NO_CURRENT_CHARACTER: {
+		kr: '현재 설정된 캐릭터가 없어 결과를 제출할 수 없습니다. 새로 고침 후 다시 시도해 보시고, 문제가 지속되면 관리자에게 문의해 주세요.',
+		en: 'There are no characters currently set, so you cannot submit your results. Please refresh the page and try again. If the issue persists, contact the administrator for assistance.'
 	}
 }

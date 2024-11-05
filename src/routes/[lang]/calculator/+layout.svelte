@@ -1,5 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import {
+		currentCharacter,
+		currentCharacters,
+		getCharacters
+	} from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
 		mySealCounts,
@@ -12,13 +17,15 @@
 	} from '$entities/seals'
 	import { user } from '$entities/user'
 	import { PATH } from '$shared/config'
-	import { objectBy } from '$shared/lib'
+	import { cn, objectBy } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import type { LangType } from '$shared/types'
+	import CharacterDropdown from '$widgets/character-dropdown/CharacterDropdown.svelte'
 	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
+	import { onMount } from 'svelte'
 
 	$: lang = $page.data.lang as LangType
 	$: statCalc = (statType: StatType) => {
@@ -71,11 +78,15 @@
 		}
 	]
 	// my seals
-	const setMyData = async () => {
-		await mySealCounts.load()
-		await mySealPrices.load()
+	const getMySealPrices = async () => {
+		mySealPrices.load()
 	}
-	$: $user && setMyData()
+	const getMySealCounts = async () => {
+		if (!$currentCharacter) return
+		await mySealCounts.load($currentCharacter.id)
+	}
+	$: $user && getMySealPrices()
+	$: $user && $currentCharacter && getMySealCounts()
 
 	const resetMyData = () => {
 		mySealCounts.reset()
@@ -96,19 +107,34 @@
 	}
 
 	$: $mySealCounts && setMyStats()
+
+	const setCharacters = async () => {
+		if ($currentCharacters) return
+		const characters = await getCharacters()
+		currentCharacters.set(characters)
+		currentCharacter.set(characters[0])
+	}
+
+	$: $user && setCharacters()
 </script>
 
 <Section>
-	<Tabs>
-		{#each SUB_MENUS as subMenu (lang + subMenu.path)}
-			<Tab
-				tagName="a"
-				href="/{lang}{subMenu.path}"
-				isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
-			>
-				{subMenu.menuName[lang]}
-			</Tab>
-		{/each}
-	</Tabs>
+	<div class="flex items-center">
+		{#if $user}
+			<CharacterDropdown />
+		{/if}
+
+		<Tabs class={cn('flex-1', $user && 'rounded-l-none')}>
+			{#each SUB_MENUS as subMenu (lang + subMenu.path)}
+				<Tab
+					tagName="a"
+					href="/{lang}{subMenu.path}"
+					isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
+				>
+					{subMenu.menuName[lang]}
+				</Tab>
+			{/each}
+		</Tabs>
+	</div>
 	<slot></slot>
 </Section>

@@ -14,6 +14,8 @@
 	"grade": "grade",
 	"close_popup": "Close Popup",
 	"support": "Report Issue",
+	"change_character": "Change Character",
+	"setting": "Setting",
 	"seal": {
 		"allStatTypes": "All Stat",
 		"myTotalStats": "My Total Stats",

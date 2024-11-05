@@ -1,3 +1,4 @@
+import type { CharacterData } from '$entities/characters'
 import { getMySealsCount, putMySealCount } from '$entities/seals/api'
 import { updateOrAddData } from '$entities/seals/lib'
 import { ALERT } from '$shared/config'
@@ -17,15 +18,19 @@ const createMySealCounts = () => {
 
 	return {
 		subscribe,
-		load: async () => {
-			const res = await getMySealsCount()
+		load: async (characterId: CharacterData['id']) => {
+			const res = await getMySealsCount(characterId)
 			set(sortBy(res, 'id'))
 		},
 		reset: () => {
 			set([])
 		},
-		updateCount: async (newData: MySealCount, lang: LangType) => {
-			const res = await putMySealCount(newData)
+		updateCount: async (
+			characterId: CharacterData['id'],
+			newData: MySealCount,
+			lang: LangType
+		) => {
+			const res = await putMySealCount(characterId, newData)
 			if (!res) {
 				alert(ALERT.FAILED_UPDATE_SEAL[lang])
 				return
@@ -35,8 +40,8 @@ const createMySealCounts = () => {
 				return sortBy([...result], 'id')
 			})
 		},
-		remove: async (sealId: number) => {
-			await putMySealCount({ id: sealId, count: 0 })
+		remove: async (characterId: CharacterData['id'], sealId: number) => {
+			await putMySealCount(characterId, { id: sealId, count: 0 })
 			update((prev) => {
 				return prev.filter((prevItem) => prevItem.id !== sealId)
 			})
