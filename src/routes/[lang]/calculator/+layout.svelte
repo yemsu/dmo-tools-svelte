@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import {
-		currentCharacter,
+		currentCharacterId,
 		currentCharacters,
 		getCharacters
 	} from '$entities/characters'
@@ -82,11 +82,11 @@
 		mySealPrices.load()
 	}
 	const getMySealCounts = async () => {
-		if (!$currentCharacter) return
-		await mySealCounts.load($currentCharacter.id)
+		if (!$currentCharacterId) return
+		await mySealCounts.load($currentCharacterId)
 	}
 	$: $user && getMySealPrices()
-	$: $user && $currentCharacter && getMySealCounts()
+	$: $user && $currentCharacterId && getMySealCounts()
 
 	const resetMyData = () => {
 		mySealCounts.reset()
@@ -112,7 +112,7 @@
 		if ($currentCharacters) return
 		const characters = await getCharacters()
 		currentCharacters.set(characters)
-		currentCharacter.set(characters[0])
+		currentCharacterId.set(characters[0].id)
 	}
 
 	$: $user && setCharacters()

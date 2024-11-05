@@ -9,12 +9,12 @@ export const postCharacter = (characterName: CharacterData['name']) => {
 	})
 }
 
-export const putCharacter = (
+export const putCharacterName = (
 	id: CharacterData['id'],
 	newCharacterName: CharacterData['name']
 ) => {
 	return apiFetch<CharacterData>(`/characters/${id}?name=${newCharacterName}`, {
-		method: 'DELETE'
+		method: 'PUT'
 	})
 }
 

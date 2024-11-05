@@ -10,7 +10,7 @@
 	import { goto } from '$app/navigation'
 	import { ALERT, PATH, TOAST } from '$shared/config'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import { currentCharacter } from '$entities/characters'
+	import { currentCharacterId } from '$entities/characters'
 
 	export let sealId: number
 	export let isEditable: boolean = true
@@ -49,15 +49,15 @@
 				onClickInputOn()
 			}, 100)
 		} else {
-			if (!$currentCharacter) {
+			if (!$currentCharacterId) {
 				alert(ALERT.NO_CURRENT_CHARACTER[lang])
 				return
 			}
 			if (inputValue === 0) {
-				mySealCounts.remove($currentCharacter.id, sealId)
+				mySealCounts.remove($currentCharacterId, sealId)
 			} else {
 				mySealCounts.updateCount(
-					$currentCharacter.id,
+					$currentCharacterId,
 					{ id: sealId, count: inputValue },
 					lang
 				)

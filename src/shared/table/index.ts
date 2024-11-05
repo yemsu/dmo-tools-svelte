@@ -1,5 +1,6 @@
 import type { LeftTitleTableData } from '$shared/table/types'
-import LeftTitleTable from '$shared/table/ui/LeftTitleTable.svelte'
+import LeftTitleTable from './ui/LeftTitleTable.svelte'
+import ListTable from './ui/ListTable.svelte'
 
-export { LeftTitleTable }
+export { LeftTitleTable, ListTable }
 export type { LeftTitleTableData }

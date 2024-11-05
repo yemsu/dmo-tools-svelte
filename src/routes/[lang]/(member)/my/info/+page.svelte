@@ -4,7 +4,7 @@
 	import { user } from '$entities/user'
 	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
-	import { LeftTitleTable, type LeftTitleTableData } from '$shared/table'
+	import { LeftTitleTable } from '$shared/table'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import Title from '$shared/text/ui/Title.svelte'
 	import { ChangeNickname, ResignButton } from '$widgets/my-info'
@@ -29,7 +29,7 @@
 			title: '회원 탈퇴',
 			engTitle: 'Withdrawal'
 		}
-	] as LeftTitleTableData[]
+	]
 
 	$: raidInfoMap = [
 		{
@@ -47,7 +47,7 @@
 			engTitle: 'Report Count',
 			desc: 235
 		}
-	] as LeftTitleTableData[]
+	]
 </script>
 
 <Section class="mx-auto max-w-[450px]">

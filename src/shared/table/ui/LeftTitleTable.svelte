@@ -2,7 +2,8 @@
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import type { LeftTitleTableData } from '$shared/table/types'
 
-	export let infoItems: LeftTitleTableData[]
+	type T = $$Generic
+	export let infoItems: (T & LeftTitleTableData)[]
 </script>
 
 <dl class="w-full rounded-md bg-gray-800 text-sm md:text-md">

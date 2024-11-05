@@ -1,12 +1,16 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { currentCharacter, currentCharacters } from '$entities/characters'
+	import { currentCharacterId, currentCharacters } from '$entities/characters'
 	import { PATH } from '$shared/config'
 	import { Dropdown } from '$shared/dropdown'
 	import { Icon } from '$shared/icon'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { _ } from 'svelte-i18n'
+
+	$: currentCharacter = $currentCharacters?.find(
+		({ id }) => id === $currentCharacterId
+	)
 </script>
 
 <Dropdown class="h-full">
@@ -17,16 +21,16 @@
 		let:toggleDropdown
 		on:click={toggleDropdown}
 	>
-		{$currentCharacter?.name || ''}
+		{currentCharacter?.name || ''}
 	</button>
 	<div slot="contentSlot" let:closeDropdown>
 		{#if $currentCharacters}
 			<Tabs dir="ver" class="w-[150px]">
 				{#each $currentCharacters as character (character.id)}
 					<Tab
-						isActive={character.name === $currentCharacter?.name}
+						isActive={character.name === currentCharacter?.name}
 						on:click={() => {
-							currentCharacter.set(character)
+							currentCharacterId.set(character.id)
 							closeDropdown()
 						}}
 					>

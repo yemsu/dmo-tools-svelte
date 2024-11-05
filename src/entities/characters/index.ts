@@ -1,18 +1,18 @@
 import {
 	getCharacters,
 	postCharacter,
-	putCharacter,
+	putCharacterName,
 	deleteCharacter
 } from './api'
-import { currentCharacter, currentCharacters } from './model'
+import { currentCharacterId, currentCharacters } from './model'
 import type { CharacterData } from './type'
 
 export {
 	getCharacters,
 	postCharacter,
-	putCharacter,
+	putCharacterName,
 	deleteCharacter,
-	currentCharacter,
+	currentCharacterId,
 	currentCharacters,
 	type CharacterData
 }
