@@ -1,6 +1,8 @@
 {
 	"delete": "삭제",
 	"confirm": "확인",
+	"add": "추가",
+	"cancel": "취소",
 	"count_unit": "개",
 	"all": "전체",
 	"ago": "전",
@@ -15,6 +17,7 @@
 	"close_popup": "팝업 닫기",
 	"support": "문의/제보",
 	"change_character": "캐릭터 변경",
+	"add_character_name": "추가할 캐릭터명",
 	"character": "캐릭터",
 	"setting": "설정",
 	"seal": {

@@ -1,4 +1,8 @@
 export const ALERT = {
+	NO_VALUE: {
+		kr: '값을 입력해 주세요.',
+		en: 'Please enter a value'
+	},
 	INVALID_NICKNAME: {
 		kr: '닉네임이 올바른지 확인해 주세요.',
 		en: 'Please confirm if the nickname is correct.'
@@ -30,6 +34,10 @@ export const ALERT = {
 	WRONG_TARGET_VALUE: {
 		kr: '현재 스탯보다 큰 값이여야 합니다.',
 		en: 'It must be a value greater than the current stat.'
+	},
+	DUPLICATED_CHARACTER_NAME: {
+		kr: '이미 사용중인 캐릭터명입니다.',
+		en: 'The character name is already in use.'
 	},
 	NO_CURRENT_CHARACTER: {
 		kr: '현재 설정된 캐릭터가 없어 결과를 제출할 수 없습니다. 새로 고침 후 다시 시도해 보시고, 문제가 지속되면 관리자에게 문의해 주세요.',

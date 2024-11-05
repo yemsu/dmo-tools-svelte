@@ -1,6 +1,8 @@
 {
 	"delete": "Delete",
 	"confirm": "Confirm",
+	"add": "Add",
+	"cancel": "Cancel",
 	"count_unit": " results",
 	"all": "All",
 	"ago": "ago",
@@ -15,6 +17,8 @@
 	"close_popup": "Close Popup",
 	"support": "Report Issue",
 	"change_character": "Change Character",
+	"add_character_name": "Character Name to Add",
+	"character": "Character",
 	"setting": "Setting",
 	"seal": {
 		"allStatTypes": "All Stat",
