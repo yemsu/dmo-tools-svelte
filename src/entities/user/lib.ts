@@ -5,7 +5,7 @@ export const setTokenCookie = (token: string, tokenName?: string) => {
 	const tokenValue = token.replace('Bearer ', '')
 	const hourSec = 3600
 	const daySec = hourSec * 24
-	document.cookie = `${tokenName || TOKEN_NAME}=${tokenValue}; Secure; max-age=${daySec * 70}`
+	document.cookie = `${tokenName || TOKEN_NAME}=${tokenValue}; Secure; max-age=${daySec * 70}' path=/;`
 }
 
 export const getTokenCookie = (tokenName?: string): string | null => {
@@ -21,5 +21,5 @@ export const getTokenCookie = (tokenName?: string): string | null => {
 }
 
 export const removeTokenCookie = (tokenName?: string) => {
-	document.cookie = `${tokenName || TOKEN_NAME}=; Secure;`
+	document.cookie = `${tokenName || TOKEN_NAME}=; Secure; path=/;`
 }
