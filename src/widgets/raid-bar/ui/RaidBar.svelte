@@ -24,6 +24,7 @@
 	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 	import { onDestroy, onMount } from 'svelte'
 	import RaidBarServerButton from './RaidBarServerButton.svelte'
+	import { getRemainingTime } from '$shared/time'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
@@ -129,8 +130,15 @@
 	}
 
 	const notify = (_nextRaid: NextRaidData) => {
+		const remainingTime = getRemainingTime(_nextRaid.time.startAt)
+		const text =
+			remainingTime === '출현 중'
+				? `${remainingTime} 입니다!`
+				: remainingTime === '곧 출현'
+					? `${remainingTime} 합니다!`
+					: `출현하기 ${remainingTime} 입니다!`
 		new Notification(`🐉 ${_nextRaid.name}`, {
-			body: `[${_nextRaid.time.channel}채널] ${_nextRaid.location} 에서\n보스가 ${$alarmMinute}분 후 출현 합니다!`
+			body: `[${_nextRaid.time.channel}채널] ${_nextRaid.location} 에서\n보스가 ${text}`
 		})
 	}
 
