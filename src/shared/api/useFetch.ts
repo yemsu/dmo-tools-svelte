@@ -42,10 +42,8 @@ export const apiFetch = async <ResponseData>(
 		}
 		return data.result
 	} catch (e) {
-		const err = e as { body: { message: string; status?: number } }
-		error(err.body.status || 0, {
-			message: `${err.body.message}! endpoint: ${endpoint}`
-		})
+		const err = e as { message: string }
+		throw new Error(err.message)
 	}
 }
 
