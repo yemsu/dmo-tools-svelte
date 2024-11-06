@@ -1,4 +1,4 @@
-import { NICKNAME_SCHEMA } from './config/schema'
+import { NICKNAME_SCHEMA, CHARACTER_SCHEMA } from './config/schema'
 import type { FormSchema } from './types/schema'
 import Input from './ui/Input.svelte'
 import ToggleFormWrap from './ui/ToggleFormWrap.svelte'
@@ -9,5 +9,6 @@ export {
 	ToggleFormWrap,
 	ValidationText,
 	NICKNAME_SCHEMA,
+	CHARACTER_SCHEMA,
 	type FormSchema
 }

@@ -21,6 +21,7 @@
 	const bgStyles = {
 		'submit-primary': 'point-neon',
 		'submit-secondary': 'bg-primary-30',
+		gray: 'bg-gray-600',
 		ghost: 'bg-gray-700'
 	}
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
@@ -31,7 +32,7 @@
 	class={cn(
 		'flex-center gap-[0.2em] leading-none',
 		!disabled && 'button-hover',
-		'text-balance break-keep disabled:bg-gray-500 disabled:text-gray-300',
+		'text-balance break-keep disabled:text-gray-300 disabled:opacity-70',
 		isActive === true && 'border-2 opacity-100 ',
 		isActive === false && 'opacity-40 hover:opacity-100',
 		shapeStyles[rounded],

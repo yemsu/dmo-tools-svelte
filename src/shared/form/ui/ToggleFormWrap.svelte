@@ -49,7 +49,7 @@
 					type="button"
 					size="md-lg"
 					rounded="md"
-					class="bg-gray-500"
+					bg="gray"
 					on:click={onClickCancel}
 				>
 					<TextByLang text="취소" engText="Cancel" />

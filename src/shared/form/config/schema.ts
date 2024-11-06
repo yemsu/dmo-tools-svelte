@@ -1,3 +1,4 @@
+import type { CharacterData } from '$entities/characters'
 import { getNickCheck } from '$entities/user'
 import type { FormSchema } from '../types/schema'
 
@@ -31,10 +32,24 @@ const DUPLICATED_NICKNAME = {
 		return isDuplicated
 	}
 }
-
 export const NICKNAME_SCHEMA: Record<string, FormSchema> = {
 	NO_SPECIAL_CHARACTER,
 	MIN: MIN(2),
 	MAX: MAX(10),
 	DUPLICATED_NICKNAME
 }
+
+export const CHARACTER_SCHEMA: (
+	currentCharacterId: CharacterData[]
+) => Record<string, FormSchema> = (currentCharacters: CharacterData[]) => ({
+	NO_SPECIAL_CHARACTER,
+	MIN: MIN(2),
+	MAX: MAX(10),
+	DUPLICATED_CHARACTER: {
+		kr: '이미 사용중인 캐릭터명이예요.',
+		en: 'This character name is already in use.',
+		check: (value: string) => {
+			return !!currentCharacters.find(({ name }) => name === value)
+		}
+	}
+})
