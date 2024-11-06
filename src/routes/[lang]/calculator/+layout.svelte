@@ -96,9 +96,8 @@
 
 	// my stats
 	const setMyStats = () => {
-		if ($mySealCounts.length === 0) return
 		const newStats = STATS.reduce((result, { type }) => {
-			const statTypeCalc = statCalc(type)
+			const statTypeCalc = $mySealCounts.length === 0 ? 0 : statCalc(type)
 			if (statTypeCalc === undefined) return result
 			result[type] = statTypeCalc
 			return result
