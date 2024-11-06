@@ -1,20 +1,32 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
+	import { META } from '$shared/config'
+	import { NoticeBar } from '$shared/layout'
 	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
+	import type { LangType } from '$shared/types'
+	import { AdLayout } from '$widgets/adsense'
+	import { Gnb } from '$widgets/gnb'
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
 	import 'iconify-icon'
 	import '../../app/app.css'
-	import { Gnb } from '$widgets/gnb'
-	import Header from './Header.svelte'
-	import { META } from '$shared/config'
-	import { NoticeBar } from '$shared/layout'
-	import { AdLayout } from '$widgets/adsense'
-	import type { LangType } from '$shared/types'
 	import '../../lib/i18n'
+	import Header from './Header.svelte'
 	$: lang = $page.data.lang as LangType
+	$: pathname = $page.url.pathname
 	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
+
+	// 점검시
+	const gotoErrorPage = () => {
+		if (import.meta.env.SSR) return
+		if ($page.url.pathname !== '/error') {
+			goto(`/${lang}/error`)
+		}
+	}
+
+	$: pathname && gotoErrorPage()
 </script>
 
 <svelte:head>
