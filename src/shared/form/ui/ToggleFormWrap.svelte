@@ -1,15 +1,15 @@
 <script lang="ts">
-	import type { UserResponse } from '$entities/user'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { Input } from '$shared/form'
 	import { delay } from '$shared/lib'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
+	type T = $$Generic
 	export let text: string
-	export let value: string | null
+	export let value: string
 	export let placeholder: string
 	export let isValid: boolean
-	export let onsubmit: () => Promise<UserResponse | undefined>
+	export let onsubmit: () => Promise<T | undefined>
 	export let resetValue: () => void
 
 	let isInputVisible = false
@@ -27,8 +27,7 @@
 	}
 
 	const onsubmitHandler = async () => {
-		const isOnSubmit = await onsubmit()
-		if (!isOnSubmit) return
+		await onsubmit()
 		isInputVisible = false
 	}
 </script>

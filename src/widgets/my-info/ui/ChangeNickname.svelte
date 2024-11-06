@@ -3,11 +3,11 @@
 	import { page } from '$app/stores'
 	import { putNickname, setTokenCookie, user } from '$entities/user'
 	import { ALERT, CONFIRM, TOAST } from '$shared/config'
-	import { ToggleFormWrap } from '$shared/form'
+	import { NICKNAME_SCHEMA, ToggleFormWrap, ValidationText } from '$shared/form'
 	import { toast } from '$shared/toast'
-	import NickValidationText from '$widgets/my-info/ui/NickValidationText.svelte'
+	import NickValidationText from '$shared/form/ui/ValidationText.svelte'
 
-	let newNickname: string | null = null
+	let newNickname: string = ''
 	let isValid: boolean
 	$: lang = $page.data.lang as LangType
 
@@ -15,7 +15,7 @@
 		isValid = _isValue
 	}
 	const resetValue = () => {
-		newNickname = null
+		newNickname = $user?.nickname || ''
 	}
 
 	const onsubmit = async () => {
@@ -33,8 +33,14 @@
 		user.set(res)
 		setTokenCookie(res.token)
 		toast.on(TOAST.CHANGE_NICK(newNickname)[lang])
-		return res
 	}
+
+	const setNewNickname = () => {
+		if (!$user) return
+		newNickname = $user.nickname
+	}
+
+	$: $user && setNewNickname()
 </script>
 
 <ToggleFormWrap
@@ -45,5 +51,10 @@
 	{onsubmit}
 	{resetValue}
 >
-	<NickValidationText slot="validationText" value={newNickname} {setIsValid} />
+	<ValidationText
+		slot="validationText"
+		value={newNickname}
+		{setIsValid}
+		schema={NICKNAME_SCHEMA}
+	/>
 </ToggleFormWrap>

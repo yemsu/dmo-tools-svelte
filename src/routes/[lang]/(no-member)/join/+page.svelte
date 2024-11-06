@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import {
@@ -12,17 +11,17 @@
 	} from '$entities/user'
 	import { Button } from '$shared/button'
 	import { ALERT, CONFIRM, ERROR, PATH, TOAST } from '$shared/config'
-	import { Input } from '$shared/form'
+	import { Input, NICKNAME_SCHEMA, ValidationText } from '$shared/form'
 	import { checkJoinProcess, checkNoMember } from '$shared/lib'
 	import { Section } from '$shared/section'
 	import { Title } from '$shared/text'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { toast } from '$shared/toast'
-	import NickValidationText from '$widgets/my-info/ui/NickValidationText.svelte'
+	import type { LangType } from '$shared/types'
 	import { error } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
-	let value: string | null = null
+	let value: string = ''
 	let isValid: boolean
 	let inputElement: HTMLInputElement
 	$: lang = $page.data.lang as LangType
@@ -83,7 +82,7 @@
 				bind:inputElement
 			/>
 			<div class="h-[4em]">
-				<NickValidationText {value} {setIsValid} />
+				<ValidationText {value} {setIsValid} schema={NICKNAME_SCHEMA} />
 			</div>
 		</div>
 		<Button size="lg" rounded="md" class="bg-primary-30" disabled={!isValid}>
