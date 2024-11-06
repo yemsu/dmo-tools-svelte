@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import { crrServerType, GAME_SERVERS } from '$entities/raid'
 	import { META } from '$shared/config'
@@ -10,6 +11,13 @@
 	import { RaidTabList, RaidTimeView } from '$widgets/raid'
 
 	$: lang = $page.data.lang as LangType
+
+	const gotoErrorPage = () => {
+		if (import.meta.env.SSR || lang !== 'en') return
+		goto(`/en`)
+	}
+
+	$: lang && gotoErrorPage()
 </script>
 
 <svelte:head>
