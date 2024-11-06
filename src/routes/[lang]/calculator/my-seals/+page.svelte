@@ -112,15 +112,6 @@
 						씰 설정
 					</a>
 					메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!
-					<br /><br />
-					<span
-						class="flex-center flex-wrap gap-2 rounded-md bg-primary-50 p-2 sm:flex-col"
-					>
-						<span class="font-extrabold text-primary-5">
-							설정해놨던 보유 씰이 모두 사라졌나요?
-						</span>
-						<SaveUrlLink />
-					</span>
 				{:else}
 					There are no seals registered yet. <br /> Please update the number of
 					seals you own in the

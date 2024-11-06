@@ -1,3 +1,4 @@
+import type { CharacterData } from '$entities/characters'
 import type {
 	MySealCount,
 	MySealPrice,
@@ -20,10 +21,14 @@ export const getSealPrices = (
 }
 
 // seal count
-export const getMySealsCount = () => apiFetch<MySealCount[]>(`/seals/my/count`)
+export const getMySealsCount = (characterId: CharacterData['id']) =>
+	apiFetch<MySealCount[]>(`/seals/my/${characterId}/count`)
 
-export const putMySealCount = ({ id, count }: MySealCount) => {
-	return apiFetch<MySealCount>(`/seals/my/${id}/count`, {
+export const putMySealCount = (
+	characterId: CharacterData['id'],
+	{ id, count }: MySealCount
+) => {
+	return apiFetch<MySealCount>(`/seals/my/${characterId}/${id}/count`, {
 		method: 'PUT',
 		body: JSON.stringify({ count })
 	})

@@ -4,14 +4,10 @@
 	import { user } from '$entities/user'
 	import { checkMember } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
+	import { LeftTitleTable } from '$shared/table'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import Title from '$shared/text/ui/Title.svelte'
-	import {
-		ChangeNickname,
-		InfoItem,
-		ResignButton,
-		type InfoItemData
-	} from '$widgets/my-info'
+	import { ChangeNickname, ResignButton } from '$widgets/my-info'
 	import { beforeUpdate } from 'svelte'
 
 	beforeUpdate(() => {
@@ -33,7 +29,7 @@
 			title: '회원 탈퇴',
 			engTitle: 'Withdrawal'
 		}
-	] as InfoItemData[]
+	]
 
 	$: raidInfoMap = [
 		{
@@ -51,7 +47,7 @@
 			engTitle: 'Report Count',
 			desc: 235
 		}
-	] as InfoItemData[]
+	]
 </script>
 
 <Section class="mx-auto max-w-[450px]">
@@ -60,7 +56,7 @@
 			<Title class="w-full">
 				<TextByLang text="내 정보" engText="My Information" />
 			</Title>
-			<InfoItem infoItems={baseInfoMap} let:infoItemData>
+			<LeftTitleTable infoItems={baseInfoMap} let:infoItemData>
 				{#if infoItemData.title === '닉네임'}
 					<ChangeNickname />
 				{:else if infoItemData.title === '회원 탈퇴'}
@@ -68,7 +64,7 @@
 				{:else}
 					{infoItemData.desc}
 				{/if}
-			</InfoItem>
+			</LeftTitleTable>
 		</div>
 		<!-- <div class="flex w-full flex-col gap-3">
 			<Title>레이드 타이머</Title>

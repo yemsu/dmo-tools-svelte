@@ -2,10 +2,10 @@
 	import { page } from '$app/stores'
 	import { type MenuData } from '$entities/menus'
 	import { cn } from '$shared/lib'
-	import Modal from '$shared/modal/ui/Modal.svelte'
+	import { Modal } from '$shared/modal'
 	import { Inner } from '$shared/section'
 	import type { LangType } from '$shared/types'
-	import GnbMenu from '$widgets/gnb/ui/GnbMenu.svelte'
+	import GnbMenu from './GnbMenu.svelte'
 	import { _ } from 'svelte-i18n'
 
 	$: lang = $page.data.lang as LangType
@@ -75,14 +75,19 @@
 				</a>
 			{:else}
 				<Modal>
-					<span slot="buttonSlot" class="flex-col-center">
+					<button
+						slot="buttonSlot"
+						class="flex-col-center"
+						let:toggleModal
+						on:click={toggleModal}
+					>
 						<iconify-icon
 							icon="hugeicons:customer-support"
 							width="20"
 							height="20"
 						/>
 						<span class="text-xs4 md:text-xs2">{$_('support')}</span>
-					</span>
+					</button>
 					<div slot="popupContent">
 						<p>
 							Are you having trouble using the site? <br />

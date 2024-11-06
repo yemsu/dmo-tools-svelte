@@ -64,7 +64,7 @@
 						>
 							<span class="ir">정확도 {i + 1}순위</span>
 							<button
-								class="flex h-[35px] w-full items-center justify-between py-1.5 text-xs"
+								class="button-hover flex h-[35px] w-full items-center justify-between py-1.5 text-xs"
 								title="좋아요"
 								on:click={() => onClickVote(raid, time)}
 							>

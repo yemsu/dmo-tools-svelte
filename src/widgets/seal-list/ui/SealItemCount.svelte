@@ -10,6 +10,7 @@
 	import { goto } from '$app/navigation'
 	import { ALERT, PATH, TOAST } from '$shared/config'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { currentCharacterId } from '$entities/characters'
 
 	export let sealId: number
 	export let isEditable: boolean = true
@@ -41,17 +42,25 @@
 		}
 	}
 
-	const onSubmit = () => {
+	$: onSubmit = () => {
 		if (inputValue === null) {
 			alert(ALERT.INPUT_CHANGE_NUMBER[lang])
 			setTimeout(() => {
 				onClickInputOn()
 			}, 100)
 		} else {
+			if (!$currentCharacterId) {
+				alert(ALERT.NO_CURRENT_CHARACTER[lang])
+				return
+			}
 			if (inputValue === 0) {
-				mySealCounts.remove(sealId)
+				mySealCounts.remove($currentCharacterId, sealId)
 			} else {
-				mySealCounts.updateCount({ id: sealId, count: inputValue }, lang)
+				mySealCounts.updateCount(
+					$currentCharacterId,
+					{ id: sealId, count: inputValue },
+					lang
+				)
 			}
 			isOnInput = false
 			toast.on(TOAST.SEAL_COUNT_CHANGED[lang])

@@ -219,7 +219,7 @@
 			href="/{$page.data.lang}{MENUS.raid.path}"
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-2 px-2',
-				'border-gradient border-b border-t'
+				'border-gradient button-hover border-b border-t'
 			)}
 			title="레이드 타이머 전체 보기"
 		>
@@ -240,10 +240,10 @@
 			{/if}
 		</a>
 		{#if !isGreuta}
-			<div class="flex h-full overflow-hidden rounded-br-md rounded-tr-md">
+			<div class="flex h-full">
 				{#if !isSseConnected}
 					<button
-						class="flex-center h-full flex-wrap gap-1 bg-warning px-4"
+						class="flex-center button-hover h-full flex-wrap gap-1 bg-warning px-4"
 						on:click={initRaidSubscribe}
 					>
 						<iconify-icon icon="ooui:network-off" width={14} height={14} />
@@ -251,17 +251,19 @@
 					</button>
 				{:else}
 					<NotificationToggleButton />
-					<button
-						class="h-full bg-primary-30 px-2"
-						title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
-						on:click={toggleAudioAlarm}
-					>
-						<iconify-icon
-							icon="mdi:bell{isAudioOn ? '' : '-off'}"
-							width={14}
-							height={14}
-						/>
-					</button>
+					<div class="overflow-hidden rounded-br-md rounded-tr-md">
+						<button
+							class="button-hover h-full bg-primary-30 px-2"
+							title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
+							on:click={toggleAudioAlarm}
+						>
+							<iconify-icon
+								icon="mdi:bell{isAudioOn ? '' : '-off'}"
+								width={14}
+								height={14}
+							/>
+						</button>
+					</div>
 				{/if}
 			</div>
 		{/if}

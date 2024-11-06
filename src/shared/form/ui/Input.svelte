@@ -12,9 +12,9 @@
 	const { name, class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
-		xs: 'h-[25px] text-xs',
-		sm: 'h-[30px] text-xs',
-		'sm-md': 'h-[30px] text-xs md:text-md',
+		xs: 'h-[25px] text-xs px-1',
+		sm: 'h-[30px] text-xs px-1',
+		'sm-md': 'h-[30px] text-xs md:text-md px-2',
 		md: 'h-input-h px-2 text-xs md:text-md'
 	}
 

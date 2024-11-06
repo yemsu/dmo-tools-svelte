@@ -1,8 +1,9 @@
 <script lang="ts">
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import type { InfoItemData } from '$widgets/my-info'
+	import type { LeftTitleTableData } from '$shared/table/types'
 
-	export let infoItems: InfoItemData[]
+	type T = $$Generic
+	export let infoItems: (T & LeftTitleTableData)[]
 </script>
 
 <dl class="w-full rounded-md bg-gray-800 text-sm md:text-md">
@@ -13,7 +14,7 @@
 			<dt class="w-[70px] break-keep font-semibold md:w-[100px]">
 				<TextByLang data={infoItemData} dataKey={['title', 'engTitle']} />
 			</dt>
-			<dd class="flex flex-1 flex-wrap items-center gap-4">
+			<dd class="flex flex-1 items-center gap-4">
 				<slot {infoItemData}></slot>
 			</dd>
 		</div>

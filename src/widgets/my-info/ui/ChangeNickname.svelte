@@ -1,21 +1,21 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { putNickname, setTokenCookie, user } from '$entities/user'
 	import { ALERT, CONFIRM, TOAST } from '$shared/config'
-	import { ToggleFormWrap } from '$shared/form'
+	import { NICKNAME_SCHEMA, ToggleFormWrap, ValidationText } from '$shared/form'
 	import { toast } from '$shared/toast'
-	import NickValidationText from '$widgets/my-info/ui/NickValidationText.svelte'
+	import type { LangType } from '$shared/types'
 
-	let newNickname: string | null = null
+	let newNickname: string = ''
 	let isValid: boolean
 	$: lang = $page.data.lang as LangType
 
 	const setIsValid = (_isValue: boolean) => {
 		isValid = _isValue
 	}
-	const resetValue = () => {
-		newNickname = null
+	const reset = () => {
+		newNickname = $user?.nickname || ''
+		isValid = false
 	}
 
 	const onsubmit = async () => {
@@ -33,17 +33,28 @@
 		user.set(res)
 		setTokenCookie(res.token)
 		toast.on(TOAST.CHANGE_NICK(newNickname)[lang])
-		return res
 	}
+
+	const setNewNickname = () => {
+		if (!$user) return
+		newNickname = $user.nickname
+	}
+
+	$: $user && setNewNickname()
 </script>
 
 <ToggleFormWrap
-	text={$user?.nickname || ''}
+	defaultText={$user?.nickname || ''}
 	bind:value={newNickname}
 	placeholder={lang === 'kr' ? '변경할 닉네임' : 'New nickname to change to'}
 	{isValid}
 	{onsubmit}
-	{resetValue}
+	{reset}
 >
-	<NickValidationText slot="validationText" value={newNickname} {setIsValid} />
+	<ValidationText
+		slot="validationText"
+		value={newNickname}
+		{setIsValid}
+		schema={NICKNAME_SCHEMA}
+	/>
 </ToggleFormWrap>

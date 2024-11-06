@@ -1,14 +1,58 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
-	import { mySealCounts } from '$entities/seals'
 	import { page } from '$app/stores'
+	import {
+		currentCharacterId,
+		currentCharacters,
+		getCharacters
+	} from '$entities/characters'
+	import { MENUS } from '$entities/menus'
+	import {
+		mySealCounts,
+		mySealPrices,
+		myStats,
+		STATS,
+		STATS_PERCENT_TYPE,
+		type Stats,
+		type StatType
+	} from '$entities/seals'
+	import { user } from '$entities/user'
+	import { PATH } from '$shared/config'
+	import { cn, objectBy } from '$shared/lib'
+	import { Section } from '$shared/section'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
-	import { PATH } from '$shared/config'
-	import { Section } from '$shared/section'
-	import { MENUS } from '$entities/menus'
+	import type { LangType } from '$shared/types'
+	import CharacterDropdown from '$widgets/character-dropdown/CharacterDropdown.svelte'
+	import { getMySealData } from '$widgets/my-seals'
+	import { getCurrentStep } from '$widgets/seal-calculator'
+	import { onMount } from 'svelte'
 
 	$: lang = $page.data.lang as LangType
+	$: statCalc = (statType: StatType) => {
+		if ($mySealCounts.length === 0) return
+		const mySealsByStatType = objectBy(
+			$mySealCounts,
+			({ id }) => getMySealData($page.data.seals, id).statType
+		)
+		if (!mySealsByStatType) return 0
+		const sealsByStatType = mySealsByStatType[statType]
+		if (!sealsByStatType || sealsByStatType.length === 0) {
+			return 0
+		}
+		let resultValue = 0
+		sealsByStatType.forEach(({ id, count }) => {
+			let sealPercent = 0
+			const seal = getMySealData($page.data.seals, id)
+			const crrStat = getCurrentStep(seal, count)
+			sealPercent = crrStat.percent
+			const maxIncrease = seal.maxIncrease
+			resultValue += maxIncrease * (sealPercent / 100)
+		})
+		if (STATS_PERCENT_TYPE.includes(statType)) {
+			resultValue = resultValue / 100
+		}
+		return resultValue
+	}
 
 	$: SUB_MENUS = [
 		{
@@ -33,19 +77,64 @@
 			path: PATH.MY_SEALS
 		}
 	]
+	// my seals
+	const getMySealPrices = async () => {
+		mySealPrices.load()
+	}
+	const getMySealCounts = async () => {
+		if (!$currentCharacterId) return
+		await mySealCounts.load($currentCharacterId)
+	}
+	$: $user && getMySealPrices()
+	$: $user && $currentCharacterId && getMySealCounts()
+
+	const resetMyData = () => {
+		mySealCounts.reset()
+		mySealPrices.reset()
+	}
+	$: !$user && resetMyData()
+
+	// my stats
+	const setMyStats = () => {
+		if ($mySealCounts.length === 0) return
+		const newStats = STATS.reduce((result, { type }) => {
+			const statTypeCalc = statCalc(type)
+			if (statTypeCalc === undefined) return result
+			result[type] = statTypeCalc
+			return result
+		}, {} as Stats)
+		myStats.set(newStats)
+	}
+
+	$: $mySealCounts && setMyStats()
+
+	const setCharacters = async () => {
+		if ($currentCharacters) return
+		const characters = await getCharacters()
+		currentCharacters.set(characters)
+		currentCharacterId.set(characters[0].id)
+	}
+
+	$: $user && setCharacters()
 </script>
 
 <Section>
-	<Tabs>
-		{#each SUB_MENUS as subMenu (lang + subMenu.path)}
-			<Tab
-				tagName="a"
-				href="/{lang}{subMenu.path}"
-				isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
-			>
-				{subMenu.menuName[lang]}
-			</Tab>
-		{/each}
-	</Tabs>
+	<div class="flex items-center">
+		{#if $user}
+			<CharacterDropdown />
+		{/if}
+
+		<Tabs class={cn('flex-1', $user && 'rounded-l-none')}>
+			{#each SUB_MENUS as subMenu (lang + subMenu.path)}
+				<Tab
+					tagName="a"
+					href="/{lang}{subMenu.path}"
+					isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
+				>
+					{subMenu.menuName[lang]}
+				</Tab>
+			{/each}
+		</Tabs>
+	</div>
 	<slot></slot>
 </Section>
