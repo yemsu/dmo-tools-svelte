@@ -40,7 +40,8 @@
 	on:click={clickDelete}
 	size="icon"
 	rounded="md"
-	class="-mr-2 ml-auto"
+	class="-mr-2 mb-auto ml-auto"
+	variant="outline"
 >
-	<Icon icon="mdi:close" />
+	<Icon icon="ph:trash" />
 </Button>

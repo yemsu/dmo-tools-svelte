@@ -3,12 +3,13 @@
 
 	export let isActive: Boolean | undefined = undefined
 	export let rounded: 'full' | 'md' = 'full'
-	export let bg:
+	export let variant:
 		| 'submit-primary'
 		| 'submit-secondary'
 		| 'ghost'
 		| 'gray'
 		| 'danger'
+		| 'outline'
 		| undefined = undefined
 	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let disabled: boolean | undefined = undefined
@@ -23,12 +24,13 @@
 		'md-lg': 'min-w-[3.5em] h-[30px] px-2 text-xs md:text-md',
 		lg: 'px-[1em] py-[0.5em] text-xs md:text-md min-w-[5em] h-input-h'
 	}
-	const bgStyles = {
+	const variants = {
 		'submit-primary': 'point-neon',
 		'submit-secondary': 'bg-primary-30',
 		gray: 'bg-gray-600',
-		ghost: 'bg-gray-700',
-		danger: 'bg-red'
+		ghost: 'hover:bg-gray-800',
+		danger: 'bg-red',
+		outline: 'border border-gray-600 hover:bg-gray-700'
 	}
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
 </script>
@@ -43,7 +45,7 @@
 		isActive === false && 'opacity-40 hover:opacity-100',
 		shapeStyles[rounded],
 		sizeStyles[size],
-		bg && bgStyles[bg],
+		variant && variants[variant],
 		$$restProps.class
 	)}
 	{disabled}

@@ -4,6 +4,7 @@
 	"add": "Add",
 	"cancel": "Cancel",
 	"edit": "Edit",
+	"done": "Done",
 	"change": "Change",
 	"count_unit": " results",
 	"all": "All",
@@ -21,8 +22,10 @@
 	"setting": "Setting",
 	"character": "Character",
 	"change_character": "Change Character",
+	"add_character": "Add Character",
 	"add_character_name": "Character Name to Add",
 	"change_character_name": "Character Name to Change",
+	"current_character": "Current Character",
 	"available_nickname": "The nickname is available.",
 	"seal": {
 		"allStatTypes": "All Stat",

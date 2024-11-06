@@ -1,11 +1,10 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { putNickname, setTokenCookie, user } from '$entities/user'
 	import { ALERT, CONFIRM, TOAST } from '$shared/config'
 	import { NICKNAME_SCHEMA, ToggleFormWrap, ValidationText } from '$shared/form'
 	import { toast } from '$shared/toast'
-	import NickValidationText from '$shared/form/ui/ValidationText.svelte'
+	import type { LangType } from '$shared/types'
 
 	let newNickname: string = ''
 	let isValid: boolean
@@ -14,8 +13,9 @@
 	const setIsValid = (_isValue: boolean) => {
 		isValid = _isValue
 	}
-	const resetValue = () => {
+	const reset = () => {
 		newNickname = $user?.nickname || ''
+		isValid = false
 	}
 
 	const onsubmit = async () => {
@@ -44,12 +44,12 @@
 </script>
 
 <ToggleFormWrap
-	text={$user?.nickname || ''}
+	defaultText={$user?.nickname || ''}
 	bind:value={newNickname}
 	placeholder={lang === 'kr' ? '변경할 닉네임' : 'New nickname to change to'}
 	{isValid}
 	{onsubmit}
-	{resetValue}
+	{reset}
 >
 	<ValidationText
 		slot="validationText"

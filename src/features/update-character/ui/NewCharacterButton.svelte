@@ -1,80 +1,70 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
+	import { page } from '$app/stores'
 	import { currentCharacters, postCharacter } from '$entities/characters'
 	import { Button } from '$shared/button'
-	import { ALERT, TOAST } from '$shared/config'
-	import { Input } from '$shared/form'
+	import { CONFIRM, TOAST } from '$shared/config'
+	import { CHARACTER_SCHEMA } from '$shared/form'
+	import ToggleFormWrap from '$shared/form/ui/ToggleFormWrap.svelte'
+	import ValidationText from '$shared/form/ui/ValidationText.svelte'
 	import { Icon } from '$shared/icon'
-	import { toast } from '$shared/toast'
-	import { page } from '$app/stores'
-	import type { LangType } from '$shared/types'
 	import { cn } from '$shared/lib'
+	import { toast } from '$shared/toast'
+	import type { LangType } from '$shared/types'
+	import { _ } from 'svelte-i18n'
 
-	let inputElement: HTMLInputElement
 	let value = ''
+	let isValid = false
 	let isFormVisible = false
 	$: lang = $page.data.lang as LangType
 
-	const focusToInput = () => {
-		setTimeout(() => {
-			inputElement.focus()
-		}, 60)
-	}
-
-	const endForm = () => {
-		isFormVisible = false
-		value = ''
-	}
-
-	const toggleEditOn = () => {
-		if (isFormVisible) {
-			endForm()
-		} else {
-			isFormVisible = true
-			focusToInput()
-		}
-	}
-
-	$: onSubmit = async () => {
-		if (!value) {
-			alert(ALERT.NO_VALUE[lang])
-			focusToInput()
-			return
-		}
-		if ($currentCharacters?.find((character) => character.name === value)) {
-			alert(ALERT.DUPLICATED_CHARACTER_NAME[lang])
-			focusToInput()
-			return
-		}
+	$: onsubmit = async () => {
+		const isConfirmed = confirm(CONFIRM.ADD_CHARACTER(value)[lang])
+		if (!isConfirmed) return
 		const newCharacterData = await postCharacter(value)
 		currentCharacters.update((prev) => [...(prev || []), newCharacterData])
 
 		toast.on(TOAST.CHARACTER_ADDED[lang])
-		endForm()
+	}
+
+	const setIsValid = (_isValid: boolean) => {
+		isValid = _isValid
+	}
+
+	const reset = () => {
+		isValid = false
+		value = ''
 	}
 </script>
 
-<Button
-	on:click={toggleEditOn}
+<ToggleFormWrap
+	bind:value
+	placeholder={$_('add_character_name')}
 	size="lg"
-	bg="ghost"
-	class="w-full"
-	title={isFormVisible ? $_('cancel') : $_('add')}
+	{isValid}
+	{onsubmit}
+	{reset}
 >
-	<Icon
-		icon="gridicons:plus"
-		class={cn('transition-transform', isFormVisible && 'rotate-45')}
-		size={18}
-	/>
-</Button>
-{#if isFormVisible}
-	<form on:submit={onSubmit} class="mt-2 flex w-full gap-2">
-		<Input
-			placeholder={$_('add_character_name')}
-			bind:value
-			bind:inputElement
-			class="w-full"
+	<Button
+		slot="button"
+		let:clickEditOn
+		on:click={clickEditOn}
+		size="lg"
+		variant="outline"
+		class="w-full"
+		rounded="md"
+		title={$_('add')}
+	>
+		<Icon
+			icon="gridicons:plus"
+			class={cn('transition-transform', isFormVisible && 'rotate-45')}
+			size={15}
 		/>
-		<Button rounded="md" size="lg" bg="submit-primary">{$_('add')}</Button>
-	</form>
-{/if}
+		{$_('add_character')}
+	</Button>
+	<ValidationText
+		slot="validationText"
+		bind:value
+		{setIsValid}
+		schema={CHARACTER_SCHEMA($currentCharacters || [])}
+	/>
+</ToggleFormWrap>

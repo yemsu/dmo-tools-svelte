@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import {
+		currentCharacterId,
 		currentCharacters,
 		putCharacterName,
 		type CharacterData
@@ -8,6 +9,7 @@
 	import { TOAST } from '$shared/config'
 	import { CHARACTER_SCHEMA, ValidationText } from '$shared/form'
 	import ToggleFormWrap from '$shared/form/ui/ToggleFormWrap.svelte'
+	import Icon from '$shared/icon/Icon.svelte'
 	import { toast } from '$shared/toast'
 	import type { LangType } from '$shared/types'
 	import { _ } from 'svelte-i18n'
@@ -16,6 +18,19 @@
 	let value = character.name
 	let isValid: boolean
 	$: lang = $page.data.lang as LangType
+
+	const setIsValid = (_isValue: boolean) => {
+		isValid = _isValue
+	}
+
+	const reset = () => {
+		value = character.name
+	}
+
+	const changeTo = (characterId: number) => {
+		currentCharacterId.set(characterId)
+		toast.on(TOAST.CHARACTER_CHANGED[lang])
+	}
 
 	$: onsubmit = async () => {
 		const changedCharacterData = await putCharacterName(character.id, value)
@@ -31,22 +46,30 @@
 		})
 		toast.on(TOAST.CHARACTER_NAME_CHANGED[lang])
 	}
-	const setIsValid = (_isValue: boolean) => {
-		isValid = _isValue
-	}
-	const resetValue = () => {
-		value = character.name
-	}
 </script>
 
 <ToggleFormWrap
-	text={character.name}
 	bind:value
 	placeholder={$_('add_character_name')}
 	{isValid}
 	{onsubmit}
-	{resetValue}
+	{reset}
 >
+	<button
+		slot="defaultText"
+		class="w-full text-left"
+		title={$_('change_character')}
+		on:click={() => changeTo(character.id)}
+	>
+		{character.name}
+		{#if character.id === $currentCharacterId}
+			<Icon
+				icon="material-symbols:check"
+				class="text-point"
+				title={$_('current_character')}
+			/>
+		{/if}
+	</button>
 	<ValidationText
 		slot="validationText"
 		{value}

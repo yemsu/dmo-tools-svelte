@@ -14,7 +14,7 @@
 			<dt class="w-[70px] break-keep font-semibold md:w-[100px]">
 				<TextByLang data={infoItemData} dataKey={['title', 'engTitle']} />
 			</dt>
-			<dd class="flex flex-1 flex-wrap items-center gap-4">
+			<dd class="flex flex-1 items-center gap-4">
 				<slot {infoItemData}></slot>
 			</dd>
 		</div>

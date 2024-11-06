@@ -1,71 +1,107 @@
 <script lang="ts">
+	import { Icon } from '$shared/icon'
+	import { _ } from 'svelte-i18n'
+
+	import { onMount } from 'svelte'
+
 	import Button from '$shared/button/ui/Button.svelte'
 	import { Input } from '$shared/form'
-	import { delay } from '$shared/lib'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { cn, delay } from '$shared/lib'
 
 	type T = $$Generic
-	export let text: string
 	export let value: string
 	export let placeholder: string
 	export let isValid: boolean
 	export let onsubmit: () => Promise<T | undefined>
-	export let resetValue: () => void
+	export let reset: () => void
+	export let defaultText: string | undefined = undefined
+	export let size: 'md' | 'lg' = 'md'
 
 	let isInputVisible = false
 	let inputElement: HTMLInputElement
+	let formElement: HTMLFormElement
 
-	const onClickEdit = async () => {
+	const clickEditOn = async () => {
 		isInputVisible = true
 		await delay(50)
 		inputElement.focus()
 	}
 
-	const onClickCancel = () => {
-		isInputVisible = false
-		resetValue()
-	}
-
 	const onsubmitHandler = async () => {
+		if (!isValid) return
 		await onsubmit()
 		isInputVisible = false
 	}
+
+	$: onClickOutward = (e: Event) => {
+		if (!isInputVisible) return
+		const target = e.target as HTMLElement
+		if (!formElement.contains(target)) {
+			isInputVisible = false
+			reset()
+		}
+	}
+
+	onMount(() => {
+		document.addEventListener('mousedown', onClickOutward)
+	})
 </script>
 
 {#if isInputVisible}
-	<div class="flex flex-col gap-2">
-		<form on:submit|preventDefault={onsubmitHandler} class="flex gap-1">
-			<Input bind:value bind:inputElement size="sm-md" {placeholder} />
-			<div class="flex gap-1">
+	<div class={cn('flex w-full flex-col gap-2')}>
+		<form
+			bind:this={formElement}
+			on:submit|preventDefault={onsubmitHandler}
+			class="flex w-full gap-1"
+		>
+			<Input
+				bind:value
+				bind:inputElement
+				size={size === 'md' ? 'sm-md' : 'md'}
+				{placeholder}
+				class="w-full"
+			/>
+
+			{#if size === 'md'}
 				<Button
-					size="md-lg"
+					size="icon"
 					rounded="md"
-					bg="submit-secondary"
+					variant={!isValid ? 'outline' : 'submit-primary'}
+					disabled={!isValid}
+					title={$_('done')}
+				>
+					<Icon icon="material-symbols:check" />
+				</Button>
+			{:else}
+				<Button
+					size="lg"
+					rounded="md"
+					variant={!isValid ? 'gray' : 'submit-primary'}
 					disabled={!isValid}
 				>
-					<TextByLang text="완료" engText="Done" />
+					{$_('done')}
 				</Button>
-				<Button
-					type="button"
-					size="md-lg"
-					rounded="md"
-					bg="gray"
-					on:click={onClickCancel}
-				>
-					<TextByLang text="취소" engText="Cancel" />
-				</Button>
-			</div>
+			{/if}
 		</form>
 		<slot name="validationText"></slot>
 	</div>
 {:else}
-	<span>{text}</span>
-	<Button
-		size="md-lg"
-		rounded="md"
-		class="ml-auto bg-primary-30"
-		on:click={onClickEdit}
-	>
-		<TextByLang text="수정" engText="Edit" />
-	</Button>
+	{#if defaultText}
+		<span class="w-full">{defaultText}</span>
+	{:else if $$slots.defaultText}
+		<slot name="defaultText"></slot>
+	{/if}
+	{#if $$slots.button}
+		<slot name="button" {clickEditOn}></slot>
+	{:else}
+		<Button
+			size="icon"
+			rounded="md"
+			variant="outline"
+			title={$_('edit')}
+			on:click={clickEditOn}
+		>
+			<Icon icon="tdesign:edit" />
+		</Button>
+	{/if}
 {/if}

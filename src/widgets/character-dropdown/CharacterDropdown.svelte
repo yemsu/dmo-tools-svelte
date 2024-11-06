@@ -1,13 +1,16 @@
 <script lang="ts">
+	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import { currentCharacterId, currentCharacters } from '$entities/characters'
-	import { PATH } from '$shared/config'
+	import { PATH, TOAST } from '$shared/config'
 	import { Dropdown } from '$shared/dropdown'
 	import { Icon } from '$shared/icon'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
+	import { toast } from '$shared/toast'
 	import { _ } from 'svelte-i18n'
 
+	$: lang = $page.data.lang as LangType
 	$: currentCharacter = $currentCharacters?.find(
 		({ id }) => id === $currentCharacterId
 	)
@@ -16,7 +19,7 @@
 <Dropdown class="h-full">
 	<button
 		slot="buttonSlot"
-		class="button-hover h-full min-w-[100px] rounded-l-md bg-primary-50 px-1 font-semibold text-black"
+		class="button-hover h-full min-w-[80px] text-ellipsis rounded-l-md bg-primary-50 px-1 font-semibold text-black md:min-w-[100px] sm:text-xs2"
 		title={$_('change_character')}
 		let:toggleDropdown
 		on:click={toggleDropdown}
@@ -25,12 +28,13 @@
 	</button>
 	<div slot="contentSlot" let:closeDropdown>
 		{#if $currentCharacters}
-			<Tabs dir="ver" class="w-[150px]">
+			<Tabs dir="ver" class="w-[100px] md:w-[150px]">
 				{#each $currentCharacters as character (character.id)}
 					<Tab
 						isActive={character.name === currentCharacter?.name}
 						on:click={() => {
 							currentCharacterId.set(character.id)
+							toast.on(TOAST.CHARACTER_CHANGED[lang])
 							closeDropdown()
 						}}
 					>

@@ -5,6 +5,7 @@
 	"cancel": "취소",
 	"edit": "수정",
 	"change": "변경",
+	"done": "완료",
 	"count_unit": "개",
 	"all": "전체",
 	"ago": "전",
@@ -21,8 +22,10 @@
 	"setting": "설정",
 	"character": "캐릭터",
 	"change_character": "캐릭터 변경",
+	"add_character": "캐릭터 추가",
 	"add_character_name": "추가할 캐릭터명",
 	"change_character_name": "변경할 캐릭터명",
+	"current_character": "현재 캐릭터",
 	"available_nickname": "사용 가능한 닉네임 입니다.",
 	"seal": {
 		"allStatTypes": "모든 스탯 타입",

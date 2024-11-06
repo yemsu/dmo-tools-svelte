@@ -54,6 +54,10 @@ export const TOAST = {
 		kr: '씰 가격이 설정되었습니다.',
 		en: 'The seal price has been set.'
 	},
+	CHARACTER_CHANGED: {
+		kr: '현재 캐릭터가 변경되었습니다.',
+		en: 'Your current character has been changed.'
+	},
 	CHARACTER_ADDED: {
 		kr: '캐릭터가 추가되었습니다.',
 		en: 'The character has been added.'
