@@ -34,6 +34,7 @@ const config = {
 				'/kr/policy/privacy',
 				'/kr/raid-timer',
 				'/kr/save-url',
+				'/kr/error',
 				'/en',
 				'/en/calculator',
 				'/en/calculator/my-seals',
@@ -45,7 +46,8 @@ const config = {
 				'/en/my/info',
 				'/en/policy/privacy',
 				'/en/raid-timer',
-				'/en/save-url'
+				'/en/save-url',
+				'/en/error'
 			]
 		}
 	},

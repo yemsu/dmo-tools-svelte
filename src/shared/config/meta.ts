@@ -10,6 +10,16 @@ const META_COMMON = {
 }
 export const META = {
 	COMMON: META_COMMON,
+	ERROR: {
+		TITLE: {
+			kr: `에러 | ${META_COMMON.TITLE.kr}`,
+			en: `Error | ${META_COMMON.TITLE.en}`
+		},
+		DESC: {
+			kr: `${META_COMMON.TITLE.kr}`,
+			en: `${META_COMMON.TITLE.en}`
+		}
+	},
 	SETTING: {
 		TITLE: {
 			kr: `씰 설정 | ${META_COMMON.TITLE.kr}`,
