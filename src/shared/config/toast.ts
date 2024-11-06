@@ -61,5 +61,9 @@ export const TOAST = {
 	CHARACTER_NAME_CHANGED: {
 		kr: '캐릭터명이 변경되었습니다.',
 		en: 'The character name has been changed.'
+	},
+	CHARACTER_DELETED: {
+		kr: '캐릭터가 삭제되었습니다.',
+		en: 'The character has been deleted'
 	}
 }

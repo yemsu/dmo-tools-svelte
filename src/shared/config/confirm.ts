@@ -28,5 +28,9 @@ export const CONFIRM = {
 	RESIGN: {
 		kr: '정말 탈퇴하시겠어요?\n탈퇴 후엔 모든 데이터가 삭제되며 복구가 불가합니다.',
 		en: 'Are you sure you want to delete your account? \nAll data will be erased and cannot be recovered.'
+	},
+	DELETE_CHARACTER: {
+		kr: '캐릭터를 삭제하면 해당 캐릭터의 보유 씰 데이터도 함께 삭제되며, 복구가 불가능합니다. 정말로 캐릭터를 삭제하시겠습니까?',
+		en: 'If you delete the character, the seal data associated with that character will also be deleted and cannot be recovered. Do you really want to delete this character?'
 	}
 }

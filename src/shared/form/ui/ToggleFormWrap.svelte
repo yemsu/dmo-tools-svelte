@@ -40,7 +40,7 @@
 				<Button
 					size="md-lg"
 					rounded="md"
-					class="bg-primary-30"
+					bg="submit-secondary"
 					disabled={!isValid}
 				>
 					<TextByLang text="완료" engText="Done" />

@@ -3,8 +3,13 @@
 
 	export let isActive: Boolean | undefined = undefined
 	export let rounded: 'full' | 'md' = 'full'
-	export let bg: 'submit-primary' | 'submit-secondary' | 'ghost' | undefined =
-		undefined
+	export let bg:
+		| 'submit-primary'
+		| 'submit-secondary'
+		| 'ghost'
+		| 'gray'
+		| 'danger'
+		| undefined = undefined
 	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let disabled: boolean | undefined = undefined
 	const shapeStyles = {
@@ -22,7 +27,8 @@
 		'submit-primary': 'point-neon',
 		'submit-secondary': 'bg-primary-30',
 		gray: 'bg-gray-600',
-		ghost: 'bg-gray-700'
+		ghost: 'bg-gray-700',
+		danger: 'bg-red'
 	}
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
 </script>

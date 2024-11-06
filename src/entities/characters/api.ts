@@ -18,8 +18,8 @@ export const putCharacterName = (
 	})
 }
 
-export const deleteCharacter = (characterName: CharacterData['name']) => {
-	return apiFetch<CharacterData>(`/characters/${characterName}`, {
+export const deleteCharacter = (characterId: CharacterData['id']) => {
+	return apiFetch<CharacterData>(`/characters/${characterId}`, {
 		method: 'DELETE'
 	})
 }
