@@ -24,15 +24,16 @@
 
 {#if showNotice}
 	<div class="bg-primary-50 py-2 text-primary-5 sm:text-xs">
-		<div class="flex-center relative mx-auto w-content-w px-content-side">
-			<p class="text-balance break-keep font-bold">
+		<div class="flex-center relative mx-auto px-content-side md:w-content-w">
+			<p class="text-balance break-keep text-center font-bold">
 				<TextByLang
 					text="효율 계산기에 캐릭터 설정 기능이 추가되었습니다!"
 					engText="We've added a character selection feature to the efficiency calculator!"
 				/>
+				<br class="md:hidden" />
 				<a
 					href="/{lang}{PATH.CHARACTERS}"
-					class="ml-2 inline-flex items-center rounded-full bg-primary-10 p-2 px-3 text-xs font-medium text-white"
+					class="ml-2 inline-flex items-center rounded-full bg-primary-10 p-1 px-3 text-xs font-medium text-white md:p-2"
 				>
 					<TextByLang
 						text="캐릭터 설정 페이지 바로가기"
@@ -42,7 +43,7 @@
 				</a>
 			</p>
 			<button
-				class="position-y-center absolute -right-2 p-2"
+				class="position-y-center absolute right-content-side p-2 md:-right-2"
 				title={$_('dont_show_again')}
 				on:click={clickDontShow}
 			>
