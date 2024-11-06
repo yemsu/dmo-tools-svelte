@@ -34,6 +34,7 @@
 		StatBarWrap
 	} from '$widgets/stat-bar'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { currentCharacterId } from '$entities/characters'
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
 	let effDataListSorted: SealEfficiency[] = []
@@ -162,7 +163,12 @@
 			CONFIRM.ADD_MY_SEAL(seal, effData.needCount)[lang]
 		)
 		if (!isConfirmed) return
+		if (!$currentCharacterId) {
+			alert('no currentCharacterId')
+			return
+		}
 		mySealCounts.updateCount(
+			$currentCharacterId,
 			{
 				id: effData.id,
 				count: +mySealCount + effData.needCount
