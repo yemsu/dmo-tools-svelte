@@ -19,7 +19,7 @@
 <Dropdown class="h-full">
 	<button
 		slot="buttonSlot"
-		class="button-hover h-full min-w-[80px] text-ellipsis rounded-l-md bg-primary-50 px-1 font-semibold text-black md:min-w-[100px] sm:text-xs2"
+		class="button-hover h-full text-ellipsis rounded-l-md bg-primary-50 px-1 font-semibold text-black md:min-w-[100px] sm:max-w-[80px] sm:text-xs2"
 		title={$_('change_character')}
 		let:toggleDropdown
 		on:click={toggleDropdown}
