@@ -19,14 +19,14 @@
 	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
 
 	// 점검시
-	const gotoErrorPage = () => {
-		if (import.meta.env.SSR) return
-		if ($page.url.pathname !== '/error') {
-			goto(`/${lang}/error`)
-		}
-	}
+	// const gotoErrorPage = () => {
+	// 	if (import.meta.env.SSR) return
+	// 	if ($page.url.pathname !== '/error') {
+	// 		goto(`/${lang}/error`)
+	// 	}
+	// }
 
-	$: pathname && gotoErrorPage()
+	// $: pathname && gotoErrorPage()
 </script>
 
 <svelte:head>
