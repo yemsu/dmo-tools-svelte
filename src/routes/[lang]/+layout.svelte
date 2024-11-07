@@ -1,22 +1,14 @@
 <script lang="ts">
-	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-	import { META, PATH } from '$shared/config'
-	import { NoticeBar } from '$shared/layout'
+	import { Footer, NoticeBar } from '$shared/layout'
 	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
-	import type { LangType } from '$shared/types'
 	import { AdLayout } from '$widgets/adsense'
 	import { Gnb } from '$widgets/gnb'
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
-	import 'iconify-icon'
-	import '../../app/app.css'
-	import '../../lib/i18n'
 	import Header from './Header.svelte'
-	$: lang = $page.data.lang as LangType
 	$: pathname = $page.url.pathname
-	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
 
 	// 점검시
 	// const gotoErrorPage = () => {
@@ -28,29 +20,6 @@
 
 	// $: pathname && gotoErrorPage()
 </script>
-
-<svelte:head>
-	<!-- Open Graph Meta Tags -->
-	<meta property="og:title" content={META.COMMON.TITLE[lang]} />
-	<meta property="og:description" content={META.COMMON.DESC[lang]} />
-	<meta property="og:image" content="/og-image.jpg" />
-	<meta property="og:url" content="/og-image.jpg" />
-	<meta property="og:type" content="website" />
-	<meta property="og:site_name" content={META.COMMON.TITLE[lang]} />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="628" />
-
-	<!-- Twitter Card Meta Tags -->
-	<meta name="twitter:card" content="/og-image.jpg" />
-	<meta name="twitter:title" content={META.COMMON.TITLE[lang]} />
-	<meta name="twitter:description" content={META.COMMON.DESC[lang]} />
-	<meta name="twitter:image" content="/og-image.jpg" />
-	<script
-		async
-		src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`}
-		crossorigin="anonymous"
-	></script>
-</svelte:head>
 
 <div class={cn('relative flex h-full flex-col')}>
 	<NoticeBar />
@@ -72,17 +41,7 @@
 			<main class="relative h-full max-w-[100vw] overflow-hidden">
 				<slot></slot>
 			</main>
-			<footer class="w-full p-2 text-center text-xs text-gray-500">
-				<div>
-					<a href="/{$page.data.lang}{PATH.PRIVACY_POLICY}" class="">
-						개인정보처리방침
-					</a>
-				</div>
-				<p class="mt-2">
-					© 2024. DMO tools All rights reserved. <br />
-					This site is not associated with Digimon Masters Online.
-				</p>
-			</footer>
+			<Footer />
 		</div>
 		<Gnb />
 		<AdLayout />

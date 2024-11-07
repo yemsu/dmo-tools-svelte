@@ -55,6 +55,7 @@
 	}
 	@media screen and (max-width: 768px) {
 		:root {
+			--content-w: 100%;
 			--content-side: 10px;
 			--gnb-h: 45px;
 			--input-h: 30px;
