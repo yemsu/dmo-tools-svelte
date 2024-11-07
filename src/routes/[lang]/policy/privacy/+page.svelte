@@ -5,7 +5,7 @@
 
 <Section class="text-sm leading-[1.4] text-gray-200">
 	<Title>개인정보처리방침</Title>
-	<article class="scroll-box flex flex-col gap-[1em]">
+	<article class="flex flex-col gap-[1em]">
 		<div>
 			<Title>목적</Title>
 			<p>

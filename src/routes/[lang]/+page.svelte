@@ -17,7 +17,7 @@
 </svelte:head>
 
 <Section>
-	<div class="scroll-box flex flex-1 flex-col">
+	<div class="flex flex-1 flex-col">
 		<div class={cn('flex-center flex-1', isKr && 'sm:hidden')}>
 			<div class="flex-col-center gap-1">
 				<p class="text-right text-gray-300">
