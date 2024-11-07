@@ -71,7 +71,6 @@
 	<meta name="description" content={META.SETTING.DESC[lang]} />
 </svelte:head>
 
-<h2 class="ir">씰 세팅</h2>
 <div
 	class={cn(
 		'flex w-full flex-col items-start gap-1.5',
@@ -101,16 +100,13 @@
 		on:input={onSearchInput}
 	/>
 </div>
-<section class="flex flex-1 flex-col overflow-hidden">
+<div class="flex flex-1 flex-col overflow-hidden">
 	<div class="mb-2 flex items-center justify-between">
 		<ListReferText tagName="h2" mb={false}>
+			<span class="ir">씰 세팅 - </span>
+			{statTypeSelected === 'ALL' ? $_('seal.allStatTypes') : statTypeSelected}
 			{#if searchText}
-				{searchText ? `'${searchText}'` : '모든 검색어'} &gt;
-				{statTypeSelected === 'ALL'
-					? $_('seal.allStatTypes')
-					: statTypeSelected}
-			{:else}
-				{$_('all')}
+				&gt; "{searchText}"
 			{/if}
 			({searchResults.length}{$_('count_unit')})
 		</ListReferText>
@@ -158,4 +154,4 @@
 	>
 		<SealItem {seal} />
 	</SealList>
-</section>
+</div>
