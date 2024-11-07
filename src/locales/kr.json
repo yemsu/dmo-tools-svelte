@@ -28,6 +28,7 @@
 	"current_character": "현재 캐릭터",
 	"available_nickname": "사용 가능한 닉네임 입니다.",
 	"dont_show_again": "더 이상 보지않기",
+	"notice": "공지사항",
 	"seal": {
 		"allStatTypes": "모든 스탯 타입",
 		"myTotalStats": "보유 씰 총 스탯",

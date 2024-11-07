@@ -1,7 +1,16 @@
 <script lang="ts">
+	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { _ } from 'svelte-i18n'
+
+	export let size: 'sm' | 'md' | 'lg' = 'md'
 	let isPopupVisible = false
+
+	const sizeStyles = {
+		sm: '',
+		md: 'max-w-[500px]',
+		lg: 'max-w-[700px]'
+	}
 
 	const toggleModal = () => {
 		isPopupVisible = !isPopupVisible
@@ -16,7 +25,10 @@
 	></div>
 	<Inner class="position-fix-center flex-center z-modal w-full">
 		<div
-			class="relative max-w-[500px] rounded-md border border-primary-20 bg-secondary-5 p-6"
+			class={cn(
+				'relative rounded-md border border-primary-20 bg-secondary-5 p-6',
+				sizeStyles[size]
+			)}
 		>
 			<slot name="popupContent"></slot>
 			<button

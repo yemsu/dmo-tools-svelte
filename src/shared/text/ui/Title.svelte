@@ -2,10 +2,11 @@
 	import { cn } from '$shared/lib'
 
 	export let tag: string = 'h2'
-	export let size: 'sm' | 'md' | 'lg' = 'md'
+	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md'
 
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
+		xs: 'text-sm font-semibold',
 		sm: 'text-[15px] font-semibold',
 		md: 'text-lg md:text-lg2 font-semibold',
 		lg: 'text-xl font-semibold'
