@@ -14,28 +14,20 @@
 	$: isActive = getIsActive(type)
 </script>
 
-<li
-	class={cn(
-		'h-full max-w-[45%] md:max-w-[35%]',
-		isActive ? 'w-[45%] md:w-[35%]' : 'flex-1'
-	)}
->
+<li class="h-full">
 	<a
 		href="/{$page.data.lang}{MENUS[type].path}"
 		class={cn(
-			'flex-col-center h-full px-1 md:flex-row md:gap-2',
-			'rounded-t-[15px] leading-none transition-opacity',
-			isActive
-				? 'flex-row gap-1 bg-primary-20 py-2 text-xs font-semibold opacity-100 md:gap-2 md:px-8 md:text-sm'
-				: 'gap-[0.4em] opacity-50 hover:opacity-100'
+			'flex-center h-full hover:text-point',
+			isActive && 'font-bold text-point'
 		)}
 	>
-		<iconify-icon
+		<!-- <iconify-icon
 			icon={icon.name}
 			width={icon.width}
 			height={icon.height}
 			class={cn(icon.class)}
-		/>
+		/> -->
 		<span class="relative">
 			<TextByLang data={MENUS[type]} />
 			{#if type === 'gacha'}

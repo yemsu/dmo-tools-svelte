@@ -7,7 +7,20 @@
 
 @layer base {
 	:root {
+		/* font size */
+		--body-md: 14px;
+		@media screen and (max-width: 768px) {
+			--body-md: 14px;
+		}
+		/* font */
+		--weight-normal: 300;
+		--weight-semibold: 400;
+		--weight-bold: 500;
+
 		/* colors */
+		--white: #e6e6e8;
+		--background-color: #17171c;
+
 		--primary-5: 214 82% 11%; /* hsl(214 82% 11%) */
 		--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
 		--primary-20: 219 67% 31%; /* hsl(219 67% 31%) */
@@ -48,7 +61,7 @@
 		--header-h: 50px;
 		--gnb-h: 50px;
 		--raid-bar-h: 35px;
-		--content-w: 800px;
+		--content-w: 1200px;
 		--content-side: 16px;
 		--input-h: 40px;
 		--tab-h: 30px;
@@ -82,6 +95,7 @@ textarea {
 
 a {
 	@apply text-inherit;
+	font-size: inherit;
 }
 
 li,
@@ -128,7 +142,7 @@ button:focus:not(:focus-visible) {
 		background: linear-gradient(to bottom, #fef102, #ed7000);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		filter: drop-shadow(0 0 5px #0267b6);
+		filter: drop-shadow(0 0 5px #025596);
 	}
 	/* flex */
 	.flex-center {

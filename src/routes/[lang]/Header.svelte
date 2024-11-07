@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Gnb } from '$widgets/gnb'
 	import { page } from '$app/stores'
 	import { AuthButton } from '$shared/layout'
 	import LangButton from '$shared/layout/ui/LangButton.svelte'
@@ -13,15 +14,16 @@
 		size="full"
 		class="relative flex h-header-h items-center justify-between"
 	>
-		<h1 class="font-tiny text-2xl font-semibold leading-none md:text-3xl">
+		<h1 class="font-tiny text-[26px] font-semibold leading-none">
 			<a
 				href="/{lang}"
-				class="text-logo block"
+				class=" block"
 				title={lang === 'kr' ? '메인으로' : 'Go to Main Page'}
 			>
 				DMO tools
 			</a>
 		</h1>
+		<Gnb />
 		<div class="flex-center gap-2">
 			<AuthButton />
 			<LangButton />
