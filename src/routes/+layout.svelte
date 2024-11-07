@@ -12,7 +12,7 @@
 			const userLocale = getLocaleFromNavigator() || 'en'
 			const lang = userLocale.startsWith('ko') ? 'kr' : 'en'
 
-			goto(`/${lang}`)
+			goto(`/${lang}`, { replaceState: true })
 		}
 	})
 </script>
