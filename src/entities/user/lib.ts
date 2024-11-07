@@ -21,5 +21,6 @@ export const getTokenCookie = (tokenName?: string): string | null => {
 }
 
 export const removeTokenCookie = (tokenName?: string) => {
-	document.cookie = `${tokenName || TOKEN_NAME}=; Secure; path=/;`
+	document.cookie = `${tokenName || TOKEN_NAME}=; Secure; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+	document.cookie = `${tokenName || TOKEN_NAME}=; Secure; expires=Thu, 01 Jan 1970 00:00:00 UTC;`
 }
