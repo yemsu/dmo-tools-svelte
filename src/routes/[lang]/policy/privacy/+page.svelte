@@ -5,8 +5,8 @@
 
 <Section class="text-sm leading-[1.4] text-gray-200">
 	<Title>개인정보처리방침</Title>
-	<div class="scroll-box flex flex-col gap-[1em] px-[1em]">
-		<section>
+	<article class="scroll-box flex flex-col gap-[1em]">
+		<div>
 			<Title>목적</Title>
 			<p>
 				DMO tools(이하 ‘회사'라고 함)는 회사가 제공하고자 하는 서비스(이하 ‘회사
@@ -17,15 +17,15 @@
 				있도록 하기 위하여 다음과 같이 개인정보처리방침(이하 ‘본 방침’)을
 				수립합니다.
 			</p>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>개인정보 처리의 원칙</Title>
 			<p>
 				당사는 이용자가 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할
 				경우, 서비스 이용을 위해 필요한 개인정보 수집에 동의한 것으로 봅니다.
 			</p>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>수집하는 개인정보 항목 및 수집∙이용목적</Title>
 			<p>
 				회사는 이용자의 회사 서비스에 대한 회원가입을 위하여 다음과 같은 정보를
@@ -34,8 +34,8 @@
 			<ol>
 				<li>필수 수집 정보: 이메일 주소, IP 주소(부정 이용 방지)</li>
 			</ol>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>법령에 따른 개인정보의 보유 및 이용기간</Title>
 			<p>회사는 관계법령에 따라 다음과 같이 개인정보를 보유 및 이용합니다.</p>
 			<ol>
@@ -47,15 +47,15 @@
 					</ol>
 				</li>
 			</ol>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>개인정보의 파기원칙</Title>
 			<p>
 				회사는 원칙적으로 회원 탈퇴 시 이용자의 개인정보를 지체 없이 복구
 				불가능한 방법으로 파기합니다.
 			</p>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>개인정보 조회 및 수집동의 철회</Title>
 			<ol>
 				<li>
@@ -69,8 +69,8 @@
 					전자우편주소로 연락하시면 회사는 지체 없이 조치하겠습니다.
 				</li>
 			</ol>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>개인정보 자동 수집 장치의 설치·운영 및 거부에 관한 사항</Title>
 			<ol>
 				<li>
@@ -91,8 +91,8 @@
 					서비스는 이용에 어려움이 있을 수 있습니다.
 				</li>
 			</ol>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>회사의 개인정보 보호 책임자 지정</Title>
 			<p>
 				회사는 이용자의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기
@@ -104,8 +104,8 @@
 				<dd>성명: 김대욱</dd>
 				<dd>연락처: kdw97448860@gmail.com</dd>
 			</dl>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>권익침해에 대한 구제방법</Title>
 			<p>
 				이용자는 개인정보침해로 인한 구제를 받기 위하여 개인정보분쟁조정위원회,
@@ -133,8 +133,8 @@
 				</li>
 				<li>중앙행정심판위원회 : (국번없이) 110 (www.simpan.go.kr)</li>
 			</ul>
-		</section>
-		<section>
+		</div>
+		<div>
 			<Title>본 방침의 변경</Title>
 			<ol>
 				<li>
@@ -161,9 +161,9 @@
 					전에 공지합니다.
 				</li>
 			</ol>
-		</section>
+		</div>
 		<p>본 방침은 2024.08.29.부터 시행됩니다.</p>
-	</div>
+	</article>
 </Section>
 
 <style>

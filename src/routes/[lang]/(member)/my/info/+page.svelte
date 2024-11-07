@@ -72,13 +72,5 @@
 				{infoItemData.desc}
 			</InfoItem>
 		</div> -->
-		<!-- <div class="flex w-full justify-end">
-			<a
-				href='/{$page.data.lang}{PATH.PRIVACY_POLICY}'
-				class="text-xs2 text-gray-500 underline underline-offset-2"
-			>
-				개인정보처리방침
-			</a>
-		</div> -->
 	</div>
 </Section>

@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation'
 	import { getLocaleFromNavigator } from 'svelte-i18n'
 	import { page } from '$app/stores'
+	import { PATH } from '$shared/config'
 
 	onMount(() => {
 		const path = $page.url.pathname

@@ -145,7 +145,7 @@ button:focus:not(:focus-visible) {
 	}
 	/* scroll box */
 	.scroll-box {
-		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-500;
+		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
 	}
 	/* border */
 	.point-neon {
