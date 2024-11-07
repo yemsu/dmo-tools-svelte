@@ -205,7 +205,7 @@
 	$: nextRaid && $alarmMinute && setAlarm(nextRaid)
 </script>
 
-<div
+<aside
 	class={cn(
 		'relative z-raidBar flex h-raid-bar-h items-center',
 		'bg-primary-10',
@@ -213,6 +213,7 @@
 		'whitespace-nowrap rounded-md drop-shadow-md'
 	)}
 >
+	<h2 class="ir">다음 출현 레이드 정보</h2>
 	{#if isSseSupported === true}
 		<RaidBarServerButton />
 		<a
@@ -273,4 +274,4 @@
 			브라우저를 이용해 주세요.
 		</p>
 	{/if}
-</div>
+</aside>
