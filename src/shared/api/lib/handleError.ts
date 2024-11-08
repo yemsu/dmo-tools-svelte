@@ -7,7 +7,6 @@ export const goToErrorPage = (errorMessage: string) => {
 	if (import.meta.env.SSR) return
 	const lang = window.location.href.includes('/en/') ? 'en' : 'kr'
 	goto(`/${lang}${PATH.ERROR}`, { state: { message: errorMessage } })
-	console.error(errorMessage)
 }
 
 export const showErrorToast = (businessError: BusinessError) => {

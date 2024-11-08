@@ -65,20 +65,20 @@
 	</div>
 </div> -->
 {#if message}
-	<section class="h-full">
-		<Inner class="flex-center h-full text-center">
-			<div class="flex-col-center gap-8">
+	<section class="flex-center min-h-full py-8">
+		<Inner class="text-center">
+			<div class="flex-col-center gap-5 md:gap-8">
 				<div>
-					<div class="mb-4 text-[60px]">💦</div>
-					<h2 class="text-xl">
+					<div class="mb-4 text-[40px] md:text-[60px]">💦</div>
+					<h2 class="text-lg2 md:text-xl">
 						<TextByLang
 							text="예상치 못한 에러가 발생했어요"
 							engText="An unexpected error occurred"
 						/>
 					</h2>
 				</div>
-				<div class="relative rounded-md border border-gray-700 p-6">
-					<p class="text-lg text-warning">
+				<div class="relative rounded-md border border-gray-700 p-4 md:p-6">
+					<p class="text-md text-warning md:text-lg">
 						Error Message : {message}
 					</p>
 					<Button

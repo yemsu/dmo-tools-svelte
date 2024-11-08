@@ -1,8 +1,8 @@
-export type ErrorCode = '404' | '400' | '500' | 'unknown'
-export type ErrorType = 'UNKNOWN'
+export type ErrorCode = number | 'unknown'
 
-export type ErrorResponse = {
+export type CustomErrorResponse = {
 	errorCode: ErrorCode
 	errorMessage: string
-	errorType: ErrorType
+	errorType: string
 }
+export type ErrorResponse = { error: string; path: string; status: number }

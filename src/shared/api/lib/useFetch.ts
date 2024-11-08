@@ -1,6 +1,6 @@
 import { getTokenCookie, TOKEN_NAME } from '$entities/user'
-import { BusinessError, UnknownError } from '../lib/CustomError'
-import type { ErrorResponse } from '../types'
+import { BusinessError, RequestError } from '../lib/CustomError'
+import type { CustomErrorResponse, ErrorResponse } from '../types'
 import { goToErrorPage, showErrorToast } from './handleError'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
@@ -19,7 +19,14 @@ export const apiFetch = async <ResponseData>(
 			...options,
 			headers: { ...options.headers, ...headers }
 		})
-		const data: { result: ResponseData | ErrorResponse } = await response.json()
+		const data:
+			| {
+					result: ResponseData | CustomErrorResponse
+			  }
+			| ErrorResponse = await response.json()
+		if (typeof data === 'object' && 'error' in data) {
+			throw new RequestError(data.status, response.type, data.error, endpoint)
+		}
 		if (
 			data.result &&
 			typeof data.result === 'object' &&
@@ -31,13 +38,17 @@ export const apiFetch = async <ResponseData>(
 		return data.result
 	} catch (e) {
 		if (e instanceof BusinessError) {
+			console.error('Business Error', { error: e })
 			showErrorToast(e)
+		} else if (e instanceof RequestError) {
+			goToErrorPage(`[${e.errorCode}] ${e.message} "${endpoint}"`)
 		} else {
 			const error = e as Error
+			console.error('Unknown Error', { error })
 			goToErrorPage(`[Unknown] ${error.message} "${endpoint}"`)
 			console.warn('Request Headers', headers)
 		}
-		const err = e as { message: string }
-		throw new UnknownError('unknown', 'UNKNOWN', err.message, endpoint)
+		const error = e as Error
+		throw new RequestError('unknown', 'UNKNOWN', error.message, endpoint)
 	}
 }
