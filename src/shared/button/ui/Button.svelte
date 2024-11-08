@@ -14,7 +14,6 @@
 		| undefined = undefined
 	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let href: string | undefined = undefined
-	export let disabled: boolean | undefined = undefined
 
 	// check props
 	const checkProps = () => {
@@ -50,11 +49,10 @@
 
 	// common attributes
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
-	const commonAttributes = {
-		...$$restProps,
+	$: commonAttributes = {
 		class: cn(
 			'flex-center gap-[0.2em] leading-none',
-			!disabled && 'button-hover',
+			!$$restProps.disabled && 'button-hover',
 			'text-balance break-keep disabled:text-gray-300 disabled:opacity-70',
 			isActive === true && 'border-2 opacity-100 ',
 			isActive === false && 'opacity-40 hover:opacity-100',
@@ -63,17 +61,16 @@
 			variant && variants[variant],
 			$$restProps.class
 		),
-		disabled,
 		...dataActive
 	}
 </script>
 
 {#if href}
-	<a {...commonAttributes} {href}>
+	<a {...$$restProps} {...commonAttributes} {href}>
 		<slot />
 	</a>
 {:else}
-	<button {...commonAttributes} on:click>
+	<button {...$$restProps} {...commonAttributes} on:click>
 		<slot />
 	</button>
 {/if}
