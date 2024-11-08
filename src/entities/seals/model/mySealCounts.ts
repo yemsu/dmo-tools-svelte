@@ -1,7 +1,8 @@
 import type { CharacterData } from '$entities/characters'
 import { getMySealsCount, putMySealCount } from '$entities/seals/api'
 import { updateOrAddData } from '$entities/seals/lib'
-import { ALERT } from '$shared/config'
+import { ALERT, TOAST } from '$shared/config'
+import { toast } from '$shared/toast'
 import type { LangType } from '$shared/types'
 import type { MySealCount } from '../type'
 import { writable } from 'svelte/store'
@@ -39,6 +40,8 @@ const createMySealCounts = () => {
 				const result = updateOrAddData(prev, res)
 				return sortBy([...result], 'id')
 			})
+
+			toast.on(TOAST.SEAL_COUNT_CHANGED[lang])
 		},
 		remove: async (characterId: CharacterData['id'], sealId: number) => {
 			await putMySealCount(characterId, { id: sealId, count: 0 })
