@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { type MenuData } from '$entities/menus'
+	import { EXTERNAL_LINK } from '$shared/config'
 	import { cn } from '$shared/lib'
 	import { Modal } from '$shared/modal'
 	import { Inner } from '$shared/section'
 	import type { LangType } from '$shared/types'
+	import ReportGuideModalContent from '$widgets/report-guide-modal/ui/ReportGuideModalContent.svelte'
 	import GnbMenu from './GnbMenu.svelte'
 	import { _ } from 'svelte-i18n'
 
@@ -61,7 +63,7 @@
 		<div class="flex-center h-full">
 			{#if lang === 'kr'}
 				<a
-					href="https://open.kakao.com/o/skcN4IDg"
+					href={EXTERNAL_LINK.SUPPORT}
 					target="_blank"
 					title="새창(오픈채팅)"
 					class="flex-col-center gap-[2px] px-2 opacity-50 transition-opacity hover:opacity-100 md:gap-0.5 md:px-3"
@@ -88,41 +90,7 @@
 						/>
 						<span class="text-xs4 md:text-xs2">{$_('support')}</span>
 					</button>
-					<div slot="popupContent">
-						<p>
-							Are you having trouble using the site? <br />
-							Please fill out the information below and email us at
-							<a
-								href="mailto:sssjsjj@gmail.com"
-								class="text-point"
-								title="Mail to"
-							>
-								sssjsjj@gmail.com.
-							</a> <br />
-							We'll do our best to resolve the issue!
-						</p>
-						<div
-							class="flex-center mt-4 rounded-sm border border-secondary-30 p-3"
-						>
-							<ol class="text-sm1 flex flex-col gap-2">
-								<li>1. DMO-tools username:</li>
-								<li>2. User country:</li>
-								<li>3. Browser used:</li>
-								<li class="flex flex-col gap-2">
-									4. Device type (PC/Mobile):
-									<dl class="flex flex-col gap-2 pl-3">
-										<dt>👉 if Device type is "Mobile"</dt>
-										<div class="flex flex-col gap-2 pl-3">
-											<dd>4-1. Device Model (if Mobile Device):</dd>
-											<dd>4-2. OS (window/ios/android/etc):</dd>
-											<dd>4-3. OS version:</dd>
-										</div>
-									</dl>
-								</li>
-								<li>5. Description of the Issue:</li>
-							</ol>
-						</div>
-					</div>
+					<ReportGuideModalContent slot="popupContent" />
 				</Modal>
 			{/if}
 		</div>

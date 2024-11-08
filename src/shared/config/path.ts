@@ -10,5 +10,6 @@ export const PATH = {
 	JOIN: '/join',
 	LOGIN: '/login',
 	MY_INFO: '/my/info',
-	PRIVACY_POLICY: '/policy/privacy'
+	PRIVACY_POLICY: '/policy/privacy',
+	ERROR: '/error'
 }

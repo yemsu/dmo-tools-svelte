@@ -69,5 +69,9 @@ export const TOAST = {
 	CHARACTER_DELETED: {
 		kr: '캐릭터가 삭제되었습니다.',
 		en: 'The character has been deleted'
+	},
+	ERROR_MASSAGE_COPIED: {
+		kr: '에러 메세지가 클립보드에 복사되었습니다!',
+		en: 'The error message has been copied to the clipboard!'
 	}
 }
