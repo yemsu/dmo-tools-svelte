@@ -42,7 +42,7 @@
 </script>
 
 <svelte:head>
-	<title>{META.ERROR.TITLE[lang]}</title>
+	<title>{META.ERROR.TITLE[lang]} {message}</title>
 	<meta name="description" content={META.ERROR.DESC[lang]} />
 </svelte:head>
 
