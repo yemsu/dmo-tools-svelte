@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores'
+	import { MENUS } from '$entities/menus'
 	import { META, PATH } from '$shared/config'
 	import { cn, contentUrl } from '$shared/lib'
 	import Section from '$shared/section/ui/Section.svelte'
-	import { MainBanner } from '$widgets/banner'
-	import type { LangType } from '$shared/types'
 	import { TextByLang } from '$shared/text'
-	import { MENUS } from '$entities/menus'
+	import type { LangType } from '$shared/types'
+	import { MainBanner } from '$widgets/banner'
+	import { Notice } from '$widgets/notice'
 	$: lang = $page.data.lang as LangType
 	$: isKr = lang === 'kr'
 </script>
@@ -17,22 +18,26 @@
 </svelte:head>
 
 <Section>
-	<div class="flex flex-1 flex-col">
-		<div class={cn('flex-center flex-1', isKr && 'sm:hidden')}>
-			<div class="flex-col-center gap-1">
-				<p class="text-right text-gray-300">
-					<TextByLang
-						text="디지몬 마스터즈 도구 모음"
-						engText="Digimon Masters Tools Collection"
-					/>
-				</p>
-				<p
-					class="text-logo font-tiny text-[40px] font-semibold leading-none md:text-[60px]"
-				>
-					DMO tools
-				</p>
-			</div>
+	<div class="flex h-full flex-col gap-3">
+		<div
+			class={cn(
+				'flex-col-center min-h-[120px] flex-1 gap-1',
+				isKr && 'sm:hidden'
+			)}
+		>
+			<p class="text-right text-gray-300">
+				<TextByLang
+					text="디지몬 마스터즈 도구 모음"
+					engText="Digimon Masters Tools Collection"
+				/>
+			</p>
+			<p
+				class="text-logo font-tiny text-[40px] font-semibold leading-none md:text-[60px]"
+			>
+				DMO tools
+			</p>
 		</div>
+		<Notice />
 		<div class="flex min-h-[60%] flex-col gap-3 md:gap-5">
 			<MainBanner
 				src={contentUrl('/main/main-banner-calc.png')}

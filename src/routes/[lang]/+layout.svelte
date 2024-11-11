@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { GlobalModal } from '$shared/modal'
 	import { page } from '$app/stores'
 	import { Footer, NoticeBar } from '$shared/layout'
 	import { cn } from '$shared/lib'
@@ -36,6 +37,9 @@
 		</main>
 		<Footer />
 	</div>
+	<AdLayout />
+	<ToastPopup />
+	<GlobalModal />
 	<!-- <GnbMobile /> -->
 	<AdLayout />
 	<ToastPopup />

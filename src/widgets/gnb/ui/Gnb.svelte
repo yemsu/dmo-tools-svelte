@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { type MenuData } from '$entities/menus'
+	import { EXTERNAL_LINK } from '$shared/config'
 	import { cn } from '$shared/lib'
 	import { Modal } from '$shared/modal'
 	import { Inner } from '$shared/section'
 	import type { LangType } from '$shared/types'
+	import ReportGuideModalContent from '$widgets/report-guide-modal/ui/ReportGuideModalContent.svelte'
 	import GnbMenu from './GnbMenu.svelte'
 	import { _ } from 'svelte-i18n'
 
@@ -56,6 +58,40 @@
 				{/each}
 			</ul>
 		</nav>
+		<div class="flex-center h-full">
+			{#if lang === 'kr'}
+				<a
+					href={EXTERNAL_LINK.SUPPORT}
+					target="_blank"
+					title="새창(오픈채팅)"
+					class="flex-col-center gap-[2px] px-2 opacity-50 transition-opacity hover:opacity-100 md:gap-0.5 md:px-3"
+				>
+					<iconify-icon
+						icon="hugeicons:customer-support"
+						width="20"
+						height="20"
+					/>
+					<span class="text-xs4 md:text-xs2">{$_('support')}</span>
+				</a>
+			{:else}
+				<Modal>
+					<button
+						slot="buttonSlot"
+						class="flex-col-center"
+						let:toggleModal
+						on:click={toggleModal}
+					>
+						<iconify-icon
+							icon="hugeicons:customer-support"
+							width="20"
+							height="20"
+						/>
+						<span class="text-xs4 md:text-xs2">{$_('support')}</span>
+					</button>
+					<ReportGuideModalContent slot="popupContent" />
+				</Modal>
+			{/if}
+		</div>
 	</Inner>
 </div>
 

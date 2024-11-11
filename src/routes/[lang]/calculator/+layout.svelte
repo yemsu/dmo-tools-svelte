@@ -114,7 +114,13 @@
 		currentCharacterId.set(characters[0].id)
 	}
 
+	const clearCharacters = () => {
+		$currentCharacters = undefined
+		$currentCharacterId = undefined
+	}
+
 	$: $user && setCharacters()
+	$: !$user && clearCharacters()
 </script>
 
 <Section>

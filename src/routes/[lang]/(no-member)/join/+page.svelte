@@ -6,6 +6,7 @@
 		getTokenCookie,
 		postSignup,
 		removeTokenCookie,
+		setTokenCookie,
 		TOKEN_NAME,
 		user
 	} from '$entities/user'
@@ -46,9 +47,10 @@
 		const isConfirmed = confirm(`${value}: ${CONFIRM.FINAL_NICKNAME[lang]}`)
 		if (!isConfirmed) return
 		const res = await postSignup(googleToken, value)
-		user.set(res)
+		const { token, ...userData } = res
+		setTokenCookie(res.token)
+		user.set(userData)
 		removeTokenCookie(G_TOKEN_NAME)
-		sessionStorage.setItem(TOKEN_NAME, res.token)
 		toast.on(TOAST.WELCOME(value)[lang])
 		goto(`/${$page.data.lang}${PATH.SETTING_SEALS}`)
 	}

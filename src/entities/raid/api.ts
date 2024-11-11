@@ -1,4 +1,4 @@
-import { apiFetch, apiFetchCustomError } from '$shared/api'
+import { apiFetch } from '$shared/api'
 import type { RaidData, RaidTimeData, ServerType } from './types'
 
 export const getRaids = (serverType: ServerType) =>
@@ -20,12 +20,9 @@ export const postRaidTime = (raidId: RaidData['id'], body: PostRaidTimeBody) =>
 	})
 
 export const putRaidTimeVote = (clientId: number, timeId: RaidTimeData['id']) =>
-	apiFetchCustomError<RaidTimeData>(
-		`/raids/timers/${timeId}/vote?clientId=${clientId}`,
-		{
-			method: 'PUT'
-		}
-	)
+	apiFetch<RaidTimeData>(`/raids/timers/${timeId}/vote?clientId=${clientId}`, {
+		method: 'PUT'
+	})
 
 export const getClientId = () => apiFetch<string>(`/alarms/client-id`)
 

@@ -8,6 +8,7 @@
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
+	import { BusinessError, showErrorToast } from '$shared/api'
 	import { cn, objectBy, timeRemainingString } from '$shared/lib'
 	import { NoData } from '$shared/text'
 	import Timer from '$shared/time/ui/Timer.svelte'
@@ -25,27 +26,16 @@
 			)
 		}
 		if (time.clientId === $subscribeClientId) {
-			alert('내가 등록한 제보에는 좋아요를 할 수 없어요.')
-			return
+			const error = new BusinessError('UNKNOWN', '권한이 없습니다.')
+			showErrorToast(error)
+			throw error
 		}
 		const isConfirmed = confirm(
 			`이 제보가 맞나요? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${time.channel}채널] ${timeRemainingString(time.startAt)} 출현`
 		)
 		if (!isConfirmed) return
-		const res = await putRaidTimeVote($subscribeClientId, time.id)
-		if ('errorMessage' in res) {
-			switch (res.errorMessage) {
-				case '이미 투표했습니다.':
-					alert('이미 좋아요를 눌렀어요.')
-					break
-				case '권한이 없습니다.':
-					alert('내가 등록한 제보에는 좋아요를 할 수 없어요.')
-					break
-				default:
-					alert(res.errorMessage)
-					break
-			}
-		}
+		await putRaidTimeVote($subscribeClientId, time.id)
+		toast.on('레이드 제보에 좋아요를 눌렀습니다.')
 	}
 </script>
 
