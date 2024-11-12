@@ -1,9 +1,16 @@
 <script lang="ts">
+	import { lang } from '$shared/model'
+	import { META } from '$shared/config'
 	import { Footer } from '$shared/layout'
 
 	const langButtonStyle =
 		'point-neon block w-[130px] rounded-lg p-6 hover:opacity-80'
 </script>
+
+<svelte:head>
+	<title>{META.COMMON.TITLE.en}</title>
+	<meta name="description" content={META.COMMON.DESC.en} />
+</svelte:head>
 
 <div class="flex-center mx-auto h-[100vh] flex-col gap-6 text-center">
 	<div>
