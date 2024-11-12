@@ -11,7 +11,7 @@
 </script>
 
 <svelte:head>
-	<title>{META.COMMON.TITLE[lang]}</title>
+	<title>{META.COMMON.TITLE[$lang]}</title>
 	<meta name="description" content={META.COMMON.DESC[$lang]} />
 </svelte:head>
 
