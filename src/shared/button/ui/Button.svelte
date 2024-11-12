@@ -11,8 +11,9 @@
 		| 'gray'
 		| 'danger'
 		| 'outline'
+		| 'link'
 		| undefined = undefined
-	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
+	export let size: 'text' | 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let href: string | undefined = undefined
 
 	// check props
@@ -32,6 +33,7 @@
 		md: 'rounded-md'
 	}
 	const sizeStyles = {
+		text: '',
 		icon: 'p-2 flex-center',
 		sm: 'px-2 py-1 text-xs',
 		md: 'min-w-[3.5em] px-2 py-1 text-xs md:text-md',
@@ -44,14 +46,15 @@
 		gray: 'bg-gray-600',
 		ghost: 'hover:bg-gray-800',
 		danger: 'bg-red',
-		outline: 'border border-gray-600 hover:bg-gray-700'
+		outline: 'border border-gray-600 hover:bg-gray-700',
+		link: 'underline underline-offset-2 hover:text-point'
 	}
 
 	// common attributes
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
 	$: commonAttributes = {
 		class: cn(
-			'flex-center gap-[0.2em] leading-none',
+			'inline-flex items-center justify-center gap-[0.2em] leading-none',
 			!$$restProps.disabled && 'button-hover',
 			'text-balance break-keep disabled:text-gray-300 disabled:opacity-70',
 			isActive === true && 'border-2 opacity-100 ',

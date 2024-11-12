@@ -27,7 +27,7 @@
 	<span class="relative">
 		<TextByLang data={GACHA_TYPES[gachaType]} />
 		{#if gachaType === 'DATA_SUMMON'}
-			<NewBadge />
+			<!-- <NewBadge /> -->
 		{/if}
 	</span>
 </button>

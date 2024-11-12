@@ -24,7 +24,7 @@
 </script>
 
 <div class={cn('relative flex h-full flex-col')}>
-	<NoticeBar />
+	<!-- <NoticeBar /> -->
 	<div
 		class={cn(
 			'relative flex flex-1 flex-col overflow-hidden',

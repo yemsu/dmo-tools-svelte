@@ -40,7 +40,7 @@
 		<span class="relative">
 			<TextByLang data={MENUS[type]} />
 			{#if type === 'gacha'}
-				<NewBadge />
+				<!-- <NewBadge /> -->
 			{/if}
 		</span>
 	</a>
