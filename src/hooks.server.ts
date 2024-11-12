@@ -4,7 +4,6 @@ import type { Handle } from '@sveltejs/kit'
 export const handle: Handle = async ({ event, resolve }) => {
 	if (!event.isDataRequest && !import.meta.env.DEV) {
 		const host = event.request.headers.get('host')
-
 		if (host?.includes('dmo-tools.vercel.app')) {
 			return new Response(null, {
 				status: 301,
