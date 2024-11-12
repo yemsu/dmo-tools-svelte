@@ -3,7 +3,6 @@ import { getSealPrices, getSeals } from '$entities/seals'
 import type { ServerLoad } from '@sveltejs/kit'
 import { locale, waitLocale } from 'svelte-i18n'
 
-export const prerender = true
 export const load: ServerLoad = async ({ url }) => {
 	const seals = await getSeals()
 	const gachaList = await getGachaList()
