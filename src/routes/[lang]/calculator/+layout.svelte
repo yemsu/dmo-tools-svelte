@@ -128,10 +128,10 @@
 		{/if}
 
 		<Tabs class={cn('flex-1', $user && 'rounded-l-none')}>
-			{#each SUB_MENUS as subMenu (lang + subMenu.path)}
+			{#each SUB_MENUS as subMenu ($lang + subMenu.path)}
 				<Tab
 					tagName="a"
-					href="/{lang}{subMenu.path}"
+					href="/{$lang}{subMenu.path}"
 					isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
 				>
 					{subMenu.menuName[$lang]}
