@@ -23,7 +23,7 @@
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
 	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 	import { onDestroy, onMount } from 'svelte'
-	import RaidBarServerButton from './RaidBarServerButton.svelte'
+	import RaidServerDropdown from './RaidServerDropdown.svelte'
 	import { getRemainingTime } from '$shared/time'
 
 	let isSseSupported: boolean | undefined
@@ -214,7 +214,7 @@
 	)}
 >
 	{#if isSseSupported === true}
-		<RaidBarServerButton />
+		<RaidServerDropdown />
 		<a
 			href="/{$page.data.lang}{MENUS.raid.path}"
 			class={cn(

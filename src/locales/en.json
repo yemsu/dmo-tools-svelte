@@ -31,6 +31,9 @@
 	"notice": "Notice",
 	"copy": "Copy",
 	"go_back": "Previous page",
+	"raid": {
+		"changeServer": "Change Server"
+	},
 	"seal": {
 		"allStatTypes": "All Stat",
 		"myTotalStats": "My Total Stats",

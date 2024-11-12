@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { cn } from '$shared/lib'
+	import type { TabDirection } from '../types'
 
-	export let dir: 'hor' | 'ver' = 'hor'
+	export let dir: TabDirection = 'hor'
 
 	const dirStyles = {
 		hor: 'flex items-center flex-wrap',
