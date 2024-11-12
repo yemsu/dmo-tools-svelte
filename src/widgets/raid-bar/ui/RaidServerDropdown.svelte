@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n'
 	import { crrServerType, GAME_SERVERS } from '$entities/raid'
-	import { RaidServerTabs } from '$features/change-raid-server'
+	import { RaidServerTabs } from '$features/control-raid-timer-option'
 	import { Dropdown } from '$shared/dropdown'
 </script>
 

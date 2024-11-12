@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { RaidServerTabs } from '$features/change-raid-server'
+	import { RaidServerTabs } from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
 	import { lang } from '$shared/model'
 	import { Section } from '$shared/section'
