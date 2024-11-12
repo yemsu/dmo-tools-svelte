@@ -13,23 +13,24 @@
 		type RaidTimeData,
 		type ServerType
 	} from '$entities/raid'
+	import {
+		BeepToggleButton,
+		NotificationToggleButton
+	} from '$features/control-raid-timer-option'
 	import { _objKeys, cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
-	import { toast } from '$shared/toast'
 	import { timeSortByStartAt } from '$widgets/raid'
-	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
 	import RaidAppearInfo from '$widgets/raid/ui/RaidAppearInfo.svelte'
 	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
 	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 	import { onDestroy, onMount } from 'svelte'
+	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
 	import RaidServerDropdown from './RaidServerDropdown.svelte'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
-	let isAudioOn: boolean = false
-	let audio: HTMLAudioElement | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
 	let removeChannelTimer: NodeJS.Timeout | undefined
 	let isSseConnected = false
@@ -118,17 +119,6 @@
 
 	$: $crrServerType && initRaidSubscribe()
 
-	const toggleAudioAlarm = () => {
-		const newIsAudioOn = !isAudioOn
-		isAudioOn = newIsAudioOn
-		audio = newIsAudioOn ? new Audio('/sound-alarm.mp3') : undefined
-		toast.on(
-			newIsAudioOn
-				? '보스 등장 알림음이 활성화 되었습니다.'
-				: '보스 등장 알림음이 비활성화 되었습니다.'
-		)
-	}
-
 	const notify = (_nextRaid: NextRaidData) => {
 		const remainingTime = getRemainingTime(_nextRaid.time.startAt)
 		const text =
@@ -153,7 +143,7 @@
 			if (removeChannelTimer) clearTimeout(removeChannelTimer)
 			alarmTimer = setTimeout(() => {
 				notify(_nextRaid)
-				audio && isAudioOn && audio.play()
+				$audioAlarm && $isAudioOn && $audioAlarm.play()
 			}, timeDifference - alarmTiming)
 			removeChannelTimer = setTimeout(() => {
 				raids.removeChannelTimes(time)
@@ -252,17 +242,7 @@
 				{:else}
 					<NotificationToggleButton />
 					<div class="overflow-hidden rounded-br-md rounded-tr-md">
-						<button
-							class="button-hover h-full bg-primary-30 px-2"
-							title={isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
-							on:click={toggleAudioAlarm}
-						>
-							<iconify-icon
-								icon="mdi:bell{isAudioOn ? '' : '-off'}"
-								width={14}
-								height={14}
-							/>
-						</button>
+						<BeepToggleButton />
 					</div>
 				{/if}
 			</div>
