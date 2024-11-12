@@ -22,7 +22,7 @@
 	>
 		<span class="relative rounded-full bg-gray-700 px-1 py-0.5 text-xs3">
 			<NewBadge
-				startDate="Tue Nov 12 2024 15:48:00 GMT+0900"
+				startDate="Tue Nov 12 2024 17:00:00 GMT+0900"
 				visibleDay={3}
 				position="left"
 			/>
