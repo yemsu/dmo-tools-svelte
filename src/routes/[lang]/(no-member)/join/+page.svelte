@@ -7,25 +7,22 @@
 		postSignup,
 		removeTokenCookie,
 		setTokenCookie,
-		TOKEN_NAME,
 		user
 	} from '$entities/user'
 	import { Button } from '$shared/button'
 	import { ALERT, CONFIRM, ERROR, PATH, TOAST } from '$shared/config'
 	import { Input, NICKNAME_SCHEMA, ValidationText } from '$shared/form'
 	import { checkJoinProcess, checkNoMember } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { Section } from '$shared/section'
 	import { Title } from '$shared/text'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { toast } from '$shared/toast'
-	import type { LangType } from '$shared/types'
 	import { error } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
-
 	let value: string = ''
 	let isValid: boolean
 	let inputElement: HTMLInputElement
-	$: lang = $page.data.lang as LangType
 
 	const setIsValid = (_isValue: boolean) => {
 		isValid = _isValue
@@ -33,33 +30,33 @@
 
 	$: onSubmit = async () => {
 		if (!isValid) {
-			alert(ALERT.INVALID_NICKNAME[lang])
+			alert(ALERT.INVALID_NICKNAME[$lang])
 			return
 		}
 		if (!value) {
-			alert(ALERT.BLANK_NICKNAME[lang])
+			alert(ALERT.BLANK_NICKNAME[$lang])
 			return
 		}
 		const googleToken = getTokenCookie(G_TOKEN_NAME)
 		if (!googleToken) {
-			error(550, ERROR.TOKEN_EXPIRED[lang])
+			error(550, ERROR.TOKEN_EXPIRED[$lang])
 		}
-		const isConfirmed = confirm(`${value}: ${CONFIRM.FINAL_NICKNAME[lang]}`)
+		const isConfirmed = confirm(`${value}: ${CONFIRM.FINAL_NICKNAME[$lang]}`)
 		if (!isConfirmed) return
 		const res = await postSignup(googleToken, value)
 		const { token, ...userData } = res
 		setTokenCookie(res.token)
 		user.set(userData)
 		removeTokenCookie(G_TOKEN_NAME)
-		toast.on(TOAST.WELCOME(value)[lang])
-		goto(`/${$page.data.lang}${PATH.SETTING_SEALS}`)
+		toast.on(TOAST.WELCOME(value)[$lang])
+		goto(`/${$page.data.$lang}${PATH.SETTING_SEALS}`)
 	}
 
 	onMount(() => {
-		const lang = $page.data.lang
-		const isNoMember = checkNoMember(lang)
+		const $lang = $page.data.$lang
+		const isNoMember = checkNoMember($lang)
 		if (!isNoMember) return
-		checkJoinProcess(lang)
+		checkJoinProcess($lang)
 		setTimeout(() => {
 			inputElement.focus()
 		}, 100)
@@ -79,7 +76,7 @@
 	>
 		<div class="flex flex-1 flex-col gap-2">
 			<Input
-				placeholder={lang === 'kr' ? '닉네임' : 'Nickname'}
+				placeholder={$lang === 'kr' ? '닉네임' : 'Nickname'}
 				bind:value
 				bind:inputElement
 			/>

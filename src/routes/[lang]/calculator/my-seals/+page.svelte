@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
-	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
 	import {
 		mySealCounts,
@@ -13,7 +11,8 @@
 	} from '$entities/seals'
 	import { user } from '$entities/user'
 	import { META, PATH } from '$shared/config'
-	import SaveUrlLink from '$shared/layout/ui/SaveUrlLink.svelte'
+	import { cn } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { NoData } from '$shared/text'
 	import {
@@ -23,12 +22,10 @@
 	} from '$widgets/my-seals'
 	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
 	import { StatBar } from '$widgets/stat-bar'
-	import { cn } from '$shared/lib'
 
 	let statTypeSelected: StatTypeOption = 'ALL'
 	let mySealsFiltered: MySealCount[] | null = null
-	$: lang = $page.data.lang as LangType
-	$: isKr = lang === 'kr'
+	$: isKr = $lang === 'kr'
 	$: getSelectedSeals = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
 		if (statTypeOption === 'ALL') {
@@ -73,8 +70,8 @@
 </script>
 
 <svelte:head>
-	<title>{META.MY.TITLE[lang]}</title>
-	<meta name="description" content={META.MY.DESC[lang]} />
+	<title>{META.MY.TITLE[$lang]}</title>
+	<meta name="description" content={META.MY.DESC[$lang]} />
 </svelte:head>
 
 <h2 class="ir">보유 씰</h2>

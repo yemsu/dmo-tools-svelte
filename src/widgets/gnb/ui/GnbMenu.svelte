@@ -5,6 +5,7 @@
 	import NewBadge from '$shared/badge/NewBadge.svelte'
 	import { cn } from '$shared/lib'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { lang } from '$shared/model'
 
 	export let menuData: MenuData
 	const { type, icon } = menuData
@@ -21,7 +22,7 @@
 	)}
 >
 	<a
-		href="/{$page.data.lang}{MENUS[type].path}"
+		href="/{$lang}{MENUS[type].path}"
 		class={cn(
 			'flex-col-center h-full px-1 md:flex-row md:gap-2',
 			'rounded-t-[15px] leading-none transition-opacity',

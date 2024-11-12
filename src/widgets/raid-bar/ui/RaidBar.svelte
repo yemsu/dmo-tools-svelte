@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
 	import {
 		alarmMinute,
@@ -15,6 +14,8 @@
 		type ServerType
 	} from '$entities/raid'
 	import { _objKeys, cn } from '$shared/lib'
+	import { lang } from '$shared/model'
+	import { getRemainingTime } from '$shared/time'
 	import { toast } from '$shared/toast'
 	import { timeSortByStartAt } from '$widgets/raid'
 	import NotificationToggleButton from '$widgets/raid-bar/ui/NotificationToggleButton.svelte'
@@ -24,7 +25,6 @@
 	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 	import { onDestroy, onMount } from 'svelte'
 	import RaidServerDropdown from './RaidServerDropdown.svelte'
-	import { getRemainingTime } from '$shared/time'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
@@ -216,7 +216,7 @@
 	{#if isSseSupported === true}
 		<RaidServerDropdown />
 		<a
-			href="/{$page.data.lang}{MENUS.raid.path}"
+			href="/{$lang}{MENUS.raid.path}"
 			class={cn(
 				'flex-center relative h-full w-full flex-1 gap-2 px-2',
 				'border-gradient button-hover border-b border-t'

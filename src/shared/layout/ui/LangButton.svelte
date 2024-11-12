@@ -4,12 +4,13 @@
 	import Button from '$shared/button/ui/Button.svelte'
 	import { TOAST } from '$shared/config'
 	import { Icon } from '$shared/icon'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import type { LangType } from '$shared/types'
 
-	$: toLang = ($page.data.lang === 'en' ? 'kr' : 'en') as LangType
+	$: toLang = ($lang === 'en' ? 'kr' : 'en') as LangType
 	$: changeLang = () => {
-		goto($page.url.pathname.replace(`/${$page.data.lang}`, `/${toLang}`))
+		goto($page.url.pathname.replace(`/${$lang}`, `/${toLang}`))
 		toast.on(TOAST.CHANGE_LANG[toLang])
 	}
 </script>

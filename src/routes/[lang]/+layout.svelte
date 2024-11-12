@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { GlobalModal } from '$shared/modal'
 	import { page } from '$app/stores'
 	import { Footer, NoticeBar } from '$shared/layout'
 	import { cn } from '$shared/lib'
+	import { GlobalModal } from '$shared/modal'
+	import { lang } from '$shared/model'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
 	import { AdLayout } from '$widgets/adsense'
@@ -32,7 +33,7 @@
 		)}
 	>
 		<Header />
-		{#if $page.data.lang === 'kr'}
+		{#if $lang === 'kr'}
 			<Inner class="w-full">
 				<RaidBar />
 			</Inner>

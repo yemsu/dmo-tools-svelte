@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import {
 		currentCharacterId,
 		currentCharacters,
@@ -9,15 +8,14 @@
 	import { Button } from '$shared/button'
 	import { CONFIRM, TOAST } from '$shared/config'
 	import Icon from '$shared/icon/Icon.svelte'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
-	import type { LangType } from '$shared/types'
 	import { _ } from 'svelte-i18n'
 
 	export let character: CharacterData
-	$: lang = $page.data.lang as LangType
 
 	$: clickDelete = async () => {
-		const isConfirmed = confirm(CONFIRM.DELETE_CHARACTER[lang])
+		const isConfirmed = confirm(CONFIRM.DELETE_CHARACTER[$lang])
 		if (!isConfirmed) return
 		if (!$currentCharacters) {
 			alert('no current Characters')
@@ -31,7 +29,7 @@
 			$currentCharacterId = $currentCharacters[0].id
 		}
 
-		toast.on(TOAST.CHARACTER_DELETED[lang])
+		toast.on(TOAST.CHARACTER_DELETED[$lang])
 	}
 </script>
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { currentCharacters } from '$entities/characters'
 	import {
 		EditCharacterButton,
@@ -7,12 +6,13 @@
 	} from '$features/update-character'
 	import DeleteCharacterButton from '$features/update-character/ui/DeleteCharacterButton.svelte'
 	import { checkMember } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { ListTable } from '$shared/table'
 	import Title from '$shared/text/ui/Title.svelte'
 	import { beforeUpdate } from 'svelte'
 
 	beforeUpdate(() => {
-		checkMember($page.data.lang)
+		checkMember($lang)
 	})
 </script>
 

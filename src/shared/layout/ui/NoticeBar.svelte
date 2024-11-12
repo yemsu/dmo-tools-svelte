@@ -1,15 +1,13 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { PATH } from '$shared/config'
 	import { Icon } from '$shared/icon'
+	import { lang } from '$shared/model'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import type { LangType } from '$shared/types'
 	import { onMount } from 'svelte'
 	import { _ } from 'svelte-i18n'
 
 	const STORAGE_NAME = 'DMO_NCC'
 	let showNotice = false
-	$: lang = $page.data.lang as LangType
 
 	onMount(() => {
 		const savedData = localStorage.getItem(STORAGE_NAME)
@@ -32,7 +30,7 @@
 				/>
 				<br class="md:hidden" />
 				<a
-					href="/{lang}{PATH.CHARACTERS}"
+					href="/{$lang}{PATH.CHARACTERS}"
 					class="ml-2 inline-flex items-center rounded-full bg-primary-10 p-1 px-3 text-xs font-medium text-white md:p-2"
 				>
 					<TextByLang

@@ -1,16 +1,14 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
-	import { page } from '$app/stores'
 	import { currentCharacterId, currentCharacters } from '$entities/characters'
 	import { PATH, TOAST } from '$shared/config'
 	import { Dropdown } from '$shared/dropdown'
 	import { Icon } from '$shared/icon'
+	import { lang } from '$shared/model'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { toast } from '$shared/toast'
 	import { _ } from 'svelte-i18n'
 
-	$: lang = $page.data.lang as LangType
 	$: currentCharacter = $currentCharacters?.find(
 		({ id }) => id === $currentCharacterId
 	)
@@ -34,7 +32,7 @@
 						isActive={character.name === currentCharacter?.name}
 						on:click={() => {
 							currentCharacterId.set(character.id)
-							toast.on(TOAST.CHARACTER_CHANGED[lang])
+							toast.on(TOAST.CHARACTER_CHANGED[$lang])
 							closeDropdown()
 						}}
 					>
@@ -44,7 +42,7 @@
 			</Tabs>
 		{/if}
 		<a
-			href="/{$page.data.lang}{PATH.CHARACTERS}"
+			href="/{$lang}{PATH.CHARACTERS}"
 			class="flex items-center justify-end gap-0.5 border-t border-gray-600 p-1 text-xs leading-none"
 			title="{$_('character')} {$_('setting')}"
 		>

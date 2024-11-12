@@ -1,25 +1,27 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
 	import { getSealPrice, type SealData } from '$entities/seals'
 	import { _objKeys, cn, timeElapsedString } from '$shared/lib'
+	import { lang } from '$shared/model'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { Tooltip } from '$shared/tooltip'
+	import { statColorStyles } from '$widgets/my-seals'
 	import {
 		getMySealStat,
 		SEAL_COUNT_STEPS_BY_MASTER,
 		SEAL_EXCEPTION_PERCENT
 	} from '$widgets/seal-calculator'
 	import type { SealEfficiency } from '$widgets/seal-calculator/types'
-	import { statColorStyles } from '$widgets/my-seals'
+	import { _ } from 'svelte-i18n'
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+
 	export let seal: SealData
 	export let myStep: SealEfficiency['myStep'] = undefined
 	export let isCountEditable: boolean = true
 	export let isPriceEditable: boolean = true
+
 	let sealPrices = $page.data.sealPrices
-	$: lang = $page.data.lang
 	$: sealPrice = getSealPrice(sealPrices, seal.id)
 	$: timeElapsed =
 		sealPrice && sealPrices.length > 0
@@ -42,7 +44,7 @@
 			engName: 'Price Updated',
 			value:
 				timeElapsed &&
-				`${timeElapsed.value || ''} ${$_(timeElapsed.timeUnit)}${lang === 'en' && timeElapsed.value && timeElapsed.value > 1 ? 's' : ''} ${$_('ago')}`
+				`${timeElapsed.value || ''} ${$_(timeElapsed.timeUnit)}${$lang === 'en' && timeElapsed.value && timeElapsed.value > 1 ? 's' : ''} ${$_('ago')}`
 		}
 	]
 </script>
@@ -65,7 +67,7 @@
 				seal.statType
 			]} flex items-start font-semibold leading-4"
 		>
-			{$page.data.lang === 'kr' ? seal.name : seal.engName}
+			{$lang === 'kr' ? seal.name : seal.engName}
 		</h2>
 		<p class="absolute left-[3px] top-0 text-xs4 text-gray-600 md:text-xs3">
 			#{seal.id}

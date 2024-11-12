@@ -1,21 +1,20 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
-	import { user } from '$entities/user'
+	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import { mySealPrices } from '$entities/seals'
+	import { user } from '$entities/user'
+	import { ALERT, CONFIRM, PATH, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
-	import { toast } from '$shared/toast'
-	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
-	import { getMyAndFinalPrice } from '$widgets/my-seals'
-	import { goto } from '$app/navigation'
-	import { ALERT, CONFIRM, PATH, TOAST } from '$shared/config'
+	import { lang } from '$shared/model'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { toast } from '$shared/toast'
+	import { getMyAndFinalPrice } from '$widgets/my-seals'
+	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 
 	export let sealId: number
 	export let isEditable: boolean = true
-	$: lang = $page.data.lang as LangType
-	$: isKr = lang === 'kr'
+	$: isKr = $lang === 'kr'
 	$: prices = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -23,8 +22,8 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto(`/${$page.data.lang}${PATH.LOGIN}`)
-			toast.on(TOAST.NEED_LOGIN[lang])
+			goto(`/${$lang}${PATH.LOGIN}`)
+			toast.on(TOAST.NEED_LOGIN[$lang])
 			return
 		}
 		isOnInput = true
@@ -44,14 +43,14 @@
 
 	const onSubmit = () => {
 		if (inputValue === null) {
-			alert(ALERT.INPUT_CHANGE_PRICE[lang])
+			alert(ALERT.INPUT_CHANGE_PRICE[$lang])
 			setTimeout(() => {
 				onClickInputOn()
 			}, 100)
 		} else {
-			mySealPrices.updatePrice({ id: sealId, price: inputValue }, lang)
+			mySealPrices.updatePrice({ id: sealId, price: inputValue }, $lang)
 			isOnInput = false
-			toast.on(TOAST.SEAL_PRICE_UPDATED[lang])
+			toast.on(TOAST.SEAL_PRICE_UPDATED[$lang])
 		}
 	}
 
@@ -63,10 +62,10 @@
 	}
 
 	const removeSavedPrice = () => {
-		const isConfirmed = confirm(CONFIRM.REMOVE_SEAL_PRICE[lang])
+		const isConfirmed = confirm(CONFIRM.REMOVE_SEAL_PRICE[$lang])
 		if (!isConfirmed) return
 		mySealPrices.remove(sealId)
-		toast.on(TOAST.REMOVED_SEAL_PRICE[lang])
+		toast.on(TOAST.REMOVED_SEAL_PRICE[$lang])
 	}
 
 	const priceStyle = 'flex-center min-w-[60%] gap-1 px-1'

@@ -1,16 +1,14 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { type MenuData } from '$entities/menus'
 	import { EXTERNAL_LINK } from '$shared/config'
 	import { cn } from '$shared/lib'
 	import { Modal } from '$shared/modal'
+	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
-	import type { LangType } from '$shared/types'
 	import ReportGuideModalContent from '$widgets/report-guide-modal/ui/ReportGuideModalContent.svelte'
-	import GnbMenu from './GnbMenu.svelte'
 	import { _ } from 'svelte-i18n'
+	import GnbMenu from './GnbMenu.svelte'
 
-	$: lang = $page.data.lang as LangType
 	const menuDataList: MenuData[] = [
 		{
 			type: 'calc',
@@ -54,14 +52,14 @@
 				)}
 			>
 				{#each menuDataList as menuData (menuData.type)}
-					{#if !(lang === 'en' && menuData.type === 'raid')}
+					{#if !($lang === 'en' && menuData.type === 'raid')}
 						<GnbMenu {menuData} />
 					{/if}
 				{/each}
 			</ul>
 		</nav>
 		<div class="flex-center h-full">
-			{#if lang === 'kr'}
+			{#if $lang === 'kr'}
 				<a
 					href={EXTERNAL_LINK.SUPPORT}
 					target="_blank"

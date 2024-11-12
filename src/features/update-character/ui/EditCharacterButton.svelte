@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import {
 		currentCharacterId,
 		currentCharacters,
@@ -10,14 +9,13 @@
 	import { CHARACTER_SCHEMA, ValidationText } from '$shared/form'
 	import ToggleFormWrap from '$shared/form/ui/ToggleFormWrap.svelte'
 	import Icon from '$shared/icon/Icon.svelte'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
-	import type { LangType } from '$shared/types'
 	import { _ } from 'svelte-i18n'
 
 	export let character: CharacterData
 	let value = character.name
 	let isValid: boolean
-	$: lang = $page.data.lang as LangType
 
 	const setIsValid = (_isValue: boolean) => {
 		isValid = _isValue
@@ -29,7 +27,7 @@
 
 	const changeTo = (characterId: number) => {
 		currentCharacterId.set(characterId)
-		toast.on(TOAST.CHARACTER_CHANGED[lang])
+		toast.on(TOAST.CHARACTER_CHANGED[$lang])
 	}
 
 	$: onsubmit = async () => {
@@ -44,7 +42,7 @@
 			}
 			return result
 		})
-		toast.on(TOAST.CHARACTER_NAME_CHANGED[lang])
+		toast.on(TOAST.CHARACTER_NAME_CHANGED[$lang])
 	}
 </script>
 

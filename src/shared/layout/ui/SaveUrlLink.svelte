@@ -1,16 +1,14 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
 	import { goto } from '$app/navigation'
 	import { user } from '$entities/user'
 	import { PATH, TOAST } from '$shared/config'
-	import { page } from '$app/stores'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 
-	$: lang = $page.data.lang as LangType
 	$: onClickSaveData = () => {
-		goto(`/${lang}${PATH.SAVE_URL}`)
+		goto(`/${$lang}${PATH.SAVE_URL}`)
 		if (!$user) {
-			toast.on(TOAST.NEED_LOGIN[lang])
+			toast.on(TOAST.NEED_LOGIN[$lang])
 		}
 	}
 </script>

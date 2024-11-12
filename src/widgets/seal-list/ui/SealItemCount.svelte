@@ -1,21 +1,20 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
-	import type { LangType } from '$shared/types'
+	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-	import { user } from '$entities/user'
+	import { currentCharacterId } from '$entities/characters'
 	import { mySealCounts } from '$entities/seals'
+	import { user } from '$entities/user'
+	import { ALERT, PATH, TOAST } from '$shared/config'
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
-	import { toast } from '$shared/toast'
-	import { goto } from '$app/navigation'
-	import { ALERT, PATH, TOAST } from '$shared/config'
+	import { lang } from '$shared/model'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import { currentCharacterId } from '$entities/characters'
+	import { toast } from '$shared/toast'
+	import { _ } from 'svelte-i18n'
 
 	export let sealId: number
 	export let isEditable: boolean = true
-	$: lang = $page.data.lang as LangType
-	$: isKr = lang === 'kr'
+	$: isKr = $lang === 'kr'
 	$: count = $mySealCounts.find((mySeal) => mySeal.id === sealId)?.count ?? 0
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
@@ -23,8 +22,8 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto(`/${$page.data.lang}${PATH.LOGIN}`)
-			toast.on(TOAST.NEED_LOGIN[lang])
+			goto(`/${$page.data.$lang}${PATH.LOGIN}`)
+			toast.on(TOAST.NEED_LOGIN[$lang])
 			return
 		}
 		isOnInput = true
@@ -44,13 +43,13 @@
 
 	$: onSubmit = () => {
 		if (inputValue === null) {
-			alert(ALERT.INPUT_CHANGE_NUMBER[lang])
+			alert(ALERT.INPUT_CHANGE_NUMBER[$lang])
 			setTimeout(() => {
 				onClickInputOn()
 			}, 100)
 		} else {
 			if (!$currentCharacterId) {
-				alert(ALERT.NO_CURRENT_CHARACTER[lang])
+				alert(ALERT.NO_CURRENT_CHARACTER[$lang])
 				return
 			}
 			if (inputValue === 0) {
@@ -59,11 +58,11 @@
 				mySealCounts.updateCount(
 					$currentCharacterId,
 					{ id: sealId, count: inputValue },
-					lang
+					$lang
 				)
 			}
 			isOnInput = false
-			toast.on(TOAST.SEAL_COUNT_CHANGED[lang])
+			toast.on(TOAST.SEAL_COUNT_CHANGED[$lang])
 		}
 	}
 

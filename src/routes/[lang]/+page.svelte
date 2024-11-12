@@ -1,20 +1,18 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { MENUS } from '$entities/menus'
 	import { META, PATH } from '$shared/config'
 	import { cn, contentUrl } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { TextByLang } from '$shared/text'
-	import type { LangType } from '$shared/types'
 	import { MainBanner } from '$widgets/banner'
 	import { Notice } from '$widgets/notice'
-	$: lang = $page.data.lang as LangType
-	$: isKr = lang === 'kr'
+	$: isKr = $lang === 'kr'
 </script>
 
 <svelte:head>
 	<title>{META.COMMON.TITLE[lang]}</title>
-	<meta name="description" content={META.COMMON.DESC[lang]} />
+	<meta name="description" content={META.COMMON.DESC[$lang]} />
 </svelte:head>
 
 <Section>

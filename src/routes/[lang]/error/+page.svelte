@@ -6,21 +6,20 @@
 	import { Icon } from '$shared/icon'
 	import { globalModalText } from '$shared/modal'
 	import Modal from '$shared/modal/ui/Modal.svelte'
+	import { lang } from '$shared/model'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
-	import type { LangType } from '$shared/types'
 	import ReportGuideModalContent from '$widgets/report-guide-modal/ui/ReportGuideModalContent.svelte'
 	import { _ } from 'svelte-i18n'
 
-	$: lang = $page.data.lang as LangType
 	$: message = ($page.state as any).message
 
 	$: copyToClipboard = () => {
 		navigator.clipboard
 			.writeText(message)
 			.then(() => {
-				toast.on(TOAST.ERROR_MASSAGE_COPIED[lang])
+				toast.on(TOAST.ERROR_MASSAGE_COPIED[$lang])
 			})
 			.catch((err) => {
 				globalModalText.set({
@@ -35,15 +34,15 @@
 
 	const goToMain = () => {
 		if (import.meta.env.SSR) return
-		goto(`/${lang}`)
+		goto(`/${$lang}`)
 	}
 
 	$: !message && goToMain()
 </script>
 
 <svelte:head>
-	<title>{META.ERROR.TITLE[lang]} {message}</title>
-	<meta name="description" content={META.ERROR.DESC[lang]} />
+	<title>{META.ERROR.TITLE[$lang]} {message}</title>
+	<meta name="description" content={META.ERROR.DESC[$lang]} />
 </svelte:head>
 
 <!-- <div class="flex-center mx-auto h-full w-content-w">
@@ -103,7 +102,7 @@
 					/>
 				</p>
 				<div class="grid-cols-max grid grid-cols-2 gap-2">
-					{#if lang === 'kr'}
+					{#if $lang === 'kr'}
 						<Button
 							href={EXTERNAL_LINK.SUPPORT}
 							variant="submit-secondary"

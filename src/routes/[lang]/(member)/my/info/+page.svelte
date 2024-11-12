@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { alarmMinute, crrServerType, GAME_SERVERS } from '$entities/raid'
 	import { user } from '$entities/user'
 	import { checkMember } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { LeftTitleTable } from '$shared/table'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
@@ -11,7 +11,7 @@
 	import { beforeUpdate } from 'svelte'
 
 	beforeUpdate(() => {
-		checkMember($page.data.lang)
+		checkMember($lang)
 	})
 
 	$: baseInfoMap = [

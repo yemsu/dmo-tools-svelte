@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { currentCharacterId } from '$entities/characters'
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
+	import { currentCharacterId } from '$entities/characters'
 	import {
 		alarmMinute,
 		crrServerType,
@@ -23,15 +22,13 @@
 	import { Button } from '$shared/button'
 	import { META, PATH } from '$shared/config'
 	import { checkMember } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { onMount } from 'svelte'
-	import type { LangType } from '$shared/types'
-
 	let textareaElement: HTMLTextAreaElement
 	let userUrl: string | null = null
-	$: lang = $page.data.lang as LangType
 
 	type ParamsData = {
 		seals: MySealCount[] | null
@@ -137,25 +134,23 @@
 		if (!isConfirmed) return
 		await uploadData(paramsData)
 		toast.on('데이터 저장이 완료되었습니다.')
-		goto(`/${$page.data.lang}${PATH.MY_SEALS}`)
+		goto(`/${$lang}${PATH.MY_SEALS}`)
 	}
 
 	onMount(() => {
-		const isMember = checkMember($page.data.lang)
+		const isMember = checkMember($lang)
 		if (!isMember) return
 		setTimeout(() => {
 			textareaElement.focus()
 		}, 60)
 	})
 
-	$: !$user &&
-		!import.meta.env.SSR &&
-		goto(`/${$page.data.lang}${PATH.RAID_TIMER}`)
+	$: !$user && !import.meta.env.SSR && goto(`/${$lang}${PATH.RAID_TIMER}`)
 </script>
 
 <svelte:head>
-	<title>{META.SAVE_URL.TITLE[lang]}</title>
-	<meta name="description" content={META.SAVE_URL.DESC[lang]} />
+	<title>{META.SAVE_URL.TITLE[$lang]}</title>
+	<meta name="description" content={META.SAVE_URL.DESC[$lang]} />
 </svelte:head>
 
 <Section size="sm" class="gap-10">

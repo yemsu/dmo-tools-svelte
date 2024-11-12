@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
-	import type { LangType } from '$shared/types'
-	import { page } from '$app/stores'
 	import {
 		gachaStore,
 		type GachaData,
@@ -10,14 +7,15 @@
 	} from '$entities/gacha'
 	import { ALERT } from '$shared/config'
 	import { GachaButton } from '$shared/gacha'
+	import { lang } from '$shared/model'
 	import { error } from '@sveltejs/kit'
 	import { createEventDispatcher } from 'svelte'
+	import { _ } from 'svelte-i18n'
 
 	export let currentGachaType: GachaDataType
 	export let activeGacha: GachaData
 	export let count: 1 | 10 | 11
 	export let isRetry: boolean = false
-	$: lang = $page.data.lang as LangType
 
 	const PROBABILITY_MIN = 0.01
 	const SETUP_ITEM_LENGTH = 100 / PROBABILITY_MIN
@@ -56,7 +54,7 @@
 		gachaItemIdList = []
 		const resultItemIdList: number[] = []
 		if (!activeGacha.gachaItems) {
-			alert(ALERT.NO_SELECTED_GACHA[lang])
+			alert(ALERT.NO_SELECTED_GACHA[$lang])
 			return
 		}
 

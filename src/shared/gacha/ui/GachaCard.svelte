@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { type GachaData } from '$entities/gacha'
 	import { cn, contentUrl } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { createEventDispatcher } from 'svelte'
 
@@ -33,7 +33,7 @@
 	>
 		<button
 			class="w-full"
-			title={$page.data.lang === 'kr' ? '데이터 소환하기' : 'Summon Data'}
+			title={$lang === 'kr' ? '데이터 소환하기' : 'Summon Data'}
 			on:click={() => selectGacha(gachaData)}
 		>
 			<h2

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { currentCharacters, postCharacter } from '$entities/characters'
 	import { Button } from '$shared/button'
 	import { CONFIRM, TOAST } from '$shared/config'
@@ -8,22 +7,21 @@
 	import ValidationText from '$shared/form/ui/ValidationText.svelte'
 	import { Icon } from '$shared/icon'
 	import { cn } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
-	import type { LangType } from '$shared/types'
 	import { _ } from 'svelte-i18n'
 
 	let value = ''
 	let isValid = false
 	let isFormVisible = false
-	$: lang = $page.data.lang as LangType
 
 	$: onsubmit = async () => {
-		const isConfirmed = confirm(CONFIRM.ADD_CHARACTER(value)[lang])
+		const isConfirmed = confirm(CONFIRM.ADD_CHARACTER(value)[$lang])
 		if (!isConfirmed) return
 		const newCharacterData = await postCharacter(value)
 		currentCharacters.update((prev) => [...(prev || []), newCharacterData])
 
-		toast.on(TOAST.CHARACTER_ADDED[lang])
+		toast.on(TOAST.CHARACTER_ADDED[$lang])
 	}
 
 	const setIsValid = (_isValid: boolean) => {

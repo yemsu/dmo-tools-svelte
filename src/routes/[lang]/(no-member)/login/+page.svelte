@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { user } from '$entities/user'
 	import { GoogleLoginButton } from '$shared/layout'
 	import { checkNoMember } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import Section from '$shared/section/ui/Section.svelte'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import Title from '$shared/text/ui/Title.svelte'
@@ -11,7 +11,7 @@
 	$: $user && history.back()
 
 	onMount(() => {
-		checkNoMember($page.data.lang)
+		checkNoMember($lang)
 	})
 </script>
 

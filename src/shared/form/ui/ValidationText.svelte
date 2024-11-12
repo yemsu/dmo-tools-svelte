@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { type FormSchema } from '$shared/form'
 	import { _objKeys } from '$shared/lib'
-	import type { LangType } from '$shared/types'
+	import { lang } from '$shared/model'
 	import { _ } from 'svelte-i18n'
 
 	export let value: string
@@ -11,7 +10,6 @@
 	let isOnInputTimer: NodeJS.Timeout | null
 	let inValidTypes: string[] | undefined = undefined
 	let prevValue = value
-	$: lang = $page.data.lang as LangType
 
 	const getInvalidTypes = async (
 		validation: Record<string, FormSchema>,
@@ -59,7 +57,7 @@
 		{:else}
 			{#each inValidTypes as inValidType (inValidType)}
 				<p class="text-xs text-warning">
-					{schema[inValidType][lang]}
+					{schema[inValidType][$lang]}
 				</p>
 			{/each}
 		{/if}

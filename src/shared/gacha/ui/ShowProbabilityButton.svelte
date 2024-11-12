@@ -1,12 +1,12 @@
 <script lang="ts">
-	import { page } from '$app/stores'
+	import { lang } from '$shared/model'
 	import { contentUrl } from '$shared/lib'
 </script>
 
 <button
 	class="group ml-auto"
 	on:click
-	title={$page.data.lang === 'kr' ? '보상 자세히 보기' : 'Check Reward Items'}
+	title={$lang === 'kr' ? '보상 자세히 보기' : 'Check Reward Items'}
 >
 	<img
 		src={contentUrl('/gacha/view-items-hover.jpg')}

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
-	import { page } from '$app/stores'
 	import {
 		gachaStore,
 		type GachaData,
@@ -10,20 +8,20 @@
 	import { CONFIRM, TOAST } from '$shared/config'
 	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
 	import { cn } from '$shared/lib'
+	import { lang } from '$shared/model'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { toast } from '$shared/toast'
 	import { createEventDispatcher } from 'svelte'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
 	export let currentGachaType: GachaDataType
 	export let gachaList: GachaData[]
-	$: lang = $page.data.lang as LangType
 	const dispatch = createEventDispatcher()
 
 	const cleanInventory = () => {
-		const isConfirm = confirm(CONFIRM.CLEAR_GACHA_RESULT[lang])
+		const isConfirm = confirm(CONFIRM.CLEAR_GACHA_RESULT[$lang])
 		if (!isConfirm) return
 		gachaStore.cleanInventory(currentGachaType)
-		toast.on(TOAST.GACHA.CLEAN_INVENTORY[lang])
+		toast.on(TOAST.GACHA.CLEAN_INVENTORY[$lang])
 	}
 	$: inventorySlots = new Array(99)
 		.fill(null)
@@ -70,12 +68,12 @@
 						$gachaStore.myPlayCounts[currentGachaType][gacha.id] || 0}
 					{@const playCountDivider =
 						currentGachaType === 'DATA_SUMMON' ? 1 : 11}
-					{@const playCountUnit = unitTexts[currentGachaType][lang]}
+					{@const playCountUnit = unitTexts[currentGachaType][$lang]}
 					<div
 						class="flex-center gap-1 rounded-full bg-black/30 px-[0.8em] pb-[0.35em] pt-[0.5em] leading-none"
 					>
 						<dt class="text-gray-400">
-							{(gacha[lang === 'kr' ? 'name' : 'engName'] || '').replace(
+							{(gacha[$lang === 'kr' ? 'name' : 'engName'] || '').replace(
 								' 디지털 드로우',
 								''
 							)}
@@ -92,7 +90,7 @@
 		<button
 			type="button"
 			class="ml-auto rounded-sm bg-primary-40/20 p-1 pb-0.5 leading-none"
-			title={lang === 'kr' ? '가방 비우기' : 'Clear Inventory'}
+			title={$lang === 'kr' ? '가방 비우기' : 'Clear Inventory'}
 			on:click={cleanInventory}
 		>
 			<iconify-icon icon="ph:trash" width={14} height={14} />

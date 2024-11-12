@@ -9,14 +9,13 @@
 	import { META } from '$shared/config'
 	import { GachaBg } from '$shared/gacha'
 	import { _objKeys, cn } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { GachaTypeTabContent } from '$widgets/gacha'
 	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
 	import './gacha.css'
-	import type { LangType } from '$shared/types'
 
 	let currentGachaType = _objKeys(GACHA_TYPES)[0]
-	$: lang = $page.data.lang as LangType
 
 	$: gachaTabContents = {
 		DATA_SUMMON: {
@@ -37,8 +36,8 @@
 </script>
 
 <svelte:head>
-	<title>{META.GACHA_SIMULATOR.TITLE[lang]}</title>
-	<meta name="description" content={META.GACHA_SIMULATOR.DESC[lang]} />
+	<title>{META.GACHA_SIMULATOR.TITLE[$lang]}</title>
+	<meta name="description" content={META.GACHA_SIMULATOR.DESC[$lang]} />
 </svelte:head>
 
 <section

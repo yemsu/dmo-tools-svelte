@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
+	import { currentCharacterId } from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
 		mySealCounts,
@@ -16,7 +16,9 @@
 	import { ALERT, CONFIRM, META, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { toast } from '$shared/toast'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import {
@@ -33,8 +35,7 @@
 		StatBarTotalPrice,
 		StatBarWrap
 	} from '$widgets/stat-bar'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import { currentCharacterId } from '$entities/characters'
+
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
 	let effDataListSorted: SealEfficiency[] = []
@@ -47,8 +48,7 @@
 	$: resultUnit = isPercentType ? '%' : ''
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
-	$: lang = $page.data.lang as LangType
-	$: isKr = lang === 'kr'
+	$: isKr = $lang === 'kr'
 	const getMySealCount = (mySeal: MySealCount[], sealId: number) =>
 		mySeal.find(({ id }) => id === sealId)?.count || 0
 
@@ -99,11 +99,11 @@
 
 	$: onSubmit = () => {
 		if (goalStat === '') {
-			alert(ALERT.INPUT_TARGET_VALUE[lang])
+			alert(ALERT.INPUT_TARGET_VALUE[$lang])
 			return
 		}
 		if (goalStat <= $myStats[statTypeSelected]) {
-			alert(ALERT.WRONG_TARGET_VALUE[lang])
+			alert(ALERT.WRONG_TARGET_VALUE[$lang])
 			return
 		}
 		resetPrevResult()
@@ -160,7 +160,7 @@
 	const addToMySeal = (effData: SealEfficiency, seal: SealData) => {
 		const mySealCount = getMySealCount($mySealCounts, seal.id)
 		const isConfirmed = confirm(
-			CONFIRM.ADD_MY_SEAL(seal, effData.needCount)[lang]
+			CONFIRM.ADD_MY_SEAL(seal, effData.needCount)[$lang]
 		)
 		if (!isConfirmed) return
 		if (!$currentCharacterId) {
@@ -173,14 +173,14 @@
 				id: effData.id,
 				count: +mySealCount + effData.needCount
 			},
-			lang
+			$lang
 		)
 		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
 		effDataListSorted = updateEffDataListSorted
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 		toast.on(
-			TOAST.SEAL_COUNT_UPDATE(seal, mySealCount + effData.needCount)[lang]
+			TOAST.SEAL_COUNT_UPDATE(seal, mySealCount + effData.needCount)[$lang]
 		)
 	}
 
@@ -229,8 +229,8 @@
 </script>
 
 <svelte:head>
-	<title>{META.CALCULATOR.TITLE[lang]}</title>
-	<meta name="description" content={META.CALCULATOR.DESC[lang]} />
+	<title>{META.CALCULATOR.TITLE[$lang]}</title>
+	<meta name="description" content={META.CALCULATOR.DESC[$lang]} />
 </svelte:head>
 
 <h2 class="ir">{MENUS.calc.name}</h2>
@@ -262,27 +262,27 @@
 			bind:inputElement={goalStatInput}
 			type="number"
 			class="flex-1"
-			placeholder={TEXTS.TARGET_VALUES[lang] +
+			placeholder={TEXTS.TARGET_VALUES[$lang] +
 				(STATS_PERCENT_TYPE.includes(statTypeSelected)
-					? ` (${TEXTS.PERCENT_VALUE[lang]})`
+					? ` (${TEXTS.PERCENT_VALUE[$lang]})`
 					: '')}
 			bind:value={goalStat}
 		/>
 		<Button rounded="md" size="lg" class="point-neon h-input-h font-semibold">
-			{TEXTS.VIEW_RESULT[lang]}
+			{TEXTS.VIEW_RESULT[$lang]}
 		</Button>
 	</form>
 </div>
 <section class="relative flex flex-1 flex-col overflow-hidden">
 	<h2 class="ir">
-		{TEXTS.SELECTED_STAT[lang]}: {statTypeSelected}
-		&gt; {TEXTS.TARGET_STAT[lang]}: {goalStat || 0}
-		&gt; {TEXTS.RESULT_COUNT[lang]}: {effDataListSorted.length}
+		{TEXTS.SELECTED_STAT[$lang]}: {statTypeSelected}
+		&gt; {TEXTS.TARGET_STAT[$lang]}: {goalStat || 0}
+		&gt; {TEXTS.RESULT_COUNT[$lang]}: {effDataListSorted.length}
 	</h2>
 	<SealList
 		seals={effDataListSorted}
 		let:seal={effData}
-		noDataText={TEXTS.NO_DATA_TEXT[lang]}
+		noDataText={TEXTS.NO_DATA_TEXT[$lang]}
 	>
 		{@const seal = $page.data.seals.find(({ id }) => id === effData.id)}
 		{#if seal}
@@ -295,7 +295,7 @@
 					on:click={() => addToMySeal(effData, seal)}
 				>
 					<iconify-icon icon="mdi:check" width={15} height={15} />
-					{TEXTS.SEAL_REGISTERED[lang]}
+					{TEXTS.SEAL_REGISTERED[$lang]}
 				</Button>
 			</SealItem>
 		{/if}

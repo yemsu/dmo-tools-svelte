@@ -1,6 +1,4 @@
 <script lang="ts">
-	import type { LangType } from '$shared/types'
-	import { page } from '$app/stores'
 	import { goto } from '$app/navigation'
 	import {
 		G_TOKEN_NAME,
@@ -16,13 +14,13 @@
 		onGoogleScriptLoad
 	} from '$shared/layout/lib/login'
 	import { delay } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import { onMount } from 'svelte'
 
 	export let id: string = 'googleLogin'
 	export let size: 'small' | 'large' = 'small'
 	export let text: 'signin' | 'signin_with' = 'signin'
-	$: lang = $page.data.lang as LangType
 
 	let isLoginButtonRendered = false
 
@@ -30,12 +28,12 @@
 		const res = await postLogin(token)
 		if (res === null) {
 			setTokenCookie(token, G_TOKEN_NAME)
-			goto(`/${$page.data.lang}${PATH.JOIN}`)
+			goto(`/${$lang}${PATH.JOIN}`)
 		} else {
 			const { token, ...userData } = res
 			setTokenCookie(res.token)
 			user.set(userData)
-			toast.on(TOAST.WELCOME(res.nickname)[lang])
+			toast.on(TOAST.WELCOME(res.nickname)[$lang])
 		}
 	}
 

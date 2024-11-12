@@ -18,16 +18,14 @@
 	import { user } from '$entities/user'
 	import { PATH } from '$shared/config'
 	import { cn, objectBy } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { Section } from '$shared/section'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
-	import type { LangType } from '$shared/types'
 	import CharacterDropdown from '$widgets/character-dropdown/CharacterDropdown.svelte'
 	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
-	import { onMount } from 'svelte'
 
-	$: lang = $page.data.lang as LangType
 	$: statCalc = (statType: StatType) => {
 		if ($mySealCounts.length === 0) return
 		const mySealsByStatType = objectBy(
@@ -136,7 +134,7 @@
 					href="/{lang}{subMenu.path}"
 					isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
 				>
-					{subMenu.menuName[lang]}
+					{subMenu.menuName[$lang]}
 				</Tab>
 			{/each}
 		</Tabs>

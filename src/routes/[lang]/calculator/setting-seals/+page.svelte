@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
 	import {
 		type SealData,
@@ -11,20 +10,21 @@
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
+	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
+	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { Tooltip } from '$shared/tooltip'
+	import type { LangType } from '$shared/types'
 	import { statTypeOptionStyles } from '$widgets/my-seals'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
-	import type { LangType } from '$shared/types'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { _ } from 'svelte-i18n'
 
 	let statTypeSelected: StatTypeOption = STAT_TYPE_OPTIONS[0]
 	let searchText = ''
 	let seals = $page.data.seals
 	$: searchResults = seals
-	$: lang = $page.data.lang as LangType
-	$: isKr = lang === 'kr'
+	$: isKr = $lang === 'kr'
 	const updateSearchResult = (_searchText: string, _lang: LangType) => {
 		const filterStatTypeSelected =
 			statTypeSelected === 'ALL'
@@ -57,18 +57,18 @@
 
 	$: onSearchInput = (e: CustomEvent) => {
 		const _searchText = e.detail.target.value
-		updateSearchResult(_searchText, lang)
+		updateSearchResult(_searchText, $lang)
 	}
 
 	$: onClickStatType = (statTypeOption: StatTypeOption) => {
 		statTypeSelected = statTypeOption
-		updateSearchResult(searchText, lang)
+		updateSearchResult(searchText, $lang)
 	}
 </script>
 
 <svelte:head>
-	<title>{META.SETTING.TITLE[lang]}</title>
-	<meta name="description" content={META.SETTING.DESC[lang]} />
+	<title>{META.SETTING.TITLE[$lang]}</title>
+	<meta name="description" content={META.SETTING.DESC[$lang]} />
 </svelte:head>
 
 <div
