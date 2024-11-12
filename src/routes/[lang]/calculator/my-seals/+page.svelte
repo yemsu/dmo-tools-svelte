@@ -105,14 +105,14 @@
 			<NoData>
 				{#if isKr}
 					보유 씰이 아직 없습니다. <br />
-					<a href="/{lang}{PATH.SETTING_SEALS}" class="font-bold underline">
+					<a href="/{$lang}{PATH.SETTING_SEALS}" class="font-bold underline">
 						씰 설정
 					</a>
 					메뉴에서 보유하고 있는 씰의 개수를 업데이트 해주세요!
 				{:else}
 					There are no seals registered yet. <br /> Please update the number of
 					seals you own in the
-					<a href="/{lang}{PATH.SETTING_SEALS}" class="font-bold underline">
+					<a href="/{$lang}{PATH.SETTING_SEALS}" class="font-bold underline">
 						Setting Seals
 					</a> menu!
 				{/if}
