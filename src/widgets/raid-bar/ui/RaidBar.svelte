@@ -37,8 +37,6 @@
 
 	let eventSource: EventSource | undefined
 	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-	$: isGreuta =
-		typeof window !== 'undefined' && window.location.href.includes('greuta.org')
 
 	$: clearPrevSubscribe = async () => {
 		if (!eventSource || !$subscribeClientId) return
@@ -96,7 +94,6 @@
 		const server = $crrServerType || 'luce'
 		const raidsFetched = await getRaids(server)
 		raids.set(raidsFetched)
-		if (isGreuta) return
 		subscribeSSE(server)
 		setTimeout(() => {
 			if (!isSseConnected)
@@ -229,24 +226,22 @@
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
 		</a>
-		{#if !isGreuta}
-			<div class="flex h-full">
-				{#if !isSseConnected}
-					<button
-						class="flex-center button-hover h-full flex-wrap gap-1 bg-warning px-4"
-						on:click={initRaidSubscribe}
-					>
-						<iconify-icon icon="ooui:network-off" width={14} height={14} />
-						<span>연결 재시도</span>
-					</button>
-				{:else}
-					<NotificationToggleButton />
-					<div class="overflow-hidden rounded-br-md rounded-tr-md">
-						<BeepToggleButton />
-					</div>
-				{/if}
-			</div>
-		{/if}
+		<div class="flex h-full">
+			{#if !isSseConnected}
+				<button
+					class="flex-center button-hover h-full flex-wrap gap-1 bg-warning px-4"
+					on:click={initRaidSubscribe}
+				>
+					<iconify-icon icon="ooui:network-off" width={14} height={14} />
+					<span>연결 재시도</span>
+				</button>
+			{:else}
+				<NotificationToggleButton />
+				<div class="overflow-hidden rounded-br-md rounded-tr-md">
+					<BeepToggleButton />
+				</div>
+			{/if}
+		</div>
 	{:else if isSseSupported === false}
 		<p class="w-full text-center text-gray-300">
 			현재 브라우저에서는 보스 출현 알람 기능이 지원되지 않습니다. <br />다른
