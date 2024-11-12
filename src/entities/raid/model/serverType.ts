@@ -1,6 +1,8 @@
 import { GAME_SERVERS } from '$entities/raid/config'
 import type { ServerType } from '$entities/raid/types'
+import { TOAST } from '$shared/config'
 import { toast } from '$shared/toast'
+import type { LangType } from '$shared/types'
 import { writable } from 'svelte/store'
 
 const NAME = 'DMO_SERVER'
@@ -17,11 +19,11 @@ const createCrrServerType = () => {
 
 			set(savedData)
 		},
-		set: (serverType: ServerType) => {
+		set: (serverType: ServerType, lang: LangType) => {
 			localStorage.setItem(NAME, `${serverType}`)
 			set(serverType)
 			subscribe((value) =>
-				toast.on(`게임 서버가 ${GAME_SERVERS[value]}로 설정되었습니다.`)
+				toast.on(TOAST.CHANGE_RAID_SERVER(GAME_SERVERS[value])[lang])
 			)
 		}
 	}

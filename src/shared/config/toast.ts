@@ -1,3 +1,4 @@
+import type { ServerName } from '$entities/raid'
 import type { SealData } from '$entities/seals'
 
 export const TOAST = {
@@ -33,9 +34,13 @@ export const TOAST = {
 			en: 'All acquired items have been removed.'
 		}
 	},
-	CHANGE_LANG: () => ({
+	CHANGE_LANG: {
 		kr: `사이트 언어가 한국어로 설정되었습니다.`,
 		en: 'The site language has been set to English.'
+	},
+	CHANGE_RAID_SERVER: (serverName: ServerName) => ({
+		kr: `게임 서버가 ${serverName}로 설정되었습니다.`,
+		en: `The game server has been set to ${serverName}`
 	}),
 	// seal
 	SEAL_COUNT_UPDATE: (seal: SealData, sealCount: number) => ({
