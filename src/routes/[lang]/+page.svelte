@@ -51,7 +51,7 @@
 			{#if isKr}
 				<MainBanner
 					src={contentUrl('/main/main-banner-raid.png')}
-					href="/{lang}{PATH.RAID_TIMER}"
+					href="/{$lang}{PATH.RAID_TIMER}"
 					title="레이드 타이머"
 					subTitle="보스 출현 시간을 제보하여 유저들과 공유하고 알림을 받아보세요."
 					xDir="left"
@@ -61,7 +61,7 @@
 			{/if}
 			<MainBanner
 				src={contentUrl('/main/main-banner-gacha.png')}
-				href="/{lang}{PATH.GACHA}"
+				href="/{$lang}{PATH.GACHA}"
 				title={MENUS.gacha[isKr ? 'name' : 'engName']}
 				subTitle={isKr
 					? '뽑기 시뮬레이터로 운을 미리 시험해 보세요.'
