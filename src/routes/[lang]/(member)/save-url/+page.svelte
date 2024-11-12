@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { currentCharacterId } from '$entities/characters'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
 	import {
@@ -39,10 +40,23 @@
 		alarm: string | null
 	}
 
+	$: errorCurrentCharacterId = () => {
+		goto(PATH.ERROR, {
+			state: {
+				message: 'saveSealCountData - No $currentCharacterId'
+			}
+		})
+		throw Error('saveSealCountData - No $currentCharacterId')
+	}
+
 	const saveSealCountData = (mySealCounts: MySealCount[]) => {
+		if (!$currentCharacterId) {
+			errorCurrentCharacterId()
+			return
+		}
 		return new Promise(async (resolve) => {
 			mySealCounts.forEach(async (mySeal, i) => {
-				await putMySealCount(mySeal)
+				await putMySealCount($currentCharacterId, mySeal)
 				if (i === mySealCounts.length - 1) {
 					resolve(true)
 				}
@@ -84,7 +98,11 @@
 		prices && (await saveSealPriceData(prices))
 		server && crrServerType.set(server as ServerType)
 		alarm && alarmMinute.set(+alarm)
-		await mySealCounts.load()
+		if (!$currentCharacterId) {
+			errorCurrentCharacterId()
+			return
+		}
+		await mySealCounts.load($currentCharacterId)
 		await mySealPrices.load()
 	}
 

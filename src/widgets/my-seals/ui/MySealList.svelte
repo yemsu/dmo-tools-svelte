@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { currentCharacterId } from '$entities/characters'
 	import { _ } from 'svelte-i18n'
 	import type { LangType } from '$shared/types'
 	import { page } from '$app/stores'
@@ -14,7 +15,7 @@
 	const onClickMySealDelete = (sealId: number) => {
 		const isConfirmed = confirm(CONFIRM.DELETE_SEAL[lang])
 		if (!isConfirmed) return
-		mySealCounts.remove(sealId)
+		mySealCounts.remove($currentCharacterId, sealId)
 	}
 </script>
 
