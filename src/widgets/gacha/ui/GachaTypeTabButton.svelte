@@ -27,7 +27,7 @@
 	<span class="relative">
 		<TextByLang data={GACHA_TYPES[gachaType]} />
 		{#if gachaType === 'DATA_SUMMON'}
-			<!-- <NewBadge /> -->
+			<NewBadge startDate="Wed Nov 13 2024 17:37:25" />
 		{/if}
 	</span>
 </button>

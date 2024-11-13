@@ -40,7 +40,7 @@
 		<span class="relative">
 			<TextByLang data={MENUS[type]} />
 			{#if type === 'gacha'}
-				<!-- <NewBadge /> -->
+				<NewBadge startDate="Wed Nov 13 2024 17:37:25" />
 			{/if}
 		</span>
 	</a>
