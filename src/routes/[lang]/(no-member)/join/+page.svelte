@@ -49,11 +49,11 @@
 		user.set(userData)
 		removeTokenCookie(G_TOKEN_NAME)
 		toast.on(TOAST.WELCOME(value)[$lang])
-		goto(`/${$page.data.$lang}${PATH.SETTING_SEALS}`)
+		goto(`/${$lang}${PATH.SETTING_SEALS}`)
 	}
 
 	onMount(() => {
-		const $lang = $page.data.$lang
+		const $lang = $lang
 		const isNoMember = checkNoMember($lang)
 		if (!isNoMember) return
 		checkJoinProcess($lang)
