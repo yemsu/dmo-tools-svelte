@@ -13,7 +13,14 @@ export default {
 			adMobile: { max: '1139px' }
 		},
 		extend: {
+			fontWeight: {
+				normal: 'var(--weight-normal)',
+				semibold: 'var(--weight-semibold)',
+				bold: 'var(--weight-bold)'
+			},
 			colors: {
+				background: 'var(--background-color)',
+				white: 'var(--white)',
 				primary: {
 					5: 'hsl(var(--primary-5))',
 					10: 'hsl(var(--primary-10))',
@@ -87,11 +94,13 @@ export default {
 			zIndex: {
 				tooltip: '99',
 				raidBar: '90',
+				floatingMenu: '970',
 				dim: '980',
 				modal: '990',
 				toast: '999'
 			},
 			fontSize: {
+				'body-md': 'var(--body-md)',
 				xs4: '9px',
 				xs3: '10px',
 				xs2: '11px',

@@ -13,7 +13,7 @@
 		| 'outline'
 		| 'link'
 		| undefined = undefined
-	export let size: 'text' | 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
+	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let href: string | undefined = undefined
 
 	// check props
@@ -54,7 +54,7 @@
 	$: dataActive = isActive === undefined ? {} : { 'data-active': isActive }
 	$: commonAttributes = {
 		class: cn(
-			'inline-flex items-center justify-center gap-[0.2em] leading-none',
+			'flex-center gap-[0.2em] leading-none',
 			!$$restProps.disabled && 'button-hover',
 			'text-balance break-keep disabled:text-gray-300 disabled:opacity-70',
 			isActive === true && 'border-2 opacity-100 ',
