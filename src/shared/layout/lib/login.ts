@@ -1,4 +1,5 @@
 import type { UserToken } from '$entities/user'
+import { PUBLIC_GOOGLE_CLIENT_ID } from '$env/static/public'
 
 export const onGoogleScriptLoad = (
 	targetId: string,
@@ -10,7 +11,7 @@ export const onGoogleScriptLoad = (
 			cb(response.credential)
 		}
 		google.accounts.id.initialize({
-			client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+			client_id: PUBLIC_GOOGLE_CLIENT_ID,
 			callback: handleCredentialResponse
 		})
 		google.accounts.id.renderButton(

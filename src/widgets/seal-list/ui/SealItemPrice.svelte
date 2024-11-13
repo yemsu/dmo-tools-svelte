@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
-	import { mySealPrices } from '$entities/seals'
+	import { mySealPrices, type SealPrice } from '$entities/seals'
 	import { user } from '$entities/user'
 	import { ALERT, CONFIRM, PATH, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
@@ -12,10 +11,11 @@
 	import { getMyAndFinalPrice } from '$widgets/my-seals'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 
+	export let sealPrices: SealPrice[]
 	export let sealId: number
 	export let isEditable: boolean = true
 	$: isKr = $lang === 'kr'
-	$: prices = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, sealId)
+	$: prices = getMyAndFinalPrice(sealPrices, $mySealPrices, sealId)
 	let inputValue: number | null = null
 	let inputElement: HTMLInputElement
 	let isOnInput = false

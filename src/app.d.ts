@@ -1,20 +1,24 @@
 // See https://kit.svelte.dev/docs/types#app
-import type { SealData, SealPrice } from '$entities/seals'
+import type { LangType } from '$shared/types'
 
 // for information about these interfaces
 declare global {
 	namespace App {
 		// interface Error {}
-		interface Locals {
-			sealsFetched: string
-			sealPricesFetched: string
-			// 필요한 다른 필드들도 여기에 추가하세요
-		}
 		interface PageData {
-			seals: SealData[]
-			sealPrices: SealPrice[]
+			lang: LangType
+			url: string
 		}
+
 		// interface PageState {}
 		// interface Platform {}
 	}
+}
+
+declare module '$env/static/public' {
+	export const PUBLIC_BASE_URL: string
+	export const PUBLIC_API_BASE_URL: string
+	export const PUBLIC_CONTENT_URL: string
+	export const PUBLIC_ADSENSE_CLIENT: string
+	export const PUBLIC_GOOGLE_CLIENT_ID: string
 }

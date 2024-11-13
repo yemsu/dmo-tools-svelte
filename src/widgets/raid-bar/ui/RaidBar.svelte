@@ -28,6 +28,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
 	import RaidServerDropdown from './RaidServerDropdown.svelte'
+	import { PUBLIC_API_BASE_URL } from '$env/static/public'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
@@ -36,7 +37,6 @@
 	let isSseConnected = false
 
 	let eventSource: EventSource | undefined
-	const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 	$: clearPrevSubscribe = async () => {
 		if (!eventSource || !$subscribeClientId) return
@@ -85,7 +85,7 @@
 		await clearPrevSubscribe()
 		const clientId = await getClientId()
 		eventSource = new EventSource(
-			`${API_BASE_URL}/alarms/subscribe/${serverType}?clientId=${clientId}`
+			`${PUBLIC_API_BASE_URL}/alarms/subscribe/${serverType}?clientId=${clientId}`
 		)
 		handleEventSource(eventSource)
 	}

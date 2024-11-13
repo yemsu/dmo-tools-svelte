@@ -1,9 +1,8 @@
 import { getTokenCookie, TOKEN_NAME } from '$entities/user'
+import { PUBLIC_API_BASE_URL } from '$env/static/public'
 import { BusinessError, RequestError } from '../lib/CustomError'
 import type { CustomErrorResponse, ErrorResponse } from '../types'
 import { goToErrorPage, showErrorToast } from './handleError'
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export const apiFetch = async <ResponseData>(
 	endpoint: string,
@@ -15,7 +14,7 @@ export const apiFetch = async <ResponseData>(
 		Authorization: token ? `Bearer ${token}` : ''
 	}
 	try {
-		const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+		const response = await fetch(`${PUBLIC_API_BASE_URL}${endpoint}`, {
 			...options,
 			headers: { ...options.headers, ...headers }
 		})

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import {
 		GACHA_TYPES,
 		gachaStore,
@@ -13,8 +12,10 @@
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { GachaTypeTabContent } from '$widgets/gacha'
 	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
+	import type { PageData } from './$types'
 	import './gacha.css'
 
+	export let data: PageData
 	let currentGachaType = _objKeys(GACHA_TYPES)[0]
 
 	$: gachaTabContents = {
@@ -23,14 +24,14 @@
 				kr: '소환할 데이터를 선택하세요.',
 				en: 'Select the data to summon.'
 			},
-			gachaList: $page.data.gachaSummons
+			gachaList: data.gachaSummons
 		},
 		DIGITAL_DRAW: {
 			title: {
 				kr: '디지털 드로우를 선택하세요.',
 				en: 'Choose Digital Draw.'
 			},
-			gachaList: $page.data.gachaDraws
+			gachaList: data.gachaDraws
 		}
 	} as GachaTabContents
 </script>

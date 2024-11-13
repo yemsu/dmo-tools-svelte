@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { getSealPrice, type SealData } from '$entities/seals'
+	import { getSealPrice, type SealData, type SealPrice } from '$entities/seals'
 	import { _objKeys, cn, timeElapsedString } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
@@ -16,12 +16,12 @@
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'
 
+	export let sealPrices: SealPrice[]
 	export let seal: SealData
 	export let myStep: SealEfficiency['myStep'] = undefined
 	export let isCountEditable: boolean = true
 	export let isPriceEditable: boolean = true
 
-	let sealPrices = $page.data.sealPrices
 	$: sealPrice = getSealPrice(sealPrices, seal.id)
 	$: timeElapsed =
 		sealPrice && sealPrices.length > 0
@@ -117,7 +117,7 @@
 	</div>
 	<div class="flex flex-col items-center gap-1 p-1">
 		<SealItemCount sealId={seal.id} isEditable={isCountEditable} />
-		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} />
+		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} {sealPrices} />
 		<slot></slot>
 	</div>
 </article>

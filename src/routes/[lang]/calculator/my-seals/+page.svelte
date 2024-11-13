@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import {
 		mySealCounts,
 		mySealPrices,
@@ -22,7 +21,9 @@
 	} from '$widgets/my-seals'
 	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
 	import { StatBar } from '$widgets/stat-bar'
+	import type { PageData } from './$types'
 
+	export let data: PageData
 	let statTypeSelected: StatTypeOption = 'ALL'
 	let mySealsFiltered: MySealCount[] | null = null
 	$: isKr = $lang === 'kr'
@@ -33,8 +34,7 @@
 		} else {
 			const mySealCounts = $mySealCounts.filter(
 				(mySeal) =>
-					getMySealData($page.data.seals, mySeal.id)?.statType ===
-					statTypeSelected
+					getMySealData(data.seals, mySeal.id)?.statType === statTypeSelected
 			)
 			return mySealCounts
 		}
@@ -54,7 +54,7 @@
 		if (!mySealsFiltered) return 0
 		let totalPrice = 0
 		for (const { id, count } of mySealsFiltered) {
-			const price = getMyAndFinalPrice($page.data.sealPrices, $mySealPrices, id)
+			const price = getMyAndFinalPrice(data.sealPrices, $mySealPrices, id)
 			const sumSealPrice = price.final * count
 			if (sumSealPrice) totalPrice += sumSealPrice
 		}
@@ -100,7 +100,11 @@
 			{/if}
 		</h2>
 		{#if $user && mySealsFiltered && mySealsFiltered.length > 0}
-			<MySealList {mySealsFiltered} />
+			<MySealList
+				{mySealsFiltered}
+				seals={data.seals}
+				sealPrices={data.sealPrices}
+			/>
 		{:else if mySealsFiltered}
 			<NoData>
 				{#if isKr}

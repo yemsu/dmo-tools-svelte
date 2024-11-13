@@ -1,4 +1,4 @@
-import type { LangType } from '$shared/types'
+import { PUBLIC_CONTENT_URL } from '$env/static/public'
 
 export const objectBy = <ArrItem, KeyName extends string | number>(
 	arr: ArrItem[],
@@ -112,6 +112,6 @@ export const delay = (time: number) => {
 }
 
 export const contentUrl = (path: string) => {
-	const CONTENT_URL = import.meta.env.VITE_CONTENT_URL
+	const CONTENT_URL = PUBLIC_CONTENT_URL
 	return `${CONTENT_URL}${path}`
 }

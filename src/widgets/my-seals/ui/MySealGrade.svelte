@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { _ } from 'svelte-i18n'
 	import { page } from '$app/stores'
-	import { STATS_PERCENT_TYPE, type MySealCount } from '$entities/seals'
+	import {
+		STATS_PERCENT_TYPE,
+		type MySealCount,
+		type SealData
+	} from '$entities/seals'
 	import { getMySealData } from '$widgets/my-seals/lib/helper'
 	import { getCurrentStep, getMySealStat } from '$widgets/seal-calculator'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 
+	export let seals: SealData[]
 	export let mySeal: MySealCount
-	$: sealData = getMySealData($page.data.seals, mySeal.id)
+	$: sealData = getMySealData(seals, mySeal.id)
 	$: crrStep = getCurrentStep(sealData, mySeal.count)
 	$: grade = crrStep.grade
 	$: result = getMySealStat(sealData, crrStep.percent)

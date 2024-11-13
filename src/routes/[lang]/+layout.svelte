@@ -11,11 +11,11 @@
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
 	import Header from './Header.svelte'
 	$: pathname = $page.url.pathname
+	import { PUBLIC_BASE_URL } from '$env/static/public'
 
-	const baseUrl = import.meta.env.VITE_BASE_URL
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
-	const koreanUrl = `${baseUrl}/kr${pathWithoutLang}`
-	const englishUrl = `${baseUrl}/en${pathWithoutLang}`
+	const koreanUrl = `${PUBLIC_BASE_URL}/kr${pathWithoutLang}`
+	const englishUrl = `${PUBLIC_BASE_URL}/en${pathWithoutLang}`
 
 	// 점검시
 	// const gotoErrorPage = () => {

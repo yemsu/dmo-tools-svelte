@@ -4,11 +4,15 @@
 	import 'iconify-icon'
 	import '../app/app.css'
 	import '../lib/i18n'
-
-	const adClient = import.meta.env.VITE_ADSENSE_CLIENT
+	import {
+		PUBLIC_GOOGLE_CLIENT_ID,
+		PUBLIC_ADSENSE_CLIENT
+	} from '$env/static/public'
 </script>
 
 <svelte:head>
+	<meta name="google-signin-client_id" content={PUBLIC_GOOGLE_CLIENT_ID} />
+
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content={META.COMMON.TITLE[$lang]} />
 	<meta property="og:description" content={META.COMMON.DESC[$lang]} />
@@ -26,7 +30,7 @@
 	<meta name="twitter:image" content="/og-image.jpg" />
 	<script
 		async
-		src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adClient}`}
+		src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${PUBLIC_ADSENSE_CLIENT}`}
 		crossorigin="anonymous"
 	></script>
 </svelte:head>

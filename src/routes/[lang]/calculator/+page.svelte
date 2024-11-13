@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { currentCharacterId } from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
@@ -35,7 +34,9 @@
 		StatBarTotalPrice,
 		StatBarWrap
 	} from '$widgets/stat-bar'
+	import type { PageData } from './$types'
 
+	export let data: PageData
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
 	let effDataListSorted: SealEfficiency[] = []
@@ -55,7 +56,7 @@
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
 		const result: SealEfficiency[] = []
 		const { final: price } = getMyAndFinalPrice(
-			$page.data.sealPrices,
+			data.sealPrices,
 			$mySealPrices,
 			seal.id
 		)
@@ -107,7 +108,7 @@
 			return
 		}
 		resetPrevResult()
-		const statSeals = $page.data.seals.filter(
+		const statSeals = data.seals.filter(
 			({ statType }) => statType === statTypeSelected
 		)
 
@@ -284,9 +285,14 @@
 		let:seal={effData}
 		noDataText={TEXTS.NO_DATA_TEXT[$lang]}
 	>
-		{@const seal = $page.data.seals.find(({ id }) => id === effData.id)}
+		{@const seal = data.seals.find(({ id }) => id === effData.id)}
 		{#if seal}
-			<SealItem {seal} myStep={effData.myStep} isCountEditable={false}>
+			<SealItem
+				{seal}
+				myStep={effData.myStep}
+				isCountEditable={false}
+				sealPrices={data.sealPrices}
+			>
 				<SealCalcData {effData} {isPercentType} />
 				<Button
 					type="button"

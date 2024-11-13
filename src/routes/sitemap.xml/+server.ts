@@ -1,10 +1,10 @@
+import { PUBLIC_BASE_URL } from '$env/static/public'
 import { PATH } from '$shared/config'
 import { _objKeys } from '$shared/lib'
 import type { RequestHandler } from '@sveltejs/kit'
 
 export const prerender = true
 const onlyKrPaths = ['raid-timer', 'save-url']
-const baseUrl = import.meta.env.VITE_BASE_URL
 
 function generateUrlEntry(path: string): string {
 	const restPath = path === '/' ? '' : path
@@ -15,36 +15,36 @@ function generateUrlEntry(path: string): string {
 	if (isKrOnly) {
 		return `
 			<url>
-				<loc>${baseUrl}/kr${restPath}</loc>
+				<loc>${PUBLIC_BASE_URL}/kr${restPath}</loc>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="ko" 
-						href="${baseUrl}/kr${restPath}"/>
+						href="${PUBLIC_BASE_URL}/kr${restPath}"/>
 			</url>
 		`
 	} else {
 		return `
 			<url>
-				<loc>${baseUrl}/kr${restPath}</loc>
+				<loc>${PUBLIC_BASE_URL}/kr${restPath}</loc>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="ko" 
-						href="${baseUrl}/kr${restPath}"/>
+						href="${PUBLIC_BASE_URL}/kr${restPath}"/>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="en" 
-						href="${baseUrl}/en${restPath}"/>
+						href="${PUBLIC_BASE_URL}/en${restPath}"/>
 			</url>
 			<url>
-				<loc>${baseUrl}/en${restPath}</loc>
+				<loc>${PUBLIC_BASE_URL}/en${restPath}</loc>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="en" 
-						href="${baseUrl}/en${restPath}"/>
+						href="${PUBLIC_BASE_URL}/en${restPath}"/>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="ko" 
-						href="${baseUrl}/kr${restPath}"/>
+						href="${PUBLIC_BASE_URL}/kr${restPath}"/>
 			</url>
 		`
 	}

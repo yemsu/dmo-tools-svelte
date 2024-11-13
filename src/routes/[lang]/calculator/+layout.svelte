@@ -25,12 +25,14 @@
 	import CharacterDropdown from '$widgets/character-dropdown/CharacterDropdown.svelte'
 	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
+	import type { PageData } from './$types'
 
+	export let data: PageData
 	$: statCalc = (statType: StatType) => {
 		if ($mySealCounts.length === 0) return
 		const mySealsByStatType = objectBy(
 			$mySealCounts,
-			({ id }) => getMySealData($page.data.seals, id).statType
+			({ id }) => getMySealData(data.seals, id).statType
 		)
 		if (!mySealsByStatType) return 0
 		const sealsByStatType = mySealsByStatType[statType]
@@ -40,7 +42,7 @@
 		let resultValue = 0
 		sealsByStatType.forEach(({ id, count }) => {
 			let sealPercent = 0
-			const seal = getMySealData($page.data.seals, id)
+			const seal = getMySealData(data.seals, id)
 			const crrStat = getCurrentStep(seal, count)
 			sealPercent = crrStat.percent
 			const maxIncrease = seal.maxIncrease
