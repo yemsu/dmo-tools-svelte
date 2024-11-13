@@ -29,10 +29,7 @@
 			{date}
 		</span>
 		<span class="group-hover:underline">
-			<TextByLang
-				text={title[$lang]}
-				engText="Fixing Efficiency Calculator Seal Setting Error for New Users"
-			/>
+			{title[$lang]}
 		</span>
 	</button>
 	<article slot="popupContent">
@@ -44,10 +41,7 @@
 				<!-- 22:50 <TextByLang text=" " engText="KTC" /> -->
 			</time>
 			<Title>
-				<TextByLang
-					text={title[$lang]}
-					engText="Fixing Efficiency Calculator Seal Setting Error for New Users"
-				/>
+				{title[$lang]}
 			</Title>
 		</div>
 		<div class="flex flex-col gap-4 break-keep font-light text-gray-100">
