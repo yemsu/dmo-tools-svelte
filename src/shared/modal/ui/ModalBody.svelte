@@ -12,10 +12,10 @@
 	}
 </script>
 
-<div
+<button
 	class="bg-dim fixed left-0 top-0 z-dim size-full bg-secondary-5/30 backdrop-blur-sm"
 	on:click={hideModal}
-></div>
+></button>
 <div
 	class={cn(
 		'position-fix-center z-modal max-w-full p-6',

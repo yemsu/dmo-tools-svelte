@@ -177,9 +177,7 @@
 	dt {
 		font-weight: bold;
 	}
-	li ul,
-	li ol,
-	li dl {
+	li :where(ul, ol, dl) {
 		padding-left: 1em;
 	}
 	p,
