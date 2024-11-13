@@ -1,0 +1,15 @@
+{
+	"redirects": [
+		{
+			"source": "/:path*",
+			"has": [
+				{
+					"type": "host",
+					"value": "dmo-tools.vercel.app"
+				}
+			],
+			"destination": "https://dmo.greuta.org/:path*",
+			"permanent": true
+		}
+	]
+}
