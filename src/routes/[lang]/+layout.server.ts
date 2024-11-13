@@ -27,6 +27,7 @@ export const load: ServerLoad = async ({ url }) => {
 		sealPrices,
 		gachaSummons: gachaListSorted.filter(({ type }) => type === 'DATA_SUMMON'),
 		gachaDraws: gachaListSorted.filter(({ type }) => type === 'DIGITAL_DRAW'),
-		lang
+		lang,
+		url: url.href
 	}
 }

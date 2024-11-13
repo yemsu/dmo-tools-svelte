@@ -12,6 +12,11 @@
 	import Header from './Header.svelte'
 	$: pathname = $page.url.pathname
 
+	const baseUrl = import.meta.env.VITE_BASE_URL
+	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
+	const koreanUrl = `${baseUrl}/kr${pathWithoutLang}`
+	const englishUrl = `${baseUrl}/en${pathWithoutLang}`
+
 	// 점검시
 	// const gotoErrorPage = () => {
 	// 	if (import.meta.env.SSR) return
@@ -22,6 +27,20 @@
 
 	// $: pathname && gotoErrorPage()
 </script>
+
+<svelte:head>
+	<!-- 다국어 -->
+	<link rel="alternate" hreflang="ko" href={koreanUrl} />
+	<link rel="alternate" hreflang="en" href={englishUrl} />
+	<link rel="canonical" href={$page.data.url} />
+	{#if $page.data.lang === 'kr'}
+		<meta property="og:locale" content="ko_KR" />
+		<meta name="language" content="Korean" />
+	{:else}
+		<meta property="og:locale" content="en_US" />
+		<meta name="language" content="English" />
+	{/if}
+</svelte:head>
 
 <div class={cn('relative flex h-full flex-col')}>
 	<!-- <NoticeBar /> -->
