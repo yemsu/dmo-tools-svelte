@@ -9,7 +9,7 @@
 	const date = '2024.11.12'
 	const title = {
 		kr: '사이트 도메인이 변경되었습니다.',
-		en: ''
+		en: 'The site domain has been changed.'
 	}
 </script>
 
