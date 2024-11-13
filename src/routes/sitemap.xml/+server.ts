@@ -2,6 +2,7 @@ import { PATH } from '$shared/config'
 import { _objKeys } from '$shared/lib'
 import type { RequestHandler } from '@sveltejs/kit'
 
+export const prerender = true
 const onlyKrPaths = ['raid-timer', 'save-url']
 const baseUrl = import.meta.env.VITE_BASE_URL
 
@@ -76,8 +77,7 @@ export const GET: RequestHandler = async () => {
 
 	return new Response(sitemapXml, {
 		headers: {
-			'Content-Type': 'application/xml',
-			'Cache-Control': 'max-age=0, s-maxage=3600'
+			'Content-Type': 'application/xml'
 		}
 	})
 }
