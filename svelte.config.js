@@ -22,6 +22,7 @@ const config = {
 		prerender: {
 			crawl: false,
 			entries: [
+				'/',
 				'/kr',
 				'/kr/calculator',
 				'/kr/calculator/my-seals',
