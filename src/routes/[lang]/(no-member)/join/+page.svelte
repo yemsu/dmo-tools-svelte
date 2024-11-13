@@ -53,7 +53,6 @@
 	}
 
 	onMount(() => {
-		const $lang = $lang
 		const isNoMember = checkNoMember($lang)
 		if (!isNoMember) return
 		checkJoinProcess($lang)
