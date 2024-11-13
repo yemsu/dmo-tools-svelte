@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores'
 	import { cn } from '$shared/lib'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
@@ -14,6 +15,8 @@
 </script>
 
 <svelte:head>
+	<link rel="canonical" href={`https://dmo.greuta.org${$page.url.pathname}`} />
+
 	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content={META.COMMON.TITLE} />
 	<meta property="og:description" content={META.COMMON.DESC} />
