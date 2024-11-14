@@ -9,8 +9,8 @@ export default {
 		screens: {
 			md: '769px',
 			sm: { max: '768px' },
-			adPc: '1140px',
-			adMobile: { max: '1139px' }
+			adPc: '1350px',
+			adMobile: { max: '1349px' }
 		},
 		extend: {
 			fontWeight: {
@@ -19,8 +19,50 @@ export default {
 				bold: 'var(--weight-bold)'
 			},
 			colors: {
-				background: 'var(--background-color)',
-				white: 'var(--white)',
+				background: 'hsl(var(--background-color))',
+				white: 'hsl(var(--gray-12))',
+				blue: {
+					1: 'hsl(var(--blue-1))',
+					2: 'hsl(var(--blue-2))',
+					3: 'hsl(var(--blue-3))',
+					4: 'hsl(var(--blue-4))',
+					5: 'hsl(var(--blue-5))',
+					6: 'hsl(var(--blue-6))',
+					7: 'hsl(var(--blue-7))',
+					8: 'hsl(var(--blue-8))',
+					9: 'hsl(var(--blue-9))',
+					10: 'hsl(var(--blue-10))',
+					11: 'hsl(var(--blue-11))',
+					12: 'hsl(var(--blue-12))'
+				},
+				orange: {
+					1: 'hsl(var(--orange-1))',
+					2: 'hsl(var(--orange-2))',
+					3: 'hsl(var(--orange-3))',
+					4: 'hsl(var(--orange-4))',
+					5: 'hsl(var(--orange-5))',
+					6: 'hsl(var(--orange-6))',
+					7: 'hsl(var(--orange-7))',
+					8: 'hsl(var(--orange-8))',
+					9: 'hsl(var(--orange-9))',
+					10: 'hsl(var(--orange-10))',
+					11: 'hsl(var(--orange-11))',
+					12: 'hsl(var(--orange-12))'
+				},
+				gray: {
+					1: 'hsl(var(--gray-1))',
+					2: 'hsl(var(--gray-2))',
+					3: 'hsl(var(--gray-3))',
+					4: 'hsl(var(--gray-4))',
+					5: 'hsl(var(--gray-5))',
+					6: 'hsl(var(--gray-6))',
+					7: 'hsl(var(--gray-7))',
+					8: 'hsl(var(--gray-8))',
+					9: 'hsl(var(--gray-9))',
+					10: 'hsl(var(--gray-10))',
+					11: 'hsl(var(--gray-11))',
+					12: 'hsl(var(--gray-12))'
+				},
 				primary: {
 					5: 'hsl(var(--primary-5))',
 					10: 'hsl(var(--primary-10))',
@@ -92,6 +134,7 @@ export default {
 				lg: '3px 3px 6px rgba(0,0,0,0.6)'
 			},
 			zIndex: {
+				header: '50',
 				tooltip: '99',
 				raidBar: '90',
 				floatingMenu: '970',

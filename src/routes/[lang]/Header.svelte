@@ -6,7 +6,7 @@
 	import { Gnb } from '$widgets/gnb'
 </script>
 
-<header>
+<header class="z-header fixed top-0 w-full bg-background">
 	<Inner
 		size="full"
 		class="relative flex h-header-h items-center justify-between"

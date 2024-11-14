@@ -40,27 +40,19 @@
 	{/if}
 </svelte:head>
 
-<div class={cn('relative flex h-full flex-col')}>
-	<!-- <NoticeBar /> -->
-	<Header />
-	{#if $lang === 'kr'}
-		<Inner class="w-full">
-			<RaidBar />
-		</Inner>
-	{/if}
+<!-- <NoticeBar /> -->
+<Header />
 
-	<div class="mx-auto w-content-w flex-1">
-		<main class="relative h-full max-w-[100vw] overflow-hidden">
-			<slot></slot>
-		</main>
-		<Footer />
-	</div>
-	<AdLayout />
-	<ToastPopup />
-	<GlobalModal />
-	<AdLayout />
-	<ToastPopup />
-	<GlobalModal />
-	<AdLayout />
-	<ToastPopup />
+<div class="mt-header-h">
+	{#if $lang === 'kr'}
+		<RaidBar />
+	{/if}
+	<main class="relative mx-auto w-content-w">
+		<slot></slot>
+	</main>
 </div>
+
+<Footer />
+<AdLayout />
+<ToastPopup />
+<GlobalModal />
