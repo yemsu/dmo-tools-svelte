@@ -4,7 +4,7 @@ import { fontFamily } from 'tailwindcss/defaultTheme'
 
 export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
-
+	darkMode: 'class',
 	theme: {
 		screens: {
 			md: '769px',
@@ -144,6 +144,7 @@ export default {
 			},
 			fontSize: {
 				'body-md': 'var(--body-md)',
+				xs5: '8px',
 				xs4: '9px',
 				xs3: '10px',
 				xs2: '11px',

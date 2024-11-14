@@ -58,9 +58,8 @@
 		--content-side: 16px;
 		--input-h: 40px;
 		--tab-h: 30px;
-
 		/* Colors */
-		--background-color: 0 0% 93%; /* hsl(0 0% 93%) */
+		--background-color: 257, 10%, 93%; /* hsl(257, 10%, 93%) */
 
 		--blue-1: 180 100% 75%; /* #7DFFFF */
 		--blue-2: 186 100% 71%; /* #68E9FF */
@@ -102,9 +101,9 @@
 		--gray-12: 220 11% 13%; /* hsl(220 11% 13%) */
 
 		/* Font Weight */
-		--weight-normal: 300;
-		--weight-semibold: 400;
-		--weight-bold: 500;
+		--weight-normal: 500;
+		--weight-semibold: 600;
+		--weight-bold: 700;
 	}
 
 	.dark {
@@ -141,19 +140,19 @@
 		--gray-2: 240 15% 13%; /* hsl(240 15% 13%) */
 		--gray-3: 240 13% 17%; /* hsl(240 13% 17%) */
 		--gray-4: 240 19% 20%; /* hsl(240 19% 20%) */
-		--gray-5: 240 19% 23%; /* hsl(240 19% 23%) */
-		--gray-6: 240 14% 26%; /* hsl(240 14% 26%) */
-		--gray-7: 240 12% 31%; /* hsl(240 12% 31%) */
-		--gray-8: 240 11% 41%; /* hsl(240 11% 41%) */
-		--gray-9: 240 11% 47%; /* hsl(240 11% 47%) */
-		--gray-10: 240 11% 52%; /* hsl(240 11% 52%) */
-		--gray-11: 240 13% 74%; /* hsl(240 13% 74%) */
+		--gray-5: 240 19% 24%; /* hsl(240 19% 23%) */
+		--gray-6: 240 14% 31%; /* hsl(240 14% 26%) */
+		--gray-7: 240 12% 41%; /* hsl(240 12% 31%) */
+		--gray-8: 240 11% 52%; /* hsl(240 11% 41%) */
+		--gray-9: 240 11% 60%; /* hsl(240 11% 47%) */
+		--gray-10: 240 11% 72%; /* hsl(240 11% 52%) */
+		--gray-11: 240 13% 84%; /* hsl(240 13% 74%) */
 		--gray-12: 240 20% 95%; /* hsl(240 20% 95%) */
 
 		/* Font Weight */
-		--weight-normal: 400;
-		--weight-semibold: 500;
-		--weight-bold: 600;
+		--weight-normal: 300;
+		--weight-semibold: 400;
+		--weight-bold: 500;
 	}
 	@media screen and (max-width: 768px) {
 		:root {

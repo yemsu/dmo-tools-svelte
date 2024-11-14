@@ -58,7 +58,7 @@
 		class={cn(
 			'group relative flex items-center justify-center',
 			'h-[3.2em] w-auto md:h-[3.6em]',
-			'gradient-black-op border-b border-t border-b-white/30 border-t-white/30 px-1',
+			'gradient-black-op border-b-white/30 border-t-white/30 border-b border-t px-1',
 			'text-balance break-keep'
 		)}
 	>
@@ -85,7 +85,7 @@
 					{/if}
 				{/each}
 				{#if myStep}
-					<div class="rounded-sm bg-white/10 p-1">
+					<div class="bg-white/10 rounded-sm p-1">
 						<p class="mb-1 text-xs3">
 							<TextByLang text="현재 내 능력치" engText="Current My Level" />
 						</p>

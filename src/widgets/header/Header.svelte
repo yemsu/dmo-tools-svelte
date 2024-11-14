@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { AuthButton } from '$shared/layout'
-	import LangButton from '$shared/layout/ui/LangButton.svelte'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
-	import { Gnb } from '$widgets/gnb'
+	import { ThemeToggleButton } from '$shared/ui/theme'
+	import Gnb from './Gnb.svelte'
+	import LangButton from './LangButton.svelte'
 </script>
 
 <header class="z-header fixed top-0 w-full bg-background">
@@ -20,10 +21,14 @@
 				DMO tools
 			</a>
 		</h1>
-		<Gnb />
+		<Gnb class="sm:hidden" />
 		<div class="flex-center gap-2">
 			<AuthButton />
-			<LangButton />
+			<div class="flex-center sm:hidden">
+				<ThemeToggleButton />
+				<LangButton />
+			</div>
 		</div>
 	</Inner>
 </header>
+<Gnb class="md:hidden" />

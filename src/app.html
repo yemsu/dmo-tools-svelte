@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="%lang%" class="dark">
+<html lang="%lang%">
 
 <head>
 	<meta charset="utf-8" />
@@ -23,6 +23,14 @@
 	<script async src="https://fundingchoicesmessages.google.com/i/pub-4052679554213032?ers=1" nonce="bv79QNd8BVlebUuuzfc24g"></script>
 	<script nonce="bv79QNd8BVlebUuuzfc24g">(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
 	<script src="%sveltekit.assets%/adsense-request-allow.js"></script>
+	<!-- theme -->
+	<script>
+		let theme = localStorage.getItem('DMO_THEME');
+		if (!theme) {
+			theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		}
+		document.documentElement.classList.toggle('dark', theme === 'dark');
+	</script>
 	%sveltekit.head%
 </head>
 

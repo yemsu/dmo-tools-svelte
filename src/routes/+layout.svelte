@@ -5,11 +5,12 @@
 		PUBLIC_GOOGLE_CLIENT_ID
 	} from '$env/static/public'
 	import { META } from '$shared/config'
-	import { lang } from '$shared/model'
+	import { lang, theme } from '$shared/model'
 	import 'iconify-icon'
 	import { onMount } from 'svelte'
 	import '../app/app.css'
 	import '../lib/i18n'
+	import { browser } from '$app/environment'
 
 	const OLD_DOMAIN = 'dmo-tools.vercel.app'
 	const NEW_DOMAIN = 'dmo.greuta.org'
@@ -32,6 +33,9 @@
 
 	$: if ($page) {
 		checkAndRedirect()
+	}
+	$: if (browser) {
+		document.documentElement.classList.toggle('dark', $theme === 'dark')
 	}
 </script>
 

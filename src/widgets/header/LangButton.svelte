@@ -16,10 +16,16 @@
 </script>
 
 <Button
-	class="flex-center border border-white/80  text-white/80"
-	size="sm"
+	class="relative"
+	size="icon"
+	variant="ghost"
+	rounded="md"
 	on:click={changeLang}
 >
-	<Icon icon="material-symbols:language" />
-	{toLang.toUpperCase()}
+	<Icon icon="iconoir:language" size={18} />
+	<span
+		class="absolute right-0.5 top-0.5 rounded-full bg-background p-[2px] text-xs4"
+	>
+		{toLang.toUpperCase()}
+	</span>
 </Button>

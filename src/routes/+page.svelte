@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { lang } from '$shared/model'
 	import { META } from '$shared/config'
-	import { Footer } from '$shared/layout'
+	import { Footer } from '$widgets/footer'
 
 	const langButtonStyle =
 		'point-neon block w-[130px] rounded-lg p-6 hover:opacity-80'

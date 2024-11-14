@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { PUBLIC_BASE_URL } from '$env/static/public'
-	import { Footer } from '$shared/layout'
-	import { cn } from '$shared/lib'
 	import { GlobalModal } from '$shared/modal'
 	import { lang } from '$shared/model'
-	import Inner from '$shared/section/ui/Inner.svelte'
 	import { ToastPopup } from '$shared/toast'
+	import { Footer } from '$widgets/footer'
+	import { Header } from '$widgets/header'
 	import { AdLayout } from '$widgets/adsense'
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
-	import Header from './Header.svelte'
 
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
 	const koreanUrl = `${PUBLIC_BASE_URL}/kr${pathWithoutLang}`
