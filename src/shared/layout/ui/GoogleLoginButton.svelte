@@ -22,7 +22,7 @@
 	export let size: 'small' | 'large' = 'small'
 	export let text: 'signin' | 'signin_with' = 'signin'
 
-	let isLoginButtonRendered = false
+	let isLoginButtonRendered: boolean | undefined = false
 
 	const onGoogleLogin = async (token: string) => {
 		const res = await postLogin(token)

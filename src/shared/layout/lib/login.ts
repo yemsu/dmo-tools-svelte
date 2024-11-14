@@ -14,17 +14,19 @@ export const onGoogleScriptLoad = (
 			client_id: PUBLIC_GOOGLE_CLIENT_ID,
 			callback: handleCredentialResponse
 		})
-		google.accounts.id.renderButton(
-			document.getElementById(targetId),
-			{
-				theme: 'outline',
-				size: 'small',
-				text: 'signin',
-				shape: 'pill',
-				logo_alignment: 'left',
-				...options
-			} // customization attributes
-		)
+		const targetElement = document.getElementById(targetId)
+		if (!targetElement) {
+			alert('google accounts: CANNOT Find TargetId!')
+			return
+		}
+		google.accounts.id.renderButton(targetElement, {
+			theme: 'outline',
+			size: 'small',
+			text: 'signin',
+			shape: 'pill',
+			logo_alignment: 'left',
+			...options
+		} as google.accounts.id.GsiButtonConfiguration)
 		google.accounts.id.prompt() // also display the One Tap dialog
 		return true
 	} catch {

@@ -1,13 +1,38 @@
 <script lang="ts">
+	import { page } from '$app/stores'
+	import {
+		PUBLIC_ADSENSE_CLIENT,
+		PUBLIC_GOOGLE_CLIENT_ID
+	} from '$env/static/public'
 	import { META } from '$shared/config'
 	import { lang } from '$shared/model'
 	import 'iconify-icon'
+	import { onMount } from 'svelte'
 	import '../app/app.css'
 	import '../lib/i18n'
-	import {
-		PUBLIC_GOOGLE_CLIENT_ID,
-		PUBLIC_ADSENSE_CLIENT
-	} from '$env/static/public'
+
+	const OLD_DOMAIN = 'dmo-tools.vercel.app'
+	const NEW_DOMAIN = 'dmo.greuta.org'
+
+	function checkAndRedirect() {
+		if (import.meta.env.SSR) return
+		if (window.location.hostname !== OLD_DOMAIN) return
+		const newUrl = window.location.href.replace(OLD_DOMAIN, NEW_DOMAIN)
+
+		const redirected = sessionStorage.getItem('redirected')
+		if (!redirected) {
+			sessionStorage.setItem('redirected', 'true')
+			window.location.href = newUrl
+		}
+	}
+	// 초기 마운트시 체크
+	onMount(() => {
+		checkAndRedirect()
+	})
+
+	$: if ($page) {
+		checkAndRedirect()
+	}
 </script>
 
 <svelte:head>

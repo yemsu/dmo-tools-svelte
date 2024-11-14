@@ -22,7 +22,7 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto(`/${$page.data.$lang}${PATH.LOGIN}`)
+			goto(`/${$lang}${PATH.LOGIN}`)
 			toast.on(TOAST.NEED_LOGIN[$lang])
 			return
 		}

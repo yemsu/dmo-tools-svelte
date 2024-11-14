@@ -13,7 +13,7 @@
 		| 'outline'
 		| 'link'
 		| undefined = undefined
-	export let size: 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
+	export let size: 'text' | 'icon' | 'sm' | 'md' | 'md-lg' | 'lg' = 'md'
 	export let href: string | undefined = undefined
 
 	// check props

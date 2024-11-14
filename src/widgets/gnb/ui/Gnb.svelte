@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { MENUS, type MenuType } from '$entities/menus'
+	import { NewBadge } from '$shared/badge'
 	import { EXTERNAL_LINK } from '$shared/config'
 	import { _objKeys, cn } from '$shared/lib'
 	import { Modal } from '$shared/modal'
@@ -36,7 +37,7 @@
 							<span class="relative">
 								<TextByLang data={MENUS[menuType]} />
 								{#if menuType === 'gacha'}
-									<!-- <NewBadge /> -->
+									<NewBadge startDate="Wed Nov 13 2024 17:37:25" />
 								{/if}
 							</span>
 						</a>
@@ -48,7 +49,7 @@
 </Inner>
 
 <div
-	class="flex-center z-floatingMenu fixed bottom-8 right-8 h-14 w-14 rounded-full bg-primary-30 shadow-lg"
+	class="flex-center fixed bottom-8 right-8 z-floatingMenu h-14 w-14 rounded-full bg-primary-30 shadow-lg"
 >
 	{#if $lang === 'kr'}
 		<a
