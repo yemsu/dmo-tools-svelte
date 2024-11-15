@@ -230,7 +230,7 @@ button:focus:not(:focus-visible) {
 		background: linear-gradient(to bottom, #fef102, #ed7000);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		filter: drop-shadow(0 0 5px #025596);
+		filter: drop-shadow(0 0 6px #fff5);
 	}
 	/* flex */
 	.flex-center {

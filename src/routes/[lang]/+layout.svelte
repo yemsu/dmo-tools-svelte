@@ -8,11 +8,14 @@
 	import { Header } from '$widgets/header'
 	import { AdLayout } from '$widgets/adsense'
 	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
+	import { cn } from '$shared/lib'
+	import { SpaceBackground } from '$widgets/bg-space'
+	import { fade } from 'svelte/transition'
 
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
 	const koreanUrl = `${PUBLIC_BASE_URL}/kr${pathWithoutLang}`
 	const englishUrl = `${PUBLIC_BASE_URL}/en${pathWithoutLang}`
-
+	$: isMain = $page.url.pathname === `/${$lang}`
 	// 점검시
 	// const gotoErrorPage = () => {
 	// 	if (import.meta.env.SSR) return
@@ -39,18 +42,28 @@
 </svelte:head>
 
 <!-- <NoticeBar /> -->
-<Header />
+<Header noBg={isMain} />
 
-<div class="mt-header-h">
-	{#if $lang === 'kr'}
-		<RaidBar />
+<div class={cn(!isMain && 'relative mt-header-h')}>
+	{#if isMain}
+		<div
+			transition:fade={{
+				duration: 300
+			}}
+		>
+			<SpaceBackground />
+		</div>
 	{/if}
-	<main class="relative mx-auto w-content-w">
+	<main class="relative">
 		<slot></slot>
 	</main>
+	<Footer />
 </div>
 
-<Footer />
+{#if $lang === 'kr'}
+	<RaidBar />
+{/if}
+
 <AdLayout />
 <ToastPopup />
 <GlobalModal />

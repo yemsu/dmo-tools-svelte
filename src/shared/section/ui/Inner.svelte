@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { cn } from '$shared/lib'
 
-	export let size: 'sm' | 'md' | 'lg' | 'full' = 'md'
+	export let size: 'content' | 'full' = 'content'
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
-		sm: '',
-		md: 'mx-auto',
-		lg: '',
+		content: 'mx-auto w-content-w',
 		full: ''
 	}
 </script>

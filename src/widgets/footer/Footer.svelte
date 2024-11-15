@@ -8,7 +8,7 @@
 
 	const links = [
 		{
-			href: `/{$lang}{PATH.PRIVACY_POLICY}`,
+			href: `/${$lang}{PATH.PRIVACY_POLICY}`,
 			text: {
 				kr: '개인정보처리방침',
 				en: 'Private Policy'
@@ -18,7 +18,7 @@
 </script>
 
 <footer class="mt-8 w-full py-8">
-	<Inner class="text-gray-11 w-content-w md:text-center">
+	<Inner class="text-gray-11 md:text-center">
 		<div class="flex items-center md:justify-center sm:justify-between">
 			<p class="font-tiny leading-none md:text-2xl sm:text-3xl">DMO tools</p>
 			<div class="flex-center gap-2 md:hidden">

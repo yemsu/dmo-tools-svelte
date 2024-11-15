@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { AuthButton } from '$shared/layout'
+	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
 	import { ThemeToggleButton } from '$shared/ui/theme'
 	import Gnb from './Gnb.svelte'
 	import LangButton from './LangButton.svelte'
+
+	export let noBg: boolean
 </script>
 
-<header class="z-header fixed top-0 w-full bg-background">
+<header class={cn('z-header fixed top-0 w-full', !noBg && 'bg-background')}>
 	<Inner
 		size="full"
 		class="relative flex h-header-h items-center justify-between"

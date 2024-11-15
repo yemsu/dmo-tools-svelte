@@ -33,8 +33,8 @@
 
 <nav
 	class={cn(
-		'flex-center bg-background md:gap-5',
-		'sm:z-header sm:fixed sm:bottom-0 sm:w-full',
+		'flex-center md:gap-5',
+		'sm:z-header sm:fixed sm:bottom-0 sm:w-full sm:bg-background',
 		$$restProps.class
 	)}
 >

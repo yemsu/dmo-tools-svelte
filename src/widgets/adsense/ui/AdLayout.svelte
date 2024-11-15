@@ -9,7 +9,7 @@
 
 	const sideFixedCommonStyle = cn(
 		'fixed top-header-h flex h-[calc(100vh-var(--header-h))] w-[clamp(192px,calc((100vw-var(--content-w))/2),330px)] justify-center px-content-side py-header-h',
-		import.meta.env.DEV && 'bg-primary-30/10'
+		import.meta.env.DEV && 'bg-blue-9/10'
 	)
 	const isServer = import.meta.env.SSR
 
