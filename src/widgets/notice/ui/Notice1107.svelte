@@ -11,7 +11,7 @@
 		on:click={toggleModal}
 		class="group flex items-start justify-center gap-1 py-1 text-left text-xs"
 	>
-		<span class="rounded-full bg-gray-700 px-1 py-0.5 text-xs3">
+		<span class="rounded-full bg-gray-5 px-1 py-0.5 text-xs3">
 			2024.11.07
 		</span>
 		<span class="group-hover:underline">
@@ -23,7 +23,7 @@
 	</button>
 	<article slot="popupContent">
 		<div
-			class="flex-center mb-4 w-full flex-col gap-2 border-b border-b-gray-600 pb-4"
+			class="flex-center mb-4 w-full flex-col gap-2 border-b border-b-gray-500 pb-4"
 		>
 			<time datetime="2024-11-07" class="text-sm text-warning">
 				2024.11.07 22:50 <TextByLang text=" " engText="KTC" />

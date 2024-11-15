@@ -43,10 +43,10 @@
 	const variants = {
 		'submit-primary': 'point-neon',
 		'submit-secondary': 'bg-primary-30',
-		gray: 'bg-gray-600',
+		gray: 'bg-gray-500',
 		ghost: 'hover:bg-gray-800',
 		danger: 'bg-red',
-		outline: 'border border-gray-600 hover:bg-gray-700',
+		outline: 'border border-gray-500 hover:bg-gray-5',
 		link: 'underline underline-offset-2 hover:text-point'
 	}
 

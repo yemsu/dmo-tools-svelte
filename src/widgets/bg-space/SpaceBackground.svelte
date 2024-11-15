@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte'
 	import { browser } from '$app/environment'
+	import { theme } from '$shared/model'
 
 	interface Star {
 		x: number
@@ -11,51 +12,39 @@
 
 	interface SpaceConfig {
 		numStars: number
-		baseColor: string
 		speed: number
 		trailEffect: boolean
 		trailOpacity: number
 	}
 
-	function getResponsiveConfig(): SpaceConfig {
-		if (!browser) return defaultConfig
+	$: canvasBgColor = isDarkTheme ? 'rgb(209, 255, 255)' : 'rgb(50, 50, 50)'
 
-		const baseWidth = 1920
-		const currentWidth = window.innerWidth
-		const isMobile = currentWidth <= 768
-
-		const starsRatio = isMobile
-			? 0.1
-			: Math.max(0.7, Math.min(1, currentWidth / baseWidth))
-
-		const speedRatio = isMobile
-			? 0.1
-			: Math.max(0.7, Math.min(1, currentWidth / baseWidth))
-
-		return {
-			numStars: Math.floor(defaultConfig.numStars * starsRatio),
-			baseColor: 'rgb(209, 255, 255)',
-			speed: defaultConfig.speed * speedRatio,
-			trailEffect: true,
-			trailOpacity: 0.2
-		}
-	}
-
-	const defaultConfig: SpaceConfig = {
-		numStars: 2400,
-		baseColor: 'rgb(209, 255, 255)',
+	const defaultConfig = {
+		numStars: 2500,
 		speed: 1.5,
 		trailEffect: true,
 		trailOpacity: 0.2
 	}
 
+	$: getResponsiveConfig = () => {
+		if (!browser) return defaultConfig
+
+		const baseWidth = 1920
+		const currentWidth = window.innerWidth
+		const starsRatio = Math.max(0.3, Math.min(1, currentWidth / baseWidth))
+		const speedRatio = Math.max(0.3, Math.min(1, currentWidth / baseWidth))
+
+		return {
+			...defaultConfig,
+			numStars: Math.floor(defaultConfig.numStars * starsRatio),
+			speed: defaultConfig.speed * speedRatio
+		}
+	}
+	$: isDarkTheme = $theme === 'dark'
+
 	export let config: SpaceConfig = defaultConfig
 
-	$: responsiveConfig = getResponsiveConfig()
-	$: activeConfig = {
-		...responsiveConfig,
-		...config
-	}
+	$: activeConfig = getResponsiveConfig()
 
 	let canvas: HTMLCanvasElement
 	let ctx: CanvasRenderingContext2D | null
@@ -82,7 +71,7 @@
 
 	const randomOpacity = () => `0.${Math.floor(Math.random() * 99) + 1}`
 
-	function initializeStars(): void {
+	$: initializeStars = () => {
 		stars = Array.from({ length: activeConfig.numStars }, () => ({
 			x: Math.random() * width,
 			y: Math.random() * height,
@@ -113,16 +102,14 @@
 		})
 	}
 
-	function drawStars(): void {
+	$: drawStars = () => {
 		if (!ctx) return
+		const backgroundColor = isDarkTheme
+			? `rgba(0,10,20,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 다크모드
+			: `rgba(240,245,250,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 라이트모드
 
-		if (activeConfig.trailEffect) {
-			ctx.fillStyle = `rgba(0,10,20,${1 - config.trailOpacity})`
-			ctx.fillRect(0, 0, width, height)
-		} else {
-			ctx.fillStyle = 'rgba(0,10,20,1)'
-			ctx.fillRect(0, 0, width, height)
-		}
+		ctx.fillStyle = backgroundColor
+		ctx.fillRect(0, 0, width, height)
 
 		stars.forEach((star) => {
 			if (!ctx) return
@@ -130,26 +117,33 @@
 			const pixelY = (star.y - centerY) * (focalLength / star.z) + centerY
 			const pixelRadius = 1 * (focalLength / star.z)
 
-			const size = Math.min(Math.max(pixelRadius, 0.4), 2)
+			const size = isDarkTheme
+				? Math.min(Math.max(pixelRadius, 0.4), 2)
+				: Math.min(Math.max(pixelRadius, 1), 3)
 
-			ctx.fillStyle = `${activeConfig.baseColor.replace('rgb', 'rgba').replace(')', `, ${star.opacity})`)}`
+			ctx.fillStyle = `${canvasBgColor.replace('rgb', 'rgba').replace(')', `, ${star.opacity})`)}`
 			ctx.fillRect(pixelX, pixelY, size, size)
 		})
 	}
 
 	function animate(): void {
+		if (!browser) return
 		moveStars()
 		drawStars()
 		animationFrameId = requestAnimationFrame(animate)
 	}
 
 	function handleResize(): void {
+		if (animationFrameId) {
+			cancelAnimationFrame(animationFrameId)
+		}
 		if (
 			canvas.width !== window.innerWidth ||
 			canvas.height !== window.innerHeight
 		) {
 			setCanvasSize()
 			initializeStars()
+			animate()
 		}
 	}
 
@@ -161,7 +155,6 @@
 		ctx = canvas.getContext('2d')
 		setCanvasSize()
 		initializeStars()
-		animate()
 
 		window.addEventListener('resize', debouncedResize)
 	})
@@ -174,6 +167,14 @@
 		}
 		window.removeEventListener('resize', debouncedResize)
 	})
+
+	const toggleTheme = () => {
+		if (!browser) return
+		cancelAnimationFrame(animationFrameId)
+		animate()
+	}
+
+	$: $theme && toggleTheme()
 </script>
 
 <canvas bind:this={canvas} class="fixed left-0 top-0 z-[-1] h-full w-full" />

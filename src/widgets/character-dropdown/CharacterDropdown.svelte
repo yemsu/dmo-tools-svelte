@@ -43,7 +43,7 @@
 		{/if}
 		<a
 			href="/{$lang}{PATH.CHARACTERS}"
-			class="flex items-center justify-end gap-0.5 border-t border-gray-600 p-1 text-xs leading-none"
+			class="flex items-center justify-end gap-0.5 border-t border-gray-500 p-1 text-xs leading-none"
 			title="{$_('character')} {$_('setting')}"
 		>
 			<Icon icon="ant-design:setting-outlined" />

@@ -116,7 +116,7 @@
 		<Button
 			on:click={onToggleShowForm}
 			size="sm"
-			class="bg-gray-700 "
+			class="bg-gray-5 "
 			rounded="md">취소</Button
 		>
 	</div>

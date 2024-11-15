@@ -55,7 +55,7 @@
 	{#if isDropdownOpen}
 		<div
 			class={cn(
-				'absolute -bottom-1 z-tooltip translate-y-full rounded-md border border-gray-600 bg-gray-700 drop-shadow-lg',
+				'absolute -bottom-1 z-tooltip translate-y-full rounded-md border border-gray-500 bg-gray-5 drop-shadow-lg',
 				menuBoxAlignStyles[menuBoxAlign]
 			)}
 		>

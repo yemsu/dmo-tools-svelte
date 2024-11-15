@@ -32,7 +32,7 @@
 					<Button size="text" {href} class="font-semibold">
 						{text[$lang]}
 					</Button>
-					<div class="bg-gray-6 h-[1.1em] w-[1px]"></div>
+					<div class="h-[1.1em] w-[1px] bg-gray-5"></div>
 				{/each}
 				<SupportGuide />
 			</div>

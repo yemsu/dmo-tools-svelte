@@ -11,7 +11,7 @@
 	const { class: className, ...restProps } = $$restProps
 </script>
 
-<menu class="overflow-hidde flex items-center rounded-md bg-gray-700 p-1">
+<menu class="overflow-hidde flex items-center rounded-md bg-gray-5 p-1">
 	{#each tabButtons as tabButton (keyName(tabButton))}
 		<li>
 			<button

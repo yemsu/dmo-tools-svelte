@@ -9,7 +9,7 @@
 <dl class="w-full rounded-md bg-gray-800 text-sm md:text-md">
 	{#each infoItems as infoItemData (infoItemData.title)}
 		<div
-			class="flex min-h-[50px] items-center gap-4 border-b border-gray-700/60 px-4 py-2 last:border-transparent"
+			class="flex min-h-[50px] items-center gap-4 border-b border-gray-5/60 px-4 py-2 last:border-transparent"
 		>
 			<dt class="w-[70px] break-keep font-semibold md:w-[100px]">
 				<TextByLang data={infoItemData} dataKey={['title', 'engTitle']} />

@@ -76,7 +76,7 @@
 						/>
 					</h2>
 				</div>
-				<div class="relative rounded-md border border-gray-700 p-4 md:p-6">
+				<div class="relative rounded-md border border-gray-5 p-4 md:p-6">
 					<p class="text-md text-warning md:text-lg">
 						Error Message : {message}
 					</p>

@@ -20,7 +20,7 @@
 		on:click={toggleModal}
 		class="group flex items-start justify-center gap-1 py-1 text-left text-xs"
 	>
-		<span class="relative rounded-full bg-gray-700 px-1 py-0.5 text-xs3">
+		<span class="relative rounded-full bg-gray-5 px-1 py-0.5 text-xs3">
 			<NewBadge
 				startDate="Tue Nov 12 2024 17:00:00 GMT+0900"
 				visibleDay={3}
@@ -34,7 +34,7 @@
 	</button>
 	<article slot="popupContent">
 		<div
-			class="flex-center mb-4 w-full flex-col gap-2 border-b border-b-gray-600 pb-4"
+			class="flex-center mb-4 w-full flex-col gap-2 border-b border-b-gray-500 pb-4"
 		>
 			<time datetime="2024-11-07" class="text-sm text-warning">
 				{date}
