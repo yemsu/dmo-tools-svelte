@@ -20,7 +20,7 @@
 
 <div
 	class={cn(
-		'sm:bg-gr-t relative w-full overflow-hidden rounded-l-lg border-b-2 border-t-2',
+		'sm:bg-gr-t lg:rounded-r-none relative w-full overflow-hidden rounded-lg border-b-2 border-t-2',
 		yDir === 'top' ? 'md:bg-gr-t' : 'md:bg-gr-b',
 		colorTypeStyles[colorType],
 		className

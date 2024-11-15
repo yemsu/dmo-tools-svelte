@@ -5,11 +5,13 @@
 	import { _ } from 'svelte-i18n'
 </script>
 
-<section class="flex items-center rounded-md bg-gray-2">
-	<Title size="xs" class="flex-center gap-2 px-2 py-1.5 text-center"
+<section
+	class="lg:max-w-[400px] lg:flex-col flex w-full max-w-[500px] overflow-hidden rounded-md bg-gray-2"
+>
+	<Title size="xs" class="flex-center gap-2 bg-gray-3 px-2 py-1.5"
 		>{$_('notice')}</Title
 	>
-	<div class="flex-center flex-1 text-pretty px-2">
+	<div class="flex-center flex-1 py-1">
 		<div>
 			<Notice1112 />
 			<Notice1107 />

@@ -15,24 +15,24 @@
 	<meta name="description" content={META.COMMON.DESC[$lang]} />
 </svelte:head>
 
-<div class="flex min-h-[100vh] w-full overflow-hidden pt-header-h">
-	<div class="flex-col-center flex-1 gap-8">
-		<p class="flex-col-center gap-1">
-			<span class="text-lg text-gray-11">
+<div class="lg:flex min-h-[100vh] w-full overflow-hidden pt-header-h">
+	<div class="flex-col-center lg:px-10 flex-1 gap-8 px-content-side">
+		<p class="flex-col-center min-h-[200px] gap-1 text-center">
+			<span class="text-[clamp(12px,2vw,16px)] text-gray-11">
 				<TextByLang
 					text="디지몬 마스터즈 도구 모음"
 					engText="Digimon Masters Tools Collection"
 				/>
 			</span>
 			<span
-				class="text-logo font-tiny text-[40px] font-semibold leading-none md:text-[100px]"
+				class="text-logo lg:text-[100px] font-tiny text-[clamp(50px,7vw,80px)] font-semibold leading-none"
 				>DMO tools</span
 			>
 		</p>
 		<Notice />
 	</div>
 	<div
-		class="flex-center flex flex-col gap-[clamp(20px,20%,50px)] md:w-[clamp(740px,100%,800px)]"
+		class="flex-center lg:px-0 lg:mt-0 lg:gap-[clamp(20px,20%,50px)] mx-auto mt-4 flex shrink-0 flex-col gap-4 px-content-side md:w-[clamp(720px,50%,800px)]"
 	>
 		<MainBanner
 			src={contentUrl('/main/main-banner-calc.png')}
