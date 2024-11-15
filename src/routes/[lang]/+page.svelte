@@ -4,10 +4,8 @@
 	import { cn, contentUrl } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
-	import Section from '$shared/section/ui/Section.svelte'
 	import { TextByLang } from '$shared/text'
 	import { MainBanner } from '$widgets/banner'
-	import { SpaceBackground } from '$widgets/bg-space'
 	import { Notice } from '$widgets/notice'
 	$: isKr = $lang === 'kr'
 </script>
@@ -17,24 +15,25 @@
 	<meta name="description" content={META.COMMON.DESC[$lang]} />
 </svelte:head>
 
-<div class={cn(' min-h-[120px]', isKr && 'sm:hidden')}>
-	<Inner class="flex-col-center gap-1 pt-header-h">
-		<p class="text-gray-10 text-right">
-			<TextByLang
-				text="디지몬 마스터즈 도구 모음"
-				engText="Digimon Masters Tools Collection"
-			/>
+<div class="flex min-h-[100vh] w-full overflow-hidden pt-header-h">
+	<div class="flex-col-center flex-1 gap-8">
+		<p class="flex-col-center gap-1">
+			<span class="text-lg text-gray-11">
+				<TextByLang
+					text="디지몬 마스터즈 도구 모음"
+					engText="Digimon Masters Tools Collection"
+				/>
+			</span>
+			<span
+				class="text-logo font-tiny text-[40px] font-semibold leading-none md:text-[100px]"
+				>DMO tools</span
+			>
 		</p>
-		<p
-			class="text-logo font-tiny text-[40px] font-semibold leading-none md:text-[60px]"
-		>
-			DMO tools
-		</p>
-	</Inner>
-</div>
-<Inner>
-	<Notice />
-	<div class="flex min-h-[60%] flex-col gap-3 md:gap-5">
+		<Notice />
+	</div>
+	<div
+		class="flex-center flex flex-col gap-[clamp(20px,20%,50px)] md:w-[clamp(740px,100%,800px)]"
+	>
 		<MainBanner
 			src={contentUrl('/main/main-banner-calc.png')}
 			href="/{$lang}{PATH.CALCULATOR}"
@@ -69,4 +68,4 @@
 			colorType="primary-50"
 		/>
 	</div>
-</Inner>
+</div>

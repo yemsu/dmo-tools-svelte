@@ -194,7 +194,7 @@
 
 <aside
 	class={cn(
-		'relative z-raidBar flex h-raid-bar-h items-center',
+		'fixed left-1/2 top-header-h z-raidBar flex h-raid-bar-h -translate-x-1/2 items-center',
 		'bg-primary-10',
 		'text-xs2 leading-none',
 		'whitespace-nowrap rounded-md drop-shadow-md'

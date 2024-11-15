@@ -247,8 +247,11 @@ button:focus:not(:focus-visible) {
 		@apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
 	}
 	/* scroll box */
+	.custom-scroll {
+		@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
+	}
 	.scroll-box {
-		@apply overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
+		@apply custom-scroll overflow-y-auto;
 	}
 	/* border */
 	.point-neon {

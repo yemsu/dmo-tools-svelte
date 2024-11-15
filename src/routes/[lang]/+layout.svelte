@@ -64,6 +64,8 @@
 	<RaidBar />
 {/if}
 
-<AdLayout />
+{#if !isMain}
+	<AdLayout />
+{/if}
 <ToastPopup />
 <GlobalModal />
