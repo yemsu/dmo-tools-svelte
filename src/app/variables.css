@@ -1,0 +1,201 @@
+:root {
+	/* font size */
+	--body-md: 14px;
+	@media screen and (max-width: 768px) {
+		--body-md: 14px;
+	}
+
+	/* colors */
+	--primary-5: 214 82% 11%; /* hsl(214 82% 11%) */
+	--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
+	--primary-20: 219 67% 31%; /* hsl(219 67% 31%) */
+	--primary-30: 218 66% 38%; /* hsl(218 66% 38%) */
+	--primary-35: 212 71% 45%; /* hsl(212 71% 45%) */
+	--primary-40: 206 76% 51%; /* hsl(206 76% 51) */
+	--primary-50: 194 99% 49%; /* hsl(194 99% 49%) */
+	--primary-90: 181 100% 71%; /* hsl(181 100% 71%) */
+
+	--secondary-5: 208 46% 8%; /* hsl(208 46% 8%) */
+	--secondary-10: 207 48% 9.8%; /* hsl(207 48% 9.8%) */
+	--secondary-20: 203 25% 14.12%; /* hsl(203 25% 14.12%) */
+	--secondary-30: 196.36 30.02% 19.02%; /* hsl(196.36 34.02% 19.02%) */
+	--secondary-40: 195.43 22.88% 30%; /* hsl(195.43 22.88% 30%) */
+	--secondary-50: 188.28 12.13% 46.86%; /* hsl(188.28 12.13% 46.86%) */
+
+	--point: 120 100% 48%; /* hsl(120 100% 48%) */
+	--warning: 20 80% 48%; /* hsl(20 80% 48%) */
+	--red: 0 75% 42%; /* hsl(0 75% 42%) */
+
+	--stat-at: 185.69 93.55% 48.63%; /* hsl(185.69 93.55% 48.63%) */
+	--stat-ht: 60 100% 50.39%; /* hsl(60 100% 50.39%) */
+	--stat-ct: 35.8 98.35% 47.45%; /* hsl(35.8 98.35% 47.45%) */
+	--stat-hp: 12 80% 55%; /* hsl(12 80% 55%) */
+	--stat-ds: 180 100% 51.96%; /* hsl(180 100% 51.96%) */
+	--stat-bl: 180 0% 75%; /* hsl(180 0% 75%) */
+	--stat-ev: 94.62 100% 49.61%; /* hsl(94.62 100% 49.61%) */
+	--stat-de: 50 85% 50%; /* hsl(50 85% 50%) */
+
+	--price-t-1: #ea6228;
+	--price-t-2: #421921;
+	--price-m-1: #50b602;
+	--price-m-2: #1c4319;
+	--price-b-1: #bdbdbd;
+	--price-b-2: #1d1d1d;
+
+	/* size */
+	--header-h: 50px;
+	--gnb-h: 50px;
+	--raid-bar-h: 35px;
+	--content-w: 1000px;
+	--content-side: 16px;
+	--input-h: 40px;
+	--tab-h: 30px;
+	@media screen and (max-width: 768px) {
+		--content-w: 100%;
+		--content-side: 10px;
+		--gnb-h: 45px;
+		--input-h: 30px;
+		--tab-h: 25px;
+	}
+
+	/* Colors */
+	--background-color: 257, 10%, 93%; /* hsl(257, 10%, 93%) */
+
+	--blue-1: 180 100% 75%; /* #7DFFFF */
+	--blue-2: 186 100% 71%; /* #68E9FF */
+	--blue-3: 195 100% 67%; /* #55CCFF */
+	--blue-4: 204 100% 63%; /* #42ABFF */
+	--blue-5: 217 98% 59%; /* #3086fd */
+	--blue-6: 217 67% 54%; /* #2C7BE8 */
+	--blue-7: 217 67% 49%; /* #286FD2 */
+	--blue-8: 217 67% 44%; /* #2464BD */
+	--blue-9: 217 67% 39%; /* #2059A8 */
+	--blue-10: 217 67% 34%; /* #1C4E92 */
+	--blue-11: 217 67% 29%; /* #18427D */
+	--blue-12: 217 67% 24%; /* #143768 */
+
+	--orange-1: 30 4% 91%; /* hsl(30 4% 91%) */
+	--orange-2: 24 20% 89%; /* hsl(24 20% 89%) */
+	--orange-3: 20 42% 85%; /* hsl(20 42% 85%) */
+	--orange-4: 17 78% 81%; /* hsl(17 78% 81%) */
+	--orange-5: 17 82% 76%; /* hsl(17 82% 76%) */
+	--orange-6: 17 65% 71%; /* hsl(17 65% 71%) */
+	--orange-7: 20 57% 64%; /* hsl(20 57% 64%) */
+	--orange-8: 21 61% 55%; /* hsl(21 61% 55%) */
+	--orange-9: 27 97% 45%; /* hsl(27 97% 45%) */
+	--orange-10: 27 100% 41%; /* hsl(27 100% 41%) */
+	--orange-11: 24 100% 34%; /* hsl(24 100% 34%) */
+	--orange-12: 24 48% 22%; /* hsl(24 48% 22%) */
+
+	--gray-1: 210 4% 95%; /* hsl(210 4% 95%) */
+	--gray-2: 240 3% 91%; /* hsl(240 3% 91%) */
+	--gray-3: 220 5% 87%; /* hsl(220 5% 87%) */
+	--gray-4: 220 6% 82%; /* hsl(220 6% 82%) */
+	--gray-5: 220 7% 77%; /* hsl(220 7% 77%) */
+	--gray-6: 220 8% 70%; /* hsl(220 8% 70%) */
+	--gray-7: 220 9% 63%; /* hsl(220 9% 63%) */
+	--gray-8: 220 11% 55%; /* hsl(220 11% 55%) */
+	--gray-9: 220 5% 47%; /* hsl(220 5% 47%) */
+	--gray-10: 220 5% 43%; /* hsl(220 5% 43%) */
+	--gray-11: 220 7% 31%; /* hsl(220 7% 31%) */
+	--gray-12: 220 11% 13%; /* hsl(220 11% 13%) */
+
+	--gr-y-o: linear-gradient(to bottom, #ddd100, #ed5000);
+
+	/* Shadow Color */
+	--shadow-color-lg: hsla(var(--gray-11) / 0.2);
+
+	/* Font Weight */
+	--weight-light: 400;
+	--weight-normal: 500;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+
+	/* Font Size */
+	--font-sub-sm: 10px;
+	--font-sub-md: 11px;
+	--font-sub-lg: 12px;
+
+	--font-body-sm: 14px;
+	--font-body-md: 15px;
+	--font-body-lg: 16px;
+
+	--font-title-xs: 0px;
+	--font-title-sm: 0px;
+	--font-title-md: 0px;
+	--font-title-lg: 0px;
+	--font-title-xl: 0px;
+
+	@media screen and (max-width: 768px) {
+		--font-sub-sm: 15px;
+		--font-sub-md: 16px;
+		--font-sub-lg: 0px;
+
+		--font-body-xs: 0px;
+		--font-body-sm: 15px;
+		--font-body-md: 16px;
+		--font-body-lg: 0px;
+		--font-body-xl: 0px;
+
+		--font-title-xs: 0px;
+		--font-title-sm: 0px;
+		--font-title-md: 0px;
+		--font-title-lg: 0px;
+		--font-title-xl: 0px;
+	}
+}
+
+.dark {
+	/* Colors */
+	--background-color: 245 8% 10%; /* hsl(245 8% 10%) */
+
+	--blue-1: 217 67% 24%; /* #143768 */
+	--blue-2: 217 67% 29%; /* #18427D */
+	--blue-3: 217 67% 34%; /* #1C4E92 */
+	--blue-4: 217 67% 39%; /* #2059A8 */
+	--blue-5: 217 67% 44%; /* #2464BD */
+	--blue-6: 217 67% 49%; /* #286FD2 */
+	--blue-7: 217 67% 54%; /* #2C7BE8 */
+	--blue-8: 217 98% 59%; /* #3086fd */
+	--blue-9: 204 100% 63%; /* #42ABFF */
+	--blue-10: 195 100% 67%; /* #55CCFF */
+	--blue-11: 186 100% 71%; /* #68E9FF */
+	--blue-12: 180 100% 75%; /* #7DFFFF */
+
+	--orange-1: 12 15% 9%; /* hsl(12 15% 9%) */
+	--orange-2: 17 24% 11%; /* hsl(17 24% 11%) */
+	--orange-3: 23 45% 14%; /* hsl(23 45% 14%) */
+	--orange-4: 24 85% 16%; /* hsl(24 85% 16%) */
+	--orange-5: 22 76% 20%; /* hsl(22 76% 20%) */
+	--orange-6: 21 59% 25%; /* hsl(21 59% 25%) */
+	--orange-7: 20 54% 32%; /* hsl(20 54% 32%) */
+	--orange-8: 19 50% 42%; /* hsl(19 50% 42%) */
+	--orange-9: 22 86% 53%; /* hsl(22 86% 53%) */
+	--orange-10: 27 97% 45%; /* hsl(27 97% 45%) */
+	--orange-11: 24 100% 69%; /* hsl(24 100% 69%) */
+	--orange-12: 24 100% 90%; /* hsl(24 100% 90%) */
+
+	--gray-1: 240 15% 10%; /* hsl(240 15% 10%) */
+	--gray-2: 240 13% 13%; /* hsl(240 13% 13%) */
+	--gray-3: 240 13% 18%; /* hsl(240 13% 18%) */
+	--gray-4: 240 10% 24%; /* hsl(240 10% 24%) */
+	--gray-5: 240 10% 30%; /* hsl(240 10% 30%) */
+	--gray-6: 240 10% 37%; /* hsl(240 10% 37%) */
+	--gray-7: 240 10% 43%; /* hsl(240 10% 43%) */
+	--gray-8: 240 10% 52%; /* hsl(240 10% 52%) */
+	--gray-9: 240 10% 60%; /* hsl(240 10% 60%) */
+	--gray-10: 240 10% 72%; /* hsl(240 10% 72%) */
+	--gray-11: 240 13% 84%; /* hsl(240 13% 84%) */
+	--gray-12: 240 20% 95%; /* hsl(240 20% 95%) */
+
+	--gr-y-o: linear-gradient(to bottom, #fef102, #ed7000);
+
+	/* Font Weight */
+	--weight-light: 200;
+	--weight-normal: 300;
+	--weight-semibold: 400;
+	--weight-bold: 500;
+
+	/* Shadow Color */
+	--shadow-color-lg: hsla(var(--gray-3) / 0.5);
+}

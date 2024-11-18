@@ -8,6 +8,7 @@
 	import { lang, theme } from '$shared/model'
 	import 'iconify-icon'
 	import { onMount } from 'svelte'
+	import '../app/variables.css'
 	import '../app/app.css'
 	import '../lib/i18n'
 	import { browser } from '$app/environment'
