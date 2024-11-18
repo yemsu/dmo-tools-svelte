@@ -3,7 +3,9 @@ import type { SealExceptionStep, SealStepsByMaster } from '../types'
 export const SEAL_MASTER_COUNT_TYPE = [
 	50, 150, 200, 300, 400, 500, 700, 1000, 3000
 ] as const
+
 export const SEAL_PERCENT_STEPS = [10, 20, 40, 60, 80, 100] as const
+
 export const SEAL_GRADES = [
 	{ name: '노말', engName: 'Normal' },
 	{ name: '브론즈', engName: 'Bronze' },
@@ -12,6 +14,7 @@ export const SEAL_GRADES = [
 	{ name: '플래티넘', engName: 'Platinum' },
 	{ name: '마스터', engName: 'Master' }
 ] as const
+
 export const SEAL_COUNT_STEPS_BY_MASTER: SealStepsByMaster = {
 	'3000': [1, 50, 200, 500, 1000, 3000],
 	'1000': [1, 50, 200, 500, 700, 1000],
@@ -23,11 +26,20 @@ export const SEAL_COUNT_STEPS_BY_MASTER: SealStepsByMaster = {
 	'150': [1, 10, 30, 50, 100, 150],
 	'50': [1, 3, 10, 20, 30, 50]
 }
+
 export const SEAL_EXCEPTION_PERCENT: SealExceptionStep = {
 	'220': [
 		11.1111,
 		22.2222,
 		26.6666,
+		SEAL_PERCENT_STEPS[3],
+		SEAL_PERCENT_STEPS[4],
+		SEAL_PERCENT_STEPS[5]
+	],
+	'221': [
+		SEAL_PERCENT_STEPS[0],
+		SEAL_PERCENT_STEPS[1],
+		25,
 		SEAL_PERCENT_STEPS[3],
 		SEAL_PERCENT_STEPS[4],
 		SEAL_PERCENT_STEPS[5]
