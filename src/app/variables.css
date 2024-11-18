@@ -128,19 +128,19 @@
 	--font-title-xl: 34px;
 
 	@media screen and (max-width: 768px) {
-		--font-sub-sm: 9px;
-		--font-sub-md: 10px;
-		--font-sub-lg: 11px;
+		--font-sub-sm: 8px;
+		--font-sub-md: 9px;
+		--font-sub-lg: 10px;
 
-		--font-body-sm: 13px;
-		--font-body-md: 14px;
-		--font-body-lg: 15px;
+		--font-body-sm: 12px;
+		--font-body-md: 13px;
+		--font-body-lg: 14px;
 
-		--font-title-xs: 16px;
-		--font-title-sm: 18px;
-		--font-title-md: 20px;
-		--font-title-lg: 22px;
-		--font-title-xl: 38px;
+		--font-title-xs: 15px;
+		--font-title-sm: 17px;
+		--font-title-md: 19px;
+		--font-title-lg: 21px;
+		--font-title-xl: 24px;
 	}
 }
 

@@ -34,14 +34,16 @@
 <nav
 	class={cn(
 		'flex-center md:gap-5',
-		'sm:z-header sm:fixed sm:bottom-0 sm:w-full sm:bg-background',
+		'sm:fixed sm:bottom-0 sm:z-header sm:w-full sm:bg-background',
 		$$restProps.class
 	)}
 >
 	<h2 class="ir">글로벌 네비게이션</h2>
 	<ul
 		class={cn(
-			'flex h-gnb-h items-center justify-between gap-10 whitespace-nowrap p-1 font-semibold md:p-1.5',
+			'h-gnb-h items-center gap-10 whitespace-nowrap font-semibold ',
+			'md:flex md:justify-between md:p-1.5',
+			'sm:grid-cols-max sm:grid sm:grid-cols-3 sm:p-1',
 			isMain ? 'text-gray-11' : 'text-gray-9'
 		)}
 	>
@@ -52,9 +54,10 @@
 					<a
 						href="/{$lang}{MENUS[menuType].path}"
 						class={cn(
-							'flex-center hover:text-gray-12 h-full hover:font-bold',
-							'transition-colors sm:flex-col sm:gap-[1px]',
-							isActive && 'text-gray-12 font-bold'
+							'flex-center',
+							'h-full transition-colors hover:font-bold hover:text-gray-12',
+							'sm:flex-col sm:gap-[1px]',
+							isActive && 'font-bold text-gray-12'
 						)}
 					>
 						<Icon
@@ -62,7 +65,7 @@
 							size={menuIcons[menuType].size}
 							class={cn('md:hidden', menuIcons[menuType].class)}
 						/>
-						<span class="sm:text-xs5 relative">
+						<span class="sm:text-sub-sm relative">
 							<TextByLang data={MENUS[menuType]} />
 							{#if menuType === 'gacha'}
 								<NewBadge startDate="Wed Nov 13 2024 17:37:25" />
