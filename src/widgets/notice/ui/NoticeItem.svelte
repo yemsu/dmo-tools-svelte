@@ -14,18 +14,18 @@
 		slot="buttonSlot"
 		let:toggleModal
 		on:click={toggleModal}
-		class="group flex items-start justify-center gap-1 py-1 text-left text-xs"
+		class="text-body-sm group flex items-start justify-center gap-1 py-1 text-left"
 	>
-		<span class="rounded-full bg-gray-4 px-1 py-0.5 text-xs3">
+		<span class="text-sub-md rounded-full bg-gray-4 px-1 py-0.5">
 			{date}
 		</span>
-		<span class="group-hover:underline">
+		<span class="text-balance break-keep group-hover:underline">
 			{title[$lang]}
 		</span>
 	</button>
 	<article slot="popupContent">
 		<div class="flex w-full flex-col gap-2">
-			<Title>
+			<Title size="sm">
 				{title[$lang]}
 			</Title>
 			<time datetime="2024-11-07" class="font-semibold text-blue-8">
