@@ -17,7 +17,7 @@
 		trailOpacity: number
 	}
 
-	$: canvasBgColor = isDarkTheme ? 'rgb(209, 255, 255)' : 'rgb(50, 50, 50)'
+	$: starColor = isDarkTheme ? 'hsl(257, 10%, 93%)' : 'hsl(245, 8%, 10%)'
 
 	const defaultConfig = {
 		numStars: 2500,
@@ -105,8 +105,8 @@
 	$: drawStars = () => {
 		if (!ctx) return
 		const backgroundColor = isDarkTheme
-			? `rgba(0,10,20,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 다크모드
-			: `rgba(240,245,250,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 라이트모드
+			? `hsla(245, 8%, 10%,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 다크모드
+			: `hsla(257, 10%, 93%,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 라이트모드
 
 		ctx.fillStyle = backgroundColor
 		ctx.fillRect(0, 0, width, height)
@@ -118,10 +118,10 @@
 			const pixelRadius = 1 * (focalLength / star.z)
 
 			const size = isDarkTheme
-				? Math.min(Math.max(pixelRadius, 0.4), 2)
+				? Math.min(Math.max(pixelRadius, 0.8), 2.5)
 				: Math.min(Math.max(pixelRadius, 1), 3)
 
-			ctx.fillStyle = `${canvasBgColor.replace('rgb', 'rgba').replace(')', `, ${star.opacity})`)}`
+			ctx.fillStyle = `${starColor.replace('hsl', 'hsla').replace(')', `, ${star.opacity})`)}`
 			ctx.fillRect(pixelX, pixelY, size, size)
 		})
 	}
