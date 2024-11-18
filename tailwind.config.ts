@@ -123,6 +123,29 @@ export default {
 				'input-h': 'var(--input-h)',
 				'tab-h': 'var(--tab-h)'
 			},
+			fontSize: {
+				xs5: '8px',
+				xs4: '9px',
+				xs3: '10px',
+				xs2: '11px',
+				xs: '12px',
+				sm: '13px',
+				md: '14px',
+				lg: '16px',
+				lg2: '18px',
+				xl: '25px',
+				'sub-sm': 'var(--font-sub-sm)',
+				'sub-md': 'var(--font-sub-md)',
+				'sub-lg': 'var(--font-sub-lg)',
+				'body-sm': 'var(--font-body-sm)',
+				'body-md': 'var(--font-body-md)',
+				'body-lg': 'var(--font-body-lg)',
+				'title-xs': 'var(--font-title-xs)',
+				'title-sm': 'var(--font-title-sm)',
+				'title-md': 'var(--font-title-md)',
+				'title-lg': 'var(--font-title-lg)',
+				'title-xl': 'var(--font-title-xl)'
+			},
 			fontFamily: {
 				tiny: ['Tiny5', 'sans-serif', ...fontFamily.sans],
 				pretendard: ['"Pretendard Variable", Pretendard', ...fontFamily.sans],
@@ -143,19 +166,6 @@ export default {
 				dim: '980',
 				modal: '990',
 				toast: '999'
-			},
-			fontSize: {
-				'body-md': 'var(--body-md)',
-				xs5: '8px',
-				xs4: '9px',
-				xs3: '10px',
-				xs2: '11px',
-				xs: '12px',
-				sm: '13px',
-				md: '14px',
-				lg: '16px',
-				lg2: '18px',
-				xl: '25px'
 			}
 		}
 	},

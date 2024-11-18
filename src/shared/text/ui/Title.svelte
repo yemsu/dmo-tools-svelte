@@ -2,20 +2,33 @@
 	import { cn } from '$shared/lib'
 
 	export let tag: string = 'h2'
-	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md'
+	export let size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' = 'md'
+	export let weight: 'semibold' | 'bold' | 'extrabold' = 'semibold'
 
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
-		xs: 'text-sm font-semibold',
-		sm: 'text-[15px] font-semibold',
-		md: 'text-lg md:text-lg2 font-semibold',
-		lg: 'text-xl font-semibold'
+		xxs: 'text-body-lg',
+		xs: 'text-title-xs',
+		sm: 'text-title-sm',
+		md: 'text-title-md',
+		lg: 'text-title-lg',
+		xl: 'text-title-xl'
+	}
+	const weightStyles = {
+		semibold: 'font-semibold',
+		bold: 'font-bold',
+		extrabold: 'font-extrabold'
 	}
 </script>
 
 <svelte:element
 	this={tag}
-	class={cn('text-balance break-keep', sizeStyles[size], className)}
+	class={cn(
+		'text-balance break-keep',
+		sizeStyles[size],
+		weightStyles[weight],
+		className
+	)}
 	{...restProps}
 >
 	<slot></slot>

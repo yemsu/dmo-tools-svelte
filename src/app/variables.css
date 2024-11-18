@@ -110,6 +110,7 @@
 	--weight-normal: 500;
 	--weight-semibold: 600;
 	--weight-bold: 700;
+	--weight-extrabold: 800;
 
 	/* Font Size */
 	--font-sub-sm: 10px;
@@ -120,28 +121,26 @@
 	--font-body-md: 15px;
 	--font-body-lg: 16px;
 
-	--font-title-xs: 0px;
-	--font-title-sm: 0px;
-	--font-title-md: 0px;
-	--font-title-lg: 0px;
-	--font-title-xl: 0px;
+	--font-title-xs: 18px;
+	--font-title-sm: 20px;
+	--font-title-md: 22px;
+	--font-title-lg: 28px;
+	--font-title-xl: 34px;
 
 	@media screen and (max-width: 768px) {
-		--font-sub-sm: 15px;
-		--font-sub-md: 16px;
-		--font-sub-lg: 0px;
+		--font-sub-sm: 9px;
+		--font-sub-md: 10px;
+		--font-sub-lg: 11px;
 
-		--font-body-xs: 0px;
-		--font-body-sm: 15px;
-		--font-body-md: 16px;
-		--font-body-lg: 0px;
-		--font-body-xl: 0px;
+		--font-body-sm: 13px;
+		--font-body-md: 14px;
+		--font-body-lg: 15px;
 
-		--font-title-xs: 0px;
-		--font-title-sm: 0px;
-		--font-title-md: 0px;
-		--font-title-lg: 0px;
-		--font-title-xl: 0px;
+		--font-title-xs: 16px;
+		--font-title-sm: 18px;
+		--font-title-md: 20px;
+		--font-title-lg: 22px;
+		--font-title-xl: 38px;
 	}
 }
 
@@ -195,6 +194,7 @@
 	--weight-normal: 300;
 	--weight-semibold: 400;
 	--weight-bold: 500;
+	--weight-extrabold: 600;
 
 	/* Shadow Color */
 	--shadow-color-lg: hsla(var(--gray-3) / 0.5);
