@@ -8,18 +8,18 @@
 	const sizeStyles = {
 		sm: 'w-[300px] text-center',
 		md: 'w-[500px]',
-		lg: 'w-[700px]'
+		lg: 'w-[600px]'
 	}
 </script>
 
 <button
-	class="bg-dim fixed left-0 top-0 z-dim size-full bg-secondary-5/30 backdrop-blur-sm"
+	class="bg-dim fixed left-0 top-0 z-dim size-full bg-gray-2/40 backdrop-blur-md"
 	on:click={hideModal}
 ></button>
 <div
 	class={cn(
 		'position-fix-center z-modal max-w-full p-6',
-		'rounded-md border border-primary-20 bg-secondary-5',
+		'rounded-md bg-background drop-shadow-lg',
 		sizeStyles[size]
 	)}
 >

@@ -15,6 +15,7 @@ export default {
 		},
 		extend: {
 			fontWeight: {
+				light: 'var(--weight-light)',
 				normal: 'var(--weight-normal)',
 				semibold: 'var(--weight-semibold)',
 				bold: 'var(--weight-bold)'
@@ -132,7 +133,7 @@ export default {
 				'primary-90': '0 0 3px hsl(var(--primary-90))',
 				'primary-50': '0 0 5px hsl(var(--primary-50)/50%)',
 				'primary-30': '0 0 40px hsl(var(--primary-30)/30%)',
-				lg: '3px 3px 6px rgba(0,0,0,0.6)'
+				lg: '0px 0px 15px var(--shadow-color-lg)'
 			},
 			zIndex: {
 				header: '50',
