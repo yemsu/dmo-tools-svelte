@@ -10,7 +10,7 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
-		"dev": "vite dev & npm run check:watch",
+		"dev": "npm run check & vite dev",
 		"build": "npm run check && vite build",
 		"prepare": "husky"
 	},
