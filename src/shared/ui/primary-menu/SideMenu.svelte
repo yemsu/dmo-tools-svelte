@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cn } from '$shared/lib'
+	import { cn, isLandscape } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
 	import { Header } from '$shared/ui/header'
@@ -9,13 +9,13 @@
 <div
 	class={cn(
 		'fixed left-0 top-0 z-header bg-background',
-		'w-side-menu-w h-full',
+		'h-full w-side-menu-w',
 		$$restProps.class
 	)}
 >
 	<Inner size="full" class={cn('relative')}>
 		<Header />
-		{#if $lang === 'kr'}
+		{#if $isLandscape && $lang === 'kr'}
 			<RaidBar class="mt-6" />
 		{/if}
 	</Inner>

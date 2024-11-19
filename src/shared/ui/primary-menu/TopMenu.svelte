@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { cn } from '$shared/lib'
+	import { cn, isLandscape } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
 	import { Gnb } from '$shared/ui/gnb'
 	import { Header } from '$shared/ui/header'
@@ -14,7 +15,9 @@
 				$$restProps.class
 			)}
 		/>
-		<RaidBar />
+		{#if !$isLandscape && $lang === 'kr'}
+			<RaidBar />
+		{/if}
 	</Inner>
 	<Gnb />
 </div>

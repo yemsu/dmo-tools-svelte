@@ -10,3 +10,4 @@ export {
 } from './helper'
 export { _remove, _pick, _objKeys } from './util'
 export { checkNoMember, checkJoinProcess, checkMember } from './checkAuth'
+export { isLandscape } from './isLandscape'
