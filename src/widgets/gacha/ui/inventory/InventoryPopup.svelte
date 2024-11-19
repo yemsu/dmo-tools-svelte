@@ -49,7 +49,7 @@
 >
 	<BackBlur />
 	<h2
-		class="text-shadow bg-gr-b text-sub-md border-b border-primary-5 py-2 text-center leading-none shadow-[0px_-2px_1px_1px_hsl(var(--primary-50)/60%)] md:py-3 md:text-body-md"
+		class="text-shadow bg-gr-b border-b border-primary-5 py-2 text-center text-sub-md leading-none shadow-[0px_-2px_1px_1px_hsl(var(--primary-50)/60%)] md:py-3 md:text-body-md"
 	>
 		<TextByLang text="가방" engText="Inventory" />
 	</h2>
@@ -57,7 +57,7 @@
 		class="leading-0 flex items-center justify-between border-b border-primary-5 bg-primary-10/20 p-1.5 sm:py-1"
 	>
 		<div
-			class="text-sub-md3 md:text-sub-md2 flex items-center gap-[0.5em] text-gray-300"
+			class="flex items-center gap-[0.5em] text-body-sm text-gray-300 md:text-sub-md"
 		>
 			<h3 class="ir">
 				<TextByLang text="뽑기 횟수" engText="Gacha Counts" />
@@ -72,7 +72,7 @@
 					<div
 						class="flex-center gap-1 rounded-full bg-black/30 px-[0.8em] pb-[0.35em] pt-[0.5em] leading-none"
 					>
-						<dt class="text-gray-400">
+						<dt class="text-gray-9">
 							{(gacha[$lang === 'kr' ? 'name' : 'engName'] || '').replace(
 								' 디지털 드로우',
 								''
@@ -107,7 +107,7 @@
 							<GachaItemImage id={invenSlot.item.id} />
 							<ItemTooltip item={invenSlot.item} />
 							<span
-								class="text-shadow text-sub-md absolute bottom-0 right-1 shadow-sm"
+								class="text-shadow absolute bottom-0 right-1 text-sub-md shadow-sm"
 								>{invenSlot.count}</span
 							>
 						{/if}

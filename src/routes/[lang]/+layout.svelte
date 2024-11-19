@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { PUBLIC_BASE_URL } from '$env/static/public'
-	import { cn } from '$shared/lib'
+	import { cn, isLandscape } from '$shared/lib'
 	import { GlobalModal } from '$shared/modal'
 	import { lang } from '$shared/model'
 	import { ToastPopup } from '$shared/toast'
@@ -44,14 +44,21 @@
 <TopMenu class="landscape:hidden" />
 <SideMenu class="portrait:hidden" />
 
-<div class={cn('relative landscape:ml-side-menu-w')}>
+<div
+	class={cn(
+		'relative landscape:ml-side-menu-w',
+		!isMain && 'landscape:mr-side-ad-w'
+	)}
+>
 	{#if isMain}
 		<SpaceBackground />
 	{/if}
-	<main class="relative">
+	<main class="relative min-h-[100vh]">
 		<slot></slot>
 	</main>
-	<Footer />
+	{#if !$isLandscape}
+		<Footer />
+	{/if}
 </div>
 
 {#if !isMain}

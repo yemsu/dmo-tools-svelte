@@ -15,6 +15,7 @@
 	} from '$entities/raid'
 	import { PUBLIC_API_BASE_URL } from '$env/static/public'
 	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
+	import { Icon } from '$shared/icon'
 	import { _objKeys, cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
@@ -184,9 +185,9 @@
 
 <aside
 	class={cn(
-		'z-raidBar',
-		'whitespace-nowrap bg-background text-sub-md leading-none drop-shadow-md',
-		'rounded-md border border-blue-9',
+		'relative z-raidBar',
+		'whitespace-nowrap bg-blue-4/20 text-sub-lg leading-none',
+		'portrait:rounded-md',
 		$$restProps.class
 	)}
 >
@@ -195,24 +196,43 @@
 		<a
 			href="/{$lang}{MENUS.raid.path}"
 			class={cn(
-				'button-hover flex-center relative h-raid-bar-h w-full flex-1 gap-2 px-4'
+				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1',
+				'landscape:py-3'
 			)}
 			title="레이드 타이머 전체 보기"
 		>
 			{#if nextRaid}
-				<span class="flex items-center gap-2 leading-none">
-					<span class="flex gap-1">
+				<span
+					class={cn(
+						'flex max-w-full items-center gap-2 px-1 leading-none',
+						'landscape:gap-1'
+					)}
+				>
+					<span
+						class={cn(
+							'flex-shrink overflow-hidden',
+							'portrait:flex portrait:gap-1',
+							'landscape:flex landscape:flex-col landscape:gap-1.5'
+						)}
+					>
 						<RaidTitle title={nextRaid.name} />
 						<RaidLocation location={nextRaid.location} />
 					</span>
 					<RaidNextIcon />
-					<span class="flex flex-wrap items-center gap-x-1 gap-y-[0.1em]">
+					<span
+						class={cn(
+							'portrait:flex portrait:flex-wrap portrait:items-center portrait:gap-x-1 portrait:gap-y-[0.1em]',
+							'landscape:flex landscape:flex-col landscape:gap-1.5'
+						)}
+					>
 						<RaidAppearInfo time={nextRaid.time} />
 					</span>
 				</span>
 			{:else if $raids.length > 0}
-				보스 출현 정보를 제보해주세요!
-				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
+				<span class="flex-center gap-1">
+					<Icon icon="mdi:dinosaur-pixel" size={12} class="-mb-[1px]" />
+					보스 출현 정보를 제보해주세요!
+				</span>
 			{/if}
 		</a>
 		{#if isSseConnected === false}
@@ -220,7 +240,7 @@
 				class="flex-center button-hover h-[25px] w-full gap-1 bg-warning px-4"
 				on:click={initRaidSubscribe}
 			>
-				<iconify-icon icon="ooui:network-off" width={14} height={14} />
+				<Icon icon="ooui:network-off" size={14} />
 				<span>연결 재시도</span>
 			</button>
 		{/if}

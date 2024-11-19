@@ -8,5 +8,5 @@
 	icon="line-md:chevron-triple-right"
 	width={12}
 	height={12}
-	class={cn('-mb-[2px] text-gray-300', className)}
+	class={cn('-mb-[2px] text-gray-9', className)}
 />

@@ -66,7 +66,7 @@
 		>
 			<iconify-icon icon="majesticons:timer" width={16} height={16} />
 			<span
-				class="text-sub-md3 absolute left-1/2 top-1/2 -translate-x-[62%] -translate-y-[50%] rounded-full bg-white font-extrabold leading-none tracking-[-0.1em] text-blue-6"
+				class="bg-foreground absolute left-1/2 top-1/2 -translate-x-[62%] -translate-y-[50%] rounded-full text-body-sm font-extrabold leading-none tracking-[-0.1em] text-blue-6"
 				>{$alarmMinute}</span
 			>
 		</button>

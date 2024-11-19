@@ -11,7 +11,7 @@
 <button
 	class={cn(
 		'flex-center h-tab-h flex-1 gap-2 py-1',
-		'text-sub-md2 md:text-sub-md border transition-all md:border-2',
+		'border text-sub-md transition-all md:border-2 md:text-sub-md',
 		'hover:border-primary-50 hover:bg-primary-50/20',
 		isActive ? 'border-primary-50 bg-primary-50/20' : 'border-transparent'
 	)}

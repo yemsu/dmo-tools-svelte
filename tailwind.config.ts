@@ -22,7 +22,7 @@ export default {
 			},
 			colors: {
 				background: 'hsl(var(--background-color))',
-				white: 'hsl(var(--gray-12))',
+				foreground: 'hsl(var(--gray-12))',
 				blue: {
 					1: 'hsl(var(--blue-1))',
 					2: 'hsl(var(--blue-2))',
@@ -122,7 +122,8 @@ export default {
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)',
-				'tab-h': 'var(--tab-h)'
+				'tab-h': 'var(--tab-h)',
+				'side-ad-w': 'var(--side-ad-w)'
 			},
 			fontSize: {
 				xs5: '8px',

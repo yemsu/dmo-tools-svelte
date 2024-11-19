@@ -78,7 +78,7 @@
 				bind:inputElement
 				type="number"
 				id={`price-${sealId}`}
-				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px] text-white')}
+				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px]')}
 				step="0.1"
 				placeholder={isKr ? '씰 가격' : 'Seal Price'}
 				size="xs"

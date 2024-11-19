@@ -32,7 +32,6 @@
 </script>
 
 <!-- 타이머 출력 -->
-<span
-	class={cn('text-sub-md2 md:text-sub-md text-point', className)}
-	{...restProps}>{remainingTime}</span
+<span class={cn('text-sub-lg font-bold text-point', className)} {...restProps}
+	>{remainingTime}</span
 >

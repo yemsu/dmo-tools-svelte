@@ -27,10 +27,10 @@
 	<dl class="flex flex-col gap-1 whitespace-nowrap leading-none">
 		{#each datalist as data (data.key)}
 			<div class="flex items-center gap-1">
-				<dt class="text-sub-md2 sm:text-sub-md3 text-gray-200">
+				<dt class="text-sub-md text-gray-200 sm:text-body-sm">
 					<TextByLang {data} />
 				</dt>
-				<dd class="sm:text-sub-md2 text-point">
+				<dd class="text-point sm:text-sub-md">
 					{#if data.key === 'willGetStat' && isPercentType}
 						{effData[data.key] / 100}%
 					{:else}

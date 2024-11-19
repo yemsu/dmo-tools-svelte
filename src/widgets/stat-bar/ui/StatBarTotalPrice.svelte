@@ -23,11 +23,11 @@
 
 <span class="flex items-center gap-4 font-semibold">
 	{#each CURRENCY_UNITS as currencyUnit}
-		<span class="text-sub-md2 flex items-center gap-1 md:text-sm">
+		<span class="flex items-center gap-1 text-sub-md md:text-sm">
 			<span>{price[currencyUnit].toLocaleString()}</span>
 			<span
 				class={cn(
-					' text-sub-md3 md:text-sub-md h-[12px] w-[12px] leading-none md:h-[16px] md:w-[16px]',
+					' h-[12px] w-[12px] text-body-sm leading-none md:h-[16px] md:w-[16px] md:text-sub-md',
 					styles[currencyUnit]
 				)}>{currencyUnit}</span
 			>

@@ -337,28 +337,28 @@
 			<div>
 				<p class="flex-center gap-2 text-body-md leading-none md:text-lg2">
 					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-sub-md4 md:text-sub-md text-gray-300">
+						<span class="text-sub-lg text-gray-300 md:text-sub-md">
 							<TextByLang text="현재 내 능력치" engText="Current Stats" />
 						</span>
-						<span class="text-sub-md2 font-semibold text-point md:text-body-md">
+						<span class="text-sub-md font-semibold text-point md:text-body-md">
 							{numberFormatter($myStats[statTypeSelected])}{resultUnit}
 						</span>
 					</span>
 					<span>+</span>
 					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-sub-md3 md:text-sub-md text-gray-300">
+						<span class="text-body-sm text-gray-300 md:text-sub-md">
 							<TextByLang text="얻어야하는 능력치" engText="Required Stats" />
 						</span>
-						<span class="text-sub-md2 font-semibold text-point md:text-body-md"
+						<span class="text-sub-md font-semibold text-point md:text-body-md"
 							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
 						>
 					</span>
 					<span>=</span>
 					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-sub-md3 md:text-sub-md text-gray-300">
+						<span class="text-body-sm text-gray-300 md:text-sub-md">
 							<TextByLang text="최종 능력치" engText="Final Stats" />
 						</span>
-						<span class="text-sub-md2 font-semibold text-point md:text-body-md">
+						<span class="text-sub-md font-semibold text-point md:text-body-md">
 							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
 						</span>
 					</span>

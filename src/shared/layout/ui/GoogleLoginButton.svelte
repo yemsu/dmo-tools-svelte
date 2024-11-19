@@ -19,8 +19,12 @@
 	import { onMount } from 'svelte'
 
 	export let id: string = 'googleLogin'
-	export let size: 'small' | 'large' = 'small'
-	export let text: 'signin' | 'signin_with' = 'signin'
+	export let width: string = '168px'
+	export let shape: 'rectangular' | 'pill' | 'circle' | 'square' = 'rectangular'
+	export let theme: 'outline' | 'filled_blue' | 'filled_black' = 'filled_blue'
+	export let size: 'small' | 'medium' | 'large' = 'medium'
+	export let text: 'signin_with' | 'signup_with' | 'continue_with' | 'signin' =
+		'signin'
 
 	let isLoginButtonRendered: boolean | undefined = false
 
@@ -41,8 +45,12 @@
 		await delay(80)
 		if ($user) return
 		isLoginButtonRendered = onGoogleScriptLoad(id, onGoogleLogin, {
+			width: width || 'auto',
+			theme,
+			shape,
 			size,
-			text
+			text,
+			locale: $lang
 		})
 		if (!isLoginButtonRendered) renderButton()
 	}

@@ -8,15 +8,12 @@
 </script>
 
 <div class={$$restProps.class}>
-	<Inner>
-		<Header
-			class={cn(
-				'flex h-header-h items-center justify-between',
-				$$restProps.class
-			)}
-		/>
-		{#if !$isLandscape && $lang === 'kr'}
-			<RaidBar />
+	<Inner class="h-header-h">
+		{#if !$isLandscape}
+			<Header class={cn('flex h-full items-center justify-between')} />
+			{#if $lang === 'kr'}
+				<RaidBar />
+			{/if}
 		{/if}
 	</Inner>
 	<Gnb />

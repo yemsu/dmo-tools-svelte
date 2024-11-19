@@ -5,6 +5,6 @@
 	export let channel: RaidTimeData['channel']
 </script>
 
-<Badge size="md" color="primary-30">
+<Badge size="sm" color="blue">
 	{channel} 채널
 </Badge>

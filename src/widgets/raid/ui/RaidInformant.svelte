@@ -8,8 +8,8 @@
 	const { class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
-		sm: 'text-sub-md3 md:text-sub-md2',
-		md: 'text-sub-md3 md:text-sub-md'
+		sm: 'text-body-sm md:text-sub-md',
+		md: 'text-body-sm md:text-sub-md'
 	}
 
 	const getUserGrade = (timerCompleteCount: number) => {
@@ -34,9 +34,9 @@
 	{#if user}
 		{#if user?.id === 20}
 			<!-- 관리자 -->
-			<span class="text-sub-md2" title={`관리자`}>🦀</span>
+			<span class="text-sub-md" title={`관리자`}>🦀</span>
 		{:else}
-			<span class="text-sub-md3 contrast-75">
+			<span class="text-body-sm contrast-75">
 				{getUserGrade(user?.timerCompleteCount || 0)}
 			</span>
 		{/if}

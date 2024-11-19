@@ -1,22 +1,32 @@
 <script lang="ts">
 	import { cn, isLandscape } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { Inner } from '$shared/section'
+	import { Footer } from '$shared/ui/footer'
+	import { Gnb } from '$shared/ui/gnb'
 	import { Header } from '$shared/ui/header'
 	import { RaidBar } from '$widgets/raid-bar'
 </script>
 
 <div
 	class={cn(
-		'fixed left-0 top-0 z-header bg-background',
+		'fixed left-0 top-0 z-header flex flex-col border-r border-gray-3 bg-background',
 		'h-full w-side-menu-w',
 		$$restProps.class
 	)}
 >
-	<Inner size="full" class={cn('relative')}>
-		<Header />
-		{#if $isLandscape && $lang === 'kr'}
-			<RaidBar class="mt-6" />
-		{/if}
-	</Inner>
+	{#if $isLandscape}
+		<div class="px-content-side">
+			<Header>
+				<Gnb />
+				<div class="my-6 border-b border-gray-3 portrait:hidden"></div>
+			</Header>
+		</div>
+
+		<div class="mt-auto">
+			{#if $lang === 'kr'}
+				<RaidBar />
+			{/if}
+			<Footer />
+		</div>
+	{/if}
 </div>

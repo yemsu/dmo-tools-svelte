@@ -41,7 +41,7 @@
 <p class="mt-1 rounded-full bg-black/90 pr-2">
 	<span
 		class="rounded-full px-1 py-0.5 md:px-2 {grade &&
-			gradeBgStyles[grade.name]} text-sub-md4 md:text-sub-md3"
+			gradeBgStyles[grade.name]} text-sub-lg md:text-body-sm"
 		title={$_('grade')}
 	>
 		<TextByLang data={grade} />
@@ -50,7 +50,7 @@
 		class="font-bold {grade &&
 			gradeTextStyles[
 				grade.name
-			]} text-sub-md2 md:text-sub-md py-0.5 brightness-150 saturate-200"
+			]} py-0.5 text-sub-md brightness-150 saturate-200 md:text-sub-md"
 		>+{result / calcNum}{dataUnit}</span
 	>
 </p>

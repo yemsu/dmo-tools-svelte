@@ -18,7 +18,7 @@
 <Section size="sm" class="gap-10">
 	<div class="flex-col-center gap-2 text-center">
 		<Title size="lg">로그인</Title>
-		<p class="text-balance break-keep text-gray-400">
+		<p class="text-balance break-keep text-gray-9">
 			<TextByLang
 				text="로그인 후 보유 씰을 설정하고 효율 계산기로 씰 구매 효율 리스트를 간편하게 확인해보세요"
 				engText="After logging in, set up your owned seals and easily check the seal purchase efficiency list using the efficiency calculator."

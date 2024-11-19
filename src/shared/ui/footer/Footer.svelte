@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from '$shared/button'
+	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
 	import { LangButton } from '$shared/ui/header'
@@ -17,17 +18,17 @@
 	]
 </script>
 
-<footer class="mt-8 w-full py-8">
-	<Inner class="text-gray-11 md:text-center">
-		<div class="flex items-center md:justify-center sm:justify-between">
-			<p class="font-tiny leading-none md:text-2xl sm:text-3xl">DMO tools</p>
-			<div class="flex-center gap-2 md:hidden">
+<footer class={cn('mt-8 w-full py-8', $$restProps.class)}>
+	<Inner class="text-gray-10">
+		<div class="flex items-center justify-between">
+			<!-- <p class="font-tiny text-3xl leading-none">DMO tools</p> -->
+			<div class="flex-center gap-2">
 				<ThemeToggleButton />
 				<LangButton />
 			</div>
 		</div>
 		<div class="mt-4 text-sm">
-			<div class="flex gap-4 md:justify-center">
+			<div class="flex flex-wrap gap-2">
 				{#each links as { href, text } (text)}
 					<Button size="text" {href} class="font-semibold">
 						{text[$lang]}
@@ -36,7 +37,7 @@
 				{/each}
 				<SupportGuide />
 			</div>
-			<p class="mt-4">
+			<p class="mt-4 font-light">
 				© 2024. DMO tools All rights reserved. <br />
 				This site is not associated with Digimon Masters Online.
 			</p>

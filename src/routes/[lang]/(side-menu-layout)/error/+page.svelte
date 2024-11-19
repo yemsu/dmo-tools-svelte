@@ -55,7 +55,7 @@
 				<TextByLang text="점검중" engText="Under Maintenance" />
 			</span>
 		</p>
-		<p class="max-w-[500px] text-pretty text-gray-400">
+		<p class="max-w-[500px] text-pretty text-gray-9">
 			<TextByLang
 				text="신규 기능 추가를 위한 서버 점검이 진행 중입니다. (약 5분 소요 예정)"
 				engText="Server maintenance is currently underway to add new features. (Expected to take approximately 5 minutes)"

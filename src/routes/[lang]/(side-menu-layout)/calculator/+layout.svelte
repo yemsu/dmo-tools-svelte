@@ -19,7 +19,7 @@
 	import { PATH } from '$shared/config'
 	import { cn, objectBy } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { Section } from '$shared/section'
+	import { Inner } from '$shared/section'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import CharacterDropdown from '$widgets/character-dropdown/CharacterDropdown.svelte'
@@ -123,12 +123,11 @@
 	$: !$user && clearCharacters()
 </script>
 
-<Section>
+<section>
 	<div class="flex items-center">
 		{#if $user}
 			<CharacterDropdown />
 		{/if}
-
 		<Tabs class={cn('flex-1', $user && 'rounded-l-none')}>
 			{#each SUB_MENUS as subMenu ($lang + subMenu.path)}
 				<Tab
@@ -142,4 +141,4 @@
 		</Tabs>
 	</div>
 	<slot></slot>
-</Section>
+</section>

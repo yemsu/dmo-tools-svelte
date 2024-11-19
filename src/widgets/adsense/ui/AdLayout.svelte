@@ -9,7 +9,7 @@
 
 	const adCommonStyle = cn(import.meta.env.DEV && 'bg-blue-9/10')
 	const sideFixedCommonStyle = cn(
-		'fixed top-header-h flex h-[calc(100vh-var(--header-h))] w-[clamp(192px,calc((100vw-var(--content-w))/2),330px)] justify-center px-content-side py-header-h'
+		'fixed flex h-[100vh] w-side-ad-w justify-center'
 	)
 	const isServer = import.meta.env.SSR
 
@@ -60,7 +60,7 @@
 	{/if}
 </div>
 {#if idAdVisibleRefreshFlag}
-	<div
+	<!-- <div
 		class={cn(
 			adCommonStyle,
 			sideFixedCommonStyle,
@@ -69,13 +69,13 @@
 		)}
 	>
 		<Adsense adType="left" visibleDevice="pc" />
-	</div>
+	</div> -->
 	<div
 		class={cn(
 			adCommonStyle,
 			sideFixedCommonStyle,
-			'right-[calc(50%-(var(--content-w)/2))] translate-x-full overflow-hidden',
-			'adMobile:hidden'
+			'right-0 top-0 overflow-hidden',
+			'portrait:hidden'
 		)}
 	>
 		<Adsense adType="right" visibleDevice="pc" />

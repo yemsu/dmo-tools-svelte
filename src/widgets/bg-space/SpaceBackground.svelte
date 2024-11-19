@@ -17,7 +17,7 @@
 		trailOpacity: number
 	}
 
-	$: starColor = isDarkTheme ? 'hsl(257, 10%, 93%)' : 'hsl(245, 8%, 10%)'
+	$: starColor = isDarkTheme ? 'hsl(190, 80%, 88%)' : 'hsl(350, 80%, 10%)'
 
 	const defaultConfig = {
 		numStars: 2500,
@@ -105,8 +105,8 @@
 	$: drawStars = () => {
 		if (!ctx) return
 		const backgroundColor = isDarkTheme
-			? `hsla(245, 8%, 10%,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 다크모드
-			: `hsla(257, 10%, 93%,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})` // 라이트모드
+			? `hsla(245, 8%, 10%,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})`
+			: `hsla(190, 10%, 93%,${activeConfig.trailEffect ? 1 - config.trailOpacity : 1})`
 
 		ctx.fillStyle = backgroundColor
 		ctx.fillRect(0, 0, width, height)

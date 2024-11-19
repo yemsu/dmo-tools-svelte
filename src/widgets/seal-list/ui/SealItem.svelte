@@ -51,7 +51,7 @@
 
 <article
 	class={cn(
-		'text-sub-md2 md:text-sub-md relative flex flex-col justify-center text-center'
+		'relative flex flex-col justify-center text-center text-sub-md md:text-sub-md'
 	)}
 >
 	<div
@@ -70,7 +70,7 @@
 			{$lang === 'kr' ? seal.name : seal.engName}
 		</h2>
 		<p
-			class="text-sub-md4 md:text-sub-md3 absolute left-[3px] top-0 text-gray-6"
+			class="absolute left-[3px] top-0 text-sub-lg text-gray-6 md:text-body-sm"
 		>
 			#{seal.id}
 		</p>
@@ -88,16 +88,16 @@
 				{/each}
 				{#if myStep}
 					<div class="rounded-sm bg-white/10 p-1">
-						<p class="text-sub-md3 mb-1">
+						<p class="mb-1 text-body-sm">
 							<TextByLang text="현재 내 능력치" engText="Current My Level" />
 						</p>
-						<ol class="text-sub-md3 flex items-center gap-1 leading-none">
+						<ol class="flex items-center gap-1 text-body-sm leading-none">
 							{#each SEAL_COUNT_STEPS_BY_MASTER[`${seal.masterCount}`] as sealCount}
 								<li
 									class={cn(
 										myStep.sealCount === sealCount
 											? 'rounded-md bg-blue-6 p-1'
-											: 'text-gray-400'
+											: 'text-gray-9'
 									)}
 								>
 									{sealCount}

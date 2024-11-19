@@ -32,7 +32,7 @@
 				<RaidInformant user={nextTime.user} size="sm" class="opacity-80" />
 			</span>
 		{:else}
-			<span class="text-sub-md2 md:text-sub-md text-gray-400">제보 없음</span>
+			<span class="text-sub-md text-gray-9 md:text-sub-md">제보 없음</span>
 		{/if}
 	</span>
 </span>

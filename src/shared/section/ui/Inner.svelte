@@ -10,7 +10,7 @@
 </script>
 
 <div
-	class={cn('max-w-full px-content-side', sizeStyles[size], className)}
+	class={cn('relative max-w-full px-content-side', sizeStyles[size], className)}
 	{...restProps}
 >
 	<slot></slot>

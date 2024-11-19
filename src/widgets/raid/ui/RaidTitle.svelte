@@ -4,14 +4,6 @@
 	export let title: RaidData['name']
 </script>
 
-<span
-	class="overflow-hiddenflex text-sub-md shrink-0 gap-1 break-keep leading-[1.2] md:text-sm"
->
-	<iconify-icon
-		icon="mdi:dinosaur-pixel"
-		width={12}
-		height={12}
-		class="-mb-[1px]"
-	/>
+<span class="overflow-hidden truncate text-sub-lg leading-none">
 	{title}
 </span>
