@@ -98,17 +98,6 @@
 		}, 5000)
 	}
 
-	onMount(async () => {
-		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
-		alarmMinute.loadSavedData()
-		document.addEventListener('visibilitychange', checkEventSourceConnect)
-	})
-
-	onDestroy(() => {
-		if (typeof window === 'undefined') return
-		document.removeEventListener('visibilitychange', checkEventSourceConnect)
-	})
-
 	$: $crrServerType && initRaidSubscribe()
 
 	const notify = (_nextRaid: NextRaidData) => {
@@ -177,9 +166,15 @@
 			isSseSupported = false
 			return
 		}
+		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
+		alarmMinute.loadSavedData()
+		document.addEventListener('visibilitychange', checkEventSourceConnect)
 	})
 
 	onDestroy(() => {
+		if (typeof window === 'undefined') return
+		document.removeEventListener('visibilitychange', checkEventSourceConnect)
+		subscribeClientId.set(undefined)
 		clearInterval(alarmTimer)
 	})
 
