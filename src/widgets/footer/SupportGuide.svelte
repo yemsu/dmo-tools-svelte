@@ -6,12 +6,18 @@
 </script>
 
 {#if $lang === 'kr'}
-	<Button size="text" href="https://open.kakao.com/o/skcN4IDg" target="_blank">
+	<Button
+		variant="link"
+		size="text"
+		href="https://open.kakao.com/o/skcN4IDg"
+		target="_blank"
+	>
 		{$_('support')}
 	</Button>
 {:else}
 	<Modal>
 		<Button
+			variant="link"
 			size="text"
 			slot="buttonSlot"
 			class="flex-col-center"

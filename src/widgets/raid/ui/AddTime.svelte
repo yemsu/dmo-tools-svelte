@@ -96,13 +96,10 @@
 
 {#if !isShowForm}
 	<div class="flex-center mt-2 flex-wrap gap-2">
-		<p class="text-sub-md text-gray-300">올바른 보스 제보가 없나요?</p>
-		<Button
-			on:click={onToggleShowForm}
-			size="sm"
-			class="bg-primary-50 font-bold text-secondary-5"
-			rounded="md">보스 제보하기</Button
-		>
+		<p class="text-sub-md text-gray-10">올바른 보스 제보가 없나요?</p>
+		<Button on:click={onToggleShowForm} size="sm" variant="blue">
+			보스 제보하기
+		</Button>
 	</div>
 {:else}
 	<div class="mt-2 flex items-center justify-between gap-2">
@@ -113,12 +110,7 @@
 				보스 출현까지 남은 시간을 입력해주세요
 			{/if}
 		</p>
-		<Button
-			on:click={onToggleShowForm}
-			size="sm"
-			class="bg-gray-5 "
-			rounded="md">취소</Button
-		>
+		<Button on:click={onToggleShowForm} size="sm" variant="gray">취소</Button>
 	</div>
 	<section class="mt-2">
 		<h2 class="ir">보스 제보</h2>
@@ -149,12 +141,7 @@
 					bind:value={form.timeRemaining}
 					on:input={onInput}
 				/>
-				<Button
-					type="submit"
-					size="sm"
-					rounded="md"
-					class="point-neon shrink-0"
-				>
+				<Button type="submit" size="sm" variant="blue" class="shrink-0">
 					+ 보스 제보
 				</Button>
 			</form>

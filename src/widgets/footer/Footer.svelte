@@ -30,7 +30,7 @@
 		<div class="mt-4 text-sm">
 			<div class="flex flex-wrap gap-2">
 				{#each links as { href, text } (text)}
-					<Button size="text" {href} class="font-semibold">
+					<Button variant="link" size="text" {href} class="font-semibold">
 						{text[$lang]}
 					</Button>
 					<div class="h-[1.1em] w-[1px] bg-gray-5"></div>

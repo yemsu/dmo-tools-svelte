@@ -4,7 +4,7 @@
 	import { theme } from '$shared/model'
 </script>
 
-<Button size="icon" variant="ghost" rounded="md" on:click={theme.toggle}>
+<Button size="icon" variant="ghost" on:click={theme.toggle}>
 	{#if $theme === 'dark'}
 		<Icon icon="si:moon-line" size={18} />
 	{:else}

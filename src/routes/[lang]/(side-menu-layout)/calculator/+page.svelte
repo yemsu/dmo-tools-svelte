@@ -269,7 +269,7 @@
 					: '')}
 			bind:value={goalStat}
 		/>
-		<Button rounded="md" size="lg" class="point-neon h-input-h font-semibold">
+		<Button variant="blue" size="lg" class="font-semibold">
 			{TEXTS.VIEW_RESULT[$lang]}
 		</Button>
 	</form>
@@ -296,8 +296,8 @@
 				<SealCalcData {effData} {isPercentType} />
 				<Button
 					type="button"
+					variant="blue"
 					size="sm"
-					class="bg-blue-6"
 					on:click={() => addToMySeal(effData, seal)}
 				>
 					<iconify-icon icon="mdi:check" width={15} height={15} />
@@ -319,7 +319,7 @@
 					engText="The seal prices have been updated after the efficiency calculation. Please click the button below to recalculate!"
 				/>
 			</p>
-			<Button rounded="md" size="lg" class="point-neon" on:click={onSubmit}>
+			<Button variant="blue" size="lg" on:click={onSubmit}>
 				<TextByLang text="계산 다시하기" engText="Recalculate the values." />
 			</Button>
 		</div>

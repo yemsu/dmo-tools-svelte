@@ -2,7 +2,7 @@
 	import { cn } from '$shared/lib'
 
 	export let icon: string
-	export let size: number | null = null
+	export let size: number | string | null = null
 </script>
 
 <iconify-icon

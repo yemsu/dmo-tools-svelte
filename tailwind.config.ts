@@ -23,6 +23,7 @@ export default {
 			colors: {
 				background: 'hsl(var(--background-color))',
 				foreground: 'hsl(var(--gray-12))',
+				skeleton: 'hsl(var(--gray-2))',
 				blue: {
 					1: 'hsl(var(--blue-1))',
 					2: 'hsl(var(--blue-2))',

@@ -1,0 +1,17 @@
+export type ButtonRounded = 'full' | 'md'
+export type ButtonVariant =
+	| 'point'
+	| 'blue'
+	| 'ghost'
+	| 'gray'
+	| 'danger'
+	| 'outline'
+	| 'link'
+export type ButtonSize =
+	| 'text'
+	| 'icon'
+	| 'icon-md'
+	| 'sm'
+	| 'md'
+	| 'md-lg'
+	| 'lg'

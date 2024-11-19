@@ -27,11 +27,6 @@
 	}
 </script>
 
-<Button
-	size="md-lg"
-	rounded="md"
-	class="bg-warning py-2"
-	on:click={onClickResign}
->
+<Button size="sm" variant="danger" on:click={onClickResign}>
 	<TextByLang text="탈퇴" engText="Withdrawal" />
 </Button>

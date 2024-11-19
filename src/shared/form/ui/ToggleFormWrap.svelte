@@ -66,7 +66,7 @@
 				<Button
 					size="icon"
 					rounded="md"
-					variant={!isValid ? 'outline' : 'submit-primary'}
+					variant={!isValid ? 'outline' : 'blue'}
 					disabled={!isValid}
 					title={$_('done')}
 				>
@@ -76,7 +76,7 @@
 				<Button
 					size="lg"
 					rounded="md"
-					variant={!isValid ? 'gray' : 'submit-primary'}
+					variant={!isValid ? 'gray' : 'blue'}
 					disabled={!isValid}
 				>
 					{$_('done')}

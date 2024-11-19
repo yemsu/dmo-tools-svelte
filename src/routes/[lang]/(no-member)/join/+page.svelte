@@ -82,7 +82,7 @@
 				<ValidationText {value} {setIsValid} schema={NICKNAME_SCHEMA} />
 			</div>
 		</div>
-		<Button size="lg" rounded="md" class="bg-blue-6" disabled={!isValid}>
+		<Button variant="blue" size="lg" disabled={!isValid}>
 			<TextByLang text="결정했어요" engText="Confirm" />
 		</Button>
 	</form>

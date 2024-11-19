@@ -3,6 +3,7 @@
 	import { Icon } from '$shared/icon'
 	import { toast } from '$shared/toast'
 	import { cn } from '$shared/lib'
+	import { Button } from '$shared/button'
 
 	$: toggleAudioAlarm = () => {
 		const newIsAudioOn = !$isAudioOn
@@ -16,7 +17,9 @@
 	}
 </script>
 
-<button
+<Button
+	size="icon-md"
+	variant="outline"
 	class={cn(
 		'button-hover h-full px-2',
 		!$isAudioOn && 'text-gray-8',
@@ -25,5 +28,5 @@
 	title={$isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
 	on:click={toggleAudioAlarm}
 >
-	<Icon icon="mdi:bell{$isAudioOn ? '' : '-off'}" width={14} height={14} />
-</button>
+	<Icon icon="mdi:bell{$isAudioOn ? '' : '-off'}" size={18} />
+</Button>

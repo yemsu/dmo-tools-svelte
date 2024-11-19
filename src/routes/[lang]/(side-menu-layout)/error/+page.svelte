@@ -103,18 +103,14 @@
 				</p>
 				<div class="grid-cols-max grid grid-cols-2 gap-2">
 					{#if $lang === 'kr'}
-						<Button
-							href={EXTERNAL_LINK.SUPPORT}
-							variant="submit-secondary"
-							size="lg"
-						>
+						<Button href={EXTERNAL_LINK.SUPPORT} variant="blue" size="lg">
 							{$_('support')}
 						</Button>
 					{:else}
 						<Modal>
 							<Button
 								slot="buttonSlot"
-								variant="submit-secondary"
+								variant="blue"
 								size="lg"
 								let:toggleModal
 								on:click={toggleModal}

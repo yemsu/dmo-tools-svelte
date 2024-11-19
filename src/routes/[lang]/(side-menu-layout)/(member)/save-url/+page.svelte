@@ -160,7 +160,7 @@
 	<figure>
 		<img src={urlExampleSrc} alt="url 예시" />
 		<figcaption
-			class="text-sub-md mt-2 text-center leading-[1.3] text-gray-300"
+			class="mt-2 text-center text-sub-md leading-[1.3] text-gray-300"
 		>
 			그동안 사이트를 사용하면서 쌓인 데이터가 url에 저장되어 있어요! <br />
 			url 전체를 복사해서 붙여 넣어 주세요.
@@ -172,9 +172,9 @@
 	>
 		<textarea
 			bind:this={textareaElement}
-			class="text-sub-md min-h-[15em] w-full font-extralight"
+			class="min-h-[15em] w-full text-sub-md font-extralight"
 			bind:value={userUrl}
 		/>
-		<Button size="lg" class="bg-blue-6">데이터 저장하기</Button>
+		<Button variant="blue" size="lg">데이터 저장하기</Button>
 	</form>
 </Section>

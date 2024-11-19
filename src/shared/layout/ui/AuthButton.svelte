@@ -41,6 +41,8 @@
 			on:click={() => {
 				goto(`/${$lang}${PATH.MY_INFO}`)
 			}}
+			size="md"
+			variant="ghost"
 			class="w-full justify-between"
 		>
 			{$user.nickname}
