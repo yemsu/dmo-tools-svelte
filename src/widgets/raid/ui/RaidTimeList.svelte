@@ -48,18 +48,18 @@
 					{#each raidTimeByChannel[channel] as time, i}
 						<li
 							class={cn(
-								'rounded-md bg-gray-800',
+								'rounded-md bg-gray-3',
 								i === 0 ? 'border-b border-t border-primary-50/50' : ''
 							)}
 						>
 							<span class="ir">정확도 {i + 1}순위</span>
 							<button
-								class="button-hover flex h-[35px] w-full items-center justify-between py-1.5 text-xs"
+								class="button-hover text-sub-md flex h-[35px] w-full items-center justify-between py-1.5"
 								title="좋아요"
 								on:click={() => onClickVote(raid, time)}
 							>
 								<span
-									class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 text-xs3 md:min-w-[5em] md:text-xs2"
+									class="flex-center text-sub-md3 md:text-sub-md2 min-w-[4em] gap-[0.3em] border-r border-gray-5 md:min-w-[5em]"
 								>
 									<iconify-icon icon="oi:heart" width="1em" height="1em" />
 									{time.voteCount + 1}

@@ -21,7 +21,7 @@
 	<span
 		class={cn(
 			'flex shrink-0 items-center gap-1.5',
-			'sm:mt-1.5 sm:flex-col sm:items-start sm:border-t sm:border-gray-800 sm:pt-1.5'
+			'sm:mt-1.5 sm:flex-col sm:items-start sm:border-t sm:border-gray-3 sm:pt-1.5'
 		)}
 	>
 		{#if nextTime}
@@ -32,7 +32,7 @@
 				<RaidInformant user={nextTime.user} size="sm" class="opacity-80" />
 			</span>
 		{:else}
-			<span class="text-xs2 text-gray-400 md:text-xs">제보 없음</span>
+			<span class="text-sub-md2 md:text-sub-md text-gray-400">제보 없음</span>
 		{/if}
 	</span>
 </span>

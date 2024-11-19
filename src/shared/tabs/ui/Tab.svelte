@@ -7,10 +7,9 @@
 	$: commonProps = {
 		class: cn(
 			'flex-center size-full whitespace-nowrap rounded-md px-2 font-semibold transition-colors md:min-w-[45px] md:py-1.5 h-tab-h',
-			isActive === true && 'bg-secondary-10',
-			isActive === false &&
-				'opacity-30 hover:bg-secondary-10/60 hover:opacity-100',
-			isActive === null && 'hover:bg-secondary-10',
+			isActive === true && 'bg-gray-4',
+			isActive === false && 'opacity-30 hover:bg-gray-4/60 hover:opacity-100',
+			isActive === null && 'hover:bg-gray-4',
 			className
 		),
 		...restProps

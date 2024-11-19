@@ -2,6 +2,7 @@
 	import { audioAlarm, isAudioOn } from '../model'
 	import { Icon } from '$shared/icon'
 	import { toast } from '$shared/toast'
+	import { cn } from '$shared/lib'
 
 	$: toggleAudioAlarm = () => {
 		const newIsAudioOn = !$isAudioOn
@@ -16,7 +17,11 @@
 </script>
 
 <button
-	class="button-hover h-full bg-primary-30 px-2"
+	class={cn(
+		'button-hover h-full px-2',
+		!$isAudioOn && 'text-gray-8',
+		$$restProps.class
+	)}
 	title={$isAudioOn ? '알림음 활성화 상태' : '알림음 비활성화 상태'}
 	on:click={toggleAudioAlarm}
 >

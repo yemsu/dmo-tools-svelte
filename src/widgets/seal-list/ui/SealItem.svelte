@@ -51,7 +51,7 @@
 
 <article
 	class={cn(
-		'relative flex flex-col justify-center text-center text-xs2 md:text-xs'
+		'text-sub-md2 md:text-sub-md relative flex flex-col justify-center text-center'
 	)}
 >
 	<div
@@ -69,7 +69,9 @@
 		>
 			{$lang === 'kr' ? seal.name : seal.engName}
 		</h2>
-		<p class="absolute left-[3px] top-0 text-xs4 text-gray-500 md:text-xs3">
+		<p
+			class="text-sub-md4 md:text-sub-md3 absolute left-[3px] top-0 text-gray-6"
+		>
 			#{seal.id}
 		</p>
 		<Tooltip size="sm" useAdaptiveX={true} class="top-4">
@@ -86,15 +88,15 @@
 				{/each}
 				{#if myStep}
 					<div class="rounded-sm bg-white/10 p-1">
-						<p class="mb-1 text-xs3">
+						<p class="text-sub-md3 mb-1">
 							<TextByLang text="현재 내 능력치" engText="Current My Level" />
 						</p>
-						<ol class="flex items-center gap-1 text-xs3 leading-none">
+						<ol class="text-sub-md3 flex items-center gap-1 leading-none">
 							{#each SEAL_COUNT_STEPS_BY_MASTER[`${seal.masterCount}`] as sealCount}
 								<li
 									class={cn(
 										myStep.sealCount === sealCount
-											? 'rounded-md bg-primary-30 p-1'
+											? 'rounded-md bg-blue-6 p-1'
 											: 'text-gray-400'
 									)}
 								>

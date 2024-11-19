@@ -12,10 +12,10 @@
 	const { name, class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
-		xs: 'h-[25px] text-xs px-1',
-		sm: 'h-[30px] text-xs px-1',
-		'sm-md': 'h-[30px] text-xs md:text-md px-2',
-		md: 'h-input-h px-2 text-xs md:text-md'
+		xs: 'h-[25px] text-sub-md px-1',
+		sm: 'h-[30px] text-sub-md px-1',
+		'sm-md': 'h-[30px] text-sub-md md:text-body-md px-2',
+		md: 'h-input-h px-2 text-sub-md md:text-body-md'
 	}
 
 	const handleInput = (event: Event) => {

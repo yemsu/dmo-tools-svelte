@@ -2,7 +2,7 @@
 	import { Button } from '$shared/button'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
-	import { LangButton } from '$widgets/header'
+	import { LangButton } from '$shared/ui/header'
 	import { ThemeToggleButton } from '$shared/ui/theme'
 	import SupportGuide from './SupportGuide.svelte'
 

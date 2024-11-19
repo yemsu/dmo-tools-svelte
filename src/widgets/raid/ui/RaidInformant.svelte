@@ -8,8 +8,8 @@
 	const { class: className, ...restProps } = $$restProps
 
 	const sizeStyles = {
-		sm: 'text-xs3 md:text-xs2',
-		md: 'text-xs3 md:text-xs'
+		sm: 'text-sub-md3 md:text-sub-md2',
+		md: 'text-sub-md3 md:text-sub-md'
 	}
 
 	const getUserGrade = (timerCompleteCount: number) => {
@@ -24,7 +24,7 @@
 <span
 	class={cn(
 		'flex items-center gap-[0.1em]',
-		!user?.nickname ? 'text-gray-500' : 'text-gray-300',
+		!user?.nickname ? 'text-gray-6' : 'text-gray-300',
 		sizeStyles[size],
 		className
 	)}
@@ -34,9 +34,9 @@
 	{#if user}
 		{#if user?.id === 20}
 			<!-- 관리자 -->
-			<span class="text-xs2" title={`관리자`}>🦀</span>
+			<span class="text-sub-md2" title={`관리자`}>🦀</span>
 		{:else}
-			<span class="text-xs3 contrast-75">
+			<span class="text-sub-md3 contrast-75">
 				{getUserGrade(user?.timerCompleteCount || 0)}
 			</span>
 		{/if}

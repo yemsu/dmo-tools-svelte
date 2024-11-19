@@ -21,7 +21,7 @@
 </script>
 
 {#if showNotice}
-	<div class="bg-primary-50 py-2 text-primary-5 sm:text-xs">
+	<div class="sm:text-sub-md bg-primary-50 py-2 text-primary-5">
 		<div class="flex-center relative mx-auto px-content-side md:w-content-w">
 			<p class="text-balance break-keep text-center font-bold">
 				<TextByLang
@@ -31,7 +31,7 @@
 				<br class="md:hidden" />
 				<a
 					href="/{$lang}{PATH.CHARACTERS}"
-					class="ml-2 inline-flex items-center rounded-full bg-primary-10 p-1 px-3 text-xs font-medium text-white md:p-2"
+					class="text-sub-md ml-2 inline-flex items-center rounded-full bg-primary-10 p-1 px-3 font-medium text-white md:p-2"
 				>
 					<TextByLang
 						text="캐릭터 설정 페이지 바로가기"

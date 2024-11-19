@@ -13,10 +13,8 @@
 		type RaidTimeData,
 		type ServerType
 	} from '$entities/raid'
-	import {
-		BeepToggleButton,
-		NotificationToggleButton
-	} from '$features/control-raid-timer-option'
+	import { PUBLIC_API_BASE_URL } from '$env/static/public'
+	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
 	import { _objKeys, cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
@@ -26,15 +24,12 @@
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
 	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 	import { onDestroy, onMount } from 'svelte'
-	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
-	import RaidServerDropdown from './RaidServerDropdown.svelte'
-	import { PUBLIC_API_BASE_URL } from '$env/static/public'
 
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
 	let removeChannelTimer: NodeJS.Timeout | undefined
-	let isSseConnected = false
+	let isSseConnected: boolean | undefined = undefined
 
 	let eventSource: EventSource | undefined
 
@@ -194,26 +189,24 @@
 
 <aside
 	class={cn(
-		'fixed left-1/2 top-header-h z-raidBar flex h-raid-bar-h -translate-x-1/2 items-center',
-		'bg-primary-10',
-		'text-xs2 leading-none',
-		'whitespace-nowrap rounded-md drop-shadow-md'
+		'z-raidBar',
+		'whitespace-nowrap bg-background text-sub-md leading-none drop-shadow-md',
+		'rounded-md border border-blue-9',
+		$$restProps.class
 	)}
 >
 	<h2 class="ir">다음 출현 레이드 정보</h2>
 	{#if isSseSupported === true}
-		<RaidServerDropdown />
 		<a
 			href="/{$lang}{MENUS.raid.path}"
 			class={cn(
-				'flex-center relative h-full w-full flex-1 gap-2 px-2',
-				'border-gradient button-hover border-b border-t'
+				'button-hover flex-center relative h-raid-bar-h w-full flex-1 gap-2 px-4'
 			)}
 			title="레이드 타이머 전체 보기"
 		>
 			{#if nextRaid}
 				<span class="flex items-center gap-2 leading-none">
-					<span class="flex md:gap-1 sm:flex-col">
+					<span class="flex gap-1">
 						<RaidTitle title={nextRaid.name} />
 						<RaidLocation location={nextRaid.location} />
 					</span>
@@ -227,24 +220,17 @@
 				<iconify-icon icon="mdi:speak-outline" width={14} height={14} />
 			{/if}
 		</a>
-		<div class="flex h-full">
-			{#if !isSseConnected}
-				<button
-					class="flex-center button-hover h-full flex-wrap gap-1 bg-warning px-4"
-					on:click={initRaidSubscribe}
-				>
-					<iconify-icon icon="ooui:network-off" width={14} height={14} />
-					<span>연결 재시도</span>
-				</button>
-			{:else}
-				<NotificationToggleButton />
-				<div class="overflow-hidden rounded-br-md rounded-tr-md">
-					<BeepToggleButton />
-				</div>
-			{/if}
-		</div>
+		{#if isSseConnected === false}
+			<button
+				class="flex-center button-hover h-[25px] w-full gap-1 bg-warning px-4"
+				on:click={initRaidSubscribe}
+			>
+				<iconify-icon icon="ooui:network-off" width={14} height={14} />
+				<span>연결 재시도</span>
+			</button>
+		{/if}
 	{:else if isSseSupported === false}
-		<p class="w-full text-center text-gray-300">
+		<p class="w-full text-center text-gray-10">
 			현재 브라우저에서는 보스 출현 알람 기능이 지원되지 않습니다. <br />다른
 			브라우저를 이용해 주세요.
 		</p>

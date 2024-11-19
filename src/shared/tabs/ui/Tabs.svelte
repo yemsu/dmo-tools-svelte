@@ -13,7 +13,7 @@
 <ul
 	{...$$restProps}
 	class={cn(
-		'min-w-[100px] overflow-hidden rounded-md bg-gray-5 p-0.5 text-xs2 md:p-1 md:text-md',
+		'text-sub-md2 min-w-[100px] overflow-hidden rounded-md bg-gray-3 p-0.5 md:p-1 md:text-body-md',
 		dirStyles[dir],
 		$$restProps.class
 	)}

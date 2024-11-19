@@ -1,6 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { RaidServerTabs } from '$features/control-raid-timer-option'
+	import {
+		BeepToggleButton,
+		NotificationToggleButton,
+		RaidServerTabs
+	} from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
 	import { lang } from '$shared/model'
 	import { Section } from '$shared/section'
@@ -24,6 +28,8 @@
 	<div class="flex items-center gap-4">
 		<Title class="leading-none">레이드 타이머</Title>
 		<RaidServerTabs />
+		<NotificationToggleButton />
+		<BeepToggleButton />
 	</div>
 	<RaidTabList let:raid>
 		<RaidTimeView {raid} />

@@ -5,7 +5,7 @@
 </script>
 
 <span
-	class="overflow-hiddenflex shrink-0 gap-1 break-keep text-xs leading-[1.2] md:text-sm"
+	class="overflow-hiddenflex text-sub-md shrink-0 gap-1 break-keep leading-[1.2] md:text-sm"
 >
 	<iconify-icon
 		icon="mdi:dinosaur-pixel"

@@ -6,7 +6,7 @@
 	export let listClassName: string = ''
 </script>
 
-<ul class="w-full rounded-md bg-gray-800 text-sm md:text-md">
+<ul class="w-full rounded-md bg-gray-3 text-sm md:text-body-md">
 	{#each infoItems as infoItemData (infoItemData.id)}
 		<li
 			class={cn(

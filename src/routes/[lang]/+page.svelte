@@ -32,15 +32,12 @@
 		<Notice />
 	</div>
 	<div
-		class="flex-center mx-auto mt-4 flex shrink-0 flex-col gap-4 px-content-side lg:mt-0 lg:gap-[clamp(20px,20%,50px)] lg:px-0 md:w-[clamp(720px,50%,800px)]"
+		class="flex-center mx-auto mt-4 flex min-w-[600px] max-w-[800px] shrink-0 flex-col gap-4 px-content-side lg:mt-0 lg:w-[50%] lg:gap-[clamp(20px,20%,50px)] lg:px-0"
 	>
 		<MainBanner
 			src={contentUrl('/main/main-banner-calc.png')}
 			href="/{$lang}{PATH.CALCULATOR}"
 			title={MENUS.calc[isKr ? 'name' : 'engName']}
-			subTitle={isKr
-				? '목표 스탯까지 씰 효율 우선순위를 간편하게 확인해보세요.'
-				: 'Set your current seals and easily check the priority of seal efficiency to reach your target stat.'}
 			xDir="right"
 			yDir="top"
 			colorType="blue-1"

@@ -10,7 +10,7 @@
 	const wrapClassName = cn(
 		'grid items-start md:grid-cols-5 grid-cols-3 gap-1 md:gap-2',
 		'w-full',
-		'scroll-box text-xs',
+		'scroll-box text-sub-md',
 		className
 	)
 </script>
@@ -18,7 +18,7 @@
 {#if isLoading}
 	<div class={wrapClassName} {...restProps}>
 		{#each new Array(35).fill(1) as _}
-			<div class="h-[96px] rounded-sm bg-gray-800"></div>
+			<div class="h-[96px] rounded-sm bg-gray-3"></div>
 		{/each}
 	</div>
 {:else if seals.length === 0 && noDataText}

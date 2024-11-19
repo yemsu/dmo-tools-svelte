@@ -45,19 +45,20 @@
 	/* size */
 	--header-h: 50px;
 	--gnb-h: 50px;
-	--raid-bar-h: 35px;
+	--side-menu-w: 200px;
+	--raid-bar-h: 45px;
 	--content-w: 1000px;
 	--content-side: 16px;
 	--input-h: 40px;
 	--tab-h: 30px;
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 768px), screen and (orientation: landscape) {
+		--gnb-h: 45px;
+		--raid-bar-h: 35px;
 		--content-w: 100%;
 		--content-side: 10px;
-		--gnb-h: 45px;
 		--input-h: 30px;
 		--tab-h: 25px;
 	}
-
 	/* Colors */
 	--background-color: 257, 10%, 93%; /* hsl(257, 10%, 93%) */
 

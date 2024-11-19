@@ -12,11 +12,11 @@
 	}
 	const sizeStyles = {
 		sm: '',
-		md: 'px-1.5 py-0.5 text-xs4 md:px-2 md:text-xs2',
+		md: 'px-1.5 py-0.5 text-sub-md4 md:px-2 md:text-sub-md2',
 		lg: ''
 	}
 	const colorStyles = {
-		'primary-30': 'bg-primary-30',
+		'primary-30': 'bg-blue-6',
 		warning: 'bg-warning',
 		'warning-line': 'font-semibold text-warning border border-warning'
 	}

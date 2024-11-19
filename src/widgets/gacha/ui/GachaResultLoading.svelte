@@ -70,7 +70,7 @@
 			</video>
 		</div>
 		<button
-			class="bg-gacha-skip-loading absolute right-3 top-4 w-[80px] py-1.5 text-xs md:top-2"
+			class="bg-gacha-skip-loading text-sub-md absolute right-3 top-4 w-[80px] py-1.5 md:top-2"
 			on:click={onVideoEnd}
 		>
 			SKIP

@@ -36,7 +36,7 @@
 	}
 	/* scroll box */
 	.custom-scroll {
-		@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-700;
+		@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-5;
 	}
 	.scroll-box {
 		@apply custom-scroll overflow-y-auto;
@@ -55,7 +55,7 @@
 		@apply border-2 border-primary-50 drop-shadow-primary-50;
 	}
 	/* gradient */
-	.gradient-gray-800 {
+	.gradient-gray-3 {
 		@apply bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900;
 	}
 	.gradient-black-op {
@@ -66,7 +66,12 @@
 	}
 	.border-gradient {
 		@apply border-transparent;
-		border-image: linear-gradient(45deg, #2150a1, #216dc4) 1;
+		border-image: linear-gradient(
+				45deg,
+				hsl(var(--blue-10)),
+				hsl(var(--blue-4))
+			)
+			1;
 	}
 	/* hover */
 	.button-hover {

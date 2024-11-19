@@ -49,7 +49,7 @@
 >
 	<BackBlur />
 	<h2
-		class="text-shadow bg-gr-b border-b border-primary-5 py-2 text-center text-xs leading-none shadow-[0px_-2px_1px_1px_hsl(var(--primary-50)/60%)] md:py-3 md:text-md"
+		class="text-shadow bg-gr-b text-sub-md border-b border-primary-5 py-2 text-center leading-none shadow-[0px_-2px_1px_1px_hsl(var(--primary-50)/60%)] md:py-3 md:text-body-md"
 	>
 		<TextByLang text="가방" engText="Inventory" />
 	</h2>
@@ -57,7 +57,7 @@
 		class="leading-0 flex items-center justify-between border-b border-primary-5 bg-primary-10/20 p-1.5 sm:py-1"
 	>
 		<div
-			class="flex items-center gap-[0.5em] text-xs3 text-gray-300 md:text-xs2"
+			class="text-sub-md3 md:text-sub-md2 flex items-center gap-[0.5em] text-gray-300"
 		>
 			<h3 class="ir">
 				<TextByLang text="뽑기 횟수" engText="Gacha Counts" />
@@ -101,13 +101,13 @@
 			<div class="scroll-box grid h-full grid-cols-9 items-start gap-1">
 				{#each inventorySlots as invenSlot}
 					<div
-						class="bg-gacha-common group relative aspect-[51/53] border border-primary-30"
+						class="bg-gacha-common group relative aspect-[51/53] border border-blue-6"
 					>
 						{#if invenSlot}
 							<GachaItemImage id={invenSlot.item.id} />
 							<ItemTooltip item={invenSlot.item} />
 							<span
-								class="text-shadow absolute bottom-0 right-1 text-xs shadow-sm"
+								class="text-shadow text-sub-md absolute bottom-0 right-1 shadow-sm"
 								>{invenSlot.count}</span
 							>
 						{/if}

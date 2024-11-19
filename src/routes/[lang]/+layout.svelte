@@ -1,16 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { PUBLIC_BASE_URL } from '$env/static/public'
+	import { cn } from '$shared/lib'
 	import { GlobalModal } from '$shared/modal'
 	import { lang } from '$shared/model'
 	import { ToastPopup } from '$shared/toast'
-	import { Footer } from '$widgets/footer'
-	import { Header } from '$widgets/header'
+	import { Footer } from '$shared/ui/footer'
+	import { TopMenu } from '$shared/ui/primary-menu'
+	import SideMenu from '$shared/ui/primary-menu/SideMenu.svelte'
 	import { AdLayout } from '$widgets/adsense'
-	import RaidBar from '$widgets/raid-bar/ui/RaidBar.svelte'
-	import { cn } from '$shared/lib'
 	import { SpaceBackground } from '$widgets/bg-space'
-	import { fade } from 'svelte/transition'
 
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
 	const koreanUrl = `${PUBLIC_BASE_URL}/kr${pathWithoutLang}`
@@ -42,27 +41,18 @@
 </svelte:head>
 
 <!-- <NoticeBar /> -->
-<Header noBg={isMain} />
+<TopMenu class="landscape:hidden" />
+<SideMenu class="portrait:hidden" />
 
-<div class={cn(!isMain && 'relative mt-header-h')}>
+<div class={cn('relative landscape:ml-side-menu-w')}>
 	{#if isMain}
-		<div
-			transition:fade={{
-				duration: 300
-			}}
-		>
-			<SpaceBackground />
-		</div>
+		<SpaceBackground />
 	{/if}
 	<main class="relative">
 		<slot></slot>
 	</main>
 	<Footer />
 </div>
-
-{#if $lang === 'kr'}
-	<RaidBar />
-{/if}
 
 {#if !isMain}
 	<AdLayout />

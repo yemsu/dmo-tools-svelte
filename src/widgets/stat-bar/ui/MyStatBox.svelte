@@ -12,9 +12,11 @@
 >
 	{#each STATS as stat (stat.type)}
 		<div class="flex items-center gap-[0.1em] rounded-full md:gap-2">
-			<dt class="w-[1.5em] text-xs3 text-gray-200 md:text-xs">{stat.type}</dt>
+			<dt class="text-sub-md3 md:text-sub-md w-[1.5em] text-gray-200">
+				{stat.type}
+			</dt>
 			<dd
-				class="text-right text-xs3 font-semibold text-point md:text-sm sm:w-[3em]"
+				class="text-sub-md3 text-right font-semibold text-point md:text-sm sm:w-[3em]"
 			>
 				{stats
 					? numberFormatter(stats[stat.type])

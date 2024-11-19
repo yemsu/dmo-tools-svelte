@@ -37,7 +37,7 @@
 			on:click={() => selectGacha(gachaData)}
 		>
 			<h2
-				class="flex-col-center gap-[0.4em] text-balance break-keep py-3 text-center text-xs2 md:text-xs"
+				class="flex-col-center text-sub-md2 md:text-sub-md gap-[0.4em] text-balance break-keep py-3 text-center"
 			>
 				{#if gachaData.category}
 					<span>

@@ -4,8 +4,9 @@
 	import { Button } from '$shared/button'
 	import { ERROR, PATH, TOAST } from '$shared/config'
 	import { Dropdown } from '$shared/dropdown'
+	import { Icon } from '$shared/icon'
 	import { GoogleLoginButton } from '$shared/layout'
-	import { delay } from '$shared/lib'
+	import { cn, delay } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Tab } from '$shared/tabs'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
@@ -28,39 +29,23 @@
 	}
 </script>
 
-<div class="relative flex min-w-[100px] justify-end">
+<div
+	class={cn(
+		'relative flex justify-center',
+		'portrait:min-w-[100px]',
+		$$restProps.class
+	)}
+>
 	{#if $user}
-		<Dropdown menuBoxAlign="center">
-			<Button
-				slot="buttonSlot"
-				let:toggleDropdown
-				class="flex-center border border-white/80 text-xs text-white/80 md:text-sm"
-				title={$lang === 'kr' ? '유저 메뉴 열기' : 'User Menu'}
-				on:click={toggleDropdown}
-			>
-				<iconify-icon icon="mdi:user" width={14} height={14} />
-				{$user.nickname}
-			</Button>
-			<Tabs slot="contentSlot" let:closeDropdown dir="ver">
-				<Tab
-					on:click={() => {
-						goto(`/${$lang}${PATH.MY_INFO}`)
-						closeDropdown()
-					}}
-				>
-					<TextByLang text="마이 페이지" engText="My Page" />
-				</Tab>
-				<!-- <Tab
-					on:click={() => {
-						goto(`/${$lang}${PATH.SAVE_URL}`)
-						isShowTab = false
-					}}>url 데이터 저장</Tab
-				> -->
-				<Tab on:click={logout}>
-					<TextByLang text="로그아웃" engText="Log out" />
-				</Tab>
-			</Tabs>
-		</Dropdown>
+		<Button
+			on:click={() => {
+				goto(`/${$lang}${PATH.MY_INFO}`)
+			}}
+			class="w-full justify-between"
+		>
+			{$user.nickname}
+			<Icon icon="weui:arrow-filled" size={20} />
+		</Button>
 	{:else}
 		<GoogleLoginButton />
 	{/if}

@@ -115,8 +115,8 @@
 		<div class="flex-center relative gap-4">
 			<button
 				class={cn(
-					'flex-center peer gap-0.5 text-right text-xs3',
-					'text-gray-300 md:text-left md:text-xs'
+					'flex-center text-sub-md3 peer gap-0.5 text-right',
+					'md:text-sub-md text-gray-300 md:text-left'
 				)}
 			>
 				<iconify-icon icon="ic:outline-info" width={14} height={14} />

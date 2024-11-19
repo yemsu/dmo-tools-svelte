@@ -7,6 +7,8 @@
 	export let menuBoxAlign: 'left' | 'center' | 'right' = 'left'
 	let isDropdownOpen = false
 	let dropdownElement: HTMLDivElement
+	let menuElement: HTMLDivElement
+	let shouldShowAbove = false
 	const { class: className, ...restProps } = $$restProps
 
 	const menuBoxAlignStyles = {
@@ -19,8 +21,24 @@
 		isDropdownOpen = false
 	}
 
+	const calculatePosition = () => {
+		if (!menuElement || !dropdownElement) return
+
+		const dropdownRect = dropdownElement.getBoundingClientRect()
+		const menuRect = menuElement.getBoundingClientRect()
+		const viewportHeight = window.innerHeight
+
+		const spaceBelow = viewportHeight - dropdownRect.bottom
+		const spaceAbove = dropdownRect.top
+
+		shouldShowAbove = menuRect.height > spaceBelow && spaceAbove > spaceBelow
+	}
+
 	const toggleDropdown = () => {
 		isDropdownOpen = !isDropdownOpen
+		if (isDropdownOpen) {
+			setTimeout(calculatePosition, 0)
+		}
 	}
 
 	const handleOutsideClick = (e: MouseEvent) => {
@@ -31,14 +49,24 @@
 		}
 	}
 
+	const handleResize = () => {
+		if (isDropdownOpen) {
+			calculatePosition()
+		}
+	}
+
 	onMount(() => {
 		if (!browser) return
 		document.addEventListener('click', handleOutsideClick)
+		window.addEventListener('resize', handleResize)
+		window.addEventListener('scroll', handleResize)
 	})
 
 	onDestroy(() => {
 		if (!browser) return
 		document.removeEventListener('click', handleOutsideClick)
+		window.removeEventListener('resize', handleResize)
+		window.removeEventListener('scroll', handleResize)
 	})
 
 	afterNavigate(() => {
@@ -54,8 +82,12 @@
 	<slot name="buttonSlot" {toggleDropdown} />
 	{#if isDropdownOpen}
 		<div
+			bind:this={menuElement}
 			class={cn(
-				'absolute -bottom-1 z-tooltip translate-y-full rounded-md border border-gray-500 bg-gray-5 drop-shadow-lg',
+				'absolute z-tooltip rounded-md border border-gray-3 bg-gray-3 drop-shadow-lg',
+				shouldShowAbove
+					? 'bottom-full -translate-y-1'
+					: '-bottom-1 translate-y-full',
 				menuBoxAlignStyles[menuBoxAlign]
 			)}
 		>

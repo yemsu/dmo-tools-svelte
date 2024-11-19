@@ -53,10 +53,10 @@
 {#if inValidTypes}
 	<div>
 		{#if inValidTypes.length === 0}
-			<p class="text-xs text-point">{$_('available_nickname')}</p>
+			<p class="text-sub-md text-point">{$_('available_nickname')}</p>
 		{:else}
 			{#each inValidTypes as inValidType (inValidType)}
-				<p class="text-xs text-warning">
+				<p class="text-sub-md text-warning">
 					{schema[inValidType][$lang]}
 				</p>
 			{/each}

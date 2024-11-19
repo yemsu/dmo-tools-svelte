@@ -7,9 +7,9 @@
 	let idAdVisibleRefreshFlag = true
 	let debounceTimer: NodeJS.Timeout | null = null
 
+	const adCommonStyle = cn(import.meta.env.DEV && 'bg-blue-9/10')
 	const sideFixedCommonStyle = cn(
-		'fixed top-header-h flex h-[calc(100vh-var(--header-h))] w-[clamp(192px,calc((100vw-var(--content-w))/2),330px)] justify-center px-content-side py-header-h',
-		import.meta.env.DEV && 'bg-blue-9/10'
+		'fixed top-header-h flex h-[calc(100vh-var(--header-h))] w-[clamp(192px,calc((100vw-var(--content-w))/2),330px)] justify-center px-content-side py-header-h'
 	)
 	const isServer = import.meta.env.SSR
 
@@ -49,7 +49,7 @@
 	$: $page.url && rerenderAd()
 </script>
 
-<div class="h-[60px] adPc:hidden">
+<div class="h-[60px] landscape:hidden {adCommonStyle}">
 	{#if idAdVisibleRefreshFlag}
 		<Adsense
 			adType="top"
@@ -62,6 +62,7 @@
 {#if idAdVisibleRefreshFlag}
 	<div
 		class={cn(
+			adCommonStyle,
 			sideFixedCommonStyle,
 			'left-[calc(50%-(var(--content-w)/2))] -translate-x-full overflow-hidden',
 			'adMobile:hidden'
@@ -71,6 +72,7 @@
 	</div>
 	<div
 		class={cn(
+			adCommonStyle,
 			sideFixedCommonStyle,
 			'right-[calc(50%-(var(--content-w)/2))] translate-x-full overflow-hidden',
 			'adMobile:hidden'

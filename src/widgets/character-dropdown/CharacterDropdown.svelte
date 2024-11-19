@@ -17,7 +17,7 @@
 <Dropdown class="h-full">
 	<button
 		slot="buttonSlot"
-		class="button-hover h-full text-ellipsis rounded-l-md bg-primary-50 px-1 font-semibold text-black md:min-w-[100px] sm:max-w-[80px] sm:text-xs2"
+		class="button-hover sm:text-sub-md2 h-full text-ellipsis rounded-l-md bg-primary-50 px-1 font-semibold text-black md:min-w-[100px] sm:max-w-[80px]"
 		title={$_('change_character')}
 		let:toggleDropdown
 		on:click={toggleDropdown}
@@ -43,7 +43,7 @@
 		{/if}
 		<a
 			href="/{$lang}{PATH.CHARACTERS}"
-			class="flex items-center justify-end gap-0.5 border-t border-gray-500 p-1 text-xs leading-none"
+			class="text-sub-md flex items-center justify-end gap-0.5 border-t border-gray-6 p-1 leading-none"
 			title="{$_('character')} {$_('setting')}"
 		>
 			<Icon icon="ant-design:setting-outlined" />

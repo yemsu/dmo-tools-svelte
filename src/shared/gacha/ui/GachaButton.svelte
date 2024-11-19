@@ -11,7 +11,7 @@
 </script>
 
 <button
-	class="{bgStyles[bg]} text-shadow w-[50%] py-1 text-xs2 md:text-xs"
+	class="{bgStyles[bg]} text-shadow text-sub-md2 md:text-sub-md w-[50%] py-1"
 	on:click
 >
 	<slot></slot>
