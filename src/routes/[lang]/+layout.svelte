@@ -5,9 +5,9 @@
 	import { GlobalModal } from '$shared/modal'
 	import { lang } from '$shared/model'
 	import { ToastPopup } from '$shared/toast'
-	import { Footer } from '$shared/ui/footer'
-	import { TopMenu } from '$shared/ui/primary-menu'
-	import SideMenu from '$shared/ui/primary-menu/SideMenu.svelte'
+	import { Footer } from '$widgets/footer'
+	import { TopMenu } from '$widgets/primary-menu'
+	import { SideMenu } from '$widgets/primary-menu'
 	import { AdLayout } from '$widgets/adsense'
 	import { SpaceBackground } from '$widgets/bg-space'
 

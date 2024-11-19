@@ -3,7 +3,7 @@
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
-	import { LangButton } from '$shared/ui/header'
+	import { LangButton } from '$widgets/header'
 	import { ThemeToggleButton } from '$shared/ui/theme'
 	import SupportGuide from './SupportGuide.svelte'
 

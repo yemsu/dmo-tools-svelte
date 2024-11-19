@@ -2,8 +2,8 @@
 	import { cn, isLandscape } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'
-	import { Gnb } from '$shared/ui/gnb'
-	import { Header } from '$shared/ui/header'
+	import { Gnb } from '$widgets/gnb'
+	import { Header } from '$widgets/header'
 	import { RaidBar } from '$widgets/raid-bar'
 </script>
 

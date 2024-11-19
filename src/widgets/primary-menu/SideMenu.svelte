@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { cn, isLandscape } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { Footer } from '$shared/ui/footer'
-	import { Gnb } from '$shared/ui/gnb'
-	import { Header } from '$shared/ui/header'
+	import { Footer } from '$widgets/footer'
+	import { Gnb } from '$widgets/gnb'
+	import { Header } from '$widgets/header'
 	import { RaidBar } from '$widgets/raid-bar'
 </script>
 
