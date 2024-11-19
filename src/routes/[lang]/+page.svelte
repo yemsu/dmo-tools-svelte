@@ -32,7 +32,7 @@
 		<Notice />
 	</div>
 	<div
-		class="flex-center mx-auto mt-4 flex min-w-[600px] max-w-[800px] shrink-0 flex-col gap-4 px-content-side lg:mt-0 lg:w-[50%] lg:gap-[clamp(20px,20%,50px)] lg:px-0"
+		class="flex-center mx-auto mt-4 flex max-w-[800px] shrink-0 flex-col gap-4 px-content-side lg:mt-0 lg:w-[50%] lg:gap-[clamp(20px,20%,50px)] lg:px-0 md:min-w-[600px]"
 	>
 		<MainBanner
 			src={contentUrl('/main/main-banner-calc.png')}
