@@ -12,7 +12,9 @@
 	<meta name="description" content={META.COMMON.DESC.en} />
 </svelte:head>
 
-<div class="flex-center relative mx-auto h-[100vh] flex-col gap-6 text-center">
+<div
+	class="flex-center relative h-[100vh] flex-col gap-6 overflow-hidden text-center"
+>
 	<SpaceBackground />
 	<div class="flex-center flex-1 flex-col pt-[10%]">
 		<div>
