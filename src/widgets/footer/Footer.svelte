@@ -6,13 +6,14 @@
 	import { LangButton } from '$widgets/header'
 	import { ThemeToggleButton } from '$shared/ui/theme'
 	import SupportGuide from './SupportGuide.svelte'
+	import { PATH } from '$shared/config'
 
 	export let align: 'left' | 'center' = 'center'
 	$: isAlignCenter = align === 'center'
 
 	const links = [
 		{
-			href: `/${$lang}{PATH.PRIVACY_POLICY}`,
+			href: `/${$lang}${PATH.PRIVACY_POLICY}`,
 			text: {
 				kr: '개인정보처리방침',
 				en: 'Private Policy'
