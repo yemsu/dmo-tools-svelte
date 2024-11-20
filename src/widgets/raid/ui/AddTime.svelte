@@ -103,7 +103,7 @@
 	</div>
 {:else}
 	<div class="mt-2 flex items-center justify-between gap-2">
-		<p class="break-keep text-sub-lg text-gray-300">
+		<p class="break-keep text-sub-lg text-gray-11">
 			{#if raidChannels.length > 1}
 				보스가 출현할 채널과 남은 시간을 입력해주세요
 			{:else}

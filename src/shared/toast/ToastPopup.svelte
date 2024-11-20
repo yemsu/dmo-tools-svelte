@@ -13,18 +13,15 @@
 </script>
 
 {#if $toast}
-	<div class="flex-center absolute bottom-gnb-h z-toast mb-3 w-full">
-		<p
-			class={cn(
-				'min-w-[200px] p-3',
-				'border2-primary-50-neon bg-secondary-5/90',
-				'text-center text-sm',
-				'rounded-md backdrop-blur-sm',
-				'transition-all',
-				isToastOn ? '' : 'translate-y-full opacity-0'
-			)}
-		>
-			{$toast}
-		</p>
-	</div>
+	<p
+		class={cn(
+			'fixed bottom-gnb-h left-1/2 z-toast mb-3 min-w-[200px] -translate-x-1/2 p-3',
+			'border border-blue-9 bg-background/80',
+			'rounded-md text-center drop-shadow-lg backdrop-blur-sm',
+			'transition-all',
+			!isToastOn && 'translate-y-full opacity-0'
+		)}
+	>
+		{$toast}
+	</p>
 {/if}

@@ -79,7 +79,7 @@
 				{#each data as infoItem (infoItem.name)}
 					{#if infoItem.value}
 						<div class="flex items-center gap-2">
-							<dt class="text-gray-300">
+							<dt class="text-gray-11">
 								<TextByLang data={infoItem} />
 							</dt>
 							<dd class="text-point">{infoItem.value}</dd>
@@ -104,7 +104,7 @@
 								</li>
 							{/each}
 						</ol>
-						<span class="text-gray-300">
+						<span class="text-gray-11">
 							{#if !_objKeys(SEAL_EXCEPTION_PERCENT).includes(`${seal.id}`)}
 								{seal.maxIncrease} * {myStep?.percent}% =
 							{/if}

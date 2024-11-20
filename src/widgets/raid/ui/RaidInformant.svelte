@@ -18,7 +18,7 @@
 <span
 	class={cn(
 		'flex items-center gap-[0.1em] whitespace-nowrap text-[0.9em]',
-		!user?.nickname && 'text-gray-6',
+		!user?.nickname && 'text-gray-9',
 		className
 	)}
 	title={user?.nickname ? `제보 달성: ${user?.timerCompleteCount || 0}회` : ''}

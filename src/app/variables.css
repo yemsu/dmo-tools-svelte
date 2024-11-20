@@ -196,5 +196,5 @@
 	--weight-extrabold: 600;
 
 	/* Shadow Color */
-	--shadow-color-lg: hsla(var(--gray-3) / 0.5);
+	--shadow-color-lg: #0009;
 }

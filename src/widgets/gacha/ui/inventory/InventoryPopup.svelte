@@ -57,7 +57,7 @@
 		class="leading-0 flex items-center justify-between border-b border-primary-5 bg-primary-10/20 p-1.5 sm:py-1"
 	>
 		<div
-			class="flex items-center gap-[0.5em] text-body-sm text-gray-300 md:text-sub-md"
+			class="flex items-center gap-[0.5em] text-body-sm text-gray-11 md:text-sub-md"
 		>
 			<h3 class="ir">
 				<TextByLang text="뽑기 횟수" engText="Gacha Counts" />

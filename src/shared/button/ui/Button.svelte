@@ -34,7 +34,7 @@
 		class: cn(
 			'gap-[0.2em] leading-none',
 			!$$restProps.disabled && 'button-hover',
-			'text-balance break-keep disabled:text-gray-300 disabled:opacity-70',
+			'text-balance break-keep disabled:text-gray-11 disabled:opacity-70',
 			isActive === true && 'border-2 opacity-100 ',
 			isActive === false && 'opacity-40 hover:opacity-100',
 			buttonShapeStyles[rounded],

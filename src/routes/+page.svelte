@@ -16,7 +16,7 @@
 	<SpaceBackground />
 	<div class="flex-center flex-1 flex-col pt-[10%]">
 		<div>
-			<p class="text-gray-300">디지몬 마스터즈 도구 모음</p>
+			<p class="text-gray-11">디지몬 마스터즈 도구 모음</p>
 			<h1 class="text-logo font-tiny text-[60px] font-semibold leading-none">
 				DMO tools
 			</h1>

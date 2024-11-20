@@ -202,12 +202,12 @@
 			title="레이드 타이머 전체 보기"
 		>
 			{#if nextRaid}
-				<span class={cn('flex max-w-full items-center leading-none')}>
+				<span class={cn('flex items-center leading-none land:w-full')}>
 					<span
 						class={cn(
 							'flex-shrink overflow-hidden bg-blue-4/10 px-1.5',
 							'port:flex port:gap-1',
-							'land:flex land:flex-col land:gap-1.5 land:py-3'
+							'land:flex-col-center land:w-[60%] land:gap-2 land:py-3'
 						)}
 					>
 						<RaidTitle title={nextRaid.name} />
@@ -217,9 +217,9 @@
 					<RaidNextIcon class="land:hidden" />
 					<span
 						class={cn(
-							'px-1.5',
-							'port:flex port:flex-wrap port:items-center port:gap-x-1 port:gap-y-[0.1em]',
-							'land:flex land:flex-col land:items-start land:gap-1.5'
+							'flex-center px-1.5',
+							'port:flex-wrap port:gap-x-1 port:gap-y-[0.1em]',
+							'land:flex-1 land:flex-col land:gap-2'
 						)}
 					>
 						<Badge size="sm" color="gray">

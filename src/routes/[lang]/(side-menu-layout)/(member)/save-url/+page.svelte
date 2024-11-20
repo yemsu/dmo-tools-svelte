@@ -159,9 +159,7 @@
 	</Title>
 	<figure>
 		<img src={urlExampleSrc} alt="url 예시" />
-		<figcaption
-			class="mt-2 text-center text-sub-md leading-[1.3] text-gray-300"
-		>
+		<figcaption class="mt-2 text-center text-sub-md leading-[1.3] text-gray-11">
 			그동안 사이트를 사용하면서 쌓인 데이터가 url에 저장되어 있어요! <br />
 			url 전체를 복사해서 붙여 넣어 주세요.
 		</figcaption>

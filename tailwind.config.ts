@@ -158,9 +158,9 @@ export default {
 				'ns-bold': ['NanumSquareBold', ...fontFamily.sans]
 			},
 			dropShadow: {
-				'primary-90': '0 0 3px hsl(var(--primary-90))',
-				'primary-50': '0 0 5px hsl(var(--primary-50)/50%)',
-				'primary-30': '0 0 40px hsl(var(--primary-30)/30%)',
+				'blue-9': '0 0 3px hsl(var(--blue-9))',
+				'blue-9/50': '0 0 5px hsl(var(--blue-9)/50%)',
+				'blue-6/30': '0 0 40px hsl(var(--primary-6)/30%)',
 				lg: '0px 0px 15px var(--shadow-color-lg)'
 			},
 			zIndex: {

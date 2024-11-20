@@ -116,7 +116,7 @@
 			<button
 				class={cn(
 					'flex-center peer gap-0.5 text-right text-body-sm',
-					'text-gray-300 md:text-left md:text-sub-md'
+					'text-gray-11 md:text-left md:text-sub-md'
 				)}
 			>
 				<iconify-icon icon="ic:outline-info" width={14} height={14} />
