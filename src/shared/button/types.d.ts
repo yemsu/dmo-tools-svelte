@@ -6,6 +6,7 @@ export type ButtonVariant =
 	| 'background'
 	| 'gray'
 	| 'danger'
+	| 'warning'
 	| 'outline'
 	| 'link'
 export type ButtonSize =

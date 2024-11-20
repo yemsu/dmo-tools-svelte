@@ -22,6 +22,7 @@ export const buttonVariants = {
 	ghost: 'hover:bg-gray-3',
 	background: 'bg-background',
 	danger: 'bg-red',
+	warning: 'bg-warning',
 	outline: 'border border-gray-5',
 	link: 'hover:underline hover:underline-offset-2'
 }

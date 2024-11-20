@@ -36,12 +36,12 @@
 {#if isNotificationOn === false}
 	<Button
 		size="icon-md"
-		variant="danger"
+		variant="warning"
 		class={cn($$restProps.class)}
 		title="브라우저 알람 받기"
 		on:click={askNotificationPermission}
 	>
-		<Icon icon="icomoon-free:notification" size="1.4em" />
+		<Icon icon="icomoon-free:notification" size="1.1em" />
 	</Button>
 	<Tooltip class="-bottom-2 right-0 translate-y-full">
 		<p>
