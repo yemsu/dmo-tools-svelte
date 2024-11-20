@@ -46,13 +46,13 @@
 		@apply border border-point/80 bg-point/20 text-point;
 	}
 	.point-border-neon {
-		@apply drop-shadow-blue-9 border border-blue-9/70 border-l-transparent border-r-transparent;
+		@apply border border-primary-90/70 border-l-transparent border-r-transparent drop-shadow-primary-90;
 	}
-	.border-blue-9-neon {
-		@apply drop-shadow-blue-9 border border-blue-9;
+	.border-primary-50-neon {
+		@apply border border-primary-50 drop-shadow-primary-50;
 	}
-	.border2-blue-9-neon {
-		@apply drop-shadow-blue-9 border-2 border-blue-9;
+	.border2-primary-50-neon {
+		@apply border-2 border-primary-50 drop-shadow-primary-50;
 	}
 	/* gradient */
 	.gradient-gray-3 {
@@ -113,7 +113,7 @@ button {
 
 input,
 textarea {
-	@apply focus:drop-shadow-blue-9 rounded-md border-solid bg-gray-700 px-[0.5em] py-[0.5em] focus:border focus:border-blue-9 focus:outline-none;
+	@apply rounded-md border-solid bg-gray-3 px-[0.5em] py-[0.5em] focus:border focus:border-blue-6 focus:outline-none;
 }
 
 textarea {

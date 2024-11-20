@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GameChannel, RaidData } from '$entities/raid'
 	import { Title } from '$shared/text'
-	import { RaidLocation, AddTime } from '$widgets/raid'
+	import { RaidLocation } from '$widgets/raid'
 	import RaidTimeList from '$widgets/raid/ui/RaidTimeList.svelte'
 
 	export let raid: RaidData
@@ -18,5 +18,4 @@
 		<RaidLocation location={raid.location} />
 	</div>
 	<RaidTimeList {raid} {raidChannels} />
-	<AddTime {raid} {raidChannels} />
 </section>

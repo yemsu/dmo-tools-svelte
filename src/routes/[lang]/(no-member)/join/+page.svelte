@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { goto } from '$app/navigation'
 	import {
 		G_TOKEN_NAME,
@@ -79,7 +80,12 @@
 				bind:inputElement
 			/>
 			<div class="h-[4em]">
-				<ValidationText {value} {setIsValid} schema={NICKNAME_SCHEMA} />
+				<ValidationText
+					{value}
+					{setIsValid}
+					schema={NICKNAME_SCHEMA}
+					validText={$_('available_nickname')}
+				/>
 			</div>
 		</div>
 		<Button variant="blue" size="lg" disabled={!isValid}>

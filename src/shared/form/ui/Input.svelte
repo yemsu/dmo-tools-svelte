@@ -4,17 +4,16 @@
 	const dispatch = createEventDispatcher()
 
 	export let label: string | undefined = undefined
+	export let name: string | undefined = undefined
 	export let placeholder: string | undefined = undefined
 	export let value: string | number | null
 	export let inputElement: HTMLInputElement | null = null
 	export let size: 'xs' | 'sm' | 'sm-md' | 'md' = 'md'
 
-	const { name, class: className, ...restProps } = $$restProps
-
 	const sizeStyles = {
 		xs: 'h-[25px] text-sub-md px-1',
 		sm: 'h-[30px] text-sub-md px-1',
-		'sm-md': 'h-[30px] text-sub-md md:text-body-md px-2',
+		'sm-md': 'h-[30px] text-sub-md md:text-body-sm px-2',
 		md: 'h-input-h px-2 text-sub-md md:text-body-md'
 	}
 
@@ -30,20 +29,19 @@
 	for={name}
 	class={cn(
 		'label flex items-center gap-2',
-		$$restProps.type === 'checkbox' && 'flex-row-reverse',
-		className
+		$$restProps.type === 'checkbox' && 'flex-row-reverse'
 	)}
 >
 	{#if label}
 		<span class="min-w-[40px]">{label}</span>
 	{/if}
 	<input
+		{...$$restProps}
 		placeholder={placeholder || (label && `${label}를 입력하세요`)}
 		bind:value
 		bind:this={inputElement}
 		on:input={handleInput}
 		on:blur={handleBlur}
-		class={cn('w-full', sizeStyles[size], className)}
-		{...restProps}
+		class={cn('w-full', sizeStyles[size], $$restProps.class)}
 	/>
 </label>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { putNickname, setTokenCookie, user } from '$entities/user'
 	import { ALERT, CONFIRM, TOAST } from '$shared/config'
 	import { NICKNAME_SCHEMA, ToggleFormWrap, ValidationText } from '$shared/form'
@@ -54,5 +55,6 @@
 		value={newNickname}
 		{setIsValid}
 		schema={NICKNAME_SCHEMA}
+		validText={$_('available_nickname')}
 	/>
 </ToggleFormWrap>

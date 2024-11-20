@@ -148,6 +148,3 @@
 		</div>
 	</section>
 {/if}
-<p class="mt-4 text-center text-sub-lg font-semibold text-warning">
-	허위제보 시 <br class="md:hidden" />사이트 이용이 제한될 수 있습니다
-</p>

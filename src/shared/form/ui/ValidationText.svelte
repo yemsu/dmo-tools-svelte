@@ -7,6 +7,7 @@
 	export let value: string
 	export let setIsValid: (isValue: boolean) => void
 	export let schema: Record<string, FormSchema>
+	export let validText: string | undefined = undefined
 	let isOnInputTimer: NodeJS.Timeout | null
 	let inValidTypes: string[] | undefined = undefined
 	let prevValue = value
@@ -52,8 +53,10 @@
 
 {#if inValidTypes}
 	<div>
-		{#if inValidTypes.length === 0}
-			<p class="text-sub-md text-point">{$_('available_nickname')}</p>
+		{#if validText && inValidTypes.length === 0}
+			<p class="text-sub-md text-point">
+				{validText}
+			</p>
 		{:else}
 			{#each inValidTypes as inValidType (inValidType)}
 				<p class="text-sub-md text-warning">

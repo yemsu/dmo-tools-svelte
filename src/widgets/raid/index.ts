@@ -1,4 +1,3 @@
-import AddTime from '$widgets/raid/ui/AddTime.svelte'
 import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
@@ -9,7 +8,6 @@ import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 export { timeSortByVote, timeSortByStartAt } from './lib/helper'
 export {
 	RaidTabList,
-	AddTime,
 	RaidTimeView,
 	RaidTitle,
 	RaidLocation,
