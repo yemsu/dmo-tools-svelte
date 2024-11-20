@@ -2,6 +2,6 @@
 	import { Inner } from '$shared/section'
 </script>
 
-<Inner class="pt-header-h">
+<Inner class="land:py-header-h pt-header-h">
 	<slot />
 </Inner>

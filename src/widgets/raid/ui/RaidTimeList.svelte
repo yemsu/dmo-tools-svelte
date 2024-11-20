@@ -9,11 +9,11 @@
 		type RaidTimeData
 	} from '$entities/raid'
 	import { BusinessError, showErrorToast } from '$shared/api'
+	import { Badge } from '$shared/badge'
 	import { cn, objectBy, timeRemainingString } from '$shared/lib'
 	import { NoData } from '$shared/text'
 	import Timer from '$shared/time/ui/Timer.svelte'
 	import { toast } from '$shared/toast'
-	import RaidItemChannel from '$widgets/raid-bar/ui/RaidItemChannel.svelte'
 	import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 
 	export let raid: RaidData
@@ -42,7 +42,9 @@
 <ul class="flex flex-col gap-4">
 	{#each raidChannels as channel (channel)}
 		<li class="flex flex-col items-start gap-1.5">
-			<RaidItemChannel {channel} />
+			<Badge size="md" color="gray">
+				{channel} 채널
+			</Badge>
 			{#if raidTimeByChannel[channel] && raidTimeByChannel[channel].length > 0}
 				<ol class="flex w-full flex-col gap-2">
 					{#each raidTimeByChannel[channel] as time, i}
@@ -54,12 +56,12 @@
 						>
 							<span class="ir">정확도 {i + 1}순위</span>
 							<button
-								class="button-hover flex h-[35px] w-full items-center justify-between py-1.5 text-sub-md"
+								class="button-hover port:text-body-sm flex h-input-h w-full items-center justify-between py-1.5"
 								title="좋아요"
 								on:click={() => onClickVote(raid, time)}
 							>
 								<span
-									class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 text-body-sm md:min-w-[5em] md:text-sub-md"
+									class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 md:min-w-[5em]"
 								>
 									<iconify-icon icon="oi:heart" width="1em" height="1em" />
 									{time.voteCount + 1}
@@ -77,7 +79,7 @@
 					{/each}
 				</ol>
 			{:else}
-				<NoData class="w-full leading-none" compact>-</NoData>
+				<NoData class="min-h-input-h w-full leading-none" compact>-</NoData>
 			{/if}
 		</li>
 	{/each}

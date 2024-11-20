@@ -3,7 +3,7 @@
 
 	export let shape: 'square' | 'round' = 'round'
 	export let size: 'sm' | 'md' | 'lg' = 'md'
-	export let color: 'blue' | 'warning' | 'warning-line'
+	export let color: 'blue' | 'warning' | 'warning-line' | 'reverse' | 'gray'
 	const { class: className, ...restProps } = $$restProps
 
 	const shapeStyles = {
@@ -12,19 +12,20 @@
 	}
 	const sizeStyles = {
 		sm: 'px-1.5 py-0.5 text-sub-sm',
-		md: 'px-1.5 py-0.5 text-sub-lg md:px-2 md:text-sub-md2',
+		md: 'py-[0.3em] text-sub-lg px-[0.7em] land:text-sub-md2',
 		lg: ''
 	}
 	const colorStyles = {
-		blue: 'bg-blue-6',
-		warning: 'bg-warning',
+		blue: 'bg-blue-6 text-white',
+		reverse: 'bg-gray-12 text-gray-1 dark:font-bold',
+		gray: 'bg-gray-5 text-white',
+		warning: 'bg-warning text-white',
 		'warning-line': 'font-semibold text-warning border border-warning'
 	}
 </script>
 
 <span
 	class={cn(
-		'text-white',
 		shapeStyles[shape],
 		sizeStyles[size],
 		colorStyles[color],

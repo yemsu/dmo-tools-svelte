@@ -1,5 +1,4 @@
 import AddTime from '$widgets/raid/ui/AddTime.svelte'
-import RaidAppearInfo from '$widgets/raid/ui/RaidAppearInfo.svelte'
 import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
@@ -15,7 +14,6 @@ export {
 	RaidTitle,
 	RaidLocation,
 	RaidNextIcon,
-	RaidAppearInfo,
 	RaidInformant
 }
 export { GRADES } from './config/index'

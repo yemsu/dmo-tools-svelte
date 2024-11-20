@@ -41,15 +41,10 @@
 </svelte:head>
 
 <!-- <NoticeBar /> -->
-<TopMenu class="landscape:hidden" />
-<SideMenu class="portrait:hidden" />
+<TopMenu class="land:hidden" />
+<SideMenu class="port:hidden" />
 
-<div
-	class={cn(
-		'relative landscape:ml-side-menu-w',
-		!isMain && 'landscape:mr-side-ad-w'
-	)}
->
+<div class={cn('land:ml-side-menu-w relative', !isMain && 'land:mr-side-ad-w')}>
 	{#if isMain}
 		<SpaceBackground />
 	{/if}

@@ -17,28 +17,25 @@
 	$: $raids && initSelectedRaidId()
 </script>
 
-<div class="flex flex-1 overflow-hidden">
+<div class="scroll-box flex h-full flex-1 overflow-hidden">
 	<ul
 		class={cn(
 			'scroll-box h-full',
-			'flex w-[50%] flex-col gap-1 rounded-md bg-gray-3 p-1 pr-2 md:w-[430px] md:gap-1.5 md:p-1.5'
+			'flex w-[50%] max-w-[500px] flex-col gap-1 rounded-md pr-2',
+			'land:gap-2'
 		)}
 		role="tablist"
 		aria-label="레이드 채널별 시간 제보 자세히 보기 탭"
 	>
 		{#each $raids as raid (raid.id)}
-			<li
-				class={cn(
-					'relative rounded-md',
-					'md:hover:bg-secondary-10 md:hover:opacity-100',
-					selectedRaidId === raid.id
-						? 'border border-secondary-40 bg-secondary-10 opacity-100'
-						: 'bg-secondary-10 opacity-40'
-				)}
-				role="presentation"
-			>
+			<li role="presentation">
 				<button
-					class="text-sub-md w-full px-1.5 py-2 md:p-2"
+					class={cn(
+						'relative w-full overflow-hidden rounded-md bg-gray-3',
+						selectedRaidId === raid.id
+							? 'border border-gray-10 opacity-100'
+							: 'border border-gray-4 opacity-40 md:hover:opacity-100'
+					)}
 					title="자세히 보기"
 					on:click={() => onClickView(raid.id)}
 					id="raid-tab-{raid.id}"
@@ -57,10 +54,7 @@
 			role="tabpanel"
 			aria-labelledby="raid-tab-{raid.id}"
 			hidden={selectedRaidId !== raid.id}
-			class={cn(
-				'w-[60%] shrink-0 md:w-[50%]',
-				selectedRaidId !== raid.id && 'hidden'
-			)}
+			class={cn('w-[50%] shrink-0', selectedRaidId !== raid.id && 'hidden')}
 		>
 			<slot {raid}></slot>
 		</div>

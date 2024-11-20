@@ -6,13 +6,13 @@
 <h1
 	class={cn(
 		'font-tiny text-[26px] font-semibold leading-none',
-		'landscape:mb-6 landscape:flex landscape:h-header-h landscape:items-center',
+		'land:mb-6 land:flex land:h-header-h land:items-center',
 		$$restProps.class
 	)}
 >
 	<a
 		href="/{$lang}"
-		class="block landscape:px-2"
+		class="land:px-2 block"
 		title={$lang === 'kr' ? '메인으로' : 'Go to Main Page'}
 	>
 		DMO tools

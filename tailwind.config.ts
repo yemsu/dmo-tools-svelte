@@ -10,6 +10,8 @@ export default {
 			lg: '1200px',
 			md: '769px',
 			sm: { max: '768px' },
+			port: { raw: '(max-width: 1023px), (orientation: portrait)' },
+			land: { raw: '(min-width: 1024px) and (orientation: landscape)' },
 			adPc: '1350px',
 			adMobile: { max: '1349px' }
 		},

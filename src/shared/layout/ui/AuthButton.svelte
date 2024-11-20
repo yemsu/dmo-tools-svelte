@@ -32,7 +32,7 @@
 <div
 	class={cn(
 		'relative flex justify-center',
-		'portrait:min-w-[100px]',
+		'port:min-w-[100px]',
 		$$restProps.class
 	)}
 >

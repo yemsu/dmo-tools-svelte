@@ -7,8 +7,7 @@
 	} from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
 	import { lang } from '$shared/model'
-	import { Section } from '$shared/section'
-	import { Title } from '$shared/text'
+	import { PageHeader } from '$shared/ui/page-header'
 	import { RaidTabList, RaidTimeView } from '$widgets/raid'
 
 	const gotoErrorPage = () => {
@@ -24,16 +23,15 @@
 	<meta name="description" content={META.RAID_TIMER.DESC[$lang]} />
 </svelte:head>
 
-<Section>
-	<div class="flex items-center gap-4">
-		<Title class="leading-none">레이드 타이머</Title>
-		<div class="flex items-center gap-2">
+<section class="flex h-[calc(100vh-var(--header-h)*2)] flex-col">
+	<PageHeader title="레이드 타이머">
+		<svelte:fragment slot="nextTitleSlot">
 			<RaidServerTabs />
 			<ControlWindowAlarmButton />
 			<BeepToggleButton />
-		</div>
-	</div>
+		</svelte:fragment>
+	</PageHeader>
 	<RaidTabList let:raid>
 		<RaidTimeView {raid} />
 	</RaidTabList>
-</Section>
+</section>

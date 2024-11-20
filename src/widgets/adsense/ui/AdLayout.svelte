@@ -49,7 +49,7 @@
 	$: $page.url && rerenderAd()
 </script>
 
-<div class="h-[60px] landscape:hidden {adCommonStyle}">
+<div class="land:hidden h-[60px] {adCommonStyle}">
 	{#if idAdVisibleRefreshFlag}
 		<Adsense
 			adType="top"
@@ -75,7 +75,7 @@
 			adCommonStyle,
 			sideFixedCommonStyle,
 			'right-0 top-0 overflow-hidden',
-			'portrait:hidden'
+			'port:hidden'
 		)}
 	>
 		<Adsense adType="right" visibleDevice="pc" />

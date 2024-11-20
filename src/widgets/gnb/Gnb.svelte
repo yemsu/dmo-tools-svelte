@@ -30,8 +30,8 @@
 
 <nav
 	class={cn(
-		'landscape:gap-5',
-		'portrait:fixed portrait:bottom-0 portrait:z-header portrait:w-full portrait:bg-background',
+		'land:gap-5',
+		'port:fixed port:bottom-0 port:z-header port:w-full port:bg-background',
 		$$restProps.class
 	)}
 >
@@ -39,31 +39,29 @@
 	<ul
 		class={cn(
 			'items-center gap-10 whitespace-nowrap font-semibold ',
-			'portrait:grid-cols-max portrait:grid portrait:h-gnb-h portrait:grid-cols-3 portrait:p-1',
+			'port:grid-cols-max port:grid port:h-gnb-h port:grid-cols-3 port:p-1',
 			isMain ? 'text-gray-11' : 'text-gray-9'
 		)}
 	>
 		{#each _objKeys(MENUS) as menuType (menuType)}
 			{#if !($lang === 'en' && menuType === 'raid')}
 				{@const isActive = getIsActive(menuType)}
-				<li class="portrait:h-full">
+				<li class="port:h-full">
 					<a
 						href="/{$lang}{MENUS[menuType].path}"
 						class={cn(
-							'landscape:flex landscape:h-gnb-h landscape:items-center landscape:gap-2 landscape:px-2 landscape:transition-colors landscape:hover:font-bold landscape:hover:text-gray-12',
-							'portrait:flex-col-center portrait:h-full portrait:gap-[1px]',
+							'land:flex land:h-gnb-h land:items-center land:gap-2 land:px-2 land:transition-colors land:hover:font-bold land:hover:text-gray-12',
+							'port:flex-col-center port:h-full port:gap-[1px]',
 							isActive && 'font-bold text-gray-12'
 						)}
 					>
-						<span
-							class={cn('flex-center landscape:h-[20px] landscape:w-[20px]')}
-						>
+						<span class={cn('flex-center land:h-[20px] land:w-[20px]')}>
 							<Icon
 								icon={menuIcons[menuType].name}
 								size={menuIcons[menuType].size}
 							/>
 						</span>
-						<span class="portrait:text-sub-sm relative">
+						<span class="port:text-sub-sm relative">
 							<TextByLang data={MENUS[menuType]} />
 							{#if menuType === 'gacha'}
 								<NewBadge startDate="Wed Nov 13 2024 17:37:25" />

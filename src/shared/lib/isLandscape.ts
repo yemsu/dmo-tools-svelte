@@ -4,8 +4,10 @@ import { readable } from 'svelte/store'
 type IsLandscape = boolean | undefined
 
 const getInitialIsLandscape = (): IsLandscape => {
-	if (!browser) return
-	return window.matchMedia('(orientation: landscape)').matches
+	if (!browser) return undefined
+	const orientationQuery = window.matchMedia('(orientation: landscape)')
+	const widthQuery = window.matchMedia('(min-width: 1024px)')
+	return orientationQuery.matches && widthQuery.matches
 }
 
 export const isLandscape = readable<IsLandscape>(
@@ -13,14 +15,19 @@ export const isLandscape = readable<IsLandscape>(
 	(set) => {
 		if (!browser) return
 
-		const query = window.matchMedia('(orientation: landscape)')
+		const orientationQuery = window.matchMedia('(orientation: landscape)')
+		const widthQuery = window.matchMedia('(min-width: 1024px)')
 
-		const updateIsLandscape = (e: MediaQueryListEvent | MediaQueryList) => {
-			set(e.matches)
+		const updateIsLandscape = () => {
+			set(orientationQuery.matches && widthQuery.matches)
 		}
 
-		query.addEventListener('change', updateIsLandscape)
+		orientationQuery.addEventListener('change', updateIsLandscape)
+		widthQuery.addEventListener('change', updateIsLandscape)
 
-		return () => query.removeEventListener('change', updateIsLandscape)
+		return () => {
+			orientationQuery.removeEventListener('change', updateIsLandscape)
+			widthQuery.removeEventListener('change', updateIsLandscape)
+		}
 	}
 )

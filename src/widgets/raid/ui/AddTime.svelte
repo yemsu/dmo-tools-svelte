@@ -95,15 +95,15 @@
 </script>
 
 {#if !isShowForm}
-	<div class="flex-center mt-2 flex-wrap gap-2">
-		<p class="text-sub-md text-gray-10">올바른 보스 제보가 없나요?</p>
+	<div class="flex-center mt-4 flex-wrap gap-2">
+		<p class="text-sub-lg text-gray-10">올바른 보스 제보가 없나요?</p>
 		<Button on:click={onToggleShowForm} size="sm" variant="blue">
 			보스 제보하기
 		</Button>
 	</div>
 {:else}
 	<div class="mt-2 flex items-center justify-between gap-2">
-		<p class="break-keep text-sub-md text-gray-300">
+		<p class="break-keep text-sub-lg text-gray-300">
 			{#if raidChannels.length > 1}
 				보스가 출현할 채널과 남은 시간을 입력해주세요
 			{:else}
@@ -124,7 +124,7 @@
 							class="flex-center"
 						>
 							{channel}
-							<span class="hidden text-sub-md font-normal md:inline">채널</span>
+							<span class="hidden text-sub-lg font-normal md:inline">채널</span>
 							<span class="text-sub-lg font-normal md:hidden">채널</span>
 						</Tab>
 					{/each}
@@ -148,6 +148,6 @@
 		</div>
 	</section>
 {/if}
-<p class="mt-4 text-center text-sub-md font-semibold text-warning">
+<p class="mt-4 text-center text-sub-lg font-semibold text-warning">
 	허위제보 시 <br class="md:hidden" />사이트 이용이 제한될 수 있습니다
 </p>

@@ -4,13 +4,7 @@
 	import { GRADES } from '$widgets/raid/config'
 
 	export let user: UserData | null
-	export let size: 'sm' | 'md' = 'md'
 	const { class: className, ...restProps } = $$restProps
-
-	const sizeStyles = {
-		sm: 'text-body-sm md:text-sub-md',
-		md: 'text-body-sm md:text-sub-md'
-	}
 
 	const getUserGrade = (timerCompleteCount: number) => {
 		const gradeTypes = _objKeys(GRADES)
@@ -23,9 +17,8 @@
 
 <span
 	class={cn(
-		'flex items-center gap-[0.1em]',
-		!user?.nickname ? 'text-gray-6' : 'text-gray-300',
-		sizeStyles[size],
+		'flex items-center gap-[0.1em] whitespace-nowrap text-[0.9em]',
+		!user?.nickname && 'text-gray-6',
 		className
 	)}
 	title={user?.nickname ? `제보 달성: ${user?.timerCompleteCount || 0}회` : ''}

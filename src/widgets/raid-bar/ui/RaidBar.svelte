@@ -15,12 +15,13 @@
 	} from '$entities/raid'
 	import { PUBLIC_API_BASE_URL } from '$env/static/public'
 	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
+	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
 	import { _objKeys, cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
+	import Timer from '$shared/time/ui/Timer.svelte'
 	import { timeSortByStartAt } from '$widgets/raid'
-	import RaidAppearInfo from '$widgets/raid/ui/RaidAppearInfo.svelte'
 	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
 	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
@@ -187,7 +188,7 @@
 	class={cn(
 		'relative z-raidBar',
 		'whitespace-nowrap bg-blue-4/20 text-sub-lg leading-none',
-		'portrait:rounded-md',
+		'port:rounded-md',
 		$$restProps.class
 	)}
 >
@@ -197,7 +198,7 @@
 			href="/{$lang}{MENUS.raid.path}"
 			class={cn(
 				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1',
-				'landscape:py-3'
+				'land:py-3'
 			)}
 			title="레이드 타이머 전체 보기"
 		>
@@ -205,14 +206,14 @@
 				<span
 					class={cn(
 						'flex max-w-full items-center gap-2 px-1 leading-none',
-						'landscape:gap-1'
+						'land:gap-1'
 					)}
 				>
 					<span
 						class={cn(
 							'flex-shrink overflow-hidden',
-							'portrait:flex portrait:gap-1',
-							'landscape:flex landscape:flex-col landscape:gap-1.5'
+							'port:flex port:gap-1',
+							'land:flex land:flex-col land:gap-1.5'
 						)}
 					>
 						<RaidTitle title={nextRaid.name} />
@@ -221,11 +222,14 @@
 					<RaidNextIcon />
 					<span
 						class={cn(
-							'portrait:flex portrait:flex-wrap portrait:items-center portrait:gap-x-1 portrait:gap-y-[0.1em]',
-							'landscape:flex landscape:flex-col landscape:gap-1.5'
+							'port:flex port:flex-wrap port:items-center port:gap-x-1 port:gap-y-[0.1em]',
+							'land:flex land:flex-col land:items-start land:gap-1.5'
 						)}
 					>
-						<RaidAppearInfo time={nextRaid.time} />
+						<Badge size="sm" color="gray">
+							{nextRaid.time.channel} 채널
+						</Badge>
+						<Timer time={nextRaid.time} />
 					</span>
 				</span>
 			{:else if $raids.length > 0}

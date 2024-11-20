@@ -1,38 +1,43 @@
 <script lang="ts">
 	import type { RaidData } from '$entities/raid'
+	import { Badge } from '$shared/badge'
 	import { cn } from '$shared/lib'
-	import {
-		RaidLocation,
-		RaidAppearInfo,
-		RaidInformant,
-		RaidNextIcon,
-		RaidTitle
-	} from '$widgets/raid'
+	import Timer from '$shared/time/ui/Timer.svelte'
+	import { RaidInformant, RaidLocation, RaidTitle } from '$widgets/raid'
 	export let raid: RaidData
 	$: nextTime = raid.times[0]
 </script>
 
-<span class={cn('flex leading-none md:items-center md:gap-3 sm:flex-col')}>
-	<span class={cn('flex flex-col flex-wrap gap-0.5 text-left')}>
+<span class={cn('flex leading-none port:flex-col land:items-center')}>
+	<span
+		class={cn(
+			'relative flex gap-2 text-left',
+			'bg-gray-1',
+			'land:w-[40%] land:flex-col land:p-3 land:pr-[12px]',
+			'port:flex-col port:items-center port:p-2'
+		)}
+	>
 		<RaidTitle title={raid.name} />
 		<RaidLocation location={raid.location} />
 	</span>
-	<RaidNextIcon class="sm:hidden" />
-	<span
-		class={cn(
-			'flex shrink-0 items-center gap-1.5',
-			'sm:mt-1.5 sm:flex-col sm:items-start sm:border-t sm:border-gray-3 sm:pt-1.5'
-		)}
-	>
+	<span class={cn('flex-center flex-1 p-2')}>
 		{#if nextTime}
-			<span>
-				<RaidAppearInfo time={nextTime} />
-			</span>
-			<span>
-				<RaidInformant user={nextTime.user} size="sm" class="opacity-80" />
+			<span class="flex flex-wrap items-center justify-center gap-[0.6em]">
+				<span class="flex-center flex-wrap gap-[0.4em]">
+					<Badge size="md" color="gray">
+						{nextTime.channel} 채널
+					</Badge>
+					<Timer time={nextTime} />
+				</span>
+				<span class="flex-center gap-2">
+					<span
+						class="text-[0.5em] text-gray-9 after:content-['ㅡ'] port:hidden"
+					></span>
+					<RaidInformant user={nextTime.user} />
+				</span>
 			</span>
 		{:else}
-			<span class="text-sub-md text-gray-9 md:text-sub-md">제보 없음</span>
+			<span class="text-gray-9">제보 없음</span>
 		{/if}
 	</span>
 </span>

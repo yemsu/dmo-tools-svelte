@@ -49,6 +49,7 @@
 
 {#if isInputVisible}
 	<div class={cn('flex w-full flex-col gap-2')}>
+		<slot name="upperForm"></slot>
 		<form
 			bind:this={formElement}
 			on:submit|preventDefault={onsubmitHandler}
@@ -57,6 +58,8 @@
 			<Input
 				bind:value
 				bind:inputElement
+				type={$$restProps.type}
+				step={$$restProps.step}
 				size={size === 'md' ? 'sm-md' : 'md'}
 				{placeholder}
 				class="w-full"

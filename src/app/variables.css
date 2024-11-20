@@ -1,10 +1,4 @@
 :root {
-	/* font size */
-	--body-md: 14px;
-	@media screen and (max-width: 768px) {
-		--body-md: 14px;
-	}
-
 	/* colors */
 	--primary-5: 214 82% 11%; /* hsl(214 82% 11%) */
 	--primary-10: 218 85% 16%; /* hsl(218 85% 16%) */
@@ -129,14 +123,14 @@
 	--font-title-lg: 28px;
 	--font-title-xl: 34px;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 768px), screen and (orientation: portrait) {
 		--font-sub-sm: 8px;
 		--font-sub-md: 9px;
 		--font-sub-lg: 10px;
 
-		--font-body-sm: 12px;
-		--font-body-md: 13px;
-		--font-body-lg: 14px;
+		--font-body-sm: 11px;
+		--font-body-md: 12px;
+		--font-body-lg: 13px;
 
 		--font-title-xs: 15px;
 		--font-title-sm: 17px;
