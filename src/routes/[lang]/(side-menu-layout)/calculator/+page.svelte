@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { currentCharacterId } from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
@@ -192,41 +193,6 @@
 	}
 
 	$: $mySealPrices && onChangedSealPrice()
-
-	const TEXTS = {
-		TARGET_VALUES: {
-			kr: '목표 수치 입력',
-			en: 'Target Value'
-		},
-		PERCENT_VALUE: {
-			kr: '퍼센트 값',
-			en: 'Percentage'
-		},
-		VIEW_RESULT: {
-			kr: '결과보기',
-			en: 'View Results'
-		},
-		SELECTED_STAT: {
-			kr: '선택된 능력치',
-			en: 'Selected Stat'
-		},
-		TARGET_STAT: {
-			kr: '목표 스탯',
-			en: 'Target Stat'
-		},
-		RESULT_COUNT: {
-			kr: '결과 씰 개수',
-			en: 'Resulting Seal Count'
-		},
-		NO_DATA_TEXT: {
-			kr: '목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!',
-			en: 'Input the target value to find the most efficient seal configuration!'
-		},
-		SEAL_REGISTERED: {
-			kr: '씰 등록 완료',
-			en: 'Registration completed'
-		}
-	}
 </script>
 
 <svelte:head>
@@ -256,27 +222,25 @@
 			bind:inputElement={goalStatInput}
 			type="number"
 			class="flex-1"
-			placeholder={TEXTS.TARGET_VALUES[$lang] +
-				(STATS_PERCENT_TYPE.includes(statTypeSelected)
-					? ` (${TEXTS.PERCENT_VALUE[$lang]})`
-					: '')}
+			placeholder={$_('seal.target_value') +
+				(STATS_PERCENT_TYPE.includes(statTypeSelected) ? ` (%)` : '')}
 			bind:value={goalStat}
 		/>
 		<Button variant="blue" size="lg" class="font-semibold">
-			{TEXTS.VIEW_RESULT[$lang]}
+			{$_('seal.view_result')}
 		</Button>
 	</form>
 </div>
 <section class="relative flex flex-1 flex-col overflow-hidden">
 	<h2 class="ir">
-		{TEXTS.SELECTED_STAT[$lang]}: {statTypeSelected}
-		&gt; {TEXTS.TARGET_STAT[$lang]}: {goalStat || 0}
-		&gt; {TEXTS.RESULT_COUNT[$lang]}: {effDataListSorted.length}
+		{$_('seal.selected_stat')}: {statTypeSelected}
+		&gt; {$_('seal.target_stat')}: {goalStat || 0}
+		&gt; {$_('seal.result_count')}: {effDataListSorted.length}
 	</h2>
 	<SealList
 		seals={effDataListSorted}
 		let:seal={effData}
-		noDataText={TEXTS.NO_DATA_TEXT[$lang]}
+		noDataText={$_('seal.no_data_text')}
 	>
 		{@const seal = data.seals.find(({ id }) => id === effData.id)}
 		{#if seal}
@@ -294,7 +258,7 @@
 					on:click={() => addToMySeal(effData, seal)}
 				>
 					<iconify-icon icon="mdi:check" width={15} height={15} />
-					{TEXTS.SEAL_REGISTERED[$lang]}
+					{$_('seal.seal_registered')}
 				</Button>
 			</SealItem>
 		{/if}

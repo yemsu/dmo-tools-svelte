@@ -37,7 +37,14 @@
 	"seal": {
 		"allStatTypes": "All Stat",
 		"myTotalStats": "My Total Stats",
-		"myTotalAssets": "Total Assets Based on Owned Seals"
+		"myTotalAssets": "Total Assets Based on Owned Seals",
+		"target_value": "Target Value",
+		"view_result": "View Results",
+		"selected_stat": "Selected Stat",
+		"target_stat": "Target Stat",
+		"result_count": "Resulting Seal Count",
+		"no_data_text": "Input the target value to find the most efficient seal configuration!",
+		"seal_registered": "Registration completed"
 	},
 	"gacha": {
 		"resultItems": "Obtained Items",
