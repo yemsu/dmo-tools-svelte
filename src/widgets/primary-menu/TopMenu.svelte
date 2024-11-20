@@ -8,13 +8,13 @@
 </script>
 
 <div class={$$restProps.class}>
-	<Inner class="h-header-h">
-		{#if !$isLandscape}
+	{#if !$isLandscape}
+		<Inner class="h-header-h">
 			<Header class={cn('flex h-full items-center justify-between')} />
 			{#if $lang === 'kr'}
 				<RaidBar />
 			{/if}
-		{/if}
-	</Inner>
-	<Gnb />
+		</Inner>
+		<Gnb />
+	{/if}
 </div>
