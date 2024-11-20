@@ -1,21 +1,19 @@
 <script lang="ts">
+	import { lang } from '$shared/model'
 	import { Title } from '$shared/text'
 
-	export let title: string
+	export let title: {
+		kr: string
+		en: string
+	}
 </script>
 
-<header class="mb-4 flex flex-wrap items-center justify-between gap-4">
-	<div class="flex-center gap-4">
-		<Title class="leading-none" weight="bold">{title}</Title>
-		{#if $$slots.nextTitleSlot}
-			<div class="flex items-center gap-2">
-				<slot name="nextTitleSlot" />
-			</div>
-		{/if}
+<header
+	class="mb-4 flex flex-wrap items-center justify-between gap-4 port:gap-2"
+>
+	<div class="flex items-center gap-4 overflow-hidden port:gap-2">
+		<Title class="shrink-0" weight="bold">{title[$lang]}</Title>
+		<slot name="nextTitleSlot" />
 	</div>
-	{#if $$slots.rightSlot}
-		<div class="flex items-center gap-2">
-			<slot name="rightSlot" />
-		</div>
-	{/if}
+	<slot></slot>
 </header>

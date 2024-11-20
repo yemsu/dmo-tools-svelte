@@ -11,13 +11,13 @@
 	title={$_('seal.myTotalStats')}
 >
 	{#each STATS as stat (stat.type)}
-		<div class="flex items-center gap-[0.1em] rounded-full md:gap-2">
-			<dt class="w-[1.5em] text-body-sm text-gray-200 md:text-sub-md">
+		<div
+			class="flex items-center gap-[0.1em] rounded-full text-sub-lg md:gap-2"
+		>
+			<dt class="w-[1.5em] text-gray-200">
 				{stat.type}
 			</dt>
-			<dd
-				class="text-right text-body-sm font-semibold text-point md:text-sm sm:w-[3em]"
-			>
+			<dd class="text-right font-semibold text-point sm:w-[3em]">
 				{stats
 					? numberFormatter(stats[stat.type])
 					: 0}{#if STATS_PERCENT_TYPE.includes(stat.type)}

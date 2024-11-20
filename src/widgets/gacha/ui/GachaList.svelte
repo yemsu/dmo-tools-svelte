@@ -43,7 +43,7 @@
 {#if gachaList.length > 0}
 	<div
 		class={cn(
-			'flex-col-center gap-6 pt-2 md:gap-10 md:pt-[calc(var(--tab-h)/2)]',
+			'flex-col-center gap-6 pt-2 md:gap-10 md:pt-[calc(var(--input-h)/2)]',
 			$gachaStore.isResultShow && 'opacity-0'
 		)}
 	>

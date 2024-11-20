@@ -22,9 +22,11 @@
 	import { Inner } from '$shared/section'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
-	import CharacterDropdown from '$widgets/character-dropdown/CharacterDropdown.svelte'
+	import { PageHeader } from '$shared/ui/page-header'
+	import { CharacterTabs } from '$widgets/character-tabs'
 	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
+	import { MyStatBox, StatBarWrap } from '$widgets/stat-bar'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -57,8 +59,8 @@
 	$: SUB_MENUS = [
 		{
 			menuName: {
-				kr: MENUS.calc.name,
-				en: MENUS.calc.engName
+				kr: '계산기',
+				en: 'Calculator'
 			},
 			path: PATH.CALCULATOR
 		},
@@ -124,21 +126,22 @@
 </script>
 
 <section>
-	<div class="flex items-center">
-		{#if $user}
-			<CharacterDropdown />
-		{/if}
-		<Tabs class={cn('flex-1', $user && 'rounded-l-none')}>
-			{#each SUB_MENUS as subMenu ($lang + subMenu.path)}
-				<Tab
-					tagName="a"
-					href="/{$lang}{subMenu.path}"
-					isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
-				>
-					{subMenu.menuName[$lang]}
-				</Tab>
-			{/each}
-		</Tabs>
-	</div>
+	<PageHeader title={{ kr: '씰 효율 계산기', en: 'Seal Calculator' }}>
+		<div class="flex w-full flex-col gap-2">
+			<CharacterTabs />
+			<Tabs variant="underline">
+				{#each SUB_MENUS as subMenu ($lang + subMenu.path)}
+					<Tab
+						variant="underline"
+						tagName="a"
+						href="/{$lang}{subMenu.path}"
+						isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
+					>
+						{subMenu.menuName[$lang]}
+					</Tab>
+				{/each}
+			</Tabs>
+		</div>
+	</PageHeader>
 	<slot></slot>
 </section>

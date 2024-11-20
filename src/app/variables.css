@@ -40,7 +40,6 @@
 	--content-w: 1100px;
 	--content-side: 16px;
 	--input-h: 40px;
-	--tab-h: 30px;
 	--side-ad-w: clamp(200px, 20vw, 330px);
 	@media screen and (max-width: 768px), screen and (orientation: portrait) {
 		--gnb-h: 45px;
@@ -48,7 +47,6 @@
 		--content-w: 100%;
 		--content-side: 10px;
 		--input-h: 30px;
-		--tab-h: 25px;
 	}
 	/* Colors */
 	--background-color: 190, 10%, 93%; /* hsl(190, 10%, 93%) */

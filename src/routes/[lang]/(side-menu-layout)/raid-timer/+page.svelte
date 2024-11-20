@@ -24,12 +24,12 @@
 </svelte:head>
 
 <section class="flex h-[calc(100vh-var(--header-h)*2)] flex-col">
-	<PageHeader title="레이드 타이머">
-		<svelte:fragment slot="nextTitleSlot">
+	<PageHeader title={{ kr: '레이드 타이머', en: ' Raid Timer' }}>
+		<div slot="nextTitleSlot" class="flex gap-2">
 			<RaidServerTabs />
 			<ControlWindowAlarmButton />
 			<BeepToggleButton />
-		</svelte:fragment>
+		</div>
 	</PageHeader>
 	<RaidTabList let:raid>
 		<RaidTimeView {raid} />

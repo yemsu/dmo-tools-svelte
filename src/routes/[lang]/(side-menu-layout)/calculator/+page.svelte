@@ -235,29 +235,22 @@
 </svelte:head>
 
 <h2 class="ir">{MENUS.calc.name}</h2>
-<div class="flex shrink-0 flex-col gap-1.5">
-	<div class="flex w-full flex-col gap-1.5">
-		<dl>
-			<StatBarWrap class="flex-center">
-				<MyStatBox stats={$myStats} />
-			</StatBarWrap>
-		</dl>
-		<Tabs>
-			{#each STATS as stat (stat.type)}
-				<Tab
-					class={statColorStyles[stat.type]}
-					isActive={statTypeSelected === stat.type}
-					on:click={() => onClickStatType(stat.type)}
-					title={isKr ? stat.name : stat.engName}
-				>
-					{stat.type}
-				</Tab>
-			{/each}
-		</Tabs>
-	</div>
+<div class="flex shrink-0 gap-1.5 port:flex-col">
+	<Tabs class="w-full">
+		{#each STATS as stat (stat.type)}
+			<Tab
+				class={statColorStyles[stat.type]}
+				isActive={statTypeSelected === stat.type}
+				on:click={() => onClickStatType(stat.type)}
+				title={isKr ? stat.name : stat.engName}
+			>
+				{stat.type}
+			</Tab>
+		{/each}
+	</Tabs>
 	<form
 		on:submit|preventDefault={onSubmit}
-		class="flex w-full flex-1 items-center gap-1 md:w-auto"
+		class="flex items-center gap-1.5 port:w-full"
 	>
 		<Input
 			bind:inputElement={goalStatInput}

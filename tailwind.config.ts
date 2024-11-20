@@ -125,7 +125,6 @@ export default {
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)',
-				'tab-h': 'var(--tab-h)',
 				'side-ad-w': 'var(--side-ad-w)'
 			},
 			fontSize: {

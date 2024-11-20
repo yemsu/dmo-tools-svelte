@@ -20,7 +20,7 @@
 		statTypeOptionStyles
 	} from '$widgets/my-seals'
 	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
-	import { StatBar } from '$widgets/stat-bar'
+	import { StatBar, StatBarTotalPrice, StatBarWrap } from '$widgets/stat-bar'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -76,7 +76,9 @@
 
 <h2 class="ir">보유 씰</h2>
 {#if $myStats}
-	<StatBar stats={$myStats} totalPrice={getTotalMySealPrice()} />
+	<StatBarWrap>
+		<StatBarTotalPrice totalPrice={getTotalMySealPrice()} />
+	</StatBarWrap>
 {/if}
 
 <Tabs>

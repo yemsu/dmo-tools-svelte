@@ -11,7 +11,7 @@
 
 <div
 	class={cn(
-		'rounded-md border border-primary-50 bg-primary-10 text-center',
+		'rounded-md rounded-tl-none bg-gray-3 text-center',
 		sizeStyles[size],
 		className
 	)}

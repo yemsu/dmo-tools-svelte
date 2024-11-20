@@ -29,7 +29,8 @@
 	for={name}
 	class={cn(
 		'label flex items-center gap-2',
-		$$restProps.type === 'checkbox' && 'flex-row-reverse'
+		$$restProps.type === 'checkbox' && 'flex-row-reverse',
+		$$restProps.class
 	)}
 >
 	{#if label}

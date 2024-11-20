@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { myStats } from '$entities/seals'
 	import { currentCharacterId, currentCharacters } from '$entities/characters'
+	import { user } from '$entities/user'
+	import { Button } from '$shared/button'
 	import { PATH, TOAST } from '$shared/config'
 	import { Dropdown } from '$shared/dropdown'
 	import { Icon } from '$shared/icon'
@@ -7,6 +10,7 @@
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { toast } from '$shared/toast'
+	import { MyStatBox, StatBarTotalPrice, StatBarWrap } from '$widgets/stat-bar'
 	import { _ } from 'svelte-i18n'
 
 	$: currentCharacter = $currentCharacters?.find(
@@ -14,39 +18,37 @@
 	)
 </script>
 
-<Dropdown class="h-full">
-	<button
-		slot="buttonSlot"
-		class="button-hover h-full text-ellipsis rounded-l-md bg-primary-50 px-1 font-semibold text-black md:min-w-[100px] sm:max-w-[80px] sm:text-sub-md"
-		title={$_('change_character')}
-		let:toggleDropdown
-		on:click={toggleDropdown}
-	>
-		{currentCharacter?.name || ''}
-	</button>
-	<div slot="contentSlot" let:closeDropdown>
-		{#if $currentCharacters}
-			<Tabs dir="ver" class="w-[100px] md:w-[150px]">
+{#if $user && $currentCharacters}
+	<div class="w-full">
+		<div class="flex items-center justify-between gap-1">
+			<Tabs variant="separated" class="overflow-auto">
 				{#each $currentCharacters as character (character.id)}
 					<Tab
+						variant="separated"
 						isActive={character.name === currentCharacter?.name}
 						on:click={() => {
 							currentCharacterId.set(character.id)
 							toast.on(TOAST.CHARACTER_CHANGED[$lang])
-							closeDropdown()
 						}}
 					>
 						{character.name}
 					</Tab>
 				{/each}
 			</Tabs>
-		{/if}
-		<a
-			href="/{$lang}{PATH.CHARACTERS}"
-			class="flex items-center justify-end gap-0.5 border-t border-gray-6 p-1 text-sub-md leading-none"
-			title="{$_('character')} {$_('setting')}"
-		>
-			<Icon icon="ant-design:setting-outlined" />
-		</a>
+			<Button
+				size="icon-lg"
+				variant="ghost"
+				href="/{$lang}{PATH.CHARACTERS}"
+				title="{$_('character')} {$_('setting')}"
+				class="shrink-0"
+			>
+				<Icon icon="ant-design:setting-outlined" size="1.1em" />
+			</Button>
+		</div>
+		<StatBarWrap class="flex-center mt-[-3px]">
+			<dl>
+				<MyStatBox stats={$myStats} />
+			</dl>
+		</StatBarWrap>
 	</div>
-</Dropdown>
+{/if}

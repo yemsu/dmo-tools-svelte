@@ -4,9 +4,11 @@ export const buttonShapeStyles = {
 }
 export const buttonSizeStyles = {
 	text: 'flex-inline-center',
-	icon: 'flex-center p-2 flex-center aspect-square leading-[0]',
+	icon: 'flex-center p-2 flex-center aspect-square leading-[0] land:h-[30px] h-[25px]',
 	'icon-md':
 		'flex-center p-2 flex-center aspect-square leading-[0] land:w-[38px] land:h-[38px] w-[30px] h-[30px]',
+	'icon-lg':
+		'flex-center p-2 flex-center aspect-square leading-[0] w-input-h h-input-h',
 	sm: 'flex-center px-2 py-1 text-body-sm land:h-[30px] h-[25px]',
 	md: 'flex-center min-w-[3.5em] px-2 py-1 text-body-sm md:text-body-md land:h-[35px] h-[30px]',
 	'md-lg':

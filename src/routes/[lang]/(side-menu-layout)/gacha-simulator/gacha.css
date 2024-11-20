@@ -13,7 +13,7 @@
 		--current-card-scale: 1.1;
 		--current-card-w: calc(var(--card-w) * var(--current-card-scale));
 		--card-gap: 20px;
-		--gacha-select-view-h: calc(var(--gacha-bg-h) + (var(--tab-h) * 2));
+		--gacha-select-view-h: calc(var(--gacha-bg-h) + (var(--input-h) * 2));
 		--card-carousel-w: calc(
 			var(--current-card-w) + (var(--card-w) * 2) + (var(--card-gap) * 2)
 		);
@@ -104,7 +104,7 @@
 		filter: drop-shadow(0 0 10px rgb(222 173 0 / 30%)) sepia(0.2);
 	}
 	.neon-best-item {
-		@apply border-gray-12 border;
+		@apply border border-gray-12;
 		filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.8));
 	}
 	.animation-flare {
