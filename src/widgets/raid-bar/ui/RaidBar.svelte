@@ -187,7 +187,7 @@
 <aside
 	class={cn(
 		'relative z-raidBar',
-		'whitespace-nowrap bg-blue-4/20 text-sub-lg leading-none',
+		'whitespace-nowrap bg-blue-4/10 text-sub-lg leading-none',
 		'port:rounded-md',
 		$$restProps.class
 	)}
@@ -197,31 +197,27 @@
 		<a
 			href="/{$lang}{MENUS.raid.path}"
 			class={cn(
-				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1',
-				'land:py-3'
+				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1'
 			)}
 			title="레이드 타이머 전체 보기"
 		>
 			{#if nextRaid}
-				<span
-					class={cn(
-						'flex max-w-full items-center gap-2 px-1 leading-none',
-						'land:gap-1'
-					)}
-				>
+				<span class={cn('flex max-w-full items-center leading-none')}>
 					<span
 						class={cn(
-							'flex-shrink overflow-hidden',
+							'flex-shrink overflow-hidden bg-blue-4/10 px-1.5',
 							'port:flex port:gap-1',
-							'land:flex land:flex-col land:gap-1.5'
+							'land:flex land:flex-col land:gap-1.5 land:py-3'
 						)}
 					>
 						<RaidTitle title={nextRaid.name} />
 						<RaidLocation location={nextRaid.location} />
 					</span>
-					<RaidNextIcon />
+
+					<RaidNextIcon class="land:hidden" />
 					<span
 						class={cn(
+							'px-1.5',
 							'port:flex port:flex-wrap port:items-center port:gap-x-1 port:gap-y-[0.1em]',
 							'land:flex land:flex-col land:items-start land:gap-1.5'
 						)}

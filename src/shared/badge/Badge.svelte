@@ -18,7 +18,7 @@
 	const colorStyles = {
 		blue: 'bg-blue-6 text-white',
 		reverse: 'bg-gray-12 text-gray-1 dark:font-bold',
-		gray: 'bg-gray-5 text-white',
+		gray: 'bg-gray-5',
 		warning: 'bg-warning text-white',
 		'warning-line': 'font-semibold text-warning border border-warning'
 	}
