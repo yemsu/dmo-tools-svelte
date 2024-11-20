@@ -18,7 +18,7 @@
 		<div class="px-content-side">
 			<Header>
 				<Gnb />
-				<div class="my-6 border-b border-gray-3 portrait:hidden"></div>
+				<div class="my-6 border-b border-gray-3 port:hidden"></div>
 			</Header>
 		</div>
 
@@ -26,7 +26,7 @@
 			{#if $lang === 'kr'}
 				<RaidBar />
 			{/if}
-			<Footer />
+			<Footer align="left" />
 		</div>
 	{/if}
 </div>

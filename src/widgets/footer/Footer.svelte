@@ -7,6 +7,9 @@
 	import { ThemeToggleButton } from '$shared/ui/theme'
 	import SupportGuide from './SupportGuide.svelte'
 
+	export let align: 'left' | 'center' = 'center'
+	$: isAlignCenter = align === 'center'
+
 	const links = [
 		{
 			href: `/${$lang}{PATH.PRIVACY_POLICY}`,
@@ -18,8 +21,10 @@
 	]
 </script>
 
-<footer class={cn('mt-8 w-full py-8', $$restProps.class)}>
-	<Inner class="text-gray-10">
+<footer
+	class={cn('mt-8 w-full py-8 text-sub-lg text-gray-10', $$restProps.class)}
+>
+	<Inner class={cn(isAlignCenter && 'flex-center flex-col text-center')}>
 		<div class="flex items-center justify-between">
 			<!-- <p class="font-tiny text-3xl leading-none">DMO tools</p> -->
 			<div class="flex-center gap-2">
@@ -27,20 +32,18 @@
 				<LangButton />
 			</div>
 		</div>
-		<div class="mt-4 text-sm">
-			<div class="flex flex-wrap gap-2">
-				{#each links as { href, text } (text)}
-					<Button variant="link" size="text" {href} class="font-semibold">
-						{text[$lang]}
-					</Button>
-					<div class="h-[1.1em] w-[1px] bg-gray-5"></div>
-				{/each}
-				<SupportGuide />
-			</div>
-			<p class="mt-4 font-light">
-				© 2024. DMO tools All rights reserved. <br />
-				This site is not associated with Digimon Masters Online.
-			</p>
+		<div class="mt-4 flex flex-wrap gap-2">
+			{#each links as { href, text } (text)}
+				<Button variant="link" size="text" {href} class="font-semibold">
+					{text[$lang]}
+				</Button>
+				<div class="h-[1.1em] w-[1px] bg-gray-5"></div>
+			{/each}
+			<SupportGuide />
 		</div>
+		<p class="mt-4 font-light">
+			© 2024. DMO tools All rights reserved. <br />
+			This site is not associated with Digimon Masters Online.
+		</p>
 	</Inner>
 </footer>
