@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { RaidData } from '$entities/raid'
 	import { Badge } from '$shared/badge'
+	import { Icon } from '$shared/icon'
 	import { cn } from '$shared/lib'
 	import Timer from '$shared/time/ui/Timer.svelte'
 	import { RaidInformant, RaidLocation, RaidTitle } from '$widgets/raid'
@@ -37,7 +38,10 @@
 				</span>
 			</span>
 		{:else}
-			<span class="text-gray-9">제보 없음</span>
+			<span class="flex items-start font-bold text-gray-9">
+				<Icon icon="mdi:dinosaur-pixel" size="1.3em" class="scale-x-[-1]" />
+				?
+			</span>
 		{/if}
 	</span>
 </span>
