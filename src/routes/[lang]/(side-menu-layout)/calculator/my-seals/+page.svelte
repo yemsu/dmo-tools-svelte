@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import {
 		mySealCounts,
 		mySealPrices,
@@ -11,6 +12,7 @@
 	import { user } from '$entities/user'
 	import { META, PATH } from '$shared/config'
 	import { cn } from '$shared/lib'
+	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { NoData } from '$shared/text'
@@ -88,19 +90,20 @@
 		</Tab>
 	{/each}
 </Tabs>
-{#if $myStats}
-	<StatBarWrap class="flex-center">
-		<StatBarTotalPrice totalPrice={getTotalMySealPrice()} />
-	</StatBarWrap>
-{/if}
 <div class="flex flex-1 flex-col overflow-hidden">
-	<section class="flex flex-1 flex-col overflow-hidden">
-		<h2 class="ir">
-			보유 씰 리스트({statTypeSelected}):
+	<section class="flex flex-1 flex-col gap-2 overflow-hidden">
+		<ListReferText tagName="h2" mb={false}>
+			<span class="ir">보유 씰 리스트</span>
+			{statTypeSelected === 'ALL' ? $_('seal.allStatTypes') : statTypeSelected}
 			{#if mySealsFiltered}
-				총 {mySealsFiltered.length}개
+				({mySealsFiltered.length}개)
 			{/if}
-		</h2>
+		</ListReferText>
+		{#if $myStats}
+			<StatBarWrap class="flex-center">
+				<StatBarTotalPrice totalPrice={getTotalMySealPrice()} />
+			</StatBarWrap>
+		{/if}
 		{#if $user && mySealsFiltered && mySealsFiltered.length > 0}
 			<MySealList
 				{mySealsFiltered}

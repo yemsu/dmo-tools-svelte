@@ -36,6 +36,8 @@
 	} from '$widgets/stat-bar'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
+	import { ListReferText } from '$shared/list'
+	import { Icon } from '$shared/icon'
 
 	export let data: PageData
 	let statTypeSelected: StatType = STATS[0].type
@@ -237,11 +239,25 @@
 			'land:pb-[calc(var(--calc-result-h)+var(--content-side))]'
 	)}
 >
-	<h2 class="ir">
-		{$_('seal.selected_stat')}: {statTypeSelected}
-		&gt; {$_('seal.target_stat')}: {goalStat || 0}
-		&gt; {$_('seal.result_count')}: {effDataListSorted.length}
-	</h2>
+	<ListReferText tagName="h2" class="flex items-center">
+		{statTypeSelected}
+		{#if goalStat}
+			<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
+			{$_('seal.target_stat')}: {goalStat}
+		{:else}
+			<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
+			<span class="text-gray-10">
+				<TextByLang
+					text="목표 수치를 입력해주세요"
+					engText="Please enter target values"
+				/>
+			</span>
+		{/if}
+		{#if effDataListSorted.length}
+			<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
+			{$_('seal.result_count')}: {effDataListSorted.length}
+		{/if}
+	</ListReferText>
 	<SealList
 		seals={effDataListSorted}
 		let:seal={effData}

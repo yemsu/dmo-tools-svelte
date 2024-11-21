@@ -5,7 +5,7 @@
 	export let mb: boolean = true
 	const { class: className, ...restProps } = $$restProps
 	const attrs = {
-		class: cn('text-sub-lg', mb && 'mb-2', className),
+		class: cn('text-sub-lg land:text-body-sm', mb && 'mb-2', className),
 		...restProps
 	}
 </script>
