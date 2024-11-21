@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
 	import { currentCharacterId } from '$entities/characters'
 	import { mySealCounts } from '$entities/seals'
 	import { user } from '$entities/user'
+	import { Button } from '$shared/button'
 	import { ALERT, PATH, TOAST } from '$shared/config'
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
@@ -84,29 +84,24 @@
 				size="xs"
 				type="number"
 				id={`count-${sealId}`}
-				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px]')}
 				placeholder={isKr ? '씰 개수' : 'Seal Count'}
 				bind:value={inputValue}
 				on:input={checkCountInputValue}
 				on:blur|once={onBlurInput}
 			/>
-			<button
-				type="submit"
-				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-semibold text-black md:px-1"
-			>
-				<TextByLang text="완료" engText="Done" />
-			</button>
+			<Button size="xs" variant="blue" type="submit">
+				{$_('done')}
+			</Button>
 		</form>
 	{:else}
 		<div class="flex-center">
 			<!-- {myStep ? myStep.percent * sealId.max : 0} -->
 			{#if isEditable}
-				<button
+				<Button
 					type="button"
-					class={cn(
-						'w-full rounded-md bg-primary-20/50 py-1.5 md:py-1',
-						countStyle
-					)}
+					variant="background"
+					size="xs"
+					class={cn('w-full', countStyle)}
 					title={isKr ? '보유 개수 수정하기' : 'Edit Seal Quantity'}
 					on:click={onClickInputOn}
 				>
@@ -117,7 +112,7 @@
 					/>
 					{numberFormatter(count)}
 					{$_('seal_count')}
-				</button>
+				</Button>
 			{:else}
 				<p class={countStyle}>
 					<iconify-icon

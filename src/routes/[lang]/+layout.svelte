@@ -44,11 +44,11 @@
 <TopMenu class="land:hidden" />
 <SideMenu class="port:hidden" />
 
-<div class={cn('land:ml-side-menu-w relative', !isMain && 'land:mr-side-ad-w')}>
+<div class={cn('relative land:ml-side-menu-w', !isMain && 'land:mr-side-ad-w')}>
 	{#if isMain}
 		<SpaceBackground />
 	{/if}
-	<main class="relative min-h-[100vh]">
+	<main class="relative flex min-h-[100vh] flex-col">
 		<slot></slot>
 	</main>
 	{#if !$isLandscape}

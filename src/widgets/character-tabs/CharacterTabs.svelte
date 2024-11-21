@@ -45,7 +45,7 @@
 				<Icon icon="ant-design:setting-outlined" size="1.1em" />
 			</Button>
 		</div>
-		<StatBarWrap class="flex-center mt-[-3px]">
+		<StatBarWrap class="flex-center mt-[-3px] rounded-tl-none">
 			<dl>
 				<MyStatBox stats={$myStats} />
 			</dl>

@@ -28,7 +28,7 @@
 	<SealItem {seal} myStep={getCurrentStep(seal, mySeal.count)} {sealPrices}>
 		<MySealGrade {mySeal} {seals} />
 		<button
-			class="absolute right-[1px] top-[1px]"
+			class="button-hover absolute right-[1px] top-[1px]"
 			on:click={() => onClickMySealDelete(mySeal.id)}
 			title={$lang === 'kr' ? '삭제' : 'Delete'}
 		>

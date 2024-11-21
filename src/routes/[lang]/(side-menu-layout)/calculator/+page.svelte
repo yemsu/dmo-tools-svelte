@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
 	import { currentCharacterId } from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
@@ -24,17 +23,18 @@
 	import {
 		getCurrentStep,
 		getNextSteps,
+		SealCalcData,
+		CalcResult,
 		sortByEffDataList,
 		type SealEfficiency
 	} from '$widgets/seal-calculator'
-	import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import {
-		MyStatBox,
 		StatBarSeparator,
 		StatBarTotalPrice,
 		StatBarWrap
 	} from '$widgets/stat-bar'
+	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -47,7 +47,6 @@
 	let isSealPriceChanged = false
 	$: isPercentType = STATS_PERCENT_TYPE.includes(statTypeSelected)
 	$: calcNum = isPercentType ? 100 : 1
-	$: resultUnit = isPercentType ? '%' : ''
 	$: calcResultStatTotal =
 		($myStats[statTypeSelected] * calcNum + willGetStatTotal) / calcNum
 	$: isKr = $lang === 'kr'
@@ -201,7 +200,7 @@
 </svelte:head>
 
 <h2 class="ir">{MENUS.calc.name}</h2>
-<div class="flex shrink-0 gap-1.5 port:flex-col">
+<div class={cn('flex shrink-0 gap-1.5 port:flex-col')}>
 	<Tabs class="w-full">
 		{#each STATS as stat (stat.type)}
 			<Tab
@@ -216,7 +215,7 @@
 	</Tabs>
 	<form
 		on:submit|preventDefault={onSubmit}
-		class="flex items-center gap-1.5 port:w-full"
+		class="flex items-center gap-1.5 port:w-full land:w-[35%] land:shrink-0"
 	>
 		<Input
 			bind:inputElement={goalStatInput}
@@ -231,7 +230,13 @@
 		</Button>
 	</form>
 </div>
-<section class="relative flex flex-1 flex-col overflow-hidden">
+<section
+	class={cn(
+		'relative flex flex-1 flex-col overflow-hidden',
+		effDataListSorted.length > 0 &&
+			'land:pb-[calc(var(--calc-result-h)+var(--content-side))]'
+	)}
+>
 	<h2 class="ir">
 		{$_('seal.selected_stat')}: {statTypeSelected}
 		&gt; {$_('seal.target_stat')}: {goalStat || 0}
@@ -253,8 +258,9 @@
 				<SealCalcData {effData} {isPercentType} />
 				<Button
 					type="button"
-					variant="blue"
+					variant="background"
 					size="sm"
+					class="w-full"
 					on:click={() => addToMySeal(effData, seal)}
 				>
 					<iconify-icon icon="mdi:check" width={15} height={15} />
@@ -282,49 +288,13 @@
 		</div>
 	{/if}
 </section>
+
 {#if effDataListSorted.length > 0}
-	<section>
-		<h2 class="ir">
-			<TextByLang
-				text="계산 결과 - 총 능력치, 총 비용"
-				engText="Calculation Results - Total Stats, Total Cost "
-			/>
-		</h2>
-		<StatBarWrap>
-			<div>
-				<p class="flex-center gap-2 text-body-md leading-none md:text-lg2">
-					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-sub-lg text-gray-11 md:text-sub-md">
-							<TextByLang text="현재 내 능력치" engText="Current Stats" />
-						</span>
-						<span class="text-sub-md font-semibold text-point md:text-body-md">
-							{numberFormatter($myStats[statTypeSelected])}{resultUnit}
-						</span>
-					</span>
-					<span>+</span>
-					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-body-sm text-gray-11 md:text-sub-md">
-							<TextByLang text="얻어야하는 능력치" engText="Required Stats" />
-						</span>
-						<span class="text-sub-md font-semibold text-point md:text-body-md"
-							>{numberFormatter(willGetStatTotal / calcNum)}{resultUnit}</span
-						>
-					</span>
-					<span>=</span>
-					<span class="flex flex-col sm:gap-[2px]">
-						<span class="text-body-sm text-gray-11 md:text-sub-md">
-							<TextByLang text="최종 능력치" engText="Final Stats" />
-						</span>
-						<span class="text-sub-md font-semibold text-point md:text-body-md">
-							{numberFormatter(calcResultStatTotal, 5)}{resultUnit}
-						</span>
-					</span>
-				</p>
-			</div>
-			<StatBarSeparator />
-			<p class="flex-center">
-				<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
-			</p>
-		</StatBarWrap>
-	</section>
+	<CalcResult
+		crrMyStat={numberFormatter($myStats[statTypeSelected])}
+		needGetStat={numberFormatter(willGetStatTotal / calcNum)}
+		resultStat={numberFormatter(calcResultStatTotal, 5)}
+		{willNeedMoneyTotal}
+		{isPercentType}
+	/>
 {/if}

@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n'
 	import { goto } from '$app/navigation'
 	import { mySealPrices, type SealPrice } from '$entities/seals'
 	import { user } from '$entities/user'
+	import Button from '$shared/button/ui/Button.svelte'
 	import { ALERT, CONFIRM, PATH, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
@@ -73,28 +75,24 @@
 
 <div class="w-full">
 	{#if isOnInput}
-		<form on:submit|preventDefault={onSubmit} class="flex h-[24px] gap-1">
+		<form on:submit|preventDefault={onSubmit} class="flex gap-1">
 			<Input
 				bind:inputElement
+				size="xs"
 				type="number"
 				id={`price-${sealId}`}
-				class={cn('w-full rounded-sm bg-primary-20 px-1 py-[1px]')}
 				step="0.1"
 				placeholder={isKr ? '씰 가격' : 'Seal Price'}
-				size="xs"
 				bind:value={inputValue}
 				on:input={checkPriceInputValue}
 				on:blur|once={onBlurInput}
 			/>
-			<button
-				type="submit"
-				class="whitespace-nowrap rounded-sm bg-primary-50 px-2 font-semibold text-black md:px-1"
-			>
-				<TextByLang text="완료" engText="Done" />
-			</button>
+			<Button size="xs" variant="blue" type="submit">
+				{$_('done')}
+			</Button>
 		</form>
 	{:else if isEditable}
-		<div class="flex w-full overflow-hidden rounded-md">
+		<div class="flex w-full overflow-hidden rounded-sm">
 			{#if prices.my !== undefined}
 				<button
 					class="flex-center w-[35%] shrink-0 bg-warning"
@@ -110,14 +108,20 @@
 					/>
 				</button>
 			{/if}
-			<button
+			<Button
 				type="button"
-				class="flex-1 bg-primary-20/50 py-1.5 md:py-1 {priceStyle}"
+				size="xs"
+				variant="background"
+				class={cn(
+					'flex-1',
+					prices.my && 'rounded-l-none border-l-0',
+					priceStyle
+				)}
 				title={isKr ? '씰 가격 수정하기' : 'Edit Seal Price'}
 				on:click={onClickInputOn}
 			>
 				<SealItemPriceText price={prices.final} />
-			</button>
+			</Button>
 		</div>
 	{:else}
 		<p class={cn(priceStyle)}>

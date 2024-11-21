@@ -10,11 +10,7 @@
 </script>
 
 <div
-	class={cn(
-		'rounded-md rounded-tl-none bg-gray-3 text-center',
-		sizeStyles[size],
-		className
-	)}
+	class={cn('rounded-md bg-gray-3 text-center', sizeStyles[size], className)}
 	{...restProps}
 >
 	<slot></slot>

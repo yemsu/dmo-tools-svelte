@@ -125,7 +125,7 @@
 	$: !$user && clearCharacters()
 </script>
 
-<section>
+<section class="flex flex-1 flex-col">
 	<PageHeader title={{ kr: '씰 효율 계산기', en: 'Seal Calculator' }}>
 		<div class="flex w-full flex-col gap-2">
 			<CharacterTabs />
@@ -143,5 +143,7 @@
 			</Tabs>
 		</div>
 	</PageHeader>
-	<slot></slot>
+	<div class="flex flex-1 flex-col gap-2">
+		<slot></slot>
+	</div>
 </section>

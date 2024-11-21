@@ -14,6 +14,7 @@ export type ButtonSize =
 	| 'icon'
 	| 'icon-md'
 	| 'icon-lg'
+	| 'xs'
 	| 'sm'
 	| 'md'
 	| 'md-lg'

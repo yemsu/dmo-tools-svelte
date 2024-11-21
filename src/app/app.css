@@ -46,23 +46,17 @@
 		@apply border border-point/80 bg-point/20 text-point;
 	}
 	.point-border-neon {
-		@apply border border-primary-90/70 border-l-transparent border-r-transparent drop-shadow-primary-90;
+		@apply drop-shadow-primary-90 border border-primary-90/70 border-l-transparent border-r-transparent;
 	}
 	.border-primary-50-neon {
-		@apply border border-primary-50 drop-shadow-primary-50;
+		@apply drop-shadow-primary-50 border border-primary-50;
 	}
 	.border2-primary-50-neon {
-		@apply border-2 border-primary-50 drop-shadow-primary-50;
+		@apply drop-shadow-primary-50 border-2 border-primary-50;
 	}
 	/* gradient */
 	.gradient-gray-3 {
 		@apply bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900;
-	}
-	.gradient-black-op {
-		@apply bg-gradient-to-br from-black/40 via-black/15 to-black/40;
-	}
-	.gradient-black-op {
-		@apply bg-gradient-to-br from-black/40 via-black/15 to-black/40;
 	}
 	.border-gradient {
 		@apply border-transparent;
@@ -113,7 +107,7 @@ button {
 
 input,
 textarea {
-	@apply rounded-md border-solid bg-gray-3 px-[0.5em] py-[0.5em] focus:border focus:border-blue-6 focus:outline-none;
+	@apply rounded-md border border-solid border-gray-5 bg-background px-[0.5em] py-[0.5em] hover:border-gray-8 hover:bg-gray-2 focus:border-gray-12 focus:bg-gray-2 focus:outline-none;
 }
 
 textarea {

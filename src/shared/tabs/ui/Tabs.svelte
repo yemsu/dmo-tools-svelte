@@ -20,7 +20,7 @@
 <ul
 	{...$$restProps}
 	class={cn(
-		'flex h-input-h min-w-[100px] text-sub-md land:text-body-md',
+		'scroll-box flex h-input-h min-w-[100px] text-sub-md land:text-body-md',
 		dirStyles[dir],
 		variants[variant],
 		$$restProps.class

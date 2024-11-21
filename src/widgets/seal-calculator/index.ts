@@ -1,3 +1,7 @@
+import CalcResult from '$widgets/seal-calculator/ui/CalcResult.svelte'
+import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
+
+export { SealCalcData, CalcResult }
 export {
 	SEAL_MASTER_COUNT_TYPE,
 	SEAL_PERCENT_STEPS,

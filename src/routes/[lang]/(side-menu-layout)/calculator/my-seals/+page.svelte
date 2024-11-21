@@ -75,11 +75,6 @@
 </svelte:head>
 
 <h2 class="ir">보유 씰</h2>
-{#if $myStats}
-	<StatBarWrap>
-		<StatBarTotalPrice totalPrice={getTotalMySealPrice()} />
-	</StatBarWrap>
-{/if}
 
 <Tabs>
 	{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
@@ -93,6 +88,11 @@
 		</Tab>
 	{/each}
 </Tabs>
+{#if $myStats}
+	<StatBarWrap class="flex-center">
+		<StatBarTotalPrice totalPrice={getTotalMySealPrice()} />
+	</StatBarWrap>
+{/if}
 <div class="flex flex-1 flex-col overflow-hidden">
 	<section class="flex flex-1 flex-col overflow-hidden">
 		<h2 class="ir">

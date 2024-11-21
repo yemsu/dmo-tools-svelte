@@ -9,8 +9,7 @@
 	export let noDataText: string | undefined = undefined
 	const wrapClassName = cn(
 		'grid items-start md:grid-cols-5 grid-cols-3 gap-1 md:gap-2',
-		'w-full',
-		'scroll-box text-sub-md',
+		'w-full text-sub-md',
 		className
 	)
 </script>
@@ -26,9 +25,7 @@
 {:else}
 	<div class={wrapClassName} {...restProps}>
 		{#each seals as seal}
-			<div class="bg-primary-10 transition-opacity">
-				<slot {seal}></slot>
-			</div>
+			<slot {seal}></slot>
 		{/each}
 	</div>
 {/if}

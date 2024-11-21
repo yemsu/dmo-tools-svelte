@@ -9,6 +9,8 @@
 	import { getMySealData } from '$widgets/my-seals/lib/helper'
 	import { getCurrentStep, getMySealStat } from '$widgets/seal-calculator'
 	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { Badge } from '$shared/badge'
+	import { cn } from '$shared/lib'
 
 	export let seals: SealData[]
 	export let mySeal: MySealCount
@@ -21,12 +23,12 @@
 	$: dataUnit = isPercentType ? '%' : ''
 
 	const gradeBgStyles = {
-		노말: 'bg-[#0C73AE]',
-		브론즈: 'bg-[#0C73AE]',
-		실버: 'bg-[#7D7B7B]',
-		골드: 'bg-[#A3712C]',
-		플래티넘: 'bg-[#2B57FF]',
-		마스터: 'bg-[#754ED1]'
+		노말: 'bg-[#0C73AE22]',
+		브론즈: 'bg-[#0C73AE22]',
+		실버: 'bg-[#7D7B7B22]',
+		골드: 'bg-[#A3712C22]',
+		플래티넘: 'bg-[#2B57FF22]',
+		마스터: 'bg-[#754ED122]'
 	}
 	const gradeTextStyles = {
 		노말: 'text-[#0C73AE]',
@@ -38,19 +40,17 @@
 	}
 </script>
 
-<p class="mt-1 rounded-full bg-black/90 pr-2">
-	<span
-		class="rounded-full px-1 py-0.5 md:px-2 {grade &&
-			gradeBgStyles[grade.name]} text-sub-lg md:text-body-sm"
-		title={$_('grade')}
-	>
+<p
+	class={cn(
+		'rounded-b-md border-b border-current bg-background/50 py-1 text-sub-lg font-semibold leading-none dark:font-bold',
+		'-m-1 mt-0 w-[calc(100%+8px)] translate-y-[1px] land:-m-2 land:mt-0 land:w-[calc(100%+16px)]',
+		grade && gradeTextStyles[grade.name],
+		grade && gradeBgStyles[grade.name]
+	)}
+>
+	<span class="flex-center gap-1 dark:brightness-150 dark:saturate-200">
+		<span class={cn('h-[0.3em] w-[0.3em] rotate-45 bg-current')}></span>
 		<TextByLang data={grade} />
+		+{result / calcNum}{dataUnit}
 	</span>
-	<span
-		class="font-bold {grade &&
-			gradeTextStyles[
-				grade.name
-			]} py-0.5 text-sub-md brightness-150 saturate-200 md:text-sub-md"
-		>+{result / calcNum}{dataUnit}</span
-	>
 </p>

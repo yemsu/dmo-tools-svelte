@@ -29,7 +29,7 @@
 
 	$: commonProps = {
 		class: cn(
-			'flex-center size-full whitespace-nowrap  font-semibold transition-colors land:min-w-[45px] h-full',
+			'flex-center size-full whitespace-nowrap font-bold transition-colors land:min-w-[45px] h-full',
 			isActive === false && 'hover:opacity-100',
 			variants[variant],
 			className

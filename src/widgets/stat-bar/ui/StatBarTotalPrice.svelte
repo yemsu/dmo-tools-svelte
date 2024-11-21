@@ -15,9 +15,9 @@
 	$: price = convertToTMB(totalPrice)
 
 	const styles: Record<CurrencyUnits, string> = {
-		T: 'border border-price-t-1 bg-price-t-2 text-price-t-1',
-		M: 'border border-price-m-1 bg-price-m-2 text-price-m-1',
-		B: 'border border-price-b-1 bg-price-b-2 text-price-b-1'
+		T: 'border-price-t-1 bg-price-t-2 text-price-t-1',
+		M: 'border-price-m-1 bg-price-m-2 text-price-m-1',
+		B: 'border-gray-12 bg-gray-4 text-gray-12'
 	}
 </script>
 
@@ -27,7 +27,8 @@
 			<span>{price[currencyUnit].toLocaleString()}</span>
 			<span
 				class={cn(
-					' flex-center h-[12px] w-[12px] text-body-sm leading-none md:h-[16px] md:w-[16px] md:text-sub-md',
+					'flex-center h-[12px] w-[12px] land:h-[1.4em] land:w-[1.4em] land:text-sub-md',
+					'border text-body-sm leading-none',
 					styles[currencyUnit]
 				)}>{currencyUnit}</span
 			>

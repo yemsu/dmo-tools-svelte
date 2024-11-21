@@ -17,6 +17,10 @@
 	export let size: ButtonSize = 'md'
 	export let href: string | undefined = undefined
 
+	$: roundedBySize = (
+		size === 'xs' && rounded === 'md' ? 'sm' : rounded
+	) as ButtonRounded
+
 	// check props
 	const checkProps = () => {
 		if ('on:click' in $$props && href) {
@@ -37,7 +41,7 @@
 			'text-balance break-keep disabled:text-gray-11 disabled:opacity-70',
 			isActive === true && 'border-2 opacity-100 ',
 			isActive === false && 'opacity-40 hover:opacity-100',
-			buttonShapeStyles[rounded],
+			buttonShapeStyles[roundedBySize],
 			buttonSizeStyles[size],
 			buttonVariants[variant],
 			$$restProps.class

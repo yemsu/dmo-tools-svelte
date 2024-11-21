@@ -45,8 +45,8 @@
 	class={cn(
 		'hidden group-hover:block peer-hover:block',
 		'absolute z-tooltip',
-		'mc:text-sm text-sub-md break-keep rounded-md',
-		'border border-blue-6 bg-primary-5/80',
+		'break-keep rounded-md text-sub-md md:text-sub-lg',
+		'border border-gray-5 bg-background/90',
 		'drop-shadow-lg',
 		sizeStyles[size],
 		useAdaptiveX && positionStyles[tooltipPosition],

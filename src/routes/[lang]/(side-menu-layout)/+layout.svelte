@@ -2,6 +2,6 @@
 	import { Inner } from '$shared/section'
 </script>
 
-<Inner class="land:py-header-h pt-header-h">
+<Inner class="flex flex-1 flex-col pt-header-h land:pb-content-side">
 	<slot />
 </Inner>

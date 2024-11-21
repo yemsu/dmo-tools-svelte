@@ -23,6 +23,7 @@ export default {
 				bold: 'var(--weight-bold)'
 			},
 			colors: {
+				deep: 'hsl(var(--deep-color))',
 				background: 'hsl(var(--background-color))',
 				foreground: 'hsl(var(--gray-12))',
 				skeleton: 'hsl(var(--gray-2))',
@@ -109,9 +110,7 @@ export default {
 					't-1': 'var(--price-t-1)',
 					't-2': 'var(--price-t-2)',
 					'm-1': 'var(--price-m-1)',
-					'm-2': 'var(--price-m-2)',
-					'b-1': 'var(--price-b-1))',
-					'b-2': 'var(--price-b-2))'
+					'm-2': 'var(--price-m-2)'
 				},
 				point: 'hsl(var(--point))',
 				warning: 'hsl(var(--warning))',
@@ -125,7 +124,10 @@ export default {
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)',
-				'side-ad-w': 'var(--side-ad-w)'
+				'input-h-sm': 'var(--input-h-sm)',
+				'input-h-xs': 'var(--input-h-xs)',
+				'side-ad-w': 'var(--side-ad-w)',
+				'calc-result-h': 'var(--calc-result-h)'
 			},
 			fontSize: {
 				xs5: '8px',
@@ -155,6 +157,9 @@ export default {
 				pretendard: ['"Pretendard Variable", Pretendard', ...fontFamily.sans],
 				ns: ['NanumSquare', ...fontFamily.sans],
 				'ns-bold': ['NanumSquareBold', ...fontFamily.sans]
+			},
+			borderRadius: {
+				sm: '0.2rem'
 			},
 			dropShadow: {
 				'blue-9': '0 0 3px hsl(var(--blue-9))',

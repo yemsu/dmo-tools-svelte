@@ -1,6 +1,7 @@
 export const buttonShapeStyles = {
 	full: 'rounded-full',
-	md: 'rounded-md'
+	md: 'rounded-md',
+	sm: 'rounded-sm'
 }
 export const buttonSizeStyles = {
 	text: 'flex-inline-center',
@@ -9,7 +10,8 @@ export const buttonSizeStyles = {
 		'flex-center p-2 flex-center aspect-square leading-[0] land:w-[38px] land:h-[38px] w-[30px] h-[30px]',
 	'icon-lg':
 		'flex-center p-2 flex-center aspect-square leading-[0] w-input-h h-input-h',
-	sm: 'flex-center px-2 py-1 text-body-sm land:h-[30px] h-[25px]',
+	xs: 'flex-center px-2 py-1 text-sub-lg h-input-h-xs',
+	sm: 'flex-center px-2 py-1 text-body-sm h-input-h-sm',
 	md: 'flex-center min-w-[3.5em] px-2 py-1 text-body-sm md:text-body-md land:h-[35px] h-[30px]',
 	'md-lg':
 		'flex-center min-w-[3.5em] h-[30px] px-2 text-body-sm md:text-body-md',

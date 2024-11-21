@@ -78,10 +78,10 @@
 		'md:flex-row md:items-center md:justify-between'
 	)}
 >
-	<Tabs class="w-full md:w-[70%]">
+	<Tabs class="w-full">
 		{#each STAT_TYPE_OPTIONS as statTypeOption (statTypeOption)}
 			<Tab
-				class={statTypeOptionStyles[statTypeOption]}
+				class={cn(statTypeOptionStyles[statTypeOption])}
 				isActive={statTypeSelected === statTypeOption}
 				on:click={() => onClickStatType(statTypeOption)}
 				title={cn(
@@ -96,7 +96,7 @@
 		id="search"
 		maxlength={30}
 		placeholder={isKr ? '씰 이름을 검색하세요' : 'Search for seal names'}
-		class="w-full flex-1 md:w-auto"
+		class="port:w-full land:w-[30%] land:shrink-0"
 		bind:value={searchText}
 		on:input={onSearchInput}
 	/>

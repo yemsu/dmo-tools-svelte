@@ -11,9 +11,9 @@
 	export let size: 'xs' | 'sm' | 'sm-md' | 'md' = 'md'
 
 	const sizeStyles = {
-		xs: 'h-[25px] text-sub-md px-1',
-		sm: 'h-[30px] text-sub-md px-1',
-		'sm-md': 'h-[30px] text-sub-md md:text-body-sm px-2',
+		xs: 'h-input-h-xs text-sub-md px-1',
+		sm: 'h-input-h-sm text-sub-md px-1',
+		'sm-md': 'h-input-h-sm text-sub-md md:text-body-sm px-2',
 		md: 'h-input-h px-2 text-sub-md md:text-body-md'
 	}
 
@@ -43,6 +43,6 @@
 		bind:this={inputElement}
 		on:input={handleInput}
 		on:blur={handleBlur}
-		class={cn('w-full', sizeStyles[size], $$restProps.class)}
+		class={cn('w-full', sizeStyles[size])}
 	/>
 </label>

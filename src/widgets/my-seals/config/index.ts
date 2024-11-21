@@ -12,6 +12,6 @@ export const statColorStyles: Record<StatType, string> = {
 }
 
 export const statTypeOptionStyles: Record<StatTypeOption, string> = {
-	ALL: 'text-white',
+	ALL: 'text-gray-12',
 	...statColorStyles
 }
