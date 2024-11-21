@@ -23,7 +23,7 @@
 				DMO tools
 			</h1>
 		</div>
-		<main class="w-full py-14">
+		<main class="w-full pt-10 land:pt-10">
 			<div class="flex flex-col gap-1 text-lg2 font-light md:text-[20px]">
 				<p>환영합니다! 언어를 선택해 주세요.</p>
 				<p>Welcome! Please select a language.</p>
