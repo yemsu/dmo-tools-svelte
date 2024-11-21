@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { numberFormatter } from '$shared/lib'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import type { SealEfficiency } from '$widgets/seal-calculator/types'
 
 	export let effData: SealEfficiency

@@ -1,16 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { removeTokenCookie, user } from '$entities/user'
+	import { GoogleLoginButton } from '$features/control-session'
 	import { Button } from '$shared/button'
 	import { ERROR, PATH, TOAST } from '$shared/config'
-	import { Dropdown } from '$shared/dropdown'
 	import { Icon } from '$shared/icon'
-	import { GoogleLoginButton } from '$shared/layout'
 	import { cn, delay } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { Tab } from '$shared/tabs'
-	import Tabs from '$shared/tabs/ui/Tabs.svelte'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { toast } from '$shared/toast'
 	import { error } from '@sveltejs/kit'
 

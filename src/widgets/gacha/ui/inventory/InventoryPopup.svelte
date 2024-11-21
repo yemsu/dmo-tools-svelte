@@ -9,7 +9,7 @@
 	import { GachaItemImage, GachaPopup, ItemTooltip } from '$shared/gacha'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { createEventDispatcher } from 'svelte'
 

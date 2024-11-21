@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { alarmMinute, crrServerType, GAME_SERVERS } from '$entities/raid'
 	import { user } from '$entities/user'
+	import { LogoutButton } from '$features/control-session'
+	import { ChangeNickname, ResignButton } from '$features/update-user-info'
 	import { checkMember } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import Section from '$shared/section/ui/Section.svelte'
+	import { Inner } from '$shared/section'
 	import { LeftTitleTable } from '$shared/table'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
-	import Title from '$shared/text/ui/Title.svelte'
-	import { ChangeNickname, ResignButton } from '$widgets/my-info'
+	import type { LeftTitleTableData } from '$shared/table/types'
+	import { TextByLang, Title } from '$shared/text'
 	import { beforeUpdate } from 'svelte'
 
 	beforeUpdate(() => {
@@ -16,20 +17,20 @@
 
 	$: baseInfoMap = [
 		{
-			title: '닉네임',
-			engTitle: 'Nickname',
+			i18n: 'user.nickname',
 			desc: $user?.nickname
 		},
 		{
-			title: '이메일',
-			engTitle: 'E-Mail',
+			i18n: 'user.email',
 			desc: $user?.email
 		},
 		{
-			title: '회원 탈퇴',
-			engTitle: 'Withdrawal'
+			i18n: 'user.logout'
+		},
+		{
+			i18n: 'user.withdrawal'
 		}
-	]
+	] as LeftTitleTableData[]
 
 	$: raidInfoMap = [
 		{
@@ -50,16 +51,18 @@
 	]
 </script>
 
-<Section class="mx-auto max-w-[450px]">
-	<div class="flex-col-center h-full gap-3">
+<section class="flex-center flex-1">
+	<Inner size="content-middle">
 		<div class="flex w-full flex-col gap-3">
 			<Title class="w-full">
 				<TextByLang text="내 정보" engText="My Information" />
 			</Title>
 			<LeftTitleTable infoItems={baseInfoMap} let:infoItemData>
-				{#if infoItemData.title === '닉네임'}
+				{#if infoItemData.i18n === 'user.nickname'}
 					<ChangeNickname />
-				{:else if infoItemData.title === '회원 탈퇴'}
+				{:else if infoItemData.i18n === 'user.logout'}
+					<LogoutButton />
+				{:else if infoItemData.i18n === 'user.withdrawal'}
 					<ResignButton />
 				{:else}
 					{infoItemData.desc}
@@ -72,5 +75,5 @@
 				{infoItemData.desc}
 			</InfoItem>
 		</div> -->
-	</div>
-</Section>
+	</Inner>
+</section>

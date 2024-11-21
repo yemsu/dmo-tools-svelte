@@ -1,4 +1,4 @@
 export type LeftTitleTableData = {
-	title: string
-	engTitle: string
+	i18n: string
+	desc?: string
 }

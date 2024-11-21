@@ -8,7 +8,7 @@
 	} from '$entities/seals'
 	import { getMySealData } from '$widgets/my-seals/lib/helper'
 	import { getCurrentStep, getMySealStat } from '$widgets/seal-calculator'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { Badge } from '$shared/badge'
 	import { cn } from '$shared/lib'
 
@@ -43,7 +43,7 @@
 <p
 	class={cn(
 		'rounded-b-md border-b border-current bg-background/50 py-1 text-sub-lg font-semibold leading-none dark:font-bold',
-		'-m-1 mt-0 w-[calc(100%+8px)] translate-y-[1px] land:-m-2 land:mt-0 land:w-[calc(100%+16px)]',
+		'-m-1 mt-0 w-[calc(100%+8px)] land:-m-2 land:mt-0 land:w-[calc(100%+16px)]',
 		grade && gradeTextStyles[grade.name],
 		grade && gradeBgStyles[grade.name]
 	)}

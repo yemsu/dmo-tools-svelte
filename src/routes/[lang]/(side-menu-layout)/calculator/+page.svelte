@@ -17,7 +17,7 @@
 	import { _remove, cn, numberFormatter } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import {

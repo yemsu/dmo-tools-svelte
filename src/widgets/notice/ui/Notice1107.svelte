@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import NoticeItem from './NoticeItem.svelte'
 </script>
 

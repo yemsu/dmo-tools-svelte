@@ -20,11 +20,12 @@ export const buttonSizeStyles = {
 export const buttonVariants = {
 	point: 'point-neon',
 	blue: 'bg-blue-6 text-white',
-	gray: 'bg-gray-6',
+	gray: 'bg-gray-5',
 	ghost: 'hover:bg-gray-3',
 	background: 'bg-background',
-	danger: 'bg-red',
+	danger: 'bg-red text-white',
 	warning: 'bg-warning',
 	outline: 'border border-gray-5',
+	'outline-danger': 'border border-red text-red font-bold',
 	link: 'hover:underline hover:underline-offset-2'
 }

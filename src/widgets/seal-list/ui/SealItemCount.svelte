@@ -8,7 +8,7 @@
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { _ } from 'svelte-i18n'
 

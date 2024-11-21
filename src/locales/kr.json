@@ -31,6 +31,12 @@
 	"notice": "공지",
 	"copy": "복사하기",
 	"go_back": "이전 페이지로",
+	"user": {
+		"nickname": "닉네임",
+		"email": "이메일",
+		"logout": "로그아웃",
+		"withdrawal": "회원탈퇴"
+	},
 	"raid": {
 		"changeServer": "서버 변경"
 	},

@@ -31,6 +31,12 @@
 	"notice": "Notice",
 	"copy": "Copy",
 	"go_back": "Previous page",
+	"user": {
+		"nickname": "Nickname",
+		"email": "E-Mail",
+		"logout": "Logout",
+		"withdrawal": "Withdrawal"
+	},
 	"raid": {
 		"changeServer": "Change Server"
 	},

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import Section from '$shared/section/ui/Section.svelte'
-	import Title from '$shared/text/ui/Title.svelte'
+	import { Title } from '$shared/text'
 </script>
 
-<Section class="text-sm leading-[1.4] text-gray-200">
+<Section class="leading-[1.4 text-sm">
 	<Title>개인정보처리방침</Title>
 	<article class="flex flex-col gap-[1em]">
 		<div>

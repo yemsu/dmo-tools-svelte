@@ -7,8 +7,9 @@
 	import DeleteCharacterButton from '$features/update-character/ui/DeleteCharacterButton.svelte'
 	import { checkMember } from '$shared/lib'
 	import { lang } from '$shared/model'
+	import { Inner } from '$shared/section'
 	import { ListTable } from '$shared/table'
-	import Title from '$shared/text/ui/Title.svelte'
+	import { Title } from '$shared/text'
 	import { beforeUpdate } from 'svelte'
 
 	beforeUpdate(() => {
@@ -16,8 +17,8 @@
 	})
 </script>
 
-<div class="flex-center flex-1 overflow-hidden pt-1">
-	<div class="flex max-h-full w-full max-w-[450px] flex-col">
+<section class="flex-center flex-1">
+	<Inner size="content-middle">
 		<Title class="mb-3">내 캐릭터 ({$currentCharacters?.length})</Title>
 		{#if $currentCharacters}
 			<div class="scroll-box flex-1">
@@ -34,5 +35,5 @@
 		<div class="mt-2">
 			<NewCharacterButton />
 		</div>
-	</div>
-</div>
+	</Inner>
+</section>

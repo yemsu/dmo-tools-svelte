@@ -24,7 +24,7 @@
 >
 	<Icon icon="iconoir:language" size={18} />
 	<span
-		class="absolute right-0.5 top-0.5 rounded-full bg-background p-[2px] text-sub-sm"
+		class="absolute right-0.5 top-0.5 rounded-full bg-background p-[1px] text-sub-sm"
 	>
 		{toLang.toUpperCase()}
 	</span>

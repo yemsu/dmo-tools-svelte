@@ -11,7 +11,7 @@
 	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { Tooltip } from '$shared/tooltip'
 	import type { LangType } from '$shared/types'
 	import { statTypeOptionStyles } from '$widgets/my-seals'

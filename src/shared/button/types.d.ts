@@ -8,6 +8,7 @@ export type ButtonVariant =
 	| 'danger'
 	| 'warning'
 	| 'outline'
+	| 'outline-danger'
 	| 'link'
 export type ButtonSize =
 	| 'text'

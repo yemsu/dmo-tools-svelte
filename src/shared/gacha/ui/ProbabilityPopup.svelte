@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { GachaData } from '$entities/gacha'
 	import { GachaPopup, GachaItemImage } from '$shared/gacha'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData

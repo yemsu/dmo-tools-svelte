@@ -14,9 +14,9 @@
 	import { Input, NICKNAME_SCHEMA, ValidationText } from '$shared/form'
 	import { checkJoinProcess, checkNoMember } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { Section } from '$shared/section'
+	import { Inner, Section } from '$shared/section'
 	import { Title } from '$shared/text'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { error } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
@@ -62,34 +62,36 @@
 	})
 </script>
 
-<Section size="sm" class="gap-10">
-	<Title class="text-center">
-		<TextByLang
-			text="사이트에서 사용할 닉네임을 입력해 주세요."
-			engText="Please enter the nickname you will use on the site."
-		/>
-	</Title>
-	<form
-		on:submit|preventDefault={onSubmit}
-		class="flex w-full items-start gap-2"
-	>
-		<div class="flex flex-1 flex-col gap-2">
-			<Input
-				placeholder={$lang === 'kr' ? '닉네임' : 'Nickname'}
-				bind:value
-				bind:inputElement
+<section class="flex-center flex-1">
+	<Inner size="content-middle" class="flex-col-center gap-10">
+		<Title class="text-center">
+			<TextByLang
+				text="사이트에서 사용할 닉네임을 입력해 주세요."
+				engText="Please enter the nickname you will use on the site."
 			/>
-			<div class="h-[4em]">
-				<ValidationText
-					{value}
-					{setIsValid}
-					schema={NICKNAME_SCHEMA}
-					validText={$_('available_nickname')}
+		</Title>
+		<form
+			on:submit|preventDefault={onSubmit}
+			class="flex w-full items-start gap-2"
+		>
+			<div class="flex flex-1 flex-col gap-2">
+				<Input
+					placeholder={$lang === 'kr' ? '닉네임' : 'Nickname'}
+					bind:value
+					bind:inputElement
 				/>
+				<div class="h-[4em]">
+					<ValidationText
+						{value}
+						{setIsValid}
+						schema={NICKNAME_SCHEMA}
+						validText={$_('available_nickname')}
+					/>
+				</div>
 			</div>
-		</div>
-		<Button variant="blue" size="lg" disabled={!isValid}>
-			<TextByLang text="결정했어요" engText="Confirm" />
-		</Button>
-	</form>
-</Section>
+			<Button variant="blue" size="lg" disabled={!isValid}>
+				<TextByLang text="결정했어요" engText="Confirm" />
+			</Button>
+		</form>
+	</Inner>
+</section>

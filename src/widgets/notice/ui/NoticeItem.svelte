@@ -2,7 +2,7 @@
 	import { Modal } from '$shared/modal'
 	import { lang } from '$shared/model'
 	import { Title } from '$shared/text'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 
 	export let date: string
 	export let time: string | undefined = undefined
@@ -14,9 +14,9 @@
 		slot="buttonSlot"
 		let:toggleModal
 		on:click={toggleModal}
-		class="text-body-sm group flex items-start justify-center gap-1 py-1 text-left"
+		class="group flex items-start justify-center gap-1 py-1 text-left text-body-sm"
 	>
-		<span class="text-sub-md rounded-full bg-gray-4 px-1 py-0.5">
+		<span class="rounded-full bg-gray-4 px-1 py-0.5 text-sub-md">
 			{date}
 		</span>
 		<span class="text-balance break-keep group-hover:underline">

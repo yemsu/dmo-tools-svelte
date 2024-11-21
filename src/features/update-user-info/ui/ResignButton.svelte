@@ -9,8 +9,8 @@
 	import Button from '$shared/button/ui/Button.svelte'
 	import { CONFIRM, PATH, TOAST } from '$shared/config'
 	import { lang } from '$shared/model'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
 	import { toast } from '$shared/toast'
+	import { _ } from 'svelte-i18n'
 
 	const onClickResign = async () => {
 		const isConfirm = confirm(CONFIRM.RESIGN[$lang])
@@ -28,5 +28,5 @@
 </script>
 
 <Button size="sm" variant="danger" on:click={onClickResign}>
-	<TextByLang text="탈퇴" engText="Withdrawal" />
+	{$_('user.withdrawal')}
 </Button>

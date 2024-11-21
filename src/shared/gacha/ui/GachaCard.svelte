@@ -2,7 +2,7 @@
 	import { type GachaData } from '$entities/gacha'
 	import { cn, contentUrl } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { createEventDispatcher } from 'svelte'
 
 	export let gachaData: GachaData

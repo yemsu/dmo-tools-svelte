@@ -9,7 +9,7 @@
 	import { GachaBg } from '$shared/gacha'
 	import { _objKeys, cn } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { GachaTypeTabContent } from '$widgets/gacha'
 	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
 	import type { PageData } from './$types'

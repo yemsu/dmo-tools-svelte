@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { cn } from '$shared/lib'
-	import Title from '$shared/text/ui/Title.svelte'
+	import { Title } from '$shared/text'
 
 	export let src: string
 	export let href: string
@@ -49,7 +49,7 @@
 				<Title size="sm" weight="bold" class="text-primay-30">
 					{title}
 				</Title>
-				<p class="text-body-sm text-balance break-keep text-gray-10 sm:flex-1">
+				<p class="text-balance break-keep text-body-sm text-gray-10 sm:flex-1">
 					<slot name="subTitle" />
 				</p>
 			</div>

@@ -8,7 +8,7 @@
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import TextByLang from '$shared/text/ui/TextByLang.svelte'
+	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { getMyAndFinalPrice } from '$widgets/my-seals'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
