@@ -51,27 +51,17 @@
 
 	const styles = {
 		side: {
-			left: cn(
-				'fixed flex w-side-ad-w justify-center',
-				'right-0 top-0 h-[30vh] overflow-hidden',
-				'port:hidden'
-			),
-			right: cn(
-				'fixed flex w-side-ad-w justify-center',
-				'bottom-0 right-0 h-[70vh] overflow-hidden',
-				'port:hidden'
-			)
+			left: 'w-side-ad-w right-0 top-0 h-[30vh]',
+			right: 'w-side-ad-w right-0 bottom-0 h-[70vh]'
 		},
 		bottom: {
 			left: cn(
-				'fixed flex h-bottom-ad-h justify-center',
-				'bottom-0 right-0 w-[calc((100vw-var(--side-menu-w))*0.6)] overflow-hidden',
-				'port:hidden'
+				'h-bottom-ad-h bottom-0',
+				'right-0 w-[calc((100vw-var(--side-menu-w))*0.6)] '
 			),
 			right: cn(
-				'fixed flex h-bottom-ad-h justify-center',
-				'bottom-0 left-side-menu-w w-[calc((100vw-var(--side-menu-w))*0.4)] overflow-hidden',
-				'port:hidden'
+				'h-bottom-ad-h bottom-0',
+				'left-side-menu-w w-[calc((100vw-var(--side-menu-w))*0.4)] '
 			)
 		}
 	}
@@ -82,18 +72,34 @@
 		<Adsense
 			adType="left"
 			visibleDevice="pc"
-			class={styles[landscapeLayoutType].left}
+			class={cn(
+				'flex-center fixed overflow-hidden port:hidden',
+				styles[landscapeLayoutType].left
+			)}
+			randomFormat={false}
 		/>
 		<Adsense
 			adType="right"
 			visibleDevice="pc"
-			class={styles[landscapeLayoutType].right}
+			class={cn(
+				'flex-center fixed overflow-hidden port:hidden',
+				styles[landscapeLayoutType].right
+			)}
+			randomFormat={false}
 		/>
 	{/if}
-	<Adsense
-		adType="top"
-		visibleDevice="mobile"
-		class="fixed bottom-0 h-mobile-bottom-ad-h w-full land:hidden"
-		randomFormat={false}
-	/>
 {/if}
+<div
+	class={cn(
+		'fixed bottom-0 h-mobile-bottom-ad-h w-full bg-background land:hidden'
+	)}
+>
+	{#if idAdVisibleRefreshFlag}
+		<Adsense
+			adType="top"
+			visibleDevice="mobile"
+			style="display:inline-block;width:100%;height:60px"
+			randomFormat={false}
+		/>
+	{/if}
+</div>
