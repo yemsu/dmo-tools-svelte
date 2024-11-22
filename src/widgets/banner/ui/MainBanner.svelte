@@ -32,24 +32,26 @@
 >
 	<a
 		{href}
-		class={cn('flex sm:flex-col', isLeft ? '' : 'justify-end')}
+		class={cn('flex port:flex-col', isLeft ? '' : 'justify-end')}
 		title={`${title} 바로가기`}
 	>
 		<div
 			class={cn(
-				'flex-center gap-2 sm:py-4',
-				'md:absolute md:top-0 md:h-full',
+				'flex-center gap-2 port:py-4',
+				'land:absolute land:top-0 land:h-full',
 				isLeft
-					? 'md:right-0 md:w-[26%] md:pl-6'
-					: 'md:left-0 md:w-[28%] md:pl-2 md:pr-8 md:text-right',
-				!isTop && 'md:justify-end'
+					? 'land:right-0 land:w-[26%] land:pl-6'
+					: 'land:left-0 land:w-[28%] land:pl-2 land:pr-8 land:text-right',
+				!isTop && 'land:justify-end'
 			)}
 		>
-			<div class="flex gap-2 md:flex-col">
+			<div class="flex gap-2 land:flex-col">
 				<Title size="sm" weight="bold" class="text-primay-30">
 					{title}
 				</Title>
-				<p class="text-balance break-keep text-body-sm text-gray-10 sm:flex-1">
+				<p
+					class="text-balance break-keep text-body-sm text-gray-10 port:flex-1"
+				>
 					<slot name="subTitle" />
 				</p>
 			</div>
@@ -60,7 +62,7 @@
 			width="600"
 			height="190"
 			class={cn(
-				'object-cover md:h-[190px] md:w-[78%]',
+				'object-cover land:h-[190px] land:w-[78%]',
 				isLeft ? 'object-right' : 'object-left'
 			)}
 		/>

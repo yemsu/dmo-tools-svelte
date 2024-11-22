@@ -31,7 +31,7 @@
 							'relative w-full overflow-hidden rounded-md bg-gray-3',
 							selectedRaidId === raid.id
 								? 'border border-gray-10 opacity-100'
-								: 'border border-gray-4 opacity-40 md:hover:opacity-100'
+								: 'border border-gray-4 opacity-40 land:hover:opacity-100'
 						)}
 						title="자세히 보기"
 						on:click={() => onClickView(raid.id)}

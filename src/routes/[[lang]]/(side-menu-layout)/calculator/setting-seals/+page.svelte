@@ -75,7 +75,7 @@
 <div
 	class={cn(
 		'flex w-full flex-col items-start gap-1.5',
-		'md:flex-row md:items-center md:justify-between'
+		'land:flex-row land:items-center land:justify-between'
 	)}
 >
 	<Tabs class="w-full">
@@ -116,7 +116,7 @@
 			<button
 				class={cn(
 					'flex-center peer gap-0.5 text-right text-body-sm',
-					'text-gray-11 md:text-left md:text-sub-md'
+					'text-gray-11 land:text-left land:text-sub-md'
 				)}
 			>
 				<iconify-icon icon="ic:outline-info" width={14} height={14} />

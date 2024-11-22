@@ -5,7 +5,7 @@
 	const { class: className, ...restProps } = $$restProps
 	const sizeStyles = {
 		sm: 'flex-col-center w-[400px] max-w-full pb-[2vh] mx-auto py-1.5',
-		md: 'flex flex-col gap-1.5 md:gap-2 py-2'
+		md: 'flex flex-col gap-1.5 land:gap-2 py-2'
 	}
 </script>
 

@@ -17,7 +17,7 @@
 
 <button
 	class={cn(
-		'group absolute top-[calc(50%-20px)] flex -translate-y-1/2 items-center md:top-[calc(50%-40px)] ',
+		'group absolute top-[calc(50%-20px)] flex -translate-y-1/2 items-center land:top-[calc(50%-40px)] ',
 		'transition-transform land:enabled:hover:scale-125',
 		directionStyles[dir]
 	)}

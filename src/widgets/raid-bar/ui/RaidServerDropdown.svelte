@@ -10,7 +10,7 @@
 		slot="buttonSlot"
 		let:toggleDropdown
 		on:click={toggleDropdown}
-		class="button-hover text-sub-lg relative block h-full w-full text-center md:px-2"
+		class="button-hover relative block h-full w-full text-center text-sub-lg land:px-2"
 		title={$_('raid.changeServer')}
 	>
 		{$crrServerType ? GAME_SERVERS[$crrServerType] : ''}

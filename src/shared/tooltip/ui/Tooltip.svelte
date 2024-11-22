@@ -30,8 +30,8 @@
 	const positionStyles = {
 		top: 'top-0',
 		bottom: 'bottom-0',
-		left: 'md:-left-1 -translate-x-full left-10',
-		right: 'md:-right-1 translate-x-full right-10'
+		left: 'land:-left-1 -translate-x-full left-10',
+		right: 'land:-right-1 translate-x-full right-10'
 	}
 	const sizeStyles = {
 		sm: 'p-2',
@@ -45,7 +45,7 @@
 	class={cn(
 		'hidden group-hover:block peer-hover:block',
 		'absolute z-tooltip',
-		'break-keep rounded-md text-sub-md md:text-sub-lg',
+		'break-keep rounded-md text-sub-md land:text-sub-lg',
 		'border border-gray-5 bg-background/90',
 		'drop-shadow-lg',
 		sizeStyles[size],

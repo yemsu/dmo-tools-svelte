@@ -8,7 +8,7 @@
 	export let isLoading: boolean = false
 	export let noDataText: string | undefined = undefined
 	const wrapClassName = cn(
-		'grid items-start md:grid-cols-5 grid-cols-3 gap-1 md:gap-2',
+		'grid items-start land:grid-cols-5 grid-cols-3 gap-1 land:gap-2',
 		'w-full text-sub-md',
 		className
 	)

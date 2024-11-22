@@ -9,7 +9,7 @@
 
 <div
 	class={cn(
-		'grid grid-cols-2 gap-1 break-keep p-2 text-center md:grid-cols-6 md:gap-2',
+		'grid grid-cols-2 gap-1 break-keep p-2 text-center land:grid-cols-6 land:gap-2',
 		className
 	)}
 	{...restProps}

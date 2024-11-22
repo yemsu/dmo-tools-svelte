@@ -66,18 +66,18 @@
 {#if message}
 	<section class="flex-center min-h-full flex-1">
 		<Inner size="content-middle" class="text-center">
-			<div class="flex-col-center gap-5 md:gap-8">
+			<div class="flex-col-center gap-5 land:gap-8">
 				<div>
-					<div class="mb-4 text-[40px] md:text-[60px]">💦</div>
-					<h2 class="text-body-lg2 md:text-title-lg">
+					<div class="mb-4 text-[40px] land:text-[60px]">💦</div>
+					<h2 class="text-body-lg2 land:text-title-lg">
 						<TextByLang
 							text="예상치 못한 에러가 발생했어요"
 							engText="An unexpected error occurred"
 						/>
 					</h2>
 				</div>
-				<div class="relative rounded-md border border-gray-5 p-4 md:p-6">
-					<p class="text-body-md text-warning md:text-body-lg">
+				<div class="relative rounded-md border border-gray-5 p-4 land:p-6">
+					<p class="text-body-md text-warning land:text-body-lg">
 						Error Message : {message}
 					</p>
 					<Button

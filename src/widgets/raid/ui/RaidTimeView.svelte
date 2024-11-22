@@ -11,7 +11,7 @@
 </script>
 
 <section class="scroll-box size-full rounded-md py-6 backdrop-blur-sm">
-	<div class="mb-4 flex flex-col items-center gap-2 md:flex-row md:gap-3">
+	<div class="mb-4 flex flex-col items-center gap-2 land:flex-row land:gap-3">
 		<Title class="text-center">{raid.name}</Title>
 		<RaidLocation location={raid.location} />
 	</div>

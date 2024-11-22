@@ -5,7 +5,7 @@
 </script>
 
 <iconify-icon
-	icon="line-md:chevron-triple-right"
+	icon="line-land:chevron-triple-right"
 	width={12}
 	height={12}
 	class={cn('-mb-[2px] text-gray-9', className)}

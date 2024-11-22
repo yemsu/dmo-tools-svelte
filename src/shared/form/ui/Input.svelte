@@ -13,8 +13,8 @@
 	const sizeStyles = {
 		xs: 'h-input-h-xs text-sub-md px-1',
 		sm: 'h-input-h-sm text-sub-md px-1',
-		'sm-md': 'h-input-h-sm text-sub-md md:text-body-sm px-2',
-		md: 'h-input-h px-2 text-sub-md md:text-body-md'
+		'sm-md': 'h-input-h-sm text-sub-md land:text-body-sm px-2',
+		md: 'h-input-h px-2 text-sub-md land:text-body-md'
 	}
 
 	const handleInput = (event: Event) => {

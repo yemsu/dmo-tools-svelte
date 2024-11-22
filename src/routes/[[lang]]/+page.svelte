@@ -34,7 +34,7 @@
 		<Notice />
 	</div>
 	<div
-		class="flex-center mx-auto mt-4 flex max-w-[800px] shrink-0 flex-col gap-4 px-content-side lg:mt-0 lg:w-[50%] lg:gap-[clamp(20px,20%,50px)] lg:px-0 md:min-w-[600px]"
+		class="flex-center mx-auto mt-4 flex max-w-[800px] shrink-0 flex-col gap-4 px-content-side lg:mt-0 lg:w-[50%] lg:gap-[clamp(20px,20%,50px)] lg:px-0 land:min-w-[600px]"
 	>
 		<MainBanner
 			src={contentUrl('/main/main-banner-calc.png')}
@@ -46,9 +46,9 @@
 		>
 			<slot slot="subTitle">
 				{#if isKr}
-					목표 스탯까지 씰 효율 우선순위를 <br class="md:hidden" /> 간편하게 확인해보세요.
+					목표 스탯까지 씰 효율 우선순위를 <br class="land:hidden" /> 간편하게 확인해보세요.
 				{:else}
-					Easily check the priority of seal <br class="md:hidden" />
+					Easily check the priority of seal <br class="land:hidden" />
 					efficiency to reach your target stat.
 				{/if}
 			</slot>
@@ -63,7 +63,7 @@
 				colorType="blue-2"
 			>
 				<slot slot="subTitle">
-					보스 출현 시간을 공유하고 <br class="md:hidden" /> 알림을 받아보세요.
+					보스 출현 시간을 공유하고 <br class="land:hidden" /> 알림을 받아보세요.
 				</slot>
 			</MainBanner>
 		{/if}
@@ -77,9 +77,9 @@
 		>
 			<slot slot="subTitle">
 				{#if isKr}
-					뽑기 시뮬레이터로 <br class="md:hidden" /> 운을 미리 시험해 보세요.
+					뽑기 시뮬레이터로 <br class="land:hidden" /> 운을 미리 시험해 보세요.
 				{:else}
-					Test your luck <br class="md:hidden" /> in the gacha simulator!
+					Test your luck <br class="land:hidden" /> in the gacha simulator!
 				{/if}
 			</slot>
 		</MainBanner>
