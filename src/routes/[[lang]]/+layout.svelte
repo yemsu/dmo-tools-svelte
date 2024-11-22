@@ -25,7 +25,6 @@
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
 	const koreanUrl = `${PUBLIC_BASE_URL}/${pathWithoutLang}`
 	const englishUrl = `${PUBLIC_BASE_URL}/en${pathWithoutLang}`
-	$: console.log(' $page.url.p', $page.url)
 	$: isMain = $page.url.pathname === `${$langPath || '/'}`
 	// 점검시
 	// const gotoErrorPage = () => {
