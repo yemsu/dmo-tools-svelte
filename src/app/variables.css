@@ -16,7 +16,7 @@
 	--input-h: 40px;
 	--input-h-sm: 30px;
 	--input-h-xs: 25px;
-	--side-ad-w: clamp(200px, 20vw, 330px);
+	--side-ad-w: clamp(200px, 20vw, 290px);
 	--bottom-ad-h: clamp(180px, 25vh, 280px);
 	--mobile-bottom-ad-h: 0;
 	--calc-result-h: 70px;
