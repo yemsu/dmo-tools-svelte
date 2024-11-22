@@ -40,7 +40,7 @@
 	{/if}
 </svelte:head>
 
-<NoticeBar />
+<!-- <NoticeBar /> -->
 <TopMenu class="land:hidden" />
 <SideMenu class="port:hidden" />
 
