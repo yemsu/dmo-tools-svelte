@@ -1,25 +1,9 @@
 <script lang="ts">
-	import { cn, intersectionObserver } from '$shared/lib'
+	import { cn } from '$shared/lib'
 	import Adsense from '$widgets/adsense/ui/Adsense.svelte'
-
-	let isAdFixed = true
-
-	const handleIntersect = (isIntersecting: boolean) => {
-		isAdFixed = !isIntersecting
-	}
 </script>
 
-<div
-	use:intersectionObserver={{
-		target: 'footer',
-		rootMargin: '60px 0px 0px 0px',
-		onIntersect: handleIntersect
-	}}
-	class={cn(
-		'h-[60px] w-full land:hidden',
-		isAdFixed ? 'fixed bottom-gnb-h z-header' : 'mt-content-side'
-	)}
->
+<div class={cn('h-mobile-bottom-ad-h fixed bottom-0 w-full land:hidden')}>
 	<Adsense
 		adType="top"
 		visibleDevice="mobile"

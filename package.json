@@ -25,6 +25,7 @@
 		"@types/eslint": "^9.6.0",
 		"@types/google.accounts": "^0.0.15",
 		"@types/node": "^22.1.0",
+		"@types/three": "^0.170.0",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -50,7 +51,9 @@
 		"embla-carousel-svelte": "^8.2.0",
 		"es-hangul": "^1.4.7",
 		"iconify-icon": "^2.1.0",
+		"postprocessing": "^6.36.4",
 		"svelte-i18n": "^4.0.0",
+		"three": "^0.170.0",
 		"vite-plugin-pwa": "^0.20.1"
 	}
 }

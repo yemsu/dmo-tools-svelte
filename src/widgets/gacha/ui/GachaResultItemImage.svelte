@@ -29,6 +29,6 @@
 	{/if}
 	<GachaItemImage
 		{id}
-		class={cn('sm:w-[40px]', isBestItem && 'neon-best-item')}
+		class={cn('port:w-[40px]', isBestItem && 'neon-best-item')}
 	/>
 </span>

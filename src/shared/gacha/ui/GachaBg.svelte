@@ -9,7 +9,7 @@
 		loop
 		muted
 		playsinline
-		class="size-gacha-video max-w-none"
+		class="size-full max-w-none object-contain"
 	>
 		<track kind="captions" />
 	</video>

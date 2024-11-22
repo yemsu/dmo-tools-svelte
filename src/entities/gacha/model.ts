@@ -99,3 +99,4 @@ const createGachaStore = () => {
 	}
 }
 export const gachaStore = createGachaStore()
+export const isLoadingVideoOn = writable(false)

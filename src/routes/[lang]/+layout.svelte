@@ -44,19 +44,27 @@
 <TopMenu class="land:hidden" />
 <SideMenu class="port:hidden" />
 
-<div class={cn('relative port:pb-gnb-h land:ml-side-menu-w')}>
+<div
+	class={cn(
+		'relative port:pb-gnb-h land:ml-side-menu-w',
+		'port:pt-[calc(var(--raid-bar-h)+var(--header-h))]'
+	)}
+>
 	{#if isMain}
 		<SpaceBackground />
 	{/if}
-	<main class="relative flex min-h-[100vh] flex-col">
+	<main
+		class={cn(
+			'relative flex flex-1 flex-col',
+			'port:min-h-content-h land:min-h-[100vh]'
+		)}
+	>
 		<slot></slot>
 	</main>
-	{#if !isMain}
-		<AdMobileBanner />
-	{/if}
 	{#if !$isLandscape}
 		<Footer />
 	{/if}
+	<AdMobileBanner />
 </div>
 <ToastPopup />
 <GlobalModal />

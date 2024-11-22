@@ -25,9 +25,9 @@
 			activeGacha.id === gachaData.id
 				? 'bg-gacha-card-selected neon-gacha-gold scale-[var(--current-card-scale)] border-gacha-gold text-[#E6E1CE]'
 				: cn(
-						`bg-gacha-card inactive-card border-transparent md:hover:-translate-y-2 sm:brightness-50`,
-						isPrev && 'sm:prev-card',
-						isNext && 'sm:next-card'
+						`bg-gacha-card inactive-card border-transparent brightness-50 land:hover:-translate-y-2`,
+						isPrev && 'port:prev-card',
+						isNext && 'port:next-card'
 					)
 		)}
 	>
@@ -37,7 +37,7 @@
 			on:click={() => selectGacha(gachaData)}
 		>
 			<h2
-				class="flex-col-center gap-[0.4em] text-balance break-keep py-3 text-center text-sub-md md:text-sub-md"
+				class="flex-col-center gap-[0.4em] text-balance break-keep py-3 text-center text-sub-md land:py-4 land:text-body-md"
 			>
 				{#if gachaData.category}
 					<span>

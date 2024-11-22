@@ -2,6 +2,7 @@
 	import {
 		GACHA_TYPES,
 		gachaStore,
+		isLoadingVideoOn,
 		type GachaData,
 		type GachaDataType,
 		type GachaTabContents
@@ -18,12 +19,7 @@
 
 	export let currentGachaType: GachaDataType
 	export let gachaTabContent: GachaTabContents[GachaDataType]
-	let isLoadingOn = false
 	$: activeGacha = gachaTabContent.gachaList[0]
-
-	const endLoadingVideo = () => {
-		isLoadingOn = false
-	}
 
 	$: onResultViewConfirm = () => {
 		gachaStore.setResultShow(false)
@@ -32,7 +28,7 @@
 
 	$: startLoading = () => {
 		if ($gachaStore.results.length === 0) return
-		isLoadingOn = true
+		isLoadingVideoOn.set(true)
 		gachaStore.setResultShow(false)
 		setTimeout(() => {
 			gachaStore.setResultShow(true)
@@ -59,7 +55,7 @@
 	})
 </script>
 
-<div class="w-full md:pb-10">
+<div class="w-full">
 	<GachaList
 		{currentGachaType}
 		{activeGacha}
@@ -76,8 +72,5 @@
 			on:confirm={onResultViewConfirm}
 			on:start={startLoading}
 		/>
-	{/if}
-	{#if isLoadingOn}
-		<GachaResultLoading on:endVideo={endLoadingVideo} />
 	{/if}
 </div>

@@ -4,7 +4,7 @@
 </script>
 
 <button
-	class="group ml-auto"
+	class="group ml-auto size-[25px] land:size-[30px]"
 	on:click
 	title={$lang === 'kr' ? '보상 자세히 보기' : 'Check Reward Items'}
 >
@@ -13,13 +13,13 @@
 		alt=""
 		width="25"
 		height="25"
-		class="group-hover:hidden"
+		class="size-full group-hover:hidden"
 	/>
 	<img
 		src={contentUrl('/gacha/view-items.jpg')}
 		alt=""
 		width="25"
 		height="25"
-		class="hidden group-hover:block"
+		class="hidden size-full group-hover:block"
 	/>
 </button>

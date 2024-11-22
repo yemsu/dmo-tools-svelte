@@ -1,17 +1,16 @@
 <script lang="ts">
-	import { gachaStore } from '$entities/gacha'
+	import { browser } from '$app/environment'
+	import { gachaStore, isLoadingVideoOn } from '$entities/gacha'
 	import { cn, contentUrl } from '$shared/lib'
-	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+	import { onDestroy, onMount } from 'svelte'
 
 	let isVideoFadeOut = false
 	let videoElement: HTMLVideoElement
 
-	const dispatch = createEventDispatcher()
-
 	const onVideoEnd = () => {
 		isVideoFadeOut = true
 		setTimeout(() => {
-			dispatch('endVideo', true)
+			isLoadingVideoOn.set(false)
 			isVideoFadeOut = false
 		}, 500)
 	}
@@ -48,13 +47,14 @@
 	})
 
 	onDestroy(() => {
+		if (!browser) return
 		document.removeEventListener('keyup', onKeyUp)
 	})
 </script>
 
 <div
 	class={cn(
-		'flex-col-center absolute left-0 top-0 z-20 size-full bg-black transition-all duration-500',
+		'flex-col-center port:h-content-h absolute left-0 top-0 z-20 size-full bg-black transition-all duration-500',
 		isVideoFadeOut && 'scale-150 opacity-0 blur-xl'
 	)}
 >
@@ -63,14 +63,19 @@
 			<video
 				bind:this={videoElement}
 				src={contentUrl(`/gacha/videos/loading-rarity-${videoNumber()}.mp4`)}
-				class="pc:size-full size-gacha-video max-w-none"
+				class="size-gacha-video max-w-none land:w-full"
+				width="1067"
+				height="600"
 				playsinline
 			>
 				<track kind="captions" />
 			</video>
 		</div>
 		<button
-			class="bg-gacha-skip-loading text-sub-md absolute right-3 top-4 w-[80px] py-1.5 md:top-2"
+			class={cn(
+				'bg-gacha-skip-loading absolute right-3 top-4 w-[80px] py-1.5 text-sub-md',
+				'land:right-6 land:top-4 land:w-[120px] land:text-body-md'
+			)}
 			on:click={onVideoEnd}
 		>
 			SKIP

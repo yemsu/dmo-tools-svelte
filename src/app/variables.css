@@ -34,19 +34,25 @@
 	--input-h-sm: 30px;
 	--input-h-xs: 25px;
 	--side-ad-w: clamp(200px, 20vw, 330px);
-	--bottom-ad-h: clamp(200px, 30vh, 300px);
+	--bottom-ad-h: clamp(180px, 25vh, 280px);
+	--mobile-bottom-ad-h: 0;
 	--calc-result-h: 70px;
-	@media screen and (max-width: 768px), screen and (orientation: portrait) {
+	@media screen and (max-width: 1023px), screen and (orientation: portrait) {
 		--gnb-h: 45px;
 		--side-menu-w: 0px;
 		--raid-bar-h: 35px;
 		--content-w: 100%;
+		--content-h: calc(
+			100vh - var(--gnb-h) - var(--mobile-bottom-ad-h) - var(--header-h) -
+				var(--raid-bar-h)
+		);
 		--content-side: 10px;
 		--input-h: 30px;
 		--input-h-sm: 25px;
 		--input-h-xs: 20px;
 		--side-ad-w: 0px;
 		--bottom-ad-h: 0;
+		--mobile-bottom-ad-h: 60px;
 		--calc-result-h: auto;
 	}
 	/* Colors */
@@ -132,7 +138,7 @@
 	--font-title-lg: 28px;
 	--font-title-xl: 34px;
 
-	@media screen and (max-width: 768px), screen and (orientation: portrait) {
+	@media screen and (max-width: 1023px), screen and (orientation: portrait) {
 		--font-sub-sm: 8px;
 		--font-sub-md: 9px;
 		--font-sub-lg: 10px;

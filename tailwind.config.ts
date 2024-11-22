@@ -121,6 +121,7 @@ export default {
 				'gnb-h': 'var(--gnb-h)',
 				'side-menu-w': 'var(--side-menu-w)',
 				'content-w': 'var(--content-w)',
+				'content-h': 'var(--content-h)',
 				'content-side': 'var(--content-side)',
 				'raid-bar-h': 'var(--raid-bar-h)',
 				'input-h': 'var(--input-h)',
@@ -128,6 +129,7 @@ export default {
 				'input-h-xs': 'var(--input-h-xs)',
 				'side-ad-w': 'var(--side-ad-w)',
 				'bottom-ad-h': 'var(--bottom-ad-h)',
+				'mobile-bottom-ad-h': 'var(--mobile-bottom-ad-h)',
 				'calc-result-h': 'var(--calc-result-h)'
 			},
 			fontSize: {

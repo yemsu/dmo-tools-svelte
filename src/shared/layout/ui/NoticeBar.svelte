@@ -21,7 +21,7 @@
 </script>
 
 {#if showNotice}
-	<div class="bg-primary-50 py-2 text-primary-5 sm:text-sub-md">
+	<div class="bg-blue-10 py-2 text-primary-5 sm:text-sub-md">
 		<div class="flex-center relative mx-auto px-content-side md:w-content-w">
 			<p class="text-balance break-keep text-center font-bold">
 				<TextByLang

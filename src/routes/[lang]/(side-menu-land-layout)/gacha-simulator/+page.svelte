@@ -1,17 +1,22 @@
 <script lang="ts">
 	import {
 		GACHA_TYPES,
-		gachaStore,
+		isLoadingVideoOn,
+		type GachaDataType,
 		type GachaTabContents
 	} from '$entities/gacha'
 	import { MENUS } from '$entities/menus'
 	import { META } from '$shared/config'
-	import { GachaBg } from '$shared/gacha'
-	import { _objKeys, cn } from '$shared/lib'
+	import { _objKeys } from '$shared/lib'
 	import { lang } from '$shared/model'
+	import { Inner } from '$shared/section'
 	import { TextByLang } from '$shared/text'
-	import { GachaTypeTabContent } from '$widgets/gacha'
-	import GachaTypeTabButton from '$widgets/gacha/ui/GachaTypeTabButton.svelte'
+	import { DigitalBackground } from '$widgets/bg-space'
+	import {
+		GachaResultLoading,
+		GachaTypeTabContent,
+		GachaTypeTabs
+	} from '$widgets/gacha'
 	import type { PageData } from './$types'
 	import './gacha.css'
 
@@ -34,6 +39,10 @@
 			gachaList: data.gachaDraws
 		}
 	} as GachaTabContents
+
+	const setCurrentGachaType = (gachaType: GachaDataType) => {
+		currentGachaType = gachaType
+	}
 </script>
 
 <svelte:head>
@@ -42,36 +51,24 @@
 </svelte:head>
 
 <section
-	class="bg-gacha relative flex h-full flex-col justify-center font-ns text-gray-200"
+	class="dark relative flex flex-1 flex-col justify-center font-ns text-gray-200"
 >
+	<DigitalBackground />
 	<h2 class="ir">
 		<TextByLang data={MENUS.gacha} />
 	</h2>
-	<section class="flex-col-center h-full flex-1">
-		<GachaBg />
-		<div
-			class="relative flex h-full w-full flex-col md:h-[var(--gacha-select-view-h)]"
-		>
-			<div
-				class={cn(
-					'flex-center mx-auto mb-3 w-full bg-primary-20/40 md:max-w-[500px] sm:mt-4 sm:max-w-[300px]',
-					$gachaStore.isResultShow && 'opacity-0'
-				)}
-			>
-				{#each _objKeys(GACHA_TYPES) as gachaType (gachaType)}
-					<GachaTypeTabButton
-						{gachaType}
-						isActive={currentGachaType === gachaType}
-						on:click={() => (currentGachaType = gachaType)}
-					/>
-				{/each}
-			</div>
+	<section class="flex-col-center relative h-full flex-1 port:h-[380px]">
+		<Inner class="relative flex flex-col gap-6">
+			<GachaTypeTabs {currentGachaType} onTabClick={setCurrentGachaType} />
 			<div class="flex-col-center flex-1">
 				<GachaTypeTabContent
 					{currentGachaType}
 					gachaTabContent={gachaTabContents[currentGachaType]}
 				/>
 			</div>
-		</div>
+		</Inner>
 	</section>
+	{#if $isLoadingVideoOn}
+		<GachaResultLoading />
+	{/if}
 </section>

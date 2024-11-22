@@ -56,16 +56,15 @@
 </script>
 
 <section
-	class="position-center flex-col-center h-full max-h-[500px] w-full bg-black/30"
+	class="position-center flex-col-center h-[calc(100vh-var(--bottom-ad-h))] w-full"
 >
-	<BackBlur />
 	<div
-		class="flex-col-center h-full w-full max-w-[300px] gap-10 md:max-w-[400px] md:gap-14"
+		class="flex-col-center w-full max-w-[300px] gap-10 land:max-w-[600px] land:gap-14"
 	>
 		<GachaTitle>{$_('gacha.resultItems')}</GachaTitle>
 		<ul
 			class={cn(
-				'max-h-[160px] w-full flex-1 md:max-h-[220px]',
+				'min-h-[160px] w-full flex-1 land:min-h-[250px]',
 				$gachaStore.results.length === 1
 					? 'flex-center'
 					: $gachaStore.results.length === 10

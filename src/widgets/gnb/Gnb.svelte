@@ -31,7 +31,7 @@
 <nav
 	class={cn(
 		'land:gap-5',
-		'port:fixed port:bottom-0 port:z-header port:w-full port:bg-background',
+		'port:bottom-mobile-bottom-ad-h port:fixed port:z-header port:w-full port:bg-background',
 		$$restProps.class
 	)}
 >

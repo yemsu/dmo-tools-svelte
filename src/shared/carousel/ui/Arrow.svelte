@@ -16,9 +16,11 @@
 </script>
 
 <button
-	class="group absolute top-[calc(50%-20px)] flex -translate-y-1/2 items-center md:top-[calc(50%-40px)] {directionStyles[
-		dir
-	]}"
+	class={cn(
+		'group absolute top-[calc(50%-20px)] flex -translate-y-1/2 items-center md:top-[calc(50%-40px)] ',
+		'transition-transform land:enabled:hover:scale-125',
+		directionStyles[dir]
+	)}
 	on:click={() => dispatch('toDir', dir)}
 	{...$$restProps}
 >

@@ -7,14 +7,19 @@
 	import { RaidBar } from '$widgets/raid-bar'
 </script>
 
-<div class={$$restProps.class}>
+<div
+	class={cn(
+		'fixed left-0 top-0 z-header w-full bg-background',
+		$$restProps.class
+	)}
+>
 	{#if !$isLandscape}
 		<Inner class="h-header-h">
 			<Header class={cn('flex h-full items-center justify-between')} />
-			{#if $lang === 'kr'}
-				<RaidBar />
-			{/if}
 		</Inner>
+		{#if $lang === 'kr'}
+			<RaidBar />
+		{/if}
 		<Gnb />
 	{/if}
 </div>

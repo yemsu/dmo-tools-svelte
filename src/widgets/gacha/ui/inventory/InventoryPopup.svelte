@@ -42,27 +42,27 @@
 <GachaPopup
 	class={cn(
 		'z-40 flex flex-col',
-		'bg-primary-20/60',
-		'rounded-t-md border border-primary-5 shadow-[0px_0px_1px_1px_hsl(var(--primary-40)/50%)]'
+		'bg-blue-2/60',
+		'rounded-t-md border border-blue-5 shadow-[0px_0px_1px_1px_hsl(var(--blue-9)/50%)]'
 	)}
 	on:close={() => dispatch('close')}
 >
 	<BackBlur />
 	<h2
-		class="text-shadow bg-gr-b border-b border-primary-5 py-2 text-center text-sub-md leading-none shadow-[0px_-2px_1px_1px_hsl(var(--primary-50)/60%)] md:py-3 md:text-body-md"
+		class="text-shadow bg-gr-b border-b border-blue-5 py-2 text-center text-sub-md leading-none shadow-[0px_-2px_1px_1px_hsl(var(--blue-9)/60%)] land:py-3 land:text-body-md"
 	>
 		<TextByLang text="가방" engText="Inventory" />
 	</h2>
 	<div
-		class="leading-0 flex items-center justify-between border-b border-primary-5 bg-primary-10/20 p-1.5 sm:py-1"
+		class="leading-0 flex items-center justify-between border-b border-blue-5 bg-blue-2/20 p-1.5 port:py-1"
 	>
 		<div
-			class="flex items-center gap-[0.5em] text-body-sm text-gray-11 md:text-sub-md"
+			class="flex items-center gap-[0.5em] text-sub-md text-gray-11 land:text-sub-lg"
 		>
 			<h3 class="ir">
 				<TextByLang text="뽑기 횟수" engText="Gacha Counts" />
 			</h3>
-			<dl class="flex flex-wrap gap-[0.2em] md:gap-[0.5em]">
+			<dl class="flex flex-wrap gap-[0.2em] land:gap-[0.5em]">
 				{#each gachaList as gacha (gacha.id)}
 					{@const playCount =
 						$gachaStore.myPlayCounts[currentGachaType][gacha.id] || 0}
@@ -89,15 +89,15 @@
 		</div>
 		<button
 			type="button"
-			class="ml-auto rounded-sm bg-primary-40/20 p-1 pb-0.5 leading-none"
+			class="ml-auto rounded-sm bg-blue-9/20 p-1 pb-0.5 leading-none"
 			title={$lang === 'kr' ? '가방 비우기' : 'Clear Inventory'}
 			on:click={cleanInventory}
 		>
 			<iconify-icon icon="ph:trash" width={14} height={14} />
 		</button>
 	</div>
-	<div class="flex-1 overflow-hidden bg-primary-20/20 p-1.5">
-		<div class="h-full bg-primary-5/70 p-1.5">
+	<div class="flex-1 overflow-hidden bg-blue-3/20 p-1.5">
+		<div class="h-full bg-blue-4/50 p-1.5">
 			<div class="scroll-box grid h-full grid-cols-9 items-start gap-1">
 				{#each inventorySlots as invenSlot}
 					<div

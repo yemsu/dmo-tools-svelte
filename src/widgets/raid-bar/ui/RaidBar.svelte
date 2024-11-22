@@ -187,8 +187,8 @@
 <aside
 	class={cn(
 		'relative z-raidBar',
-		'whitespace-nowrap bg-blue-4/10 text-sub-lg leading-none',
-		'port:rounded-md',
+		'whitespace-nowrap bg-gray-3 text-sub-lg leading-none land:bg-blue-4/10',
+		'port:fixed port:top-header-h port:w-full',
 		$$restProps.class
 	)}
 >

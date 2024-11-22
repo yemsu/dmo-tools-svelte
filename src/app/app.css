@@ -48,11 +48,11 @@
 	.point-border-neon {
 		@apply drop-shadow-primary-90 border border-primary-90/70 border-l-transparent border-r-transparent;
 	}
-	.border-primary-50-neon {
-		@apply drop-shadow-primary-50 border border-primary-50;
+	.border-blue-10-neon {
+		@apply drop-shadow-blue-10 border border-blue-10;
 	}
-	.border2-primary-50-neon {
-		@apply drop-shadow-primary-50 border-2 border-primary-50;
+	.border2-blue-10-neon {
+		@apply drop-shadow-blue-10 border-2 border-blue-10;
 	}
 	/* gradient */
 	.gradient-gray-3 {
@@ -70,6 +70,10 @@
 	/* hover */
 	.button-hover {
 		@apply transition-opacity hover:opacity-80;
+	}
+	/* blur */
+	.bg-blur-sm {
+		@apply before:absolute before:inset-0 before:z-[-1] before:backdrop-blur-sm;
 	}
 }
 body,

@@ -36,13 +36,13 @@
 <section
 	bind:this={popupElement}
 	class={cn(
-		'position-center z-20 h-[90%] w-[calc(100%-(var(--content-side)*2))] max-w-[500px] md:h-[420px] md:w-full',
+		'position-fix-center land:position-center z-modal h-[60vh] w-[calc(100%-(var(--content-side)*2))] max-w-[550px] land:h-[550px] land:w-full',
 		className
 	)}
 >
 	<slot></slot>
 	<button
-		class="absolute right-2 top-1 text-[yellow] md:top-2"
+		class="button-hover absolute right-2 top-1 text-[yellow] land:right-3 land:top-3"
 		on:click={() => dispatch('close')}
 		title="닫기"
 	>

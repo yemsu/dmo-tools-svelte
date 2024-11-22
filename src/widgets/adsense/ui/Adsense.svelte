@@ -64,7 +64,9 @@
 			{...restProps}
 			class={cn(
 				'adsbygoogle size-full',
-				import.meta.env.DEV && 'border border-gray-5 bg-blue-9/10'
+				import.meta.env.DEV
+					? 'border border-gray-5 bg-blue-9/10'
+					: 'bg-background'
 			)}
 			data-ad-client={PUBLIC_ADSENSE_CLIENT}
 			data-ad-slot={AD_SLOTS[adType]}

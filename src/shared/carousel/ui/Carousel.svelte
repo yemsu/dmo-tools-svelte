@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { type GachaData, type GachaDataType } from '$entities/gacha'
 	import Arrow from '$shared/carousel/ui/Arrow.svelte'
-	import { cn } from '$shared/lib'
+	import { cn, isLandscape } from '$shared/lib'
 	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 	import emblaCarousel from 'embla-carousel-svelte'
-	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+	import { createEventDispatcher } from 'svelte'
 
 	export let gachaList: GachaData[]
 	export let currentGachaType: GachaDataType
@@ -15,8 +15,6 @@
 	}
 	let isCarouselActive: boolean | null = null
 	let activeIndex: number = 0
-	let resizeDebounceTimer: NodeJS.Timeout | null = null
-	let isMobile: boolean | null = null
 
 	const dispatch = createEventDispatcher()
 
@@ -80,45 +78,20 @@
 		}
 	}
 
-	const setIsMobile = () => {
-		isMobile = window.innerWidth < 768
-	}
-
-	const onResize = () => {
-		if (resizeDebounceTimer) {
-			clearTimeout(resizeDebounceTimer)
-		}
-		setTimeout(() => {
-			setIsMobile()
-			resizeDebounceTimer = null
-		}, 100)
-	}
-
-	onMount(() => {
-		setTimeout(() => {
-			setIsMobile()
-		}, 60)
-		window.addEventListener('resize', onResize)
-	})
-	onDestroy(() => {
-		if (import.meta.env.SSR) return
-		window.removeEventListener('resize', onResize)
-	})
-
-	$: isMobile !== null && initCarousel()
+	$: $isLandscape && initCarousel()
 	$: currentGachaType && initCarousel()
 	$: activeGacha !== null && onActiveGachaChange()
 </script>
 
 <div
 	class={cn(
-		'relative mx-auto w-full sm:w-[clamp(0px,100%,calc(var(--current-card-w)*3))]',
+		'relative mx-auto w-full select-none port:w-[clamp(0px,100%,calc(var(--current-card-w)*3))]',
 		isCarouselActive === null && 'opacity-0'
 	)}
 >
 	<div
 		class={cn(
-			'sm:flex-center h-[var(--card-carousel-h)] overflow-hidden md:pt-[12px]',
+			'port:flex-center h-[var(--card-carousel-h)] overflow-hidden land:pt-4',
 			'transition-opacity'
 		)}
 		use:emblaCarousel={{ options, plugins: [] }}
@@ -126,7 +99,7 @@
 	>
 		<div
 			class={cn(
-				'mx-auto flex w-[var(--card-w)] md:gap-[var(--card-gap)]',
+				'mx-auto flex w-[var(--card-w)] gap-[var(--card-gap)]',
 				isCarouselActive === false && 'justify-center'
 			)}
 		>
@@ -140,6 +113,12 @@
 			{/each}
 		</div>
 	</div>
+	<div
+		class="absolute left-0 top-0 h-full w-[100px] bg-gradient-to-r from-background from-[10%]"
+	></div>
+	<div
+		class="absolute right-0 top-0 h-full w-[100px] bg-gradient-to-l from-background from-[10%]"
+	></div>
 	{#if isCarouselActive}
 		<Arrow dir="prev" on:toDir={onClickArrow} disabled={activeIndex === 0} />
 		<Arrow

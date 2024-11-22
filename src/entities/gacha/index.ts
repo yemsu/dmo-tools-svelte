@@ -8,4 +8,4 @@ export type {
 	GachaDataType,
 	GachaTabContents
 } from './type'
-export { gachaStore } from './model'
+export { gachaStore, isLoadingVideoOn } from './model'
