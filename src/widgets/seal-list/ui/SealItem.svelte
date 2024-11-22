@@ -28,17 +28,17 @@
 
 <article
 	class={cn(
-		'relative flex flex-col justify-center',
+		'relative flex flex-col justify-center land:min-h-[130px]',
 		'rounded-md bg-gray-3 text-center text-body-sm',
 		'border-b border-t',
-		'via-deep/15 bg-gradient-to-br',
+		'bg-gradient-to-br via-deep/15',
 		statGradientStyle[seal.statType]
 	)}
 >
 	<div
 		class={cn(
 			'group relative flex items-center justify-center',
-			'h-[3.2em] w-auto px-1 land:h-[3.6em]',
+			'h-[3.2em] w-auto px-1 land:min-h-[3.6em] land:flex-1',
 			'text-balance break-keep'
 		)}
 	>
