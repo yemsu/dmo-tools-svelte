@@ -289,7 +289,7 @@
 		<div
 			class={cn(
 				'absolute left-0 top-0',
-				'flex-col-center size-full gap-4 bg-primary-5/60 backdrop-blur-sm'
+				'flex-col-center size-full gap-4 bg-gray-3/60 backdrop-blur-sm'
 			)}
 		>
 			<p class="text-balance break-keep text-center">

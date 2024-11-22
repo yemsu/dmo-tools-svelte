@@ -3,7 +3,7 @@
 	import { Title } from '$shared/text'
 </script>
 
-<Section class="leading-[1.4 text-sm">
+<Section class="leading-[1.4 text-body-sm">
 	<Title>개인정보처리방침</Title>
 	<article class="flex flex-col gap-[1em]">
 		<div>

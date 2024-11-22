@@ -24,11 +24,11 @@
 			</h1>
 		</div>
 		<main class="w-full pt-10 land:pt-10">
-			<div class="flex flex-col gap-1 text-lg2 font-light md:text-[20px]">
+			<div class="flex flex-col gap-1 text-title-sm font-light">
 				<p>환영합니다! 언어를 선택해 주세요.</p>
 				<p>Welcome! Please select a language.</p>
 			</div>
-			<ul class="flex-center mt-8 gap-6 text-xl">
+			<ul class="flex-center mt-8 gap-6 text-title-md">
 				<li>
 					<a href="/kr" class={langButtonStyle}>한국어</a>
 				</li>

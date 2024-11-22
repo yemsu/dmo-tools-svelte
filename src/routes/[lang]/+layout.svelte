@@ -10,6 +10,7 @@
 	import { SideMenu } from '$widgets/primary-menu'
 	import { AdMobileBanner } from '$widgets/adsense'
 	import { SpaceBackground } from '$widgets/bg-space'
+	import NoticeBar from '$shared/layout/ui/NoticeBar.svelte'
 
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
 	const koreanUrl = `${PUBLIC_BASE_URL}/kr${pathWithoutLang}`
@@ -40,7 +41,7 @@
 	{/if}
 </svelte:head>
 
-<!-- <NoticeBar /> -->
+<NoticeBar />
 <TopMenu class="land:hidden" />
 <SideMenu class="port:hidden" />
 

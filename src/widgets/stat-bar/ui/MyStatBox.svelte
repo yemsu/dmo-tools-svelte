@@ -14,7 +14,7 @@
 		<div
 			class="flex items-center gap-[0.1em] rounded-full text-sub-lg md:gap-2"
 		>
-			<dt class="w-[1.5em] text-gray-200">
+			<dt class="w-[1.5em]">
 				{stat.type}
 			</dt>
 			<dd class="text-right font-semibold text-point sm:w-[3em]">

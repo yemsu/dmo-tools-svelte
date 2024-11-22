@@ -45,19 +45,7 @@
 	.point-neon {
 		@apply border border-point/80 bg-point/20 text-point;
 	}
-	.point-border-neon {
-		@apply drop-shadow-primary-90 border border-primary-90/70 border-l-transparent border-r-transparent;
-	}
-	.border-blue-10-neon {
-		@apply drop-shadow-blue-10 border border-blue-10;
-	}
-	.border2-blue-10-neon {
-		@apply drop-shadow-blue-10 border-2 border-blue-10;
-	}
 	/* gradient */
-	.gradient-gray-3 {
-		@apply bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900;
-	}
 	.border-gradient {
 		@apply border-transparent;
 		border-image: linear-gradient(

@@ -14,7 +14,7 @@
 	<meta name="description" content={META.COMMON.DESC[$lang]} />
 </svelte:head>
 
-<div class="w-full overflow-hidden pt-header-h lg:flex land:min-h-[100vh]">
+<div class="w-full overflow-hidden lg:flex land:min-h-[100vh]">
 	<div class="flex-col-center flex-1 gap-4 px-content-side lg:px-10 land:gap-8">
 		<p
 			class="flex-col-center min-h-[130px] gap-1 text-center land:min-h-[200px]"

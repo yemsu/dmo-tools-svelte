@@ -21,17 +21,19 @@
 </script>
 
 {#if showNotice}
-	<div class="bg-blue-10 py-2 text-primary-5 sm:text-sub-md">
-		<div class="flex-center relative mx-auto px-content-side md:w-content-w">
+	<div
+		class="relative z-header bg-blue-10 py-2 text-deep port:text-sub-md land:pl-side-menu-w"
+	>
+		<div class="flex-center relative mx-auto px-content-side land:w-content-w">
 			<p class="text-balance break-keep text-center font-bold">
 				<TextByLang
 					text="효율 계산기에 캐릭터 설정 기능이 추가되었습니다!"
 					engText="We've added a character selection feature to the efficiency calculator!"
 				/>
-				<br class="md:hidden" />
+				<br class="land:hidden" />
 				<a
 					href="/{$lang}{PATH.CHARACTERS}"
-					class="ml-2 inline-flex items-center rounded-full bg-primary-10 p-1 px-3 text-sub-md font-medium text-white md:p-2"
+					class="ml-2 inline-flex items-center rounded-full bg-blue-1 p-1 px-3 text-sub-md font-medium text-white land:p-2 land:text-sub-lg"
 				>
 					<TextByLang
 						text="캐릭터 설정 페이지 바로가기"
@@ -41,7 +43,7 @@
 				</a>
 			</p>
 			<button
-				class="position-y-center absolute right-content-side p-2 md:-right-2"
+				class="position-y-center absolute right-content-side p-2 land:-right-2"
 				title={$_('dont_show_again')}
 				on:click={clickDontShow}
 			>

@@ -8,7 +8,7 @@
 {#if $globalModalText}
 	<ModalBody hideModal={() => globalModalText.set(null)} size="sm">
 		<header class="mb-4"><Title>{$globalModalText.title}</Title></header>
-		<main class="text-gray-200">
+		<main>
 			<p>{$globalModalText.description[$lang]}</p>
 		</main>
 	</ModalBody>

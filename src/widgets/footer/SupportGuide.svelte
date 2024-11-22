@@ -26,7 +26,7 @@
 		>
 			{$_('support')}
 		</Button>
-		<div slot="popupContent" class="text-gray-12">
+		<div slot="popupContent" class="text-body-md text-gray-12">
 			<p>
 				Are you having trouble using the site? <br />
 				Please fill out the information below and email us at
@@ -35,8 +35,8 @@
 				</a> <br />
 				We'll do our best to resolve the issue!
 			</p>
-			<div class="flex-center mt-4 rounded-sm border border-secondary-30 p-3">
-				<ol class="text-sm1 flex flex-col gap-2">
+			<div class="flex-center mt-4 rounded-sm border border-gray-3 p-4">
+				<ol class="flex flex-col gap-2">
 					<li>1. DMO-tools username:</li>
 					<li>2. User country:</li>
 					<li>3. Browser used:</li>

@@ -6,7 +6,7 @@
 	export let infoItems: LeftTitleTableData[]
 </script>
 
-<dl class="w-full rounded-md bg-gray-3 text-sm md:text-body-md">
+<dl class="w-full rounded-md bg-gray-3 text-body-sm md:text-body-md">
 	{#each infoItems as infoItemData (infoItemData.i18n)}
 		<div
 			class="flex min-h-[50px] items-center gap-4 border-b border-gray-5/60 px-4 py-2 last:border-transparent"

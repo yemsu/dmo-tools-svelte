@@ -47,7 +47,7 @@
 
 <!-- <div class="flex-center mx-auto h-full w-content-w">
 	<div
-		class="flex-center h-[500px] w-full flex-col gap-4 rounded-md pb-7 text-center text-lg"
+		class="flex-center h-[500px] w-full flex-col gap-4 rounded-md pb-7 text-center text-body-lg"
 	>
 		<p>
 			<span class="text-[80px]">🏸</span><br />
@@ -64,12 +64,12 @@
 	</div>
 </div> -->
 {#if message}
-	<section class="flex-center min-h-full py-8">
-		<Inner class="text-center">
+	<section class="flex-center min-h-full flex-1">
+		<Inner size="content-middle" class="text-center">
 			<div class="flex-col-center gap-5 md:gap-8">
 				<div>
 					<div class="mb-4 text-[40px] md:text-[60px]">💦</div>
-					<h2 class="text-lg2 md:text-xl">
+					<h2 class="text-body-lg2 md:text-title-lg">
 						<TextByLang
 							text="예상치 못한 에러가 발생했어요"
 							engText="An unexpected error occurred"
@@ -77,7 +77,7 @@
 					</h2>
 				</div>
 				<div class="relative rounded-md border border-gray-5 p-4 md:p-6">
-					<p class="text-body-md text-warning md:text-lg">
+					<p class="text-body-md text-warning md:text-body-lg">
 						Error Message : {message}
 					</p>
 					<Button
@@ -91,7 +91,7 @@
 						<Icon icon="mynaui:copy" />
 					</Button>
 				</div>
-				<p class="text-pretty text-sm font-light opacity-60">
+				<p class="text-pretty text-body-sm font-light opacity-60">
 					<TextByLang
 						text="사이트 이용에 불편을 드려 죄송합니다."
 						engText="We apologize for the inconvenience you experienced on our site."

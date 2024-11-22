@@ -69,24 +69,6 @@ export default {
 					11: 'hsl(var(--gray-11))',
 					12: 'hsl(var(--gray-12))'
 				},
-				primary: {
-					5: 'hsl(var(--primary-5))',
-					10: 'hsl(var(--primary-10))',
-					20: 'hsl(var(--primary-20))',
-					30: 'hsl(var(--primary-30))',
-					35: 'hsl(var(--primary-35))',
-					40: 'hsl(var(--primary-40))',
-					50: 'hsl(var(--primary-50))',
-					90: 'hsl(var(--primary-90))'
-				},
-				secondary: {
-					5: 'hsl(var(--secondary-5))',
-					10: 'hsl(var(--secondary-10))',
-					20: 'hsl(var(--secondary-20))',
-					30: 'hsl(var(--secondary-30))',
-					40: 'hsl(var(--secondary-40))',
-					50: 'hsl(var(--secondary-50))'
-				},
 				gacha: {
 					10: '#080813',
 					20: '#0e0e1d',
@@ -133,16 +115,6 @@ export default {
 				'calc-result-h': 'var(--calc-result-h)'
 			},
 			fontSize: {
-				xs5: '8px',
-				xs4: '9px',
-				xs3: '10px',
-				xs2: '11px',
-				xs: '12px',
-				sm: '13px',
-				md: '14px',
-				lg: '16px',
-				lg2: '18px',
-				xl: '25px',
 				'sub-sm': 'var(--font-sub-sm)',
 				'sub-md': 'var(--font-sub-md)',
 				'sub-lg': 'var(--font-sub-lg)',
@@ -165,9 +137,6 @@ export default {
 				sm: '0.2rem'
 			},
 			dropShadow: {
-				'blue-9': '0 0 3px hsl(var(--blue-9))',
-				'blue-9/50': '0 0 5px hsl(var(--blue-9)/50%)',
-				'blue-6/30': '0 0 40px hsl(var(--primary-6)/30%)',
 				lg: '0px 0px 15px var(--shadow-color-lg)'
 			},
 			zIndex: {

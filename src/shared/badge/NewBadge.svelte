@@ -25,7 +25,7 @@
 		class={cn(
 			'flex-center absolute top-0 -translate-y-[40%]',
 			'aspect-square w-[1.5em]',
-			'rounded-full bg-red text-[6px] text-gray-200 md:text-[8px]',
+			'rounded-full bg-red text-[6px] text-white md:text-[8px]',
 			positionStyles[position],
 			className
 		)}
