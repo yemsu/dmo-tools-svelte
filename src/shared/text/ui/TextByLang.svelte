@@ -10,14 +10,14 @@
 
 {#if data}
 	{#if isKr}
-		{data[dataKey[0]]}
+		{data[dataKey[0]] || ''}
 	{:else}
-		{data[dataKey[1]]}
+		{data[dataKey[1]] || ''}
 	{/if}
 {:else if text && engText}
 	{#if isKr}
-		{text}
+		{text || ''}
 	{:else}
-		{engText}
+		{engText || ''}
 	{/if}
 {/if}
