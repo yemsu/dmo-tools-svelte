@@ -34,6 +34,7 @@
 	--input-h-sm: 30px;
 	--input-h-xs: 25px;
 	--side-ad-w: clamp(200px, 20vw, 330px);
+	--bottom-ad-h: clamp(200px, 30vh, 300px);
 	--calc-result-h: 70px;
 	@media screen and (max-width: 768px), screen and (orientation: portrait) {
 		--gnb-h: 45px;
@@ -45,6 +46,7 @@
 		--input-h-sm: 25px;
 		--input-h-xs: 20px;
 		--side-ad-w: 0px;
+		--bottom-ad-h: 0;
 		--calc-result-h: auto;
 	}
 	/* Colors */

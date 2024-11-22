@@ -217,7 +217,7 @@
 	</Tabs>
 	<form
 		on:submit|preventDefault={onSubmit}
-		class="flex items-center gap-1.5 port:w-full land:w-[35%] land:shrink-0"
+		class="flex items-center gap-1.5 port:w-full land:w-[30%] land:shrink-0"
 	>
 		<Input
 			bind:inputElement={goalStatInput}

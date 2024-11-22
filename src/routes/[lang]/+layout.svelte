@@ -8,7 +8,7 @@
 	import { Footer } from '$widgets/footer'
 	import { TopMenu } from '$widgets/primary-menu'
 	import { SideMenu } from '$widgets/primary-menu'
-	import { AdLayout } from '$widgets/adsense'
+	import { AdMobileBanner } from '$widgets/adsense'
 	import { SpaceBackground } from '$widgets/bg-space'
 
 	const pathWithoutLang = $page.data.url?.split($page.data.lang)[1] || ''
@@ -44,20 +44,19 @@
 <TopMenu class="land:hidden" />
 <SideMenu class="port:hidden" />
 
-<div class={cn('relative land:ml-side-menu-w', !isMain && 'land:mr-side-ad-w')}>
+<div class={cn('relative port:pb-gnb-h land:ml-side-menu-w')}>
 	{#if isMain}
 		<SpaceBackground />
 	{/if}
 	<main class="relative flex min-h-[100vh] flex-col">
 		<slot></slot>
 	</main>
+	{#if !isMain}
+		<AdMobileBanner />
+	{/if}
 	{#if !$isLandscape}
 		<Footer />
 	{/if}
 </div>
-
-{#if !isMain}
-	<AdLayout />
-{/if}
 <ToastPopup />
 <GlobalModal />

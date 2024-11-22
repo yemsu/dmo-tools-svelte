@@ -14,9 +14,11 @@
 	<meta name="description" content={META.COMMON.DESC[$lang]} />
 </svelte:head>
 
-<div class="w-full overflow-hidden pt-header-h lg:flex md:min-h-[100vh]">
-	<div class="flex-col-center flex-1 gap-8 px-content-side lg:px-10">
-		<p class="flex-col-center min-h-[200px] gap-1 text-center">
+<div class="w-full overflow-hidden pt-header-h lg:flex land:min-h-[100vh]">
+	<div class="flex-col-center flex-1 gap-4 px-content-side lg:px-10 land:gap-8">
+		<p
+			class="flex-col-center min-h-[130px] gap-1 text-center land:min-h-[200px]"
+		>
 			<span class="text-[clamp(12px,2.5vw,16px)] text-gray-11">
 				<TextByLang
 					text="디지몬 마스터즈 도구 모음"

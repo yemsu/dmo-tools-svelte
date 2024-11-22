@@ -23,7 +23,10 @@
 </script>
 
 <footer
-	class={cn('mt-8 w-full py-8 text-sub-lg text-gray-10', $$restProps.class)}
+	class={cn(
+		'w-full py-8 text-sub-lg text-gray-10 land:mt-8',
+		$$restProps.class
+	)}
 >
 	<Inner class={cn(isAlignCenter && 'flex-center flex-col text-center')}>
 		<div class="flex items-center justify-between">

@@ -41,8 +41,9 @@
 			variant="ghost"
 			class="w-full justify-between"
 		>
+			<Icon icon="mdi:user" size="1.1em" class="land:hidden" />
 			{$user.nickname}
-			<Icon icon="weui:arrow-filled" size={20} />
+			<Icon icon="weui:arrow-filled" size={20} class="port:hidden" />
 		</Button>
 	{:else}
 		<GoogleLoginButton />

@@ -1,3 +1,4 @@
-import AdLayout from '$widgets/adsense/ui/AdLayout.svelte'
+import AdMobileBanner from './ui/AdMobileBanner.svelte'
+import Adsense from './ui/Adsense.svelte'
 
-export { AdLayout }
+export { Adsense, AdMobileBanner }

@@ -127,6 +127,7 @@ export default {
 				'input-h-sm': 'var(--input-h-sm)',
 				'input-h-xs': 'var(--input-h-xs)',
 				'side-ad-w': 'var(--side-ad-w)',
+				'bottom-ad-h': 'var(--bottom-ad-h)',
 				'calc-result-h': 'var(--calc-result-h)'
 			},
 			fontSize: {

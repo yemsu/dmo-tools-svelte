@@ -38,7 +38,7 @@
 	<h2 class="ir">글로벌 네비게이션</h2>
 	<ul
 		class={cn(
-			'items-center gap-10 whitespace-nowrap font-semibold ',
+			'items-center whitespace-nowrap font-semibold ',
 			'port:grid-cols-max port:grid port:h-gnb-h port:grid-cols-3 port:p-1',
 			isMain ? 'text-gray-11' : 'text-gray-9'
 		)}
@@ -61,7 +61,7 @@
 								size={menuIcons[menuType].size}
 							/>
 						</span>
-						<span class="port:text-sub-sm relative">
+						<span class="relative port:text-sub-sm">
 							<TextByLang data={MENUS[menuType]} />
 							{#if menuType === 'gacha'}
 								<NewBadge startDate="Wed Nov 13 2024 17:37:25" />
