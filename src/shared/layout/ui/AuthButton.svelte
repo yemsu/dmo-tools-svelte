@@ -5,7 +5,7 @@
 	import { Button } from '$shared/button'
 	import { ERROR, PATH, TOAST } from '$shared/config'
 	import { Icon } from '$shared/icon'
-	import { cn, delay } from '$shared/lib'
+	import { cn, delay, isLandscape } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import { error } from '@sveltejs/kit'
@@ -25,13 +25,7 @@
 	}
 </script>
 
-<div
-	class={cn(
-		'relative flex justify-center',
-		'port:min-w-[100px]',
-		$$restProps.class
-	)}
->
+<div class={cn('relative flex justify-center', $$restProps.class)}>
 	{#if $user}
 		<Button
 			on:click={() => {
@@ -46,6 +40,9 @@
 			<Icon icon="weui:arrow-filled" size={20} class="port:hidden" />
 		</Button>
 	{:else}
-		<GoogleLoginButton />
+		<GoogleLoginButton
+			width={!$isLandscape ? '60px' : undefined}
+			size={$isLandscape ? 'medium' : 'small'}
+		/>
 	{/if}
 </div>

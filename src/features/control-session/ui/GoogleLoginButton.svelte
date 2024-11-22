@@ -41,7 +41,7 @@
 		}
 	}
 
-	const renderButton = async () => {
+	$: renderButton = async () => {
 		await delay(80)
 		if ($user) return
 		isLoginButtonRendered = onGoogleScriptLoad(id, onGoogleLogin, {
