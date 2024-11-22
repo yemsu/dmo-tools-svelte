@@ -2,7 +2,7 @@
 	import { MENUS } from '$entities/menus'
 	import { META, PATH } from '$shared/config'
 	import { contentUrl } from '$shared/lib'
-	import { lang } from '$shared/model'
+	import { lang, langPath } from '$shared/model'
 	import { TextByLang } from '$shared/text'
 	import { MainBanner } from '$widgets/banner'
 	import { Notice } from '$widgets/notice'
@@ -38,7 +38,7 @@
 	>
 		<MainBanner
 			src={contentUrl('/main/main-banner-calc.png')}
-			href="/{$lang}{PATH.CALCULATOR}"
+			href="{$langPath}{PATH.CALCULATOR}"
 			title={MENUS.calc[isKr ? 'name' : 'engName']}
 			xDir="right"
 			yDir="top"
@@ -56,7 +56,7 @@
 		{#if isKr}
 			<MainBanner
 				src={contentUrl('/main/main-banner-raid.png')}
-				href="/{$lang}{PATH.RAID_TIMER}"
+				href="{$langPath}{PATH.RAID_TIMER}"
 				title="레이드 타이머"
 				xDir="left"
 				yDir="bottom"
@@ -69,7 +69,7 @@
 		{/if}
 		<MainBanner
 			src={contentUrl('/main/main-banner-gacha.png')}
-			href="/{$lang}{PATH.GACHA}"
+			href="{$langPath}{PATH.GACHA}"
 			title={MENUS.gacha[isKr ? 'name' : 'engName']}
 			xDir="right"
 			yDir="bottom"

@@ -18,7 +18,7 @@
 	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
 	import { _objKeys, cn } from '$shared/lib'
-	import { lang } from '$shared/model'
+	import { langPath } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
 	import Timer from '$shared/time/ui/Timer.svelte'
 	import { timeSortByStartAt } from '$widgets/raid'
@@ -195,7 +195,7 @@
 	<h2 class="ir">다음 출현 레이드 정보</h2>
 	{#if isSseSupported === true}
 		<a
-			href="/{$lang}{MENUS.raid.path}"
+			href="{$langPath}{MENUS.raid.path}"
 			class={cn(
 				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1'
 			)}

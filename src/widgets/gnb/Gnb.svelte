@@ -4,8 +4,7 @@
 	import { NewBadge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
 	import { _objKeys, cn } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { Inner } from '$shared/section'
+	import { lang, langPath } from '$shared/model'
 	import { TextByLang } from '$shared/text'
 
 	$: getIsActive = (type: MenuType) =>
@@ -48,7 +47,7 @@
 				{@const isActive = getIsActive(menuType)}
 				<li class="port:h-full">
 					<a
-						href="/{$lang}{MENUS[menuType].path}"
+						href="{$langPath}{MENUS[menuType].path}"
 						class={cn(
 							'land:flex land:h-gnb-h land:items-center land:gap-2 land:px-2 land:transition-colors land:hover:font-bold land:hover:text-gray-12',
 							'port:flex-col-center port:h-full port:gap-[1px]',

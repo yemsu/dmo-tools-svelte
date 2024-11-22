@@ -5,7 +5,6 @@
 		currentCharacters,
 		getCharacters
 	} from '$entities/characters'
-	import { MENUS } from '$entities/menus'
 	import {
 		mySealCounts,
 		mySealPrices,
@@ -17,16 +16,14 @@
 	} from '$entities/seals'
 	import { user } from '$entities/user'
 	import { PATH } from '$shared/config'
-	import { cn, objectBy } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { Inner } from '$shared/section'
+	import { objectBy } from '$shared/lib'
+	import { lang, langPath } from '$shared/model'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { PageHeader } from '$shared/ui/page-header'
 	import { CharacterTabs } from '$widgets/character-tabs'
 	import { getMySealData } from '$widgets/my-seals'
 	import { getCurrentStep } from '$widgets/seal-calculator'
-	import { MyStatBox, StatBarWrap } from '$widgets/stat-bar'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -134,7 +131,7 @@
 					<Tab
 						variant="underline"
 						tagName="a"
-						href="/{$lang}{subMenu.path}"
+						href="{$langPath}{subMenu.path}"
 						isActive={new RegExp(`${subMenu.path}$`).test($page.url.pathname)}
 					>
 						{subMenu.menuName[$lang]}

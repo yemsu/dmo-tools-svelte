@@ -1,16 +1,15 @@
 <script lang="ts">
-	import { myStats } from '$entities/seals'
 	import { currentCharacterId, currentCharacters } from '$entities/characters'
+	import { myStats } from '$entities/seals'
 	import { user } from '$entities/user'
 	import { Button } from '$shared/button'
 	import { PATH, TOAST } from '$shared/config'
-	import { Dropdown } from '$shared/dropdown'
 	import { Icon } from '$shared/icon'
-	import { lang } from '$shared/model'
+	import { lang, langPath } from '$shared/model'
 	import Tab from '$shared/tabs/ui/Tab.svelte'
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { toast } from '$shared/toast'
-	import { MyStatBox, StatBarTotalPrice, StatBarWrap } from '$widgets/stat-bar'
+	import { MyStatBox, StatBarWrap } from '$widgets/stat-bar'
 	import { _ } from 'svelte-i18n'
 
 	$: currentCharacter = $currentCharacters?.find(
@@ -38,7 +37,7 @@
 			<Button
 				size="icon-lg"
 				variant="ghost"
-				href="/{$lang}{PATH.CHARACTERS}"
+				href="{$langPath}{PATH.CHARACTERS}"
 				title="{$_('character')} {$_('setting')}"
 				class="shrink-0"
 			>

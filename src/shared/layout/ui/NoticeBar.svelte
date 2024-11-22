@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { PATH } from '$shared/config'
 	import { Icon } from '$shared/icon'
-	import { lang } from '$shared/model'
+	import { langPath } from '$shared/model'
 	import { TextByLang } from '$shared/text'
 	import { onMount } from 'svelte'
 	import { _ } from 'svelte-i18n'
@@ -32,7 +32,7 @@
 				/>
 				<br class="land:hidden" />
 				<a
-					href="/{$lang}{PATH.CHARACTERS}"
+					href="{$langPath}{PATH.CHARACTERS}"
 					class="ml-2 inline-flex items-center rounded-full bg-blue-1 p-1 px-3 text-sub-md font-medium text-white land:p-2 land:text-sub-lg"
 				>
 					<TextByLang

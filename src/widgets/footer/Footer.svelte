@@ -25,7 +25,7 @@
 <footer
 	class={cn(
 		'w-full py-8 text-sub-lg text-gray-10 land:mt-8',
-		'pb-[calc(var(--gnb-h)+var(--mobile-bottom-ad-h))]',
+		'port:pb-[calc(var(--gnb-h)+var(--mobile-bottom-ad-h))]',
 		$$restProps.class
 	)}
 >

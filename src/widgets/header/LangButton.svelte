@@ -10,7 +10,11 @@
 
 	$: toLang = ($lang === 'en' ? 'kr' : 'en') as LangType
 	$: changeLang = () => {
-		goto($page.url.pathname.replace(`/${$lang}`, `/${toLang}`))
+		goto(
+			toLang === 'kr'
+				? $page.url.pathname.replace('/en', '') || '/'
+				: `/en${$page.url.pathname}`
+		)
 		toast.on(TOAST.CHANGE_LANG[toLang])
 	}
 </script>

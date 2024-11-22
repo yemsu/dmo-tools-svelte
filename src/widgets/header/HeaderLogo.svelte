@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { lang } from '$shared/model'
 	import { cn } from '$shared/lib'
+	import { lang, langPath } from '$shared/model'
 </script>
 
 <h1
@@ -11,8 +11,8 @@
 	)}
 >
 	<a
-		href="/{$lang}"
-		class="land:px-2 block"
+		href={$langPath || '/'}
+		class="block land:px-2"
 		title={$lang === 'kr' ? '메인으로' : 'Go to Main Page'}
 	>
 		DMO tools

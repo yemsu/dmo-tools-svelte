@@ -15,21 +15,21 @@ function generateUrlEntry(path: string): string {
 	if (isKrOnly) {
 		return `
 			<url>
-				<loc>${PUBLIC_BASE_URL}/kr${restPath}</loc>
+				<loc>${PUBLIC_BASE_URL}/${restPath}</loc>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="ko" 
-						href="${PUBLIC_BASE_URL}/kr${restPath}"/>
+						href="${PUBLIC_BASE_URL}/${restPath}"/>
 			</url>
 		`
 	} else {
 		return `
 			<url>
-				<loc>${PUBLIC_BASE_URL}/kr${restPath}</loc>
+				<loc>${PUBLIC_BASE_URL}/${restPath}</loc>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="ko" 
-						href="${PUBLIC_BASE_URL}/kr${restPath}"/>
+						href="${PUBLIC_BASE_URL}/${restPath}"/>
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="en" 
@@ -44,7 +44,7 @@ function generateUrlEntry(path: string): string {
 				<xhtml:link 
 						rel="alternate" 
 						hreflang="ko" 
-						href="${PUBLIC_BASE_URL}/kr${restPath}"/>
+						href="${PUBLIC_BASE_URL}/${restPath}"/>
 			</url>
 		`
 	}

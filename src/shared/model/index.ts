@@ -1,2 +1,2 @@
 export { theme } from '$shared/model/theme'
-export { lang } from '$shared/model/lang'
+export { lang, langPath } from '$shared/model/lang'
