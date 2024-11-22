@@ -1,7 +1,47 @@
 <script lang="ts">
-	import { cn } from '$shared/lib'
+	import { page } from '$app/stores'
+	import { cn, delay } from '$shared/lib'
 	import { Inner } from '$shared/section'
+	import { useAdsense } from '$widgets/adsense/lib'
+	import { adsenseStore } from '$widgets/adsense/model'
 	import Adsense from '$widgets/adsense/ui/Adsense.svelte'
+	import { onDestroy, onMount } from 'svelte'
+
+	let isAdInitialized = false
+	const { class: className, ...restProps } = $$restProps
+
+	const isServer = import.meta.env.SSR
+	const { handleResize, handlePageChange } = useAdsense()
+
+	const initAd = async () => {
+		if (isServer || isAdInitialized) return
+
+		try {
+			window.adsbygoogle = window.adsbygoogle || []
+			await delay(100)
+			window.adsbygoogle.push({})
+			isAdInitialized = true
+		} catch (error) {
+			console.error('Ad initialization error:', error)
+		}
+	}
+
+	$: if ($page.url && !isServer) {
+		handlePageChange()
+	}
+
+	onMount(() => {
+		if (!isServer) {
+			initAd()
+			window.addEventListener('resize', handleResize)
+		}
+	})
+
+	onDestroy(() => {
+		if (isServer) return
+		window.removeEventListener('resize', handleResize)
+		adsenseStore.clearTimers()
+	})
 </script>
 
 <div class="flex flex-1 flex-col land:pr-side-ad-w">
