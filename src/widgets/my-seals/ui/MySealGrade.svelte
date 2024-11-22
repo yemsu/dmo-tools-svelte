@@ -42,7 +42,7 @@
 
 <p
 	class={cn(
-		'rounded-b-md border-b border-current bg-background/50 py-1 text-sub-lg font-semibold leading-none dark:font-bold',
+		'rounded-b-md bg-background/50 py-1 text-sub-lg font-semibold leading-none dark:font-bold',
 		'-m-1 mt-0 w-[calc(100%+8px)] land:-m-2 land:mt-0 land:w-[calc(100%+16px)]',
 		grade && gradeTextStyles[grade.name],
 		grade && gradeBgStyles[grade.name]
