@@ -50,7 +50,9 @@
 	<meta name="description" content={META.GACHA_SIMULATOR.DESC[$lang]} />
 </svelte:head>
 
-<section class="dark relative flex flex-1 flex-col justify-center font-ns">
+<section
+	class="dark relative flex flex-1 flex-col justify-center font-ns text-gray-12"
+>
 	<DigitalBackground />
 	<h2 class="ir">
 		<TextByLang data={MENUS.gacha} />
