@@ -23,7 +23,7 @@
 	<meta name="description" content={META.RAID_TIMER.DESC[$lang]} />
 </svelte:head>
 
-<section class="flex h-[calc(100vh-var(--header-h)*2)] flex-col">
+<section class="flex flex-col">
 	<PageHeader title={{ kr: '레이드 타이머', en: ' Raid Timer' }}>
 		<div slot="nextTitleSlot" class="flex gap-2">
 			<RaidServerTabs />

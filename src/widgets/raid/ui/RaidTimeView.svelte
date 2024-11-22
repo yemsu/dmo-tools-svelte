@@ -10,9 +10,7 @@
 		.map((channel) => +channel) as GameChannel[]
 </script>
 
-<section
-	class="scroll-box size-full rounded-md py-2 pl-2 backdrop-blur-sm md:pl-4"
->
+<section class="scroll-box size-full rounded-md py-6 backdrop-blur-sm">
 	<div class="mb-4 flex flex-col items-center gap-2 md:flex-row md:gap-3">
 		<Title class="text-center">{raid.name}</Title>
 		<RaidLocation location={raid.location} />

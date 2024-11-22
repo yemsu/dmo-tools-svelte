@@ -36,7 +36,7 @@
 	}
 	/* scroll box */
 	.custom-scroll {
-		@apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-gray-5;
+		@apply land:scrollbar-thin land:scrollbar-track-transparent land:scrollbar-thumb-gray-5;
 	}
 	.scroll-box {
 		@apply custom-scroll overflow-y-auto;
