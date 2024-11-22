@@ -1,35 +1,19 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
-	import { removeTokenCookie, user } from '$entities/user'
+	import { user } from '$entities/user'
 	import { GoogleLoginButton } from '$features/control-session'
 	import { Button } from '$shared/button'
-	import { ERROR, PATH, TOAST } from '$shared/config'
+	import { PATH } from '$shared/config'
 	import { Icon } from '$shared/icon'
-	import { cn, delay, isLandscape } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { toast } from '$shared/toast'
-	import { error } from '@sveltejs/kit'
-
-	let isShowTab = false
-
-	const logout = async () => {
-		try {
-			removeTokenCookie()
-			user.set(null)
-			toast.on(TOAST.LOGOUT[$lang])
-			isShowTab = false
-			await delay(100)
-		} catch (e) {
-			error(550, ERROR.LOGOUT_FAIL[$lang])
-		}
-	}
+	import { cn, isLandscape } from '$shared/lib'
+	import { langPath } from '$shared/model'
 </script>
 
 <div class={cn('relative flex justify-center', $$restProps.class)}>
 	{#if $user}
 		<Button
 			on:click={() => {
-				goto(`/${$lang}${PATH.MY_INFO}`)
+				goto(`${$langPath}${PATH.MY_INFO}`)
 			}}
 			size="md"
 			variant="ghost"

@@ -14,7 +14,7 @@
 		onGoogleScriptLoad
 	} from '$shared/layout/lib/login'
 	import { delay } from '$shared/lib'
-	import { lang } from '$shared/model'
+	import { lang, langPath } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import { onMount } from 'svelte'
 
@@ -32,7 +32,7 @@
 		const res = await postLogin(token)
 		if (res === null) {
 			setTokenCookie(token, G_TOKEN_NAME)
-			goto(`/${$lang}${PATH.JOIN}`)
+			goto(`${$langPath}${PATH.JOIN}`)
 		} else {
 			const { token, ...userData } = res
 			setTokenCookie(res.token)

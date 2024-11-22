@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
 	import { goto } from '$app/navigation'
 	import {
 		G_TOKEN_NAME,
@@ -13,13 +12,13 @@
 	import { ALERT, CONFIRM, ERROR, PATH, TOAST } from '$shared/config'
 	import { Input, NICKNAME_SCHEMA, ValidationText } from '$shared/form'
 	import { checkJoinProcess, checkNoMember } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { Inner, Section } from '$shared/section'
-	import { Title } from '$shared/text'
-	import { TextByLang } from '$shared/text'
+	import { lang, langPath } from '$shared/model'
+	import { Inner } from '$shared/section'
+	import { TextByLang, Title } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { error } from '@sveltejs/kit'
 	import { onMount } from 'svelte'
+	import { _ } from 'svelte-i18n'
 	let value: string = ''
 	let isValid: boolean
 	let inputElement: HTMLInputElement
@@ -49,7 +48,7 @@
 		user.set(userData)
 		removeTokenCookie(G_TOKEN_NAME)
 		toast.on(TOAST.WELCOME(value)[$lang])
-		goto(`/${$lang}${PATH.SETTING_SEALS}`)
+		goto(`${$langPath}${PATH.SETTING_SEALS}`)
 	}
 
 	onMount(() => {

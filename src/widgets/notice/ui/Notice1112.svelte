@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from '$shared/button'
-	import { lang } from '$shared/model'
+	import { langPath } from '$shared/model'
 	import { TextByLang } from '$shared/text'
 	import NoticeItem from './NoticeItem.svelte'
 </script>
@@ -25,7 +25,11 @@
 	<p>
 		이전 도메인: https://dmo-tools.vercel.app <br />
 		신규 도메인:
-		<Button href="https://dmo.greuta.org/{$lang}" size="text" variant="link">
+		<Button
+			href="https://dmo.greuta.org{$langPath || '/'}"
+			size="text"
+			variant="link"
+		>
 			https://dmo.greuta.org
 		</Button>
 	</p>

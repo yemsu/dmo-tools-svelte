@@ -31,7 +31,7 @@
 	// const gotoErrorPage = () => {
 	// 	if (import.meta.env.SSR) return
 	// 	if ($page.url.pathname !== '/error') {
-	// 		goto(`/${$lang}/error`)
+	// 		goto(`${$langPath/error`)
 	// 	}
 	// }
 

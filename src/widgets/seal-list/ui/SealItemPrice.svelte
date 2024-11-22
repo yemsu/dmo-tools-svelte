@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
 	import { goto } from '$app/navigation'
 	import { mySealPrices, type SealPrice } from '$entities/seals'
 	import { user } from '$entities/user'
@@ -7,11 +6,11 @@
 	import { ALERT, CONFIRM, PATH, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { TextByLang } from '$shared/text'
+	import { lang, langPath } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import { getMyAndFinalPrice } from '$widgets/my-seals'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
+	import { _ } from 'svelte-i18n'
 
 	export let sealPrices: SealPrice[]
 	export let sealId: number
@@ -24,7 +23,7 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto(`/${$lang}${PATH.LOGIN}`)
+			goto(`${$langPath}${PATH.LOGIN}`)
 			toast.on(TOAST.NEED_LOGIN[$lang])
 			return
 		}

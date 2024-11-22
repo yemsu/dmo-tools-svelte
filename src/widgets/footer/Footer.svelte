@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { Button } from '$shared/button'
-	import { cn } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { Inner } from '$shared/section'
-	import { LangButton } from '$widgets/header'
-	import { ThemeToggleButton } from '$shared/ui/theme'
-	import SupportGuide from './SupportGuide.svelte'
 	import { PATH } from '$shared/config'
+	import { cn } from '$shared/lib'
+	import { lang, langPath } from '$shared/model'
+	import { Inner } from '$shared/section'
+	import { ThemeToggleButton } from '$shared/ui/theme'
+	import { LangButton } from '$widgets/header'
+	import SupportGuide from './SupportGuide.svelte'
 
 	export let align: 'left' | 'center' = 'center'
 	$: isAlignCenter = align === 'center'
 
 	const links = [
 		{
-			href: `/${$lang}${PATH.PRIVACY_POLICY}`,
+			href: `${$langPath}${PATH.PRIVACY_POLICY}`,
 			text: {
 				kr: '개인정보처리방침',
 				en: 'Private Policy'

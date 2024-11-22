@@ -7,8 +7,7 @@
 	import { ALERT, PATH, TOAST } from '$shared/config'
 	import Input from '$shared/form/ui/Input.svelte'
 	import { cn, numberFormatter } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { TextByLang } from '$shared/text'
+	import { lang, langPath } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import { _ } from 'svelte-i18n'
 
@@ -22,7 +21,7 @@
 
 	const onClickInputOn = () => {
 		if (!$user) {
-			goto(`/${$lang}${PATH.LOGIN}`)
+			goto(`${$langPath}${PATH.LOGIN}`)
 			toast.on(TOAST.NEED_LOGIN[$lang])
 			return
 		}

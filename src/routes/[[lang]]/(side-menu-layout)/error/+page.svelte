@@ -6,7 +6,7 @@
 	import { Icon } from '$shared/icon'
 	import { globalModalText } from '$shared/modal'
 	import Modal from '$shared/modal/ui/Modal.svelte'
-	import { lang } from '$shared/model'
+	import { lang, langPath } from '$shared/model'
 	import Inner from '$shared/section/ui/Inner.svelte'
 	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
@@ -34,7 +34,7 @@
 
 	const goToMain = () => {
 		if (import.meta.env.SSR) return
-		goto(`/${$lang}`)
+		goto(`${$langPath}`)
 	}
 
 	$: !message && goToMain()

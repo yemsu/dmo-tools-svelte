@@ -22,7 +22,7 @@
 	import { Button } from '$shared/button'
 	import { META, PATH } from '$shared/config'
 	import { checkMember } from '$shared/lib'
-	import { lang } from '$shared/model'
+	import { lang, langPath } from '$shared/model'
 	import Section from '$shared/section/ui/Section.svelte'
 	import { Title } from '$shared/text'
 	import { toast } from '$shared/toast'
@@ -134,7 +134,7 @@
 		if (!isConfirmed) return
 		await uploadData(paramsData)
 		toast.on('데이터 저장이 완료되었습니다.')
-		goto(`/${$lang}${PATH.MY_SEALS}`)
+		goto(`${$langPath}${PATH.MY_SEALS}`)
 	}
 
 	onMount(() => {
@@ -145,7 +145,7 @@
 		}, 60)
 	})
 
-	$: !$user && !import.meta.env.SSR && goto(`/${$lang}${PATH.RAID_TIMER}`)
+	$: !$user && !import.meta.env.SSR && goto(`${$langPath}${PATH.RAID_TIMER}`)
 </script>
 
 <svelte:head>

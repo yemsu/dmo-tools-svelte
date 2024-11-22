@@ -9,7 +9,6 @@
 
 	$: getIsActive = (type: MenuType) =>
 		$page.url.pathname.includes(MENUS[type].path)
-	$: isMain = $page.url.pathname === `/${$lang}`
 
 	const menuIcons = {
 		calc: {
@@ -38,8 +37,7 @@
 	<ul
 		class={cn(
 			'items-center whitespace-nowrap font-semibold ',
-			'port:grid-cols-max port:grid port:h-gnb-h port:grid-cols-3 port:p-1',
-			isMain ? 'text-gray-11' : 'text-gray-9'
+			'port:grid-cols-max port:grid port:h-gnb-h port:grid-cols-3 port:p-1'
 		)}
 	>
 		{#each _objKeys(MENUS) as menuType (menuType)}
