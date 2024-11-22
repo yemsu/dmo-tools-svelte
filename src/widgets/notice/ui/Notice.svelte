@@ -6,7 +6,7 @@
 </script>
 
 <section
-	class="flex w-full max-w-[500px] overflow-hidden rounded-md bg-gray-2 lg:max-w-[400px] lg:flex-col"
+	class="flex w-full max-w-[500px] overflow-hidden rounded-md bg-gray-2 land:max-w-[400px] land:flex-col"
 >
 	<Title size="xxs" class="flex-center gap-2 bg-gray-3 px-2 py-1.5"
 		>{$_('notice')}</Title
