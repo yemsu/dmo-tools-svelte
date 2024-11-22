@@ -57,11 +57,11 @@
 		bottom: {
 			left: cn(
 				'h-bottom-ad-h bottom-0',
-				'right-0 w-[calc((100vw-var(--side-menu-w))*0.6)] '
+				'right-0 w-[calc((100vw-var(--side-menu-w))*0.5)]'
 			),
 			right: cn(
 				'h-bottom-ad-h bottom-0',
-				'left-side-menu-w w-[calc((100vw-var(--side-menu-w))*0.4)] '
+				'left-side-menu-w w-[calc((100vw-var(--side-menu-w))*0.5)]'
 			)
 		}
 	}
