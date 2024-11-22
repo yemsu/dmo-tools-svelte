@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { cn } from '$shared/lib'
 	import { toast } from '$shared/toast'
+	import { quintOut } from 'svelte/easing'
+	import { fly } from 'svelte/transition'
 	let isToastOn = !!$toast
 
 	const toggleIsVisible = () => {
@@ -21,6 +23,7 @@
 			'transition-all',
 			!isToastOn && 'translate-y-full opacity-0'
 		)}
+		transition:fly={{ y: 30, duration: 300, easing: quintOut }}
 	>
 		{$toast}
 	</p>

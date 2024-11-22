@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { cn } from '$shared/lib'
 	import { createEventDispatcher, onDestroy, onMount } from 'svelte'
+	import { quintOut } from 'svelte/easing'
+	import { scale } from 'svelte/transition'
 
 	let popupElement: HTMLElement
 
@@ -39,6 +41,12 @@
 		'position-fix-center land:position-center z-modal h-[60vh] w-[calc(100%-(var(--content-side)*2))] max-w-[550px] land:h-[550px] land:w-full',
 		className
 	)}
+	transition:scale={{
+		start: 0.95,
+		duration: 300,
+		easing: quintOut,
+		opacity: 0
+	}}
 >
 	<slot></slot>
 	<button
