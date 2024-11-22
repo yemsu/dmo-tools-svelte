@@ -95,33 +95,27 @@
 	{:else}
 		<div class="flex-center">
 			<!-- {myStep ? myStep.percent * sealId.max : 0} -->
-			{#if isEditable}
-				<Button
-					type="button"
-					variant="background"
-					size="xs"
-					class={cn('w-full', countStyle)}
-					title={isKr ? '보유 개수 수정하기' : 'Edit Seal Quantity'}
-					on:click={onClickInputOn}
-				>
-					<iconify-icon
-						icon="mdi:treasure-chest-outline"
-						width={15}
-						height={15}
-					/>
-					{numberFormatter(count)}
-					{$_('seal_count')}
-				</Button>
-			{:else}
-				<p class={countStyle}>
-					<iconify-icon
-						icon="mdi:treasure-chest-outline"
-						width={15}
-						height={15}
-					/>
-					{numberFormatter(count)}{$_('seal_count')}
-				</p>
-			{/if}
+			<Button
+				type="button"
+				variant="background"
+				size="xs"
+				class={cn('w-full', countStyle)}
+				title={isEditable
+					? isKr
+						? '보유 개수 수정하기'
+						: 'Edit Seal Quantity'
+					: ''}
+				on:click={onClickInputOn}
+				disabled={!isEditable}
+			>
+				<iconify-icon
+					icon="mdi:treasure-chest-outline"
+					width={15}
+					height={15}
+				/>
+				{numberFormatter(count)}
+				{$_('seal_count')}
+			</Button>
 		</div>
 	{/if}
 </div>

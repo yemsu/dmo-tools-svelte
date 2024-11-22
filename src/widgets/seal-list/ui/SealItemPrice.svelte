@@ -90,7 +90,7 @@
 				{$_('done')}
 			</Button>
 		</form>
-	{:else if isEditable}
+	{:else}
 		<div class="flex w-full overflow-hidden rounded-sm">
 			{#if prices.my !== undefined}
 				<button
@@ -116,23 +116,16 @@
 					prices.my && 'rounded-l-none border-l-0',
 					priceStyle
 				)}
-				title={isKr ? '씰 가격 수정하기' : 'Edit Seal Price'}
+				title={isEditable
+					? isKr
+						? '씰 가격 수정하기'
+						: 'Edit Seal Price'
+					: ''}
 				on:click={onClickInputOn}
+				disabled={!isEditable}
 			>
 				<SealItemPriceText price={prices.final} />
 			</Button>
 		</div>
-	{:else}
-		<p class={cn(priceStyle)}>
-			{#if prices.my !== undefined}
-				<iconify-icon
-					title={isKr ? '저장됨' : 'Saved'}
-					icon="material-symbols:lock-outline"
-					width={15}
-					height={15}
-				/>
-			{/if}
-			<SealItemPriceText price={prices.final} />
-		</p>
 	{/if}
 </div>
