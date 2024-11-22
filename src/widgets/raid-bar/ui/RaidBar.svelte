@@ -205,7 +205,7 @@
 				<span class={cn('flex items-center leading-none land:w-full')}>
 					<span
 						class={cn(
-							'flex-shrink overflow-hidden bg-blue-4/10 px-1.5',
+							'flex-shrink overflow-hidden px-1.5',
 							'port:flex port:gap-1',
 							'land:flex-col-center land:w-[60%] land:gap-2 land:py-3'
 						)}

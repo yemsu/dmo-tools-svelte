@@ -12,10 +12,9 @@
 <span class={cn('flex leading-none port:flex-col land:items-center')}>
 	<span
 		class={cn(
-			'relative flex gap-2 text-left',
-			'bg-gray-1',
-			'land:w-[40%] land:flex-col land:p-3 land:pr-[12px]',
-			'port:flex-col port:items-center port:p-2'
+			'relative flex bg-gray-1 text-left',
+			'land:w-[40%] land:flex-col land:gap-2 land:p-3 land:pr-[12px]',
+			'flex-col items-center gap-1 p-2'
 		)}
 	>
 		<RaidTitle title={raid.name} />
