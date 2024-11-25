@@ -14,7 +14,7 @@ export type RaidTimeData = {
 	server: ServerType
 	raidId: RaidData['id']
 	clientId: number
-	user: UserData
+	user: UserData | null
 }
 
 export type RaidData = {
