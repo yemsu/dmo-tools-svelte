@@ -24,6 +24,11 @@ export const putRaidTimeVote = (clientId: number, timeId: RaidTimeData['id']) =>
 		method: 'PUT'
 	})
 
+export const deleteRaidTime = (timerId: number) =>
+	apiFetch<RaidTimeData>(`/raids/${timerId}`, {
+		method: 'DELETE'
+	})
+
 export const getClientId = () => apiFetch<string>(`/alarms/client-id`)
 
 export const disSubscribe = (clientId: number) =>

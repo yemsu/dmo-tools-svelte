@@ -42,9 +42,9 @@
 	on:click={() => onClickVote(raid, time)}
 >
 	<span
-		class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 land:min-w-[5em]"
+		class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 land:min-w-[4em]"
 	>
-		<iconify-icon icon="oi:heart" width="1em" height="1em" />
+		<iconify-icon icon="oi:heart" width="0.8em" height="0.8em" />
 		{time.voteCount + 1}
 	</span>
 	<span class="flex-center flex-1 border-r border-gray-5">

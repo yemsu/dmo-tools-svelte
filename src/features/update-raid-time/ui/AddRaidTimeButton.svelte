@@ -7,7 +7,7 @@
 		type GameChannel,
 		type RaidData
 	} from '$entities/raid'
-	import { ADD_RAID_SCHEMA } from '$features/add-raid-time/config/schema'
+	import { ADD_RAID_SCHEMA } from '$features/update-raid-time/config/schema'
 	import { Button } from '$shared/button'
 	import { ToggleFormWrap } from '$shared/form'
 	import ValidationText from '$shared/form/ui/ValidationText.svelte'

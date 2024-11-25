@@ -36,5 +36,9 @@ export const CONFIRM = {
 	DELETE_CHARACTER: {
 		kr: '캐릭터를 삭제하면 해당 캐릭터의 보유 씰 데이터도 함께 삭제되며, 복구가 불가능합니다. 정말로 캐릭터를 삭제하시겠습니까?',
 		en: 'If you delete the character, the seal data associated with that character will also be deleted and cannot be recovered. Do you really want to delete this character?'
+	},
+	CANCEL_RAID_TIME: {
+		kr: '이 레이드 제보를 취소하시겠어요?',
+		en: 'Do you want to cancel reporting this raid?'
 	}
 }

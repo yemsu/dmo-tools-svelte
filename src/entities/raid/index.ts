@@ -3,7 +3,8 @@ export {
 	postRaidTime,
 	disSubscribe,
 	putRaidTimeVote,
-	getClientId
+	getClientId,
+	deleteRaidTime
 } from './api'
 export { GAME_CHANNELS, GAME_SERVERS } from './config'
 export { subscribeClientId } from './model'
