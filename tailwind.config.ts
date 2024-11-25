@@ -111,8 +111,7 @@ export default {
 				'input-h-xs': 'var(--input-h-xs)',
 				'side-ad-w': 'var(--side-ad-w)',
 				'bottom-ad-h': 'var(--bottom-ad-h)',
-				'mobile-bottom-ad-h': 'var(--mobile-bottom-ad-h)',
-				'calc-result-h': 'var(--calc-result-h)'
+				'mobile-bottom-ad-h': 'var(--mobile-bottom-ad-h)'
 			},
 			fontSize: {
 				'sub-sm': 'var(--font-sub-sm)',

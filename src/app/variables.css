@@ -19,7 +19,6 @@
 	--side-ad-w: clamp(200px, 20vw, 290px);
 	--bottom-ad-h: clamp(160px, 20vh, 280px);
 	--mobile-bottom-ad-h: 0;
-	--calc-result-h: 70px;
 	@media screen and (max-width: 1023px), screen and (orientation: portrait) {
 		--gnb-h: 45px;
 		--side-menu-w: 0px;
@@ -36,7 +35,6 @@
 		--side-ad-w: 0px;
 		--bottom-ad-h: 0;
 		--mobile-bottom-ad-h: 60px;
-		--calc-result-h: auto;
 	}
 	/* Colors */
 	--deep-color: 0 0% 100%; /* hsl(0 0% 100%) */

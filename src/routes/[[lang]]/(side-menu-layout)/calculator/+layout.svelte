@@ -1,4 +1,5 @@
 <script lang="ts">
+	import './calculator.css'
 	import { page } from '$app/stores'
 	import {
 		currentCharacterId,

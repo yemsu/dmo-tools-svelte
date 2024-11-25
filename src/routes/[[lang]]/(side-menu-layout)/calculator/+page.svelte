@@ -236,7 +236,7 @@
 	class={cn(
 		'relative flex flex-1 flex-col overflow-hidden',
 		effDataListSorted.length > 0 &&
-			'land:pb-[calc(var(--calc-result-h)+var(--content-side))]'
+			'land:pb-[calc(var(--result-h)+var(--result-b))]'
 	)}
 >
 	<ListReferText tagName="h2" class="flex items-center">
@@ -289,12 +289,13 @@
 		<div
 			class={cn(
 				'absolute left-0 top-0',
-				'flex-col-center size-full gap-4 bg-gray-3/60 backdrop-blur-sm'
+				'flex size-full flex-col items-center gap-4',
+				'bg-gray-3/60 pt-[100px] backdrop-blur-sm'
 			)}
 		>
 			<p class="text-balance break-keep text-center">
 				<TextByLang
-					text="효율 계산 이후에 씰 가격이 업데이트 되었습니다. 아래 버튼을 클릭하여 다시 계산해주세요!"
+					text="씰 가격이 업데이트 되었습니다. <br /> 아래 버튼을 클릭하여 다시 계산해주세요!"
 					engText="The seal prices have been updated after the efficiency calculation. Please click the button below to recalculate!"
 				/>
 			</p>

@@ -1,0 +1,18 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
+:root {
+	--result-b: 4vh;
+	--result-l: calc(var(--side-menu-w)+var(--content-side));
+	--result-w: calc(
+		100% - var(--side-menu-w) - var(--side-ad-w) - var(--content-side) * 2
+	);
+	--result-h: 70px;
+	@media screen and (max-width: 1023px), screen and (orientation: portrait) {
+		--result-b: calc(
+			var(--gnb-h) + var(--content-side) + var(--mobile-bottom-ad-h)
+		);
+		--result-w: calc(100% - var(content-side) * 2);
+		--result-h: auto;
+	}
+}
