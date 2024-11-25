@@ -54,11 +54,16 @@
 
 <div
 	class={cn(
-		'flex-col-center port:h-content-h absolute left-0 top-0 z-20 size-full bg-black transition-all duration-500',
-		isVideoFadeOut && 'scale-150 opacity-0 blur-xl'
+		'flex-col-center absolute left-0 top-0 z-20 size-full overflow-hidden bg-black port:h-content-h'
 	)}
 >
-	<div class="relative w-full overflow-hidden">
+	<div
+		class={cn(
+			'relative w-full overflow-hidden',
+			isVideoFadeOut &&
+				'scale-150 opacity-0 blur-xl transition-all duration-500 '
+		)}
+	>
 		<div class="flex-center">
 			<video
 				bind:this={videoElement}
