@@ -145,7 +145,8 @@ export default {
 				floatingMenu: '970',
 				dim: '980',
 				modal: '990',
-				toast: '999'
+				toast: '999',
+				'progress-bar': '9999'
 			}
 		}
 	},

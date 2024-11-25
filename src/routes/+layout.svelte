@@ -12,6 +12,7 @@
 	import '../app/app.css'
 	import '../lib/i18n'
 	import { browser } from '$app/environment'
+	import { ProgressBar } from '$shared/ui/progress-bar'
 
 	const OLD_DOMAIN = 'dmo-tools.vercel.app'
 	const NEW_DOMAIN = 'dmo.greuta.org'
@@ -74,4 +75,5 @@
 	></script>
 </svelte:head>
 
+<ProgressBar />
 <slot />
