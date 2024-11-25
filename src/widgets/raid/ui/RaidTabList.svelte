@@ -1,63 +1,55 @@
 <script lang="ts">
-	import { raids } from '$entities/raid'
+	import { type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
+	import { NoData } from '$shared/text'
 	import { RaidItem } from '$widgets/raid-bar'
 
-	let selectedRaidId: number | null = null
+	export let raidList: RaidData[]
+	export let selectRaid: (raid: RaidData) => void
+	export let selectedRaid: RaidData | undefined
+	export let searchValue: string
 
-	const onClickView = (raidId: number) => {
-		selectedRaidId = raidId
+	const onClickTab = (raid: RaidData) => {
+		selectRaid(raid)
 	}
 
 	const initSelectedRaidId = () => {
-		if ($raids.length == 0 || selectedRaidId !== null) return
-		selectedRaidId = $raids[0].id
+		if (raidList.length == 0 || selectedRaid !== undefined) return
+		selectRaid(raidList[0])
 	}
 
-	$: $raids && initSelectedRaidId()
+	$: raidList && initSelectedRaidId()
 </script>
 
-<div class="flex-1 gap-2 land:gap-4">
-	<div class="inline-block w-[45%] max-w-[500px] land:w-[50%]">
+<div>
+	{#if raidList.length > 0 || !searchValue}
 		<ul
 			class={cn('flex h-full flex-col rounded-md', 'gap-1 land:gap-2')}
 			role="tablist"
 			aria-label="레이드 채널별 시간 제보 자세히 보기 탭"
 		>
-			{#each $raids as raid (raid.id)}
+			{#each raidList as raid (raid.id)}
 				<li role="presentation">
 					<button
 						class={cn(
-							'relative w-full overflow-hidden rounded-md bg-gray-3',
-							selectedRaidId === raid.id
+							'relative w-full overflow-hidden rounded-md',
+							selectedRaid?.id === raid.id
 								? 'border border-gray-10 opacity-100'
 								: 'border border-gray-4 opacity-40 land:hover:opacity-100'
 						)}
 						title="자세히 보기"
-						on:click={() => onClickView(raid.id)}
+						on:click={() => onClickTab(raid)}
 						id="raid-tab-{raid.id}"
 						aria-controls="raid-panel-{raid.id}"
 						role="tab"
-						aria-selected={selectedRaidId === raid.id}
+						aria-selected={selectedRaid?.id === raid.id}
 					>
 						<RaidItem {raid} />
 					</button>
 				</li>
 			{/each}
 		</ul>
-	</div>
-	{#each $raids as raid, i (raid.id)}
-		<div
-			id="raid-panel-{raid.id}"
-			role="tabpanel"
-			aria-labelledby="raid-tab-{raid.id}"
-			hidden={selectedRaidId !== raid.id}
-			class={cn(
-				'sticky top-[calc(var(--header-h)+var(--raid-bar-h))] float-right inline-block w-[53%] shrink-0 land:top-0 land:w-[48%]',
-				selectedRaidId !== raid.id && 'hidden'
-			)}
-		>
-			<slot {raid}></slot>
-		</div>
-	{/each}
+	{:else}
+		<NoData class="min-h-[300px]">검색 결과가 없습니다.</NoData>
+	{/if}
 </div>

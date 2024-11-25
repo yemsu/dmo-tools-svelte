@@ -9,10 +9,10 @@
 	$: nextTime = raid.times[0]
 </script>
 
-<span class={cn('flex leading-none port:flex-col land:items-center')}>
+<span class={cn('flex leading-none port:flex-col')}>
 	<span
 		class={cn(
-			'relative flex bg-gray-1 text-left',
+			'relative flex bg-gray-3 text-left',
 			'land:w-[40%] land:flex-col land:gap-2 land:p-3 land:pr-[12px]',
 			'flex-col items-center gap-1 p-2'
 		)}
@@ -20,7 +20,7 @@
 		<RaidTitle title={raid.name} />
 		<RaidLocation location={raid.location} />
 	</span>
-	<span class={cn('flex-center flex-1 p-2')}>
+	<span class={cn('flex-center flex-1 bg-gray-1 p-2')}>
 		{#if nextTime}
 			<span class="flex flex-wrap items-center justify-center gap-[0.6em]">
 				<span class="flex-center flex-wrap gap-[0.4em]">

@@ -1,6 +1,7 @@
 import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
+import RaidSearchInput from '$widgets/raid/ui/RaidSearchInput.svelte'
 import RaidTabList from '$widgets/raid/ui/RaidTabList.svelte'
 import RaidTimeView from '$widgets/raid/ui/RaidTimeView.svelte'
 import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
@@ -12,7 +13,8 @@ export {
 	RaidTitle,
 	RaidLocation,
 	RaidNextIcon,
-	RaidInformant
+	RaidInformant,
+	RaidSearchInput
 }
 export { GRADES } from './config/index'
 export type { GradeTypes } from './type'
