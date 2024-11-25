@@ -1,7 +1,8 @@
 import CalcResult from '$widgets/seal-calculator/ui/CalcResult.svelte'
+import RetryCalc from '$widgets/seal-calculator/ui/RetryCalc.svelte'
 import SealCalcData from '$widgets/seal-calculator/ui/SealCalcData.svelte'
 
-export { SealCalcData, CalcResult }
+export { SealCalcData, CalcResult, RetryCalc }
 export {
 	SEAL_MASTER_COUNT_TYPE,
 	SEAL_PERCENT_STEPS,

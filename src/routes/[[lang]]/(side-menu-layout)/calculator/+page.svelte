@@ -14,30 +14,26 @@
 	import Button from '$shared/button/ui/Button.svelte'
 	import { ALERT, CONFIRM, META, TOAST } from '$shared/config'
 	import { Input } from '$shared/form'
+	import { Icon } from '$shared/icon'
 	import { _remove, cn, numberFormatter } from '$shared/lib'
+	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import {
+		CalcResult,
 		getCurrentStep,
 		getNextSteps,
+		RetryCalc,
 		SealCalcData,
-		CalcResult,
 		sortByEffDataList,
 		type SealEfficiency
 	} from '$widgets/seal-calculator'
 	import { SealItem, SealList } from '$widgets/seal-list'
-	import {
-		StatBarSeparator,
-		StatBarTotalPrice,
-		StatBarWrap
-	} from '$widgets/stat-bar'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
-	import { ListReferText } from '$shared/list'
-	import { Icon } from '$shared/icon'
 
 	export let data: PageData
 	let statTypeSelected: StatType = STATS[0].type
@@ -286,23 +282,7 @@
 		{/if}
 	</SealList>
 	{#if isSealPriceChanged}
-		<div
-			class={cn(
-				'absolute left-0 top-0',
-				'flex size-full flex-col items-center gap-4',
-				'bg-gray-3/60 pt-[100px] backdrop-blur-sm'
-			)}
-		>
-			<p class="text-balance break-keep text-center">
-				<TextByLang
-					text="씰 가격이 업데이트 되었습니다. <br /> 아래 버튼을 클릭하여 다시 계산해주세요!"
-					engText="The seal prices have been updated after the efficiency calculation. Please click the button below to recalculate!"
-				/>
-			</p>
-			<Button variant="blue" size="lg" on:click={onSubmit}>
-				<TextByLang text="계산 다시하기" engText="Recalculate the values." />
-			</Button>
-		</div>
+		<RetryCalc on:click={onSubmit} />
 	{/if}
 </section>
 

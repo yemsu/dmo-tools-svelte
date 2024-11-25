@@ -16,6 +16,8 @@
 	export let variant: ButtonVariant
 	export let size: ButtonSize = 'md'
 	export let href: string | undefined = undefined
+	export let element: HTMLButtonElement | HTMLAnchorElement | undefined =
+		undefined
 
 	$: roundedBySize = (
 		size === 'xs' && rounded === 'md' ? 'sm' : rounded
@@ -51,11 +53,11 @@
 </script>
 
 {#if href}
-	<a {...$$restProps} {...commonAttributes} {href}>
+	<a bind:this={element} {...$$restProps} {...commonAttributes} {href}>
 		<slot />
 	</a>
 {:else}
-	<button {...$$restProps} {...commonAttributes} on:click>
+	<button bind:this={element} {...$$restProps} {...commonAttributes} on:click>
 		<slot />
 	</button>
 {/if}
