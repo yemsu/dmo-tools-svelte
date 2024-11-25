@@ -1,10 +1,10 @@
 const META_COMMON = {
 	TITLE: {
-		kr: '디지몬 마스터즈 도구 모음 - DMO tools',
+		kr: 'DMO tools - 디지몬 마스터즈 도구 모음 ',
 		en: 'DMO Tools - Digimon Masters Tools Collection'
 	},
 	DESC: {
-		kr: '디지몬 마스터즈 온라인 도구 모음 DMO tools 입니다.',
+		kr: '디지몬 마스터즈 온라인 도구 모음 DMO tools로 더욱 효율적인 게임 플레이를 경험해 보세요!',
 		en: 'This is the DMO Tools, a collection of tools for Digimon Masters Online.'
 	}
 }
@@ -26,7 +26,7 @@ export const META = {
 			en: `Seal Settings - ${META_COMMON.TITLE.en}`
 		},
 		DESC: {
-			kr: `${META_COMMON.TITLE.kr} 스탯 별 보유 씰 개수를 설정해보세요.`,
+			kr: `${META_COMMON.TITLE.kr} 스탯 별 보유 씰 개수를 설정해 보세요.`,
 			en: `${META_COMMON.TITLE.en} Set the number of seals you own for each stat.`
 		}
 	},
@@ -36,7 +36,7 @@ export const META = {
 			en: `Seal Efficiency Calculator - ${META_COMMON.TITLE.en}`
 		},
 		DESC: {
-			kr: `${META_COMMON.TITLE.kr} 보유 씰을 설정하고 목표 스탯까지의 씰 효율 우선순위를 간편하게 확인해보세요.`,
+			kr: `${META_COMMON.TITLE.kr} 목표 스탯까지의 씰 효율 우선순위를 간편하게 확인해 보세요.`,
 			en: `${META_COMMON.TITLE.en} Set your current seals and easily check the priority of seal efficiency to reach your target stat.`
 		}
 	},
@@ -46,7 +46,7 @@ export const META = {
 			en: `My Seals - ${META_COMMON.TITLE.en}`
 		},
 		DESC: {
-			kr: `${META_COMMON.TITLE.kr} 등록된 보유씰 리스트와 현재 시세 기준 씰 자산을 확인해보세요.`,
+			kr: `${META_COMMON.TITLE.kr} 등록된 보유씰 리스트와 현재 시세 기준 씰 자산을 확인해 보세요.`,
 			en: `${META_COMMON.TITLE.en} registered seal list, and current market value of your seal assets.`
 		}
 	},
