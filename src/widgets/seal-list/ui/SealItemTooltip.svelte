@@ -55,33 +55,31 @@
 				</div>
 			{/if}
 		{/each}
-		{#if myStep}
-			<div class="rounded-sm bg-white/10 p-1">
-				<p class="mb-1 text-body-sm">
-					<TextByLang text="현재 내 능력치" engText="Current My Level" />
-				</p>
-				<ol class="flex items-center gap-1 text-body-sm leading-none">
-					{#each SEAL_COUNT_STEPS_BY_MASTER[`${seal.masterCount}`] as sealCount}
-						<li
-							class={cn(
-								myStep.sealCount === sealCount
-									? 'rounded-md bg-blue-6 p-1'
-									: 'text-gray-9'
-							)}
-						>
-							{sealCount}
-						</li>
-					{/each}
-				</ol>
-				<span class="text-gray-11">
-					{#if !_objKeys(SEAL_EXCEPTION_PERCENT).includes(`${seal.id}`)}
-						{seal.maxIncrease} * {myStep?.percent}% =
-					{/if}
-				</span>
-				<span class="font-semibold text-point">
-					+{getMySealStat(seal, myStep.percent)}
-				</span>
-			</div>
-		{/if}
+		<div class="rounded-sm bg-white/10 p-1">
+			<p class="mb-1 text-body-sm">
+				<TextByLang text="현재 내 능력치" engText="Current My Level" />
+			</p>
+			<ol class="flex items-center gap-1 text-body-sm leading-none">
+				{#each SEAL_COUNT_STEPS_BY_MASTER[`${seal.masterCount}`] as sealCount}
+					<li
+						class={cn(
+							myStep?.sealCount === sealCount
+								? 'rounded-md bg-blue-6 p-1'
+								: 'text-gray-9'
+						)}
+					>
+						{sealCount}
+					</li>
+				{/each}
+			</ol>
+			<span class="text-gray-11">
+				{#if !_objKeys(SEAL_EXCEPTION_PERCENT).includes(`${seal.id}`)}
+					{seal.maxIncrease} * {myStep?.percent || 0}% =
+				{/if}
+			</span>
+			<span class="font-semibold text-point">
+				+{getMySealStat(seal, myStep?.percent || 0)}
+			</span>
+		</div>
 	</dl>
 </Tooltip>
