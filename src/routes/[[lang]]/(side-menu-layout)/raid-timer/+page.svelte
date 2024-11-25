@@ -14,15 +14,10 @@
 	import { RaidSearchInput, RaidTabList, RaidTimeView } from '$widgets/raid'
 
 	let searchValue = ''
-	let selectedRaid: RaidData | undefined
 	$: raidList = $raids
 
 	const setRaidList = (_raids: RaidData[]) => {
 		raidList = _raids
-	}
-
-	const selectRaid = (_raid: RaidData) => {
-		selectedRaid = _raid
 	}
 
 	const gotoErrorPage = () => {
@@ -62,22 +57,7 @@
 	<ListReferText tagName="p" class="flex items-center">
 		{searchValue ? `"${searchValue}"` : '전체'} ({raidList.length}개)
 	</ListReferText>
-
-	<div class="gap-2 land:gap-4">
-		<div class="inline-block w-[45%] max-w-[500px] land:w-[50%]">
-			<RaidTabList {raidList} {selectRaid} {selectedRaid} {searchValue} />
-		</div>
-		{#if selectedRaid}
-			<div
-				id="raid-panel-{selectedRaid.id}"
-				role="tabpanel"
-				aria-labelledby="raid-tab-{selectedRaid.id}"
-				class={cn(
-					'sticky top-[calc(var(--header-h)+var(--raid-bar-h))] float-right inline-block w-[53%] shrink-0 land:top-0 land:w-[48%]'
-				)}
-			>
-				<RaidTimeView raid={selectedRaid} />
-			</div>
-		{/if}
-	</div>
+	<RaidTabList {raidList} {searchValue} let:raid>
+		<RaidTimeView {raid} />
+	</RaidTabList>
 </section>

@@ -13,6 +13,7 @@ export type ButtonVariant =
 export type ButtonSize =
 	| 'text'
 	| 'icon'
+	| 'icon-sm'
 	| 'icon-md'
 	| 'icon-lg'
 	| 'xs'
