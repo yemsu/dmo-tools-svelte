@@ -14,8 +14,10 @@
 </svelte:head>
 
 <div class="overflow-hidde flex w-full flex-1 flex-col">
-	<div class="flex-col-center flex-1 gap-4 px-content-side land:gap-20">
-		<p class="flex-col-center gap-1 text-center land:pt-16">
+	<div
+		class="flex-col-center flex-1 gap-4 px-content-side land:gap-[clamp(20px,5vh,50px)]"
+	>
+		<p class="flex-col-center gap-1 text-center">
 			<span class="text-[clamp(12px,2.5vw,16px)] text-gray-11">
 				<TextByLang
 					text="디지몬 마스터즈 도구 모음"
