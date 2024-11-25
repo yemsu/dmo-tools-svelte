@@ -25,7 +25,7 @@
 		--raid-bar-h: 35px;
 		--content-w: 100%;
 		--content-h: calc(
-			100vh - var(--gnb-h) - var(--mobile-bottom-ad-h) - var(--header-h) -
+			100dvh - var(--gnb-h) - var(--mobile-bottom-ad-h) - var(--header-h) -
 				var(--raid-bar-h)
 		);
 		--content-side: 10px;
