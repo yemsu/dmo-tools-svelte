@@ -39,7 +39,7 @@
 						>
 							<span class="ir">정확도 {i + 1}순위</span>
 							<LikeRaidTimeButton {raid} {time} />
-							{#if time.user?.nickname === $user?.nickname}
+							{#if $user && ($user.nickname === time.user?.nickname)}
 								<DeleteRaidTimeButton {time} />
 							{/if}
 						</li>
