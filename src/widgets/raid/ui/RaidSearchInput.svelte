@@ -3,6 +3,7 @@
 	import { raids } from '$entities/raid'
 	import { Input } from '$shared/form'
 	import { choseongIncludes } from 'es-hangul'
+	import { onMount } from 'svelte'
 
 	export let value = ''
 	export let setRaidList: (raids: RaidData[]) => void
@@ -32,13 +33,18 @@
 		})
 		setRaidList([...results])
 	}
+
+	onMount(() => {
+		setTimeout(() => {
+			inputElement.focus()
+		}, 100)
+	})
 </script>
 
 <Input
-	slot="nextTitleSlot"
+	bind:value
 	bind:inputElement
 	placeholder="레이드명"
-	bind:value
 	on:input={onSearchInput}
 	class={$$restProps.class}
 />
