@@ -1,3 +1,3 @@
-import Tooltip from '$shared/tooltip/ui/Tooltip.svelte'
+import Tooltip from './ui/Tooltip.svelte'
 
 export { Tooltip }

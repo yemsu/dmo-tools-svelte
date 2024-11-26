@@ -36,23 +36,25 @@
 	}
 </script>
 
-<button
-	class="button-hover flex h-input-h w-full items-center justify-between py-1.5 port:text-body-sm"
-	title="좋아요"
-	on:click={() => onClickVote(raid, time)}
->
-	<span
-		class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 land:min-w-[4em]"
+<div class="flex items-center">
+	<button
+		class="button-hover flex h-input-h w-full items-center justify-between py-1.5 port:text-body-sm"
+		title="좋아요"
+		on:click={() => onClickVote(raid, time)}
 	>
-		<iconify-icon icon="oi:heart" width="0.8em" height="0.8em" />
-		{time.voteCount + 1}
-	</span>
-	<span class="flex-center flex-1 border-r border-gray-5">
-		<Timer {time} />
-	</span>
+		<span
+			class="flex-center min-w-[4em] gap-[0.3em] border-r border-gray-5 land:min-w-[4em]"
+		>
+			<iconify-icon icon="oi:heart" width="0.8em" height="0.8em" />
+			{time.voteCount + 1}
+		</span>
+		<span class="flex-center flex-1 border-r border-gray-5">
+			<Timer {time} />
+		</span>
+	</button>
 	<span
 		class="flex-center min-w-[6em] shrink-0 text-balance px-[0.6em] port:max-w-[7em] land:min-w-[10em] land:px-[1em]"
 	>
-		<RaidInformant user={time.user} />
+		<RaidInformant {time} />
 	</span>
-</button>
+</div>

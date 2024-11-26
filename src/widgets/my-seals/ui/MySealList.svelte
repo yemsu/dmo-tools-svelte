@@ -9,7 +9,6 @@
 	import { CONFIRM } from '$shared/config'
 	import { lang } from '$shared/model'
 	import { getMySealData, MySealGrade } from '$widgets/my-seals'
-	import { getCurrentStep } from '$widgets/seal-calculator'
 	import { SealItem, SealList } from '$widgets/seal-list'
 
 	export let seals: SealData[]
@@ -25,7 +24,7 @@
 
 <SealList seals={mySealsFiltered} let:seal={mySeal} class="h-full">
 	{@const seal = getMySealData(seals, mySeal.id)}
-	<SealItem {seal} myStep={getCurrentStep(seal, mySeal.count)} {sealPrices}>
+	<SealItem {seal} {sealPrices}>
 		<MySealGrade {mySeal} {seals} />
 		<button
 			class="button-hover absolute right-[1px] top-[1px]"

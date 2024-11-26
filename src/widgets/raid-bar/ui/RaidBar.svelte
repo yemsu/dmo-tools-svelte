@@ -24,7 +24,6 @@
 	import { timeSortByStartAt } from '$widgets/raid'
 	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
-	import RaidTitle from '$widgets/raid/ui/RaidTitle.svelte'
 	import { onDestroy, onMount } from 'svelte'
 
 	let isSseSupported: boolean | undefined
@@ -214,7 +213,8 @@
 							'land:flex-col-center land:w-[60%] land:gap-2 land:py-3'
 						)}
 					>
-						<RaidTitle title={nextRaid.name} />
+						<span class="max-w-full truncate leading-none">{nextRaid.name}</span
+						>
 						<RaidLocation location={nextRaid.location} />
 					</span>
 

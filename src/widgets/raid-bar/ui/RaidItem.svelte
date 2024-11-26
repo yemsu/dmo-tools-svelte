@@ -4,7 +4,7 @@
 	import { Icon } from '$shared/icon'
 	import { cn } from '$shared/lib'
 	import Timer from '$shared/time/ui/Timer.svelte'
-	import { RaidInformant, RaidLocation, RaidTitle } from '$widgets/raid'
+	import { RaidInformant, RaidLocation } from '$widgets/raid'
 	export let raid: RaidData
 	$: nextTime = raid.times[0]
 </script>
@@ -17,7 +17,7 @@
 			'flex-col items-center gap-1 p-2'
 		)}
 	>
-		<RaidTitle title={raid.name} />
+		<span class="max-w-full truncate leading-none">{raid.name}</span>
 		<RaidLocation location={raid.location} />
 	</span>
 	<span class={cn('flex-center flex-1 bg-gray-1 p-2')}>
@@ -32,12 +32,15 @@
 				<span class="flex-center gap-2">
 					<span
 						class="text-[0.5em] text-gray-9 after:content-['ㅡ'] port:hidden"
-					></span>
-					<RaidInformant user={nextTime.user} />
+					/>
+					<RaidInformant time={nextTime} />
 				</span>
 			</span>
 		{:else}
-			<span class="flex items-start font-bold text-gray-9">
+			<span
+				class="flex items-start font-bold text-gray-9"
+				title="제보가 없어요"
+			>
 				<Icon icon="mdi:dinosaur-pixel" size="1.3em" class="scale-x-[-1]" />
 				?
 			</span>

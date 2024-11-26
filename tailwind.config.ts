@@ -140,8 +140,8 @@ export default {
 			},
 			zIndex: {
 				header: '50',
-				tooltip: '99',
-				raidBar: '90',
+				raidBar: '99',
+				tooltip: '90',
 				floatingMenu: '970',
 				dim: '980',
 				modal: '990',

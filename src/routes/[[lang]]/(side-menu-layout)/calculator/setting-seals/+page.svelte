@@ -115,9 +115,10 @@
 		<div class="flex-center relative gap-4">
 			<button
 				class={cn(
-					'flex-center peer gap-0.5 text-right text-body-sm',
-					'text-gray-11 land:text-left land:text-sub-md'
+					'flex-center peer/tooltip gap-0.5 text-right',
+					'text-sub-lg text-gray-11 land:text-left'
 				)}
+				aria-describedby="price-tooltip"
 			>
 				<iconify-icon icon="ic:outline-info" width={14} height={14} />
 				<TextByLang
@@ -125,12 +126,15 @@
 					engText="How are prices set?"
 				/>
 			</button>
-			<Tooltip class="-bottom-2 right-0 w-[310px] translate-y-full pr-2">
+			<Tooltip
+				id="price-tooltip"
+				class="-bottom-2 right-0 w-[200px] translate-y-full pr-2 land:w-[310px]"
+			>
 				<p>
 					{#if isKr}
 						<span class="text-point">루체 서버</span>를 기준으로, 각 씰의
-						<span class="text-point">위탁 거래소 <br />1페이지 매물 가격</span
-						>의 가중 평균으로 책정됩니다. <br />
+						<span class="text-point">위탁 거래소 1페이지 매물 가격</span>의 가중
+						평균으로 책정됩니다. <br />
 						가격 간 편차, 오류 등으로 인해 부정확한 가격이 책정될 가능성이 있으니
 						<span class="text-point">구매 전 확인</span>이 필요합니다.
 					{:else}

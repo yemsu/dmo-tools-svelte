@@ -91,10 +91,10 @@
 			</Button>
 		</form>
 	{:else}
-		<div class="flex w-full overflow-hidden rounded-sm">
+		<div class="flex w-full rounded-sm">
 			{#if prices.my !== undefined}
 				<button
-					class="flex-center w-[35%] shrink-0 bg-warning"
+					class="flex-center w-[35%] shrink-0 rounded-l-sm bg-warning"
 					on:click={() => removeSavedPrice()}
 				>
 					<iconify-icon

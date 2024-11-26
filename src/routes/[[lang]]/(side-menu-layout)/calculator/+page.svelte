@@ -261,12 +261,7 @@
 	>
 		{@const seal = data.seals.find(({ id }) => id === effData.id)}
 		{#if seal}
-			<SealItem
-				{seal}
-				myStep={effData.myStep}
-				isCountEditable={false}
-				sealPrices={data.sealPrices}
-			>
+			<SealItem {seal} isCountEditable={false} sealPrices={data.sealPrices}>
 				<SealCalcData {effData} {isPercentType} />
 				<Button
 					type="button"

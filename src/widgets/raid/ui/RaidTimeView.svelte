@@ -10,7 +10,7 @@
 		.map((channel) => +channel) as GameChannel[]
 </script>
 
-<section class="scroll-box size-full rounded-md py-6 backdrop-blur-sm">
+<section class="size-full rounded-md py-6 backdrop-blur-sm">
 	<div
 		class="mb-4 flex flex-col flex-wrap gap-2 port:items-center land:flex-row land:gap-3"
 	>
