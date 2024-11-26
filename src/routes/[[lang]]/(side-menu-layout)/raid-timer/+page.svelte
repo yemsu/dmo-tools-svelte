@@ -7,7 +7,6 @@
 		RaidServerTabs
 	} from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
-	import { cn, isLandscape } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { PageHeader } from '$shared/ui/page-header'
@@ -34,26 +33,25 @@
 </svelte:head>
 
 <section class="flex flex-col">
-	<PageHeader title={{ kr: '레이드 타이머', en: ' Raid Timer' }} mb={false}>
-		<div slot="nextTitleSlot">
-			{#if $isLandscape === true}
-				<RaidSearchInput bind:value={searchValue} {setRaidList} />
-			{/if}
-		</div>
-		<div class="flex gap-2">
-			<RaidServerTabs />
-			<ControlWindowAlarmButton />
-			<BeepToggleButton />
-		</div>
+	<PageHeader
+		title={{ kr: `레이드 타이머`, en: ' Raid Timer' }}
+		mb={false}
+		class="port:flex-col port:items-start"
+	>
+		<nav class="flex flex-1 flex-wrap gap-2 port:w-full">
+			<h2 class="ir">타이머 조작 메뉴</h2>
+			<RaidSearchInput
+				bind:value={searchValue}
+				{setRaidList}
+				class="port:flex-1"
+			/>
+			<div class="order-1 flex gap-2 land:ml-auto">
+				<RaidServerTabs />
+				<ControlWindowAlarmButton />
+				<BeepToggleButton />
+			</div>
+		</nav>
 	</PageHeader>
-	{#if $isLandscape === false}
-		<RaidSearchInput
-			slot="nextTitleSlot"
-			bind:value={searchValue}
-			class="mb-2"
-			{setRaidList}
-		/>
-	{/if}
 	<ListReferText tagName="p" class="flex items-center">
 		{searchValue ? `"${searchValue}"` : '전체'} ({raidList.length}개)
 	</ListReferText>
