@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
-	import Button from '$shared/button/ui/Button.svelte'
-	import { lang } from '$shared/model'
 	import { removeTokenCookie, user } from '$entities/user'
+	import Button from '$shared/button/ui/Button.svelte'
 	import { ERROR, TOAST } from '$shared/config'
 	import { delay } from '$shared/lib'
-	import { toast } from '$shared/toast'
 	import { globalModalText } from '$shared/modal'
+	import { lang } from '$shared/model'
+	import { toast } from '$shared/toast'
+	import { _ } from 'svelte-i18n'
 
 	const logout = async () => {
 		try {
 			removeTokenCookie()
 			user.set(null)
-			toast.on(TOAST.LOGOUT[$lang])
+			history.back()
 			await delay(100)
+			toast.on(TOAST.LOGOUT[$lang])
 		} catch (e) {
 			console.error(ERROR.LOGOUT_FAIL[$lang], e)
 			globalModalText.set({
