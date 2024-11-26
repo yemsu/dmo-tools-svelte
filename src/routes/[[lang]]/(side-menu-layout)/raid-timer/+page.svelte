@@ -38,7 +38,7 @@
 		mb={false}
 		class="port:flex-col port:items-start"
 	>
-		<nav class="flex flex-1 flex-wrap gap-2 port:w-full">
+		<nav class="flex flex-1 gap-2 port:w-full">
 			<h2 class="ir">타이머 조작 메뉴</h2>
 			<RaidSearchInput
 				bind:value={searchValue}
