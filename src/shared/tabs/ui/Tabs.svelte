@@ -12,7 +12,7 @@
 	}
 
 	const dirStyles = {
-		hor: 'flex items-center',
+		hor: 'flex items-center h-input-h',
 		ver: 'flex flex-col justify-center'
 	}
 </script>
@@ -20,7 +20,7 @@
 <ul
 	{...$$restProps}
 	class={cn(
-		'scroll-box flex h-input-h min-w-[100px] text-sub-lg land:text-body-md',
+		'scroll-box flex min-w-[100px] text-sub-lg land:text-body-md',
 		dirStyles[dir],
 		variants[variant],
 		$$restProps.class
