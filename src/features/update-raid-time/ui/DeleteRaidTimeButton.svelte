@@ -17,7 +17,6 @@
 		const isConfirm = confirm(CONFIRM.CANCEL_RAID_TIME[$lang])
 		if (!isConfirm) return
 		await deleteRaidTime(time.id)
-		raids.removeChannelTimes(time)
 		toast.on(TOAST.RAID_TIME_CANCELLED[$lang])
 	}
 </script>

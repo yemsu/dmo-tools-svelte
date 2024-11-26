@@ -30,7 +30,7 @@
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
-	let removeChannelTimer: NodeJS.Timeout | undefined
+	let removeChannelTimesr: NodeJS.Timeout | undefined
 	let isSseConnected: boolean | undefined = undefined
 
 	let eventSource: EventSource | undefined
@@ -56,7 +56,10 @@
 			const votedTime = JSON.parse(e.data)
 			raids.voteTime(votedTime)
 		})
-		_eventSource
+		_eventSource.addEventListener('removed', function (e) {
+			const removedTime = JSON.parse(e.data)
+			raids.removeTime(removedTime)
+		})
 		// _eventSource.addEventListener('notify', function (e) {
 		// 	const data = JSON.parse(e.data)
 		// 	console.log('notify')
@@ -123,12 +126,12 @@
 		const timeDifference = bossTime - currentTime
 		if (timeDifference > 0) {
 			if (alarmTimer) clearTimeout(alarmTimer)
-			if (removeChannelTimer) clearTimeout(removeChannelTimer)
+			if (removeChannelTimesr) clearTimeout(removeChannelTimesr)
 			alarmTimer = setTimeout(() => {
 				notify(_nextRaid)
 				$audioAlarm && $isAudioOn && $audioAlarm.play()
 			}, timeDifference - alarmTiming)
-			removeChannelTimer = setTimeout(() => {
+			removeChannelTimesr = setTimeout(() => {
 				raids.removeChannelTimes(time)
 			}, timeDifference)
 		} else {
