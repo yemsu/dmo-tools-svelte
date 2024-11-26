@@ -20,7 +20,7 @@
 
 <div
 	class={cn(
-		'relative flex cursor-help items-center gap-[0.1em] whitespace-nowrap text-[0.9em]',
+		'relative flex items-center gap-[0.1em] whitespace-nowrap text-[0.9em]',
 		!time.user?.nickname && 'text-gray-9',
 		className
 	)}
