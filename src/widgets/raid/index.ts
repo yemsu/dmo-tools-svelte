@@ -16,5 +16,3 @@ export {
 	RaidInformant,
 	RaidSearchInput
 }
-export { GRADES } from './config/index'
-export type { GradeTypes } from './type'

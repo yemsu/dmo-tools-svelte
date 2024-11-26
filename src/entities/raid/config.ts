@@ -4,3 +4,11 @@ export const GAME_SERVERS = {
 	omega: '오메가',
 	alpha: '알파'
 } as const
+export const GRADES = {
+	10: '🌱',
+	50: '🥉',
+	100: '🥈',
+	200: '🥇',
+	500: '🏆',
+	1000: '💎'
+} as const

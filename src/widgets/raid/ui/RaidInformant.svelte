@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { UserData } from '$entities/user'
 	import { _objKeys, cn } from '$shared/lib'
-	import { GRADES } from '$widgets/raid/config'
+	import { GRADES } from '$entities/raid'
 
 	export let user: UserData | null
 	const { class: className, ...restProps } = $$restProps
