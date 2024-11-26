@@ -22,7 +22,6 @@ export const checkJoinProcess = (lang: LangType) => {
 }
 
 export const checkMember = (lang: LangType) => {
-	console.log('checkMember')
 	const token = getTokenCookie(TOKEN_NAME)
 	if (!token) {
 		goto(`/${lang}${PATH.LOGIN}`)
