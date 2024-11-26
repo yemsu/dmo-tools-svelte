@@ -1,4 +1,12 @@
+import type { GameChannel, ServerName } from '$entities/raid'
 import type { SealData } from '$entities/seals'
+
+type RaidConfirmParam = {
+	serverName: ServerName
+	raidName: string
+	channel: GameChannel
+	minute: string
+}
 
 export const CONFIRM = {
 	FINAL_NICKNAME: {
@@ -37,8 +45,20 @@ export const CONFIRM = {
 		kr: '캐릭터를 삭제하면 해당 캐릭터의 보유 씰 데이터도 함께 삭제되며, 복구가 불가능합니다. 정말로 캐릭터를 삭제하시겠습니까?',
 		en: 'If you delete the character, the seal data associated with that character will also be deleted and cannot be recovered. Do you really want to delete this character?'
 	},
-	CANCEL_RAID_TIME: {
-		kr: '이 레이드 제보를 취소하시겠어요?',
+	ADD_RAID_TIME: (
+		{ serverName, raidName, channel, minute }: RaidConfirmParam,
+		isUser: boolean = true
+	) => ({
+		kr: `${!isUser ? `❗비회원 상태에서 제보하실 경우 이후 제보 취소가 불가합니다. \n` : ''} 보스를 제보하시겠습니까? \n [${serverName} 서버] ${raidName} - [${channel}채널] ${minute}분 후 출현`,
+		en: ''
+	}),
+	CANCEL_RAID_TIME: ({
+		serverName,
+		raidName,
+		channel,
+		minute
+	}: RaidConfirmParam) => ({
+		kr: `이 레이드 제보를 취소하시겠어요? \n [${serverName} 서버] ${raidName} - [${channel}채널] ${minute}`,
 		en: 'Do you want to cancel reporting this raid?'
-	}
+	})
 }

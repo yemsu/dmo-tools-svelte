@@ -1,20 +1,31 @@
 <script lang="ts">
 	import {
+		crrServerType,
 		deleteRaidTime,
-		raids,
+		GAME_SERVERS,
+		type GameChannel,
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
-	import { Button } from '$shared/button'
 	import { CONFIRM, TOAST } from '$shared/config'
 	import { Icon } from '$shared/icon'
 	import { lang } from '$shared/model'
+	import { getRemainingTime } from '$shared/time'
 	import { toast } from '$shared/toast'
 
 	export let time: RaidTimeData
+	export let raidName: RaidData['name']
+	export let channel: GameChannel
 
 	const onClick = async () => {
-		const isConfirm = confirm(CONFIRM.CANCEL_RAID_TIME[$lang])
+		const isConfirm = confirm(
+			CONFIRM.CANCEL_RAID_TIME({
+				serverName: GAME_SERVERS[$crrServerType],
+				raidName,
+				channel,
+				minute: getRemainingTime(time.startAt)
+			})[$lang]
+		)
 		if (!isConfirm) return
 		await deleteRaidTime(time.id)
 		toast.on(TOAST.RAID_TIME_CANCELLED[$lang])

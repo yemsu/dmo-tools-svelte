@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { type GameChannel, type RaidData } from '$entities/raid'
+	import { user } from '$entities/user'
+	import { LikeRaidTimeButton } from '$features/like-raid-time'
 	import {
 		AddRaidTimeButton,
 		DeleteRaidTimeButton
 	} from '$features/update-raid-time'
-	import { LikeRaidTimeButton } from '$features/like-raid-time'
 	import { Badge } from '$shared/badge'
 	import { cn, objectBy } from '$shared/lib'
 	import { NoData } from '$shared/text'
-	import { user } from '$entities/user'
 
 	export let raid: RaidData
 	export let raidChannels: GameChannel[]
@@ -39,8 +39,8 @@
 						>
 							<span class="ir">정확도 {i + 1}순위</span>
 							<LikeRaidTimeButton {raid} {time} />
-							{#if $user && ($user.nickname === time.user?.nickname)}
-								<DeleteRaidTimeButton {time} />
+							{#if $user && $user.nickname === time.user?.nickname}
+								<DeleteRaidTimeButton {time} {channel} raidName={raid.name} />
 							{/if}
 						</li>
 					{/each}

@@ -7,11 +7,14 @@
 		type GameChannel,
 		type RaidData
 	} from '$entities/raid'
+	import { user } from '$entities/user'
 	import { ADD_RAID_SCHEMA } from '$features/update-raid-time/config/schema'
 	import { Button } from '$shared/button'
+	import { CONFIRM } from '$shared/config'
 	import { ToggleFormWrap } from '$shared/form'
 	import ValidationText from '$shared/form/ui/ValidationText.svelte'
 	import { Icon } from '$shared/icon'
+	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 
 	export let raid: RaidData
@@ -40,7 +43,15 @@
 			return
 		}
 		const isConfirmed = confirm(
-			`보스를 제보하시겠습니까? \n [${GAME_SERVERS[$crrServerType]} 서버] ${raid.name} - [${channel}채널] ${value}분 후 출현`
+			CONFIRM.ADD_RAID_TIME(
+				{
+					serverName: GAME_SERVERS[$crrServerType],
+					raidName: raid.name,
+					channel,
+					minute: value
+				},
+				!!$user
+			)[$lang]
 		)
 		if (!isConfirmed) return
 		await postRaidTime(raid.id, {
