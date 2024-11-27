@@ -6,7 +6,8 @@ import { goToErrorPage, showErrorToast } from './handleError'
 
 export const apiFetch = async <ResponseData>(
 	endpoint: string,
-	options: RequestInit = {}
+	options: RequestInit = {},
+	hideError: boolean = false
 ): Promise<ResponseData> => {
 	const token = getTokenCookie(TOKEN_NAME)
 	const headers: HeadersInit = {
@@ -36,7 +37,9 @@ export const apiFetch = async <ResponseData>(
 		}
 		return data.result
 	} catch (e) {
-		if (e instanceof BusinessError) {
+		if (hideError) {
+			console.error('Passed Error', { error: e })
+		} else if (e instanceof BusinessError) {
 			console.error('Business Error', { error: e })
 			showErrorToast(e)
 		} else if (e instanceof RequestError) {

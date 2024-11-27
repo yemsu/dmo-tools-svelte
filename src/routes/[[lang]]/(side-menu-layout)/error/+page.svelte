@@ -34,9 +34,10 @@
 
 	const goToMain = () => {
 		if (import.meta.env.SSR) return
-		goto(`${$langPath}`)
+		goto(`${$langPath || '/'}`)
 	}
 
+	$: console.log('message', message)
 	$: !message && goToMain()
 </script>
 

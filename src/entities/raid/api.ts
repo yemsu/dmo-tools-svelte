@@ -32,6 +32,10 @@ export const deleteRaidTime = (timerId: number) =>
 export const getClientId = () => apiFetch<string>(`/alarms/client-id`)
 
 export const disSubscribe = (clientId: number) =>
-	apiFetch<boolean>(`/alarms/${clientId}/dis-subscribe`, {
-		method: 'POST'
-	})
+	apiFetch<boolean>(
+		`/alarms/${clientId}/dis-subscribe`,
+		{
+			method: 'POST'
+		},
+		true
+	)
