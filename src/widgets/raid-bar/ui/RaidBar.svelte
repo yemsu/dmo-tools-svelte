@@ -205,7 +205,7 @@
 			title="레이드 타이머 전체 보기"
 		>
 			{#if nextRaid}
-				<span class={cn('flex items-center leading-none land:w-full')}>
+				<p class={cn('flex items-center leading-none land:w-full')}>
 					<span
 						class={cn(
 							'flex-shrink overflow-hidden px-1.5',
@@ -231,12 +231,12 @@
 						</Badge>
 						<Timer time={nextRaid.time} />
 					</span>
-				</span>
+				</p>
 			{:else if $raids.length > 0}
-				<span class="flex-center gap-1">
+				<p class="flex-center gap-1">
 					<Icon icon="mdi:dinosaur-pixel" size={12} class="-mb-[1px]" />
 					보스 출현 정보를 제보해주세요!
-				</span>
+				</p>
 			{/if}
 		</a>
 		{#if isSseConnected === false}

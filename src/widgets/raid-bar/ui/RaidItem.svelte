@@ -9,17 +9,17 @@
 	$: nextTime = raid.times[0]
 </script>
 
-<span class={cn('flex flex-col gap-1 p-1.5 text-left land:gap-2 land:p-3')}>
-	<span class="flex p-1">
-		<span class="flex gap-0.5 port:flex-col land:gap-2">
+<div class={cn('flex flex-col gap-1 p-1.5 text-left land:gap-2 land:p-3')}>
+	<div class="flex p-1">
+		<p class="flex gap-0.5 port:flex-col land:gap-2">
 			<span class="max-w-full truncate land:text-body-lg">
 				{raid.name}
 			</span>
 			<RaidLocation location={raid.location} />
-		</span>
-	</span>
+		</p>
+	</div>
 	{#if nextTime}
-		<span
+		<p
 			class={cn(
 				'grid grid-cols-5 rounded-md text-center',
 				'port:grid-cols-3 port:grid-rows-2',
@@ -33,14 +33,14 @@
 			<span class="flex-center col-span-2 port:col-span-3">
 				<RaidInformant time={nextTime} />
 			</span>
-		</span>
+		</p>
 	{:else}
-		<span
+		<p
 			class="flex-center h-input-h-sm bg-gray-3 font-bold text-gray-8"
 			title="제보가 없어요"
 		>
 			<Icon icon="mdi:dinosaur-pixel" size="1.3em" class="scale-x-[-1]" />
 			?
-		</span>
+		</p>
 	{/if}
-</span>
+</div>

@@ -17,7 +17,9 @@
 		class="flex flex-col flex-wrap gap-2 border-b border-gray-3 pb-4 text-body-lg port:items-center land:flex-row"
 	>
 		<Title class="port:text-center">{raid.name}</Title>
-		<RaidLocation location={raid.location} />
+		<p>
+			<RaidLocation location={raid.location} />
+		</p>
 	</div>
 	<div>
 		<RaidTimeList {raid} {raidChannels} />
