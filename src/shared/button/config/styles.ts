@@ -23,6 +23,7 @@ export const buttonVariants = {
 	blue: 'bg-blue-6 text-white',
 	gray: 'bg-gray-5',
 	ghost: 'hover:bg-gray-3',
+	'ghost-danger': 'text-red hover:bg-gray-3',
 	background: 'bg-background',
 	danger: 'bg-red text-white',
 	warning: 'bg-warning',

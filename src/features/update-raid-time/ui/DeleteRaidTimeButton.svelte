@@ -7,6 +7,7 @@
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
+	import { Button } from '$shared/button'
 	import { CONFIRM, TOAST } from '$shared/config'
 	import { Icon } from '$shared/icon'
 	import { lang } from '$shared/model'
@@ -32,10 +33,12 @@
 	}
 </script>
 
-<button
-	class="flex-center button-hover w-full gap-1 border-t border-gray-5 bg-red/50 py-1 text-sub-md"
+<Button
+	size="xs"
+	variant="ghost"
 	title="제보 취소"
+	class={$$restProps.class}
 	on:click={onClick}
 >
-	<Icon icon="mdi:close" size="1.2em" />
-</button>
+	<Icon icon="mdi:close" />
+</Button>

@@ -3,6 +3,7 @@ export type ButtonVariant =
 	| 'point'
 	| 'blue'
 	| 'ghost'
+	| 'ghost-danger'
 	| 'background'
 	| 'gray'
 	| 'danger'

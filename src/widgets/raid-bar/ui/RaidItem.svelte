@@ -9,41 +9,38 @@
 	$: nextTime = raid.times[0]
 </script>
 
-<span class={cn('flex leading-none port:flex-col')}>
-	<span
-		class={cn(
-			'relative flex bg-gray-3 text-left',
-			'land:w-[40%] land:flex-col land:gap-2 land:p-3 land:pr-[12px]',
-			'flex-col items-center gap-1 p-2'
-		)}
-	>
-		<span class="max-w-full truncate leading-none">{raid.name}</span>
-		<RaidLocation location={raid.location} />
-	</span>
-	<span class={cn('flex-center flex-1 bg-gray-1 p-2')}>
-		{#if nextTime}
-			<span class="flex flex-wrap items-center justify-center gap-[0.6em]">
-				<span class="flex-center flex-wrap gap-[0.4em]">
-					<Badge size="md" color="gray">
-						{nextTime.channel} 채널
-					</Badge>
-					<Timer time={nextTime} />
-				</span>
-				<span class="flex-center gap-2">
-					<span
-						class="text-[0.5em] text-gray-9 after:content-['ㅡ'] port:hidden"
-					/>
-					<RaidInformant time={nextTime} />
-				</span>
+<span class={cn('flex flex-col gap-1 p-1.5 text-left land:gap-2 land:p-3')}>
+	<span class="flex p-1">
+		<span class="flex gap-0.5 port:flex-col land:gap-2">
+			<span class="max-w-full truncate land:text-body-lg">
+				{raid.name}
 			</span>
-		{:else}
-			<span
-				class="flex items-start font-bold text-gray-9"
-				title="제보가 없어요"
-			>
-				<Icon icon="mdi:dinosaur-pixel" size="1.3em" class="scale-x-[-1]" />
-				?
-			</span>
-		{/if}
+			<RaidLocation location={raid.location} />
+		</span>
 	</span>
+	{#if nextTime}
+		<span
+			class={cn(
+				'grid grid-cols-5 rounded-md text-center',
+				'port:grid-cols-3 port:grid-rows-2',
+				'gap-[3px] bg-gray-1 [&>*]:h-input-h-sm [&>*]:bg-gray-3'
+			)}
+		>
+			<span class="flex-center text-[0.9em]">{nextTime.channel} 채널</span>
+			<span class="flex-center col-span-2">
+				<Timer time={nextTime} />
+			</span>
+			<span class="flex-center col-span-2 port:col-span-3">
+				<RaidInformant time={nextTime} />
+			</span>
+		</span>
+	{:else}
+		<span
+			class="flex-center h-input-h-sm bg-gray-3 font-bold text-gray-8"
+			title="제보가 없어요"
+		>
+			<Icon icon="mdi:dinosaur-pixel" size="1.3em" class="scale-x-[-1]" />
+			?
+		</span>
+	{/if}
 </span>

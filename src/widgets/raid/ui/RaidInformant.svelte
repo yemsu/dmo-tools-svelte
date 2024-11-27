@@ -3,6 +3,7 @@
 	import { _objKeys, cn } from '$shared/lib'
 	import { GRADES, type RaidTimeData } from '$entities/raid'
 	import { Tooltip } from '$shared/tooltip'
+	import { Icon } from '$shared/icon'
 
 	export let time: RaidTimeData
 	$: userGrade = getUserGrade(time.user?.timerCompleteCount || 0)
@@ -39,8 +40,8 @@
 			{time.user?.nickname}
 		</button>
 	{:else}
-		<p>
-			<iconify-icon icon="mdi:user" width="1em" height="1em" />
+		<p class="flex-center gap-[0.2em]">
+			<Icon icon="mdi:user" size="1em" />
 			비회원
 		</p>
 	{/if}

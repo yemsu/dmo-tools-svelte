@@ -8,7 +8,7 @@
 <iconify-icon
 	{...$$restProps}
 	{icon}
-	width={size || 14}
-	height={size || 14}
+	width={size || '1.2em'}
+	height={size || '1.2em'}
 	class={cn($$restProps.class)}
 />
