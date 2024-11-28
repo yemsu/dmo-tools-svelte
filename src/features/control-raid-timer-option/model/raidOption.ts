@@ -6,7 +6,7 @@ export const RAID_ITEM_FAVORITE_STORAGE = 'RAID_ITEM_FAVORITE_STORAGE'
 
 type RaidIdList = string[]
 
-type RaidOptionStore = {
+export type RaidOptionStore = {
 	noAlarmRaidIds: RaidIdList | undefined
 	favoriteRaidIds: RaidIdList | undefined
 }

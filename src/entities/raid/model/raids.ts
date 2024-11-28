@@ -1,32 +1,60 @@
 import type { RaidData, RaidTimeData } from '$entities/raid/types'
+import type { RaidOptionStore } from '$features/control-raid-timer-option'
 import { timeSortByVote } from '$widgets/raid'
 import { writable } from 'svelte/store'
 
-const raidTimeString = (raid: RaidData) => {
-	return raid.times[0]
-		? new Date(raid.times[0].startAt).getTime()
-		: 9999999999999
-}
-const raidSortByTime = (raids: RaidData[]) =>
-	raids.sort((a, b) => {
-		const aTime = raidTimeString(a)
-		const bTime = raidTimeString(b)
-		return aTime - bTime
+const sortRaid = (raids: RaidData[], raidOption: RaidOptionStore) => {
+	const { favoriteRaidIds } = raidOption
+	const sortedRaid = raids.sort((a, b) => {
+		// favorite 대조
+		const aIsFavorite = favoriteRaidIds?.some((strId) => +strId === a.id)
+		const bIsFavorite = favoriteRaidIds?.some((strId) => +strId === b.id)
+		if (aIsFavorite && !bIsFavorite) {
+			return -1
+		}
+		if (!aIsFavorite && bIsFavorite) {
+			return 1
+		}
+		// alarmOff 대조
+		// const aIsAlarmOff = noAlarmRaidIds?.some((strId) => +strId === a.id)
+		// const bIsAlarmOff = noAlarmRaidIds?.some((strId) => +strId === b.id)
+		// if (aIsAlarmOff && !bIsAlarmOff) {
+		// 	return 1
+		// }
+		// if (!aIsAlarmOff && bIsAlarmOff) {
+		// 	return -1
+		// }
+		// startAt 대조
+		const aStartAt = a.times[0]?.startAt
+		const bStartAt = b.times[0]?.startAt
+		if (aStartAt && bStartAt) {
+			return new Date(aStartAt).getTime() - new Date(bStartAt).getTime()
+		}
+		if (bStartAt) {
+			return 1
+		}
+		if (aStartAt) {
+			return -1
+		}
+		const koreanNameCompare = a.name.localeCompare(b.name, 'ko-KR')
+		return koreanNameCompare
 	})
+	return sortedRaid
+}
 
 const createRaidsStore = () => {
 	const { subscribe, set, update } = writable<RaidData[]>([])
 	return {
 		subscribe,
-		set: (raids: RaidData[]) => {
+		set: (raids: RaidData[], raidOption: RaidOptionStore) => {
 			const raidsTimeSorted = raids.map((raid) => {
 				raid.times = timeSortByVote(raid.times)
 				return raid
 			})
-			const raidSorted = raidSortByTime(raidsTimeSorted)
+			const raidSorted = sortRaid(raidsTimeSorted, raidOption)
 			set(raidSorted)
 		},
-		addNewTime: (time: RaidTimeData) => {
+		addNewTime: (time: RaidTimeData, raidOption: RaidOptionStore) => {
 			update((prev) => {
 				const newRaids = prev.map((prevRaidData) => {
 					const newTimes = [...prevRaidData.times, time]
@@ -34,10 +62,10 @@ const createRaidsStore = () => {
 						? { ...prevRaidData, times: timeSortByVote(newTimes) }
 						: prevRaidData
 				})
-				return raidSortByTime(newRaids)
+				return sortRaid(newRaids, raidOption)
 			})
 		},
-		voteTime: (time: RaidTimeData) => {
+		voteTime: (time: RaidTimeData, raidOption: RaidOptionStore) => {
 			update((prev) => {
 				const newRaids = prev.map((prevRaidData) => {
 					if (prevRaidData.id !== time.raidId) return prevRaidData
@@ -51,10 +79,10 @@ const createRaidsStore = () => {
 						times: timeSortByVote(newTimes)
 					}
 				})
-				return raidSortByTime(newRaids)
+				return sortRaid(newRaids, raidOption)
 			})
 		},
-		removeTime: (time: RaidTimeData) => {
+		removeTime: (time: RaidTimeData, raidOption: RaidOptionStore) => {
 			update((prev) => {
 				const newRaids = prev.map((prevRaidData) =>
 					prevRaidData.id === time.raidId
@@ -66,10 +94,10 @@ const createRaidsStore = () => {
 							}
 						: prevRaidData
 				)
-				return raidSortByTime(newRaids)
+				return sortRaid(newRaids, raidOption)
 			})
 		},
-		removeChannelTimes: (time: RaidTimeData) => {
+		removeChannelTimes: (time: RaidTimeData, raidOption: RaidOptionStore) => {
 			update((prev) => {
 				const newRaids = prev.map((prevRaidData) =>
 					prevRaidData.id === time.raidId
@@ -81,7 +109,7 @@ const createRaidsStore = () => {
 							}
 						: prevRaidData
 				)
-				return raidSortByTime(newRaids)
+				return sortRaid(newRaids, raidOption)
 			})
 		}
 	}

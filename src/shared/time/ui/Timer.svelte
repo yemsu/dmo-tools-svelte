@@ -3,6 +3,7 @@
 	import { cn } from '$shared/lib'
 	import { onDestroy, onMount } from 'svelte'
 	import { getRemainingTime } from '../lib'
+	import { raidOption } from '$features/control-raid-timer-option'
 
 	// 외부에서 받을 타겟 시간
 	export let time: RaidTimeData
@@ -11,10 +12,10 @@
 
 	let remainingTime = ''
 
-	function updateTimer() {
+	$: updateTimer = () => {
 		remainingTime = getRemainingTime(targetTime)
 		if (remainingTime === '출현 중') {
-			raids.removeTime(time)
+			raids.removeTime(time, $raidOption)
 			clearInterval(timerInterval)
 		}
 	}

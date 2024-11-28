@@ -21,7 +21,7 @@
 	$: raidList && initSelectedRaidId()
 </script>
 
-<div class="gap-2 land:gap-4">
+<div class="flex-1 gap-2 land:gap-4">
 	<div class="inline-block w-[45%] max-w-[500px] land:w-[50%]">
 		{#if raidList.length > 0 || !searchValue}
 			<ul
@@ -44,7 +44,7 @@
 			aria-labelledby="raid-tab-{raid.id}"
 			hidden={selectedRaid.id !== raid.id}
 			class={cn(
-				'scroll-box sticky top-[calc(var(--header-h)+var(--raid-bar-h))] float-right inline-block h-content-h w-[53%] shrink-0 land:top-0 land:w-[48%]',
+				'scroll-box sticky top-[calc(var(--header-h)+var(--raid-bar-h))] float-right inline-block h-[100dvh] w-[53%] shrink-0 land:top-0 land:w-[48%]',
 				selectedRaid.id !== raid.id && 'hidden'
 			)}
 		>

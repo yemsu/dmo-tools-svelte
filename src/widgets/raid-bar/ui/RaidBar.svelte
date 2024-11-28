@@ -14,7 +14,11 @@
 		type ServerType
 	} from '$entities/raid'
 	import { PUBLIC_API_BASE_URL } from '$env/static/public'
-	import { audioAlarm, isAudioOn } from '$features/control-raid-timer-option'
+	import {
+		audioAlarm,
+		isAudioOn,
+		raidOption
+	} from '$features/control-raid-timer-option'
 	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
 	import { _objKeys, cn } from '$shared/lib'
@@ -29,7 +33,7 @@
 	let isSseSupported: boolean | undefined
 	let nextRaid: NextRaidData | undefined
 	let alarmTimer: NodeJS.Timeout | undefined
-	let removeChannelTimesr: NodeJS.Timeout | undefined
+	let removeChannelTimer: NodeJS.Timeout | undefined
 	let isSseConnected: boolean | undefined = undefined
 
 	let eventSource: EventSource | undefined
@@ -49,15 +53,15 @@
 		})
 		_eventSource.addEventListener('created', function (e) {
 			const createdTime = JSON.parse(e.data) as RaidTimeData
-			raids.addNewTime(createdTime)
+			raids.addNewTime(createdTime, $raidOption)
 		})
 		_eventSource.addEventListener('voted', function (e) {
 			const votedTime = JSON.parse(e.data)
-			raids.voteTime(votedTime)
+			raids.voteTime(votedTime, $raidOption)
 		})
 		_eventSource.addEventListener('removed', function (e) {
 			const removedTime = JSON.parse(e.data)
-			raids.removeTime(removedTime)
+			raids.removeTime(removedTime, $raidOption)
 		})
 		// _eventSource.addEventListener('notify', function (e) {
 		// 	const data = JSON.parse(e.data)
@@ -92,7 +96,7 @@
 	$: initRaidSubscribe = async () => {
 		const server = $crrServerType || 'luce'
 		const raidsFetched = await getRaids(server)
-		raids.set(raidsFetched)
+		raids.set(raidsFetched, $raidOption)
 		subscribeSSE(server)
 		setTimeout(() => {
 			if (!isSseConnected)
@@ -125,16 +129,16 @@
 		const timeDifference = bossTime - currentTime
 		if (timeDifference > 0) {
 			if (alarmTimer) clearTimeout(alarmTimer)
-			if (removeChannelTimesr) clearTimeout(removeChannelTimesr)
+			if (removeChannelTimer) clearTimeout(removeChannelTimer)
 			alarmTimer = setTimeout(() => {
 				notify(_nextRaid)
 				$audioAlarm && $isAudioOn && $audioAlarm.play()
 			}, timeDifference - alarmTiming)
-			removeChannelTimesr = setTimeout(() => {
-				raids.removeChannelTimes(time)
+			removeChannelTimer = setTimeout(() => {
+				raids.removeChannelTimes(time, $raidOption)
 			}, timeDifference)
 		} else {
-			raids.removeChannelTimes(time)
+			raids.removeChannelTimes(time, $raidOption)
 			console.log('이미 시간이 지났습니다.')
 		}
 	}
@@ -142,8 +146,15 @@
 	$: updateNextRaid = () => {
 		if ($raids.length === 0) return
 		const times = $raids
-			.map(({ times }) => (times.length > 0 ? times[0] : []))
+			.map(({ times, id }) => {
+				// 알람 비활성화 설정된 경우 시간 리스트업 X
+				if ($raidOption.noAlarmRaidIds?.some((strId) => +strId === id)) {
+					return []
+				}
+				return times.length > 0 ? times[0] : []
+			})
 			.flat()
+
 		const timesSorted = timeSortByStartAt(times)
 		if (timesSorted.length === 0) {
 			nextRaid = undefined
@@ -164,6 +175,8 @@
 	}
 
 	onMount(() => {
+		raidOption.loadAllOptions()
+
 		if (typeof EventSource !== 'undefined') {
 			isSseSupported = true
 		} else {

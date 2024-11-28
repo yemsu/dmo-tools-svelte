@@ -55,7 +55,7 @@
 	{id}
 	class={cn(
 		'hidden flex-col peer-hover/tooltip:flex peer-focus/tooltip:flex',
-		'absolute z-tooltip',
+		'pointer-events-none absolute z-tooltip overflow-visible',
 		'break-keep rounded-md',
 		'border border-gray-5 bg-background/90',
 		'drop-shadow-lg',

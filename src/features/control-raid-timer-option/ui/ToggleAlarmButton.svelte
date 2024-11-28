@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { RaidData } from '$entities/raid'
-	import { raidOption } from '$features/control-raid-timer-option/model'
+	import { raidOption } from '$features/control-raid-timer-option'
 	import { Button } from '$shared/button'
 	import { TOAST } from '$shared/config'
 	import { Icon } from '$shared/icon'
