@@ -1,22 +1,28 @@
 <script lang="ts">
+	import { NewBadge } from '$shared/badge'
 	import { Modal } from '$shared/modal'
 	import { lang } from '$shared/model'
 	import { Title } from '$shared/text'
 	import { TextByLang } from '$shared/text'
 
 	export let date: string
+	export let startDate: string | undefined = undefined
 	export let time: string | undefined = undefined
 	export let title: { kr: string; en: string }
+	export let modalSize: 'sm' | 'md' | 'lg' = 'md'
 </script>
 
-<Modal>
+<Modal size={modalSize}>
 	<button
 		slot="buttonSlot"
 		let:toggleModal
 		on:click={toggleModal}
 		class="group flex items-start justify-center gap-1 py-1 text-left text-body-sm"
 	>
-		<span class="rounded-full bg-gray-4 px-1 py-0.5 text-sub-md">
+		<span class="relative rounded-full bg-gray-4 px-1 py-0.5 text-sub-md">
+			{#if startDate}
+				<NewBadge {startDate} visibleDay={3} position="left" />
+			{/if}
 			{date}
 		</span>
 		<span class="text-balance break-keep group-hover:underline">

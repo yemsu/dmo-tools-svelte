@@ -22,7 +22,7 @@
 
 <div
 	class={cn(
-		'position-fix-center z-modal max-w-full p-6',
+		'position-fix-center z-modal max-w-full p-6 port:px-content-side',
 		'rounded-md border border-gray-3 bg-background drop-shadow-lg',
 		sizeStyles[size]
 	)}

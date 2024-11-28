@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { lang } from '$shared/model'
 	import { Title } from '$shared/text'
 	import Notice1107 from '$widgets/notice/ui/Notice1107.svelte'
 	import Notice1112 from '$widgets/notice/ui/Notice1112.svelte'
+	import Notice1128 from '$widgets/notice/ui/Notice1128.svelte'
 	import { _ } from 'svelte-i18n'
+
+	$: isKr = $lang === 'kr'
 </script>
 
 <section
@@ -13,6 +17,9 @@
 	>
 	<div class="flex-center flex-1 px-2 py-1">
 		<div>
+			{#if isKr}
+				<Notice1128 />
+			{/if}
 			<Notice1112 />
 			<Notice1107 />
 		</div>
