@@ -66,6 +66,24 @@ const createRaidOptionStore = () => {
 					JSON.stringify($raidOptionStore.favoriteRaidIds)
 				)
 			})
+		},
+		allAlarmOn: () => {
+			update((prev) => ({ ...prev, noAlarmRaidIds: [] }))
+		},
+		allAlarmOff: (raids: RaidData[]) => {
+			update((prev) => ({
+				...prev,
+				noAlarmRaidIds: raids.map(({ id }) => `${id}`)
+			}))
+		},
+		allFavoriteOn: (raids: RaidData[]) => {
+			update((prev) => ({
+				...prev,
+				favoriteRaidIds: raids.map(({ id }) => `${id}`)
+			}))
+		},
+		allFavoriteOff: () => {
+			update((prev) => ({ ...prev, favoriteRaidIds: [] }))
 		}
 	}
 }

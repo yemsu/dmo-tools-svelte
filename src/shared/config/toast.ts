@@ -98,8 +98,24 @@ export const TOAST = {
 			en: ''
 		}),
 		OFF_A_FAVORITE: (raidName: string) => ({
-			kr: `${josa(raidName, '이/가')} 상단 고정이 해제되었습니다.`,
+			kr: `${josa(raidName, '이/가')} 상단고정이 해제되었습니다.`,
 			en: ''
-		})
+		}),
+		ON_ALL_ALARM: {
+			kr: `모든 알림이 활성화 되었습니다.`,
+			en: ''
+		},
+		OFF_ALL_ALARM: {
+			kr: `모든 알림이 비활성화 되었습니다.`,
+			en: ''
+		},
+		ON_ALL_FAVORITE: {
+			kr: `모든 레이드가 상단고정되었습니다.`,
+			en: ''
+		},
+		OFF_ALL_FAVORITE: {
+			kr: `모든 레이드의 상단고정이 해제되었습니다.`,
+			en: ''
+		}
 	}
 }

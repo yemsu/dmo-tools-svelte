@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { RaidData } from '$entities/raid'
-	import { raidOption } from '$features/control-raid-timer-option/model'
+	import { raidOption } from '$features/control-raid-timer-option'
 	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import { Button } from '$shared/button'
@@ -25,7 +25,7 @@
 	size="icon"
 	variant="ghost"
 	class={cn(!isActive && 'opacity-60')}
-	title={isActive ? '레이드 리스트 상단 고정 해제' : '레이드 리스트 상단 고정'}
+	title={isActive ? '상단 고정 해제' : '상단 고정'}
 	on:click={onClick}
 >
 	<Icon icon="mdi:star{isActive ? '' : '-outline'}" size="1.1em" />

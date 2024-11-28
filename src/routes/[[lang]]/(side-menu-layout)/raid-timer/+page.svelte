@@ -4,7 +4,8 @@
 	import {
 		BeepToggleButton,
 		ControlWindowAlarmButton,
-		RaidServerTabs
+		RaidServerTabs,
+		MoreOptionDropdown
 	} from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
 	import { ListReferText } from '$shared/list'
@@ -45,10 +46,11 @@
 				{setRaidList}
 				class="port:flex-1"
 			/>
-			<div class="order-1 flex gap-2 land:ml-auto">
+			<div class="order-1 flex gap-1.5 land:ml-auto land:gap-2">
 				<RaidServerTabs />
 				<ControlWindowAlarmButton />
 				<BeepToggleButton />
+				<MoreOptionDropdown />
 			</div>
 		</nav>
 	</PageHeader>
