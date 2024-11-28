@@ -7,7 +7,7 @@
 	startDate="Tue Nov 28 2024 16:00:00 GMT+0900"
 	modalSize="lg"
 	title={{
-		kr: '레이드 별 알림 설정/상단고정 설정 기능이 추가되었습니다!',
+		kr: '레이드별 알림/상단고정 설정 기능이 추가되었습니다!',
 		en: 'The site domain has been changed.'
 	}}
 >
