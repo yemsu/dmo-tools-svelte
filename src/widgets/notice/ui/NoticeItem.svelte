@@ -25,7 +25,7 @@
 			{/if}
 			{date}
 		</span>
-		<span class="text-balance break-keep group-hover:underline">
+		<span class="text-pretty break-keep group-hover:underline">
 			{title[$lang]}
 		</span>
 	</button>
