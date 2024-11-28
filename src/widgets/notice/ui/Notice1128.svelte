@@ -30,7 +30,7 @@
 	<p>레이드의 정렬 방식도 함께 개선되었는데요, 우선순위는 다음과 같습니다.</p>
 	<ul class="flex flex-col gap-2 rounded-md bg-gray-2 p-2 px-4">
 		<li>- 상단 고정 설정된 레이드</li>
-		<li>- 시작이 임박한 레이드</li>
+		<li>- 출현이 임박한 레이드</li>
 		<li>- 레이드명 가나다 순</li>
 	</ul>
 	<p>
