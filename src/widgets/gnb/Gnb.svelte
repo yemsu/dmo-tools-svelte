@@ -29,7 +29,7 @@
 <nav
 	class={cn(
 		'land:gap-5',
-		'port:bottom-mobile-bottom-ad-h port:fixed port:z-header port:w-full port:bg-background',
+		'port:fixed port:bottom-mobile-bottom-ad-h port:z-header port:w-full port:bg-background',
 		$$restProps.class
 	)}
 >
@@ -37,7 +37,8 @@
 	<ul
 		class={cn(
 			'items-center whitespace-nowrap font-semibold ',
-			'port:grid-cols-max port:grid port:h-gnb-h port:grid-cols-3 port:p-1'
+			'port:grid-cols-max port:grid port:h-gnb-h port:p-1',
+			$lang === 'kr' ? 'port:grid-cols-3' : 'port:grid-cols-2'
 		)}
 	>
 		{#each _objKeys(MENUS) as menuType (menuType)}
