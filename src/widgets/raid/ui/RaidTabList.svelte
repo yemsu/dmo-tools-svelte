@@ -2,7 +2,7 @@
 	import { type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import { NoData } from '$shared/text'
-	import { RaidItem } from '$widgets/raid-bar'
+	import RaidTabListItem from '$widgets/raid/ui/RaidTabListItem.svelte'
 
 	export let raidList: RaidData[]
 	export let searchValue: string
@@ -30,27 +30,7 @@
 				aria-label="레이드 채널별 시간 제보 자세히 보기 탭"
 			>
 				{#each raidList as raid (raid.id)}
-					<li
-						role="presentation"
-						class={cn(
-							'relative flex w-full rounded-md bg-gray-1',
-							selectedRaid?.id === raid.id
-								? 'border border-gray-10 opacity-100'
-								: 'border border-gray-4 opacity-40 land:hover:opacity-100'
-						)}
-					>
-						<button
-							title="자세히 보기"
-							on:click={() => onClickTab(raid)}
-							id="raid-tab-{raid.id}"
-							aria-controls="raid-panel-{raid.id}"
-							role="tab"
-							aria-selected={selectedRaid?.id === raid.id}
-							class="button-hover flex-1"
-						>
-							<RaidItem {raid} />
-						</button>
-					</li>
+					<RaidTabListItem {raid} {selectedRaid} {onClickTab} />
 				{/each}
 			</ul>
 		{:else}

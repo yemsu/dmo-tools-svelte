@@ -139,6 +139,7 @@ export default {
 				lg: '0px 0px 15px var(--shadow-color-lg)'
 			},
 			zIndex: {
+				'1': '1',
 				header: '50',
 				raidBar: '99',
 				tooltip: '90',

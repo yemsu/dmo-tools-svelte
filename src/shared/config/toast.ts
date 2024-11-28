@@ -1,5 +1,6 @@
 import type { ServerName } from '$entities/raid'
 import type { SealData } from '$entities/seals'
+import { josa } from 'es-hangul'
 
 export const TOAST = {
 	NEED_LOGIN: {
@@ -82,5 +83,23 @@ export const TOAST = {
 	RAID_TIME_CANCELLED: {
 		kr: '레이드 제보가 취소되었습니다.',
 		en: 'The raid report has been cancelled'
+	},
+	RAID: {
+		ON_A_ALARM: (raidName: string) => ({
+			kr: `${raidName} 알림이 활성화 되었습니다.`,
+			en: ''
+		}),
+		OFF_A_ALARM: (raidName: string) => ({
+			kr: `${raidName} 알림이 비활성화 되었습니다.`,
+			en: ''
+		}),
+		ON_A_FAVORITE: (raidName: string) => ({
+			kr: `${josa(raidName, '이/가')} 상단고정되었습니다.`,
+			en: ''
+		}),
+		OFF_A_FAVORITE: (raidName: string) => ({
+			kr: `${josa(raidName, '이/가')} 상단 고정이 해제되었습니다.`,
+			en: ''
+		})
 	}
 }

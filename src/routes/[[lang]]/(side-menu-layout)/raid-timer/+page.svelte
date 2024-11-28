@@ -4,6 +4,7 @@
 	import {
 		BeepToggleButton,
 		ControlWindowAlarmButton,
+		raidOption,
 		RaidServerTabs
 	} from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
@@ -11,6 +12,7 @@
 	import { lang } from '$shared/model'
 	import { PageHeader } from '$shared/ui/page-header'
 	import { RaidSearchInput, RaidTabList, RaidTimeView } from '$widgets/raid'
+	import { onMount } from 'svelte'
 
 	let searchValue = ''
 	$: raidList = $raids
@@ -23,6 +25,10 @@
 		if (import.meta.env.SSR || $lang !== 'en') return
 		goto(`/en`)
 	}
+
+	onMount(() => {
+		raidOption.loadAllOptions()
+	})
 
 	$: $lang && gotoErrorPage()
 </script>
