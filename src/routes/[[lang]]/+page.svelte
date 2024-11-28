@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MENUS } from '$entities/menus'
 	import { META, PATH } from '$shared/config'
+	import { cn } from '$shared/lib'
 	import { lang, langPath } from '$shared/model'
 	import { TextByLang } from '$shared/text'
 	import { MainBanner } from '$widgets/banner'
@@ -32,7 +33,12 @@
 		</p>
 		<Notice />
 	</div>
-	<div class="grid w-full grid-cols-2 port:flex-1 land:grid-cols-3">
+	<div
+		class={cn(
+			'grid w-full grid-cols-2 port:flex-1 ',
+			$lang === 'kr' ? 'land:grid-cols-3' : 'land:grid-cols-2'
+		)}
+	>
 		<MainBanner
 			href="{$langPath}{PATH.CALCULATOR}"
 			title={MENUS.calc[isKr ? 'name' : 'engName']}
