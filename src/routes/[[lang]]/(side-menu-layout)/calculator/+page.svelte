@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { currentCharacterId } from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
 		mySealCounts,
@@ -11,16 +10,16 @@
 		type SealData,
 		type StatType
 	} from '$entities/seals'
+	import { AddToMySealButton } from '$features/update-my-seal'
 	import Button from '$shared/button/ui/Button.svelte'
-	import { ALERT, CONFIRM, META, TOAST } from '$shared/config'
+	import { ALERT, META } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { Icon } from '$shared/icon'
-	import { _remove, cn, numberFormatter } from '$shared/lib'
+	import { cn, numberFormatter } from '$shared/lib'
 	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { TextByLang } from '$shared/text'
-	import { toast } from '$shared/toast'
 	import { Switch } from '$shared/ui/switch'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import {
@@ -142,24 +141,7 @@
 		}, 60)
 	}
 
-	const addToMySeal = (effData: SealEfficiency, seal: SealData) => {
-		const mySealCount = getMySealCount($mySealCounts, seal.id)
-		const isConfirmed = confirm(
-			CONFIRM.ADD_MY_SEAL(seal, effData.needCount)[$lang]
-		)
-		if (!isConfirmed) return
-		if (!$currentCharacterId) {
-			alert('no currentCharacterId')
-			return
-		}
-		mySealCounts.updateCount(
-			$currentCharacterId,
-			{
-				id: effData.id,
-				count: +mySealCount + effData.needCount
-			},
-			$lang
-		)
+	const afterAddToMySeal = (effData: SealEfficiency) => {
 		const updateEffDataListSorted = effDataListSorted.filter(
 			(_effData) =>
 				!(
@@ -170,24 +152,12 @@
 		calcResultList = getCalcResultList(updateEffDataListSorted)
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
-		toast.on(
-			TOAST.SEAL_COUNT_UPDATE(seal, mySealCount + effData.needCount)[$lang]
-		)
 	}
 
 	const onChangedSealPrice = () => {
 		if (effDataListSorted.length > 0) {
 			isSealPriceChanged = true
 		}
-	}
-
-	$: getHasSameSealPrevStep = (effData: SealEfficiency) => {
-		const result = calcResultList.some(
-			(resultEff) =>
-				resultEff.id === effData.id &&
-				resultEff.nextStepIdx < effData.nextStepIdx
-		)
-		return result
 	}
 
 	$: onMergeSwitchChange = (e: CustomEvent) => {
@@ -274,30 +244,18 @@
 		noDataText={$_('seal.no_data_text')}
 	>
 		{@const seal = data.seals.find(({ id }) => id === effData.id)}
-		{@const hasSameSealPrevStep = getHasSameSealPrevStep(effData)}
 		{#if seal}
 			<SealItem {seal} isCountEditable={false} sealPrices={data.sealPrices}>
 				<p class="absolute right-1 top-0 text-sub-md text-gray-8">
 					{effData.nextStepIdx + 1} 단계
 				</p>
 				<SealCalcData {effData} {isPercentType} />
-				<Button
-					type="button"
-					variant="background"
-					size="sm"
-					class="w-full"
-					on:click={() => addToMySeal(effData, seal)}
-					disabled={hasSameSealPrevStep}
-				>
-					{#if hasSameSealPrevStep}
-						<span class="text-[0.9em] leading-[1.2]"
-							>{effData.nextStepIdx}단계 결과를 먼저 등록해 주세요</span
-						>
-					{:else}
-						<iconify-icon icon="mdi:check" width={15} height={15} />
-						{$_('seal.seal_registered')}
-					{/if}
-				</Button>
+				<AddToMySealButton
+					{effData}
+					{seal}
+					{calcResultList}
+					updateResult={() => afterAddToMySeal(effData)}
+				/>
 			</SealItem>
 		{/if}
 	</SealList>
