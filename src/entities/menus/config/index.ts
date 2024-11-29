@@ -2,7 +2,7 @@ import { PATH } from '$shared/config'
 
 export const MENUS = {
 	calc: {
-		name: '씰 계산기',
+		name: '씰 효율 계산기',
 		engName: 'Seal Calculator',
 		path: PATH.CALCULATOR
 	},
