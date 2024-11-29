@@ -21,28 +21,40 @@
 	import { Tab, Tabs } from '$shared/tabs'
 	import { TextByLang } from '$shared/text'
 	import { toast } from '$shared/toast'
+	import { Switch } from '$shared/ui/switch'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import {
 		CalcResult,
-		getCurrentStep,
 		getNextSteps,
 		RetryCalc,
 		SealCalcData,
 		sortByEffDataList,
+		type CalcMode,
 		type SealEfficiency
 	} from '$widgets/seal-calculator'
+	import {
+		calculateEfficiencyTotals,
+		getEfficiencyFilteredList,
+		getMergedResult,
+		getNextStepsEffData
+	} from '$widgets/seal-calculator/lib/calculate'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
+
+	type ListViewMode = 'merged' | 'separated'
 
 	export let data: PageData
 	let statTypeSelected: StatType = STATS[0].type
 	let goalStat: number | '' = ''
 	let effDataListSorted: SealEfficiency[] = []
+	let calcResultList: SealEfficiency[] = []
 	let willGetStatTotal = 0
 	let willNeedMoneyTotal = 0
 	let goalStatInput: HTMLInputElement
 	let isSealPriceChanged = false
+	let listViewMode: ListViewMode = 'merged'
+	let calcMode: CalcMode = 'closest'
 	$: isPercentType = STATS_PERCENT_TYPE.includes(statTypeSelected)
 	$: calcNum = isPercentType ? 100 : 1
 	$: calcResultStatTotal =
@@ -52,48 +64,30 @@
 		mySeal.find(({ id }) => id === sealId)?.count || 0
 
 	$: getAllStepEffData = (seal: SealData): SealEfficiency[] => {
-		const result: SealEfficiency[] = []
 		const { final: price } = getMyAndFinalPrice(
 			data.sealPrices,
 			$mySealPrices,
 			seal.id
 		)
-		if (!price) return result
+		if (!price) return []
 		const mySealCount = getMySealCount($mySealCounts, seal.id)
-		const crrMyStep =
-			mySealCount !== 0 ? getCurrentStep(seal, mySealCount) : undefined
 		const nextSteps = getNextSteps(seal, mySealCount)
 
-		if (nextSteps.length === 0) return result
-		for (const nextStep of nextSteps) {
-			if (nextStep.sealCount === null) continue
-
-			const willGetStat =
-				seal.maxIncrease *
-				((nextStep.percent - (crrMyStep?.percent || 0)) / 100)
-			const needCount = nextStep.sealCount - mySealCount
-			const needPrice = price ? needCount * price : 0
-			const efficiency = +(willGetStat / needPrice) || 0
-
-			result.push({
-				id: seal.id,
-				price,
-				count: mySealCount,
-				willGetStat: Math.round(willGetStat),
-				needCount,
-				needPrice,
-				efficiency,
-				myStep: crrMyStep
-			})
-		}
-		return result
+		return getNextStepsEffData(seal, price, mySealCount, nextSteps)
 	}
 
 	const resetPrevResult = () => {
 		effDataListSorted = []
+		calcResultList = []
 		willGetStatTotal = 0
 		willNeedMoneyTotal = 0
 		isSealPriceChanged = false
+	}
+
+	const getCalcResultList = (_effDataListSorted: SealEfficiency[]) => {
+		return listViewMode === 'merged'
+			? getMergedResult(_effDataListSorted)
+			: _effDataListSorted
 	}
 
 	$: onSubmit = () => {
@@ -124,27 +118,19 @@
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
 		const needStatCount =
 			goalStat * calcNum - $myStats[statTypeSelected] * calcNum
-		let result: SealEfficiency[] = []
-		for (const effData of sortedEfficiencyData) {
-			if (willGetStatTotal >= needStatCount) break
-			const prevResult = result.find(({ id }) => id === effData.id)
-			if (prevResult) {
-				if (
-					prevResult.efficiency > effData.efficiency &&
-					prevResult.willGetStat > effData.willGetStat
-				)
-					continue
-				result = result.filter(({ id }) => id !== effData.id)
-				willGetStatTotal -= prevResult.willGetStat
-				willNeedMoneyTotal -= prevResult.needPrice
-			}
-			result.push(effData)
-			willGetStatTotal += effData.willGetStat
-			willNeedMoneyTotal += effData.needPrice
-		}
-		// 결과 리스트에 같은 씰이 여러개인 케이스 merge
-		// effDataListSorted = resultMerged(result)
-		effDataListSorted = result
+
+		const _effDataListSorted = getEfficiencyFilteredList(
+			sortedEfficiencyData,
+			needStatCount
+		)
+		effDataListSorted = _effDataListSorted
+		calcResultList =
+			listViewMode === 'merged'
+				? getMergedResult(effDataListSorted)
+				: effDataListSorted
+		const totals = calculateEfficiencyTotals(_effDataListSorted)
+		willGetStatTotal = totals.willGetStatTotal
+		willNeedMoneyTotal = totals.willNeedMoneyTotal
 	}
 
 	const onClickStatType = (statType: StatType) => {
@@ -174,8 +160,14 @@
 			},
 			$lang
 		)
-		const updateEffDataListSorted = _remove(effDataListSorted, effData.id)
+		const updateEffDataListSorted = effDataListSorted.filter(
+			(_effData) =>
+				!(
+					_effData.id === effData.id && _effData.needCount === effData.needCount
+				)
+		)
 		effDataListSorted = updateEffDataListSorted
+		calcResultList = getCalcResultList(updateEffDataListSorted)
 		willGetStatTotal -= effData.willGetStat
 		willNeedMoneyTotal -= effData.needPrice
 		toast.on(
@@ -189,7 +181,26 @@
 		}
 	}
 
+	$: getHasSameSealPrevStep = (effData: SealEfficiency) => {
+		const result = calcResultList.some(
+			(resultEff) =>
+				resultEff.id === effData.id &&
+				resultEff.nextStepIdx < effData.nextStepIdx
+		)
+		return result
+	}
+
+	$: onMergeSwitchChange = (e: CustomEvent) => {
+		const checked = e.detail
+		listViewMode = checked ? 'merged' : 'separated'
+	}
+
+	$: onChangeListViewMode = () => {
+		calcResultList = getCalcResultList(effDataListSorted)
+	}
+
 	$: $mySealPrices && onChangedSealPrice()
+	$: listViewMode && onChangeListViewMode()
 </script>
 
 <svelte:head>
@@ -231,37 +242,44 @@
 <section
 	class={cn(
 		'relative flex flex-1 flex-col overflow-hidden',
-		effDataListSorted.length > 0 &&
+		calcResultList.length > 0 &&
 			'land:pb-[calc(var(--result-h)+var(--result-b))]'
 	)}
 >
-	<ListReferText tagName="h2" class="flex items-center">
-		{statTypeSelected}
-		{#if goalStat}
-			<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-			{$_('seal.target_stat')}: {goalStat}
-		{:else}
-			<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-			<span class="text-gray-10">
-				<TextByLang
-					text="목표 수치를 입력해주세요"
-					engText="Please enter target values"
-				/>
-			</span>
-		{/if}
-		{#if effDataListSorted.length}
-			<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-			{$_('seal.result_count')}: {effDataListSorted.length}
-		{/if}
-	</ListReferText>
+	<div class="mb-2 flex items-center justify-between">
+		<ListReferText tagName="h2" mb={false} class="flex items-center">
+			{statTypeSelected}
+			{#if goalStat}
+				<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
+				{$_('seal.target_stat')}: {goalStat}
+			{:else}
+				<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
+				<span class="text-gray-10">
+					<TextByLang
+						text="목표 수치를 입력해주세요"
+						engText="Please enter target values"
+					/>
+				</span>
+			{/if}
+			{#if calcResultList.length}
+				<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
+				{$_('seal.result_count')}: {calcResultList.length}
+			{/if}
+		</ListReferText>
+		<Switch text={$_('seal.merge_same_seal')} on:change={onMergeSwitchChange} />
+	</div>
 	<SealList
-		seals={effDataListSorted}
+		seals={calcResultList}
 		let:seal={effData}
 		noDataText={$_('seal.no_data_text')}
 	>
 		{@const seal = data.seals.find(({ id }) => id === effData.id)}
+		{@const hasSameSealPrevStep = getHasSameSealPrevStep(effData)}
 		{#if seal}
 			<SealItem {seal} isCountEditable={false} sealPrices={data.sealPrices}>
+				<p class="absolute right-1 top-0 text-sub-md text-gray-8">
+					{effData.nextStepIdx + 1} 단계
+				</p>
 				<SealCalcData {effData} {isPercentType} />
 				<Button
 					type="button"
@@ -269,9 +287,16 @@
 					size="sm"
 					class="w-full"
 					on:click={() => addToMySeal(effData, seal)}
+					disabled={hasSameSealPrevStep}
 				>
-					<iconify-icon icon="mdi:check" width={15} height={15} />
-					{$_('seal.seal_registered')}
+					{#if hasSameSealPrevStep}
+						<span class="text-[0.9em] leading-[1.2]"
+							>{effData.nextStepIdx}단계 결과를 먼저 등록해 주세요</span
+						>
+					{:else}
+						<iconify-icon icon="mdi:check" width={15} height={15} />
+						{$_('seal.seal_registered')}
+					{/if}
 				</Button>
 			</SealItem>
 		{/if}
@@ -281,7 +306,7 @@
 	{/if}
 </section>
 
-{#if effDataListSorted.length > 0}
+{#if calcResultList.length > 0}
 	<CalcResult
 		crrMyStat={numberFormatter($myStats[statTypeSelected])}
 		needGetStat={numberFormatter(willGetStatTotal / calcNum)}

@@ -23,6 +23,7 @@ export type SealEfficiency = {
 	needCount: number
 	needPrice: number
 	willGetStat: number
+	nextStepIdx: number
 	myStep: SealStep | undefined
 }
 
@@ -30,3 +31,5 @@ export type SealExceptionStep = Record<
 	`${SealEfficiency['id']}`,
 	SealStepValues
 >
+
+export type CalcMode = 'efficiency' | 'closest'
