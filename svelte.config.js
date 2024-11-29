@@ -1,3 +1,5 @@
+import { preprocessMeltUI } from '@melt-ui/pp'
+import { sequence } from '@melt-ui/pp'
 import adapter from '@sveltejs/adapter-auto'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -6,7 +8,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+	preprocess: sequence([vitePreprocess(), preprocessMeltUI()]),
 
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
