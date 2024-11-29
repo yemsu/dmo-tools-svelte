@@ -27,8 +27,8 @@
 			<span>{price[currencyUnit].toLocaleString()}</span>
 			<span
 				class={cn(
-					'flex-center h-[12px] w-[12px] land:h-[1.4em] land:w-[1.4em] land:text-sub-md',
-					'border text-body-sm leading-none',
+					'flex-center h-[1.4em] w-[1.4em] text-sub-md',
+					'border leading-none',
 					styles[currencyUnit]
 				)}>{currencyUnit}</span
 			>

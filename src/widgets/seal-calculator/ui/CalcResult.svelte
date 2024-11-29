@@ -56,10 +56,10 @@
 				<p class="flex-center gap-2 text-body-md leading-none">
 					{#each values as value (value.title.kr)}
 						<span class="flex flex-col gap-[2px] whitespace-nowrap land:gap-1">
-							<span class="text-sub-lg text-gray-11 land:text-sub-md">
+							<span class="text-sub-md text-gray-11">
 								{value.title[$lang]}
 							</span>
-							<span class="text-sub-md font-bold text-point land:text-body-lg">
+							<span class="text-body-sm font-bold text-point land:text-body-lg">
 								{value.value}{resultUnit}
 							</span>
 						</span>
