@@ -36,7 +36,7 @@
 	<h2 class="ir">글로벌 네비게이션</h2>
 	<ul
 		class={cn(
-			'items-center whitespace-nowrap font-semibold ',
+			'items-center whitespace-nowrap font-light',
 			'port:grid-cols-max port:grid port:h-gnb-h port:p-1',
 			$lang === 'kr' ? 'port:grid-cols-3' : 'port:grid-cols-2'
 		)}
@@ -48,9 +48,11 @@
 					<a
 						href="{$langPath}{MENUS[menuType].path}"
 						class={cn(
-							'land:flex land:h-gnb-h land:items-center land:gap-2 land:px-2 land:transition-colors land:hover:font-bold land:hover:text-gray-12',
+							'rounded-md land:flex land:h-gnb-h land:items-center land:gap-2 land:px-2 land:transition-colors',
 							'port:flex-col-center port:h-full port:gap-[1px]',
-							isActive && 'font-bold text-gray-12'
+							isActive
+								? 'font-bold text-gray-12'
+								: 'land:hover:font-bold land:hover:text-gray-12'
 						)}
 					>
 						<span class={cn('flex-center land:h-[20px] land:w-[20px]')}>
