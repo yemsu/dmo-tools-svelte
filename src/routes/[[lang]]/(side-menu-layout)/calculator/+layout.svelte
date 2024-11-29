@@ -141,7 +141,7 @@
 			</Tabs>
 		</div>
 	</PageHeader>
-	<div class="flex flex-1 flex-col gap-2">
+	<section class="flex flex-1 flex-col gap-2">
 		<slot></slot>
-	</div>
+	</section>
 </section>
