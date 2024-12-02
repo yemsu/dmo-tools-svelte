@@ -10,23 +10,19 @@
 		type SealData,
 		type StatType
 	} from '$entities/seals'
-	import { AddToMySealButton } from '$features/update-my-seal'
-	import Button from '$shared/button/ui/Button.svelte'
 	import { ALERT, META } from '$shared/config'
-	import { Input } from '$shared/form'
-	import { Icon } from '$shared/icon'
 	import { cn, numberFormatter } from '$shared/lib'
-	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { TextByLang } from '$shared/text'
 	import { Switch } from '$shared/ui/switch'
 	import { getMyAndFinalPrice, statColorStyles } from '$widgets/my-seals'
 	import {
+		CalcReferText,
 		CalcResult,
+		CalcSearchForm,
 		getNextSteps,
+		ResultSealList,
 		RetryCalc,
-		SealCalcData,
 		sortByEffDataList,
 		type CalcMode,
 		type SealEfficiency
@@ -37,7 +33,6 @@
 		getMergedResult,
 		getNextStepsEffData
 	} from '$widgets/seal-calculator/lib/calculate'
-	import { SealItem, SealList } from '$widgets/seal-list'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
 
@@ -89,12 +84,13 @@
 			: _effDataListSorted
 	}
 
-	$: onSubmit = () => {
-		if (goalStat === '') {
+	$: onSubmit = (_goalStat: number | '') => {
+		goalStat = _goalStat
+		if (_goalStat === '') {
 			alert(ALERT.INPUT_TARGET_VALUE[$lang])
 			return
 		}
-		if (goalStat <= $myStats[statTypeSelected]) {
+		if (_goalStat <= $myStats[statTypeSelected]) {
 			alert(ALERT.WRONG_TARGET_VALUE[$lang])
 			return
 		}
@@ -116,7 +112,7 @@
 		const sortedEfficiencyData = sortByEffDataList(allSealsEffData)
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
 		const needStatCount =
-			goalStat * calcNum - $myStats[statTypeSelected] * calcNum
+			_goalStat * calcNum - $myStats[statTypeSelected] * calcNum
 
 		const _effDataListSorted = getEfficiencyFilteredList(
 			sortedEfficiencyData,
@@ -192,22 +188,7 @@
 			</Tab>
 		{/each}
 	</Tabs>
-	<form
-		on:submit|preventDefault={onSubmit}
-		class="flex items-center gap-1.5 port:w-full land:w-[30%] land:shrink-0"
-	>
-		<Input
-			bind:inputElement={goalStatInput}
-			type="number"
-			class="flex-1"
-			placeholder={$_('seal.target_value') +
-				(STATS_PERCENT_TYPE.includes(statTypeSelected) ? ` (%)` : '')}
-			bind:value={goalStat}
-		/>
-		<Button variant="blue" size="lg" class="font-semibold">
-			{$_('seal.view_result')}
-		</Button>
-	</form>
+	<CalcSearchForm {statTypeSelected} on:submit={(e) => onSubmit(e.detail)} />
 </div>
 <section
 	class={cn(
@@ -217,50 +198,18 @@
 	)}
 >
 	<div class="mb-2 flex items-center justify-between">
-		<ListReferText tagName="h2" mb={false} class="flex items-center">
-			{statTypeSelected}
-			{#if goalStat}
-				<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-				{$_('seal.target_stat')}: {goalStat}
-			{:else}
-				<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-				<span class="text-gray-10">
-					<TextByLang
-						text="목표 수치를 입력해주세요"
-						engText="Please enter target values"
-					/>
-				</span>
-			{/if}
-			{#if calcResultList.length}
-				<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-				{$_('seal.result_count')}: {calcResultList.length}
-			{/if}
-		</ListReferText>
+		<CalcReferText {statTypeSelected} {goalStat} {calcResultList} />
 		<Switch text={$_('seal.merge_same_seal')} on:change={onMergeSwitchChange} />
 	</div>
-	<SealList
-		seals={calcResultList}
-		let:seal={effData}
-		noDataText={$_('seal.no_data_text')}
-	>
-		{@const seal = data.seals.find(({ id }) => id === effData.id)}
-		{#if seal}
-			<SealItem {seal} isCountEditable={false} sealPrices={data.sealPrices}>
-				<p class="absolute right-1 top-0 text-sub-md text-gray-8">
-					{effData.nextStepIdx + 1} 단계
-				</p>
-				<SealCalcData {effData} {isPercentType} />
-				<AddToMySealButton
-					{effData}
-					{seal}
-					{calcResultList}
-					updateResult={() => afterAddToMySeal(effData)}
-				/>
-			</SealItem>
-		{/if}
-	</SealList>
+	<ResultSealList
+		seals={data.seals}
+		sealPrices={data.sealPrices}
+		{calcResultList}
+		{isPercentType}
+		{afterAddToMySeal}
+	/>
 	{#if isSealPriceChanged}
-		<RetryCalc on:click={onSubmit} />
+		<RetryCalc on:click={() => onSubmit(goalStat)} />
 	{/if}
 </section>
 
