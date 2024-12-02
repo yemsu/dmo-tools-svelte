@@ -1,7 +1,7 @@
 import type {
 	SEAL_GRADES,
 	SEAL_MASTER_COUNT_TYPE
-} from '$widgets/seal-calculator/config'
+} from '$features/calculate-seal-efficiency'
 
 export type SealMaterCount = (typeof SEAL_MASTER_COUNT_TYPE)[number]
 
@@ -31,5 +31,5 @@ export type SealExceptionStep = Record<
 	`${SealEfficiency['id']}`,
 	SealStepValues
 >
-
+export type ListViewMode = 'merged' | 'separated'
 export type CalcMode = 'efficiency' | 'closest'

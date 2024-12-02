@@ -8,7 +8,8 @@
 	} from '$entities/seals'
 	import { CONFIRM } from '$shared/config'
 	import { lang } from '$shared/model'
-	import { getMySealData, MySealGrade } from '$widgets/my-seals'
+	import { MySealGrade } from '$widgets/my-seals'
+	import { getMySealData } from '$features/update-my-seal'
 	import { SealItem, SealList } from '$widgets/seal-list'
 
 	export let seals: SealData[]

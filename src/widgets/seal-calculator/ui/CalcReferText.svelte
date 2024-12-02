@@ -1,21 +1,16 @@
 <script lang="ts">
-	import { type StatType } from '$entities/seals'
+	import { calcStore } from '$features/calculate-seal-efficiency'
 	import { Icon } from '$shared/icon'
 	import { ListReferText } from '$shared/list'
 	import { TextByLang } from '$shared/text'
-	import { type SealEfficiency } from '$widgets/seal-calculator'
 	import { _ } from 'svelte-i18n'
-
-	export let statTypeSelected: StatType
-	export let goalStat: number | ''
-	export let calcResultList: SealEfficiency[]
 </script>
 
 <ListReferText tagName="h2" mb={false} class="flex items-center">
-	{statTypeSelected}
-	{#if goalStat}
+	{$calcStore.statTypeSelected}
+	{#if $calcStore.goalStat}
 		<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-		{$_('seal.target_stat')}: {goalStat}
+		{$_('seal.target_stat')}: {$calcStore.goalStat}
 	{:else}
 		<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
 		<span class="text-gray-10">
@@ -25,8 +20,8 @@
 			/>
 		</span>
 	{/if}
-	{#if calcResultList.length}
+	{#if $calcStore.calcResultList.length}
 		<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-		{$_('seal.result_count')}: {calcResultList.length}
+		{$_('seal.result_count')}: {$calcStore.calcResultList.length}
 	{/if}
 </ListReferText>

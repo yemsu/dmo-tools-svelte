@@ -8,7 +8,7 @@
 	import { cn } from '$shared/lib'
 	import { lang, langPath } from '$shared/model'
 	import { toast } from '$shared/toast'
-	import { getMyAndFinalPrice } from '$widgets/my-seals'
+	import { getMyAndFinalPrice } from '$features/update-my-seal'
 	import SealItemPriceText from '$widgets/seal-list/ui/SealItemPriceText.svelte'
 	import { _ } from 'svelte-i18n'
 

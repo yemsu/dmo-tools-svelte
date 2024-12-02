@@ -9,16 +9,18 @@
 	import { CONFIRM, TOAST } from '$shared/config'
 	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
-	import { type SealEfficiency } from '$widgets/seal-calculator'
+	import {
+		calcStore,
+		type SealEfficiency
+	} from '$features/calculate-seal-efficiency'
 	import { _ } from 'svelte-i18n'
 
 	export let effData: SealEfficiency
 	export let seal: SealData
-	export let calcResultList: SealEfficiency[]
 	export let updateResult: () => void
 
 	$: getHasSameSealPrevStep = (effData: SealEfficiency) => {
-		const result = calcResultList.some(
+		const result = $calcStore.calcResultList.some(
 			(resultEff) =>
 				resultEff.id === effData.id &&
 				resultEff.nextStepIdx < effData.nextStepIdx

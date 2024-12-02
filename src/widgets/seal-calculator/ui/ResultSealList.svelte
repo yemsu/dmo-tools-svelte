@@ -1,19 +1,33 @@
 <script lang="ts">
 	import { type SealData, type SealPrice } from '$entities/seals'
 	import { AddToMySealButton } from '$features/update-my-seal'
-	import { SealCalcData, type SealEfficiency } from '$widgets/seal-calculator'
+	import { SealCalcData } from '$widgets/seal-calculator'
+	import {
+		calcStore,
+		type SealEfficiency
+	} from '$features/calculate-seal-efficiency'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { _ } from 'svelte-i18n'
 
 	export let seals: SealData[]
 	export let sealPrices: SealPrice[]
-	export let calcResultList: SealEfficiency[]
 	export let isPercentType: boolean
-	export let afterAddToMySeal: (effData: SealEfficiency) => void
+
+	$: afterAddToMySeal = (effData: SealEfficiency) => {
+		const updateEffDataListSorted = $calcStore.effDataListSorted.filter(
+			(_effData) =>
+				!(
+					_effData.id === effData.id && _effData.needCount === effData.needCount
+				)
+		)
+		calcStore.setEffDataListSorted(updateEffDataListSorted)
+		calcStore.setCalcResultList(updateEffDataListSorted)
+		calcStore.subtractTotal(effData)
+	}
 </script>
 
 <SealList
-	seals={calcResultList}
+	seals={$calcStore.calcResultList}
 	let:seal={effData}
 	noDataText={$_('seal.no_data_text')}
 >
@@ -27,7 +41,6 @@
 			<AddToMySealButton
 				{effData}
 				{seal}
-				{calcResultList}
 				updateResult={() => afterAddToMySeal(effData)}
 			/>
 		</SealItem>

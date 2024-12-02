@@ -1,11 +1,11 @@
 import type { SealData } from '$entities/seals'
-import { _objKeys, objectBy } from '$shared/lib'
 import {
 	SEAL_COUNT_STEPS_BY_MASTER,
 	SEAL_EXCEPTION_PERCENT,
 	SEAL_GRADES,
 	SEAL_PERCENT_STEPS
-} from '$widgets/seal-calculator/config'
+} from '$features/calculate-seal-efficiency'
+import { _objKeys, objectBy } from '$shared/lib'
 import type { SealEfficiency, SealMaterCount, SealStep } from '../types'
 
 export const getSealPercentConfig = (sealId: number, stepIndex: number) => {

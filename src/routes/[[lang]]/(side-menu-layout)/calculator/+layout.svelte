@@ -23,8 +23,8 @@
 	import Tabs from '$shared/tabs/ui/Tabs.svelte'
 	import { PageHeader } from '$shared/ui/page-header'
 	import { CharacterTabs } from '$widgets/character-tabs'
-	import { getMySealData } from '$widgets/my-seals'
-	import { getCurrentStep } from '$widgets/seal-calculator'
+	import { getMySealData } from '$features/update-my-seal'
+	import { getCurrentStep } from '$features/calculate-seal-efficiency'
 	import type { PageData } from './$types'
 
 	export let data: PageData
