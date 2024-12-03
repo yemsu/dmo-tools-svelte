@@ -1,12 +1,26 @@
-import type { SealData } from '$entities/seals'
+import {
+	STATS,
+	STATS_PERCENT_TYPE,
+	type MySealCount,
+	type SealData,
+	type Stats,
+	type StatType
+} from '$entities/seals'
 import {
 	SEAL_COUNT_STEPS_BY_MASTER,
 	SEAL_EXCEPTION_PERCENT,
 	SEAL_GRADES,
 	SEAL_PERCENT_STEPS
 } from '$features/calculate-seal-efficiency'
+import { getMySealData } from '$features/update-my-seal'
 import { _objKeys, objectBy } from '$shared/lib'
-import type { SealEfficiency, SealMaterCount, SealStep } from '../types'
+import type {
+	CalcMode,
+	CalcTotalData,
+	SealEfficiency,
+	SealMaterCount,
+	SealStep
+} from '../types'
 
 export const getSealPercentConfig = (sealId: number, stepIndex: number) => {
 	const exceptionSealIds = _objKeys(SEAL_EXCEPTION_PERCENT)
@@ -71,6 +85,49 @@ export const getPrevStep = (seal: SealData, crrStepSealCount: number) => {
 	return step
 }
 
+const sumMyStatBySealCount = (
+	seals: SealData[],
+	statType: StatType,
+	mySealCounts: MySealCount[]
+) => {
+	if (mySealCounts.length === 0) return
+	const mySealsByStatType = objectBy(
+		mySealCounts,
+		({ id }) => getMySealData(seals, id).statType
+	)
+	const sealsByStatType = mySealsByStatType[statType]
+	if (!sealsByStatType || sealsByStatType.length === 0) {
+		return 0
+	}
+	let myStat = 0
+	sealsByStatType.forEach(({ id, count }) => {
+		const seal = getMySealData(seals, id)
+		const crrStat = getCurrentStep(seal, count)
+		const maxIncrease = seal.maxIncrease
+		myStat += maxIncrease * (crrStat.percent / 100)
+	})
+	if (STATS_PERCENT_TYPE.includes(statType)) {
+		myStat = myStat / 100
+	}
+	return myStat
+}
+
+export const getMyAllStats = (
+	seals: SealData[],
+	mySealCounts: MySealCount[]
+) => {
+	const newStats = STATS.reduce((result, { type }) => {
+		const statTypeCalc =
+			mySealCounts.length === 0
+				? 0
+				: sumMyStatBySealCount(seals, type, mySealCounts)
+		if (statTypeCalc === undefined) return result
+		result[type] = statTypeCalc
+		return result
+	}, {} as Stats)
+	return newStats
+}
+
 export const getNextStepsEffData = (
 	seal: SealData,
 	price: number,
@@ -118,6 +175,28 @@ export const sortByEffDataList = (effDataList: SealEfficiency[]) => {
 	})
 }
 
+export const getEffDataListSorted = (
+	seals: SealData[],
+	statTypeSelected: StatType,
+	getAllStepEffData: (seal: SealData) => SealEfficiency[]
+) => {
+	// 효율 리스트 뽑기
+	const allSealsEffData: SealEfficiency[] = []
+	const statSeals = seals.filter(
+		({ statType }) => statType === statTypeSelected
+	)
+	for (const seal of statSeals) {
+		// 각 씰의 다음 단계들의(내 보유 개수에 따라) 효율 데이터 계산하여 반환
+		const calcDataStep2 = getAllStepEffData(seal)
+		// 효율 데이터 리스트업
+		if (calcDataStep2.length === 0) continue
+		allSealsEffData.push(...calcDataStep2)
+	}
+	// 효율별로 소팅
+	const effDataListSorted = sortByEffDataList(allSealsEffData)
+	return effDataListSorted
+}
+
 export const getMergedResult = (effDataList: SealEfficiency[]) => {
 	const result: SealEfficiency[] = []
 	const effDataListBySealId = objectBy(effDataList, (data) => data.id + '')
@@ -141,34 +220,32 @@ export const getMergedResult = (effDataList: SealEfficiency[]) => {
 	return sortByEffDataList(result)
 }
 
-export const getEfficiencyFilteredList = (
-	sortedEfficiencyData: SealEfficiency[],
+export const getEffListForNeedStat = (
+	effListSorted: SealEfficiency[],
 	needStatCount: number
 ): SealEfficiency[] => {
-	const effDataListSorted: SealEfficiency[] = []
+	const effListForNeedStat: SealEfficiency[] = []
 	let willGetStatTotal = 0
 
-	for (const effData of sortedEfficiencyData) {
+	for (const effData of effListSorted) {
 		if (willGetStatTotal >= needStatCount) break
 
-		effDataListSorted.push(effData)
+		effListForNeedStat.push(effData)
 		willGetStatTotal += effData.willGetStat
 	}
 
-	return effDataListSorted
+	return effListForNeedStat
 }
 
-export const calculateEfficiencyTotals = (
-	filteredList: SealEfficiency[]
-): {
-	willNeedMoneyTotal: number
-	willGetStatTotal: number
-} => {
+export const getCalcResultTotal = (
+	filteredList: SealEfficiency[],
+	percentNum: number
+): CalcTotalData[CalcMode] => {
 	return filteredList.reduce(
 		(acc, curr) => ({
-			willNeedMoneyTotal: acc.willNeedMoneyTotal + curr.needPrice,
-			willGetStatTotal: acc.willGetStatTotal + curr.willGetStat
+			willNeedMoney: acc.willNeedMoney + curr.needPrice,
+			willGetStat: (acc.willGetStat + curr.willGetStat) / percentNum
 		}),
-		{ willNeedMoneyTotal: 0, willGetStatTotal: 0 }
+		{ willNeedMoney: 0, willGetStat: 0 }
 	)
 }

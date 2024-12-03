@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { calcStore } from '$features/calculate-seal-efficiency'
+	import { calc } from '$features/calculate-seal-efficiency'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { TextByLang } from '$shared/text'
@@ -70,7 +70,9 @@
 				</p>
 			</div>
 			<p class="flex-center w-full bg-background p-1 land:w-[40%] land:p-4">
-				<StatBarTotalPrice totalPrice={$calcStore.willNeedMoneyTotal} />
+				<StatBarTotalPrice
+					totalPrice={$calc.resultTotal[$calc.calcMode].willNeedMoney}
+				/>
 			</p>
 		</div>
 	</section>

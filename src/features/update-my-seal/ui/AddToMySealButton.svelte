@@ -5,12 +5,12 @@
 		type MySealCount,
 		type SealData
 	} from '$entities/seals'
-	import Button from '$shared/button/ui/Button.svelte'
+	import { Button } from '$shared/button'
 	import { CONFIRM, TOAST } from '$shared/config'
 	import { lang } from '$shared/model'
 	import { toast } from '$shared/toast'
 	import {
-		calcStore,
+		calc,
 		type SealEfficiency
 	} from '$features/calculate-seal-efficiency'
 	import { _ } from 'svelte-i18n'
@@ -18,9 +18,10 @@
 	export let effData: SealEfficiency
 	export let seal: SealData
 	export let updateResult: () => void
+	$: crrCalcResults = $calc.calcResults[$calc.calcMode][$calc.viewMode]
 
 	$: getHasSameSealPrevStep = (effData: SealEfficiency) => {
-		const result = $calcStore.calcResultList.some(
+		const result = crrCalcResults.some(
 			(resultEff) =>
 				resultEff.id === effData.id &&
 				resultEff.nextStepIdx < effData.nextStepIdx

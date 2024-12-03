@@ -15,18 +15,23 @@ export {
 	getMySealStat,
 	getNextSteps,
 	sortByEffDataList,
-	calculateEfficiencyTotals,
-	getEfficiencyFilteredList,
+	getCalcResultTotal,
+	getEffListForNeedStat,
 	getMergedResult,
-	getNextStepsEffData
+	getNextStepsEffData,
+	getEffDataListSorted,
+	getMyAllStats
 } from './lib/calculate'
+export { createClosestResultGetter } from './lib/calculateClosest'
 export type {
 	SealEfficiency,
 	SealExceptionStep,
 	SealMaterCount,
 	SealStep,
 	SealStepsByMaster,
-	CalcMode
+	CalcMode,
+	CalcResultList,
+	CalcTotalData
 } from './types'
 
-export { calcStore } from '$features/calculate-seal-efficiency/model/calculator'
+export { calc } from '$features/calculate-seal-efficiency/model/calculator'

@@ -1,10 +1,7 @@
 <script lang="ts">
 	import { STATS, STATS_PERCENT_TYPE, type StatType } from '$entities/seals'
-	import {
-		calcStore,
-		statColorStyles
-	} from '$features/calculate-seal-efficiency'
-	import Button from '$shared/button/ui/Button.svelte'
+	import { calc, statColorStyles } from '$features/calculate-seal-efficiency'
+	import { Button } from '$shared/button'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
@@ -12,17 +9,17 @@
 	import { createEventDispatcher } from 'svelte'
 	import { _ } from 'svelte-i18n'
 
-	let goalStat: number | '' = ''
+	let goalStat: number | null = $calc.goalStat
 	let goalStatInput: HTMLInputElement
 	$: isKr = $lang === 'kr'
 
-	const dispatch = createEventDispatcher<{ submit: number | '' }>()
+	const dispatch = createEventDispatcher<{ submit: number | null }>()
 
 	const onClickStatType = (statType: StatType) => {
-		calcStore.selectStatType(statType)
-		calcStore.reset()
+		calc.selectStatType(statType)
+		calc.reset()
 		setTimeout(() => {
-			goalStat = ''
+			goalStat = null
 			goalStatInput.focus()
 		}, 60)
 	}
@@ -33,7 +30,7 @@
 		{#each STATS as stat (stat.type)}
 			<Tab
 				class={statColorStyles[stat.type]}
-				isActive={$calcStore.statTypeSelected === stat.type}
+				isActive={$calc.statTypeSelected === stat.type}
 				on:click={() => onClickStatType(stat.type)}
 				title={isKr ? stat.name : stat.engName}
 			>
@@ -50,9 +47,7 @@
 			type="number"
 			class="flex-1"
 			placeholder={$_('seal.target_value') +
-				(STATS_PERCENT_TYPE.includes($calcStore.statTypeSelected)
-					? ` (%)`
-					: '')}
+				(STATS_PERCENT_TYPE.includes($calc.statTypeSelected) ? ` (%)` : '')}
 			bind:value={goalStat}
 		/>
 		<Button variant="blue" size="lg" class="font-semibold">

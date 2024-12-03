@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { currentCharacterId } from '$entities/characters'
 	import { MENUS } from '$entities/menus'
 	import {
 		mySealCounts,
@@ -9,13 +10,13 @@
 		type SealData
 	} from '$entities/seals'
 	import {
-		calcStore,
+		calc,
 		CalcTargetForm,
-		calculateEfficiencyTotals,
-		getEfficiencyFilteredList,
+		createClosestResultGetter,
+		getEffDataListSorted,
+		getEffListForNeedStat,
 		getNextSteps,
 		getNextStepsEffData,
-		sortByEffDataList,
 		type SealEfficiency
 	} from '$features/calculate-seal-efficiency'
 	import { getMyAndFinalPrice } from '$features/update-my-seal'
@@ -34,12 +35,14 @@
 
 	export let data: PageData
 
-	$: isPercentType = STATS_PERCENT_TYPE.includes($calcStore.statTypeSelected)
-	$: calcNum = isPercentType ? 100 : 1
+	$: isPercentType = STATS_PERCENT_TYPE.includes($calc.statTypeSelected)
+	$: percentNum = isPercentType ? 100 : 1
+	$: crrWillGetStatTotal = $calc.resultTotal[$calc.calcMode].willGetStat
 	$: calcResultStatTotal =
-		($myStats[$calcStore.statTypeSelected] * calcNum +
-			$calcStore.willGetStatTotal) /
-		calcNum
+		($myStats[$calc.statTypeSelected] * percentNum + crrWillGetStatTotal) /
+		percentNum
+	$: crrCalcResults = $calc.calcResults[$calc.calcMode][$calc.viewMode]
+
 	const getMySealCount = (mySeal: MySealCount[], sealId: number) =>
 		mySeal.find(({ id }) => id === sealId)?.count || 0
 
@@ -56,58 +59,60 @@
 		return getNextStepsEffData(seal, price, mySealCount, nextSteps)
 	}
 
-	$: onSubmit = (_goalStat: number | '') => {
-		calcStore.setGoalStat(_goalStat)
-		if (_goalStat === '') {
+	$: onSubmit = (newGoalStat: number | null) => {
+		calc.setGoalStat(newGoalStat)
+		if (!newGoalStat) {
 			alert(ALERT.INPUT_TARGET_VALUE[$lang])
 			return
 		}
-		if (_goalStat <= $myStats[$calcStore.statTypeSelected]) {
+		if (newGoalStat <= $myStats[$calc.statTypeSelected]) {
 			alert(ALERT.WRONG_TARGET_VALUE[$lang])
 			return
 		}
-		calcStore.reset()
-		const statSeals = data.seals.filter(
-			({ statType }) => statType === $calcStore.statTypeSelected
-		)
-
-		// 효율 리스트 뽑기
-		const allSealsEffData: SealEfficiency[] = []
-		for (const seal of statSeals) {
-			// 각 씰의 다음 단계들의(내 보유 개수에 따라) 효율 데이터 계산하여 반환
-			const calcDataStep2 = getAllStepEffData(seal)
-			// 효율 데이터 리스트업
-			if (calcDataStep2.length === 0) continue
-			allSealsEffData.push(...calcDataStep2)
-		}
+		calc.reset()
 		// 효율별로 소팅
-		const sortedEfficiencyData = sortByEffDataList(allSealsEffData)
+		const effDataListSorted = getEffDataListSorted(
+			data.seals,
+			$calc.statTypeSelected,
+			getAllStepEffData
+		)
+		calc.setEffDataListSorted(effDataListSorted)
 		// 입력한 목표 수치에 도달할때까지 결과 리스트업 + 총 비용/얻게될 총 스탯 계산
 		const needStatCount =
-			_goalStat * calcNum - $myStats[$calcStore.statTypeSelected] * calcNum
+			newGoalStat * percentNum - $myStats[$calc.statTypeSelected] * percentNum
 
-		const _effDataListSorted = getEfficiencyFilteredList(
-			sortedEfficiencyData,
+		const effListForNeedStat = getEffListForNeedStat(
+			effDataListSorted,
 			needStatCount
 		)
-		calcStore.setEffDataListSorted(_effDataListSorted)
-		calcStore.setCalcResultList(_effDataListSorted)
-		const totals = calculateEfficiencyTotals(_effDataListSorted)
-		calcStore.setTotal(totals)
+		calc.setCalcResultList(
+			effListForNeedStat,
+			percentNum,
+			createClosestResultGetter($myStats[$calc.statTypeSelected])
+		)
 	}
 
 	const onChangedSealPrice = () => {
-		if ($calcStore.effDataListSorted.length > 0) {
-			calcStore.setIsSealPriceChanged(true)
+		if (crrCalcResults.length > 0) {
+			calc.setIsSealPriceChanged(true)
 		}
 	}
 
-	$: onMergeSwitchChange = (e: CustomEvent) => {
-		calcStore.toggleListViewMode()
-		calcStore.setCalcResultList($calcStore.effDataListSorted)
+	const onMergeSwitchChange = (e: CustomEvent) => {
+		calc.toggleViewMode(e.detail)
+	}
+
+	const onClosestSwitchChange = (e: CustomEvent) => {
+		calc.toggleCalcMode(e.detail)
+	}
+
+	const onChangeCharacter = () => {
+		if ($calc.calcResults.efficiency.separated.length === 0) return
+		calc.reset()
 	}
 
 	$: $mySealPrices && onChangedSealPrice()
+	$: $currentCharacterId && onChangeCharacter()
 </script>
 
 <svelte:head>
@@ -121,28 +126,41 @@
 <section
 	class={cn(
 		'relative flex flex-1 flex-col overflow-hidden',
-		$calcStore.calcResultList.length > 0 &&
+		crrCalcResults.length > 0 &&
 			'land:pb-[calc(var(--result-h)+var(--result-b))]'
 	)}
 >
 	<div class="mb-2 flex items-center justify-between">
 		<CalcReferText />
-		<Switch text={$_('seal.merge_same_seal')} on:change={onMergeSwitchChange} />
+		<div class="flex gap-4">
+			<Switch
+				id="merge-switch"
+				text={$_('seal.merge_same_seal')}
+				defaultChecked={$calc.viewMode === 'merged'}
+				on:change={onMergeSwitchChange}
+			/>
+			<Switch
+				id="closest-switch"
+				text={$_('seal.closest_result')}
+				defaultChecked={$calc.calcMode === 'closest'}
+				on:change={onClosestSwitchChange}
+			/>
+		</div>
 	</div>
 	<ResultSealList
 		seals={data.seals}
 		sealPrices={data.sealPrices}
 		{isPercentType}
+		{percentNum}
 	/>
-	{#if $calcStore.isSealPriceChanged}
-		<RetryCalc on:click={() => onSubmit($calcStore.goalStat)} />
+	{#if $calc.isSealPriceChanged}
+		<RetryCalc on:click={() => onSubmit($calc.goalStat)} />
 	{/if}
 </section>
-
-{#if $calcStore.calcResultList.length > 0}
+{#if crrCalcResults.length > 0}
 	<CalcResult
-		crrMyStat={numberFormatter($myStats[$calcStore.statTypeSelected])}
-		needGetStat={numberFormatter($calcStore.willGetStatTotal / calcNum)}
+		crrMyStat={numberFormatter($myStats[$calc.statTypeSelected])}
+		needGetStat={numberFormatter(crrWillGetStatTotal)}
 		resultStat={numberFormatter(calcResultStatTotal, 5)}
 		{isPercentType}
 	/>

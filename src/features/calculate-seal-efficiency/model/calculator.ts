@@ -1,16 +1,24 @@
 import { STATS, type StatType } from '$entities/seals'
-import { getMergedResult } from '$features/calculate-seal-efficiency'
-import type { CalcMode, ListViewMode, SealEfficiency } from '../types'
+import {
+	getCalcResultTotal,
+	getMergedResult
+} from '$features/calculate-seal-efficiency'
+import type {
+	CalcMode,
+	ViewMode,
+	SealEfficiency,
+	CalcResultList,
+	CalcTotalData
+} from '../types'
 import { writable } from 'svelte/store'
 
 type CalculatorStore = {
 	statTypeSelected: StatType
-	goalStat: number | ''
+	goalStat: number | null
 	effDataListSorted: SealEfficiency[]
-	calcResultList: SealEfficiency[]
-	willGetStatTotal: number
-	willNeedMoneyTotal: number
-	listViewMode: ListViewMode
+	calcResults: CalcResultList
+	resultTotal: CalcTotalData
+	viewMode: ViewMode
 	calcMode: CalcMode
 	isSealPriceChanged: boolean
 }
@@ -18,13 +26,30 @@ type CalculatorStore = {
 const createCalculatorStore = () => {
 	const { subscribe, update } = writable<CalculatorStore>({
 		statTypeSelected: STATS[0].type,
-		goalStat: '',
+		goalStat: null,
 		effDataListSorted: [],
-		calcResultList: [],
-		willGetStatTotal: 0,
-		willNeedMoneyTotal: 0,
-		listViewMode: 'merged',
-		calcMode: 'closest',
+		calcResults: {
+			efficiency: {
+				merged: [],
+				separated: []
+			},
+			closest: {
+				merged: [],
+				separated: []
+			}
+		},
+		resultTotal: {
+			efficiency: {
+				willGetStat: 0,
+				willNeedMoney: 0
+			},
+			closest: {
+				willGetStat: 0,
+				willNeedMoney: 0
+			}
+		},
+		viewMode: 'merged',
+		calcMode: 'efficiency',
 		isSealPriceChanged: false
 	})
 
@@ -36,13 +61,19 @@ const createCalculatorStore = () => {
 				statTypeSelected
 			}))
 		},
-		setGoalStat: (goalStat: number | '') => {
+		setGoalStat: (goalStat: number | null) => {
 			update((prev) => ({ ...prev, goalStat }))
 		},
-		toggleListViewMode: () => {
+		toggleViewMode: (isToggleOn: true) => {
 			update((prev) => ({
 				...prev,
-				listViewMode: prev.listViewMode === 'merged' ? 'separated' : 'merged'
+				viewMode: isToggleOn ? 'merged' : 'separated'
+			}))
+		},
+		toggleCalcMode: (isToggleOn: true) => {
+			update((prev) => ({
+				...prev,
+				calcMode: isToggleOn ? 'closest' : 'efficiency'
 			}))
 		},
 		setEffDataListSorted: (effDataListSorted: SealEfficiency[]) => {
@@ -51,34 +82,86 @@ const createCalculatorStore = () => {
 				effDataListSorted
 			}))
 		},
-		setCalcResultList: (effDataListSorted: SealEfficiency[]) => {
-			update((prev) => ({
-				...prev,
-				calcResultList:
-					prev.listViewMode === 'merged'
-						? getMergedResult(effDataListSorted)
-						: effDataListSorted
-			}))
+		setCalcResultList: (
+			effListForNeedStat: SealEfficiency[],
+			percentNum: number,
+			getCalcResultClosest: (
+				effDataListSorted: SealEfficiency[],
+				goalStat: number,
+				effResult: SealEfficiency[],
+				effWillGetStat: number
+			) => SealEfficiency[]
+		) => {
+			const getNewResult = (
+				calcMode: CalcMode,
+				effListForNeedStat: SealEfficiency[]
+			) => {
+				return (prev: CalculatorStore) => {
+					if (calcMode === 'closest') {
+						effListForNeedStat = getCalcResultClosest(
+							prev.effDataListSorted,
+							prev.goalStat || 0,
+							prev.calcResults.efficiency.separated,
+							prev.resultTotal.efficiency.willGetStat
+						)
+					}
+					return {
+						...prev,
+						calcResults: {
+							...prev.calcResults,
+							[calcMode]: {
+								merged: getMergedResult(effListForNeedStat),
+								separated: effListForNeedStat
+							}
+						},
+						resultTotal: {
+							...prev.resultTotal,
+							[calcMode]: getCalcResultTotal(effListForNeedStat, percentNum)
+						}
+					}
+				}
+			}
+			update(getNewResult('efficiency', effListForNeedStat))
+			setTimeout(() => {
+				update(getNewResult('closest', effListForNeedStat))
+			}, 1000)
 		},
-		setTotal: ({
-			willGetStatTotal,
-			willNeedMoneyTotal
-		}: {
-			willGetStatTotal: number
-			willNeedMoneyTotal: number
-		}) => {
-			update((prev) => ({
-				...prev,
-				willGetStatTotal,
-				willNeedMoneyTotal
-			}))
-		},
-		subtractTotal: ({ willGetStat, needPrice }: SealEfficiency) => {
-			update((prev) => ({
-				...prev,
-				willGetStatTotal: prev.willGetStatTotal - willGetStat,
-				willNeedMoneyTotal: prev.willNeedMoneyTotal - needPrice
-			}))
+
+		subtractResultTotal: (effData: SealEfficiency, percentNum: number) => {
+			const calcModes: CalcMode[] = ['efficiency', 'closest']
+			calcModes.forEach((calcMode) => {
+				update((prev) => {
+					const prevResultData = prev.calcResults[calcMode].separated
+					const newEffResults = prevResultData.filter(
+						(item) =>
+							!(item.id === effData.id && item.needCount === effData.needCount)
+					)
+					if (newEffResults.length === prevResultData.length) {
+						return prev
+					}
+					const prevResultTotal = prev.resultTotal[prev.calcMode]
+
+					return {
+						...prev,
+						calcResults: {
+							...prev.calcResults,
+							[calcMode]: {
+								separated: newEffResults,
+								merged: getMergedResult(newEffResults)
+							}
+						},
+						resultTotal: {
+							...prev.resultTotal,
+							[calcMode]: {
+								willGetStat:
+									(prevResultTotal.willGetStat - effData.willGetStat) /
+									percentNum,
+								willNeedMoney: prevResultTotal.willNeedMoney - effData.needPrice
+							}
+						}
+					}
+				})
+			})
 		},
 		setIsSealPriceChanged: (isSealPriceChanged: boolean) => {
 			update((prev) => ({ ...prev, isSealPriceChanged }))
@@ -87,13 +170,30 @@ const createCalculatorStore = () => {
 			update((prev) => ({
 				...prev,
 				effDataListSorted: [],
-				calcResultList: [],
-				willGetStatTotal: 0,
-				willNeedMoneyTotal: 0,
+				calcResults: {
+					efficiency: {
+						merged: [],
+						separated: []
+					},
+					closest: {
+						merged: [],
+						separated: []
+					}
+				},
+				resultTotal: {
+					efficiency: {
+						willGetStat: 0,
+						willNeedMoney: 0
+					},
+					closest: {
+						willGetStat: 0,
+						willNeedMoney: 0
+					}
+				},
 				isSealPriceChanged: false
 			}))
 		}
 	}
 }
 
-export const calcStore = createCalculatorStore()
+export const calc = createCalculatorStore()

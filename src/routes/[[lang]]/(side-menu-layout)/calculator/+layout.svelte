@@ -1,58 +1,22 @@
 <script lang="ts">
-	import './calculator.css'
 	import { page } from '$app/stores'
 	import {
 		currentCharacterId,
 		currentCharacters,
 		getCharacters
 	} from '$entities/characters'
-	import {
-		mySealCounts,
-		mySealPrices,
-		myStats,
-		STATS,
-		STATS_PERCENT_TYPE,
-		type Stats,
-		type StatType
-	} from '$entities/seals'
+	import { mySealCounts, mySealPrices, myStats } from '$entities/seals'
 	import { user } from '$entities/user'
+	import { getMyAllStats } from '$features/calculate-seal-efficiency'
 	import { PATH } from '$shared/config'
-	import { objectBy } from '$shared/lib'
 	import { lang, langPath } from '$shared/model'
-	import Tab from '$shared/tabs/ui/Tab.svelte'
-	import Tabs from '$shared/tabs/ui/Tabs.svelte'
+	import { Tabs, Tab } from '$shared/tabs'
 	import { PageHeader } from '$shared/ui/page-header'
 	import { CharacterTabs } from '$widgets/character-tabs'
-	import { getMySealData } from '$features/update-my-seal'
-	import { getCurrentStep } from '$features/calculate-seal-efficiency'
 	import type { PageData } from './$types'
+	import './calculator.css'
 
 	export let data: PageData
-	$: statCalc = (statType: StatType) => {
-		if ($mySealCounts.length === 0) return
-		const mySealsByStatType = objectBy(
-			$mySealCounts,
-			({ id }) => getMySealData(data.seals, id).statType
-		)
-		if (!mySealsByStatType) return 0
-		const sealsByStatType = mySealsByStatType[statType]
-		if (!sealsByStatType || sealsByStatType.length === 0) {
-			return 0
-		}
-		let resultValue = 0
-		sealsByStatType.forEach(({ id, count }) => {
-			let sealPercent = 0
-			const seal = getMySealData(data.seals, id)
-			const crrStat = getCurrentStep(seal, count)
-			sealPercent = crrStat.percent
-			const maxIncrease = seal.maxIncrease
-			resultValue += maxIncrease * (sealPercent / 100)
-		})
-		if (STATS_PERCENT_TYPE.includes(statType)) {
-			resultValue = resultValue / 100
-		}
-		return resultValue
-	}
 
 	$: SUB_MENUS = [
 		{
@@ -96,12 +60,7 @@
 
 	// my stats
 	const setMyStats = () => {
-		const newStats = STATS.reduce((result, { type }) => {
-			const statTypeCalc = $mySealCounts.length === 0 ? 0 : statCalc(type)
-			if (statTypeCalc === undefined) return result
-			result[type] = statTypeCalc
-			return result
-		}, {} as Stats)
+		const newStats = getMyAllStats(data.seals, $mySealCounts)
 		myStats.set(newStats)
 	}
 
