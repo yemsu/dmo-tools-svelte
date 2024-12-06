@@ -190,6 +190,7 @@ const createCalculatorStore = () => {
 						willNeedMoney: 0
 					}
 				},
+				calcMode: 'efficiency',
 				isSealPriceChanged: false
 			}))
 		}

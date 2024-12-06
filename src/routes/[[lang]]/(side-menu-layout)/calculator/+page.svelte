@@ -23,14 +23,12 @@
 	import { ALERT, META } from '$shared/config'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { Switch } from '$shared/ui/switch'
 	import {
-		CalcReferText,
 		CalcResult,
+		ResultListStatusBar,
 		ResultSealList,
 		RetryCalc
 	} from '$widgets/seal-calculator'
-	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
 
 	export let data: PageData
@@ -39,8 +37,8 @@
 	$: percentNum = isPercentType ? 100 : 1
 	$: crrWillGetStatTotal = $calc.resultTotal[$calc.calcMode].willGetStat
 	$: calcResultStatTotal =
-		($myStats[$calc.statTypeSelected] * percentNum + crrWillGetStatTotal) /
-		percentNum
+		$myStats[$calc.statTypeSelected] + crrWillGetStatTotal
+
 	$: crrCalcResults = $calc.calcResults[$calc.calcMode][$calc.viewMode]
 
 	const getMySealCount = (mySeal: MySealCount[], sealId: number) =>
@@ -98,14 +96,6 @@
 		}
 	}
 
-	const onMergeSwitchChange = (e: CustomEvent) => {
-		calc.toggleViewMode(e.detail)
-	}
-
-	const onClosestSwitchChange = (e: CustomEvent) => {
-		calc.toggleCalcMode(e.detail)
-	}
-
 	const onChangeCharacter = () => {
 		if ($calc.calcResults.efficiency.separated.length === 0) return
 		calc.reset()
@@ -130,23 +120,7 @@
 			'land:pb-[calc(var(--result-h)+var(--result-b))]'
 	)}
 >
-	<div class="mb-2 flex items-center justify-between">
-		<CalcReferText />
-		<div class="flex gap-4">
-			<Switch
-				id="merge-switch"
-				text={$_('seal.merge_same_seal')}
-				defaultChecked={$calc.viewMode === 'merged'}
-				on:change={onMergeSwitchChange}
-			/>
-			<Switch
-				id="closest-switch"
-				text={$_('seal.closest_result')}
-				defaultChecked={$calc.calcMode === 'closest'}
-				on:change={onClosestSwitchChange}
-			/>
-		</div>
-	</div>
+	<ResultListStatusBar />
 	<ResultSealList
 		seals={data.seals}
 		sealPrices={data.sealPrices}

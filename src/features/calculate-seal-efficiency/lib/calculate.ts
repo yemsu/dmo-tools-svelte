@@ -241,11 +241,12 @@ export const getCalcResultTotal = (
 	filteredList: SealEfficiency[],
 	percentNum: number
 ): CalcTotalData[CalcMode] => {
-	return filteredList.reduce(
+	const result = filteredList.reduce(
 		(acc, curr) => ({
 			willNeedMoney: acc.willNeedMoney + curr.needPrice,
-			willGetStat: (acc.willGetStat + curr.willGetStat) / percentNum
+			willGetStat: acc.willGetStat + curr.willGetStat / percentNum
 		}),
 		{ willNeedMoney: 0, willGetStat: 0 }
 	)
+	return result
 }
