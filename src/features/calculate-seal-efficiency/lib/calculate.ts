@@ -215,7 +215,10 @@ export const getMergedResult = (effDataList: SealEfficiency[]) => {
 			totalNeedCount.efficiency =
 				(totalNeedCount.efficiency + effDataSealId.efficiency) / (i + 1)
 		})
-		result.push({ ...effDataListSealId[0], ...totalNeedCount })
+		result.push({
+			...effDataListSealId[effDataListSealId.length - 1],
+			...totalNeedCount
+		})
 	}
 	return sortByEffDataList(result)
 }
@@ -241,11 +244,12 @@ export const getCalcResultTotal = (
 	filteredList: SealEfficiency[],
 	percentNum: number
 ): CalcTotalData[CalcMode] => {
-	return filteredList.reduce(
+	const result = filteredList.reduce(
 		(acc, curr) => ({
 			willNeedMoney: acc.willNeedMoney + curr.needPrice,
-			willGetStat: (acc.willGetStat + curr.willGetStat) / percentNum
+			willGetStat: acc.willGetStat + curr.willGetStat / percentNum
 		}),
 		{ willNeedMoney: 0, willGetStat: 0 }
 	)
+	return result
 }

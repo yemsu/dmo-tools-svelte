@@ -33,7 +33,7 @@ const createCalculatorStore = () => {
 				merged: [],
 				separated: []
 			},
-			closest: {
+			cost: {
 				merged: [],
 				separated: []
 			}
@@ -43,13 +43,13 @@ const createCalculatorStore = () => {
 				willGetStat: 0,
 				willNeedMoney: 0
 			},
-			closest: {
+			cost: {
 				willGetStat: 0,
 				willNeedMoney: 0
 			}
 		},
 		viewMode: 'merged',
-		calcMode: 'efficiency',
+		calcMode: 'cost',
 		isSealPriceChanged: false
 	})
 
@@ -73,7 +73,7 @@ const createCalculatorStore = () => {
 		toggleCalcMode: (isToggleOn: true) => {
 			update((prev) => ({
 				...prev,
-				calcMode: isToggleOn ? 'closest' : 'efficiency'
+				calcMode: isToggleOn ? 'cost' : 'efficiency'
 			}))
 		},
 		setEffDataListSorted: (effDataListSorted: SealEfficiency[]) => {
@@ -85,7 +85,7 @@ const createCalculatorStore = () => {
 		setCalcResultList: (
 			effListForNeedStat: SealEfficiency[],
 			percentNum: number,
-			getCalcResultClosest: (
+			getCalcResultCost: (
 				effDataListSorted: SealEfficiency[],
 				goalStat: number,
 				effResult: SealEfficiency[],
@@ -97,8 +97,8 @@ const createCalculatorStore = () => {
 				effListForNeedStat: SealEfficiency[]
 			) => {
 				return (prev: CalculatorStore) => {
-					if (calcMode === 'closest') {
-						effListForNeedStat = getCalcResultClosest(
+					if (calcMode === 'cost') {
+						effListForNeedStat = getCalcResultCost(
 							prev.effDataListSorted,
 							prev.goalStat || 0,
 							prev.calcResults.efficiency.separated,
@@ -123,12 +123,12 @@ const createCalculatorStore = () => {
 			}
 			update(getNewResult('efficiency', effListForNeedStat))
 			setTimeout(() => {
-				update(getNewResult('closest', effListForNeedStat))
+				update(getNewResult('cost', effListForNeedStat))
 			}, 1000)
 		},
 
 		subtractResultTotal: (effData: SealEfficiency, percentNum: number) => {
-			const calcModes: CalcMode[] = ['efficiency', 'closest']
+			const calcModes: CalcMode[] = ['efficiency', 'cost']
 			calcModes.forEach((calcMode) => {
 				update((prev) => {
 					const prevResultData = prev.calcResults[calcMode].separated
@@ -175,7 +175,7 @@ const createCalculatorStore = () => {
 						merged: [],
 						separated: []
 					},
-					closest: {
+					cost: {
 						merged: [],
 						separated: []
 					}
@@ -185,11 +185,12 @@ const createCalculatorStore = () => {
 						willGetStat: 0,
 						willNeedMoney: 0
 					},
-					closest: {
+					cost: {
 						willGetStat: 0,
 						willNeedMoney: 0
 					}
 				},
+				calcMode: 'efficiency',
 				isSealPriceChanged: false
 			}))
 		}

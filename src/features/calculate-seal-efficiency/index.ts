@@ -22,7 +22,7 @@ export {
 	getEffDataListSorted,
 	getMyAllStats
 } from './lib/calculate'
-export { createClosestResultGetter } from './lib/calculateClosest'
+export { createCostResultGetter } from './lib/calculateBasedCost'
 export type {
 	SealEfficiency,
 	SealExceptionStep,
