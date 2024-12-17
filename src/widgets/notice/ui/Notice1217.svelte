@@ -7,7 +7,7 @@
 	startDate="Tue Dec 17 2024 15:30:00 GMT+0900"
 	modalSize="lg"
 	title={{
-		kr: '씰 효율 계산기 로직이 개선되었습니다!',
+		kr: '씰 효율 계산기 로직이 개선되었습니다.',
 		en: 'The Seal Efficiency Calculator logic has been improved.'
 	}}
 >
@@ -25,7 +25,7 @@
 		달성하실 수 있습니다.
 	</p>
 	<p>
-		유저분의 제보로 시작된 이번 개선이었는데요, 앞으로도 오류나 개선 의견이
+		유저분의 문의로 시작된 이번 개선이었는데요, 앞으로도 오류나 개선 의견이
 		있으시다면 언제든 알려주세요! 즐거운 연말되세요. 감사합니다. ❄☃
 	</p>
 </NoticeItem>
