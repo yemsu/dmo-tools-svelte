@@ -15,7 +15,6 @@ import {
 import { getMySealData } from '$features/update-my-seal'
 import { _objKeys, objectBy } from '$shared/lib'
 import type {
-	CalcMode,
 	CalcTotalData,
 	SealEfficiency,
 	SealMaterCount,
@@ -215,7 +214,10 @@ export const getMergedResult = (effDataList: SealEfficiency[]) => {
 			totalNeedCount.efficiency =
 				(totalNeedCount.efficiency + effDataSealId.efficiency) / (i + 1)
 		})
-		result.push({ ...effDataListSealId[0], ...totalNeedCount })
+		result.push({
+			...effDataListSealId[effDataListSealId.length - 1],
+			...totalNeedCount
+		})
 	}
 	return sortByEffDataList(result)
 }
@@ -238,14 +240,18 @@ export const getEffListForNeedStat = (
 }
 
 export const getCalcResultTotal = (
-	filteredList: SealEfficiency[],
+	resultList: SealEfficiency[],
 	percentNum: number
-): CalcTotalData[CalcMode] => {
-	return filteredList.reduce(
-		(acc, curr) => ({
-			willNeedMoney: acc.willNeedMoney + curr.needPrice,
-			willGetStat: (acc.willGetStat + curr.willGetStat) / percentNum
-		}),
-		{ willNeedMoney: 0, willGetStat: 0 }
+): CalcTotalData => {
+	const total = resultList.reduce(
+		(acc, curr) => {
+			return {
+				willNeedMoney: acc.willNeedMoney + curr.needPrice,
+				willGetStat: acc.willGetStat + curr.willGetStat / percentNum,
+				efficiency: acc.efficiency + curr.efficiency
+			}
+		},
+		{ willNeedMoney: 0, willGetStat: 0, efficiency: 0 }
 	)
+	return total
 }

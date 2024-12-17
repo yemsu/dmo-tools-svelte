@@ -52,8 +52,8 @@
 		"result_count": "결과 씰 개수",
 		"no_data_text": "목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!",
 		"seal_registered": "씰 등록 완료",
-		"merge_same_seal": "같은 씰 합치기",
-		"closest_result": "목표 수치 우선"
+		"merge_same_seal": "병합",
+		"separate_same_seal": "분할"
 	},
 	"gacha": {
 		"resultItems": "획득 아이템",

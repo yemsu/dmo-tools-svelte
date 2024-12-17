@@ -5,7 +5,7 @@
 	import { TextByLang } from '$shared/text'
 	import { _ } from 'svelte-i18n'
 
-	$: crrCalcResults = $calc.calcResults[$calc.calcMode][$calc.viewMode]
+	$: crrCalcResults = $calc.calcResults[$calc.viewMode]
 </script>
 
 <ListReferText tagName="h2" mb={false} class="flex items-center">

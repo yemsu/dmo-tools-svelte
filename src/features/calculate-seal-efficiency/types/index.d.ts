@@ -32,12 +32,9 @@ export type SealExceptionStep = Record<
 	SealStepValues
 >
 export type ViewMode = 'merged' | 'separated'
-export type CalcMode = 'efficiency' | 'closest'
-export type CalcResultList = Record<
-	CalcMode,
-	Record<ViewMode, SealEfficiency[]>
->
-export type CalcTotalData = Record<
-	CalcMode,
-	{ willGetStat: number; willNeedMoney: number }
->
+export type CalcResultList = Record<ViewMode, SealEfficiency[]>
+export type CalcTotalData = {
+	willGetStat: number
+	willNeedMoney: number
+	efficiency: number
+}

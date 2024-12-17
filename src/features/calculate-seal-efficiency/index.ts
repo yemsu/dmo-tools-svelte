@@ -22,14 +22,13 @@ export {
 	getEffDataListSorted,
 	getMyAllStats
 } from './lib/calculate'
-export { createClosestResultGetter } from './lib/calculateClosest'
+export { createCostResultGetter } from './lib/calculateLowPrice'
 export type {
 	SealEfficiency,
 	SealExceptionStep,
 	SealMaterCount,
 	SealStep,
 	SealStepsByMaster,
-	CalcMode,
 	CalcResultList,
 	CalcTotalData
 } from './types'

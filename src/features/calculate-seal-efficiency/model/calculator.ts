@@ -4,11 +4,10 @@ import {
 	getMergedResult
 } from '$features/calculate-seal-efficiency'
 import type {
-	CalcMode,
-	ViewMode,
-	SealEfficiency,
 	CalcResultList,
-	CalcTotalData
+	CalcTotalData,
+	SealEfficiency,
+	ViewMode
 } from '../types'
 import { writable } from 'svelte/store'
 
@@ -19,7 +18,6 @@ type CalculatorStore = {
 	calcResults: CalcResultList
 	resultTotal: CalcTotalData
 	viewMode: ViewMode
-	calcMode: CalcMode
 	isSealPriceChanged: boolean
 }
 
@@ -29,27 +27,15 @@ const createCalculatorStore = () => {
 		goalStat: null,
 		effDataListSorted: [],
 		calcResults: {
-			efficiency: {
-				merged: [],
-				separated: []
-			},
-			closest: {
-				merged: [],
-				separated: []
-			}
+			merged: [],
+			separated: []
 		},
 		resultTotal: {
-			efficiency: {
-				willGetStat: 0,
-				willNeedMoney: 0
-			},
-			closest: {
-				willGetStat: 0,
-				willNeedMoney: 0
-			}
+			willGetStat: 0,
+			willNeedMoney: 0,
+			efficiency: 0
 		},
 		viewMode: 'merged',
-		calcMode: 'efficiency',
 		isSealPriceChanged: false
 	})
 
@@ -70,12 +56,6 @@ const createCalculatorStore = () => {
 				viewMode: isToggleOn ? 'merged' : 'separated'
 			}))
 		},
-		toggleCalcMode: (isToggleOn: true) => {
-			update((prev) => ({
-				...prev,
-				calcMode: isToggleOn ? 'closest' : 'efficiency'
-			}))
-		},
 		setEffDataListSorted: (effDataListSorted: SealEfficiency[]) => {
 			update((prev) => ({
 				...prev,
@@ -85,82 +65,73 @@ const createCalculatorStore = () => {
 		setCalcResultList: (
 			effListForNeedStat: SealEfficiency[],
 			percentNum: number,
-			getCalcResultClosest: (
+			getCalcResultCost: (
 				effDataListSorted: SealEfficiency[],
 				goalStat: number,
 				effResult: SealEfficiency[],
 				effWillGetStat: number
 			) => SealEfficiency[]
 		) => {
-			const getNewResult = (
-				calcMode: CalcMode,
-				effListForNeedStat: SealEfficiency[]
-			) => {
-				return (prev: CalculatorStore) => {
-					if (calcMode === 'closest') {
-						effListForNeedStat = getCalcResultClosest(
-							prev.effDataListSorted,
-							prev.goalStat || 0,
-							prev.calcResults.efficiency.separated,
-							prev.resultTotal.efficiency.willGetStat
-						)
-					}
-					return {
-						...prev,
-						calcResults: {
-							...prev.calcResults,
-							[calcMode]: {
-								merged: getMergedResult(effListForNeedStat),
-								separated: effListForNeedStat
-							}
-						},
-						resultTotal: {
-							...prev.resultTotal,
-							[calcMode]: getCalcResultTotal(effListForNeedStat, percentNum)
-						}
+			const mergedResultVanilla = getMergedResult(effListForNeedStat)
+			const separatedResultVanilla = effListForNeedStat
+			const resultTotalVanilla = getCalcResultTotal(
+				effListForNeedStat,
+				percentNum
+			)
+			const resultsVanilla = {
+				merged: mergedResultVanilla,
+				separated: separatedResultVanilla
+			}
+			// efficiency 업데이트 완료 후 cost 업데이트
+			update((prev) => {
+				const separatedResultLowPrice = getCalcResultCost(
+					prev.effDataListSorted,
+					prev.goalStat || 0,
+					separatedResultVanilla,
+					resultTotalVanilla.willGetStat
+				)
+				const hasResultLowPrice = separatedResultLowPrice.length > 0
+				const resultsLowPrice = {
+					merged: getMergedResult(separatedResultLowPrice),
+					separated: separatedResultLowPrice
+				}
+				const resultTotalLowPrice = getCalcResultTotal(
+					separatedResultLowPrice,
+					percentNum
+				)
+				return {
+					...prev,
+					calcResults: hasResultLowPrice ? resultsLowPrice : resultsVanilla,
+					resultTotal: hasResultLowPrice
+						? resultTotalLowPrice
+						: resultTotalVanilla
+				}
+			})
+		},
+		subtractResultTotal: (effData: SealEfficiency, percentNum: number) => {
+			update((prev) => {
+				const prevResultData = prev.calcResults.separated
+				const newEffResults = prevResultData.filter(
+					(item) =>
+						!(item.id === effData.id && item.needCount === effData.needCount)
+				)
+				if (newEffResults.length === prevResultData.length) {
+					return prev
+				}
+
+				return {
+					...prev,
+					calcResults: {
+						separated: newEffResults,
+						merged: getMergedResult(newEffResults)
+					},
+					resultTotal: {
+						willGetStat:
+							(prev.resultTotal.willGetStat - effData.willGetStat) / percentNum,
+						willNeedMoney: prev.resultTotal.willNeedMoney - effData.needPrice,
+						efficiency: prev.resultTotal.efficiency - effData.efficiency
 					}
 				}
-			}
-			update(getNewResult('efficiency', effListForNeedStat))
-			setTimeout(() => {
-				update(getNewResult('closest', effListForNeedStat))
-			}, 1000)
-		},
-
-		subtractResultTotal: (effData: SealEfficiency, percentNum: number) => {
-			const calcModes: CalcMode[] = ['efficiency', 'closest']
-			calcModes.forEach((calcMode) => {
-				update((prev) => {
-					const prevResultData = prev.calcResults[calcMode].separated
-					const newEffResults = prevResultData.filter(
-						(item) =>
-							!(item.id === effData.id && item.needCount === effData.needCount)
-					)
-					if (newEffResults.length === prevResultData.length) {
-						return prev
-					}
-					const prevResultTotal = prev.resultTotal[prev.calcMode]
-
-					return {
-						...prev,
-						calcResults: {
-							...prev.calcResults,
-							[calcMode]: {
-								separated: newEffResults,
-								merged: getMergedResult(newEffResults)
-							}
-						},
-						resultTotal: {
-							...prev.resultTotal,
-							[calcMode]: {
-								willGetStat:
-									(prevResultTotal.willGetStat - effData.willGetStat) /
-									percentNum,
-								willNeedMoney: prevResultTotal.willNeedMoney - effData.needPrice
-							}
-						}
-					}
-				})
 			})
 		},
 		setIsSealPriceChanged: (isSealPriceChanged: boolean) => {
@@ -171,24 +142,13 @@ const createCalculatorStore = () => {
 				...prev,
 				effDataListSorted: [],
 				calcResults: {
-					efficiency: {
-						merged: [],
-						separated: []
-					},
-					closest: {
-						merged: [],
-						separated: []
-					}
+					merged: [],
+					separated: []
 				},
 				resultTotal: {
-					efficiency: {
-						willGetStat: 0,
-						willNeedMoney: 0
-					},
-					closest: {
-						willGetStat: 0,
-						willNeedMoney: 0
-					}
+					willGetStat: 0,
+					willNeedMoney: 0,
+					efficiency: 0
 				},
 				isSealPriceChanged: false
 			}))

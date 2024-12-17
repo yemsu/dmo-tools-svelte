@@ -18,7 +18,7 @@
 	export let effData: SealEfficiency
 	export let seal: SealData
 	export let updateResult: () => void
-	$: crrCalcResults = $calc.calcResults[$calc.calcMode][$calc.viewMode]
+	$: crrCalcResults = $calc.calcResults[$calc.viewMode]
 
 	$: getHasSameSealPrevStep = (effData: SealEfficiency) => {
 		const result = crrCalcResults.some(

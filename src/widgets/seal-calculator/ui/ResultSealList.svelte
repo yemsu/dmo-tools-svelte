@@ -2,6 +2,7 @@
 	import { type SealData, type SealPrice } from '$entities/seals'
 	import {
 		calc,
+		getCurrentStep,
 		type SealEfficiency
 	} from '$features/calculate-seal-efficiency'
 	import { AddToMySealButton } from '$features/update-my-seal'
@@ -13,15 +14,8 @@
 	export let sealPrices: SealPrice[]
 	export let isPercentType: boolean
 	export let percentNum: number
-	$: crrCalcResults = $calc.calcResults[$calc.calcMode][$calc.viewMode]
-
+	$: crrCalcResults = $calc.calcResults[$calc.viewMode]
 	$: afterAddToMySeal = (effData: SealEfficiency) => {
-		const updateEffDataListSorted = crrCalcResults.filter(
-			(_effData) =>
-				!(
-					_effData.id === effData.id && _effData.needCount === effData.needCount
-				)
-		)
 		calc.subtractResultTotal(effData, percentNum)
 	}
 </script>
@@ -33,9 +27,10 @@
 >
 	{@const seal = seals.find(({ id }) => id === effData.id)}
 	{#if seal}
+		{@const crrStep = getCurrentStep(seal, effData.needCount)}
 		<SealItem {seal} isCountEditable={false} {sealPrices}>
 			<p class="absolute right-1 top-0 text-sub-md text-gray-8">
-				{effData.nextStepIdx + 1} 단계
+				{crrStep.grade?.name}
 			</p>
 			<SealCalcData {effData} {isPercentType} />
 			<AddToMySealButton
