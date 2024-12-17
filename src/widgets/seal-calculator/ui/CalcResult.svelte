@@ -80,14 +80,14 @@
 				<p class="port:flex-center port:flex-1 port:p-1">
 					<StatBarTotalPrice totalPrice={$calc.resultTotal.willNeedMoney} />
 				</p>
-				<p
+				<!-- <p
 					class={cn(
 						'port:flex-center leading-[1.2] port:h-full port:flex-col port:border-l-2 port:border-deep port:px-3 port:py-1',
 						'text-sub-lg text-gray-10'
 					)}
 				>
 					<span>평균 효율: {crrEfficiencyTotal}</span>
-				</p>
+				</p> -->
 			</div>
 		</div>
 	</section>
