@@ -14,7 +14,7 @@
 		getMySealStat,
 		SEAL_COUNT_STEPS_BY_MASTER,
 		SEAL_EXCEPTION_PERCENT
-	} from '$widgets/seal-calculator'
+	} from '$features/calculate-seal-efficiency'
 	import { _ } from 'svelte-i18n'
 
 	export let seal: SealData

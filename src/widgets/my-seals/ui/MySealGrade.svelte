@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n'
-	import { page } from '$app/stores'
 	import {
 		STATS_PERCENT_TYPE,
 		type MySealCount,
 		type SealData
 	} from '$entities/seals'
-	import { getMySealData } from '$widgets/my-seals/lib/helper'
-	import { getCurrentStep, getMySealStat } from '$widgets/seal-calculator'
-	import { TextByLang } from '$shared/text'
-	import { Badge } from '$shared/badge'
+	import {
+		getCurrentStep,
+		getMySealStat
+	} from '$features/calculate-seal-efficiency'
+	import { getMySealData } from '$features/update-my-seal'
 	import { cn } from '$shared/lib'
+	import { TextByLang } from '$shared/text'
 
 	export let seals: SealData[]
 	export let mySeal: MySealCount

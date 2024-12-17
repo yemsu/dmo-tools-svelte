@@ -4,6 +4,7 @@
 	import Notice1107 from '$widgets/notice/ui/Notice1107.svelte'
 	import Notice1112 from '$widgets/notice/ui/Notice1112.svelte'
 	import Notice1128 from '$widgets/notice/ui/Notice1128.svelte'
+	import Notice1217 from '$widgets/notice/ui/Notice1217.svelte'
 	import { _ } from 'svelte-i18n'
 
 	$: isKr = $lang === 'kr'
@@ -17,11 +18,12 @@
 	>
 	<div class="flex-center flex-1 px-2 py-1">
 		<div>
+			<Notice1217 />
 			{#if isKr}
 				<Notice1128 />
 			{/if}
 			<Notice1112 />
-			<Notice1107 />
+			<!-- <Notice1107 /> -->
 		</div>
 	</div>
 </section>

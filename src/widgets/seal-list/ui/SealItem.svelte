@@ -2,7 +2,7 @@
 	import { type SealData, type SealPrice } from '$entities/seals'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
-	import { statColorStyles } from '$widgets/my-seals'
+	import { statColorStyles } from '$features/calculate-seal-efficiency'
 	import SealItemTooltip from '$widgets/seal-list/ui/SealItemTooltip.svelte'
 	import SealItemCount from './SealItemCount.svelte'
 	import SealItemPrice from './SealItemPrice.svelte'

@@ -14,7 +14,7 @@
 	import { TextByLang } from '$shared/text'
 	import { Tooltip } from '$shared/tooltip'
 	import type { LangType } from '$shared/types'
-	import { statTypeOptionStyles } from '$widgets/my-seals'
+	import { statTypeOptionStyles } from '$features/calculate-seal-efficiency'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { choseongIncludes } from 'es-hangul'
 	import { _ } from 'svelte-i18n'

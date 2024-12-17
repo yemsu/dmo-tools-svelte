@@ -31,6 +31,7 @@
 	"notice": "Notice",
 	"copy": "Copy",
 	"go_back": "Previous page",
+	"step": "Step",
 	"user": {
 		"nickname": "Nickname",
 		"email": "E-Mail",
@@ -50,7 +51,9 @@
 		"target_stat": "Target Stat",
 		"result_count": "Resulting Seal Count",
 		"no_data_text": "Input the target value to find the most efficient seal configuration!",
-		"seal_registered": "Registration completed"
+		"seal_registered": "Registration completed",
+		"merge_same_seal": "Merge",
+		"separate_same_seal": "Split"
 	},
 	"gacha": {
 		"resultItems": "Obtained Items",

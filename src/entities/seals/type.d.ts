@@ -1,5 +1,5 @@
 import type { STATS } from '$entities/seals/config'
-import type { SealMaterCount } from '$widgets/seal-calculator'
+import type { SealMaterCount } from '$features/calculate-seal-efficiency'
 
 export type StatType = (typeof STATS)[number]['type']
 

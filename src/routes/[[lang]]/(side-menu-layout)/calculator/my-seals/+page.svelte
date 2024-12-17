@@ -15,12 +15,9 @@
 	import { lang, langPath } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
 	import { NoData } from '$shared/text'
-	import {
-		getMyAndFinalPrice,
-		getMySealData,
-		statTypeOptionStyles
-	} from '$widgets/my-seals'
+	import { getMyAndFinalPrice, getMySealData } from '$features/update-my-seal'
 	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
+	import { statTypeOptionStyles } from '$features/calculate-seal-efficiency'
 	import { StatBarTotalPrice, StatBarWrap } from '$widgets/stat-bar'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'

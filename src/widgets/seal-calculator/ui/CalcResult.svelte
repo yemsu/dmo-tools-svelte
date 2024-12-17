@@ -1,29 +1,34 @@
 <script lang="ts">
-	import { cn } from '$shared/lib'
+	import { myStats } from '$entities/seals'
+	import { calc } from '$features/calculate-seal-efficiency'
+	import { cn, numberFormatter } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { TextByLang } from '$shared/text'
 	import { StatBarTotalPrice } from '$widgets/stat-bar'
 
-	export let crrMyStat: number | string
-	export let needGetStat: number | string
-	export let resultStat: number | string
 	export let isPercentType: boolean
-	export let willNeedMoneyTotal: number
+	const EFF_TOTAL_FIXED = 10
+	$: crrWillGetStatTotal = $calc.resultTotal.willGetStat
+	$: crrEfficiencyTotal = +(
+		$calc.resultTotal.efficiency / $calc.calcResults.merged.length
+	).toFixed(EFF_TOTAL_FIXED)
+	$: calcResultStatTotal =
+		$myStats[$calc.statTypeSelected] + crrWillGetStatTotal
 
 	$: values = [
 		{
 			title: { kr: '현재 내 능력치', en: 'Current Stats' },
-			value: crrMyStat,
+			value: numberFormatter($myStats[$calc.statTypeSelected]),
 			afterMark: '+'
 		},
 		{
 			title: { kr: '얻어야하는 능력치', en: 'Required Stats' },
-			value: needGetStat,
+			value: numberFormatter(crrWillGetStatTotal),
 			afterMark: '='
 		},
 		{
 			title: { kr: '최종 능력치', en: 'Final Stats' },
-			value: resultStat
+			value: numberFormatter(calcResultStatTotal, 5)
 		}
 	]
 
@@ -69,9 +74,21 @@
 					{/each}
 				</p>
 			</div>
-			<p class="flex-center w-full bg-background p-1 land:w-[40%] land:p-4">
-				<StatBarTotalPrice totalPrice={willNeedMoneyTotal} />
-			</p>
+			<div
+				class="flex-center w-full bg-background land:w-[40%] land:flex-col land:gap-1 land:p-1"
+			>
+				<p class="port:flex-center port:flex-1 port:p-1">
+					<StatBarTotalPrice totalPrice={$calc.resultTotal.willNeedMoney} />
+				</p>
+				<p
+					class={cn(
+						'port:flex-center leading-[1.2] port:h-full port:flex-col port:border-l-2 port:border-deep port:px-3 port:py-1',
+						'text-sub-lg text-gray-10'
+					)}
+				>
+					<span>평균 효율: {crrEfficiencyTotal}</span>
+				</p>
+			</div>
 		</div>
 	</section>
 </div>
