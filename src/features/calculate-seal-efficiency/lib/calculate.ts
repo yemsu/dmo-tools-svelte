@@ -207,13 +207,14 @@ export const getMergedResult = (effDataList: SealEfficiency[]) => {
 			willGetStat: 0,
 			efficiency: 0
 		}
-		effDataListSealId.forEach((effDataSealId, i) => {
+		let efficiencyTotal = 0
+		effDataListSealId.forEach((effDataSealId) => {
 			totalNeedCount.needCount += effDataSealId.needCount
 			totalNeedCount.needPrice += effDataSealId.needPrice
 			totalNeedCount.willGetStat += effDataSealId.willGetStat
-			totalNeedCount.efficiency =
-				(totalNeedCount.efficiency + effDataSealId.efficiency) / (i + 1)
+			efficiencyTotal += effDataSealId.efficiency
 		})
+		totalNeedCount.efficiency = efficiencyTotal / effDataListSealId.length
 		result.push({
 			...effDataListSealId[effDataListSealId.length - 1],
 			...totalNeedCount
