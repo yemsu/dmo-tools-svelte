@@ -7,7 +7,7 @@
 </script>
 
 <div
-	class="mx-auto flex flex-wrap items-center gap-x-3 gap-y-1 port:w-[17.1em] land:justify-center land:gap-x-4"
+	class="mx-auto flex flex-wrap items-center gap-x-3 gap-y-1 port:w-[20.5em] land:justify-center land:gap-x-4"
 	title={$_('seal.myTotalStats')}
 >
 	{#each STATS as stat (stat.type)}
