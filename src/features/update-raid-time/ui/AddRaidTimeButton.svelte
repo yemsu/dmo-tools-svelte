@@ -60,6 +60,7 @@
 			server: $crrServerType,
 			clientId: $subscribeClientId
 		})
+		value = ''
 		toast.on('보스 제보가 완료되었습니다!')
 	}
 </script>
