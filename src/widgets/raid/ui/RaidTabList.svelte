@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import { page } from '$app/stores'
 	import { type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
@@ -7,7 +8,7 @@
 
 	export let raidList: RaidData[]
 	export let searchValue: string
-	$: param = $page.url.searchParams.get('raid')
+	$: param = browser ? $page.url.searchParams.get('raid') : ''
 	$: selectedRaid = param
 		? raidList.find(({ id }) => +param === id) || raidList[0]
 		: raidList[0]
