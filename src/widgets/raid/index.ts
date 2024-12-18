@@ -1,3 +1,4 @@
+import NeedSelectReportTooltip from '$widgets/raid/ui/NeedSelectReportTooltip.svelte'
 import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
@@ -12,5 +13,6 @@ export {
 	RaidLocation,
 	RaidNextIcon,
 	RaidInformant,
-	RaidSearchInput
+	RaidSearchInput,
+	NeedSelectReportTooltip
 }

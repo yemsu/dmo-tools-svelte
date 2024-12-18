@@ -17,7 +17,6 @@
 		if (raidList.length == 0 || selectedRaid !== undefined) return
 		selectedRaid = raidList[0]
 	}
-
 	$: raidList && initSelectedRaidId()
 </script>
 

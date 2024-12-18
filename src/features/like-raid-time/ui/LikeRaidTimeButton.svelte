@@ -7,6 +7,7 @@
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
+	import { myLikeReports } from '$features/like-raid-time'
 	import { BusinessError, showErrorToast } from '$shared/api'
 	import { cn, timeRemainingString } from '$shared/lib'
 	import Timer from '$shared/time/ui/Timer.svelte'
@@ -14,6 +15,7 @@
 
 	export let raid: RaidData
 	export let time: RaidTimeData
+	$: isAlreadyLike = $myLikeReports.some((report) => report.timeId === time.id)
 
 	$: onClickVote = async (raid: RaidData, time: RaidTimeData) => {
 		if (!$crrServerType || !$subscribeClientId) {
@@ -31,18 +33,19 @@
 		)
 		if (!isConfirmed) return
 		await putRaidTimeVote($subscribeClientId, time.id)
+		myLikeReports.saveMyLikeReports(raid.id, time.channel, time.id)
 		toast.on('레이드 제보에 좋아요를 눌렀습니다.')
 	}
 </script>
 
 <button
 	class={cn(
-		'button-hover relative flex flex-1 items-center justify-between gap-2 rounded-tl-md bg-gray-3 p-2 land:gap-4 land:p-3'
+		'button-hover relative flex flex-1 items-center justify-between gap-2 rounded-l-md bg-gray-3 p-2 land:gap-4 land:p-3'
 	)}
-	title="좋아요"
+	title={isAlreadyLike ? '이미 좋아한 제보입니다' : '좋아요'}
 	on:click={() => onClickVote(raid, time)}
 >
-	<span class="whitespace-nowrap">
+	<span class={cn('whitespace-nowrap', isAlreadyLike && 'text-point/60')}>
 		<iconify-icon icon="oi:heart" width="0.8em" height="0.8em" />
 		{time.voteCount + 1}</span
 	>

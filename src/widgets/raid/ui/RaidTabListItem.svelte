@@ -1,18 +1,36 @@
 <script lang="ts">
-	import type { RaidData } from '$entities/raid'
+	import type { GameChannel, RaidData } from '$entities/raid'
 	import {
 		ToggleAlarmButton,
 		ToggleFavoriteButton
 	} from '$features/control-raid-timer-option'
+	import { myLikeReports } from '$features/like-raid-time'
 	import { Icon } from '$shared/icon'
 	import { cn } from '$shared/lib'
 	import Timer from '$shared/time/ui/Timer.svelte'
-	import { RaidInformant, RaidLocation } from '$widgets/raid'
+	import {
+		NeedSelectReportTooltip,
+		RaidInformant,
+		RaidLocation
+	} from '$widgets/raid'
 
 	export let raid: RaidData
 	export let selectedRaid: RaidData
 	export let onClickTab: (raid: RaidData) => void
 
+	$: duplicatedReportChannels = raid.times.reduce<GameChannel[]>(
+		(acc, time) => {
+			const channelTimes = raid.times.filter(
+				(_time) => _time.channel === time.channel
+			)
+			if (channelTimes.length <= 1 || acc.includes(time.channel)) return acc
+			return [...acc, time.channel]
+		},
+		[]
+	)
+	$: needSelectReport =
+		duplicatedReportChannels.length > 0 &&
+		!$myLikeReports.some((report) => report.raidId === raid.id)
 	$: nextTime = raid.times[0]
 </script>
 
@@ -21,10 +39,12 @@
 	class={cn(
 		'relative flex w-full flex-col gap-1 p-1.5 land:gap-2 land:p-3',
 		'rounded-md bg-gray-1',
+		needSelectReport && 'data-[duplicated=true]:border-gradient-warning',
 		selectedRaid?.id === raid.id
 			? 'border border-gray-10 opacity-100'
 			: 'border border-gray-4 opacity-40 land:hover:opacity-100'
 	)}
+	data-duplicated={needSelectReport}
 >
 	<div class="flex items-center justify-between">
 		<p
@@ -35,7 +55,13 @@
 			</span>
 			<RaidLocation location={raid.location} />
 		</p>
-		<div class="flex-center relative z-1">
+		<div class="flex-center relative z-[2]">
+			{#if needSelectReport}
+				<NeedSelectReportTooltip
+					id="duplicated-report-{raid.id}"
+					class="relative"
+				/>
+			{/if}
 			<ToggleAlarmButton {raid} />
 			<ToggleFavoriteButton {raid} />
 		</div>
@@ -45,7 +71,7 @@
 			class={cn(
 				'grid grid-cols-5 rounded-md text-center',
 				'port:grid-cols-3 port:grid-rows-2',
-				'gap-[3px] bg-gray-1 [&>*]:h-input-h-sm [&>*]:bg-gray-3'
+				'gap-[3px] [&>*]:h-input-h-sm [&>*]:bg-gray-5/50'
 			)}
 		>
 			<span class="flex-center text-[0.9em]">{nextTime.channel} 채널</span>

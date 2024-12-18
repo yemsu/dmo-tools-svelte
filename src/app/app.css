@@ -55,6 +55,17 @@
 			)
 			1;
 	}
+	.border-gradient-warning {
+		@apply border-transparent;
+		background:
+			linear-gradient(
+					hsl(var(--background-color)),
+					hsl(var(--background-color))
+				)
+				padding-box,
+			linear-gradient(90deg, hsl(var(--warning)), hsla(var(--warning) / 0.2))
+				border-box;
+	}
 	/* hover */
 	.button-hover {
 		@apply transition-opacity hover:opacity-80;
