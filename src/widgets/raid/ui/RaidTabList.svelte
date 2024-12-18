@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { type RaidData } from '$entities/raid'
 	import { cn } from '$shared/lib'
 	import { NoData } from '$shared/text'
@@ -6,17 +7,16 @@
 
 	export let raidList: RaidData[]
 	export let searchValue: string
-
-	$: selectedRaid = raidList[0]
-
-	const onClickTab = (raid: RaidData) => {
-		selectedRaid = raid
-	}
+	$: param = $page.url.searchParams.get('raid')
+	$: selectedRaid = param
+		? raidList.find(({ id }) => +param === id) || raidList[0]
+		: raidList[0]
 
 	const initSelectedRaidId = () => {
 		if (raidList.length == 0 || selectedRaid !== undefined) return
 		selectedRaid = raidList[0]
 	}
+
 	$: raidList && initSelectedRaidId()
 </script>
 
@@ -29,7 +29,7 @@
 				aria-label="레이드 채널별 시간 제보 자세히 보기 탭"
 			>
 				{#each raidList as raid (raid.id)}
-					<RaidTabListItem {raid} {selectedRaid} {onClickTab} />
+					<RaidTabListItem {raid} {selectedRaid} />
 				{/each}
 			</ul>
 		{:else}

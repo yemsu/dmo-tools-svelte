@@ -16,7 +16,6 @@
 
 	export let raid: RaidData
 	export let selectedRaid: RaidData
-	export let onClickTab: (raid: RaidData) => void
 
 	$: duplicatedReportChannels = raid.times.reduce<GameChannel[]>(
 		(acc, time) => {
@@ -91,9 +90,9 @@
 			?
 		</p>
 	{/if}
-	<button
+	<a
+		href="?raid={raid.id}"
 		title="자세히 보기"
-		on:click={() => onClickTab(raid)}
 		id="raid-tab-{raid.id}"
 		aria-controls="raid-panel-{raid.id}"
 		role="tab"
@@ -101,5 +100,5 @@
 		class="button-hover absolute left-0 top-0 size-full flex-1"
 	>
 		<span class="ir">레이드 자세히 보기</span>
-	</button>
+	</a>
 </li>

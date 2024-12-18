@@ -200,7 +200,6 @@
 
 	$: $raids && updateNextRaid()
 	$: nextRaid && $alarmMinute && setAlarm(nextRaid)
-	$: console.log('nextRaid', nextRaid)
 	$: needSelectReport =
 		nextRaid &&
 		nextRaid.times.length > 1 &&
@@ -219,7 +218,9 @@
 	<h2 class="ir">다음 출현 레이드 정보</h2>
 	{#if isSseSupported === true}
 		<a
-			href="{$langPath}{MENUS.raid.path}"
+			href="{$langPath}{MENUS.raid.path}{nextRaid
+				? `?raid=${nextRaid.id}`
+				: ''}"
 			class={cn(
 				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1'
 			)}
