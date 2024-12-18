@@ -4,8 +4,10 @@
 
 	export let as = 'div'
 	export let size: 'sm' | 'md' | 'custom' = 'md'
+	export let color: 'default' | 'warning' = 'default'
 	export let useAdaptiveX: boolean = false
 	export let id: string
+	export let defaultShow: boolean = false
 
 	type Position_X = 'left' | 'right'
 	let tooltip: HTMLDivElement
@@ -39,6 +41,10 @@
 		md: 'p-4 text-sub-md land:text-body-sm',
 		custom: ''
 	}
+	const colorStyles = {
+		default: 'border-gray-5',
+		warning: 'border-warning text-warning font-bold'
+	}
 </script>
 
 <!-- 
@@ -54,12 +60,14 @@
 	role="tooltip"
 	{id}
 	class={cn(
-		'hidden flex-col peer-hover/tooltip:flex peer-focus/tooltip:flex',
+		'flex-col peer-hover/tooltip:flex peer-focus/tooltip:flex',
 		'pointer-events-none absolute z-tooltip overflow-visible',
 		'break-keep rounded-md',
-		'border border-gray-5 bg-background/90',
+		'border bg-background/90',
 		'drop-shadow-lg',
+		!defaultShow && 'hidden',
 		sizeStyles[size],
+		colorStyles[color],
 		useAdaptiveX && positionStyles[tooltipPosition],
 		$$restProps.class
 	)}

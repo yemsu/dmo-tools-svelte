@@ -4,8 +4,8 @@
 	import {
 		BeepToggleButton,
 		ControlWindowAlarmButton,
-		RaidServerTabs,
-		MoreOptionDropdown
+		MoreOptionDropdown,
+		RaidServerTabs
 	} from '$features/control-raid-timer-option'
 	import { META } from '$shared/config'
 	import { ListReferText } from '$shared/list'
@@ -54,7 +54,7 @@
 			</div>
 		</nav>
 	</PageHeader>
-	<ListReferText tagName="p" class="flex items-center">
+	<ListReferText tagName="p" class="flex items-center justify-between">
 		{searchValue ? `"${searchValue}"` : '전체'} ({raidList.length}개)
 	</ListReferText>
 	<RaidTabList {raidList} {searchValue} let:raid>

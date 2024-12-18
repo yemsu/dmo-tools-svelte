@@ -31,4 +31,5 @@ export type NextRaidData = Omit<RaidData, 'times'> & {
 	location: string
 	channels: string
 	time: RaidTimeData
+	times: RaidTimeData[]
 }

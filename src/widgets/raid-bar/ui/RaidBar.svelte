@@ -19,12 +19,14 @@
 		isAudioOn,
 		raidOption
 	} from '$features/control-raid-timer-option'
+	import { myLikeReports } from '$features/like-raid-time'
 	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
 	import { _objKeys, cn } from '$shared/lib'
 	import { langPath } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
 	import Timer from '$shared/time/ui/Timer.svelte'
+	import { Tooltip } from '$shared/tooltip'
 	import { timeSortByStartAt } from '$widgets/raid'
 	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
@@ -175,6 +177,7 @@
 	}
 
 	onMount(() => {
+		myLikeReports.loadMyLikeReports()
 		raidOption.loadAllOptions()
 
 		if (typeof EventSource !== 'undefined') {
@@ -197,6 +200,10 @@
 
 	$: $raids && updateNextRaid()
 	$: nextRaid && $alarmMinute && setAlarm(nextRaid)
+	$: needSelectReport =
+		nextRaid &&
+		nextRaid.times.length > 1 &&
+		!$myLikeReports.some((report) => report.raidId === nextRaid?.id)
 </script>
 
 <aside
@@ -211,7 +218,9 @@
 	<h2 class="ir">다음 출현 레이드 정보</h2>
 	{#if isSseSupported === true}
 		<a
-			href="{$langPath}{MENUS.raid.path}"
+			href="{$langPath}{MENUS.raid.path}{nextRaid
+				? `?raid=${nextRaid.id}`
+				: ''}"
 			class={cn(
 				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1'
 			)}
@@ -252,6 +261,18 @@
 				</p>
 			{/if}
 		</a>
+		{#if needSelectReport}
+			<Tooltip
+				as="p"
+				id="dup-report-raidbar"
+				size="sm"
+				color="warning"
+				defaultShow={true}
+				class="-top-2 left-1/2 -translate-x-1/2 -translate-y-full"
+			>
+				확인이 필요한 제보예요!
+			</Tooltip>
+		{/if}
 		{#if isSseConnected === false}
 			<button
 				class="flex-center button-hover h-[25px] w-full gap-1 bg-warning px-4"
