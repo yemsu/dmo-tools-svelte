@@ -22,7 +22,7 @@
 	import { myLikeReports } from '$features/like-raid-time'
 	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
-	import { _objKeys, cn } from '$shared/lib'
+	import { _objKeys, cn, objectBy } from '$shared/lib'
 	import { langPath } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
 	import Timer from '$shared/time/ui/Timer.svelte'
@@ -200,9 +200,15 @@
 
 	$: $raids && updateNextRaid()
 	$: nextRaid && $alarmMinute && setAlarm(nextRaid)
+	$: hasDuplicatedReport = nextRaid?.times.reduce((result, time) => {
+		const channelReports = nextRaid?.times.filter(
+			(_time) => time.channel === _time.channel
+		)
+		return channelReports ? channelReports.length >= 2 : result
+	}, false)
 	$: needSelectReport =
 		nextRaid &&
-		nextRaid.times.length > 1 &&
+		hasDuplicatedReport &&
 		!$myLikeReports.some((report) => report.raidId === nextRaid?.id)
 </script>
 
@@ -261,7 +267,7 @@
 				</p>
 			{/if}
 		</a>
-		<!-- {#if needSelectReport}
+		{#if needSelectReport}
 			<Tooltip
 				as="p"
 				id="dup-report-raidbar"
@@ -272,7 +278,7 @@
 			>
 				확인이 필요한 제보예요!
 			</Tooltip>
-		{/if} -->
+		{/if}
 		{#if isSseConnected === false}
 			<button
 				class="flex-center button-hover h-[25px] w-full gap-1 bg-warning px-4"
