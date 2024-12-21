@@ -261,7 +261,7 @@
 				</p>
 			{/if}
 		</a>
-		{#if needSelectReport}
+		<!-- {#if needSelectReport}
 			<Tooltip
 				as="p"
 				id="dup-report-raidbar"
@@ -272,7 +272,7 @@
 			>
 				확인이 필요한 제보예요!
 			</Tooltip>
-		{/if}
+		{/if} -->
 		{#if isSseConnected === false}
 			<button
 				class="flex-center button-hover h-[25px] w-full gap-1 bg-warning px-4"
