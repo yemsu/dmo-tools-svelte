@@ -98,6 +98,7 @@
 		role="tab"
 		aria-selected={selectedRaid?.id === raid.id}
 		class="button-hover absolute left-0 top-0 size-full flex-1"
+		data-sveltekit-noscroll
 	>
 		<span class="ir">레이드 자세히 보기</span>
 	</a>
