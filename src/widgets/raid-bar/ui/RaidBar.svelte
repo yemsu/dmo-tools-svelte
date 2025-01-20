@@ -215,7 +215,9 @@
 		'nextRaid',
 		nextRaid,
 		'hasDuplicatedReport',
-		hasDuplicatedReport
+		hasDuplicatedReport,
+		'myLikeReports',
+		$myLikeReports
 	)
 </script>
 
