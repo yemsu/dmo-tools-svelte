@@ -210,6 +210,13 @@
 		nextRaid &&
 		hasDuplicatedReport &&
 		!$myLikeReports.some((report) => report.raidId === nextRaid?.id)
+
+	$: console.log(
+		'nextRaid',
+		nextRaid,
+		'hasDuplicatedReport',
+		hasDuplicatedReport
+	)
 </script>
 
 <aside
