@@ -22,11 +22,10 @@
 	import { myLikeReports } from '$features/like-raid-time'
 	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
-	import { _objKeys, cn, objectBy } from '$shared/lib'
+	import { _objKeys, cn } from '$shared/lib'
 	import { langPath } from '$shared/model'
 	import { getRemainingTime } from '$shared/time'
 	import Timer from '$shared/time/ui/Timer.svelte'
-	import { Tooltip } from '$shared/tooltip'
 	import { timeSortByStartAt } from '$widgets/raid'
 	import RaidLocation from '$widgets/raid/ui/RaidLocation.svelte'
 	import RaidNextIcon from '$widgets/raid/ui/RaidNextIcon.svelte'
@@ -100,6 +99,10 @@
 		const raidsFetched = await getRaids(server)
 		raids.set(raidsFetched, $raidOption)
 		subscribeSSE(server)
+		updateNextRaid()
+		myLikeReports.loadMyLikeReports()
+		myLikeReports.cleanOldRaidReports($raids)
+
 		setTimeout(() => {
 			if (!isSseConnected)
 				alert(
@@ -107,8 +110,6 @@
 				)
 		}, 5000)
 	}
-
-	$: $crrServerType && initRaidSubscribe()
 
 	const notify = (_nextRaid: NextRaidData) => {
 		const remainingTime = getRemainingTime(_nextRaid.time.startAt)
@@ -177,7 +178,6 @@
 	}
 
 	onMount(() => {
-		myLikeReports.loadMyLikeReports()
 		raidOption.loadAllOptions()
 
 		if (typeof EventSource !== 'undefined') {
@@ -187,6 +187,7 @@
 			return
 		}
 		crrServerType.loadSavedData(_objKeys(GAME_SERVERS)[0])
+		initRaidSubscribe()
 		alarmMinute.loadSavedData()
 		document.addEventListener('visibilitychange', checkEventSourceConnect)
 	})
@@ -198,7 +199,6 @@
 		clearInterval(alarmTimer)
 	})
 
-	$: $raids && updateNextRaid()
 	$: nextRaid && $alarmMinute && setAlarm(nextRaid)
 	$: hasDuplicatedReport = nextRaid?.times.reduce((result, time) => {
 		const channelReports = nextRaid?.times.filter(
@@ -210,15 +210,6 @@
 		nextRaid &&
 		hasDuplicatedReport &&
 		!$myLikeReports.some((report) => report.raidId === nextRaid?.id)
-
-	$: console.log(
-		'nextRaid',
-		nextRaid,
-		'hasDuplicatedReport',
-		hasDuplicatedReport,
-		'myLikeReports',
-		$myLikeReports
-	)
 </script>
 
 <aside
@@ -237,12 +228,22 @@
 				? `?raid=${nextRaid.id}`
 				: ''}"
 			class={cn(
-				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1'
+				'button-hover flex-center relative min-h-raid-bar-h w-full flex-1 flex-wrap'
 			)}
 			title="레이드 타이머 전체 보기"
 		>
+			{#if needSelectReport}
+				<p
+					class={cn(
+						'land:absolute land:-top-2 land:left-1/2 land:-translate-x-1/2 land:-translate-y-full',
+						'w-full text-center font-bold leading-none text-warning'
+					)}
+				>
+					확인이 필요한 제보예요!
+				</p>
+			{/if}
 			{#if nextRaid}
-				<p class={cn('flex items-center leading-none land:w-full')}>
+				<p class={cn('flex leading-none land:w-full')}>
 					<span
 						class={cn(
 							'flex-shrink overflow-hidden px-1.5',
@@ -276,18 +277,6 @@
 				</p>
 			{/if}
 		</a>
-		{#if needSelectReport}
-			<Tooltip
-				as="p"
-				id="dup-report-raidbar"
-				size="sm"
-				color="warning"
-				defaultShow={true}
-				class="-top-2 left-1/2 -translate-x-1/2 -translate-y-full"
-			>
-				확인이 필요한 제보예요!
-			</Tooltip>
-		{/if}
 		{#if isSseConnected === false}
 			<button
 				class="flex-center button-hover h-[25px] w-full gap-1 bg-warning px-4"

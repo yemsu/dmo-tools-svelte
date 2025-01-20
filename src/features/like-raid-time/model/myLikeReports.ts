@@ -1,3 +1,4 @@
+import type { RaidData } from '$entities/raid'
 import { writable } from 'svelte/store'
 
 type MyLikeReport = {
@@ -11,16 +12,26 @@ const createMyLikeReports = () => {
 	return {
 		subscribe,
 		loadMyLikeReports: () => {
-			const savedData = localStorage.getItem(STORAGE_NAME)
-			set(savedData ? JSON.parse(savedData) : [])
+			const savedDataStr = localStorage.getItem(STORAGE_NAME)
+			set(savedDataStr ? JSON.parse(savedDataStr) : [])
 		},
-		deleteMyLikeReport: (raidId: number) => {
-			update((prev) =>
-				prev.filter((likeReport) => likeReport.raidId !== raidId)
-			)
+		cleanOldRaidReports: (raids: RaidData[]) => {
+			// 시작되지 않은 raid의 report만 필터링
+			const crrRaidTimes = raids.map((raid) => raid.times).flat()
+			const crrRaidReports: MyLikeReport[] = []
 			subscribe((myLikeReports) =>
-				localStorage.setItem(STORAGE_NAME, JSON.stringify(myLikeReports))
+				myLikeReports.forEach((myLikeReport) => {
+					const isCrrRaidTimeReport = crrRaidTimes.some(
+						({ id }) => myLikeReport.timeId === id
+					)
+					if (isCrrRaidTimeReport) {
+						crrRaidReports.push(myLikeReport)
+					}
+				})
 			)
+
+			set(crrRaidReports)
+			localStorage.setItem(STORAGE_NAME, JSON.stringify(crrRaidReports))
 		},
 		saveMyLikeReports: (raidId: number, channel: number, timeId: number) => {
 			update((prev) => [...prev, { raidId, channel, timeId }])
