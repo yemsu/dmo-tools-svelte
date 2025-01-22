@@ -1,4 +1,9 @@
-import { getTokenCookie, TOKEN_NAME } from '$entities/user'
+import {
+	getTokenCookie,
+	setTokenCookie,
+	TOKEN_NAME,
+	REFRESH_TOKEN_NAME
+} from '$entities/user'
 import { PUBLIC_API_BASE_URL } from '$env/static/public'
 import { BusinessError, RequestError } from '../lib/CustomError'
 import type { CustomErrorResponse, ErrorResponse } from '../types'
@@ -9,16 +14,26 @@ export const apiFetch = async <ResponseData>(
 	options: RequestInit = {},
 	hideError: boolean = false
 ): Promise<ResponseData> => {
-	const token = getTokenCookie(TOKEN_NAME)
+	const accessToken = getTokenCookie(TOKEN_NAME)
+	const refreshToken = getTokenCookie(REFRESH_TOKEN_NAME)
+
 	const headers: HeadersInit = {
 		'Content-Type': 'application/json',
-		Authorization: token ? `Bearer ${token}` : ''
+		Authorization: accessToken ? `Bearer ${accessToken}` : '',
+		...(refreshToken ? { Refresh: refreshToken } : {})
 	}
 	try {
 		const response = await fetch(`${PUBLIC_API_BASE_URL}${endpoint}`, {
 			...options,
 			headers: { ...options.headers, ...headers }
 		})
+
+		// 새로운 액세스 토큰이 헤더에 있다면 저장
+		const newAccessToken = response.headers.get('authorization')
+		if (newAccessToken) {
+			setTokenCookie(newAccessToken, TOKEN_NAME)
+		}
+
 		const data:
 			| {
 					result: ResponseData | CustomErrorResponse

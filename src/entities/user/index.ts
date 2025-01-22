@@ -10,6 +10,7 @@ export {
 	removeTokenCookie,
 	getTokenCookie,
 	TOKEN_NAME,
+	REFRESH_TOKEN_NAME,
 	G_TOKEN_NAME
 } from './lib'
 export { user, gToken } from './model'

@@ -1,11 +1,14 @@
 export const TOKEN_NAME = 'DMO_AUTH_T'
+export const REFRESH_TOKEN_NAME = 'DMO_REFRESH_T'
 export const G_TOKEN_NAME = 'G_AUTH_T'
 
-export const setTokenCookie = (token: string, tokenName?: string) => {
+export const setTokenCookie = (
+	token: string,
+	tokenName: string = TOKEN_NAME
+) => {
 	const tokenValue = token.replace('Bearer ', '')
-	const hourSec = 3600
-	const daySec = hourSec * 24
-	document.cookie = `${tokenName || TOKEN_NAME}=${tokenValue}; Secure; max-age=${daySec * 70}'; path=/;`
+
+	document.cookie = `${tokenName}=${tokenValue}; Secure; path=/;`
 }
 
 export const getTokenCookie = (tokenName?: string): string | null => {
