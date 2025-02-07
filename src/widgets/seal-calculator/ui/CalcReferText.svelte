@@ -12,7 +12,7 @@
 	{$calc.statTypeSelected}
 	{#if $calc.goalStat}
 		<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
-		{$_('seal.target_stat')}: {$calc.goalStat}
+		{$_('seal.target_value')}: {$calc.goalStat}
 	{:else}
 		<Icon icon="weui:arrow-filled" size="1.2em" class="text-gray-9" />
 		<span class="text-gray-10">
