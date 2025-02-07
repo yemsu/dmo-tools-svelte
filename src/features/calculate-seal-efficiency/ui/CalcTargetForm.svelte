@@ -1,28 +1,50 @@
 <script lang="ts">
-	import { STATS, STATS_PERCENT_TYPE, type StatType } from '$entities/seals'
+	import {
+		myStats,
+		STATS,
+		STATS_PERCENT_TYPE,
+		type StatType
+	} from '$entities/seals'
 	import { calc, statColorStyles } from '$features/calculate-seal-efficiency'
 	import { Button } from '$shared/button'
+	import { ALERT } from '$shared/config'
 	import { Input } from '$shared/form'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Tab, Tabs } from '$shared/tabs'
-	import { createEventDispatcher } from 'svelte'
+	import { createEventDispatcher, onMount } from 'svelte'
 	import { _ } from 'svelte-i18n'
 
-	let goalStat: number | null = $calc.goalStat
+	let value: number | null = null
 	let goalStatInput: HTMLInputElement
 	$: isKr = $lang === 'kr'
 
-	const dispatch = createEventDispatcher<{ submit: number | null }>()
+	const dispatch = createEventDispatcher()
 
 	const onClickStatType = (statType: StatType) => {
 		calc.selectStatType(statType)
 		calc.reset()
-		setTimeout(() => {
-			goalStat = null
-			goalStatInput.focus()
-		}, 60)
+		calc.setGoalStat(null)
+		value = null
+		goalStatInput.focus()
 	}
+
+	$: onsubmit = () => {
+		if (value === null) {
+			alert(ALERT.INPUT_TARGET_VALUE[$lang])
+			goalStatInput.focus()
+			return
+		}
+		if (value <= $myStats[$calc.statTypeSelected]) {
+			alert(ALERT.WRONG_TARGET_VALUE[$lang])
+			return
+		}
+		dispatch('submit', value)
+	}
+
+	onMount(() => {
+		goalStatInput.focus()
+	})
 </script>
 
 <div class={cn('flex shrink-0 gap-1.5 port:flex-col')}>
@@ -39,7 +61,7 @@
 		{/each}
 	</Tabs>
 	<form
-		on:submit|preventDefault={() => dispatch('submit', goalStat)}
+		on:submit|preventDefault={onsubmit}
 		class="flex items-center gap-1.5 port:w-full land:w-[30%] land:shrink-0"
 	>
 		<Input
@@ -48,7 +70,7 @@
 			class="flex-1"
 			placeholder={$_('seal.target_value') +
 				(STATS_PERCENT_TYPE.includes($calc.statTypeSelected) ? ` (%)` : '')}
-			bind:value={goalStat}
+			bind:value
 		/>
 		<Button variant="blue" size="lg" class="font-semibold">
 			{$_('seal.view_result')}

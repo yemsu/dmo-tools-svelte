@@ -6,5 +6,9 @@ export const ERROR = {
 	LOGOUT_FAIL: {
 		kr: '로그아웃에 실패하였습니다.',
 		en: 'Log out failed.'
+	},
+	NO_STAT_TARGET_VALUE: {
+		kr: '목표 수치를 입력해주세요.',
+		en: 'Please enter target values.'
 	}
 }

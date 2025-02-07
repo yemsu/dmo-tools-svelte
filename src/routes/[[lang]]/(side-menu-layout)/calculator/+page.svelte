@@ -20,9 +20,10 @@
 		type SealEfficiency
 	} from '$features/calculate-seal-efficiency'
 	import { getMyAndFinalPrice } from '$features/update-my-seal'
-	import { ALERT, META } from '$shared/config'
+	import { ERROR, META } from '$shared/config'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
+	import { toast } from '$shared/toast'
 	import {
 		CalcResult,
 		ResultListStatusBar,
@@ -55,16 +56,8 @@
 		return getNextStepsEffData(seal, price, mySealCount, nextSteps)
 	}
 
-	$: onSubmit = (newGoalStat: number | null) => {
+	$: onSubmit = (newGoalStat: number) => {
 		calc.setGoalStat(newGoalStat)
-		if (!newGoalStat) {
-			alert(ALERT.INPUT_TARGET_VALUE[$lang])
-			return
-		}
-		if (newGoalStat <= $myStats[$calc.statTypeSelected]) {
-			alert(ALERT.WRONG_TARGET_VALUE[$lang])
-			return
-		}
 		calc.reset()
 		// 효율별로 소팅
 		const effDataListSorted = getEffDataListSorted(
@@ -132,7 +125,15 @@
 		{percentNum}
 	/>
 	{#if $calc.isSealPriceChanged}
-		<RetryCalc on:click={() => onSubmit($calc.goalStat)} />
+		<RetryCalc
+			on:click={() => {
+				if ($calc.goalStat === null) {
+					toast.on(ERROR.NO_STAT_TARGET_VALUE[$lang])
+					return
+				}
+				onSubmit($calc.goalStat)
+			}}
+		/>
 	{/if}
 </section>
 {#if crrCalcResults.length > 0}
