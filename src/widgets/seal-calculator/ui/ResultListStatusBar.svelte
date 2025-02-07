@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { calc } from '$features/calculate-seal-efficiency'
 	import { cn, intersectionObserver } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { Tooltip } from '$shared/tooltip'
 	import { Switch } from '$shared/ui/switch'
 	import { CalcReferText } from '$widgets/seal-calculator'
 	import { _ } from 'svelte-i18n'
