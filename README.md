@@ -1,10 +1,11 @@
 # DMO tools
 
-- 디지몬 마스터즈 도구 모음 사이트
-- 씰 계산기, 레이드 타이머, 뽑기 시뮬레이터
-- 영문 사이트 (i18n)
-  
 ![Pasted image 20250108161948](https://github.com/user-attachments/assets/c637232a-37b8-40d3-a67d-c6fc9eb9a023)
+
+![image](https://github.com/user-attachments/assets/f56e8487-aa05-40c6-8695-0f5404d61a9e)
+  
+- 2.2만명의 유저가 이용하고 있는 디지몬 마스터즈 도구 모음 사이트
+- 씰 효율 계산기, 레이드 타이머, 뽑기 시뮬레이터 제공
 
 
 ## 사용 기술
@@ -15,22 +16,26 @@
   <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white" alt="Tailwind CSS"/>
  </p>
 
+- svelte: ^4.2.7
+- typescript: ^5.0.0
+- tailwindcss: ^3.4.4
 
-## 씰 계산기
+## 씰 효율 계산기
 
-- 목표 스탯까지 도달할 수 있는 가장 저렴한 씰 조합을 계산해주는 씰 계산기
-- 씰의 기본 정보를 확인할 수 있는 툴팁 노출
-- 가격 설정/해제 기능
-- 게임 내 씰을 구매 시 '씰 등록 완료' 버튼 클릭으로 보유 씰에 바로 추가 가능
+목표 스탯까지 도달할 수 있는 가장 저렴한 씰 조합을 계산해주는 씰 계산기
   
 ![Pasted image 20250108162229](https://github.com/user-attachments/assets/cb9956cb-6027-4320-9054-cc88a181c268)
 
-- 캐릭터 추가/제거 기능으로 여러 캐릭터의 씰 효율 계산 가능
+- 씰의 기본 정보를 확인할 수 있는 툴팁 노출
+- 가격 설정/해제 기능
+- 게임 내 씰을 구매 시 '씰 등록 완료' 버튼 클릭으로 보유 씰에 바로 추가 가능
+
 ![Pasted image 20250108163216](https://github.com/user-attachments/assets/25a15803-96b1-4d30-9167-891cef07f43a)
+
+- 캐릭터 추가/제거 기능으로 여러 캐릭터의 씰 효율 계산 가능
 
 
 ## 레이드 타이머
-
 
 인게임에서 레이드 시간을 확인하기 위해서는 해당 지역으로 이동해서 확인해야하는 불편함이 있어 만들게 된 레이드 타이머
   
