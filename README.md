@@ -7,6 +7,7 @@
 - 2.2만명의 유저가 이용하고 있는 디지몬 마스터즈 도구 모음 사이트
 - 씰 효율 계산기, 레이드 타이머, 뽑기 시뮬레이터 제공
 
+&nbsp;
 
 ## 사용 기술
 
@@ -16,9 +17,11 @@
   <img src="https://img.shields.io/badge/Tailwind CSS-06B6D4?style=flat-square&logo=Tailwind CSS&logoColor=white" alt="Tailwind CSS"/>
  </p>
 
-- svelte: ^4.2.7
-- typescript: ^5.0.0
-- tailwindcss: ^3.4.4
+- svelte: `^4.2.7`
+- typescript: `^5.0.0`
+- tailwindcss: `^3.4.4`
+
+&nbsp;
 
 ## 씰 효율 계산기
 
@@ -34,6 +37,7 @@
 
 - 캐릭터 추가/제거 기능으로 여러 캐릭터의 씰 효율 계산 가능
 
+&nbsp;
 
 ## 레이드 타이머
 
@@ -70,6 +74,7 @@
   
 ![Pasted image 20250108162526](https://github.com/user-attachments/assets/632825c1-60e1-4cb6-9dea-adf22864184e)
 
+&nbsp;
 
 ## 뽑기 시뮬레이터
 
@@ -88,6 +93,7 @@
 
 ![Pasted image 20250108163144](https://github.com/user-attachments/assets/a404e5ea-f034-4b0a-9422-4ffe33b98637)
 
+&nbsp;
 
 ## 영문 사이트
 
