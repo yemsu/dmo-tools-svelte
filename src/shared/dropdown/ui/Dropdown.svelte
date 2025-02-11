@@ -76,7 +76,7 @@
 
 <div
 	bind:this={dropdownElement}
-	class={cn('relative', className)}
+	class={cn('relative', isDropdownOpen && '[&>button]:bg-gray-3', className)}
 	{...restProps}
 >
 	<slot name="buttonSlot" {toggleDropdown} />
