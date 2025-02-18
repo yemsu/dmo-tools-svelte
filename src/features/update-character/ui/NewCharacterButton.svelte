@@ -20,7 +20,7 @@
 		if (!isConfirmed) return
 		const newCharacterData = await postCharacter(value)
 		currentCharacters.update((prev) => [...(prev || []), newCharacterData])
-
+		reset()
 		toast.on(TOAST.CHARACTER_ADDED[$lang])
 	}
 
