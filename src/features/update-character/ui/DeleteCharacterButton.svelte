@@ -38,7 +38,7 @@
 	on:click={clickDelete}
 	size="icon"
 	rounded="md"
-	class="-mr-2 mb-auto ml-auto"
+	class="-mr-2 ml-auto"
 	variant="outline"
 >
 	<Icon icon="ph:trash" />
