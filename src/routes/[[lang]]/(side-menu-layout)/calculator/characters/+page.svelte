@@ -19,7 +19,7 @@
 
 <section class="flex-center flex-1">
 	<Inner size="content-middle">
-		<Title class="mb-3">내 캐릭터 ({$currentCharacters?.length})</Title>
+		<Title class="mb-3">내 캐릭터 ({$currentCharacters?.length ?? 0})</Title>
 		{#if $currentCharacters}
 			<div class="scroll-box flex-1">
 				<ListTable
