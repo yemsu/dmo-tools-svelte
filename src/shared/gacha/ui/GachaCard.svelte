@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { type GachaData } from '$entities/gacha'
+	import { NewBadge } from '$shared/badge'
 	import { cn, contentUrl } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { TextByLang } from '$shared/text'
@@ -47,8 +48,11 @@
 						/>
 					</span>
 				{/if}
-				<span class="whitespace-nowrap">
+				<span class="relative whitespace-nowrap">
 					<TextByLang data={gachaData} />
+					{#if gachaData.id === 17}
+						<NewBadge startDate="Wed Feb 19 2025 19:27:25" />
+					{/if}
 				</span>
 			</h2>
 			<div class="aspect-[1/0.9078] w-[var(--gacha-card-w)] bg-black/30">
