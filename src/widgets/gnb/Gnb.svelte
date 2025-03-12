@@ -64,7 +64,7 @@
 						<span class="relative port:text-sub-sm">
 							<TextByLang data={MENUS[menuType]} />
 							{#if menuType === 'gacha'}
-								<NewBadge startDate="Wed Feb 19 2025 19:27:25" />
+								<NewBadge startDate="Wed Mar 12 2025 19:27:25" />
 							{/if}
 						</span>
 					</a>

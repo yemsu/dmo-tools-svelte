@@ -50,8 +50,8 @@
 				{/if}
 				<span class="relative whitespace-nowrap">
 					<TextByLang data={gachaData} />
-					{#if gachaData.id === 17}
-						<NewBadge startDate="Wed Feb 19 2025 19:27:25" />
+					{#if gachaData.id === 18}
+						<NewBadge startDate="Wed Mar 12 2025 19:27:25" />
 					{/if}
 				</span>
 			</h2>
