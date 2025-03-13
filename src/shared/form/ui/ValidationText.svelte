@@ -44,7 +44,7 @@
 		isOnInputTimer = setTimeout(() => {
 			isOnInputTimer = null
 			setInValidTypes()
-		}, 100)
+		}, 500)
 		prevValue = value
 	}
 

@@ -10,7 +10,7 @@
 	{#each infoItems as infoItemData (infoItemData.id)}
 		<li
 			class={cn(
-				'flex min-h-[50px] items-center border-b border-gray-5/60 px-4 py-2 last:border-transparent',
+				'flex min-h-[40px] items-center border-b border-gray-5/60 px-4 py-2 last:border-transparent',
 				listClassName
 			)}
 		>
