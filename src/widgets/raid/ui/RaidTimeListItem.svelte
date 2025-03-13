@@ -5,8 +5,8 @@
 		type RaidTimeData
 	} from '$entities/raid'
 	import { user } from '$entities/user'
-	import { LikeRaidTimeButton } from '$features/like-raid-time'
-	import { DeleteRaidTimeButton } from '$features/update-raid-time'
+	import { LikeRaidTimeButton } from '$features/raid-timer/like-raid-time'
+	import { DeleteRaidTimeButton } from '$features/raid-timer/update-raid-time'
 	import RaidInformant from '$widgets/raid/ui/RaidInformant.svelte'
 
 	export let raid: RaidData

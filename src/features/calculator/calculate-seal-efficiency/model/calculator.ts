@@ -2,7 +2,7 @@ import { STATS, type StatType } from '$entities/seals'
 import {
 	getCalcResultTotal,
 	getMergedResult
-} from '$features/calculate-seal-efficiency'
+} from '$features/calculator/calculate-seal-efficiency'
 import type {
 	CalcResultList,
 	CalcTotalData,

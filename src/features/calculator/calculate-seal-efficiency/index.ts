@@ -1,4 +1,4 @@
-import CalcTargetForm from '$features/calculate-seal-efficiency/ui/CalcTargetForm.svelte'
+import CalcTargetForm from '$features/calculator/calculate-seal-efficiency/ui/CalcTargetForm.svelte'
 
 export { CalcTargetForm }
 
@@ -33,4 +33,4 @@ export type {
 	CalcTotalData
 } from './types'
 
-export { calc } from '$features/calculate-seal-efficiency/model/calculator'
+export { calc } from '$features/calculator/calculate-seal-efficiency/model/calculator'

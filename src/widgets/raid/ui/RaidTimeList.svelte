@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type GameChannel, type RaidData } from '$entities/raid'
-	import { myLikeReports } from '$features/like-raid-time'
-	import { AddRaidTimeButton } from '$features/update-raid-time'
+	import { myLikeReports } from '$features/raid-timer/like-raid-time'
+	import { AddRaidTimeButton } from '$features/raid-timer/update-raid-time'
 	import { Icon } from '$shared/icon'
 	import { cn, objectBy } from '$shared/lib'
 	import { NoData, Title } from '$shared/text'

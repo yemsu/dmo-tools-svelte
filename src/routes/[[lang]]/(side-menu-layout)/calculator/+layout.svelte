@@ -7,7 +7,7 @@
 	} from '$entities/characters'
 	import { mySealCounts, mySealPrices, myStats } from '$entities/seals'
 	import { user } from '$entities/user'
-	import { getMyAllStats } from '$features/calculate-seal-efficiency'
+	import { getMyAllStats } from '$features/calculator/calculate-seal-efficiency'
 	import { PATH } from '$shared/config'
 	import { lang, langPath } from '$shared/model'
 	import { Tabs, Tab } from '$shared/tabs'

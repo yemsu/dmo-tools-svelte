@@ -4,8 +4,8 @@
 		calc,
 		getCurrentStep,
 		type SealEfficiency
-	} from '$features/calculate-seal-efficiency'
-	import { AddToMySealButton } from '$features/update-my-seal'
+	} from '$features/calculator/calculate-seal-efficiency'
+	import { AddToMySealButton } from '$features/calculator/update-my-seal'
 	import { SealCalcData } from '$widgets/seal-calculator'
 	import { SealItem, SealList } from '$widgets/seal-list'
 	import { _ } from 'svelte-i18n'

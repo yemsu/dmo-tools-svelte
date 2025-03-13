@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { calc } from '$features/calculate-seal-efficiency'
+	import { calc } from '$features/calculator/calculate-seal-efficiency'
 	import { cn, intersectionObserver } from '$shared/lib'
 	import { Switch } from '$shared/ui/switch'
 	import { CalcReferText } from '$widgets/seal-calculator'

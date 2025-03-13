@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { numberFormatter } from '$shared/lib'
 	import { TextByLang } from '$shared/text'
-	import type { SealEfficiency } from '$features/calculate-seal-efficiency'
+	import type { SealEfficiency } from '$features/calculator/calculate-seal-efficiency'
 
 	export let effData: SealEfficiency
 	export let isPercentType: boolean

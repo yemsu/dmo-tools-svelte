@@ -7,8 +7,8 @@
 	import {
 		getCurrentStep,
 		getMySealStat
-	} from '$features/calculate-seal-efficiency'
-	import { getMySealData } from '$features/update-my-seal'
+	} from '$features/calculator/calculate-seal-efficiency'
+	import { getMySealData } from '$features/calculator/update-my-seal'
 	import { cn } from '$shared/lib'
 	import { TextByLang } from '$shared/text'
 

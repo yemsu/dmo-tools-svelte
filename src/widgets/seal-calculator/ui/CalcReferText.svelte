@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { calc } from '$features/calculate-seal-efficiency'
+	import { calc } from '$features/calculator/calculate-seal-efficiency'
 	import { Icon } from '$shared/icon'
 	import { ListReferText } from '$shared/list'
 	import { TextByLang } from '$shared/text'

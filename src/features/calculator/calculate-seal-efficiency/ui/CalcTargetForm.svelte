@@ -5,7 +5,10 @@
 		STATS_PERCENT_TYPE,
 		type StatType
 	} from '$entities/seals'
-	import { calc, statColorStyles } from '$features/calculate-seal-efficiency'
+	import {
+		calc,
+		statColorStyles
+	} from '$features/calculator/calculate-seal-efficiency'
 	import { Button } from '$shared/button'
 	import { ALERT } from '$shared/config'
 	import { Input } from '$shared/form'

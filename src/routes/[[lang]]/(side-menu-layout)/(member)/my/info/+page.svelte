@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { alarmMinute, crrServerType, GAME_SERVERS } from '$entities/raid'
 	import { user } from '$entities/user'
-	import { LogoutButton } from '$features/control-session'
-	import { ChangeNickname, ResignButton } from '$features/update-user-info'
+	import { LogoutButton } from '$features/user/control-session'
+	import { ChangeNickname, ResignButton } from '$features/user/update-user-info'
 	import { checkMember } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'

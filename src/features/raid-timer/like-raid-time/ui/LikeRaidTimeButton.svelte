@@ -7,7 +7,7 @@
 		type RaidData,
 		type RaidTimeData
 	} from '$entities/raid'
-	import { myLikeReports } from '$features/like-raid-time'
+	import { myLikeReports } from '$features/raid-timer/like-raid-time'
 	import { BusinessError, showErrorToast } from '$shared/api'
 	import { cn, timeRemainingString } from '$shared/lib'
 	import Timer from '$shared/time/ui/Timer.svelte'

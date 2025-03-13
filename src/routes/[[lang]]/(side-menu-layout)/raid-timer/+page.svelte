@@ -6,7 +6,7 @@
 		ControlWindowAlarmButton,
 		MoreOptionDropdown,
 		RaidServerTabs
-	} from '$features/control-raid-timer-option'
+	} from '$features/raid-timer/control-raid-timer-option'
 	import { META } from '$shared/config'
 	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'

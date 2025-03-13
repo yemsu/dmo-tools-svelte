@@ -3,7 +3,7 @@
 	import { cn } from '$shared/lib'
 	import { onDestroy, onMount } from 'svelte'
 	import { getRemainingTime } from '../lib'
-	import { raidOption } from '$features/control-raid-timer-option'
+	import { raidOption } from '$features/raid-timer/control-raid-timer-option'
 
 	// 외부에서 받을 타겟 시간
 	export let time: RaidTimeData

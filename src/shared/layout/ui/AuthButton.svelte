@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation'
 	import { user } from '$entities/user'
-	import { GoogleLoginButton } from '$features/control-session'
+	import { GoogleLoginButton } from '$features/user/control-session'
 	import { Button } from '$shared/button'
 	import { PATH } from '$shared/config'
 	import { Icon } from '$shared/icon'

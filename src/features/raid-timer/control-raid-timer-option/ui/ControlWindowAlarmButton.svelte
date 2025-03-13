@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ChangeAlarmTime from '$features/control-raid-timer-option/ui/ChangeAlarmTime.svelte'
+	import ChangeAlarmTime from '$features/raid-timer/control-raid-timer-option/ui/ChangeAlarmTime.svelte'
 	import { ButtonSkeleton } from '$shared/button'
 	import Button from '$shared/button/ui/Button.svelte'
 	import { Icon } from '$shared/icon'

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { user } from '$entities/user'
-	import { GoogleLoginButton } from '$features/control-session'
+	import { GoogleLoginButton } from '$features/user/control-session'
 	import { checkNoMember } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'

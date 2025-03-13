@@ -1,5 +1,5 @@
 import type { RaidData, RaidTimeData } from '$entities/raid/types'
-import type { RaidOptionStore } from '$features/control-raid-timer-option'
+import type { RaidOptionStore } from '$features/raid-timer/control-raid-timer-option'
 import { timeSortByVote } from '$widgets/raid'
 import { writable } from 'svelte/store'
 

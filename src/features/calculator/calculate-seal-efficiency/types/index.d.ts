@@ -1,7 +1,7 @@
 import type {
 	SEAL_GRADES,
 	SEAL_MASTER_COUNT_TYPE
-} from '$features/calculate-seal-efficiency'
+} from '$features/calculator/calculate-seal-efficiency'
 
 export type SealMaterCount = (typeof SEAL_MASTER_COUNT_TYPE)[number]
 

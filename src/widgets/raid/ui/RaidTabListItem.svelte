@@ -3,8 +3,8 @@
 	import {
 		ToggleAlarmButton,
 		ToggleFavoriteButton
-	} from '$features/control-raid-timer-option'
-	import { myLikeReports } from '$features/like-raid-time'
+	} from '$features/raid-timer/control-raid-timer-option'
+	import { myLikeReports } from '$features/raid-timer/like-raid-time'
 	import { Icon } from '$shared/icon'
 	import { cn } from '$shared/lib'
 	import Timer from '$shared/time/ui/Timer.svelte'

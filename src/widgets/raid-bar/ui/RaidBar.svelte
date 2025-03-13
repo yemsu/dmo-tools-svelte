@@ -18,8 +18,8 @@
 		audioAlarm,
 		isAudioOn,
 		raidOption
-	} from '$features/control-raid-timer-option'
-	import { myLikeReports } from '$features/like-raid-time'
+	} from '$features/raid-timer/control-raid-timer-option'
+	import { myLikeReports } from '$features/raid-timer/like-raid-time'
 	import { Badge } from '$shared/badge'
 	import { Icon } from '$shared/icon'
 	import { _objKeys, cn, objectBy } from '$shared/lib'

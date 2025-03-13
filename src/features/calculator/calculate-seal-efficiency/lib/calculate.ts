@@ -11,8 +11,8 @@ import {
 	SEAL_EXCEPTION_PERCENT,
 	SEAL_GRADES,
 	SEAL_PERCENT_STEPS
-} from '$features/calculate-seal-efficiency'
-import { getMySealData } from '$features/update-my-seal'
+} from '$features/calculator/calculate-seal-efficiency'
+import { getMySealData } from '$features/calculator/update-my-seal'
 import { _objKeys, objectBy } from '$shared/lib'
 import type {
 	CalcTotalData,

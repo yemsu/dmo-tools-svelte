@@ -3,8 +3,8 @@
 	import {
 		EditCharacterButton,
 		NewCharacterButton
-	} from '$features/update-character'
-	import DeleteCharacterButton from '$features/update-character/ui/DeleteCharacterButton.svelte'
+	} from '$features/calculator/update-character'
+	import DeleteCharacterButton from '$features/calculator/update-character/ui/DeleteCharacterButton.svelte'
 	import { checkMember } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { Inner } from '$shared/section'

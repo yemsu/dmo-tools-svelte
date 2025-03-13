@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { lang } from '$shared/model'
 	import { raids } from '$entities/raid'
-	import { raidOption } from '$features/control-raid-timer-option'
+	import { raidOption } from '$features/raid-timer/control-raid-timer-option'
 	import { Button } from '$shared/button'
 	import { TOAST } from '$shared/config'
 	import { Dropdown } from '$shared/dropdown'

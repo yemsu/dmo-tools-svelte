@@ -9,7 +9,7 @@
 	import { CONFIRM } from '$shared/config'
 	import { lang } from '$shared/model'
 	import { MySealGrade } from '$widgets/my-seals'
-	import { getMySealData } from '$features/update-my-seal'
+	import { getMySealData } from '$features/calculator/update-my-seal'
 	import { SealItem, SealList } from '$widgets/seal-list'
 
 	export let seals: SealData[]

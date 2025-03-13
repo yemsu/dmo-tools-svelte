@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { myStats } from '$entities/seals'
-	import { calc } from '$features/calculate-seal-efficiency'
+	import { calc } from '$features/calculator/calculate-seal-efficiency'
 	import { cn, numberFormatter } from '$shared/lib'
 	import { lang } from '$shared/model'
 	import { TextByLang } from '$shared/text'

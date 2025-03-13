@@ -8,7 +8,7 @@
 		type RaidData
 	} from '$entities/raid'
 	import { user } from '$entities/user'
-	import { ADD_RAID_SCHEMA } from '$features/update-raid-time/config/schema'
+	import { ADD_RAID_SCHEMA } from '$features/raid-timer/update-raid-time/config/schema'
 	import { Button } from '$shared/button'
 	import { CONFIRM } from '$shared/config'
 	import { ToggleFormWrap } from '$shared/form'

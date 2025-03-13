@@ -12,7 +12,7 @@
 	import {
 		calc,
 		type SealEfficiency
-	} from '$features/calculate-seal-efficiency'
+	} from '$features/calculator/calculate-seal-efficiency'
 	import { _ } from 'svelte-i18n'
 
 	export let effData: SealEfficiency

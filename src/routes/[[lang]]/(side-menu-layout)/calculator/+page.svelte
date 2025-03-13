@@ -18,8 +18,8 @@
 		getNextSteps,
 		getNextStepsEffData,
 		type SealEfficiency
-	} from '$features/calculate-seal-efficiency'
-	import { getMyAndFinalPrice } from '$features/update-my-seal'
+	} from '$features/calculator/calculate-seal-efficiency'
+	import { getMyAndFinalPrice } from '$features/calculator/update-my-seal'
 	import { ERROR, META } from '$shared/config'
 	import { cn } from '$shared/lib'
 	import { lang } from '$shared/model'
