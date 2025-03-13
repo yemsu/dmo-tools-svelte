@@ -39,9 +39,9 @@ export const NICKNAME_SCHEMA: Record<string, FormSchema> = {
 	DUPLICATED_NICKNAME
 }
 
-export const CHARACTER_SCHEMA: (
-	currentCharacterId: CharacterData[]
-) => Record<string, FormSchema> = (currentCharacters: CharacterData[]) => ({
+export const CHARACTER_SCHEMA = (
+	currentCharacters: CharacterData[]
+): Record<string, FormSchema> => ({
 	NO_SPECIAL_CHARACTER,
 	MIN: MIN(2),
 	MAX: MAX(10),
