@@ -4,7 +4,7 @@
 	import { Footer } from '$widgets/footer'
 	import { Gnb } from '$widgets/gnb'
 	import { Header } from '$widgets/header'
-	import { RaidBar } from '$widgets/raid-bar'
+	import { RaidBar } from '$features/raid/display-raid-bar'
 </script>
 
 <div

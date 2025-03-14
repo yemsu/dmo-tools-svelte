@@ -15,7 +15,7 @@
 	import { Tooltip } from '$shared/tooltip'
 	import type { LangType } from '$shared/types'
 	import { statTypeOptionStyles } from '$features/calculator/calculate-seal-efficiency'
-	import { SealItem, SealList } from '$widgets/seal-list'
+	import { SealItem, SealList } from '$features/calculator/display-seal-list'
 	import { choseongIncludes } from 'es-hangul'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'

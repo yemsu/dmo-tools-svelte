@@ -29,7 +29,7 @@
 		ResultListStatusBar,
 		ResultSealList,
 		RetryCalc
-	} from '$widgets/seal-calculator'
+	} from '$features/calculator/display-seal-calculator'
 	import { onDestroy } from 'svelte'
 	import type { PageData } from './$types'
 

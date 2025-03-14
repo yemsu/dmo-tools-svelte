@@ -1,6 +1,6 @@
 import type { RaidData, RaidTimeData } from '$entities/raid/types'
-import type { RaidOptionStore } from '$features/raid-timer/control-raid-timer-option'
-import { timeSortByVote } from '$widgets/raid'
+import type { RaidOptionStore } from '$features/raid/control-raid-timer'
+import { timeSortByVote } from '$features/raid/display-raid-info'
 import { writable } from 'svelte/store'
 
 const sortRaid = (raids: RaidData[], raidOption: RaidOptionStore) => {

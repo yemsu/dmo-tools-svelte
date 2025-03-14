@@ -16,7 +16,7 @@
 		GachaResultLoading,
 		GachaTypeTabContent,
 		GachaTypeTabs
-	} from '$widgets/gacha'
+	} from '$features/gacha'
 	import type { PageData } from './$types'
 	import './gacha.css'
 

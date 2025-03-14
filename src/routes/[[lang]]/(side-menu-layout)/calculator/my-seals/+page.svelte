@@ -19,9 +19,12 @@
 		getMyAndFinalPrice,
 		getMySealData
 	} from '$features/calculator/update-my-seal'
-	import MySealList from '$widgets/my-seals/ui/MySealList.svelte'
+	import MySealList from '$features/calculator/display-my-seal/ui/MySealList.svelte'
 	import { statTypeOptionStyles } from '$features/calculator/calculate-seal-efficiency'
-	import { StatBarTotalPrice, StatBarWrap } from '$widgets/stat-bar'
+	import {
+		StatBarTotalPrice,
+		StatBarWrap
+	} from '$features/calculator/display-stat-bar'
 	import { _ } from 'svelte-i18n'
 	import type { PageData } from './$types'
 

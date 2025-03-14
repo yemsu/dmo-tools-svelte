@@ -6,12 +6,16 @@
 		ControlWindowAlarmButton,
 		MoreOptionDropdown,
 		RaidServerTabs
-	} from '$features/raid-timer/control-raid-timer-option'
+	} from '$features/raid/control-raid-timer'
 	import { META } from '$shared/config'
 	import { ListReferText } from '$shared/list'
 	import { lang } from '$shared/model'
 	import { PageHeader } from '$shared/ui/page-header'
-	import { RaidSearchInput, RaidTabList, RaidTimeView } from '$widgets/raid'
+	import {
+		RaidSearchInput,
+		RaidTabList,
+		RaidTimeView
+	} from '$features/raid/display-raid-info'
 
 	let searchValue = ''
 	$: raidList = $raids

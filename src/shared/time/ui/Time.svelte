@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { TIME_UNIT, type TimeData } from '$shared/time'
+	import { TIME_UNIT } from '../config'
+	import { type TimeData } from '../types'
 
 	export let time: TimeData
 </script>

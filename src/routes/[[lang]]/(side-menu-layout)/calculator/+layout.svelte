@@ -12,7 +12,7 @@
 	import { lang, langPath } from '$shared/model'
 	import { Tabs, Tab } from '$shared/tabs'
 	import { PageHeader } from '$shared/ui/page-header'
-	import { CharacterTabs } from '$widgets/character-tabs'
+	import { CharacterTabs } from '$features/calculator/display-character-tabs'
 	import type { PageData } from './$types'
 	import './calculator.css'
 
