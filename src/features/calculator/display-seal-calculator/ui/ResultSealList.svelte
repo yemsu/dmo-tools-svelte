@@ -5,9 +5,10 @@
 		getCurrentStep,
 		type SealEfficiency
 	} from '$features/calculator/calculate-seal-efficiency'
-	import { AddToMySealButton } from '$features/calculator/update-my-seal'
 	import { SealCalcData } from '$features/calculator/display-seal-calculator'
 	import { SealItem, SealList } from '$features/calculator/display-seal-list'
+	import { AddToMySealButton } from '$features/calculator/update-my-seal'
+	import { getContext } from 'svelte'
 	import { _ } from 'svelte-i18n'
 
 	export let seals: SealData[]

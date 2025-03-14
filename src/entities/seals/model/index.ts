@@ -1,4 +1,4 @@
-import type { Stats } from '$entities/seals/type'
+import type { SealPriceHistory, Stats } from '$entities/seals/type'
 import { writable } from 'svelte/store'
 
 export const isShowMySealPopup = writable<boolean>(false)
@@ -13,3 +13,5 @@ export const myStats = writable<Stats>({
 	BL: 0,
 	EV: 0
 })
+
+export const sealPricesHistory = writable<SealPriceHistory[]>([])

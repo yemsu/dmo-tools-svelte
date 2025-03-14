@@ -3,7 +3,8 @@ import type {
 	MySealCount,
 	MySealPrice,
 	SealData,
-	SealPrice
+	SealPrice,
+	SealPriceHistory
 } from '$entities/seals/type'
 import { apiFetch } from '$shared/api'
 import type { LangType } from '$shared/types'
@@ -15,9 +16,11 @@ export const getSealPrices = (
 	lang: LangType
 ) => {
 	const langParam = lang === 'en' ? '&server=sOmega' : ''
-	return apiFetch<SealPrice[]>(
-		`/seals/price${sortBy ? `?sortBy=${sortBy}${langParam}` : ''}`
-	)
+	return apiFetch<SealPrice[]>(`/seals/price${`?sortBy=${sortBy}${langParam}`}`)
+}
+
+export const getSealPricesHistory = () => {
+	return apiFetch<SealPriceHistory[]>('/seals/price/history')
 }
 
 // seal count

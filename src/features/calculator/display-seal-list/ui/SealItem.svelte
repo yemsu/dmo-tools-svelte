@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { type SealData, type SealPrice } from '$entities/seals'
-	import { cn } from '$shared/lib'
-	import { lang } from '$shared/model'
 	import { statColorStyles } from '$features/calculator/calculate-seal-efficiency'
 	import SealItemTooltip from '$features/calculator/display-seal-list/ui/SealItemTooltip.svelte'
+	import { cn } from '$shared/lib'
+	import { lang } from '$shared/model'
 	import SealItemCount from './SealItemCount.svelte'
-	import SealItemPrice from './SealItemPrice.svelte'
+	import { SealItemPrice } from '$features/calculator/update-my-price'
 
 	export let sealPrices: SealPrice[]
 	export let seal: SealData
@@ -25,7 +25,7 @@
 	}
 </script>
 
-<div
+<section
 	class={cn(
 		'relative flex flex-col justify-center land:min-h-[130px]',
 		'rounded-md bg-gray-3 text-center text-body-sm',
@@ -41,9 +41,9 @@
 			'text-balance break-keep'
 		)}
 	>
-		<h3 class={cn('flex items-start font-semibold leading-4')}>
+		<h2 class={cn('flex items-start font-semibold leading-4')}>
 			{$lang === 'kr' ? seal.name : seal.engName}
-		</h3>
+		</h2>
 		<button
 			class="peer/tooltip absolute size-full"
 			aria-describedby={tooltipId}
@@ -60,7 +60,7 @@
 		class="flex flex-col items-center gap-1 p-1 pt-0 land:gap-1.5 land:p-1.5 land:pt-0"
 	>
 		<SealItemCount sealId={seal.id} isEditable={isCountEditable} />
-		<SealItemPrice sealId={seal.id} isEditable={isPriceEditable} {sealPrices} />
+		<SealItemPrice {seal} isEditable={isPriceEditable} {sealPrices} />
 		<slot></slot>
 	</div>
-</div>
+</section>

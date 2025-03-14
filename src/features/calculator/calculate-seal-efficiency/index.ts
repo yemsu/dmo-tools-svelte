@@ -23,6 +23,7 @@ export {
 	getMyAllStats
 } from './lib/calculate'
 export { createCostResultGetter } from './lib/calculateLowPrice'
+export { generateSealsPriceChart } from './lib/sealPrices'
 export type {
 	SealEfficiency,
 	SealExceptionStep,

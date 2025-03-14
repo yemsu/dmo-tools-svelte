@@ -49,11 +49,13 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"chart.js": "^4.4.8",
 		"embla-carousel": "^8.2.0",
 		"embla-carousel-svelte": "^8.2.0",
 		"es-hangul": "^1.4.7",
 		"iconify-icon": "^2.1.0",
 		"postprocessing": "^6.36.4",
+		"svelte-chartjs": "^3.1.5",
 		"svelte-i18n": "^4.0.0",
 		"three": "^0.170.0",
 		"vite-plugin-pwa": "^0.20.1"

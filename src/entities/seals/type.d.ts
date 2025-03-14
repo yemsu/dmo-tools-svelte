@@ -33,9 +33,21 @@ export type SealPrice = {
 	price: number
 	regCount: number
 	sealId: SealData['id']
-	createAt: string
+	createdAt: string
 	modifiedAt: string
 }
+
+export type SealPriceHistory = {
+	sealId: SealData['id']
+	history: Omit<SealPrice, 'id'>[] | undefined
+}
+
+export type PriceChartData = {
+	labels: string[]
+	data: number[]
+}
+
+export type SealsPriceChartData = Record<SealData['id'], PriceChartData | null>
 
 export type MyPrice = {
 	id: SealData['id']

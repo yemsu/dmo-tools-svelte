@@ -1,9 +1,11 @@
-import { getSealPrices, getSeals } from '$entities/seals'
+import { getSealPrices, getSealPricesHistory, getSeals } from '$entities/seals'
+import { generateSealsPriceChart } from '$features/calculator/calculate-seal-efficiency'
 import type { LangType } from '$shared/types'
 
 export const load = async ({ parent }) => {
 	const { lang } = await parent()
 	const sealPrices = await getSealPrices('modifiedAt', lang as LangType)
+	const sealPricesHistory = await getSealPricesHistory()
 	const seals = await getSeals()
 
 	if (lang === 'en') {
@@ -15,6 +17,7 @@ export const load = async ({ parent }) => {
 	}
 	return {
 		seals,
-		sealPrices
+		sealPrices,
+		sealsPriceChart: generateSealsPriceChart(sealPricesHistory)
 	}
 }

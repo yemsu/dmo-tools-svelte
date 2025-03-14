@@ -135,7 +135,7 @@ export default {
 			borderRadius: {
 				sm: '0.2rem'
 			},
-			dropShadow: {
+			boxShadow: {
 				lg: '0px 0px 15px var(--shadow-color-lg)'
 			},
 			zIndex: {

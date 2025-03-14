@@ -64,7 +64,7 @@
 		'pointer-events-none absolute z-tooltip overflow-visible',
 		'break-keep rounded-md',
 		'border bg-background/90',
-		'drop-shadow-lg',
+		'shadow-lg',
 		!defaultShow && 'hidden',
 		sizeStyles[size],
 		colorStyles[color],

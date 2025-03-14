@@ -1,25 +1,29 @@
 export {
 	getSeals,
 	getSealPrices,
+	getSealPricesHistory,
 	getMySealsCount,
 	putMySealCount,
 	getMySealsPrice,
 	putMySealPrice
 } from './api'
-export { isShowMySealPopup, myStats } from './model'
+export { isShowMySealPopup, myStats, sealPricesHistory } from './model'
 export { mySealCounts } from './model/mySealCounts'
 export { mySealPrices } from './model/mySealPrices'
 export type {
 	SealData,
 	MySeal,
 	SealPrice,
+	SealPriceHistory,
 	Stats,
 	MyPrice,
 	StatType,
 	Seal,
 	StatTypeOption,
 	MySealCount,
-	MySealPrice
+	MySealPrice,
+	PriceChartData,
+	SealsPriceChartData
 } from './type'
 export { getSealPrice, queryStringToData } from './lib'
 export {

@@ -115,3 +115,10 @@ export const contentUrl = (path: string) => {
 	const CONTENT_URL = PUBLIC_CONTENT_URL
 	return `${CONTENT_URL}${path}`
 }
+
+export const calculateAverage = (numbers: number[]): number => {
+	if (numbers.length === 0) return 0
+
+	const sum = numbers.reduce((total, current) => total + current, 0)
+	return sum / numbers.length
+}

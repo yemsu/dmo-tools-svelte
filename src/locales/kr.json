@@ -52,7 +52,12 @@
 		"no_data_text": "목표 수치를 입력하여 가장 효율적인 씰 구성을 확인해보세요!",
 		"seal_registered": "씰 등록 완료",
 		"merge_same_seal": "병합",
-		"separate_same_seal": "분할"
+		"separate_same_seal": "분할",
+		"seal_price": "씰 가격",
+		"no_seal_prices": "가격 데이터가 없어요",
+		"edit_seal_price": "씰 가격 수정하기",
+		"delete_my_seal_price": "가격 설정 제거 (서버 가격 로딩)",
+		"seal_price_history": "지난 가격 보기"
 	},
 	"gacha": {
 		"resultItems": "획득 아이템",

@@ -1,11 +1,17 @@
 <script lang="ts">
+	import { onMount, setContext } from 'svelte'
 	import { page } from '$app/stores'
 	import {
 		currentCharacterId,
 		currentCharacters,
 		getCharacters
 	} from '$entities/characters'
-	import { mySealCounts, mySealPrices, myStats } from '$entities/seals'
+	import {
+		mySealCounts,
+		mySealPrices,
+		myStats,
+		sealPricesHistory
+	} from '$entities/seals'
 	import { user } from '$entities/user'
 	import { getMyAllStats } from '$features/calculator/calculate-seal-efficiency'
 	import { PATH } from '$shared/config'
@@ -80,6 +86,8 @@
 
 	$: $user && setCharacters()
 	$: !$user && clearCharacters()
+
+	setContext('sealsPriceChart', data.sealsPriceChart)
 </script>
 
 <section class="flex flex-1 flex-col">

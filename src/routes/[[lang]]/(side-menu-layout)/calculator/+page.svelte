@@ -19,17 +19,17 @@
 		getNextStepsEffData,
 		type SealEfficiency
 	} from '$features/calculator/calculate-seal-efficiency'
-	import { getMyAndFinalPrice } from '$features/calculator/update-my-seal'
-	import { ERROR, META } from '$shared/config'
-	import { cn } from '$shared/lib'
-	import { lang } from '$shared/model'
-	import { toast } from '$shared/toast'
 	import {
 		CalcResult,
 		ResultListStatusBar,
 		ResultSealList,
 		RetryCalc
 	} from '$features/calculator/display-seal-calculator'
+	import { getMyAndFinalPrice } from '$features/calculator/update-my-seal'
+	import { ERROR, META } from '$shared/config'
+	import { cn } from '$shared/lib'
+	import { lang } from '$shared/model'
+	import { toast } from '$shared/toast'
 	import { onDestroy } from 'svelte'
 	import type { PageData } from './$types'
 
