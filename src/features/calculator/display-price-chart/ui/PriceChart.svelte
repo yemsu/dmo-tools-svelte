@@ -37,7 +37,7 @@
 				borderColor: 'rgb(75, 192, 192)',
 				tension: 0.1,
 				pointRadius: 4,
-				pointHoverRadius: 6
+				pointHoverRadius: 10
 			}
 		]
 	}

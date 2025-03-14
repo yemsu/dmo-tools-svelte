@@ -6,6 +6,10 @@ export const getChartOptions = (
 ): ChartOptions<'line'> => ({
 	responsive: true,
 	maintainAspectRatio: false,
+	interaction: {
+		intersect: false, // 직접 포인트에 닿지 않아도 반응
+		mode: 'nearest' // 가장 가까운 데이터 포인트 표시
+	},
 	scales: {
 		x: {
 			ticks: {
@@ -61,15 +65,7 @@ export const getChartOptions = (
 	},
 	plugins: {
 		legend: {
-			display: false,
-			position: 'top' as const
-		},
-		subtitle: {
-			display: true,
-			text: '단위: M',
-			font: { size: 14 },
-			padding: { top: 10, bottom: 10 },
-			color: '#333333' // 서브타이틀 색상 변경 (필요시)
+			display: false
 		},
 		tooltip: {
 			callbacks: {
