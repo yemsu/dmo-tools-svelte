@@ -16,6 +16,6 @@
 		title={$lang === 'kr' ? '메인으로' : 'Go to Main Page'}
 	>
 		DMO tools
-		<!-- <span class="text-[0.75em]">🎄</span> -->
+		<span class="text-[0.75em]">🌸</span>
 	</a>
 </h1>

@@ -41,7 +41,7 @@
 	>
 		<MainBanner
 			href="{$langPath}{PATH.CALCULATOR}"
-			title="☃{MENUS.calc[isKr ? 'name' : 'engName']}☃"
+			title={MENUS.calc[isKr ? 'name' : 'engName']}
 			colorType="blue-1"
 		>
 			<slot slot="subTitle">
@@ -56,7 +56,7 @@
 		{#if isKr}
 			<MainBanner
 				href="{$langPath}{PATH.RAID_TIMER}"
-				title="❄레이드 타이머❄"
+				title="레이드 타이머"
 				colorType="blue-2"
 				class="port:order-2 port:col-span-2"
 			>
@@ -67,7 +67,7 @@
 		{/if}
 		<MainBanner
 			href="{$langPath}{PATH.GACHA}"
-			title="🎅{MENUS.gacha[isKr ? 'name' : 'engName']}🎅"
+			title={MENUS.gacha[isKr ? 'name' : 'engName']}
 			colorType="blue-3"
 		>
 			<slot slot="subTitle">
